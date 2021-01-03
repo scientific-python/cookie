@@ -1,0 +1,17 @@
+{
+    "project_name": "cookie",
+    "org": "Scikit-HEP",
+    "url": "https://github.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
+    "full_name": "Henry Schreiner",
+    "email": "henry.schreiner@cern.ch",
+    "maintainer": "The Scikit-HEP admins",
+    "maintainer_email": "scikit-hep-admins@googlegroups.com",
+    "project_short_description": "My project description",
+    "year": "{% now 'utc', '%Y' %}",
+    "_extensions": [
+        "jinja2_time.TimeExtension"
+    ],
+    "_copy_without_render": [
+        ".github/workflows/ci.yml"
+    ]
+}

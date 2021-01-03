@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# Copyright (c) 2021, Jonas Eschle, Henry Schreiner.
+# Copyright (c) {{ cookiecutter.year }}, {{ cookiecutter.full_name }}
 #
 # Distributed under the 3-clause BSD license, see accompanying file LICENSE
-# or https://github.com/scikit-hep/template-py for details.
+# or {{ cookiecutter.url }} for details.
 
 from setuptools import setup
 

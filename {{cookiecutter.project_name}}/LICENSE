@@ -1,6 +1,6 @@
 BSD 3-Clause License
 
-Copyright (c) 2019-2020, Jonas Eschle, Jim Pivarski, Eduardo Rodrigues, and Henry Schreiner.
+Copyright (c) {{ cookiecutter.year }}, {{ cookiecutter.full_name }}.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

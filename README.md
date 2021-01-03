@@ -1,36 +1,30 @@
-# Scikit-HEP: template-py
+# Scikit-HEP: cookie
 
 [![Actions Status][actions-badge]][actions-link]
-[![Documentation Status][rtd-badge]][rtd-link]
 [![Code style: black][black-badge]][black-link]
-
-[![PyPI version][pypi-version]][pypi-link]
-[![Conda-Forge][conda-badge]][conda-link]
-[![PyPI platforms][pypi-platforms]][pypi-link]
 
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
 [![Gitter][gitter-badge]][gitter-link]
 [![Scikit-HEP][sk-badge]](https://scikit-hep.org/)
 
+A cookiecutter template for new Python projects, designed off of the [Scikit-HEP developer guidelines][].
 
-Be sure you have read the Scikit-HEP developer guidelines first, and possibly used them on a project or two first. This is _not_ a minimal example or tutorial. It is a collection of useful tooling for starting a new project. You may want to remove some parts after duplicating the template. That's okay.
+Be sure you have read the [Scikit-HEP developer guidelines][] first, and possibly used them on a project or two first. This is _not_ a minimal example or tutorial. It is a collection of useful tooling for starting a new project using cookiecutter, or for copying in individual files for an existing project (by hand, from `{{cookiecutter.project_name}}/`).
 
-This is a pure python template project, using setuptools. If you are using flit or poetry, those have their own initialization tools; you can just copy the extra tooling in from this template repo. Do not fork this repo unless you want to propose a change to the template; instead use the large "template" button GitHub provides to make a new repo based on this one.
+This is a pure python template project, using setuptools. If you are using flit or poetry, those have their own initialization tools; you can just copy the extra tooling in from this template repo.
 
 #### To use:
 
-Clone with the GUI or use:
+Install cookiecutter, ideally with `brew install cookiecutter` if you use brew, otherwise with `pipx install cookiecutter`. Then run:
 
 
 ```bash
-gh repo create my-project --template scikit-hep/template-py
+cookiecutter gh:scikit-hep/cookie
 ```
 
-Search and replace `template-py` and `template_py` with your project name. Rename the `src/template_py` folder as well.
+Answer all the questions. If you are not making a Scikit-HEP repo, just enter a different org name.
 
-Update the lines in `setup.cfg` and LICENSE with your information.
-
-Replace README.md or update it significantly. Also update and add docs to `docs/`.
+Check _at least_ `setup.cfg`. Update README.md. Also update and add docs to `docs/`.
 
 #### Contained components:
 
@@ -53,20 +47,16 @@ Replace README.md or update it significantly. Also update and add docs to `docs/
     - Includes Black
 * A rough version of ReadTheDocs Sphinx docs provided
 
-[actions-badge]:            https://github.com/scikit-hep/template-py/workflows/CI/badge.svg
-[actions-link]:             https://github.com/scikit-hep/template-py/actions
+[actions-badge]:            https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
+[actions-link]:             https://github.com/scikit-hep/cookie/actions
 [black-badge]:              https://img.shields.io/badge/code%20style-black-000000.svg
 [black-link]:               https://github.com/psf/black
-[conda-badge]:              https://img.shields.io/conda/vn/conda-forge/template-py
-[conda-link]:               https://github.com/conda-forge/template-py-feedstock
+[conda-badge]:              https://img.shields.io/conda/vn/conda-forge/cookie
+[conda-link]:               https://github.com/conda-forge/cookie-feedstock
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
-[github-discussions-link]:  https://github.com/scikit-hep/template-py/discussions
+[github-discussions-link]:  https://github.com/scikit-hep/cookie/discussions
 [gitter-badge]:             https://badges.gitter.im/Scikit-HEP/community.svg
 [gitter-link]:              https://gitter.im/Scikit-HEP/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
-[pypi-link]:                https://pypi.org/project/template-py/
-[pypi-platforms]:           https://img.shields.io/pypi/pyversions/template-py
-[pypi-version]:             https://badge.fury.io/py/template-py.svg
-[rtd-badge]:                https://readthedocs.org/projects/template-py/badge/?version=latest
-[rtd-link]:                 https://template-py.readthedocs.io/en/latest/?badge=latest
 [sk-badge]:                 https://scikit-hep.org/assets/images/Scikit--HEP-Project-blue.svg
 
+[Scikit-HEP developer guidelines]: https://scikit-hep.org/developer

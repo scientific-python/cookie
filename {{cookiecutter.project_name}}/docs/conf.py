@@ -11,9 +11,9 @@ from typing import List
 
 # -- Project information -----------------------------------------------------
 
-project = "template-py"
-copyright = "2021, Scikit-HEP"
-author = "Henry Schreiner"
+project = "{{ cookiecutter.project_name }}"
+copyright = "{{ cookiecutter.year }}, {{ cookiecutter.org }}"
+author = "{{ cookiecutter.full_name }}"
 
 
 # -- General configuration ---------------------------------------------------

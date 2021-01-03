@@ -8,34 +8,20 @@ on:
     - master
     - main
     - develop
+  release:
+    types:
+      - published
 
 jobs:
   pre-commit:
     name: Format
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - uses: actions/setup-python@v2
-
-    - name: Install wheel for non-wheel deps
-      run: pip install wheel
-
-    - name: Prepare pre-commit
-      run: pip install cookiecutter pre-commit
-
-    - name: Run Cookiecutter
-      run: cookiecutter . --no-input
-
-    - name: Replace files with output
-      run: |
-        git rm -r \{\{cookiecutter.project_name\}\} .github cookiecutter.json hooks
-        mv cookie/* .
-        mv cookie/.??* .
-        git add .
-
     - uses: pre-commit/action@v2.0.0
       with:
-        extra_args: -a --hook-stage manual
+        extra_args: --hook-stage manual
 
   checks:
     name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
@@ -58,21 +44,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install cookiecutter
-      run: pip install cookiecutter
-
-    - name: Run cookiecutter
-      run: cookiecutter --no-input .
-
     - name: Install package
       run: python -m pip install -e .[test]
-      working-directory: cookie
-      env:
-        SETUPTOOLS_SCM_PRETEND_VERSION: 0.1.0
 
     - name: Test package
       run: python -m pytest -ra
-      working-directory: cookie
 
 
   dist:
@@ -80,21 +56,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
 
     - uses: actions/setup-python@v2
 
     - name: Install wheel and sdist requirements
-      run: python -m pip install build cookiecutter
-
-    - name: Run cookiecutter
-      run: cookiecutter --no-input .
+      run: python -m pip install build
 
     - name: Build sdist and wheel
-      run: python -m build cookie
-      env:
-        SETUPTOOLS_SCM_PRETEND_VERSION: 0.1.0
+      run: python -m build
 
     - uses: actions/upload-artifact@v2
       with:
         path: dist
+
+    - uses: pypa/gh-action-pypi-publish@v1.4.1
+      if: github.event_name == 'release' && github.event.action == 'published'
+      with:
+        user: __token__
+        # Remember to generate this and set it in "GitHub Secrets"
+        password: ${{ secrets.pypi_password }}
+        # Remove this line
+        repository_url: https://test.pypi.org/legacy/
