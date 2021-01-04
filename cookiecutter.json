@@ -1,13 +1,13 @@
 {
-    "project_name": "cookie",
+    "project_name": "package",
     "org": "Scikit-HEP",
     "url": "https://github.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
-    "full_name": "Henry Schreiner",
+    "full_name": "My Name",
     "project_type": ["setuptools", "pybind11", "flit", "poetry"],
-    "email": "henry.schreiner@cern.ch",
+    "email": "me@email.com",
     "maintainer": "The Scikit-HEP admins",
     "maintainer_email": "scikit-hep-admins@googlegroups.com",
-    "project_short_description": "My project description",
+    "project_short_description": "A great package.",
     "year": "{% now 'utc', '%Y' %}",
     "_extensions": [
         "jinja2_time.TimeExtension"
