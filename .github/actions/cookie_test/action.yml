@@ -10,7 +10,9 @@ runs:
   steps:
     - name: "${{ inputs.backend }}: Run cookiecutter"
       shell: bash
-      run: cookiecutter --no-input . --config-file tests/${{ inputs.backend }}.yml
+      run: |
+        cookiecutter --no-input . --config-file tests/${{ inputs.backend }}.yml
+        git add .
 
     - name: "${{ inputs.backend }}: Install package"
       shell: bash
@@ -22,4 +24,7 @@ runs:
 
     - name: "${{ inputs.backend }}: Uninstall"
       shell: bash
-      run: pip uninstall -y cookie_${{ inputs.backend }}
+      run: |
+        pip uninstall -y cookie_${{ inputs.backend }}
+        rm -r ./cookie-${{ inputs.backend }}
+        git reset

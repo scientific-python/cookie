@@ -22,13 +22,25 @@ jobs:
         pip install wheel
         pip install cookiecutter pre-commit
 
-    - uses: ./.github/actions/cookie_precommit
+    - name: Setuptools test
+      uses: ./.github/actions/cookie_precommit
       with:
         backend: setuptools
 
-    - uses: ./.github/actions/cookie_precommit
+    - name: Pybind11 test
+      uses: ./.github/actions/cookie_precommit
       with:
         backend: pybind11
+
+    - name: Flit test
+      uses: ./.github/actions/cookie_precommit
+      with:
+        backend: flit
+
+    - name: Poetry test
+      uses: ./.github/actions/cookie_precommit
+      with:
+        backend: poetry
 
 
 
@@ -58,17 +70,40 @@ jobs:
         pip install wheel
         pip install cookiecutter
 
-    - uses: ./.github/actions/cookie_test
+    - name: Setuptools test
+      uses: ./.github/actions/cookie_test
       with:
         backend: setuptools
       env:
         SETUPTOOLS_SCM_PRETEND_VERSION: 0.1.0
 
-    - uses: ./.github/actions/cookie_test
+    - name: Pybind11 test
+      uses: ./.github/actions/cookie_test
       with:
         backend: pybind11
       env:
         SETUPTOOLS_SCM_PRETEND_VERSION: 0.1.0
+
+    - name: Flit test
+      uses: ./.github/actions/cookie_test
+      with:
+        backend: flit
+
+    - name: Poetry test
+      uses: ./.github/actions/cookie_test
+      with:
+        backend: poetry
+
+    - name: Prepare Poetry tooling test
+      run: |
+        pip install poetry
+        cookiecutter --no-input . --config-file tests/poetry.yml
+
+    - name: Run Poetry tooling test
+      working-directory: cookie-poetry
+      run: |
+        poetry install
+        poetry run pytest
 
 
   dist:
@@ -87,11 +122,15 @@ jobs:
       run: |
         cookiecutter --no-input . --config-file tests/setuptools.yml
         cookiecutter --no-input . --config-file tests/pybind11.yml
+        cookiecutter --no-input . --config-file tests/flit.yml
+        cookiecutter --no-input . --config-file tests/poetry.yml
 
     - name: Build sdist and wheel
       run: |
         python -m build cookie-setuptools -o dist
         python -m build cookie-pybind11 -o dist
+        python -m build cookie-flit -o dist
+        python -m build cookie-poetry -o dist
         ls -l dist
       env:
         SETUPTOOLS_SCM_PRETEND_VERSION: 0.1.0

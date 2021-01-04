@@ -31,8 +31,11 @@ repos:
   - id: mypy
     files: src
 
+{%- if cookiecutter.project_type == "setuptools" or cookiecutter.project_type == "pybind11" %}
+
 - repo: https://github.com/mgedmin/check-manifest
   rev: "0.45"
   hooks:
   - id: check-manifest
     stages: [manual]
+{%- endif %}

@@ -1,0 +1,45 @@
+[tool.flit.metadata]
+module = "{{ cookiecutter.project_name.replace("-", "_") }}"
+author = "{{ cookiecutter.full_name }}"
+author-email = "{{ cookiecutter.email }}"
+home-page = "{{ cookiecutter.url }}"
+maintainer = "{{ cookiecutter.maintainer }}"
+maintainer-email = "{{ cookiecutter.maintainer_email }}"
+
+classifiers = [
+  "License :: OSI Approved :: BSD License",
+  "Topic :: Scientific/Engineering",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Development Status :: 1 - Planning",
+]
+
+requires-python = ">=3.6"
+
+requires = [
+  "numpy >=1.13.3",
+  "typing; python_version<'3.5'",
+]
+
+[tool.flit.metadata.requires-extra]
+test = [
+    "pytest >=4.6",
+]
+
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.pytest.ini_config]
+addopts = "-rs -s -Wd"
+testpaths = [
+    "tests",
+]

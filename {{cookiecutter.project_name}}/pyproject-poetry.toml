@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_name.replace("-", "_") }}"
+version = "0.1.0"
+authors = [
+    "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
+]
+maintainers = [
+    "{{ cookiecutter.maintainer }} <{{ cookiecutter.maintainer_email }}>",
+]
+homepage = "{{ cookiecutter.url }}"
+repository = "{{ cookiecutter.url }}"
+license = "BSD-3-Clause"
+description = "{{ cookiecutter.project_short_description }}"
+
+classifiers = [
+  "Topic :: Scientific/Engineering",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Development Status :: 1 - Planning",
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+numpy = "^1.13.3"
+typing = {version="^3", python = "<3.6"}
+
+[tool.poetry.dev-dependencies]
+pytest = ">= 4.6"
+
+[tool.poetry.extras]
+test = [
+    "pytest >=4.6",
+]
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_config]
+addopts = "-rs -s -Wd"
+testpaths = [
+    "tests",
+]
