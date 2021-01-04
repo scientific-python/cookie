@@ -1,0 +1,73 @@
+name: wheels
+
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+jobs:
+  make_sdist:
+    name: Make SDist
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+
+    - name: Install deps
+      run: python -m pip install build
+
+    - name: Build SDist
+      run: python -m build -s
+
+    - uses: actions/upload-artifact@v2
+      with:
+        path: dist/*.tar.gz
+
+  build_wheels:
+    name: Wheel on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-18.04, windows-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+
+    - uses: joerick/cibuildwheel@v1.7.4
+      env:
+        CIBW_SKIP: cp27*
+        CIBW_TEST_EXTRAS: test
+        CIBW_TEST_COMMAND: pytest {project}/tests
+
+    - name: Upload wheels
+      uses: actions/upload-artifact@v2
+      with:
+        path: wheelhouse/*.whl
+
+  upload_all:
+    needs: [build_wheels, make_sdist]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'
+
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: artifact
+        path: dist
+
+    - uses: pypa/gh-action-pypi-publish@v1.4.1
+      with:
+        user: __token__
+        # Remember to generate this and set it in "GitHub Secrets"
+        password: ${{ secrets.pypi_password }}
+        # Remove this line
+        repository_url: https://test.pypi.org/legacy/

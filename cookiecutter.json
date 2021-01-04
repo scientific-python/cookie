@@ -3,6 +3,7 @@
     "org": "Scikit-HEP",
     "url": "https://github.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
     "full_name": "Henry Schreiner",
+    "project_type": ["setuptools", "pybind11", "flit", "poetry"],
     "email": "henry.schreiner@cern.ch",
     "maintainer": "The Scikit-HEP admins",
     "maintainer_email": "scikit-hep-admins@googlegroups.com",
@@ -12,6 +13,6 @@
         "jinja2_time.TimeExtension"
     ],
     "_copy_without_render": [
-        ".github/workflows/ci.yml"
+        ".github/workflows/*.yml"
     ]
 }

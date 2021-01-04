@@ -10,9 +10,9 @@
 
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
 [![Gitter][gitter-badge]][gitter-link]
-{%- if cookiecutter.org == "Scikit-HEP" -%}
+{% if cookiecutter.org == "Scikit-HEP" -%}
 [![Scikit-HEP][sk-badge]](https://scikit-hep.org/)
-{%- endif -%}
+{%- endif %}
 
 
 

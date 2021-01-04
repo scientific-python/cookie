@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+# Copyright (c) {{ cookiecutter.year }}, {{ cookiecutter.full_name }}
+#
+# Distributed under the 3-clause BSD license, see accompanying file LICENSE
+# or {{ cookiecutter.url }} for details.
+
+from setuptools import setup
+
+# Available at setup time due to pyproject.toml
+from pybind11.setup_helpers import Pybind11Extension
+
+# Note:
+#   Sort input source files if you glob sources to ensure bit-for-bit
+#   reproducible builds (https://github.com/pybind/python_example/pull/53)
+
+ext_modules = [
+    Pybind11Extension(
+        "{{ cookiecutter.project_name.replace("-","_") }}._core",
+        ["src/main.cpp"],
+        cxx_std=11,
+    ),
+]
+
+
+setup(
+    ext_modules=ext_modules,
+)
