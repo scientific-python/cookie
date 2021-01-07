@@ -4,10 +4,10 @@
 # Distributed under the 3-clause BSD license, see accompanying file LICENSE
 # or {{ cookiecutter.url }} for details.
 
-from setuptools import setup
+from setuptools import setup  # isort:skip
 
 # Available at setup time due to pyproject.toml
-from pybind11.setup_helpers import Pybind11Extension
+from pybind11.setup_helpers import Pybind11Extension  # isort:skip
 
 # Note:
 #   Sort input source files if you glob sources to ensure bit-for-bit
