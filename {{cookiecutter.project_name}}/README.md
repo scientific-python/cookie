@@ -17,7 +17,7 @@
 
 
 [actions-badge]:            {{cookiecutter.url}}/workflows/CI/badge.svg
-[actions-link]:             {{cookiecutter.url}}actions
+[actions-link]:             {{cookiecutter.url}}/actions
 [black-badge]:              https://img.shields.io/badge/code%20style-black-000000.svg
 [black-link]:               https://github.com/psf/black
 [conda-badge]:              https://img.shields.io/conda/vn/conda-forge/{{cookiecutter.project_name}}

@@ -33,6 +33,15 @@ requires = [
 test = [
     "pytest >=4.6",
 ]
+dev = [
+  "pytest >=4.6",
+]
+docs = [
+  "recommonmark >=0.5.0",
+  "Sphinx >=3.0.0",
+  "sphinx_copybutton",
+  "sphinx_rtd_theme >=0.5.0",
+]
 
 [build-system]
 requires = ["flit_core >=2,<4"]
