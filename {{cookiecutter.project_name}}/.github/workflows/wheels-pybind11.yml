@@ -13,14 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Setup Python
-      uses: actions/setup-python@v2
-
-    - name: Install deps
-      run: python -m pip install build
-
     - name: Build SDist
-      run: python -m build -s
+      run: pipx run --spec build pyproject-build --sdist
 
     - uses: actions/upload-artifact@v2
       with:
@@ -39,10 +33,7 @@ jobs:
       with:
         submodules: true
 
-    - name: Setup Python
-      uses: actions/setup-python@v2
-
-    - uses: joerick/cibuildwheel@v1.7.4
+    - uses: joerick/cibuildwheel@v1.8.0
       env:
         CIBW_SKIP: cp27*
         CIBW_TEST_EXTRAS: test
