@@ -11,6 +11,7 @@ homepage = "{{ cookiecutter.url }}"
 repository = "{{ cookiecutter.url }}"
 license = "BSD-3-Clause"
 description = "{{ cookiecutter.project_short_description }}"
+readme = "README.md"
 
 classifiers = [
   "Topic :: Scientific/Engineering",
