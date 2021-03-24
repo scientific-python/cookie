@@ -22,7 +22,7 @@ runs:
 
     - name: "${{ inputs.backend }}: Run pre-commit"
       shell: bash
-      run: pre-commit run -a --hook-stage manual --show-diff-on-failure
+      run: pre-commit run --all-files --hook-stage manual --show-diff-on-failure
 
     - name: "${{ inputs.backend }}: Reset"
       shell: bash
