@@ -48,7 +48,7 @@ requires = ["flit_core >=2,<4"]
 build-backend = "flit_core.buildapi"
 
 [tool.pytest.ini_config]
-addopts = "-rs -s -Wd"
+addopts = "-ra -Wd"
 testpaths = [
     "tests",
 ]
