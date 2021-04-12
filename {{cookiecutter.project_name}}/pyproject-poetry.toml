@@ -22,9 +22,8 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6"
-numpy = "^1.13.3"
-typing = {version="^3", python = "<3.6"}
+python = ">=3.6"
+numpy = ">=1.13.3"
 
 [tool.poetry.dev-dependencies]
 pytest = ">= 4.6"
@@ -48,7 +47,7 @@ requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_config]
-addopts = "-rs -s -Wd"
+addopts = "-ra -Wd"
 testpaths = [
     "tests",
 ]
