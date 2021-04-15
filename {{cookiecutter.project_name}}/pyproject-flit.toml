@@ -37,10 +37,10 @@ dev = [
   "pytest >=4.6",
 ]
 docs = [
-  "recommonmark >=0.5.0",
   "Sphinx >=3.0.0",
+  "myst_parser>=0.13",
+  "sphinx-book-theme>=0.0.33",
   "sphinx_copybutton",
-  "sphinx_rtd_theme >=0.5.0",
 ]
 
 [build-system]
