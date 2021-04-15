@@ -12,7 +12,7 @@ from typing import List
 # -- Project information -----------------------------------------------------
 
 project = "{{ cookiecutter.project_name }}"
-copyright = "{{ cookiecutter.year }}, {{ cookiecutter.org }}"
+copyright = "{{ cookiecutter.year }}, {{ cookiecutter.maintainer }}"
 author = "{{ cookiecutter.full_name }}"
 
 
