@@ -33,7 +33,7 @@ jobs:
       with:
         submodules: true
 
-    - uses: joerick/cibuildwheel@v1.8.0
+    - uses: joerick/cibuildwheel@v1.10.0
       env:
         CIBW_SKIP: cp27*
         CIBW_TEST_EXTRAS: test
@@ -55,7 +55,7 @@ jobs:
         name: artifact
         path: dist
 
-    - uses: pypa/gh-action-pypi-publish@v1.4.1
+    - uses: pypa/gh-action-pypi-publish@v1.4.2
       with:
         user: __token__
         # Remember to generate this and set it in "GitHub Secrets"
