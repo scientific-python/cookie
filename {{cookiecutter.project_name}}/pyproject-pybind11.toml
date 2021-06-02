@@ -8,4 +8,4 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
-write_to = "src/{{ cookiecutter.project_name.replace("-", "_") }}/version.py"
+write_to = "src/{{ cookiecutter.project_name.replace("-", "_") }}/_version.py"

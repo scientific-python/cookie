@@ -6,7 +6,7 @@
 {% endif -%}
 
 {%- if cookiecutter.project_type == "setuptools" or cookiecutter.project_type == "pybind11" -%}
-from .version import version as __version__
+from ._version import version as __version__
 {%- else -%}
 __version__ = "0.1.0"
 {%- endif %}
