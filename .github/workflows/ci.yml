@@ -17,31 +17,17 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
 
-    - name: Prepare pre-commit
-      run: |
-        pip install wheel
-        pip install cookiecutter pre-commit
+    - name: Lint setuptools
+      run: pipx run nox --forcecolor -s 'lint(setuptools)'
 
-    - name: Setuptools test
-      uses: ./.github/actions/cookie_precommit
-      with:
-        backend: setuptools
+    - name: Lint pybind11
+      run: pipx run nox --forcecolor -s 'lint(pybind11)'
 
-    - name: Pybind11 test
-      uses: ./.github/actions/cookie_precommit
-      with:
-        backend: pybind11
+    - name: Lint flit
+      run: pipx run nox --forcecolor -s 'lint(flit)'
 
-    - name: Flit test
-      uses: ./.github/actions/cookie_precommit
-      with:
-        backend: flit
-
-    - name: Poetry test
-      uses: ./.github/actions/cookie_precommit
-      with:
-        backend: poetry
-
+    - name: Lint poetry
+      run: pipx run nox --forcecolor -s 'lint(poetry)'
 
 
   checks:
