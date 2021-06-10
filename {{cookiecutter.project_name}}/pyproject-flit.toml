@@ -5,6 +5,7 @@ author-email = "{{ cookiecutter.email }}"
 home-page = "{{ cookiecutter.url }}"
 maintainer = "{{ cookiecutter.maintainer }}"
 maintainer-email = "{{ cookiecutter.maintainer_email }}"
+description-file = "README.md"
 
 classifiers = [
   "License :: OSI Approved :: BSD License",
