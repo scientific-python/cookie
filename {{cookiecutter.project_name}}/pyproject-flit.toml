@@ -1,3 +1,8 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+
 [tool.flit.metadata]
 module = "{{ cookiecutter.project_name.replace("-", "_") }}"
 author = "{{ cookiecutter.full_name }}"
@@ -32,10 +37,10 @@ requires = [
 
 [tool.flit.metadata.requires-extra]
 test = [
-    "pytest >=4.6",
+    "pytest >=6",
 ]
 dev = [
-  "pytest >=4.6",
+  "pytest >=6",
 ]
 docs = [
   "Sphinx >=3.0.0",
@@ -44,12 +49,26 @@ docs = [
   "sphinx_copybutton",
 ]
 
-[build-system]
-requires = ["flit_core >=2,<4"]
-build-backend = "flit_core.buildapi"
-
-[tool.pytest.ini_config]
+[tool.pytest.ini_options]
 addopts = "-ra -Wd"
-testpaths = [
-    "tests",
-]
+testpaths = ["tests"]
+
+
+[tool.mypy]
+files = "src"
+python_version = "3.6"
+warn_unused_configs = true
+
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+no_implicit_reexport = true
+strict_equality = true
