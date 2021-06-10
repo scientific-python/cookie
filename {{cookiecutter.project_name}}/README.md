@@ -1,6 +1,7 @@
 # {{ cookiecutter.project_name }}
 
 [![Actions Status][actions-badge]][actions-link]
+[![Coverage Status][codecov-badge]][codecov-link]
 [![Documentation Status][rtd-badge]][rtd-link]
 [![Code style: black][black-badge]][black-link]
 
@@ -22,6 +23,8 @@
 [black-link]:               https://github.com/psf/black
 [conda-badge]:              https://img.shields.io/conda/vn/conda-forge/{{cookiecutter.project_name}}
 [conda-link]:               https://github.com/conda-forge/{{cookiecutter.project_name}}-feedstock
+[codecov-badge]:            https://app.codecov.io/gh/{{cookiecutter.org}}/{{cookiecutter.project_name}}/branch/main/graph/badge.svg
+[codecov-link]:            https://app.codecov.io/gh/{{cookiecutter.org}}/{{cookiecutter.project_name}}
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
 [github-discussions-link]:  {{cookiecutter.url}}/discussions
 [gitter-badge]:             https://badges.gitter.im/{{cookiecutter.url}}/community.svg
