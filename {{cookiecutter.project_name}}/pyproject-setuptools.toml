@@ -4,3 +4,24 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
 write_to = "src/{{ cookiecutter.project_name.replace("-", "_") }}/_version.py"
+
+[tool.mypy]
+files = src
+python_version = 3.8
+warn_unused_configs = True
+disallow_any_generics = True
+disallow_subclassing_any = True
+disallow_untyped_calls = True
+disallow_untyped_defs = True
+disallow_incomplete_defs = True
+check_untyped_defs = True
+disallow_untyped_decorators = True
+no_implicit_optional = True
+warn_redundant_casts = True
+warn_unused_ignores = True
+warn_return_any = True
+no_implicit_reexport = True
+strict_equality = True
+
+[tool.mypy-numpy]
+ignore_missing_imports = True
