@@ -3,7 +3,7 @@ from pathlib import Path
 import shutil
 
 DIR = Path(__file__).parent.resolve()
-BACKENDS = "setuptools", "pybind11", "flit", "poetry"
+BACKENDS = "setuptools", "pybind11", "poetry", "flit", "flit621", "trampolim"
 
 JOB_FILE = """\
 default_context:
