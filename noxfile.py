@@ -5,17 +5,25 @@ import shutil
 DIR = Path(__file__).parent.resolve()
 BACKENDS = "setuptools", "pybind11", "flit", "poetry"
 
+JOB_FILE = """\
+default_context:
+  project_name: cookie-{backend}
+  project_type: {backend}
+"""
+
 
 def make_cookie(session: nox.Session, backend: str) -> str:
     tmp_dir = session.create_tmp()
     session.cd(tmp_dir)
 
+    with open("input.yml", "w") as f:
+        f.write(JOB_FILE.format(backend=backend))
+
     session.run(
         "cookiecutter",
         "--no-input",
         str(DIR),
-        "--config-file",
-        str(DIR / f"tests/{backend}.yml"),
+        "--config-file=input.yml",
     )
     session.cd(f"cookie-{backend}")
     return tmp_dir
@@ -29,7 +37,13 @@ def lint(session: nox.Session, backend: str) -> None:
     make_cookie(session, backend)
 
     session.run(
-        "git", "clone", "--no-checkout", "--local", str(DIR), "../tmp_git", external=True
+        "git",
+        "clone",
+        "--no-checkout",
+        "--local",
+        str(DIR),
+        "../tmp_git",
+        external=True,
     )
     shutil.move("../tmp_git/.git", ".git")
     session.run("git", "add", ".", external=True)
@@ -63,6 +77,7 @@ def tests_poetry(session):
     session.run("poetry", "install")
     session.run("poetry", "run", "pytest")
 
+
 @nox.session()
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def dist(session, backend):
@@ -70,7 +85,9 @@ def dist(session, backend):
 
     make_cookie(session, backend)
 
-    session.run("python", "-m", "build", env={"SETUPTOOLS_SCM_PRETEND_VERSION": "0.1.0"})
+    session.run(
+        "python", "-m", "build", env={"SETUPTOOLS_SCM_PRETEND_VERSION": "0.1.0"}
+    )
     files = list(Path("dist").iterdir())
 
     session.run("twine", "check", *(str(f) for f in files))
@@ -79,5 +96,3 @@ def dist(session, backend):
         dist = DIR / "dist"
         dist.mkdir(exist_ok=True)
         shutil.move(str(f), str(dist))
-
-
