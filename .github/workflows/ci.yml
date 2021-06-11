@@ -5,9 +5,7 @@ on:
   pull_request:
   push:
     branches:
-    - master
     - main
-    - develop
 
 jobs:
   pre-commit:
@@ -15,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
 
     - name: Lint setuptools
       run: pipx run nox --forcecolor -s 'lint(setuptools)'
@@ -23,11 +20,17 @@ jobs:
     - name: Lint pybind11
       run: pipx run nox --forcecolor -s 'lint(pybind11)'
 
+    - name: Lint poetry
+      run: pipx run nox --forcecolor -s 'lint(poetry)'
+
     - name: Lint flit
       run: pipx run nox --forcecolor -s 'lint(flit)'
 
-    - name: Lint poetry
-      run: pipx run nox --forcecolor -s 'lint(poetry)'
+    - name: Lint flit621
+      run: pipx run nox --forcecolor -s 'lint(flit621)'
+
+    - name: Lint trampolim
+      run: pipx run nox --forcecolor -s 'lint(trampolim)'
 
 
   checks:
@@ -60,11 +63,18 @@ jobs:
     - name: Test pybind11
       run: nox --forcecolor -s 'tests(pybind11)'
 
+    - name: Test poetry
+      run: nox --forcecolor -s 'tests(poetry)'
+
     - name: Test flit
       run: nox --forcecolor -s 'tests(flit)'
 
-    - name: Test poetry
-      run: nox --forcecolor -s 'tests(poetry)'
+    - name: Test flit621
+      run: nox --forcecolor -s 'tests(flit621)'
+
+    - name: Test trampolim
+      if: matrix.python-version != '3.6'
+      run: nox --forcecolor -s 'tests(trampolim)'
 
     - name: Test poetry tooling
       run: nox --forcecolor -s tests_poetry

@@ -28,6 +28,9 @@ This is a Python template project, with the following project types:
 4. [poetry][]: An all-in-one solution to pure Python projects. Replaces setuptools,
    venv/pipenv, pip, wheel, and twine. Higher learning curve, but is
    all-in-one.
+5. [flit621][flit]: Flit, but with PEP 621 style configuration (hidden feature).
+6. [trampolim][]: A modern PEP 621 builder with support for tasks, allowing
+   arbitrary Python to run during the build process if needed.
 
 #### To use:
 
@@ -118,4 +121,5 @@ If you don't have `nox` locally, you can use [pipx][], such as `pipx run nox` in
 [poetry]:       https://python-poetry.org
 [pybind11]:     https://pybind11.readthedocs.io/en/stable/
 [setuptools]:   https://setuptools.readthedocs.io/en/latest/
+[trampolim]:    https://trampolim.readthedocs.io/en/latest/
 [pipx]:         https://pypa.github.io/pipx/
