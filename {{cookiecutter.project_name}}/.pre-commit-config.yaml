@@ -49,7 +49,11 @@ repos:
   rev: v0.901
   hooks:
   - id: mypy
+    {%- if cookiecutter.project_type == "trampolim" %}
+    files: {{ cookiecutter.project_name }}
+    {%- else %}
     files: src
+    {%- endif %}
 
 {%- if cookiecutter.project_type == "setuptools" or cookiecutter.project_type == "pybind11" %}
 
