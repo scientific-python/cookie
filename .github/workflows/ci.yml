@@ -77,26 +77,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Run cookiecutter
-      run: |
-        pipx run cookiecutter --no-input . --config-file tests/setuptools.yml
-        pipx run cookiecutter --no-input . --config-file tests/pybind11.yml
-        pipx run cookiecutter --no-input . --config-file tests/flit.yml
-        pipx run cookiecutter --no-input . --config-file tests/poetry.yml
-
     - name: Build sdist and wheel
-      run: |
-        pipx run build cookie-setuptools -o dist
-        pipx run build cookie-pybind11 -o dist
-        pipx run build cookie-flit -o dist
-        pipx run build cookie-poetry -o dist
-        ls -l dist
-      env:
-        SETUPTOOLS_SCM_PRETEND_VERSION: 0.1.0
+      run: pipx run nox --forcecolor -s dist
 
-    - name: Check metadata
-      run: |
-        pipx run twine check dist/*
+    - name: Show results
+      run: ls -l dist
 
     - uses: actions/upload-artifact@v2
       with:

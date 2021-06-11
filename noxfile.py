@@ -62,3 +62,22 @@ def tests_poetry(session):
 
     session.run("poetry", "install")
     session.run("poetry", "run", "pytest")
+
+@nox.session()
+@nox.parametrize("backend", BACKENDS, ids=BACKENDS)
+def dist(session, backend):
+    session.install("cookiecutter", "build", "twine")
+
+    make_cookie(session, backend)
+
+    session.run("python", "-m", "build", env={"SETUPTOOLS_SCM_PRETEND_VERSION": "0.1.0"})
+    files = list(Path("dist").iterdir())
+
+    session.run("twine", "check", *(str(f) for f in files))
+
+    for f in files:
+        dist = DIR / "dist"
+        dist.mkdir(exist_ok=True)
+        shutil.move(str(f), str(dist))
+
+
