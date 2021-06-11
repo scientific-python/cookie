@@ -90,7 +90,9 @@ def dist(session, backend):
     )
     files = list(Path("dist").iterdir())
 
-    session.run("twine", "check", *(str(f) for f in files))
+    # Twine only supports metadata 2.1, trampoline produces metadata 2.2
+    if backend != "trampolim":
+        session.run("twine", "check", *(str(f) for f in files))
 
     for f in files:
         dist = DIR / "dist"
