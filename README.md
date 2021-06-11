@@ -40,15 +40,15 @@ cookiecutter gh:scikit-hep/cookie
 ```
 
 Answer all the questions. If you are not making a Scikit-HEP repo, just enter a
-different org name.
+different org name. (You can also use `pipx run cookiecutter` without installing).
 
-Check the key setup files, `pyproject.toml`, `setup.cfg`, and possibly
+Check the key setup files, `pyproject.toml`, and possibly `setup.cfg` and
 `setup.py` (pybind11 example). Update README.md. Also update and add docs to
 `docs/`.
 
 There are a few example dependencies and a minimum Python version of 3.6,
 feel free to change it to whatever you actually need/want. Hopefully not Python
-2.7, but you can.
+2.7.
 
 #### Contained components:
 
@@ -114,6 +114,7 @@ If you don't have `nox` locally, you can use [pipx][], such as `pipx run nox` in
 
 [cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
 [flit]:         https://flit.readthedocs.io/en/latest/
+[nox]:          https://nox.thea.codes/en/stable/
 [poetry]:       https://python-poetry.org
 [pybind11]:     https://pybind11.readthedocs.io/en/stable/
 [setuptools]:   https://setuptools.readthedocs.io/en/latest/
