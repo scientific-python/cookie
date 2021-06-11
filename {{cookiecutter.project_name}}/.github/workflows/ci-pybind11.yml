@@ -16,13 +16,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-python@v2
-    - uses: pre-commit/action@v2.0.2
+    - uses: pre-commit/action@v2.0.3
       with:
         extra_args: --hook-stage manual --all-files
 
   checks:
     name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
     runs-on: ${{ matrix.runs-on }}
+    needs: [pre-commit]
     strategy:
       fail-fast: false
       matrix:

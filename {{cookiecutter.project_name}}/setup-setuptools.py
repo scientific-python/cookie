@@ -7,3 +7,6 @@
 from setuptools import setup
 
 setup()
+
+# This file is optional, on recent versions of pip you can remove it and even
+# still get editable installs.
