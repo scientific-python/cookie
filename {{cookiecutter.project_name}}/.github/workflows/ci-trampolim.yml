@@ -1,3 +1,4 @@
+
 name: CI
 
 on:
@@ -67,9 +68,6 @@ jobs:
       with:
         path: dist
 
-    - name: Check products
-      run: pip run twine check dist/*
-
     - uses: pypa/gh-action-pypi-publish@v1.4.2
       if: github.event_name == 'release' && github.event.action == 'published'
       with:
@@ -78,3 +76,5 @@ jobs:
         password: ${{ secrets.pypi_password }}
         # Remove this line
         repository_url: https://test.pypi.org/legacy/
+        # Check not supported currently by twine + trampolim
+        verify_metadata: false
