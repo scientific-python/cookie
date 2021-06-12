@@ -10,6 +10,8 @@ default_context:
   project_type: {backend}
 """
 
+ENV = {"SETUPTOOLS_SCM_PRETEND_VERSION": "0.1.0"}
+
 
 def make_cookie(session: nox.Session, backend: str) -> str:
     tmp_dir = session.create_tmp()
@@ -63,7 +65,7 @@ def tests(session, backend):
 
     make_cookie(session, backend)
 
-    session.install(".[test]", env={"SETUPTOOLS_SCM_PRETEND_VERSION": "0.1.0"})
+    session.install(".[test]", env=ENV)
     session.run("python", "-m", "pytest", "-ra")
 
 
@@ -84,16 +86,15 @@ def dist(session, backend):
 
     make_cookie(session, backend)
 
-    session.run(
-        "python", "-m", "build", env={"SETUPTOOLS_SCM_PRETEND_VERSION": "0.1.0"}
-    )
-    files = list(Path("dist").iterdir())
+    session.run("python", "-m", "build", env=ENV)
+    (sdist,) = Path("dist").glob("*.tar.gz")
+    (wheel,) = Path("dist").glob("*.whl")
 
     # Twine only supports metadata 2.1, trampoline produces metadata 2.2
     if backend != "trampolim":
-        session.run("twine", "check", *(str(f) for f in files))
+        session.run("twine", "check", str(sdist), str(wheel))
 
-    for f in files:
-        dist = DIR / "dist"
-        dist.mkdir(exist_ok=True)
-        f.rename(dist / f.stem)
+    dist = DIR / "dist"
+    dist.mkdir(exist_ok=True)
+    sdist.rename(dist / sdist.stem)
+    wheel.rename(dist / wheel.stem)
