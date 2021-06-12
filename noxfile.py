@@ -90,6 +90,9 @@ def dist(session, backend):
     (sdist,) = Path("dist").glob("*.tar.gz")
     (wheel,) = Path("dist").glob("*.whl")
 
+    if "0.1.0" not in str(wheel):
+        session.error(f"{wheel} must be version 0.1.0")
+
     # Twine only supports metadata 2.1, trampoline produces metadata 2.2
     if backend != "trampolim":
         session.run("twine", "check", str(sdist), str(wheel))
