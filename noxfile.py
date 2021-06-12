@@ -1,6 +1,5 @@
 import nox
 from pathlib import Path
-import shutil
 
 DIR = Path(__file__).parent.resolve()
 BACKENDS = "setuptools", "pybind11", "poetry", "flit", "flit621", "trampolim"
@@ -45,7 +44,7 @@ def lint(session: nox.Session, backend: str) -> None:
         "../tmp_git",
         external=True,
     )
-    shutil.move("../tmp_git/.git", ".git")
+    Path("../tmp_git/.git").rename(".git")
     session.run("git", "add", ".", external=True)
 
     session.run(
@@ -97,4 +96,4 @@ def dist(session, backend):
     for f in files:
         dist = DIR / "dist"
         dist.mkdir(exist_ok=True)
-        shutil.move(str(f), str(dist))
+        f.rename(dist / f.stem)
