@@ -17,7 +17,6 @@ maintainers = [
 ]
 license = { file = "LICENSE" }
 
-version = "0.1.0"
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
 
@@ -38,6 +37,8 @@ classifiers = [
   "Programming Language :: Python :: 3.9",
   "Development Status :: 1 - Planning",
 ]
+
+dynamic = ["version"]
 
 dependencies = [
   "numpy >=1.13.3",
