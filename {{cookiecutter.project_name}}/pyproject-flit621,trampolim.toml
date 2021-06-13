@@ -46,7 +46,7 @@ dependencies = [
 
 [project.optional-dependencies]
 test = [
-    "pytest >=6",
+  "pytest >=6",
 ]
 dev = [
   "pytest >=6",
