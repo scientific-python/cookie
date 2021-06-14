@@ -10,7 +10,10 @@ default_context:
   project_type: {backend}
 """
 
-ENV = {"SETUPTOOLS_SCM_PRETEND_VERSION": "0.1.0"}
+ENV = {
+    "SETUPTOOLS_SCM_PRETEND_VERSION": "0.1.0",
+    "TRAMPOLIM_VCS_VERSION": "0.1.0",
+}
 
 
 def make_cookie(session: nox.Session, backend: str) -> str:
