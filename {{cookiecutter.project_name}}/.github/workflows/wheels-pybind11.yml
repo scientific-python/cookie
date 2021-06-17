@@ -33,7 +33,7 @@ jobs:
       with:
         submodules: true
 
-    - uses: pypa/cibuildwheel@v1.11.0
+    - uses: pypa/cibuildwheel@v1.11.1
       env:
         CIBW_SKIP: cp27*
         CIBW_TEST_EXTRAS: test

@@ -2,5 +2,41 @@
 requires = ["wheel", "setuptools>=42", "setuptools_scm[toml]>=3.4"]
 build-backend = "setuptools.build_meta"
 
+
 [tool.setuptools_scm]
 write_to = "src/{{ cookiecutter.project_name.replace("-", "_") }}/_version.py"
+
+
+[tool.pytest.ini_options]
+addopts = "-ra -Wd"
+testpaths = ["tests"]
+
+
+[tool.mypy]
+files = "src"
+python_version = "3.7"
+warn_unused_configs = true
+
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+no_implicit_reexport = true
+strict_equality = true
+
+
+[tool.check-manifest]
+ignore = [
+    ".github/**",
+    "docs/**",
+    ".pre-commit-config.yaml",
+    ".readthedocs.yml",
+    "src/*/_version.py",
+]

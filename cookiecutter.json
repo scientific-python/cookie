@@ -1,12 +1,12 @@
 {
     "project_name": "package",
-    "org": "Scikit-HEP",
+    "org": "gradhep",
     "url": "https://github.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
-    "full_name": "My Name",
-    "project_type": ["setuptools", "pybind11", "flit", "poetry"],
-    "email": "me@email.com",
-    "maintainer": "The Scikit-HEP admins",
-    "maintainer_email": "scikit-hep-admins@googlegroups.com",
+    "full_name": "Nathan Simpson",
+    "project_type": ["setuptools", "pybind11", "poetry", "flit", "flit621", "trampolim"],
+    "email": "phinate@protonmail.com",
+    "maintainer": "Nathan Simpson",
+    "maintainer_email": "phinate@protonmail.com",
     "project_short_description": "A great package.",
     "year": "{% now 'utc', '%Y' %}",
     "_extensions": [

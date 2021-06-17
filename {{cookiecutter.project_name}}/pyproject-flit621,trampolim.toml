@@ -1,16 +1,26 @@
 [build-system]
-requires = ["flit_core >=2,<4"]
-build-backend = "flit_core.buildapi"
+{%- if cookiecutter.project_type == "trampolim" %}
+requires = ['trampolim ~=0.0.3']
+build-backend = 'trampolim'
+{%- else %}
+requires = ['flit_core ~=3.2']
+build-backend = 'flit_core.buildapi'
+{%- endif %}
 
+[project]
+name = "{{ cookiecutter.project_name.replace("-", "_") }}"
+authors = [
+  { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
+]
+maintainers = [
+  { name = "{{ cookiecutter.maintainer }}", email = "{{ cookiecutter.maintainer_email }}" },
+]
+license = { file = "LICENSE" }
 
-[tool.flit.metadata]
-module = "{{ cookiecutter.project_name.replace("-", "_") }}"
-author = "{{ cookiecutter.full_name }}"
-author-email = "{{ cookiecutter.email }}"
-home-page = "{{ cookiecutter.url }}"
-maintainer = "{{ cookiecutter.maintainer }}"
-maintainer-email = "{{ cookiecutter.maintainer_email }}"
-description-file = "README.md"
+description = "{{ cookiecutter.project_short_description }}"
+readme = "README.md"
+
+requires-python = ">=3.7"
 
 classifiers = [
   "License :: OSI Approved :: BSD License",
@@ -21,23 +31,22 @@ classifiers = [
   "License :: OSI Approved :: BSD License",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.6",
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Development Status :: 1 - Planning",
 ]
 
-requires-python = ">=3.6"
+dynamic = ["version"]
 
-requires = [
+dependencies = [
   "numpy >=1.13.3",
   "typing; python_version<'3.5'",
 ]
 
-[tool.flit.metadata.requires-extra]
+[project.optional-dependencies]
 test = [
-    "pytest >=6",
+  "pytest >=6",
 ]
 dev = [
   "pytest >=6",
@@ -49,6 +58,10 @@ docs = [
   "sphinx_copybutton",
 ]
 
+[project.urls]
+homepage = "{{ cookiecutter.url }}"
+
+
 [tool.pytest.ini_options]
 addopts = "-ra -Wd"
 testpaths = ["tests"]
@@ -56,7 +69,7 @@ testpaths = ["tests"]
 
 [tool.mypy]
 files = "src"
-python_version = "3.6"
+python_version = "3.7"
 warn_unused_configs = true
 
 disallow_any_generics = true
