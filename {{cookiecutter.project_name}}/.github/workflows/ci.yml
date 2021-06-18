@@ -68,7 +68,7 @@ jobs:
         path: dist
 
     - name: Check products
-      run: pip run twine check dist/*
+      run: pipx run twine check dist/*
 
     - uses: pypa/gh-action-pypi-publish@v1.4.2
       if: github.event_name == 'release' && github.event.action == 'published'
