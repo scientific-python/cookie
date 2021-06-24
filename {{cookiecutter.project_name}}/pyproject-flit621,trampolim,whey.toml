@@ -1,14 +1,25 @@
 [build-system]
 {%- if cookiecutter.project_type == "trampolim" %}
-requires = ['trampolim ~=0.0.3']
-build-backend = 'trampolim'
+requires = ["trampolim ~=0.0.3"]
+build-backend = "trampolim"
+{%- elif cookiecutter.project_type == "whey" %}
+requires = ["whey"]
+build-backend = "whey"
 {%- else %}
-requires = ['flit_core ~=3.2']
-build-backend = 'flit_core.buildapi'
+requires = ["flit_core ~=3.2"]
+build-backend = "flit_core.buildapi"
 {%- endif %}
+
+{% if cookiecutter.project_type == "whey" -%}
+[tool.whey]
+source-dir = "src"
+{% endif -%}
 
 [project]
 name = "{{ cookiecutter.project_name.replace("-", "_") }}"
+{%- if cookiecutter.project_type == "whey" %}
+version = "0.0.1"
+{%- endif %}
 authors = [
   { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
 ]
@@ -38,7 +49,10 @@ classifiers = [
   "Development Status :: 1 - Planning",
 ]
 
+
+{% if cookiecutter.project_type != "whey" -%}
 dynamic = ["version"]
+{% endif -%}
 
 dependencies = [
   "numpy >=1.13.3",
