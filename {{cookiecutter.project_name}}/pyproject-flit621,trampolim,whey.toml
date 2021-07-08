@@ -18,7 +18,7 @@ source-dir = "src"
 [project]
 name = "{{ cookiecutter.project_name.replace("-", "_") }}"
 {%- if cookiecutter.project_type == "whey" %}
-version = "0.0.1"
+version = "0.1.0"
 {%- endif %}
 authors = [
   { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
