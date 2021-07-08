@@ -30,7 +30,9 @@ This is a Python template project, with the following project types:
    setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low learning curve.
 5. [flit621][flit]: Flit, but with PEP 621 style configuration (hidden feature).
 6. [trampolim][]: A modern PEP 621 builder with support for tasks, allowing
-   arbitrary Python to run during the build process if needed.
+   arbitrary Python to run during the build process if needed. Python 3.7+ only
+   (for building from source, wheels can be anything).
+7. [whey][]: A modern PEP 621 builder with some automation options for Trove classifiers.
 
 #### To use:
 

@@ -32,6 +32,9 @@ jobs:
     - name: Lint trampolim
       run: pipx run nox --forcecolor -s 'lint(trampolim)'
 
+    - name: Lint whey
+      run: pipx run nox --forcecolor -s 'lint(whey)'
+
 
   checks:
     name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
@@ -75,6 +78,9 @@ jobs:
     - name: Test trampolim
       if: matrix.python-version != '3.6'
       run: nox --forcecolor -s 'tests(trampolim)'
+
+    - name: Test whey
+      run: nox --forcecolor -s 'tests(whey)'
 
     - name: Test poetry tooling
       run: nox --forcecolor -s tests_poetry
