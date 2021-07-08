@@ -10,8 +10,8 @@ default_context:
   project_type: {backend}
 """
 
+# Work around bug: https://github.com/FFY00/trampolim/issues/4
 ENV = {
-    "SETUPTOOLS_SCM_PRETEND_VERSION": "0.1.0",
     "TRAMPOLIM_VCS_VERSION": "0.1.0",
 }
 
@@ -30,6 +30,20 @@ def make_cookie(session: nox.Session, backend: str) -> str:
         "--config-file=input.yml",
     )
     session.cd(f"cookie-{backend}")
+    session.run("git", "init", "-q", external=True)
+    session.run("git", "add", ".", external=True)
+    session.run(
+        "git",
+        "-c",
+        "user.name=Bot",
+        "-c",
+        "user.email=bot@scikit-hep.org",
+        "commit",
+        "-qm",
+        "feat: initial version",
+        external=True,
+    )
+    session.run("git", "tag", "v0.1.0", external=True)
     return tmp_dir
 
 
@@ -39,18 +53,6 @@ def lint(session: nox.Session, backend: str) -> None:
     session.install("cookiecutter", "pre-commit")
 
     make_cookie(session, backend)
-
-    session.run(
-        "git",
-        "clone",
-        "--no-checkout",
-        "--local",
-        str(DIR),
-        "../tmp_git",
-        external=True,
-    )
-    Path("../tmp_git/.git").rename(".git")
-    session.run("git", "add", ".", external=True)
 
     session.run(
         "pre-commit",
@@ -89,7 +91,7 @@ def dist(session, backend):
 
     make_cookie(session, backend)
 
-    session.run("python", "-m", "build", env=ENV)
+    session.run("python", "-m", "build", env=ENV, silent=True)
     (sdist,) = Path("dist").glob("*.tar.gz")
     (wheel,) = Path("dist").glob("*.whl")
 
