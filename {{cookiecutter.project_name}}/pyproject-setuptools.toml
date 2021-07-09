@@ -39,4 +39,5 @@ ignore = [
     ".pre-commit-config.yaml",
     ".readthedocs.yml",
     "src/*/_version.py",
+    "noxfile.py",
 ]

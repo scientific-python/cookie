@@ -106,3 +106,16 @@ def dist(session, backend):
     dist.mkdir(exist_ok=True)
     sdist.rename(dist / sdist.stem)
     wheel.rename(dist / wheel.stem)
+
+
+@nox.session(name="nox")
+@nox.parametrize("backend", BACKENDS, ids=BACKENDS)
+def nox_session(session, backend):
+    session.install("cookiecutter", "nox")
+
+    make_cookie(session, backend)
+
+    if session.posargs:
+        session.run("nox", "-s", *session.posargs)
+    else:
+        session.run("nox")
