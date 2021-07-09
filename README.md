@@ -136,3 +136,4 @@ If you don't have `nox` locally, you can use [pipx][], such as `pipx run nox` in
 [setuptools]:   https://setuptools.readthedocs.io/en/latest/
 [trampolim]:    https://trampolim.readthedocs.io/en/latest/
 [pipx]:         https://pypa.github.io/pipx/
+[whey]:         https://whey.readthedocs.io/en/latest/
