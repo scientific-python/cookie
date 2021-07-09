@@ -86,7 +86,7 @@ jobs:
       run: nox --forcecolor -s tests_poetry
 
 
-  checks:
+  nox:
     name: Check included Noxfile
     runs-on: ubuntu-latest
 
