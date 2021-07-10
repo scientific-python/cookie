@@ -11,7 +11,7 @@ DIR = Path(__file__).parent.resolve()
 
 {% endif -%}
 
-nox.sessions = ["lint", "tests"]
+nox.options.sessions = ["lint", "tests"]
 
 
 @nox.session
