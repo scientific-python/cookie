@@ -116,6 +116,6 @@ def nox_session(session, backend):
     make_cookie(session, backend)
 
     if session.posargs:
-        session.run("nox", "-s", *session.posargs)
+        session.run("nox", "-s", *session.posargs, env=ENV)
     else:
-        session.run("nox")
+        session.run("nox", env=ENV)
