@@ -86,6 +86,35 @@ jobs:
       run: nox --forcecolor -s tests_poetry
 
 
+  nox:
+    name: Check included Noxfile
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Test setuptools
+      run: pipx run nox --forcecolor -s 'nox(setuptools)'
+
+    - name: Test pybind11
+      run: pipx run nox --forcecolor -s 'nox(pybind11)'
+
+    - name: Test poetry
+      run: pipx run nox --forcecolor -s 'nox(poetry)'
+
+    - name: Test flit
+      run: pipx run nox --forcecolor -s 'nox(flit)'
+
+    - name: Test flit621
+      run: pipx run nox --forcecolor -s 'nox(flit621)'
+
+    - name: Test trampolim
+      run: pipx run nox --forcecolor -s 'nox(trampolim)'
+
+    - name: Test whey
+      run: pipx run nox --forcecolor -s 'nox(whey)'
+
+
   dist:
     name: Distribution build
     runs-on: ubuntu-latest
