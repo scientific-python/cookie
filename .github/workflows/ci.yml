@@ -111,22 +111,22 @@ jobs:
     - name: Test flit
       run: |
         pipx run nox --forcecolor -s 'nox(flit)'
-        pipx run nox --forcecolor -s 'nox(flit)' --docs
+        pipx run nox --forcecolor -s 'nox(flit)' -- docs
 
     - name: Test flit621
       run: |
         pipx run nox --forcecolor -s 'nox(flit621)'
-        pipx run nox --forcecolor -s 'nox(flit621)' --docs
+        pipx run nox --forcecolor -s 'nox(flit621)' -- docs
 
     - name: Test trampolim
       run: |
         pipx run nox --forcecolor -s 'nox(trampolim)'
-        pipx run nox --forcecolor -s 'nox(trampolim)' --docs
+        pipx run nox --forcecolor -s 'nox(trampolim)' -- docs
 
     - name: Test whey
       run: |
         pipx run nox --forcecolor -s 'nox(whey)'
-        pipx run nox --forcecolor -s 'nox(whey)' --docs
+        pipx run nox --forcecolor -s 'nox(whey)' -- docs
 
 
   dist:
