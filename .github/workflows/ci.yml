@@ -94,25 +94,39 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Test setuptools
-      run: pipx run nox --forcecolor -s 'nox(setuptools)'
+      run: |
+        pipx run nox --forcecolor -s 'nox(setuptools)'
+        pipx run nox --forcecolor -s 'nox(setuptools)' -- docs
 
     - name: Test pybind11
-      run: pipx run nox --forcecolor -s 'nox(pybind11)'
+      run: |
+        pipx run nox --forcecolor -s 'nox(pybind11)'
+        pipx run nox --forcecolor -s 'nox(pybind11)' -- docs
 
     - name: Test poetry
-      run: pipx run nox --forcecolor -s 'nox(poetry)'
+      run: |
+        pipx run nox --forcecolor -s 'nox(poetry)'
+        pipx run nox --forcecolor -s 'nox(poetry)' -- docs
 
     - name: Test flit
-      run: pipx run nox --forcecolor -s 'nox(flit)'
+      run: |
+        pipx run nox --forcecolor -s 'nox(flit)'
+        pipx run nox --forcecolor -s 'nox(flit)' --docs
 
     - name: Test flit621
-      run: pipx run nox --forcecolor -s 'nox(flit621)'
+      run: |
+        pipx run nox --forcecolor -s 'nox(flit621)'
+        pipx run nox --forcecolor -s 'nox(flit621)' --docs
 
     - name: Test trampolim
-      run: pipx run nox --forcecolor -s 'nox(trampolim)'
+      run: |
+        pipx run nox --forcecolor -s 'nox(trampolim)'
+        pipx run nox --forcecolor -s 'nox(trampolim)' --docs
 
     - name: Test whey
-      run: pipx run nox --forcecolor -s 'nox(whey)'
+      run: |
+        pipx run nox --forcecolor -s 'nox(whey)'
+        pipx run nox --forcecolor -s 'nox(whey)' --docs
 
 
   dist:
