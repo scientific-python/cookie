@@ -67,9 +67,9 @@ dev = [
   "pytest >=6",
 ]
 docs = [
-  "Sphinx >=3.0.0",
+  "Sphinx~=3.0",
   "myst_parser>=0.13",
-  "sphinx-book-theme>=0.0.33",
+  "sphinx-book-theme>=0.1.0",
   "sphinx_copybutton",
 ]
 

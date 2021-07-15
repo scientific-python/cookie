@@ -1,5 +1,6 @@
-import nox
 from pathlib import Path
+
+import nox
 
 DIR = Path(__file__).parent.resolve()
 BACKENDS = "setuptools", "pybind11", "poetry", "flit", "flit621", "trampolim", "whey"
@@ -16,9 +17,11 @@ ENV = {
 }
 
 
-def make_cookie(session: nox.Session, backend: str) -> str:
+def make_cookie(session: nox.Session, backend: str) -> None:
     tmp_dir = session.create_tmp()
     session.cd(tmp_dir)
+
+    package_dir = Path(f"cookie-{backend}")
 
     with open("input.yml", "w") as f:
         f.write(JOB_FILE.format(backend=backend))
@@ -29,7 +32,7 @@ def make_cookie(session: nox.Session, backend: str) -> str:
         str(DIR),
         "--config-file=input.yml",
     )
-    session.cd(f"cookie-{backend}")
+    session.cd(package_dir)
     session.run("git", "init", "-q", external=True)
     session.run("git", "add", ".", external=True)
     session.run(
@@ -44,7 +47,6 @@ def make_cookie(session: nox.Session, backend: str) -> str:
         external=True,
     )
     session.run("git", "tag", "v0.1.0", external=True)
-    return tmp_dir
 
 
 @nox.session()

@@ -8,9 +8,9 @@
 [![Scikit-HEP][sk-badge]](https://scikit-hep.org/)
 
 A cookiecutter template for new Python projects, either targeting Scikit-HEP
-inclusion, or for general packages - the only Scikit-HEP specific parts are in
-the defaults. What makes this different from other cookie cutter templates for
-Python packages?
+inclusion, or for general software packages - the only Scikit-HEP specific
+parts are in the defaults. What makes this different from other cookie cutter
+templates for Python packages?
 
 * Designed from the [Scikit-HEP developer guidelines][]: Every decision is
   clearly documented and every tool described.
@@ -62,13 +62,12 @@ Check the key setup files, `pyproject.toml`, and possibly `setup.cfg` and
 `docs/`.
 
 There are a few example dependencies and a minimum Python version of 3.6,
-feel free to change it to whatever you actually need/want. Hopefully not Python
-2.7.
+feel free to change it to whatever you actually need/want.
 
 #### Contained components:
 
 * GitHub actions runs testing
-    - Uses nox so development can be checked locally
+    - Uses nox so cookie development can be checked locally
 * GitHub actions deploy
     - Be sure to add a token
     - C++ backend uses cibuildwheel for wheel builds
@@ -77,11 +76,13 @@ feel free to change it to whatever you actually need/want. Hopefully not Python
     - No reason not to be strict on a new project; remove what you don't want.
     - Includes MyPy - static typing
     - Includes strong Flake8 checking
-    - Includes auto fixes for most flake8 problems
+    - Includes auto fixes for common flake8 problems
     - Includes Black - standardizing formatting
     - Includes isort for nice import sorting/grouping
     - Includes PyUpgrade - keeps old Python syntax out
-* A rough version of ReadTheDocs Sphinx docs provided
+    - Includes spell checking
+* A ReadTheDocs-ready Sphinx docs folder and `[docs]` extra
+* A test folder and pytest `[test]` extra
 
 Setuptools only:
 
@@ -95,6 +96,8 @@ Setuptools only:
     - You can easily switch to manual versioning, but this avoids duplicating
       the version as git tags and in the source, and versions _every_ commit
       uniquely, sidestepping some caching problems.
+* `MANIFEST.in` checked with check-manifest
+* `setup.cfg` checked by setup-cfg-fmt
 
 
 #### For developers:
@@ -110,6 +113,9 @@ nox
 
 # Run a specific check
 nox -s "lint(setuptools)"
+
+# Run a noxfile command on the project noxfile
+nox -s "nox(whey)" -- docs
 ```
 
 If you don't have `nox` locally, you can use [pipx][], such as `pipx run nox` instead.

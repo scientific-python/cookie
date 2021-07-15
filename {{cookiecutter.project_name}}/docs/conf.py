@@ -22,7 +22,9 @@ author = "{{ cookiecutter.full_name }}"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+{%- if cookiecutter.project_type != "poetry" %}
     "myst_parser",
+{%- endif %}
     "sphinx.ext.autodoc",
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
@@ -45,7 +47,7 @@ exclude_patterns = ["_build", "**.ipynb_checkpoints", "Thumbs.db", ".DS_Store", 
 #
 html_theme = "sphinx_book_theme"
 
-html_title = f"Hist {version}"
+html_title = f"{project}"
 
 html_baseurl = "https://{{ cookiecutter.project_name.replace("-", "_") }}.readthedocs.io/en/latest/"
 

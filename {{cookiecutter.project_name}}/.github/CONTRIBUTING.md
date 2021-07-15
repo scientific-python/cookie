@@ -3,7 +3,31 @@ detailed description of best practices for developing Scikit-HEP packages.
 
 [skhep-dev-intro]: https://scikit-hep.org/developer/intro
 
-# Setting up a development environment
+# Quick development
+
+The fastest way to start with development is to use nox. If you don't have nox,
+you can use `pipx run nox` to run it without installing, or `pipx install nox`.
+If you don't have pipx (pip for applications), then you can install with with
+`pip install pipx` (the only case were installing an application with regular
+pip is reasonable). If you use macOS, then pipx and nox are both in brew, use
+`brew install pipx nox`.
+
+To use, run `nox`. This will lint and test using every installed version of
+Python on your system, skipping ones that are not installed. You can also run
+specific jobs:
+
+```console
+$ nox -s lint  # Lint only
+$ nox -s tests-3.9  # Python 3.9 tests only
+$ nox -s docs -- serve  # Build and serve the docs
+$ nox -s build  # Make an SDist and wheel
+```
+
+Nox handles everything for you, including setting up an temporary virtual
+environment for each run.
+
+
+# Setting up a development environment manually
 
 You can set up a development environment by running:
 
@@ -40,7 +64,7 @@ run --all-files` to check even without installing the hook.
 
 # Testing
 
-Use PyTest to run the unit checks:
+Use pytest to run the unit checks:
 
 ```bash
 pytest
@@ -50,28 +74,22 @@ pytest
 
 You can build the docs using:
 
-
-{% if cookiecutter.project_type == "poetry" -%}
-
-
-Remember to install the docs extra:
-
 ```bash
-poetry install --extras docs
+nox -s docs
 ```
 
-Then run:
+You can see a preview with:
 
 ```bash
-poetry run sphinx-build -M html docs docs/_build
+nox -s docs -- serve
 ```
 
-{%- else -%}
+# Pre-commit
 
-From inside your environmentwith the docs extra installed, run:
+This project uses pre-commit for all style checking. While you can run it with nox, this is such an important tool that it deserves to be installed on its own. Install pre-commit and run:
 
 ```bash
-sphinx-build -M html docs docs/_build
+pre-commit run -a
 ```
 
-{%- endif %}
+to check all files.
