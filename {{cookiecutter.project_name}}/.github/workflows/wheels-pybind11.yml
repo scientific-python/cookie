@@ -11,7 +11,9 @@ jobs:
     name: Make SDist
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: Build SDist
       run: pipx run build --sdist
@@ -26,18 +28,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-18.04, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
       with:
-        submodules: true
+        fetch-depth: 0
 
-    - uses: pypa/cibuildwheel@v1.11.1
-      env:
-        CIBW_SKIP: cp27*
-        CIBW_TEST_EXTRAS: test
-        CIBW_TEST_COMMAND: pytest {project}/tests
+    - uses: pypa/cibuildwheel@v2.0.0
 
     - name: Upload wheels
       uses: actions/upload-artifact@v2
