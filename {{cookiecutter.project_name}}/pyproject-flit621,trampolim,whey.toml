@@ -6,7 +6,7 @@ build-backend = "trampolim"
 requires = ["whey >=0.0.17"]
 build-backend = "whey"
 {%- else %}
-requires = ["flit_core >=3.2"]
+requires = ["flit_core >=3.3"]
 build-backend = "flit_core.buildapi"
 {%- endif %}
 
