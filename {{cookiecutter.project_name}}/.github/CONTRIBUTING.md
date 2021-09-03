@@ -35,17 +35,34 @@ You can set up a development environment by running:
 ```bash
 poetry install
 ```
-{%- elif cookiecutter.project_type == "pybind11" -%}
+{%- elif cookiecutter.project_type == "flit" or cookiecutter.project_type == "flit621" -%}
 ```bash
-python3 -m venv .env
-source ./.env/bin/activate
+python3 -m venv .venv
+source ./.venv/bin/activate
 flit install --symlink --extras dev
+```
+
+If you have the [Python Launcher for Unix](https://github.com/brettcannon/python-launcher),
+you can instead do:
+
+```bash
+py -m venv .venv
+py -m pip install flit
+py -m flit install --symlink --extras dev
 ```
 {%- else -%}
 ```bash
-python3 -m venv .env
-source ./.env/bin/activate
-pip install -v -e .[all]
+python3 -m venv .venv
+source ./.venv/bin/activate
+pip install -v -e .[dev]
+```
+
+If you have the [Python Launcher for Unix](https://github.com/brettcannon/python-launcher),
+you can instead do:
+
+```bash
+py -m venv .venv
+py -m install -v -e .[dev]
 ```
 {%- endif %}
 
@@ -86,7 +103,9 @@ nox -s docs -- serve
 
 # Pre-commit
 
-This project uses pre-commit for all style checking. While you can run it with nox, this is such an important tool that it deserves to be installed on its own. Install pre-commit and run:
+This project uses pre-commit for all style checking. While you can run it with
+nox, this is such an important tool that it deserves to be installed on its
+own. Install pre-commit and run:
 
 ```bash
 pre-commit run -a
