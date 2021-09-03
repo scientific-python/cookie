@@ -66,7 +66,7 @@ feel free to change it to whatever you actually need/want.
 
 #### Contained components:
 
-* GitHub actions runs testing
+* GitHub Actions runs testing for the generation itself
     - Uses nox so cookie development can be checked locally
 * GitHub actions deploy
     - Be sure to add a token
@@ -83,6 +83,7 @@ feel free to change it to whatever you actually need/want.
     - Includes spell checking
 * A ReadTheDocs-ready Sphinx docs folder and `[docs]` extra
 * A test folder and pytest `[test]` extra
+* A noxfile is included with a few common targets
 
 Setuptools only:
 
@@ -120,6 +121,16 @@ nox -s "nox(whey)" -- docs
 
 If you don't have `nox` locally, you can use [pipx][], such as `pipx run nox` instead.
 
+#### Other similar projects
+
+[Hypermodern-Python][hypermodern] is another project worth checking out
+with many similarities, like great documentation for each feature and
+many of the same tools used. It has a slighly differnet set of features,
+and has a stronger focus on GitHub Actions - most of Scikit-HEP cookie
+could be adapted to a different CI system fairly easily if you don't want
+to use GHA. It also forces the use of Poetry (instead of having a backend
+selection), and doesn't support compiled projects.
+
 [actions-badge]:            https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
 [actions-link]:             https://github.com/scikit-hep/cookie/actions
 [black-badge]:              https://img.shields.io/badge/code%20style-black-000000.svg
@@ -143,3 +154,4 @@ If you don't have `nox` locally, you can use [pipx][], such as `pipx run nox` in
 [trampolim]:    https://trampolim.readthedocs.io/en/latest/
 [pipx]:         https://pypa.github.io/pipx/
 [whey]:         https://whey.readthedocs.io/en/latest/
+[hypermodern]:  https://github.com/cjolowicz/cookiecutter-hypermodern-python
