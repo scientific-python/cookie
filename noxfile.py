@@ -65,6 +65,17 @@ def lint(session: nox.Session, backend: str) -> None:
     )
 
 
+@nox.session
+@nox.parametrize("backend", BACKENDS, ids=BACKENDS)
+def autoupdate(session, backend):
+    session.install("cookiecutter", "pre-commit")
+
+    make_cookie(session, backend)
+
+    session.run("pre-commit", "autoupdate")
+    session.run("git", "diff", "--exit-code", external=True)
+
+
 @nox.session()
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def tests(session, backend):
