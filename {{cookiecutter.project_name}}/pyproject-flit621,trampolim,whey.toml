@@ -82,6 +82,10 @@ addopts = "-ra -Wd"
 testpaths = ["tests"]
 
 
+[tool.pycln]
+all = true
+
+
 [tool.mypy]
 files = "src"
 python_version = "3.6"
