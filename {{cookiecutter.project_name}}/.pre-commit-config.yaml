@@ -38,6 +38,12 @@ repos:
 
 {%- endif %}
 
+- repo: https://github.com/hadialqattan/pycln
+  rev: v1.0.3
+  hooks:
+  - id: pycln
+    args: [--config=pyproject.toml]
+
 - repo: https://github.com/pycqa/flake8
   rev: 3.9.2
   hooks:

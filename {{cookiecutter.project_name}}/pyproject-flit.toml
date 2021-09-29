@@ -49,9 +49,14 @@ docs = [
   "sphinx_copybutton",
 ]
 
+
 [tool.pytest.ini_options]
 addopts = "-ra -Wd"
 testpaths = ["tests"]
+
+
+[tool.pycln]
+all = true
 
 
 [tool.mypy]
