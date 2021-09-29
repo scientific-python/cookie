@@ -38,6 +38,15 @@ repos:
 
 {%- endif %}
 
+{%- if  cookiecutter.project_type == "pybind11" %}
+
+- repo: https://github.com/ssciwr/clang-format-hook
+  rev: v12.0.1
+  hooks:
+   - id: clang-format
+
+{%- endif %}
+
 - repo: https://github.com/hadialqattan/pycln
   rev: v1.0.3
   hooks:
