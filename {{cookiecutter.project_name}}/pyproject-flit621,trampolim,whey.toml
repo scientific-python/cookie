@@ -1,6 +1,6 @@
 [build-system]
 {%- if cookiecutter.project_type == "trampolim" %}
-requires = ["trampolim >=0.0.3"]
+requires = ["trampolim ==0.0.3"]
 build-backend = "trampolim"
 {%- elif cookiecutter.project_type == "whey" %}
 requires = ["whey >=0.0.17"]
