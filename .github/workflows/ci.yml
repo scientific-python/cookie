@@ -83,7 +83,6 @@ jobs:
       run: nox --forcecolor -s 'tests(whey)'
 
     - name: Test poetry tooling
-      if: matrix.python-version != '3.10'
       run: nox --forcecolor -s tests_poetry
 
 
