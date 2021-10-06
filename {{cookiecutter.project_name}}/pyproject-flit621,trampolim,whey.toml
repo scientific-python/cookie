@@ -1,6 +1,6 @@
 [build-system]
 {%- if cookiecutter.project_type == "trampolim" %}
-requires = ["trampolim ==0.0.3"]
+requires = ["trampolim @ git+https://github.com/FFY00/trampolim@fix-dynamic-version"]
 build-backend = "trampolim"
 {%- elif cookiecutter.project_type == "whey" %}
 requires = ["whey >=0.0.17"]
