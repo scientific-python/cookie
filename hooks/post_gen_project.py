@@ -23,10 +23,3 @@ for f in files:
         f.replace(f.with_name(f"{base}{f.suffix}"))
     elif currents & other_project_types:
         f.unlink()
-
-# Hackaround lack of "src/" support in trampolim - remove when proper support
-# is added (and maybe after editable support is added?)
-# Also remove if clause in .pre-commit-config.yaml
-if project_type == "trampolim":
-    for f in Path("src").iterdir():
-        f.rename(f.stem)

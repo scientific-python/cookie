@@ -10,10 +10,15 @@ requires = ["flit_core >=3.3"]
 build-backend = "flit_core.buildapi"
 {%- endif %}
 
-{% if cookiecutter.project_type == "whey" -%}
+
+{%- if cookiecutter.project_type == "whey" %}
 [tool.whey]
 source-dir = "src"
-{% endif -%}
+{%- elif cookiecutter.project_type == "trampolim" %}
+[tool.trampolim]
+module-location = "src"
+{%- endif %}
+
 
 [project]
 name = "{{ cookiecutter.project_name.replace("-", "_") }}"

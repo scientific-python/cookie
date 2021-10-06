@@ -11,11 +11,6 @@ default_context:
   project_type: {backend}
 """
 
-# Work around bug: https://github.com/FFY00/trampolim/issues/4
-ENV = {
-    "TRAMPOLIM_VCS_VERSION": "0.1.0",
-}
-
 
 def make_cookie(session: nox.Session, backend: str) -> None:
     tmp_dir = session.create_tmp()
@@ -83,7 +78,7 @@ def tests(session, backend):
 
     make_cookie(session, backend)
 
-    session.install(".[test]", env=ENV)
+    session.install(".[test]")
     session.run("python", "-m", "pytest", "-ra")
 
 
@@ -104,16 +99,14 @@ def dist(session, backend):
 
     make_cookie(session, backend)
 
-    session.run("python", "-m", "build", env=ENV, silent=True)
+    session.run("python", "-m", "build", silent=True)
     (sdist,) = Path("dist").glob("*.tar.gz")
     (wheel,) = Path("dist").glob("*.whl")
 
     if "0.1.0" not in str(wheel):
         session.error(f"{wheel} must be version 0.1.0")
 
-    # Twine only supports metadata 2.1, trampoline produces metadata 2.2
-    if backend != "trampolim":
-        session.run("twine", "check", str(sdist), str(wheel))
+    session.run("twine", "check", str(sdist), str(wheel))
 
     dist = DIR / "dist"
     dist.mkdir(exist_ok=True)
@@ -129,6 +122,6 @@ def nox_session(session, backend):
     make_cookie(session, backend)
 
     if session.posargs:
-        session.run("nox", "-s", *session.posargs, env=ENV)
+        session.run("nox", "-s", *session.posargs)
     else:
-        session.run("nox", env=ENV)
+        session.run("nox")
