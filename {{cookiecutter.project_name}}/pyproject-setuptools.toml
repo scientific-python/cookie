@@ -8,7 +8,8 @@ write_to = "src/{{ cookiecutter.project_name.replace("-", "_") }}/_version.py"
 
 
 [tool.pytest.ini_options]
-addopts = "-ra -Wd"
+addopts = "-ra"
+filterwarnings = ["error"]
 testpaths = ["tests"]
 
 

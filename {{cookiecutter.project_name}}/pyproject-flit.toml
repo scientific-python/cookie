@@ -50,7 +50,8 @@ docs = [
 
 
 [tool.pytest.ini_options]
-addopts = "-ra -Wd"
+addopts = "-ra"
+filterwarnings = ["error"]
 testpaths = ["tests"]
 
 
