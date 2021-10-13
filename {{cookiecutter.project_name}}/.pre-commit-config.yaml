@@ -85,11 +85,7 @@ repos:
   rev: v0.910-1
   hooks:
   - id: mypy
-    {%- if cookiecutter.project_type == "trampolim" %}
-    files: {{ cookiecutter.project_name }}
-    {%- else %}
     files: src
-    {%- endif %}
 
 - repo: https://github.com/codespell-project/codespell
   rev: v2.1.0
