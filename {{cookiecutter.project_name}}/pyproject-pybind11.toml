@@ -17,9 +17,13 @@ test-command = "pytest {project}/tests"
 
 
 [tool.pytest.ini_options]
-addopts = "-ra"
+minversion = "6.0"
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+xfail_strict = true
 filterwarnings = ["error"]
-testpaths = ["tests"]
+testpaths = [
+    "tests",
+]
 
 
 [tool.pycln]

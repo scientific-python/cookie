@@ -21,10 +21,10 @@ name = "{{ cookiecutter.project_name.replace("-", "_") }}"
 version = "0.1.0"
 {%- endif %}
 authors = [
-  { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
+    { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
 ]
 maintainers = [
-  { name = "{{ cookiecutter.maintainer }}", email = "{{ cookiecutter.maintainer_email }}" },
+    { name = "{{ cookiecutter.maintainer }}", email = "{{ cookiecutter.maintainer_email }}" },
 ]
 license = { file = "LICENSE" }
 
@@ -34,19 +34,20 @@ readme = "README.md"
 requires-python = ">=3.6"
 
 classifiers = [
-  "License :: OSI Approved :: BSD License",
-  "Topic :: Scientific/Engineering",
-  "Intended Audience :: Science/Research",
-  "Intended Audience :: Developers",
-  "Operating System :: OS Independent",
-  "License :: OSI Approved :: BSD License",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.6",
-  "Programming Language :: Python :: 3.7",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Development Status :: 1 - Planning",
+    "License :: OSI Approved :: BSD License",
+    "Topic :: Scientific/Engineering",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Development Status :: 1 - Planning",
 ]
 
 
@@ -55,21 +56,21 @@ dynamic = ["version"]
 {% endif -%}
 
 dependencies = [
-  "typing_extensions >=3.7; python_version<'3.8'",
+    "typing_extensions >=3.7; python_version<'3.8'",
 ]
 
 [project.optional-dependencies]
 test = [
-  "pytest >=6",
+    "pytest >=6",
 ]
 dev = [
-  "pytest >=6",
+    "pytest >=6",
 ]
 docs = [
-  "Sphinx~=3.0",
-  "myst_parser>=0.13",
-  "sphinx-book-theme>=0.1.0",
-  "sphinx_copybutton",
+    "Sphinx~=3.0",
+     "myst_parser>=0.13",
+    "sphinx-book-theme>=0.1.0",
+    "sphinx_copybutton",
 ]
 
 [project.urls]
@@ -77,9 +78,13 @@ homepage = "{{ cookiecutter.url }}"
 
 
 [tool.pytest.ini_options]
-addopts = "-ra"
+minversion = "6.0"
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+xfail_strict = true
 filterwarnings = ["error"]
-testpaths = ["tests"]
+testpaths = [
+    "tests",
+]
 
 
 [tool.pycln]
