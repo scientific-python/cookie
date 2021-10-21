@@ -19,11 +19,11 @@ description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
 
 classifiers = [
-  "Topic :: Scientific/Engineering",
-  "Intended Audience :: Science/Research",
-  "Intended Audience :: Developers",
-  "Operating System :: OS Independent",
-  "Development Status :: 1 - Planning",
+    "Topic :: Scientific/Engineering",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Development Status :: 1 - Planning",
 ]
 
 [tool.poetry.dependencies]
@@ -42,16 +42,20 @@ pytest = ">= 6"
 test = ["pytest"]
 dev = ["pytest"]
 docs = [
-  "sphinx",
-  "sphinx-book-theme",
-  "sphinx_copybutton",
+    "sphinx",
+    "sphinx-book-theme",
+    "sphinx_copybutton",
 ]
 
 
 [tool.pytest.ini_options]
-addopts = "-ra"
+minversion = "6.0"
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+xfail_strict = true
 filterwarnings = ["error"]
-testpaths = ["tests"]
+testpaths = [
+    "tests",
+]
 
 
 [tool.pycln]
