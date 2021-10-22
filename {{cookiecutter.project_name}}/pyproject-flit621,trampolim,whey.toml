@@ -109,3 +109,6 @@ warn_unused_ignores = true
 warn_return_any = true
 no_implicit_reexport = true
 strict_equality = true
+
+[tool.isort]
+profile = "black"

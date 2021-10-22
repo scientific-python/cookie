@@ -46,3 +46,6 @@ ignore = [
     "src/*/_version.py",
     "noxfile.py",
 ]
+
+[tool.isort]
+profile = "black"
