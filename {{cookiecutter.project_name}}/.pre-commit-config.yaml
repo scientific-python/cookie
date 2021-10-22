@@ -59,11 +59,14 @@ repos:
 
 {%- endif %}
 
-- repo: https://github.com/hadialqattan/pycln
-  rev: v1.0.3
-  hooks:
-  - id: pycln
-    args: [--config=pyproject.toml]
+# Uses version caps. Will remove unless the policy is changed.
+# See https://github.com/scikit-hep/cookie/issues/52 and
+#
+# - repo: https://github.com/hadialqattan/pycln
+#   rev: v1.0.3
+#   hooks:
+#   - id: pycln
+#     args: [--config=pyproject.toml]
 
 - repo: https://github.com/asottile/yesqa
   rev: v1.2.3
