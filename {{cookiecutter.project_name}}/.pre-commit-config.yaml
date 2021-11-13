@@ -60,7 +60,7 @@ repos:
 {%- endif %}
 
 - repo: https://github.com/hadialqattan/pycln
-  rev: v1.0.3
+  rev: v1.1.0
   hooks:
   - id: pycln
     args: [--config=pyproject.toml]
