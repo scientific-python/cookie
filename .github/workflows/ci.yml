@@ -92,6 +92,7 @@ jobs:
       run: nox --forcecolor -s 'native(poetry)'
 
     - name: Native pdm tooling
+      if: matrix.python-version != '3.6' && matrix.python-version != 'pypy-3.7'
       run: nox --forcecolor -s 'native(pdm)'
 
 
