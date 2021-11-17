@@ -5,6 +5,9 @@ build-backend = "trampolim"
 {%- elif cookiecutter.project_type == "whey" %}
 requires = ["whey >=0.0.17"]
 build-backend = "whey"
+{%- elif cookiecutter.project_type == "pdm" %}
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
 {%- else %}
 requires = ["flit_core >=3.3"]
 build-backend = "flit_core.buildapi"
@@ -22,7 +25,7 @@ module-location = "src"
 
 [project]
 name = "{{ cookiecutter.project_name.replace("-", "_") }}"
-{%- if cookiecutter.project_type == "whey" %}
+{%- if cookiecutter.project_type != "trampolim" and cookiecutter.project_type != "flit621" %}
 version = "0.1.0"
 {%- endif %}
 authors = [
@@ -55,10 +58,10 @@ classifiers = [
     "Development Status :: 1 - Planning",
 ]
 
+{%- if cookiecutter.project_type == "trampolim" or cookiecutter.project_type == "flit621" %}
 
-{% if cookiecutter.project_type != "whey" -%}
 dynamic = ["version"]
-{% endif -%}
+{%- endif %}
 
 dependencies = [
     "typing_extensions >=3.7; python_version<'3.8'",

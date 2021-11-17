@@ -29,6 +29,9 @@ jobs:
     - name: Lint flit621
       run: pipx run nox --forcecolor -s 'lint(flit621)'
 
+    - name: Lint pdm
+      run: pipx run nox --forcecolor -s 'lint(pdm)'
+
     - name: Lint trampolim
       run: pipx run nox --forcecolor -s 'lint(trampolim)'
 
@@ -75,6 +78,9 @@ jobs:
     - name: Test flit621
       run: nox --forcecolor -s 'tests(flit621)'
 
+    - name: Test pdm
+      run: nox --forcecolor -s 'tests(pdm)'
+
     - name: Test trampolim
       if: matrix.python-version != '3.6'
       run: nox --forcecolor -s 'tests(trampolim)'
@@ -117,6 +123,11 @@ jobs:
       run: |
         pipx run nox --forcecolor -s 'nox(flit621)'
         pipx run nox --forcecolor -s 'nox(flit621)' -- docs
+
+    - name: Test pdm
+      run: |
+        pipx run nox --forcecolor -s 'nox(pdm)'
+        pipx run nox --forcecolor -s 'nox(pdm)' -- docs
 
     - name: Test trampolim
       run: |
