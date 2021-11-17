@@ -85,6 +85,14 @@ docs = [
 homepage = "{{ cookiecutter.url }}"
 
 
+{%- if cookiecutter.project_type == "pdm" %}
+
+
+[tool.pdm.dev-dependencies]
+dev = ["pytest"]
+{%- endif %}
+
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]

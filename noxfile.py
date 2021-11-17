@@ -83,13 +83,14 @@ def tests(session, backend):
 
 
 @nox.session()
-def tests_poetry(session):
-    session.install("cookiecutter", "poetry")
+@nox.parametrize("backend", ("poetry", "pdm"), ids=("poetry", "pdm"))
+def native(session, backend):
+    session.install("cookiecutter", backend)
 
-    make_cookie(session, "poetry")
+    make_cookie(session, backend)
 
-    session.run("poetry", "install")
-    session.run("poetry", "run", "pytest")
+    session.run(backend, "install")
+    session.run(backend, "run", "pytest")
 
 
 @nox.session()
