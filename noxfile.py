@@ -3,7 +3,7 @@ from pathlib import Path
 import nox
 
 DIR = Path(__file__).parent.resolve()
-BACKENDS = "setuptools", "pybind11", "poetry", "flit", "flit621", "trampolim", "whey"
+BACKENDS = "setuptools", "pybind11", "poetry", "flit", "flit621", "pdm", "trampolim", "whey"
 
 JOB_FILE = """\
 default_context:
