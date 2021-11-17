@@ -8,151 +8,43 @@ on:
     - main
 
 jobs:
-  pre-commit:
-    name: Format
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Lint setuptools
-      run: pipx run nox --forcecolor -s 'lint(setuptools)'
-
-    - name: Lint pybind11
-      run: pipx run nox --forcecolor -s 'lint(pybind11)'
-
-    - name: Lint poetry
-      run: pipx run nox --forcecolor -s 'lint(poetry)'
-
-    - name: Lint flit
-      run: pipx run nox --forcecolor -s 'lint(flit)'
-
-    - name: Lint pdm
-      run: pipx run nox --forcecolor -s 'lint(pdm)'
-
-    - name: Lint trampolim
-      run: pipx run nox --forcecolor -s 'lint(trampolim)'
-
-    - name: Lint whey
-      run: pipx run nox --forcecolor -s 'lint(whey)'
-
-    - name: Lint maturin
-      run: pipx run nox --forcecolor -s 'lint(maturin)'
-
-    - name: Lint hatch
-      run: pipx run nox --forcecolor -s 'lint(hatch)'
-
-
-  checks:
-    name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
-    runs-on: ${{ matrix.runs-on }}
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.7", "3.10"]
-        runs-on: [ubuntu-latest, macos-latest, windows-latest]
-
-        include:
-        - python-version: pypy-3.7
-          runs-on: ubuntu-latest
-
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Install nox
-      run: pip install nox
-
-    - name: Test setuptools
-      run: nox --forcecolor -s 'tests(setuptools)'
-
-    - name: Test pybind11
-      run: nox --forcecolor -s 'tests(pybind11)'
-
-    - name: Test poetry
-      run: nox --forcecolor -s 'tests(poetry)'
-
-    - name: Test flit
-      run: nox --forcecolor -s 'tests(flit)'
-
-    - name: Test pdm
-      run: nox --forcecolor -s 'tests(pdm)'
-
-    - name: Test trampolim
-      run: nox --forcecolor -s 'tests(trampolim)'
-
-    - name: Test whey
-      run: nox --forcecolor -s 'tests(whey)'
-
-    - name: Test maturin
-      run: nox --forcecolor -s 'tests(maturin)'
-
-    - name: Test hatch
-      run: nox --forcecolor -s 'tests(hatch)'
-
-    - name: Native poetry tooling
-      run: nox --forcecolor -s 'native(poetry)'
-
-    - name: Native pdm tooling
-      if: matrix.python-version != 'pypy-3.7'
-      run: nox --forcecolor -s 'native(pdm)'
-
-
-  nox:
-    name: Check included Noxfile
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Test setuptools
-      run: |
-        pipx run nox --forcecolor -s 'nox(setuptools)'
-        pipx run nox --forcecolor -s 'nox(setuptools)' -- docs
-
-    - name: Test pybind11
-      run: |
-        pipx run nox --forcecolor -s 'nox(pybind11)'
-        pipx run nox --forcecolor -s 'nox(pybind11)' -- docs
-
-    - name: Test poetry
-      run: |
-        pipx run nox --forcecolor -s 'nox(poetry)'
-        pipx run nox --forcecolor -s 'nox(poetry)' -- docs
-
-    - name: Test flit
-      run: |
-        pipx run nox --forcecolor -s 'nox(flit)'
-        pipx run nox --forcecolor -s 'nox(flit)' -- docs
-
-    - name: Test pdm
-      run: |
-        pipx run nox --forcecolor -s 'nox(pdm)'
-        pipx run nox --forcecolor -s 'nox(pdm)' -- docs
-
-    - name: Test trampolim
-      run: |
-        pipx run nox --forcecolor -s 'nox(trampolim)'
-        pipx run nox --forcecolor -s 'nox(trampolim)' -- docs
-
-    - name: Test whey
-      run: |
-        pipx run nox --forcecolor -s 'nox(whey)'
-        pipx run nox --forcecolor -s 'nox(whey)' -- docs
-
-    - name: Test maturin
-      run: |
-        pipx run nox --forcecolor -s 'nox(maturin)'
-        pipx run nox --forcecolor -s 'nox(maturin)' -- docs
-
-    - name: Test hatch
-      run: |
-        pipx run nox --forcecolor -s 'nox(hatch)'
-        pipx run nox --forcecolor -s 'nox(hatch)' -- docs
-
+  setuptools:
+    uses: ./.github/workflows/each.yml
+    with:
+      backend: setuptools
+  pybind11:
+    uses: ./.github/workflows/each.yml
+    with:
+      backend: pybind11
+  poetry:
+    uses: ./.github/workflows/each.yml
+    with:
+      backend: poetry
+  flit:
+    uses: ./.github/workflows/each.yml
+    with:
+      backend: flit
+  pdm:
+    uses: ./.github/workflows/each.yml
+    with:
+      backend: pdm
+  trampolim:
+    uses: ./.github/workflows/each.yml
+    with:
+      backend: trampolim
+  whey:
+    uses: ./.github/workflows/each.yml
+    with:
+      backend: whey
+  maturin:
+    uses: ./.github/workflows/each.yml
+    with:
+      backend: maturin
+  hatch:
+    uses: ./.github/workflows/each.yml
+    with:
+      backend: hatch
+  
 
   dist:
     name: Distribution build

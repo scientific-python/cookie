@@ -1,0 +1,63 @@
+name: Reusable workflow for testing
+
+on:
+  workflow_call:
+    inputs:
+      backend:
+        required: true
+        type: string
+
+jobs:
+  pre-commit:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Lint setuptools
+      run: pipx run nox --forcecolor -s 'lint(${{ inputs.backend }})'
+
+  checks:
+    name: Check ${{ inputs.backend }} Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
+    runs-on: ${{ matrix.runs-on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.7", "3.10"]
+        runs-on: [ubuntu-latest, macos-latest, windows-latest]
+
+        include:
+        - python-version: pypy-3.7
+          runs-on: ubuntu-latest
+
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install nox
+      run: pip install nox
+
+    - name: Test
+      run: nox --forcecolor -s 'tests( ${{ inputs.backend }} )'
+
+    - name: Native tooling test (poetry only)
+      if: inputs.backend == 'poetry' || inputs.backend == 'hatch' || inputs.backend == 'pdm'
+      run: nox --forcecolor -s tests_${{ inputs.backend }}
+      
+
+
+  nox:
+    name: Check ${{ inputs.backend }} included Noxfile
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Test
+      run: |
+        pipx run nox --forcecolor -s 'nox(${{ inputs.backend }})'
+        pipx run nox --forcecolor -s 'nox(${{ inputs.backend }})' -- docs
