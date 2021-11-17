@@ -88,8 +88,11 @@ jobs:
     - name: Test whey
       run: nox --forcecolor -s 'tests(whey)'
 
-    - name: Test poetry tooling
-      run: nox --forcecolor -s tests_poetry
+    - name: Native poetry tooling
+      run: nox --forcecolor -s 'native(poetry)'
+
+    - name: Native pdm tooling
+      run: nox --forcecolor -s 'native(pdm)'
 
 
   nox:
