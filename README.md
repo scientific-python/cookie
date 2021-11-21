@@ -15,7 +15,7 @@ templates for Python packages?
 * Designed from the [Scikit-HEP developer guidelines][]: Every decision is
   clearly documented and every tool described.
 * Template generation tested in GitHub Actions using nox.
-* Seven different backends to choose from for building packages.
+* Eight different backends to choose from for building packages.
 * Includes a backend for C++ bindings using pybind11, with wheels produced for
   all platforms using cibuildwheel.
 
