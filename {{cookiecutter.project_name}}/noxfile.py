@@ -47,7 +47,7 @@ def docs(session: nox.Session) -> None:
             print("Launching docs at http://localhost:8000/ - use Ctrl-C to quit")
             session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
         else:
-            print("Unsupported argument to docs")
+            session.warn("Unsupported argument to docs")
 
 
 {%- if cookiecutter.project_type != "pybind11" %}
