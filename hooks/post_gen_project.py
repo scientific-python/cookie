@@ -23,3 +23,14 @@ for f in files:
         f.replace(f.with_name(f"{base}{f.suffix}"))
     elif currents & other_project_types:
         f.unlink()
+
+files = [p for p in Path(".").rglob("*") if p.is_file() and "^" in p.stem]
+
+for f in files:
+    base, current = f.stem.rsplit("^", 1)
+    currents = set(current.split(","))
+    if project_type in currents:
+        f.unlink()
+    elif currents & other_project_types:
+        # with_stem requires python 3.9
+        f.replace(f.with_name(f"{base}{f.suffix}"))
