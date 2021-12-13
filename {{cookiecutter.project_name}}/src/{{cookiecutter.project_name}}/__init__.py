@@ -1,10 +1,3 @@
-{%- if cookiecutter.project_type == "flit" -%}
-"""
-{{ cookiecutter.project_short_description }}
-"""
-
-{% endif -%}
-
 {%- if cookiecutter.project_type == "setuptools" or cookiecutter.project_type == "pybind11" -%}
 from ._version import version as __version__
 {%- else -%}

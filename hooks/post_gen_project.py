@@ -2,7 +2,7 @@ from pathlib import Path
 
 project_name = "{{ cookiecutter.project_name }}"
 project_type = "{{ cookiecutter.project_type }}"
-project_types = {"setuptools", "pybind11", "poetry", "flit", "flit621", "trampolim", "whey"}
+project_types = {"setuptools", "pybind11", "poetry", "flit", "trampolim", "whey"}
 other_project_types = project_types - {project_type}
 
 project_underscore_name = project_name.replace("-", "_")
