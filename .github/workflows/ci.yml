@@ -26,9 +26,6 @@ jobs:
     - name: Lint flit
       run: pipx run nox --forcecolor -s 'lint(flit)'
 
-    - name: Lint flit621
-      run: pipx run nox --forcecolor -s 'lint(flit621)'
-
     - name: Lint pdm
       run: pipx run nox --forcecolor -s 'lint(pdm)'
 
@@ -75,9 +72,6 @@ jobs:
     - name: Test flit
       run: nox --forcecolor -s 'tests(flit)'
 
-    - name: Test flit621
-      run: nox --forcecolor -s 'tests(flit621)'
-
     - name: Test pdm
       run: nox --forcecolor -s 'tests(pdm)'
 
@@ -122,11 +116,6 @@ jobs:
       run: |
         pipx run nox --forcecolor -s 'nox(flit)'
         pipx run nox --forcecolor -s 'nox(flit)' -- docs
-
-    - name: Test flit621
-      run: |
-        pipx run nox --forcecolor -s 'nox(flit621)'
-        pipx run nox --forcecolor -s 'nox(flit621)' -- docs
 
     - name: Test pdm
       run: |

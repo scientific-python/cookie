@@ -15,7 +15,7 @@ templates for Python packages?
 * Designed from the [Scikit-HEP developer guidelines][]: Every decision is
   clearly documented and every tool described.
 * Template generation tested in GitHub Actions using nox.
-* Eight different backends to choose from for building packages.
+* Seven different backends to choose from for building packages.
 * Includes a backend for C++ bindings using pybind11, with wheels produced for
   all platforms using cibuildwheel.
 
@@ -34,9 +34,9 @@ During generation you can select from the following backends for your package:
 3. [poetry][]: An all-in-one solution to pure Python projects. Replaces
    setuptools, venv/pipenv, pip, wheel, and twine. Higher learning curve, but
    is all-in-one. Makes some bad default assumptions for libraries.
-4. [flit][]: A modern, lightweight build system for pure Python projects. Replaces
-   setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low learning curve.
-5. [flit621][flit]: Flit, but with [PEP 621][] style configuration (hidden feature).
+4. [flit][]: A modern, lightweight [PEP 621][] build system for pure Python
+   projects. Replaces setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low
+   learning curve.
 6. [pdm][]: A modern, less opinionated all-in-one solution to pure Python
    projects supporting standards. Replaces setuptools, venv/pipenv, pip, wheel,
    and twine. Supports [PEP 621][], and also the unaccepted [PEP 582][].

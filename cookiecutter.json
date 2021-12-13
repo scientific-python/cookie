@@ -3,7 +3,7 @@
     "org": "Scikit-HEP",
     "url": "https://github.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
     "full_name": "My Name",
-    "project_type": ["setuptools", "pybind11", "poetry", "flit", "flit621", "pdm", "trampolim", "whey"],
+    "project_type": ["setuptools", "pybind11", "poetry", "flit", "pdm", "trampolim", "whey"],
     "email": "me@email.com",
     "maintainer": "The Scikit-HEP admins",
     "maintainer_email": "scikit-hep-admins@googlegroups.com",

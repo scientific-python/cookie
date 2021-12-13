@@ -35,21 +35,6 @@ You can set up a development environment by running:
 ```bash
 poetry install
 ```
-{%- elif cookiecutter.project_type == "flit" or cookiecutter.project_type == "flit621" -%}
-```bash
-python3 -m venv .venv
-source ./.venv/bin/activate
-flit install --symlink --extras dev
-```
-
-If you have the [Python Launcher for Unix](https://github.com/brettcannon/python-launcher),
-you can instead do:
-
-```bash
-py -m venv .venv
-py -m pip install flit
-py -m flit install --symlink --extras dev
-```
 {%- else -%}
 ```bash
 python3 -m venv .venv
