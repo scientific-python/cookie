@@ -23,7 +23,7 @@ all = true
 
 [tool.mypy]
 files = "src"
-python_version = "3.6"
+python_version = "3.7"
 warn_unused_configs = true
 
 disallow_any_generics = true

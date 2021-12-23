@@ -41,8 +41,7 @@ During generation you can select from the following backends for your package:
    projects supporting standards. Replaces setuptools, venv/pipenv, pip, wheel,
    and twine. Supports [PEP 621][], and also the unaccepted [PEP 582][].
 7. [trampolim][]: A modern [PEP 621][] builder with support for tasks, allowing
-   arbitrary Python to run during the build process if needed. Python 3.7+ only
-   (for building from source, wheels can be anything).
+   arbitrary Python to run during the build process if needed.
 8. [whey][]: A modern [PEP 621][] builder with some automation options for Trove
    classifiers. Development seems to be stalled, possibly.
 
@@ -64,7 +63,7 @@ Check the key setup files, `pyproject.toml`, and possibly `setup.cfg` and
 `setup.py` (pybind11 example). Update README.md. Also update and add docs to
 `docs/`.
 
-There are a few example dependencies and a minimum Python version of 3.6,
+There are a few example dependencies and a minimum Python version of 3.7,
 feel free to change it to whatever you actually need/want.
 
 #### Contained components:
