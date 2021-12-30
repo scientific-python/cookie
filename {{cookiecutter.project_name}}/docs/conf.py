@@ -4,10 +4,10 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+from __future__ import annotations
+
 # Warning: do not change the path here. To use autodoc, you need to install the
 # package first.
-
-from typing import List
 
 # -- Project information -----------------------------------------------------
 
@@ -62,4 +62,4 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path: List[str] = []
+html_static_path: list[str] = []
