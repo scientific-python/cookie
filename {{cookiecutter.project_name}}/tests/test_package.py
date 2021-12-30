@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import {{ cookiecutter.project_name.replace("-", "_") }} as m
 {% if cookiecutter.project_type == "pybind11" -%}
 import {{ cookiecutter.project_name.replace("-", "_") }}._core as cpp

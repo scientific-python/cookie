@@ -4,6 +4,8 @@
 # Distributed under the 3-clause BSD license, see accompanying file LICENSE
 # or {{ cookiecutter.url }} for details.
 
+from __future__ import annotations
+
 from setuptools import setup  # isort:skip
 
 # Available at setup time due to pyproject.toml

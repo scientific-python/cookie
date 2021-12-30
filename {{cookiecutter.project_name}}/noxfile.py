@@ -1,4 +1,6 @@
-{%- if cookiecutter.project_type != "pybind11" -%}
+from __future__ import annotations
+
+{% if cookiecutter.project_type != "pybind11" -%}
 import shutil
 from pathlib import Path
 
