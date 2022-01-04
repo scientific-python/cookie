@@ -5,7 +5,7 @@ repos:
   - id: black-jupyter
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.0.1
+  rev: v4.1.0
   hooks:
   - id: check-added-large-files
   - id: check-case-conflict
@@ -36,7 +36,7 @@ repos:
     args: ["-a", "from __future__ import annotations"]  # Python 3.7+
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v2.29.1
+  rev: v2.31.0
   hooks:
   - id: pyupgrade
     args: ["--py37-plus"]
@@ -93,7 +93,7 @@ repos:
   - id: codespell
 
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: v0.8.0.2
+  rev: v0.8.0.3
   hooks:
   - id: shellcheck
 
