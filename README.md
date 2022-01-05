@@ -37,14 +37,15 @@ During generation you can select from the following backends for your package:
 4. [flit][]: A modern, lightweight [PEP 621][] build system for pure Python
    projects. Replaces setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low
    learning curve.
-6. [pdm][]: A modern, less opinionated all-in-one solution to pure Python
+5. [pdm][]: A modern, less opinionated all-in-one solution to pure Python
    projects supporting standards. Replaces setuptools, venv/pipenv, pip, wheel,
    and twine. Supports [PEP 621][], and also the unaccepted [PEP 582][].
-7. [trampolim][]: A modern [PEP 621][] builder with support for tasks, allowing
+6. [trampolim][]: A modern [PEP 621][] builder with support for tasks, allowing
    arbitrary Python to run during the build process if needed.
-8. [whey][]: A modern [PEP 621][] builder with some automation options for Trove
+7. [whey][]: A modern [PEP 621][] builder with some automation options for Trove
    classifiers. Development seems to be stalled, possibly.
 8. [maturin][]: A [PEP 621][] builder for Rust binary extensions. 
+9. [hatch][]: A package manager similar to Poetry/PDM.
 
 #### To use:
 
@@ -160,6 +161,7 @@ selection), and doesn't support compiled projects.
 [whey]:         https://whey.readthedocs.io/en/latest/
 [maturin]:      https://maturin.rs
 [hypermodern]:  https://github.com/cjolowicz/cookiecutter-hypermodern-python
+[hatch]:    https://github.com/ofek/hatch
 
 [PEP 582]: https://www.python.org/dev/peps/pep-0582
 [PEP 621]: https://www.python.org/dev/peps/pep-0621

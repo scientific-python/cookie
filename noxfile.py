@@ -4,7 +4,7 @@ import os
 import nox
 
 DIR = Path(__file__).parent.resolve()
-BACKENDS = "setuptools", "pybind11", "poetry", "flit", "pdm", "trampolim", "whey", "maturin"
+BACKENDS = "setuptools", "pybind11", "poetry", "flit", "pdm", "trampolim", "whey", "maturin", "hatch"
 
 JOB_FILE = """\
 default_context:
@@ -86,7 +86,7 @@ def tests(session, backend):
 
 
 @nox.session()
-@nox.parametrize("backend", ("poetry", "pdm"), ids=("poetry", "pdm"))
+@nox.parametrize("backend", ("poetry", "pdm", "hatch"), ids=("poetry", "pdm", "hatch"))
 def native(session, backend):
     session.install("cookiecutter", backend)
 
