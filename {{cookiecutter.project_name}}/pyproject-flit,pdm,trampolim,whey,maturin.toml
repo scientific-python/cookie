@@ -8,6 +8,9 @@ build-backend = "whey"
 {%- elif cookiecutter.project_type == "pdm" %}
 requires = ["pdm-pep517"]
 build-backend = "pdm.pep517.api"
+{%- elif cookiecutter.project_type == "maturin" %}
+requires = ["maturin>=0.12,<0.13"]
+build-backend = "maturin"
 {%- else %}
 requires = ["flit_core >=3.4"]
 build-backend = "flit_core.buildapi"
