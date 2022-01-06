@@ -86,13 +86,17 @@ def tests(session, backend):
 
 
 @nox.session()
-@nox.parametrize("backend", ("poetry", "pdm"), ids=("poetry", "pdm"))
+@nox.parametrize("backend", ("poetry", "pdm", "hatch"), ids=("poetry", "pdm", "hatch"))
 def native(session, backend):
-    session.install("cookiecutter", backend)
+    backend_install = [backend]
+    if backend == "hatch":
+        backend_install.append("--pre")
+    session.install("cookiecutter", *backend_install)
 
     make_cookie(session, backend)
 
-    session.run(backend, "install")
+    install = ["install"] if backend != "hatch" else ["env", "create"]
+    session.run(backend, *install)
     session.run(backend, "run", "pytest")
 
 

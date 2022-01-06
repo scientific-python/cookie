@@ -104,6 +104,11 @@ devtest = ["pytest"]
 [tool.hatch.build.targets.sdist]
 [tool.hatch.build.targets.wheel]
 packages = ["src/{{ cookiecutter.project_name.replace("-", "_") }}"]
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest",
+]
 {%- endif %}
 
 
