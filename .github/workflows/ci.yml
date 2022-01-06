@@ -100,9 +100,6 @@ jobs:
       if: matrix.python-version != 'pypy-3.7'
       run: nox --forcecolor -s 'native(pdm)'
 
-    - name: Native hatch tooling
-      run: nox --forcecolor -s 'native(hatch)'
-
 
   nox:
     name: Check included Noxfile

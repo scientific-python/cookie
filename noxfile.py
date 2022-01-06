@@ -86,7 +86,7 @@ def tests(session, backend):
 
 
 @nox.session()
-@nox.parametrize("backend", ("poetry", "pdm", "hatch"), ids=("poetry", "pdm", "hatch"))
+@nox.parametrize("backend", ("poetry", "pdm"), ids=("poetry", "pdm"))
 def native(session, backend):
     session.install("cookiecutter", backend)
 
