@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 import nox
 
@@ -14,6 +15,8 @@ default_context:
 
 def make_cookie(session: nox.Session, backend: str) -> None:
     tmp_dir = session.create_tmp()
+    # Nox sets TMPDIR to a relative path
+    session.env['TMPDIR'] = os.path.abspath(tmp_dir)
     session.cd(tmp_dir)
 
     package_dir = Path(f"cookie-{backend}")
