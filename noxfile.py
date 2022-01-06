@@ -1,9 +1,10 @@
 from pathlib import Path
+import os
 
 import nox
 
 DIR = Path(__file__).parent.resolve()
-BACKENDS = "setuptools", "pybind11", "poetry", "flit", "pdm", "trampolim", "whey"
+BACKENDS = "setuptools", "pybind11", "poetry", "flit", "pdm", "trampolim", "whey", "maturin"
 
 JOB_FILE = """\
 default_context:
@@ -14,6 +15,8 @@ default_context:
 
 def make_cookie(session: nox.Session, backend: str) -> None:
     tmp_dir = session.create_tmp()
+    # Nox sets TMPDIR to a relative path
+    session.env['TMPDIR'] = os.path.abspath(tmp_dir)
     session.cd(tmp_dir)
 
     package_dir = Path(f"cookie-{backend}")

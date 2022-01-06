@@ -35,6 +35,8 @@ jobs:
     - name: Lint whey
       run: pipx run nox --forcecolor -s 'lint(whey)'
 
+    - name: Lint maturin
+      run: pipx run nox --forcecolor -s 'lint(maturin)'
 
   checks:
     name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
@@ -80,6 +82,9 @@ jobs:
 
     - name: Test whey
       run: nox --forcecolor -s 'tests(whey)'
+
+    - name: Test maturin
+      run: nox --forcecolor -s 'tests(maturin)'
 
     - name: Native poetry tooling
       run: nox --forcecolor -s 'native(poetry)'
@@ -130,6 +135,11 @@ jobs:
       run: |
         pipx run nox --forcecolor -s 'nox(whey)'
         pipx run nox --forcecolor -s 'nox(whey)' -- docs
+
+    - name: Test maturin
+      run: |
+        pipx run nox --forcecolor -s 'nox(maturin)'
+        pipx run nox --forcecolor -s 'nox(maturin)' -- docs
 
 
   dist:

@@ -44,6 +44,7 @@ During generation you can select from the following backends for your package:
    arbitrary Python to run during the build process if needed.
 8. [whey][]: A modern [PEP 621][] builder with some automation options for Trove
    classifiers. Development seems to be stalled, possibly.
+8. [maturin][]: A [PEP 621][] builder for Rust binary extensions. 
 
 #### To use:
 
@@ -157,6 +158,7 @@ selection), and doesn't support compiled projects.
 [trampolim]:    https://trampolim.readthedocs.io/en/latest/
 [pipx]:         https://pypa.github.io/pipx/
 [whey]:         https://whey.readthedocs.io/en/latest/
+[maturin]:      https://maturin.rs
 [hypermodern]:  https://github.com/cjolowicz/cookiecutter-hypermodern-python
 
 [PEP 582]: https://www.python.org/dev/peps/pep-0582
