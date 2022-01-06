@@ -20,6 +20,7 @@ fn subtract(x: i64, y: i64) -> i64 {
 fn {{ cookiecutter.project_name.replace("-", "_") }}(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(add, m)?)?;
     m.add_function(wrap_pyfunction!(subtract, m)?)?;
+    m.add("__version__", env!("CARGO_PKG_VERSION"))?;
 
     Ok(())
 }
