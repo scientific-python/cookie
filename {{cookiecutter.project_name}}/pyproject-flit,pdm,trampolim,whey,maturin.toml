@@ -91,7 +91,7 @@ homepage = "{{ cookiecutter.url }}"
 
 
 [tool.pdm.dev-dependencies]
-dev = ["pytest"]
+devtest = ["pytest"]
 {%- endif %}
 
 
