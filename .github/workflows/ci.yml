@@ -38,6 +38,10 @@ jobs:
     - name: Lint maturin
       run: pipx run nox --forcecolor -s 'lint(maturin)'
 
+    - name: Lint hatch
+      run: pipx run nox --forcecolor -s 'lint(hatch)'
+
+
   checks:
     name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
     runs-on: ${{ matrix.runs-on }}
@@ -85,6 +89,9 @@ jobs:
 
     - name: Test maturin
       run: nox --forcecolor -s 'tests(maturin)'
+
+    - name: Test hatch
+      run: nox --forcecolor -s 'tests(hatch)'
 
     - name: Native poetry tooling
       run: nox --forcecolor -s 'native(poetry)'
@@ -140,6 +147,11 @@ jobs:
       run: |
         pipx run nox --forcecolor -s 'nox(maturin)'
         pipx run nox --forcecolor -s 'nox(maturin)' -- docs
+
+    - name: Test hatch
+      run: |
+        pipx run nox --forcecolor -s 'nox(hatch)'
+        pipx run nox --forcecolor -s 'nox(hatch)' -- docs
 
 
   dist:
