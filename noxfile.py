@@ -15,7 +15,7 @@ default_context:
 
 def make_cookie(session: nox.Session, backend: str) -> None:
     tmp_dir = session.create_tmp()
-    # Nox sets TMPDIR to a relative path
+    # Nox sets TMPDIR to a relative path - fixed in nox 2022.1.7
     session.env['TMPDIR'] = os.path.abspath(tmp_dir)
     session.cd(tmp_dir)
 
@@ -88,15 +88,21 @@ def tests(session, backend):
 @nox.session()
 @nox.parametrize("backend", ("poetry", "pdm", "hatch"), ids=("poetry", "pdm", "hatch"))
 def native(session, backend):
-    backend_install = [backend]
+
+    # Modern hatch is in release candidate phase currently
+    backend_install = backend
     if backend == "hatch":
-        backend_install.append("--pre")
-    session.install("cookiecutter", *backend_install)
+        backend_install = "hatch>=1.0.0rc8"
+
+    session.install("cookiecutter", backend_install)
 
     make_cookie(session, backend)
 
-    install = ["install"] if backend != "hatch" else ["env", "create"]
-    session.run(backend, *install)
+    if backend == "hatch":
+        session.run(backend, "env", "create")
+    else:
+        session.run(backend, "install")
+
     session.run(backend, "run", "pytest")
 
 
