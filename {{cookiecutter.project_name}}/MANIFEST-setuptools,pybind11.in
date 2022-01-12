@@ -1,4 +1,3 @@
-prune *
 graft src
 graft tests
 
