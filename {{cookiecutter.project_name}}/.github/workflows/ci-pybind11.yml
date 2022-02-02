@@ -19,6 +19,10 @@ jobs:
     - uses: pre-commit/action@v2.0.3
       with:
         extra_args: --hook-stage manual --all-files
+    - name: Run PyLint
+      run: |
+        echo "::add-matcher::$GITHUB_WORKSPACE/.github/matchers/pylint.json"
+        pipx run nox -s pylint
 
   checks:
     name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
