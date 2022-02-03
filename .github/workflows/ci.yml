@@ -41,6 +41,9 @@ jobs:
     - name: Lint hatch
       run: pipx run nox --forcecolor -s 'lint(hatch)'
 
+    - name: Lint setuptools PEP 621
+      run: pipx run nox --forcecolor -s 'lint(setuptools621)'
+
 
   checks:
     name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
@@ -92,6 +95,9 @@ jobs:
 
     - name: Test hatch
       run: nox --forcecolor -s 'tests(hatch)'
+
+    - name: Test setuptools PEP 621
+      run: nox --forcecolor -s 'tests(setuptools621)'
 
     - name: Native poetry tooling
       run: nox --forcecolor -s 'native(poetry)'
@@ -152,6 +158,11 @@ jobs:
       run: |
         pipx run nox --forcecolor -s 'nox(hatch)'
         pipx run nox --forcecolor -s 'nox(hatch)' -- docs
+
+    - name: Test setuptools PEP 621
+      run: |
+        pipx run nox --forcecolor -s 'nox(setuptools621)'
+        pipx run nox --forcecolor -s 'nox(setuptools621)' -- docs
 
 
   dist:
