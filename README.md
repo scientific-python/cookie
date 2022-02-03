@@ -85,7 +85,7 @@ feel free to change it to whatever you actually need/want.
     - Includes isort for nice import sorting/grouping
     - Includes PyUpgrade - keeps old Python syntax out
     - Includes spell checking
-* An optional pylint target can be used to run pylint
+* An pylint nox target can be used to run pylint, which integrated GHA annotations
 * A ReadTheDocs-ready Sphinx docs folder and `[docs]` extra
 * A test folder and pytest `[test]` extra
 * A noxfile is included with a few common targets
