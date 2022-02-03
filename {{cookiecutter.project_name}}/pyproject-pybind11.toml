@@ -57,6 +57,7 @@ master.ignore-paths= ["src/{{ cookiecutter.project_name.replace("-", "_") }}/_ve
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
 messages_control.disable = [
+  "design",
   "fixme",
   "line-too-long",
   "wrong-import-position",
