@@ -15,7 +15,7 @@ build-backend = "maturin"
 requires = ["hatchling>=0.7"]
 build-backend = "hatchling.build"
 {%- elif cookiecutter.project_type == "setuptools621" %}
-requires = ["setuptools @ git+https://github.com/abravalheri/setuptools@support-pyproject"]
+requires = ["setuptools @ git+https://github.com/abravalheri/setuptools@support-pyproject", "wheel"]
 build-backend = "setuptools.build_meta"
 {%- else %}
 requires = ["flit_core >=3.4"]
