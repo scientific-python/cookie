@@ -29,12 +29,6 @@ source-dir = "src"
 {%- elif cookiecutter.project_type == "trampolim" %}
 [tool.trampolim]
 module-location = "src"
-{%- elif cookiecutter.project_type == "setuptools621" %}
-[tool.setuptools]
-# Bug in current impl. - this table must exist
-package-dir = {"" = "src"}
-[tool.setuptools.packages.find]
-where = ["src"]
 {%- endif %}
 
 
