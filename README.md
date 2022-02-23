@@ -15,9 +15,10 @@ templates for Python packages?
 * Designed from the [Scikit-HEP developer guidelines][]: Every decision is
   clearly documented and every tool described.
 * Template generation tested in GitHub Actions using nox.
-* Seven different backends to choose from for building packages.
+* Nine different backends to choose from for building packages.
 * Includes a backend for C++ bindings using pybind11, with wheels produced for
   all platforms using cibuildwheel.
+* Follows PyPA best practices.
 
 Be sure you have read the [Scikit-HEP developer guidelines][] first, and
 possibly used them on a project or two. This is _not_ a minimal example
@@ -36,7 +37,7 @@ During generation you can select from the following backends for your package:
    is all-in-one. Makes some bad default assumptions for libraries.
 4. [flit][]: A modern, lightweight [PEP 621][] build system for pure Python
    projects. Replaces setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low
-   learning curve.
+   learning curve. Easy to bootstrap into new distributions.
 5. [pdm][]: A modern, less opinionated all-in-one solution to pure Python
    projects supporting standards. Replaces setuptools, venv/pipenv, pip, wheel,
    and twine. Supports [PEP 621][], and also the unaccepted [PEP 582][].
@@ -45,7 +46,11 @@ During generation you can select from the following backends for your package:
 7. [whey][]: A modern [PEP 621][] builder with some automation options for Trove
    classifiers. Development seems to be stalled, possibly.
 8. [maturin][]: A [PEP 621][] builder for Rust binary extensions. 
-9. [hatch][]: A package manager similar to Poetry/PDM.
+9. [hatch][]: A package manager similar to Poetry/PDM. Hatchling (the backend) is
+   a modern builder with nice error messages.
+   
+Currently, the best choices are probalby flit, PDM, or hatch for pure python projects,
+and setuptools (such as the pybind11 choice) for binary projects.
 
 #### To use:
 
@@ -134,7 +139,10 @@ many of the same tools used. It has a slightly different set of features,
 and has a stronger focus on GitHub Actions - most of Scikit-HEP cookie
 could be adapted to a different CI system fairly easily if you don't want
 to use GHA. It also forces the use of Poetry (instead of having a backend
-selection), and doesn't support compiled projects.
+selection), and doesn't support compiled projects. It currently dumps all
+development depndenices into a shared environment, causing long solve times
+and high chance of conflicts. It also does not use pre-commit properly. It
+also has quite a bit of custom code.
 
 [actions-badge]:            https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
 [actions-link]:             https://github.com/scikit-hep/cookie/actions
