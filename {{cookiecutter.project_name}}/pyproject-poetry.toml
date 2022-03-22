@@ -58,10 +58,6 @@ testpaths = [
 ]
 
 
-[tool.pycln]
-all = true
-
-
 [tool.mypy]
 files = "src"
 python_version = "3.7"

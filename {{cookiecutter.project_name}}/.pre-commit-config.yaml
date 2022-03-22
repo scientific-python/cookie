@@ -36,7 +36,7 @@ repos:
     args: ["-a", "from __future__ import annotations"]  # Python 3.7+
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v2.31.0
+  rev: v2.31.1
   hooks:
   - id: pyupgrade
     args: ["--py37-plus"]
@@ -61,10 +61,11 @@ repos:
 {%- endif %}
 
 - repo: https://github.com/hadialqattan/pycln
-  rev: v1.2.0
+  rev: v1.2.5
   hooks:
   - id: pycln
-    args: [--config=pyproject.toml]
+    args: [--all]
+    stages: [manual]
 
 - repo: https://github.com/asottile/yesqa
   rev: v1.3.0
