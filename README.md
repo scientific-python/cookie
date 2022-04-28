@@ -50,8 +50,9 @@ During generation you can select from the following backends for your package:
 9. [whey][]: A modern [PEP 621][] builder with some automation options for Trove
    classifiers. Development seems to be stalled, possibly.
 10. [maturin][]: A [PEP 621][] builder for Rust binary extensions. 
-11. [hatch][]: A package manager similar to Poetry/PDM. Hatchling (the backend) is
-   a modern builder with nice error messages.
+11. [hatch][]: A package manager similar to Poetry/PDM, but supporting multiple
+    environments, but no lockfiles (yet). Hatchling (the backend) is a modern
+    builder with nice error messages.
    
 Currently, the best choices are probably flit, PDM, or hatch for pure Python projects,
 and setuptools (such as the pybind11 choice) for binary projects.
