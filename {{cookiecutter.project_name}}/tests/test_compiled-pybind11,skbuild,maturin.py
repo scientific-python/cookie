@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-{%- if cookiecutter.project_type == "pybind11" %}
+{%- if cookiecutter.project_type != "maturin" %}
 
 import {{ cookiecutter.project_name.replace("-", "_") }}._core as m
 {%- else %}

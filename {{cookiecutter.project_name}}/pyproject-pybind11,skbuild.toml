@@ -2,7 +2,11 @@
 requires = [
     "setuptools>=42",
     "setuptools_scm[toml]>=3.4",
+{%- if cookiecutter.project_type == "pybind11" %}
     "pybind11>=2.9.0",
+{%- elif cookiecutter.project_type == "skbuild" %}
+    "scikit-build>=0.14",
+{%- endif %}
 ]
 build-backend = "setuptools.build_meta"
 
