@@ -7,6 +7,9 @@ on:
     branches:
     - main
 
+env:
+  FORCE_COLOR: 3
+
 jobs:
   pre-commit:
     name: Format
@@ -15,34 +18,37 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Lint setuptools
-      run: pipx run nox --forcecolor -s 'lint(setuptools)'
+      run: pipx run nox -s 'lint(setuptools)'
 
     - name: Lint pybind11
-      run: pipx run nox --forcecolor -s 'lint(pybind11)'
+      run: pipx run nox -s 'lint(pybind11)'
+
+    - name: Lint Scikit-build
+      run: pipx run nox -s 'lint(skbuild)'
 
     - name: Lint poetry
-      run: pipx run nox --forcecolor -s 'lint(poetry)'
+      run: pipx run nox -s 'lint(poetry)'
 
     - name: Lint flit
-      run: pipx run nox --forcecolor -s 'lint(flit)'
+      run: pipx run nox -s 'lint(flit)'
 
     - name: Lint pdm
-      run: pipx run nox --forcecolor -s 'lint(pdm)'
+      run: pipx run nox -s 'lint(pdm)'
 
     - name: Lint trampolim
-      run: pipx run nox --forcecolor -s 'lint(trampolim)'
+      run: pipx run nox -s 'lint(trampolim)'
 
     - name: Lint whey
-      run: pipx run nox --forcecolor -s 'lint(whey)'
+      run: pipx run nox -s 'lint(whey)'
 
     - name: Lint maturin
-      run: pipx run nox --forcecolor -s 'lint(maturin)'
+      run: pipx run nox -s 'lint(maturin)'
 
     - name: Lint hatch
-      run: pipx run nox --forcecolor -s 'lint(hatch)'
+      run: pipx run nox -s 'lint(hatch)'
 
     - name: Lint setuptools PEP 621
-      run: pipx run nox --forcecolor -s 'lint(setuptools621)'
+      run: pipx run nox -s 'lint(setuptools621)'
 
 
   checks:
@@ -70,41 +76,44 @@ jobs:
       run: pip install nox
 
     - name: Test setuptools
-      run: nox --forcecolor -s 'tests(setuptools)'
+      run: nox -s 'tests(setuptools)'
 
     - name: Test pybind11
-      run: nox --forcecolor -s 'tests(pybind11)'
+      run: nox -s 'tests(pybind11)'
+
+    - name: Test pybind11
+      run: nox -s 'tests(skbuild)'
 
     - name: Test poetry
-      run: nox --forcecolor -s 'tests(poetry)'
+      run: nox -s 'tests(poetry)'
 
     - name: Test flit
-      run: nox --forcecolor -s 'tests(flit)'
+      run: nox -s 'tests(flit)'
 
     - name: Test pdm
-      run: nox --forcecolor -s 'tests(pdm)'
+      run: nox -s 'tests(pdm)'
 
     - name: Test trampolim
-      run: nox --forcecolor -s 'tests(trampolim)'
+      run: nox -s 'tests(trampolim)'
 
     - name: Test whey
-      run: nox --forcecolor -s 'tests(whey)'
+      run: nox -s 'tests(whey)'
 
     - name: Test maturin
-      run: nox --forcecolor -s 'tests(maturin)'
+      run: nox -s 'tests(maturin)'
 
     - name: Test hatch
-      run: nox --forcecolor -s 'tests(hatch)'
+      run: nox -s 'tests(hatch)'
 
     - name: Test setuptools PEP 621
-      run: nox --forcecolor -s 'tests(setuptools621)'
+      run: nox -s 'tests(setuptools621)'
 
     - name: Native poetry tooling
-      run: nox --forcecolor -s 'native(poetry)'
+      run: nox -s 'native(poetry)'
 
     - name: Native pdm tooling
       if: matrix.python-version != 'pypy-3.7'
-      run: nox --forcecolor -s 'native(pdm)'
+      run: nox -s 'native(pdm)'
 
 
   nox:
@@ -116,53 +125,58 @@ jobs:
 
     - name: Test setuptools
       run: |
-        pipx run nox --forcecolor -s 'nox(setuptools)'
-        pipx run nox --forcecolor -s 'nox(setuptools)' -- docs
+        pipx run nox -s 'nox(setuptools)'
+        pipx run nox -s 'nox(setuptools)' -- docs
 
     - name: Test pybind11
       run: |
-        pipx run nox --forcecolor -s 'nox(pybind11)'
-        pipx run nox --forcecolor -s 'nox(pybind11)' -- docs
+        pipx run nox -s 'nox(pybind11)'
+        pipx run nox -s 'nox(pybind11)' -- docs
+
+    - name: Test pybind11
+      run: |
+        pipx run nox -s 'nox(skbuild)'
+        pipx run nox -s 'nox(skbuild)' -- docs
 
     - name: Test poetry
       run: |
-        pipx run nox --forcecolor -s 'nox(poetry)'
-        pipx run nox --forcecolor -s 'nox(poetry)' -- docs
+        pipx run nox -s 'nox(poetry)'
+        pipx run nox -s 'nox(poetry)' -- docs
 
     - name: Test flit
       run: |
-        pipx run nox --forcecolor -s 'nox(flit)'
-        pipx run nox --forcecolor -s 'nox(flit)' -- docs
+        pipx run nox -s 'nox(flit)'
+        pipx run nox -s 'nox(flit)' -- docs
 
     - name: Test pdm
       run: |
-        pipx run nox --forcecolor -s 'nox(pdm)'
-        pipx run nox --forcecolor -s 'nox(pdm)' -- docs
+        pipx run nox -s 'nox(pdm)'
+        pipx run nox -s 'nox(pdm)' -- docs
 
     - name: Test trampolim
       run: |
-        pipx run nox --forcecolor -s 'nox(trampolim)'
-        pipx run nox --forcecolor -s 'nox(trampolim)' -- docs
+        pipx run nox -s 'nox(trampolim)'
+        pipx run nox -s 'nox(trampolim)' -- docs
 
     - name: Test whey
       run: |
-        pipx run nox --forcecolor -s 'nox(whey)'
-        pipx run nox --forcecolor -s 'nox(whey)' -- docs
+        pipx run nox -s 'nox(whey)'
+        pipx run nox -s 'nox(whey)' -- docs
 
     - name: Test maturin
       run: |
-        pipx run nox --forcecolor -s 'nox(maturin)'
-        pipx run nox --forcecolor -s 'nox(maturin)' -- docs
+        pipx run nox -s 'nox(maturin)'
+        pipx run nox -s 'nox(maturin)' -- docs
 
     - name: Test hatch
       run: |
-        pipx run nox --forcecolor -s 'nox(hatch)'
-        pipx run nox --forcecolor -s 'nox(hatch)' -- docs
+        pipx run nox -s 'nox(hatch)'
+        pipx run nox -s 'nox(hatch)' -- docs
 
     - name: Test setuptools PEP 621
       run: |
-        pipx run nox --forcecolor -s 'nox(setuptools621)'
-        pipx run nox --forcecolor -s 'nox(setuptools621)' -- docs
+        pipx run nox -s 'nox(setuptools621)'
+        pipx run nox -s 'nox(setuptools621)' -- docs
 
 
   dist:
@@ -173,7 +187,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build sdist and wheel
-      run: pipx run nox --forcecolor -s dist
+      run: pipx run nox -s dist
 
     - name: Show results
       run: ls -l dist
