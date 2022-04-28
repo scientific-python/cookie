@@ -91,12 +91,7 @@ def tests(session, backend):
 @nox.parametrize("backend", ("poetry", "pdm", "hatch"), ids=("poetry", "pdm", "hatch"))
 def native(session, backend):
 
-    # Modern hatch is in release candidate phase currently
-    backend_install = backend
-    if backend == "hatch":
-        backend_install = "hatch>=1.0.0rc8"
-
-    session.install("cookiecutter", backend_install)
+    session.install("cookiecutter", backend)
 
     make_cookie(session, backend)
 
