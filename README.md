@@ -51,7 +51,7 @@ During generation you can select from the following backends for your package:
    classifiers. Development seems to be stalled, possibly.
 10. [maturin][]: A [PEP 621][] builder for Rust binary extensions. 
 11. [hatch][]: A package manager similar to Poetry/PDM, but supporting multiple
-12. environments and extensible via its plugin system, but no lockfiles (yet).
+    environments and extensible via its plugin system, but no lockfiles (yet).
     Hatchling (the backend) is a modern builder with nice error messages.
    
 Currently, the best choices are probably flit, PDM, or hatch for pure Python projects,
