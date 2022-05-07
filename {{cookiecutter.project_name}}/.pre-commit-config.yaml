@@ -34,7 +34,7 @@ repos:
     hooks:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json]
-        # args: [--prose-wrap=always] # Optional
+        args: [--prose-wrap=always]
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.10.1
