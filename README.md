@@ -12,13 +12,13 @@ inclusion, or for general software packages - the only Scikit-HEP specific
 parts are in the defaults. What makes this different from other cookie cutter
 templates for Python packages?
 
-* Designed from the [Scikit-HEP developer guidelines][]: Every decision is
+- Designed from the [Scikit-HEP developer guidelines][]: Every decision is
   clearly documented and every tool described.
-* Template generation tested in GitHub Actions using nox.
-* Eleven different backends to choose from for building packages.
-* Includes a backend for C++ bindings using pybind11, with wheels produced for
+- Template generation tested in GitHub Actions using nox.
+- Eleven different backends to choose from for building packages.
+- Includes a backend for C++ bindings using pybind11, with wheels produced for
   all platforms using cibuildwheel.
-* Follows PyPA best practices.
+- Follows PyPA best practices.
 
 Be sure you have read the [Scikit-HEP developer guidelines][] first, and
 possibly used them on a project or two. This is _not_ a minimal example
@@ -49,11 +49,11 @@ During generation you can select from the following backends for your package:
    arbitrary Python to run during the build process if needed.
 9. [whey][]: A modern [PEP 621][] builder with some automation options for Trove
    classifiers. Development seems to be stalled, possibly.
-10. [maturin][]: A [PEP 621][] builder for Rust binary extensions. 
+10. [maturin][]: A [PEP 621][] builder for Rust binary extensions.
 11. [hatch][]: A package manager similar to Poetry/PDM, but supporting multiple
     environments and extensible via its plugin system, but no lockfiles (yet).
     Hatchling (the backend) is a modern builder with nice error messages.
-   
+
 Currently, the best choices are probably flit, PDM, or hatch for pure Python projects,
 and setuptools (such as the pybind11 choice) for binary projects.
 
@@ -62,7 +62,6 @@ and setuptools (such as the pybind11 choice) for binary projects.
 Install cookiecutter, ideally with `brew install cookiecutter` if you use brew,
 otherwise with `pipx install cookiecutter` (or prepend `pipx run` to the
 command below, and skip installation). Then run:
-
 
 ```bash
 cookiecutter gh:scikit-hep/cookie
@@ -80,41 +79,40 @@ feel free to change it to whatever you actually need/want.
 
 #### Contained components:
 
-* GitHub Actions runs testing for the generation itself
-    - Uses nox so cookie development can be checked locally
-* GitHub actions deploy
-    - Be sure to add a token
-    - C++ backend uses cibuildwheel for wheel builds
-* Dependabot keeps actions up to date periodically, through useful pull requests
-* Formatting handled by pre-commit
-    - No reason not to be strict on a new project; remove what you don't want.
-    - Includes MyPy - static typing
-    - Includes strong Flake8 checking
-    - Includes auto fixes for common flake8 problems
-    - Includes Black - standardizing formatting
-    - Includes isort for nice import sorting/grouping
-    - Includes PyUpgrade - keeps old Python syntax out
-    - Includes spell checking
-* An pylint nox target can be used to run pylint, which integrated GHA annotations
-* A ReadTheDocs-ready Sphinx docs folder and `[docs]` extra
-* A test folder and pytest `[test]` extra
-* A noxfile is included with a few common targets
+- GitHub Actions runs testing for the generation itself
+  - Uses nox so cookie development can be checked locally
+- GitHub actions deploy
+  - Be sure to add a token
+  - C++ backend uses cibuildwheel for wheel builds
+- Dependabot keeps actions up to date periodically, through useful pull requests
+- Formatting handled by pre-commit
+  - No reason not to be strict on a new project; remove what you don't want.
+  - Includes MyPy - static typing
+  - Includes strong Flake8 checking
+  - Includes auto fixes for common flake8 problems
+  - Includes Black - standardizing formatting
+  - Includes isort for nice import sorting/grouping
+  - Includes PyUpgrade - keeps old Python syntax out
+  - Includes spell checking
+- An pylint nox target can be used to run pylint, which integrated GHA annotations
+- A ReadTheDocs-ready Sphinx docs folder and `[docs]` extra
+- A test folder and pytest `[test]` extra
+- A noxfile is included with a few common targets
 
 Setuptools only:
 
-* Setuptools controlled by `setup.cfg` and a nominal `setup.py`.
-    - Using declarative syntax avoids needless boilerplate that is often wrong
-      (like incorrectly handling the encoding when opening a README).
-    - Easier to adapt to PEP 621 eventually.
-    - Any actual logic can sit in setup.py and be clearly separate from simple
-      metadata.
-* Versioning handled by `setuptools_scm`
-    - You can easily switch to manual versioning, but this avoids duplicating
-      the version as git tags and in the source, and versions _every_ commit
-      uniquely, sidestepping some caching problems.
-* `MANIFEST.in` checked with check-manifest
-* `setup.cfg` checked by setup-cfg-fmt
-
+- Setuptools controlled by `setup.cfg` and a nominal `setup.py`.
+  - Using declarative syntax avoids needless boilerplate that is often wrong
+    (like incorrectly handling the encoding when opening a README).
+  - Easier to adapt to PEP 621 eventually.
+  - Any actual logic can sit in setup.py and be clearly separate from simple
+    metadata.
+- Versioning handled by `setuptools_scm`
+  - You can easily switch to manual versioning, but this avoids duplicating
+    the version as git tags and in the source, and versions _every_ commit
+    uniquely, sidestepping some caching problems.
+- `MANIFEST.in` checked with check-manifest
+- `setup.cfg` checked by setup-cfg-fmt
 
 #### For developers:
 
@@ -149,34 +147,31 @@ development depndenices into a shared environment, causing long solve times
 and high chance of conflicts. It also does not use pre-commit properly. It
 also has quite a bit of custom code.
 
-[actions-badge]:            https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
-[actions-link]:             https://github.com/scikit-hep/cookie/actions
-[black-badge]:              https://img.shields.io/badge/code%20style-black-000000.svg
-[black-link]:               https://github.com/psf/black
-[conda-badge]:              https://img.shields.io/conda/vn/conda-forge/cookie
-[conda-link]:               https://github.com/conda-forge/cookie-feedstock
+[actions-badge]: https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
+[actions-link]: https://github.com/scikit-hep/cookie/actions
+[black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
+[black-link]: https://github.com/psf/black
+[conda-badge]: https://img.shields.io/conda/vn/conda-forge/cookie
+[conda-link]: https://github.com/conda-forge/cookie-feedstock
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
-[github-discussions-link]:  https://github.com/scikit-hep/cookie/discussions
-[gitter-badge]:             https://badges.gitter.im/Scikit-HEP/community.svg
-[gitter-link]:              https://gitter.im/Scikit-HEP/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
-[sk-badge]:                 https://scikit-hep.org/assets/images/Scikit--HEP-Project-blue.svg
-
-[Scikit-HEP developer guidelines]: https://scikit-hep.org/developer
-
+[github-discussions-link]: https://github.com/scikit-hep/cookie/discussions
+[gitter-badge]: https://badges.gitter.im/Scikit-HEP/community.svg
+[gitter-link]: https://gitter.im/Scikit-HEP/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+[sk-badge]: https://scikit-hep.org/assets/images/Scikit--HEP-Project-blue.svg
+[scikit-hep developer guidelines]: https://scikit-hep.org/developer
 [cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
 [scikit-build]: https://scikit-build.readthedocs.io/en/latest/
-[flit]:         https://flit.readthedocs.io/en/latest/
-[nox]:          https://nox.thea.codes/en/stable/
-[pdm]:          https://pdm.fming.dev
-[poetry]:       https://python-poetry.org
-[pybind11]:     https://pybind11.readthedocs.io/en/stable/
-[setuptools]:   https://setuptools.readthedocs.io/en/latest/
-[trampolim]:    https://trampolim.readthedocs.io/en/latest/
-[pipx]:         https://pypa.github.io/pipx/
-[whey]:         https://whey.readthedocs.io/en/latest/
-[maturin]:      https://maturin.rs
-[hypermodern]:  https://github.com/cjolowicz/cookiecutter-hypermodern-python
-[hatch]:        https://github.com/ofek/hatch
-
-[PEP 582]: https://www.python.org/dev/peps/pep-0582
-[PEP 621]: https://www.python.org/dev/peps/pep-0621
+[flit]: https://flit.readthedocs.io/en/latest/
+[nox]: https://nox.thea.codes/en/stable/
+[pdm]: https://pdm.fming.dev
+[poetry]: https://python-poetry.org
+[pybind11]: https://pybind11.readthedocs.io/en/stable/
+[setuptools]: https://setuptools.readthedocs.io/en/latest/
+[trampolim]: https://trampolim.readthedocs.io/en/latest/
+[pipx]: https://pypa.github.io/pipx/
+[whey]: https://whey.readthedocs.io/en/latest/
+[maturin]: https://maturin.rs
+[hypermodern]: https://github.com/cjolowicz/cookiecutter-hypermodern-python
+[hatch]: https://github.com/ofek/hatch
+[pep 582]: https://www.python.org/dev/peps/pep-0582
+[pep 621]: https://www.python.org/dev/peps/pep-0621

@@ -11,16 +11,16 @@ jobs:
     name: Make SDist
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - name: Build SDist
-      run: pipx run build --sdist
+      - name: Build SDist
+        run: pipx run build --sdist
 
-    - uses: actions/upload-artifact@v2
-      with:
-        path: dist/*.tar.gz
+      - uses: actions/upload-artifact@v2
+        with:
+          path: dist/*.tar.gz
 
   build_wheels:
     name: Wheel on ${{ matrix.os }}
@@ -31,16 +31,16 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - uses: pypa/cibuildwheel@v2.2.0
+      - uses: pypa/cibuildwheel@v2.2.0
 
-    - name: Upload wheels
-      uses: actions/upload-artifact@v2
-      with:
-        path: wheelhouse/*.whl
+      - name: Upload wheels
+        uses: actions/upload-artifact@v2
+        with:
+          path: wheelhouse/*.whl
 
   upload_all:
     needs: [build_wheels, make_sdist]
@@ -48,15 +48,15 @@ jobs:
     if: github.event_name == 'release' && github.event.action == 'published'
 
     steps:
-    - uses: actions/download-artifact@v2
-      with:
-        name: artifact
-        path: dist
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: dist
 
-    - uses: pypa/gh-action-pypi-publish@v1.4.2
-      with:
-        user: __token__
-        # Remember to generate this and set it in "GitHub Secrets"
-        password: ${{ secrets.pypi_password }}
-        # Remove this line
-        repository_url: https://test.pypi.org/legacy/
+      - uses: pypa/gh-action-pypi-publish@v1.4.2
+        with:
+          user: __token__
+          # Remember to generate this and set it in "GitHub Secrets"
+          password: ${{ secrets.pypi_password }}
+          # Remove this line
+          repository_url: https://test.pypi.org/legacy/

@@ -1,18 +1,26 @@
 {
-    "project_name": "package",
-    "org": "Scikit-HEP",
-    "url": "https://github.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
-    "full_name": "My Name",
-    "project_type": ["setuptools", "pybind11", "skbuild", "poetry", "flit", "pdm", "trampolim", "whey", "maturin", "hatch", "setuptools621"],
-    "email": "me@email.com",
-    "maintainer": "The Scikit-HEP admins",
-    "maintainer_email": "scikit-hep-admins@googlegroups.com",
-    "project_short_description": "A great package.",
-    "year": "{% now 'utc', '%Y' %}",
-    "_extensions": [
-        "jinja2_time.TimeExtension"
-    ],
-    "_copy_without_render": [
-        ".github/workflows/*.yml"
-    ]
+  "project_name": "package",
+  "org": "Scikit-HEP",
+  "url": "https://github.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
+  "full_name": "My Name",
+  "project_type": [
+    "setuptools",
+    "pybind11",
+    "skbuild",
+    "poetry",
+    "flit",
+    "pdm",
+    "trampolim",
+    "whey",
+    "maturin",
+    "hatch",
+    "setuptools621"
+  ],
+  "email": "me@email.com",
+  "maintainer": "The Scikit-HEP admins",
+  "maintainer_email": "scikit-hep-admins@googlegroups.com",
+  "project_short_description": "A great package.",
+  "year": "{% now 'utc', '%Y' %}",
+  "_extensions": ["jinja2_time.TimeExtension"],
+  "_copy_without_render": [".github/workflows/*.yml"]
 }
