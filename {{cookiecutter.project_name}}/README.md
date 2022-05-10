@@ -14,8 +14,7 @@
 [![Scikit-HEP][sk-badge]](https://scikit-hep.org/)
 {%- endif %}
 
-
-
+<!-- prettier-ignore-start -->
 [actions-badge]:            {{cookiecutter.url}}/workflows/CI/badge.svg
 [actions-link]:             {{cookiecutter.url}}/actions
 [black-badge]:              https://img.shields.io/badge/code%20style-black-000000.svg
@@ -32,3 +31,4 @@
 [rtd-badge]:                https://readthedocs.org/projects/{{cookiecutter.project_name}}/badge/?version=latest
 [rtd-link]:                 https://{{cookiecutter.project_name}}.readthedocs.io/en/latest/?badge=latest
 [sk-badge]:                 https://scikit-hep.org/assets/images/Scikit--HEP-Project-blue.svg
+<!-- prettier-ignore-end -->

@@ -1,5 +1,5 @@
-See the [Scikit-HEP Developer introduction][skhep-dev-intro] for a
-detailed description of best practices for developing Scikit-HEP packages.
+See the [Scikit-HEP Developer introduction][skhep-dev-intro] for a detailed
+description of best practices for developing Scikit-HEP packages.
 
 [skhep-dev-intro]: https://scikit-hep.org/developer/intro
 
@@ -26,43 +26,47 @@ $ nox -s build  # Make an SDist and wheel
 Nox handles everything for you, including setting up an temporary virtual
 environment for each run.
 
-
 # Setting up a development environment manually
 
 You can set up a development environment by running:
 
 {% if cookiecutter.project_type == "poetry" -%}
+
 ```bash
 poetry install
 ```
+
 {%- else -%}
+
 ```bash
 python3 -m venv .venv
 source ./.venv/bin/activate
 pip install -v -e .[dev]
 ```
 
-If you have the [Python Launcher for Unix](https://github.com/brettcannon/python-launcher),
-you can instead do:
+If you have the
+[Python Launcher for Unix](https://github.com/brettcannon/python-launcher), you
+can instead do:
 
 ```bash
 py -m venv .venv
 py -m install -v -e .[dev]
 ```
+
 {%- endif %}
 
 # Post setup
 
-You should prepare pre-commit, which will help you by checking that commits
-pass required checks:
+You should prepare pre-commit, which will help you by checking that commits pass
+required checks:
 
 ```bash
 pip install pre-commit # or brew install pre-commit on macOS
 pre-commit install # Will install a pre-commit hook into the git repo
 ```
 
-You can also/alternatively run `pre-commit run` (changes only) or `pre-commit
-run --all-files` to check even without installing the hook.
+You can also/alternatively run `pre-commit run` (changes only) or
+`pre-commit run --all-files` to check even without installing the hook.
 
 # Testing
 
@@ -89,8 +93,8 @@ nox -s docs -- serve
 # Pre-commit
 
 This project uses pre-commit for all style checking. While you can run it with
-nox, this is such an important tool that it deserves to be installed on its
-own. Install pre-commit and run:
+nox, this is such an important tool that it deserves to be installed on its own.
+Install pre-commit and run:
 
 ```bash
 pre-commit run -a
