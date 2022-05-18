@@ -155,12 +155,10 @@ not use pre-commit properly. It also has quite a bit of custom code.
 [black-link]: https://github.com/psf/black
 [conda-badge]: https://img.shields.io/conda/vn/conda-forge/cookie
 [conda-link]: https://github.com/conda-forge/cookie-feedstock
-[github-discussions-badge]:
-  https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
+[github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
 [github-discussions-link]: https://github.com/scikit-hep/cookie/discussions
 [gitter-badge]: https://badges.gitter.im/Scikit-HEP/community.svg
-[gitter-link]:
-  https://gitter.im/Scikit-HEP/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+[gitter-link]: https://gitter.im/Scikit-HEP/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 [sk-badge]: https://scikit-hep.org/assets/images/Scikit--HEP-Project-blue.svg
 [scikit-hep developer guidelines]: https://scikit-hep.org/developer
 [cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
