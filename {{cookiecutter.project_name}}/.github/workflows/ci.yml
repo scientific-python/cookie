@@ -17,8 +17,10 @@ jobs:
     name: Format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v3
       - uses: pre-commit/action@v2.0.3
         with:
           extra_args: --hook-stage manual --all-files
@@ -38,13 +40,15 @@ jobs:
         runs-on: [ubuntu-latest, macos-latest, windows-latest]
 
         include:
-          - python-version: pypy-3.7
+          - python-version: pypy-3.8
             runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -60,19 +64,21 @@ jobs:
     needs: [pre-commit]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Build sdist and wheel
         run: pipx run build
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           path: dist
 
       - name: Check products
         run: pipx run twine check dist/*
 
-      - uses: pypa/gh-action-pypi-publish@v1.4.2
+      - uses: pypa/gh-action-pypi-publish@v1.5.0
         if: github.event_name == 'release' && github.event.action == 'published'
         with:
           user: __token__
