@@ -15,7 +15,7 @@ jobs:
     name: Format
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Lint setuptools
       run: pipx run nox -s 'lint(setuptools)'
@@ -61,14 +61,14 @@ jobs:
         runs-on: [ubuntu-latest, macos-latest, windows-latest]
 
         include:
-        - python-version: pypy-3.7
+        - python-version: pypy-3.8
           runs-on: ubuntu-latest
 
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-    - uses: actions/setup-python@v2
+    - uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -121,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Test setuptools
       run: |
@@ -184,7 +184,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Build sdist and wheel
       run: pipx run nox -s dist
@@ -192,6 +192,6 @@ jobs:
     - name: Show results
       run: ls -l dist
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         path: dist
