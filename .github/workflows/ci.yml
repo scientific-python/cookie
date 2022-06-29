@@ -10,6 +10,10 @@ on:
 env:
   FORCE_COLOR: 3
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   pre-commit:
     name: Format
@@ -130,7 +134,7 @@ jobs:
           pipx run nox -s 'nox(pybind11)'
           pipx run nox -s 'nox(pybind11)' -- docs
 
-      - name: Test pybind11
+      - name: Test skbuild
         run: |
           pipx run nox -s 'nox(skbuild)'
           pipx run nox -s 'nox(skbuild)' -- docs
