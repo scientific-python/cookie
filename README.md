@@ -149,8 +149,6 @@ not use pre-commit properly. It also has quite a bit of custom code.
 
 [actions-badge]: https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
 [actions-link]: https://github.com/scikit-hep/cookie/actions
-[black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
-[black-link]: https://github.com/psf/black
 [conda-badge]: https://img.shields.io/conda/vn/conda-forge/cookie
 [conda-link]: https://github.com/conda-forge/cookie-feedstock
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
