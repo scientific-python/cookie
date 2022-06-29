@@ -2,7 +2,6 @@
 
 [![Actions Status][actions-badge]][actions-link]
 [![Documentation Status][rtd-badge]][rtd-link]
-[![Code style: black][black-badge]][black-link]
 
 [![PyPI version][pypi-version]][pypi-link]
 [![Conda-Forge][conda-badge]][conda-link]
@@ -17,8 +16,6 @@
 <!-- prettier-ignore-start -->
 [actions-badge]:            {{cookiecutter.url}}/workflows/CI/badge.svg
 [actions-link]:             {{cookiecutter.url}}/actions
-[black-badge]:              https://img.shields.io/badge/code%20style-black-000000.svg
-[black-link]:               https://github.com/psf/black
 [conda-badge]:              https://img.shields.io/conda/vn/conda-forge/{{cookiecutter.project_name}}
 [conda-link]:               https://github.com/conda-forge/{{cookiecutter.project_name}}-feedstock
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github

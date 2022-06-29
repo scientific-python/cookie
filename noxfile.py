@@ -12,6 +12,7 @@ JOB_FILE = """\
 default_context:
   project_name: cookie-{backend}
   project_type: {backend}
+  license: BSD
 """
 
 
