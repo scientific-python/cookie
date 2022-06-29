@@ -4,7 +4,9 @@
   "url": "https://github.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
   "full_name": "My Name",
   "project_type": [
+    "hatch",
     "setuptools",
+    "setuptools621",
     "pybind11",
     "skbuild",
     "poetry",
@@ -12,9 +14,7 @@
     "pdm",
     "trampolim",
     "whey",
-    "maturin",
-    "hatch",
-    "setuptools621"
+    "maturin"
   ],
   "email": "me@email.com",
   "maintainer": "The Scikit-HEP admins",
