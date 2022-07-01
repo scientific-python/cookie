@@ -43,7 +43,6 @@ authors = [
 maintainers = [
     { name = "{{ cookiecutter.maintainer }}", email = "{{ cookiecutter.maintainer_email }}" },
 ]
-license = { file = "LICENSE" }
 
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
@@ -56,7 +55,13 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
+{%- if cookiecutter.license == "BSD" %}
     "License :: OSI Approved :: BSD License",
+{%- elif cookiecutter.license == "Apache" %}
+    "License :: OSI Approved :: Apache Software License",
+{%- elif cookiecutter.license == "MIT" %}
+    "License :: OSI Approved :: MIT License",
+{%- endif %}
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.7",

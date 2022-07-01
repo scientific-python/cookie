@@ -21,6 +21,7 @@
   "maintainer_email": "scikit-hep-admins@googlegroups.com",
   "project_short_description": "A great package.",
   "year": "{% now 'utc', '%Y' %}",
+  "license": ["BSD", "Apache", "MIT"],
   "_extensions": ["jinja2_time.TimeExtension"],
   "_copy_without_render": [".github/workflows/*.yml"]
 }
