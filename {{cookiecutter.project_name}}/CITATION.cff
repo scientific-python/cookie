@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "Please cite the following works when using this software."
+type: software
+title: {{cookiecutter.project_name}}
+abstract: {{ cookiecutter.project_short_description }}
+authors:
+- family-names:
+  given-names:
+  orcid:
+  affiliation:
+doi:
+repository-code:
+url: {{ cookiecutter.url }}
+keywords:
+license: {{ cookiecutter.license }}

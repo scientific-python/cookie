@@ -1,7 +1,7 @@
 graft src
 graft tests
 
-include LICENSE README.md pyproject.toml setup.py setup.cfg
+include LICENSE README.md pyproject.toml setup.py setup.cfg CITATION.cff
 global-exclude __pycache__ *.py[cod] .*
 {%- if cookiecutter.project_type == "skbuild" %}
 include CMakeLists.txt
