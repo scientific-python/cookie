@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "Please cite the following works when using this software."
+type: software
+title: "cookie"
+abstract: "Modern Python Package Cookiecutter"
+authors:
+- family-names: "Schreiner"
+  given-names: "Henry"
+  orcid: "https://orcid.org/0000-0002-7833-783X"
+  affiliation: "Princeton University"
+doi:
+repository-code: "https://github.com/scikit-hep/cookie"
+url: "https://scikit-hep.org/developer"
+keywords:
+license: "BSD-3-Clause"
