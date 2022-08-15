@@ -76,6 +76,14 @@ Use pytest to run the unit checks:
 pytest
 ```
 
+# Coverage
+
+Use pytest-cov to generate coverage reports:
+
+```bash
+pytest --cov={{ cookiecutter.project_name }}
+```
+
 # Building docs
 
 You can build the docs using:
