@@ -1,3 +1,4 @@
+{%- set compiled = cookiecutter.project_type in ["pybind11", "maturin", "skbuild"] -%}
 name: CI
 
 on:
@@ -8,12 +9,14 @@ on:
       - master
       - main
       - develop
+  {%- if not compiled %}
   release:
     types:
       - published
+  {%- endif %}
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
   cancel-in-progress: true
 
 jobs:
@@ -36,8 +39,8 @@ jobs:
           pipx run nox -s pylint
 
   checks:
-    name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
-    runs-on: ${{ matrix.runs-on }}
+    name: {% raw %}Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}{% endraw %}
+    runs-on: {% raw %}${{ matrix.runs-on }}{% endraw %}
     needs: [pre-commit]
     strategy:
       fail-fast: false
@@ -56,13 +59,15 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
 
       - name: Install package
         run: python -m pip install .[test]
 
       - name: Test package
         run: python -m pytest -ra
+
+  {%- if not compiled %}
 
   dist:
     name: Distribution build
@@ -81,14 +86,23 @@ jobs:
         with:
           path: dist
 
+      {%- if cookiecutter.project_type != "trampolim" %}
+
       - name: Check products
         run: pipx run twine check dist/*
+
+      {%- endif %}
 
       - uses: pypa/gh-action-pypi-publish@v1.5.0
         if: github.event_name == 'release' && github.event.action == 'published'
         with:
-          user: __token__
           # Remember to generate this and set it in "GitHub Secrets"
-          password: ${{ secrets.pypi_password }}
+          password: {% raw %}${{ secrets.pypi_password }}{% endraw %}
           # Remove this line
           repository_url: https://test.pypi.org/legacy/
+          {%- if cookiecutter.project_type == "trampolim" %}
+          # Check not supported currently by twine + trampolim
+          verify_metadata: false
+          {%- endif %}
+
+  {%- endif %}

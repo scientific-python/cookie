@@ -7,7 +7,7 @@ on:
       - published
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
   cancel-in-progress: true
 
 jobs:
@@ -27,8 +27,8 @@ jobs:
           path: dist/*.tar.gz
 
   build_wheels:
-    name: Wheel on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: {% raw %}Wheel on ${{ matrix.os }}{% endraw %}
+    runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     strategy:
       fail-fast: false
       matrix:
@@ -39,7 +39,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: pypa/cibuildwheel@v2.7.0
+      - uses: pypa/cibuildwheel@v2.9.0
 
       - name: Upload wheels
         uses: actions/upload-artifact@v3
@@ -59,8 +59,7 @@ jobs:
 
       - uses: pypa/gh-action-pypi-publish@v1.5.0
         with:
-          user: __token__
           # Remember to generate this and set it in "GitHub Secrets"
-          password: ${{ secrets.pypi_password }}
+          password: {% raw %}${{ secrets.pypi_password }}{% endraw %}
           # Remove this line
           repository_url: https://test.pypi.org/legacy/
