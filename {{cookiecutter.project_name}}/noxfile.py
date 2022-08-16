@@ -46,6 +46,16 @@ def tests(session: nox.Session) -> None:
 
 
 @nox.session
+def coverage(session: nox.Session) -> None:
+    """
+    Run tests and compute coverage.
+    """
+
+    session.posargs.append("--cov={{ cookiecutter.project_name }}")
+    tests(session)
+
+
+@nox.session
 def docs(session: nox.Session) -> None:
     """
     Build the docs. Pass "serve" to serve.

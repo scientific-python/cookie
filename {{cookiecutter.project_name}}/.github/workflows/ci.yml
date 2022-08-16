@@ -65,7 +65,10 @@ jobs:
         run: python -m pip install .[test]
 
       - name: Test package
-        run: python -m pytest -ra
+        run: python -m pytest -ra --cov={{ cookiecutter.project_name }}
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v3.1.0
 
   {%- if not compiled %}
 

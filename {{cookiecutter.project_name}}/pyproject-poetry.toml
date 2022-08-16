@@ -31,16 +31,18 @@ python = ">=3.7"
 typing_extensions = { version = ">=3.7", python = "<3.8" }
 
 pytest = { version = ">=6", optional = true }
+pytest-cov = { version = ">=3", optional = true }
 sphinx = { version = "^4.0", optional = true }
 sphinx_book_theme = { version = ">=0.1.0", optional = true }
 sphinx_copybutton = { version = ">=0.3.0", optional = true }
 
 [tool.poetry.dev-dependencies]
 pytest = ">= 6"
+pytest-cov = ">= 3"
 
 [tool.poetry.extras]
-test = ["pytest"]
-dev = ["pytest"]
+test = ["pytest", "pytest-cov"]
+dev = ["pytest", "pytest-cov"]
 docs = [
     "sphinx",
     "sphinx-book-theme",

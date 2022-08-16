@@ -83,13 +83,15 @@ dependencies = [
 [project.optional-dependencies]
 test = [
     "pytest >=6",
+    "pytest-cov >=3",
 ]
 dev = [
     "pytest >=6",
+    "pytest-cov >=3",
 ]
 docs = [
     "Sphinx>=4.0",
-     "myst_parser>=0.13",
+    "myst_parser>=0.13",
     "sphinx-book-theme>=0.1.0",
     "sphinx_copybutton",
 ]
@@ -102,7 +104,7 @@ homepage = "{{ cookiecutter.url }}"
 
 
 [tool.pdm.dev-dependencies]
-devtest = ["pytest"]
+devtest = ["pytest", "pytest-cov"]
 {%- endif %}
 
 
@@ -112,6 +114,7 @@ devtest = ["pytest"]
 [tool.hatch.envs.default]
 dependencies = [
   "pytest",
+  "pytest-cov",
 ]
 {%- endif %}
 
