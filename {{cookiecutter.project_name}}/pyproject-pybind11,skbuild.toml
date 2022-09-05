@@ -1,11 +1,11 @@
 [build-system]
 requires = [
-    "setuptools>=42",
-    "setuptools_scm[toml]>=3.4",
+  "setuptools>=42",
+  "setuptools_scm[toml]>=3.4",
 {%- if cookiecutter.project_type == "pybind11" %}
-    "pybind11>=2.9.0",
+  "pybind11>=2.9.0",
 {%- elif cookiecutter.project_type == "skbuild" %}
-    "scikit-build>=0.14",
+  "scikit-build>=0.14",
 {%- endif %}
 ]
 build-backend = "setuptools.build_meta"
@@ -26,7 +26,7 @@ xfail_strict = true
 filterwarnings = ["error"]
 log_cli_level = "INFO"
 testpaths = [
-    "tests",
+  "tests",
 ]
 
 
@@ -42,12 +42,12 @@ warn_unreachable = true
 
 [tool.check-manifest]
 ignore = [
-    ".github/**",
-    "docs/**",
-    ".pre-commit-config.yaml",
-    ".readthedocs.yml",
-    "src/*/_version.py",
-    "noxfile.py",
+  ".github/**",
+  "docs/**",
+  ".pre-commit-config.yaml",
+  ".readthedocs.yml",
+  "src/*/_version.py",
+  "noxfile.py",
 ]
 
 [tool.isort]

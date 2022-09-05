@@ -3,16 +3,16 @@
 requires = ["trampolim>=0.1.0"]
 build-backend = "trampolim"
 {%- elif cookiecutter.project_type == "whey" %}
-requires = ["whey >=0.0.17"]
+requires = ["whey>=0.0.17"]
 build-backend = "whey"
 {%- elif cookiecutter.project_type == "pdm" %}
 requires = ["pdm-pep517"]
 build-backend = "pdm.pep517.api"
 {%- elif cookiecutter.project_type == "maturin" %}
-requires = ["maturin>=0.12,<0.13"]
+requires = ["maturin>=0.12"]
 build-backend = "maturin"
 {%- elif cookiecutter.project_type == "hatch" %}
-requires = ["hatchling>=0.7"]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 {%- elif cookiecutter.project_type == "setuptools621" %}
 requires = ["setuptools>=61.0"]
@@ -23,100 +23,85 @@ build-backend = "flit_core.buildapi"
 {%- endif %}
 
 
-{%- if cookiecutter.project_type == "whey" %}
-[tool.whey]
-source-dir = "src"
-{%- elif cookiecutter.project_type == "trampolim" %}
-[tool.trampolim]
-module-location = "src"
-{%- endif %}
-
-
 [project]
 name = "{{ cookiecutter.project_name.replace("-", "_") }}"
-{%- if cookiecutter.project_type != "trampolim" and cookiecutter.project_type != "flit" %}
+{%- if cookiecutter.project_type not in ["trampolim", "flit", "hatch"] %}
 version = "0.1.0"
 {%- endif %}
 authors = [
-    { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
+  { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
 ]
 maintainers = [
-    { name = "{{ cookiecutter.maintainer }}", email = "{{ cookiecutter.maintainer_email }}" },
+  { name = "{{ cookiecutter.maintainer }}", email = "{{ cookiecutter.maintainer_email }}" },
 ]
-
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
-
 requires-python = ">=3.7"
-
 classifiers = [
-    "License :: OSI Approved :: BSD License",
-    "Topic :: Scientific/Engineering",
-    "Intended Audience :: Science/Research",
-    "Intended Audience :: Developers",
-    "Operating System :: OS Independent",
+  "License :: OSI Approved :: BSD License",
+  "Topic :: Scientific/Engineering",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
 {%- if cookiecutter.license == "BSD" %}
-    "License :: OSI Approved :: BSD License",
+  "License :: OSI Approved :: BSD License",
 {%- elif cookiecutter.license == "Apache" %}
-    "License :: OSI Approved :: Apache Software License",
+  "License :: OSI Approved :: Apache Software License",
 {%- elif cookiecutter.license == "MIT" %}
-    "License :: OSI Approved :: MIT License",
+  "License :: OSI Approved :: MIT License",
 {%- endif %}
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Development Status :: 1 - Planning",
-    "Typing :: Typed",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Development Status :: 1 - Planning",
+  "Typing :: Typed",
 ]
-
-{%- if cookiecutter.project_type == "trampolim" or cookiecutter.project_type == "flit" %}
-
+{%- if cookiecutter.project_type in ["trampolim", "flit", "hatch"] %}
 dynamic = ["version"]
 {%- endif %}
-
 dependencies = [
-    "typing_extensions >=3.7; python_version<'3.8'",
+  "typing_extensions >=3.7; python_version<'3.8'",
 ]
 
 [project.optional-dependencies]
 test = [
-    "pytest >=6",
-    "pytest-cov >=3",
+  "pytest >=6",
+  "pytest-cov >=3",
 ]
 dev = [
-    "pytest >=6",
-    "pytest-cov >=3",
+  "pytest >=6",
+  "pytest-cov >=3",
 ]
 docs = [
-    "Sphinx>=4.0",
-    "myst_parser>=0.13",
-    "sphinx-book-theme>=0.1.0",
-    "sphinx_copybutton",
+  "Sphinx>=4.0",
+  "myst_parser>=0.13",
+  "sphinx-book-theme>=0.1.0",
+  "sphinx_copybutton",
 ]
 
 [project.urls]
 homepage = "{{ cookiecutter.url }}"
 
 
-{%- if cookiecutter.project_type == "pdm" %}
-
-
-[tool.pdm.dev-dependencies]
-devtest = ["pytest", "pytest-cov"]
-{%- endif %}
-
-
-{%- if cookiecutter.project_type == "hatch" %}
-
-
-[tool.hatch.envs.default]
-dependencies = [
+{%- if cookiecutter.project_type == "whey" %}
+[tool.whey]
+source-dir = "src"
+{%- elif cookiecutter.project_type == "trampolim" %}
+[tool.trampolim]
+module-location = "src"
+{%- elif cookiecutter.project_type == "hatch" %}
+[tool.hatch]
+version.path = "src/{{ cookiecutter.project_name.replace("-", "_")  }}/__init__.py"
+envs.default.dependencies = [
   "pytest",
   "pytest-cov",
 ]
+{%- elif cookiecutter.project_type == "pdm" %}
+[tool.pdm.dev-dependencies]
+devtest = ["pytest", "pytest-cov"]
 {%- endif %}
 
 
@@ -127,7 +112,7 @@ xfail_strict = true
 filterwarnings = ["error"]
 log_cli_level = "INFO"
 testpaths = [
-    "tests",
+  "tests",
 ]
 
 

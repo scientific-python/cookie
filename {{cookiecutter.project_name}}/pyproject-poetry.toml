@@ -7,10 +7,10 @@ build-backend = "poetry.core.masonry.api"
 name = "{{ cookiecutter.project_name.replace("-", "_") }}"
 version = "0.1.0"
 authors = [
-    "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
+  "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
 ]
 maintainers = [
-    "{{ cookiecutter.maintainer }} <{{ cookiecutter.maintainer_email }}>",
+  "{{ cookiecutter.maintainer }} <{{ cookiecutter.maintainer_email }}>",
 ]
 homepage = "{{ cookiecutter.url }}"
 repository = "{{ cookiecutter.url }}"
@@ -19,12 +19,12 @@ description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
 
 classifiers = [
-    "Topic :: Scientific/Engineering",
-    "Intended Audience :: Science/Research",
-    "Intended Audience :: Developers",
-    "Operating System :: OS Independent",
-    "Development Status :: 1 - Planning",
-    "Typing :: Typed",
+  "Topic :: Scientific/Engineering",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Development Status :: 1 - Planning",
+  "Typing :: Typed",
 ]
 
 [tool.poetry.dependencies]
@@ -45,9 +45,9 @@ pytest-cov = ">= 3"
 test = ["pytest", "pytest-cov"]
 dev = ["pytest", "pytest-cov"]
 docs = [
-    "sphinx",
-    "sphinx-book-theme",
-    "sphinx_copybutton",
+  "sphinx",
+  "sphinx-book-theme",
+  "sphinx_copybutton",
 ]
 
 
@@ -58,7 +58,7 @@ xfail_strict = true
 filterwarnings = ["error"]
 log_cli_level = "INFO"
 testpaths = [
-    "tests",
+  "tests",
 ]
 
 
