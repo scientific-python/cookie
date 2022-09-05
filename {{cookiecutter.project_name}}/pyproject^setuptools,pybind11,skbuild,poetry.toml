@@ -69,6 +69,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Development Status :: 1 - Planning",
+    "Typing :: Typed",
 ]
 
 {%- if cookiecutter.project_type == "trampolim" or cookiecutter.project_type == "flit" %}

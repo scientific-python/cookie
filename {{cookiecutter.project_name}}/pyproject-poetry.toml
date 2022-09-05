@@ -24,6 +24,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
     "Development Status :: 1 - Planning",
+    "Typing :: Typed",
 ]
 
 [tool.poetry.dependencies]
