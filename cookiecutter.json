@@ -17,8 +17,6 @@
     "maturin"
   ],
   "email": "me@email.com",
-  "maintainer": "The Scikit-HEP admins",
-  "maintainer_email": "scikit-hep-admins@googlegroups.com",
   "project_short_description": "A great package.",
   "year": "{% now 'utc', '%Y' %}",
   "license": ["BSD", "Apache", "MIT"],

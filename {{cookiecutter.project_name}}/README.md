@@ -9,7 +9,7 @@
 
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
 [![Gitter][gitter-badge]][gitter-link]
-{% if cookiecutter.org == "Scikit-HEP" -%}
+{%- if cookiecutter.org == "Scikit-HEP" %}
 [![Scikit-HEP][sk-badge]](https://scikit-hep.org/)
 {%- endif %}
 
@@ -27,5 +27,8 @@
 [pypi-version]:             https://badge.fury.io/py/{{cookiecutter.project_name}}.svg
 [rtd-badge]:                https://readthedocs.org/projects/{{cookiecutter.project_name}}/badge/?version=latest
 [rtd-link]:                 https://{{cookiecutter.project_name}}.readthedocs.io/en/latest/?badge=latest
+{%- if cookiecutter.org == "Scikit-HEP" %}
 [sk-badge]:                 https://scikit-hep.org/assets/images/Scikit--HEP-Project-blue.svg
+{%- endif %}
+
 <!-- prettier-ignore-end -->

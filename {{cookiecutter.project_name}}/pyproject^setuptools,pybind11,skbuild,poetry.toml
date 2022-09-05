@@ -31,9 +31,11 @@ version = "0.1.0"
 authors = [
   { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
 ]
+{%- if cookiecutter.org == "Scikit-HEP" %}
 maintainers = [
-  { name = "{{ cookiecutter.maintainer }}", email = "{{ cookiecutter.maintainer_email }}" },
+  { name = "The Scikit-HEP admins", email = "scikit-hep-admins@googlegroups.com" },
 ]
+{%- endif %}
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
 requires-python = ">=3.7"
