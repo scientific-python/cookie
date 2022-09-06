@@ -16,16 +16,22 @@ maintainers = [
 {%- endif %}
 homepage = "{{ cookiecutter.url }}"
 repository = "{{ cookiecutter.url }}"
+{%- if cookiecutter.license == "BSD" %}
 license = "BSD-3-Clause"
+{%- elif cookiecutter.license == "Apache" %}
+license = "Apa:che-2.0"
+{%- elif cookiecutter.license == "MIT" %}
+license = "MIT"
+{%- endif %}
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
 
 classifiers = [
-  "Topic :: Scientific/Engineering",
+  "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
-  "Development Status :: 1 - Planning",
+  "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
 

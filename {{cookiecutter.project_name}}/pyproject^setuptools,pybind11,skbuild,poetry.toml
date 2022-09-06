@@ -40,11 +40,9 @@ description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
-  "License :: OSI Approved :: BSD License",
-  "Topic :: Scientific/Engineering",
+  "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
-  "Operating System :: OS Independent",
 {%- if cookiecutter.license == "BSD" %}
   "License :: OSI Approved :: BSD License",
 {%- elif cookiecutter.license == "Apache" %}
@@ -52,13 +50,15 @@ classifiers = [
 {%- elif cookiecutter.license == "MIT" %}
   "License :: OSI Approved :: MIT License",
 {%- endif %}
+  "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
-  "Development Status :: 1 - Planning",
+  "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
 {%- if cookiecutter.project_type in ["trampolim", "flit", "hatch"] %}
@@ -86,6 +86,9 @@ docs = [
 
 [project.urls]
 Homepage = "{{ cookiecutter.url }}"
+"Bug Tracker" = "{{ cookiecutter.url }}/issues"
+Discussions = "{{ cookiecutter.url }}/discussions"
+Changelog = "{{ cookiecutter.url }}/releases"
 
 
 {%- if cookiecutter.project_type == "whey" %}
