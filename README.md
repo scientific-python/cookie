@@ -1,7 +1,6 @@
 # Scikit-HEP: cookie
 
 [![Actions Status][actions-badge]][actions-link]
-
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
 [![Gitter][gitter-badge]][gitter-link]
 [![Scikit-HEP][sk-badge]](https://scikit-hep.org/)
