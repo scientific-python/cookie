@@ -85,7 +85,7 @@ docs = [
 ]
 
 [project.urls]
-homepage = "{{ cookiecutter.url }}"
+Homepage = "{{ cookiecutter.url }}"
 
 
 {%- if cookiecutter.project_type == "whey" %}
