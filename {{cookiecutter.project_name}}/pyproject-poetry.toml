@@ -9,9 +9,11 @@ version = "0.1.0"
 authors = [
   "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
 ]
+{%- if cookiecutter.org == "Scikit-HEP" %}
 maintainers = [
-  "{{ cookiecutter.maintainer }} <{{ cookiecutter.maintainer_email }}>",
+  "The Scikit-HEP admins <scikit-hep-admins@googlegroups.com>",
 ]
+{%- endif %}
 homepage = "{{ cookiecutter.url }}"
 repository = "{{ cookiecutter.url }}"
 license = "BSD-3-Clause"
