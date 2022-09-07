@@ -10,6 +10,9 @@ concurrency:
   group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
   cancel-in-progress: true
 
+env:
+  FORCE_COLOR: 3
+
 jobs:
   make_sdist:
     name: Make SDist
