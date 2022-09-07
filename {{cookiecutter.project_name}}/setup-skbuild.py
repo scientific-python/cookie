@@ -13,6 +13,5 @@ setup(
     name="{{ cookiecutter.project_name.replace("-","_") }}",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
-    include_package_data=True,
     cmake_install_dir="src/{{ cookiecutter.project_name.replace("-", "_") }}",
 )
