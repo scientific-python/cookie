@@ -24,7 +24,7 @@
 [gitter-link]:              https://gitter.im/{{cookiecutter.url}}/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 [pypi-link]:                https://pypi.org/project/{{cookiecutter.project_name}}/
 [pypi-platforms]:           https://img.shields.io/pypi/pyversions/{{cookiecutter.project_name}}
-[pypi-version]:             https://badge.fury.io/py/{{cookiecutter.project_name}}.svg
+[pypi-version]:             https://img.shields.io/pypi/v/{{cookiecutter.project_name}}
 [rtd-badge]:                https://readthedocs.org/projects/{{cookiecutter.project_name}}/badge/?version=latest
 [rtd-link]:                 https://{{cookiecutter.project_name}}.readthedocs.io/en/latest/?badge=latest
 {%- if cookiecutter.org == "Scikit-HEP" %}
