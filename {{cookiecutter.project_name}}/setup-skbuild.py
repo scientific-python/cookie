@@ -14,5 +14,5 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     cmake_install_dir="src/{{ cookiecutter.project_name.replace("-", "_") }}",
-    package_data={"{{ cookiecutter.project_name.replace("-", "_") }}": "py.typed"},
+    package_data={"{{ cookiecutter.project_name.replace("-", "_") }}": ["py.typed"]},
 )
