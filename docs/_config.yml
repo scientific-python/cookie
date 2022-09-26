@@ -1,0 +1,46 @@
+title: Scikit-HEP Developer Pages
+email: scikit-hep-admins@googlegroups.com
+description: >-
+  The Scikit-HEP Developer pages guide new users through the development
+  process.
+baseurl: ""
+url: "https://scikit-hep.github.io/cookie"
+github_username: scikit-hep
+
+# Build settings
+markdown: kramdown
+theme: "just-the-docs"
+plugins:
+  - jekyll-feed
+
+# Theme settings
+
+color_scheme: skhep
+
+logo: "/assets/images/logo.png"
+
+# Enable or disable the site search
+search_enabled: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "Scikit-HEP on GitHub":
+    - "//github.com/scikit-hep"
+
+gh_edit_link: true
+gh_edit_link_text: "View source for this page on GitHub."
+gh_edit_repository: "https://github.com/scikit-hep/cookie"
+gh_edit_branch: "main"
+gh_edit_view_mode: "tree" # "tree" or "edit"
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/

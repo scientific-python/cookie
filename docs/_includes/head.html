@@ -1,0 +1,74 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+  {% unless site.plugins contains "jekyll-seo-tag" %}
+  <title>{{ page.title }} - {{ site.title }}</title>
+
+  {% if page.description %}
+  <meta name="Description" content="{{ page.description }}" />
+  {% endif %} {% endunless %}
+
+  <link
+    rel="shortcut icon"
+    href="{{ 'favicon.ico' | relative_url }}"
+    type="image/x-icon"
+  />
+
+  {% if false %}
+  <link
+    rel="stylesheet"
+    href="{{ '/assets/css/just-the-docs-default.css' | relative_url }}"
+  />
+  {% endif %}
+
+  <script>
+    /* If `prefers-color-scheme` is not supported, fall back to default mode */
+    if (window.matchMedia('(prefers-color-scheme: dark)').media === 'not all') {
+      /* document.documentElement.style.display = 'none'; */
+      document.head.insertAdjacentHTML(
+        'beforeend',
+        '<link rel="stylesheet" href="{{ '/assets/css/just-the-docs-default.css' | relative_url }}" onload="document.documentElement.style.display = \'\'">',
+      );
+    }
+  </script>
+
+  <link
+    rel="stylesheet"
+    href="{{ '/assets/css/just-the-docs-dark.css' | relative_url }}"
+    media="(prefers-color-scheme: dark)"
+  />
+  <link
+    rel="stylesheet"
+    href="{{ '/assets/css/just-the-docs-light.css' | relative_url }}"
+    media="(prefers-color-scheme: light)"
+  />
+
+  {% if site.ga_tracking != nil %}
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_tracking }}"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{ site.ga_tracking }}'{% unless site.ga_tracking_anonymize_ip == nil %}, { 'anonymize_ip': true }{% endunless %});
+  </script>
+
+  {% endif %} {% if site.search_enabled != false %}
+  <script
+    type="text/javascript"
+    src="{{ '/assets/js/vendor/lunr.min.js' | relative_url }}"
+  ></script>
+  {% endif %}
+  <script
+    type="text/javascript"
+    src="{{ '/assets/js/just-the-docs.js' | relative_url }}"
+  ></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {% seo %} {% include head_custom.html %}
+</head>

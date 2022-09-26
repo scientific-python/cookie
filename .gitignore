@@ -140,8 +140,11 @@ cython_debug/
 # setuptools_scm
 src/*/version.py
 
-# JS
-node_modules
-.jekyll-cache
+# Jeykll stuff
+.jekyll-cache/
+_site/
+
+# NodeJS stuff, just in case (developer tooling)
+node_modules/
 package-lock.json
 package.json
