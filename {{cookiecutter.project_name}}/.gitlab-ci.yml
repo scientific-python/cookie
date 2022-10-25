@@ -117,9 +117,8 @@ make_wheels:
 
 deploy_staging:
   extends: .deploy
-  only:
-    refs:
-      - $CI_DEFAULT_BRANCH
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   variables:
     TWINE_REPOSITORY: testpypi
     TWINE_USERNAME: __token__
