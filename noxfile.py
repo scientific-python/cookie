@@ -1,6 +1,10 @@
+from __future__ import annotations
+
 from pathlib import Path
-import os
 import json
+import os
+import sys
+
 
 import nox
 
@@ -99,6 +103,10 @@ def native(session, backend):
         session.run(backend, "env", "create")
     else:
         session.run(backend, "install")
+        
+    # Temporary skip for https://github.com/pdm-project/pdm/issues/1411
+    if backend == "pdm" and sys.version_info < (3, 8):
+        return
 
     session.run(backend, "run", "pytest")
 
