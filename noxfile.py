@@ -93,6 +93,10 @@ def native(session, backend):
 
     session.install("cookiecutter", backend)
 
+    # Temporary workaround for https://github.com/pdm-project/pdm/issues/1411
+    if backend == "pdm" and sys.version_info < (3, 8):
+        session.install("importlib_metadata<5")
+
     make_cookie(session, backend)
 
     if backend == "hatch":
