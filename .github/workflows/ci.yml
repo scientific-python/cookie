@@ -195,3 +195,9 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           path: dist
+          
+  pass:
+    needs: [dist, nox, checks, pre-commit]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "All jobs passed"
