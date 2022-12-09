@@ -85,13 +85,14 @@ profile = "black"
 
 
 [tool.pylint]
-master.py-version = "3.7"
-master.ignore-paths= ["src/{{ cookiecutter.project_name.replace("-", "_") }}/_version.py"]
+py-version = "3.7"
+ignore-paths= ["src/{{ cookiecutter.project_name.replace("-", "_") }}/_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
 messages_control.disable = [
   "design",
   "fixme",
   "line-too-long",
+  "missing-module-docstring",
   "wrong-import-position",
 ]
