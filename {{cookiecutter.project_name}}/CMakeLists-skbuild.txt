@@ -7,7 +7,7 @@ FetchContent_Declare(
   pybind11
   URL https://github.com/pybind/pybind11/archive/refs/tags/v2.10.3.tar.gz
   URL_HASH
-    SHA256=4b80847061e918106250263c571067d514c735716bc6b4c2d2aadaf661c08c44)
+    SHA256=5d8c4c5dda428d3a944ba3d2a5212cb988c2fae4670d58075a5a49075a6ca315)
 FetchContent_MakeAvailable(pybind11)
 
 pybind11_add_module(_core MODULE src/main.cpp)
