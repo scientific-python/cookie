@@ -86,11 +86,9 @@ free to change it to whatever you actually need/want.
 - Formatting handled by pre-commit
   - No reason not to be strict on a new project; remove what you don't want.
   - Includes MyPy - static typing
-  - Includes strong Flake8 checking
-  - Includes auto fixes for common flake8 problems
   - Includes Black - standardizing formatting
-  - Includes isort for nice import sorting/grouping
-  - Includes PyUpgrade - keeps old Python syntax out
+  - Includes strong Ruff-based linting and autofixes
+    - Replaces Flake8, isort, pyupgrade, yesqa, pycln, and dozens of plugins
   - Includes spell checking
 - An pylint nox target can be used to run pylint, which integrated GHA
   annotations
