@@ -89,9 +89,6 @@ jobs:
       - name: Test scikit-build
         run: nox -s 'tests(skbuild)'
 
-      - name: Test meson-python
-        run: nox -s 'tests(mesonpy)'
-
       - name: Test poetry
         run: nox -s 'tests(poetry)'
 
@@ -123,6 +120,13 @@ jobs:
         if: matrix.python-version != 'pypy-3.7'
         run: nox -s 'native(pdm)'
 
+      - name: Activate MSVC for Meson
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Test meson-python
+        run: nox -s 'tests(mesonpy)'
+
   nox:
     name: Check included Noxfile
     runs-on: ubuntu-latest
@@ -144,11 +148,6 @@ jobs:
         run: |
           pipx run nox -s 'nox(skbuild)'
           pipx run nox -s 'nox(skbuild)' -- docs
-
-      - name: Test meson-python
-        run: |
-          pipx run nox -s 'nox(mesonpy)'
-          pipx run nox -s 'nox(mesonpy)' -- docs
 
       - name: Test poetry
         run: |
@@ -189,6 +188,16 @@ jobs:
         run: |
           pipx run nox -s 'nox(setuptools621)'
           pipx run nox -s 'nox(setuptools621)' -- docs
+
+      - name: Activate MSVC for Meson
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Test meson-python
+        run: |
+          pipx run nox -s 'nox(mesonpy)'
+          pipx run nox -s 'nox(mesonpy)' -- docs
+
 
   dist:
     name: Distribution build

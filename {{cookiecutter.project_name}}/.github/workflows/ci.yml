@@ -64,6 +64,12 @@ jobs:
         with:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
 
+      {%- if cookiecutter.project_type == "mesonpy" %}
+      - name: Activate MSVC for Meson
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+      {%- endif %}
+
       - name: Install package
         run: python -m pip install .[test]
 
