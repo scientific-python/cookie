@@ -27,15 +27,15 @@ build-backend = "setuptools.build_meta"
 requires = ["setuptools>=42", "setuptools_scm[toml]>=3.4", "pybind11"]
 build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.project_type == "skbuild"  %}
-requires = ["setuptools>=42", "setuptools_scm[toml]>=3.4", "pybind11", "scikit-build"]
-build-backend = "setuptools.build_meta"
+requires = ["pybind11", "scikit-build-core"]
+build-backend = "scikit_build_core.build"
 {%- elif cookiecutter.project_type == "poetry" %}
 requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 {%- endif %}
 
 
-{%- if cookiecutter.project_type in ["setuptools", "pybind11", "skbuild"] %}
+{%- if cookiecutter.project_type in ["setuptools", "pybind11"] %}
 [tool.setuptools_scm]
 write_to = "src/{{ cookiecutter.project_name.replace("-", "_") }}/_version.py"
 
@@ -178,7 +178,11 @@ Changelog = "{{ cookiecutter.url }}/releases"
 {%- endif %}
 
 
-{%- if cookiecutter.project_type == "whey" %}
+{%- if cookiecutter.project_type == "skbuild" %}
+[tool.scikit-build]
+minimum-version = "0.2"
+build-dir = "build/{cache_tag}"
+{%- elif cookiecutter.project_type == "whey" %}
 [tool.whey]
 source-dir = "src"
 {%- elif cookiecutter.project_type == "trampolim" %}
