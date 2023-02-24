@@ -19,14 +19,8 @@ pybind11_config_ret = run_command(pybind11_config, ['--includes'], check: true)
 pybind11 = declare_dependency(
     include_directories: [pybind11_config_ret.stdout().split('-I')[-1].strip()],
 )
-py.install_sources(
-  'src' / name / '__init__.py',
-  'src' / name / 'py.typed',
-   subdir: name)
-py.install_sources(
-  'src' / name / '_compat' / '__init__.py',
-  'src' / name / '_compat' / 'typing.py',
-   subdir: name / '_compat')
+
+install_subdir('src' / name, install_dir: py.get_install_dir() / name, strip_directory: true)
 
 py.extension_module('_core',
     'src/main.cpp',
