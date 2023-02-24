@@ -7,14 +7,14 @@
 
 A cookiecutter template for new Python projects, either targeting Scikit-HEP
 inclusion, or for general software packages - the only Scikit-HEP specific parts
-are in the defaults. What makes this different from other cookie cutter
+are in a few defaults. What makes this different from other cookie cutter
 templates for Python packages?
 
 - Designed from the [Scikit-HEP developer guidelines][]: Every decision is
   clearly documented and every tool described.
 - Template generation tested in GitHub Actions using nox.
 - Eleven different backends to choose from for building packages.
-- Includes a backend for C++ bindings using pybind11, with wheels produced for
+- Includes several compiled backends using pybind11, with wheels produced for
   all platforms using cibuildwheel.
 - Follows PyPA best practices.
 
@@ -41,7 +41,8 @@ During generation you can select from the following backends for your package:
    all-in-one. Makes some bad default assumptions for libraries.
 7. [flit][]: A modern, lightweight [PEP 621][] build system for pure Python
    projects. Replaces setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low
-   learning curve. Easy to bootstrap into new distributions.
+   learning curve. Easy to bootstrap into new distributions. Difficult to get
+    the right files included, little dynamic metadata support.
 8. [pdm][]: A modern, less opinionated all-in-one solution to pure Python
    projects supporting standards. Replaces setuptools, venv/pipenv, pip, wheel,
    and twine. Supports [PEP 621][], and also the unaccepted [PEP 582][].
@@ -81,7 +82,7 @@ free to change it to whatever you actually need/want.
   - Uses nox so cookie development can be checked locally
 - GitHub actions deploy
   - Be sure to add a token
-  - C++ backend uses cibuildwheel for wheel builds
+  - C++ backends include cibuildwheel for wheel builds
 - Dependabot keeps actions up to date periodically, through useful pull requests
 - Formatting handled by pre-commit
   - No reason not to be strict on a new project; remove what you don't want.
@@ -140,7 +141,7 @@ same tools used. It has a slightly different set of features, and has a stronger
 focus on GitHub Actions - most of Scikit-HEP cookie could be adapted to a
 different CI system fairly easily if you don't want to use GHA. It also forces
 the use of Poetry (instead of having a backend selection), and doesn't support
-compiled projects. It currently dumps all development depndenices into a shared
+compiled projects. It currently dumps all development dependencies into a shared
 environment, causing long solve times and high chance of conflicts. It also does
 not use pre-commit properly. It also has quite a bit of custom code.
 

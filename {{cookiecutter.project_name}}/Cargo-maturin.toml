@@ -4,15 +4,20 @@ version = "0.1.0"
 edition = "2018"
 
 [lib]
-name = "{{ cookiecutter.project_name.replace("-", "_") }}"
+name = "_core"
 # "cdylib" is necessary to produce a shared library for Python to import from.
 crate-type = ["cdylib"]
+
+[package.metadata.maturin]
+name = "{{ cookiecutter.project_name.replace("-", "_") }}._core"
+python-packages = ["{{ cookiecutter.project_name.replace("-", "_") }}"]
+python-source = "src"
 
 [dependencies]
 rand = "0.8.3"
 
 [dependencies.pyo3]
-version = "0.15.1"
+version = "0.18.1"
 # "extension-module" tells pyo3 we want to build an extension module (skips linking against libpython.so)
-# "abi3-py36" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.6
-features = ["extension-module", "abi3-py36"]
+# "abi3-py37" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.7
+features = ["extension-module", "abi3-py37"]
