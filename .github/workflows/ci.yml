@@ -27,7 +27,7 @@ jobs:
       - name: Lint pybind11
         run: pipx run nox -s 'lint(pybind11)'
 
-      - name: Lint Scikit-build
+      - name: Lint scikit-build
         run: pipx run nox -s 'lint(skbuild)'
 
       - name: Lint poetry
@@ -83,7 +83,7 @@ jobs:
       - name: Test pybind11
         run: nox -s 'tests(pybind11)'
 
-      - name: Test pybind11
+      - name: Test scikit-build
         run: nox -s 'tests(skbuild)'
 
       - name: Test poetry
@@ -134,7 +134,7 @@ jobs:
           pipx run nox -s 'nox(pybind11)'
           pipx run nox -s 'nox(pybind11)' -- docs
 
-      - name: Test skbuild
+      - name: Test scikit-build
         run: |
           pipx run nox -s 'nox(skbuild)'
           pipx run nox -s 'nox(skbuild)' -- docs

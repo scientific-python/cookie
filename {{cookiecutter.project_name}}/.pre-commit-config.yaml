@@ -60,7 +60,7 @@ repos:
 
 {%- endif %}
 
-{%- if cookiecutter.project_type == "pybind11" or cookiecutter.project_type == "skbuild" %}
+{%- if cookiecutter.project_type in ["pybind11", "skbuild"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
     rev: "v14.0.6"
@@ -95,7 +95,7 @@ repos:
         entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
         exclude: .pre-commit-config.yaml
 
-{%- if cookiecutter.project_type == "setuptools" or cookiecutter.project_type == "pybind11" %}
+{%- if cookiecutter.project_type in ["setuptools", "pybind11"] %}
 
   - repo: https://github.com/mgedmin/check-manifest
     rev: "0.49"

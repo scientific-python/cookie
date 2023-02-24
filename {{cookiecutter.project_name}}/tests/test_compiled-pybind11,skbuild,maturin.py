@@ -1,12 +1,6 @@
 from __future__ import annotations
 
-{%- if cookiecutter.project_type != "maturin" %}
-
 import {{ cookiecutter.project_name.replace("-", "_") }}._core as m
-{%- else %}
-
-import {{ cookiecutter.project_name.replace("-", "_") }} as m
-{%- endif %}
 
 
 def test_add():
