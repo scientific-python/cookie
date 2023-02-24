@@ -60,7 +60,7 @@ repos:
 
 {%- endif %}
 
-{%- if cookiecutter.project_type in ["pybind11", "skbuild"] %}
+{%- if cookiecutter.project_type in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
     rev: "v14.0.6"

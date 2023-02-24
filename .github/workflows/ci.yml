@@ -30,6 +30,9 @@ jobs:
       - name: Lint scikit-build
         run: pipx run nox -s 'lint(skbuild)'
 
+      - name: Lint meson-python
+        run: pipx run nox -s 'lint(mesonpy)'
+
       - name: Lint poetry
         run: pipx run nox -s 'lint(poetry)'
 
@@ -117,6 +120,13 @@ jobs:
         if: matrix.python-version != 'pypy-3.7'
         run: nox -s 'native(pdm)'
 
+      - name: Activate MSVC for Meson
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Test meson-python
+        run: nox -s 'tests(mesonpy)'
+
   nox:
     name: Check included Noxfile
     runs-on: ubuntu-latest
@@ -178,6 +188,16 @@ jobs:
         run: |
           pipx run nox -s 'nox(setuptools621)'
           pipx run nox -s 'nox(setuptools621)' -- docs
+
+      - name: Activate MSVC for Meson
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Test meson-python
+        run: |
+          pipx run nox -s 'nox(mesonpy)'
+          pipx run nox -s 'nox(mesonpy)' -- docs
+
 
   dist:
     name: Distribution build

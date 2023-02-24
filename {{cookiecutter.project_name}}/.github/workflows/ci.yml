@@ -1,4 +1,4 @@
-{%- set compiled = cookiecutter.project_type in ["pybind11", "maturin", "skbuild"] -%}
+{%- set compiled = cookiecutter.project_type in ["pybind11", "maturin", "skbuild", "mesonpy"] -%}
 name: CI
 
 on:
@@ -63,6 +63,12 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+
+      {%- if cookiecutter.project_type == "mesonpy" %}
+      - name: Activate MSVC for Meson
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+      {%- endif %}
 
       - name: Install package
         run: python -m pip install .[test]
