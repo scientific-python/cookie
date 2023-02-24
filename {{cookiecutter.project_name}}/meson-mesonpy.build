@@ -1,0 +1,40 @@
+project(
+  '{{ cookiecutter.project_name.replace("-", "_") }}',
+  'cpp',
+  version: '0.1.0',
+  license: '{{ cookiecutter.license }}',
+  meson_version: '>= 0.64.0',
+  default_options: [
+    'buildtype=debugoptimized',
+    'cpp_std=c++11',
+  ],
+)
+name = '{{ cookiecutter.project_name.replace("-", "_") }}'
+
+py_mod = import('python')
+py = py_mod.find_installation(pure: false)
+
+pybind11_config = find_program('pybind11-config')
+pybind11_config_ret = run_command(pybind11_config, ['--includes'], check: true)
+pybind11 = declare_dependency(
+    include_directories: [pybind11_config_ret.stdout().split('-I')[-1].strip()],
+)
+py.install_sources(
+  'src' / name / '__init__.py',
+  'src' / name / 'py.typed',
+   subdir: name)
+py.install_sources(
+  'src' / name / '_compat' / '__init__.py',
+  'src' / name / '_compat' / 'typing.py',
+   subdir: name / '_compat')
+
+py.extension_module('_core',
+    'src/main.cpp',
+    subdir: '{{ cookiecutter.project_name.replace("-", "_") }}',
+    install: true,
+    dependencies : [pybind11],
+    link_language : 'cpp',
+    override_options: [
+        'cpp_rtti=true',
+    ]
+)

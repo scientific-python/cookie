@@ -1,4 +1,4 @@
-{%- set compiled = cookiecutter.project_type in ["pybind11", "maturin", "skbuild"] -%}
+{%- set compiled = cookiecutter.project_type in ["pybind11", "maturin", "skbuild", "mesonpy"] -%}
 name: CI
 
 on:

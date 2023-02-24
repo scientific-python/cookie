@@ -29,6 +29,9 @@ build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.project_type == "skbuild"  %}
 requires = ["pybind11", "scikit-build-core"]
 build-backend = "scikit_build_core.build"
+{%- elif cookiecutter.project_type == "mesonpy"  %}
+requires = ["pybind11", "meson-python"]
+build-backend = "mesonpy"
 {%- elif cookiecutter.project_type == "poetry" %}
 requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

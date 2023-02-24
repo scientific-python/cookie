@@ -9,6 +9,7 @@
     "setuptools621",
     "pybind11",
     "skbuild",
+    "mesonpy",
     "poetry",
     "flit",
     "pdm",

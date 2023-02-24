@@ -30,6 +30,9 @@ jobs:
       - name: Lint scikit-build
         run: pipx run nox -s 'lint(skbuild)'
 
+      - name: Lint meson-python
+        run: pipx run nox -s 'lint(mesonpy)'
+
       - name: Lint poetry
         run: pipx run nox -s 'lint(poetry)'
 
@@ -86,6 +89,9 @@ jobs:
       - name: Test scikit-build
         run: nox -s 'tests(skbuild)'
 
+      - name: Test meson-python
+        run: nox -s 'tests(mesonpy)'
+
       - name: Test poetry
         run: nox -s 'tests(poetry)'
 
@@ -138,6 +144,11 @@ jobs:
         run: |
           pipx run nox -s 'nox(skbuild)'
           pipx run nox -s 'nox(skbuild)' -- docs
+
+      - name: Test meson-python
+        run: |
+          pipx run nox -s 'nox(mesonpy)'
+          pipx run nox -s 'nox(mesonpy)' -- docs
 
       - name: Test poetry
         run: |
