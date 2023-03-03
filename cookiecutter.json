@@ -21,5 +21,5 @@
   "project_short_description": "A great package.",
   "year": "{% now 'utc', '%Y' %}",
   "license": ["BSD", "Apache", "MIT"],
-  "_extensions": ["jinja2_time.TimeExtension", "local_extensions.normalize"]
+  "_extensions": ["jinja2_time.TimeExtension"]
 }
