@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import {{ cookiecutter.project_name.replace("-", "_") }} as m
-from {{ cookiecutter.project_name.replace("-", "_") }}._compat.typing import Protocol, runtime_checkable
+import {{ cookiecutter.project_name | normalize }} as m
+from {{ cookiecutter.project_name | normalize }}._compat.typing import Protocol, runtime_checkable
 
 
 def test_version():

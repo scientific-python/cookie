@@ -16,7 +16,7 @@ from pybind11.setup_helpers import Pybind11Extension  # isort:skip
 
 ext_modules = [
     Pybind11Extension(
-        "{{ cookiecutter.project_name.replace("-","_") }}._core",
+        "{{ cookiecutter.project_name | normalize }}._core",
         ["src/main.cpp"],
         cxx_std=11,
     ),

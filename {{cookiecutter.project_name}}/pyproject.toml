@@ -40,7 +40,7 @@ build-backend = "poetry.core.masonry.api"
 
 {%- if cookiecutter.project_type in ["setuptools", "pybind11"] %}
 [tool.setuptools_scm]
-write_to = "src/{{ cookiecutter.project_name.replace("-", "_") }}/_version.py"
+write_to = "src/{{ cookiecutter.project_name | normalize }}/_version.py"
 
 
 [tool.check-manifest]
@@ -55,7 +55,7 @@ ignore = [
 
 {%- elif cookiecutter.project_type == "poetry" %}
 [tool.poetry]
-name = "{{ cookiecutter.project_name.replace("-", "_") }}"
+name = "{{ cookiecutter.project_name }}"
 version = "0.1.0"
 authors = [
   "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
@@ -112,7 +112,7 @@ docs = [
 
 {%- else %}
 [project]
-name = "{{ cookiecutter.project_name.replace("-", "_") }}"
+name = "{{ cookiecutter.project_name }}"
 {%- if cookiecutter.project_type not in ["trampolim", "flit", "hatch"] %}
 version = "0.1.0"
 {%- endif %}
@@ -193,7 +193,7 @@ source-dir = "src"
 module-location = "src"
 {%- elif cookiecutter.project_type == "hatch" %}
 [tool.hatch]
-version.path = "src/{{ cookiecutter.project_name.replace("-", "_")  }}/__init__.py"
+version.path = "src/{{ cookiecutter.project_name | normalize  }}/__init__.py"
 envs.default.dependencies = [
   "pytest",
   "pytest-cov",
@@ -257,7 +257,7 @@ extend-ignore = [
   "PT004",  # Use underscore for non-returning fixture (use usefixture instead)
 ]
 target-version = "py37"
-typing-modules = ["{{ cookiecutter.project_name.replace("-", "_") }}._compat.typing"]
+typing-modules = ["{{ cookiecutter.project_name | normalize }}._compat.typing"]
 src = ["src"]
 unfixable = [
   "T20",  # Removes print statements
@@ -274,7 +274,7 @@ isort.required-imports = ["from __future__ import annotations"]
 
 [tool.pylint]
 py-version = "3.7"
-ignore-paths= ["src/{{ cookiecutter.project_name.replace("-", "_") }}/_version.py"]
+ignore-paths= ["src/{{ cookiecutter.project_name | normalize }}/_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
 messages_control.disable = [
