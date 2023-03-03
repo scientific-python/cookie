@@ -1,5 +1,5 @@
 project(
-  '{{ cookiecutter.project_name.replace("-", "_") }}',
+  '{{ cookiecutter.project_slug }}',
   'cpp',
   version: '0.1.0',
   license: '{{ cookiecutter.license }}',
@@ -9,7 +9,7 @@ project(
     'cpp_std=c++11',
   ],
 )
-name = '{{ cookiecutter.project_name.replace("-", "_") }}'
+name = '{{ cookiecutter.project_slug }}'
 
 py_mod = import('python')
 py = py_mod.find_installation(pure: false)
@@ -24,7 +24,7 @@ install_subdir('src' / name, install_dir: py.get_install_dir() / name, strip_dir
 
 py.extension_module('_core',
     'src/main.cpp',
-    subdir: '{{ cookiecutter.project_name.replace("-", "_") }}',
+    subdir: '{{ cookiecutter.project_slug }}',
     install: true,
     dependencies : [pybind11],
     link_language : 'cpp',
