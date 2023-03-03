@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-{% if cookiecutter.project_type != "pybind11" -%}
+import argparse
+{%- if cookiecutter.project_type != "pybind11" %}
 import shutil
 from pathlib import Path
-
-{% endif -%}
+{%- endif %}
 
 import nox
 
@@ -58,19 +58,39 @@ def coverage(session: nox.Session) -> None:
 @nox.session
 def docs(session: nox.Session) -> None:
     """
-    Build the docs. Pass "serve" to serve.
+    Build the docs. Pass "--serve" to serve.
     """
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--serve", action="store_true", help="Serve after building")
+    args = parser.parse_args(session.posargs)
 
     session.install(".[docs]")
     session.chdir("docs")
     session.run("sphinx-build", "-M", "html", ".", "_build")
 
-    if session.posargs:
-        if "serve" in session.posargs:
-            print("Launching docs at http://localhost:8000/ - use Ctrl-C to quit")
-            session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
-        else:
-            session.warn("Unsupported argument to docs")
+    if args.serve:
+        print("Launching docs at http://localhost:8000/ - use Ctrl-C to quit")
+        session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
+
+
+@nox.session
+def build_api_docs(session: nox.Session) -> None:
+    """
+    Build (regenerate) API docs.
+    """
+
+    session.install("sphinx")
+    session.chdir("docs")
+    session.run(
+        "sphinx-apidoc",
+        "-o",
+        "api/",
+        "--no-toc",
+        "--force",
+        "--module-first",
+        "../src/{{ cookiecutter.project_name.replace('-', '_') }}",
+    )
 
 
 {%- if cookiecutter.project_type != "pybind11" %}

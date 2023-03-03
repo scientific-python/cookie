@@ -1,6 +1,6 @@
 
-Welcome to documentation!
-=========================
+Welcome to the documentation!
+=============================
 
 
 Introduction

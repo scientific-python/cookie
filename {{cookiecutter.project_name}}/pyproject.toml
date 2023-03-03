@@ -90,10 +90,11 @@ classifiers = [
 python = ">=3.7"
 typing_extensions = { version = ">=3.7", python = "<3.8" }
 
+furo = { version = ">=22", optional = true }
+myst_parser = { version = ">=0.13", optional = true }
 pytest = { version = ">=6", optional = true }
 pytest-cov = { version = ">=3", optional = true }
-sphinx = { version = "^4.0", optional = true }
-sphinx_book_theme = { version = ">=0.1.0", optional = true }
+sphinx = { version = ">=4.0", optional = true }
 sphinx_copybutton = { version = ">=0.3.0", optional = true }
 
 [tool.poetry.dev-dependencies]
@@ -104,8 +105,9 @@ pytest-cov = ">= 3"
 test = ["pytest", "pytest-cov"]
 dev = ["pytest", "pytest-cov"]
 docs = [
+  "furo",
+  "myst_parser",
   "sphinx",
-  "sphinx-book-theme",
   "sphinx_copybutton",
 ]
 
@@ -167,10 +169,11 @@ dev = [
   "pytest-cov >=3",
 ]
 docs = [
-  "Sphinx>=4.0",
+  "sphinx>=4.0",
   "myst_parser>=0.13",
   "sphinx-book-theme>=0.1.0",
   "sphinx_copybutton",
+  "furo",
 ]
 
 [project.urls]
