@@ -6,8 +6,8 @@ build-backend = "trampolim"
 requires = ["whey>=0.0.17"]
 build-backend = "whey"
 {%- elif cookiecutter.project_type == "pdm" %}
-requires = ["pdm-pep517"]
-build-backend = "pdm.pep517.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 {%- elif cookiecutter.project_type == "maturin" %}
 requires = ["maturin>=0.12"]
 build-backend = "maturin"
