@@ -60,9 +60,9 @@ jobs:
           name: artifact
           path: dist
 
-      - uses: pypa/gh-action-pypi-publish@v1.5.1
+      - uses: pypa/gh-action-pypi-publish@v1.8.3
         with:
           # Remember to generate this and set it in "GitHub Secrets"
           password: {% raw %}${{ secrets.pypi_password }}{% endraw %}
           # Remove this line
-          repository_url: https://test.pypi.org/legacy/
+          repository-url: https://test.pypi.org/legacy/

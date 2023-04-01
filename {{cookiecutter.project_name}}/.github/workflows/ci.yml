@@ -77,7 +77,7 @@ jobs:
         run: python -m pytest -ra --cov={{ cookiecutter.project_name }}
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v3.1.0
+        uses: codecov/codecov-action@v3.1.1
 
   {%- if not compiled %}
 
@@ -105,16 +105,16 @@ jobs:
 
       {%- endif %}
 
-      - uses: pypa/gh-action-pypi-publish@v1.5.1
+      - uses: pypa/gh-action-pypi-publish@v1.8.3
         if: github.event_name == 'release' && github.event.action == 'published'
         with:
           # Remember to generate this and set it in "GitHub Secrets"
           password: {% raw %}${{ secrets.pypi_password }}{% endraw %}
           # Remove this line
-          repository_url: https://test.pypi.org/legacy/
+          repository-url: https://test.pypi.org/legacy/
           {%- if cookiecutter.project_type == "trampolim" %}
           # Check not supported currently by twine + trampolim
-          verify_metadata: false
+          verify-metadata: false
           {%- endif %}
 
   {%- endif %}
