@@ -39,20 +39,10 @@ def pylint(session: nox.Session) -> None:
 @nox.session
 def tests(session: nox.Session) -> None:
     """
-    Run the unit and regular tests.
+    Run the unit and regular tests. Use --cov to activate coverage.
     """
     session.install(".[test]")
     session.run("pytest", *session.posargs)
-
-
-@nox.session
-def coverage(session: nox.Session) -> None:
-    """
-    Run tests and compute coverage.
-    """
-
-    session.posargs.append("--cov={{ cookiecutter.project_name }}")
-    tests(session)
 
 
 @nox.session

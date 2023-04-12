@@ -223,6 +223,14 @@ testpaths = [
 ]
 
 
+[tool.coverage]
+run.source = ["{{ cookiecutter.project_slug }}"]
+port.exclude_lines = [
+  'pragma: no cover',
+  '\.\.\.',
+  'if typing.TYPE_CHECKING:',
+]
+
 [tool.mypy]
 files = "src"
 python_version = "3.7"
