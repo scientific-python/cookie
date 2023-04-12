@@ -10,12 +10,12 @@ def test_version():
 
 @runtime_checkable
 class HasQuack(Protocol):
-    def quack() -> str:
+    def quack(self) -> str:
         ...
 
 
 class Duck:
-    def quack() -> str:
+    def quack(self) -> str:
         return "quack"
 
 
