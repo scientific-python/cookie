@@ -232,13 +232,20 @@ port.exclude_lines = [
 ]
 
 [tool.mypy]
-files = "src"
+files = ["src", "tests"]
 python_version = "3.7"
 warn_unused_configs = true
 strict = true
 show_error_codes = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 warn_unreachable = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[[tool.mypy.overrides]]
+module = "{{ cookiecutter.project_slug  }}.*"
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
 
 
 [tool.ruff]

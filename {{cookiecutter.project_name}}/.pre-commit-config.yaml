@@ -74,8 +74,10 @@ repos:
     rev: "v1.1.1"
     hooks:
       - id: mypy
-        files: src
+        files: src|tests
         args: []
+        additional_dependencies:
+          - pytest
 
   - repo: https://github.com/codespell-project/codespell
     rev: "v2.2.4"
