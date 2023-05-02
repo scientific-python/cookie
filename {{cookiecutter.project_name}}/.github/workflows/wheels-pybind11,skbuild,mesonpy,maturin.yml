@@ -42,7 +42,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: pypa/cibuildwheel@v2.11.1
+      - uses: pypa/cibuildwheel@v2.12.3
 
       - name: Upload wheels
         uses: actions/upload-artifact@v3
@@ -51,6 +51,9 @@ jobs:
 
   upload_all:
     needs: [build_wheels, make_sdist]
+    environment: pypi
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
 
@@ -60,9 +63,8 @@ jobs:
           name: artifact
           path: dist
 
-      - uses: pypa/gh-action-pypi-publish@v1.8.3
+      - uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          # Remember to generate this and set it in "GitHub Secrets"
-          password: {% raw %}${{ secrets.pypi_password }}{% endraw %}
-          # Remove this line
+          # Remember to tell (test-)pypi about this repo before publishing
+          # Remove this line to publish to PyPI
           repository-url: https://test.pypi.org/legacy/
