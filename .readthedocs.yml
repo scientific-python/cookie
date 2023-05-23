@@ -8,11 +8,12 @@ version: 2
 # Set the version of Python and other tools you might need
 build:
   os: ubuntu-22.04
-  commands:
-    - curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
-    - echo "$(~/.rbenv/bin/rbenv init)" >> ~/.bashrc
-    - rbenv install 3.2.1
-    - rbenv global 3.2.1
-    - gem install jekyll bundler
-    - cd docs && bundle install
-    - cd docs && bundle exec jekyll build --destination ../_readthedocs/html
+  apt_packages:
+    - ruby-full
+    - build-essential
+    - zlib1g-dev
+  jobs:
+   pre_install:
+      - GEM_HOME="$HOME/gems" PATH="$HOME/gems/bin:$PATH" gem install jekyll bundler
+      - cd docs && $HOME/gems/bin/bundle install
+      - cd docs && $HOME/gems/bin/bundle exec jekyll build --destination ../_readthedocs/html
