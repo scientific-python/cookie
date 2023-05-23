@@ -13,9 +13,6 @@ build:
     - build-essential
     - zlib1g-dev
   commands:
-    - cd docs
-    - export GEM_HOME="$HOME/gems"
-    - export PATH="$HOME/gems/bin:$PATH"
-    - gem install jekyll bundler
-    - bundle install
-    - bundle exec jekyll build --destination ../_readthedocs/html
+    - GEM_HOME="$HOME/gems PATH="$HOME/gems/bin:$PATH" gem install jekyll bundler
+    - cd docs && $HOME/gems/bin/bundle install
+    - cd docs && $HOME/gems/bin/bundle exec jekyll build --destination ../_readthedocs/html
