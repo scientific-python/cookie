@@ -6,6 +6,7 @@ on:
     paths-ignore:
       # Skip testing builds if changes are only in documentation directories
       - 'docs/**'
+      - '.readthedocs.yml'
   push:
     branches:
       - main

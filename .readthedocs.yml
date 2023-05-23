@@ -14,8 +14,11 @@ build:
     - ruby-full
     - build-essential
     - zlib1g-dev
+    - rbenv
   jobs:
    pre_install:
-      - gem install jekyll bundler --user-install
-      - cd docs && /home/docs/.local/share/gem/ruby/3.0.0/bin/bundle install --path ~/.gem
-      - cd docs && /home/docs/.local/share/gem/ruby/3.0.0/bin/bundle exec jekyll build --destination ../_readthedocs/html
+      - rbenv local
+      - rbenv global
+      - rbenv exec gem install bundler
+      - cd docs && rbenv exec bundle install
+      - cd docs && rbenv exec bundle exec jekyll build --destination ../_readthedocs/html
