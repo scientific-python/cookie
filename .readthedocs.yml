@@ -9,7 +9,9 @@ version: 2
 build:
   os: ubuntu-22.04
   commands:
-    - apt-get update  --assume-yes --quiet && apt-get install --assume-yes --quiet ruby-full build-essential zlib1g-dev
-    - GEM_HOME="$HOME/gems" PATH="$HOME/gems/bin:$PATH" gem install jekyll bundler
-    - cd docs && $HOME/gems/bin/bundle install
-    - cd docs && $HOME/gems/bin/bundle exec jekyll build --destination ../_readthedocs/html
+    - curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
+    - rbenv install 3.2.1
+    - rbenv global 3.2.1
+    - gem install jekyll bundler
+    - cd docs && bundle install
+    - cd docs && bundle exec jekyll build --destination ../_readthedocs/html
