@@ -17,7 +17,7 @@ build:
     - rbenv
   jobs:
    pre_install:
-      - rbenv local
+      - rbenv install
       - rbenv global
       - rbenv exec gem install bundler
       - cd docs && rbenv exec bundle install
