@@ -484,7 +484,7 @@ The extra strict options shown above (`warn_unreachable`, `redundant-expr`, and
 to be ignored occasionally, but can find some signifiant logic errors in your
 typing.
 
-[mypy page]: {{ site.baseurl }}{% link pages/developers/mypy.md %}
+[mypy page]: {{ site.baseurl }}{% link pages/guides/mypy.md %}
 
 ## Check-Manifest (setuptools only)
 
