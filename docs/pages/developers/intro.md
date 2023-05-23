@@ -8,18 +8,17 @@ parent: Developer information
 
 {% include toc.html %}
 
-The libraries in Scikit-HEP try to follow best practices in the community
-for development and deployment (though some packages in Scikit-HEP are still
-being converted to use best practices). The following outlines the basics for setting
-up a development environment. It is recommended as a basis for `CONTRIBUTING.md` or
-`.github/CONTRIBUTING.md` in the packages.
+It is generally advisable for packages in the scientific Python ecosystem to try to
+follow best practices in the community for development and deployment. The following
+outlines the basics for setting up a development environment. It is recommended as a
+basis for `CONTRIBUTING.md` or `.github/CONTRIBUTING.md` in the packages.
 
 <details><summary>CONTRIBUTING.md template (click to expand)</summary>
 <pre>
-See the [Scikit-HEP Developer introduction][skhep-dev-intro] for a
-detailed description of best practices for developing Scikit-HEP packages.
+See the [Scientific Python Developer introduction][scientific-python-dev-intro] for a
+detailed description of best practices for developing Scientific Python packages.
 
-[skhep-dev-intro]: https://scikit-hep.org/developer/intro
+[scientific-python-dev-intro]: https://scientific-python.org/developer/intro
 
 # Setting up a development environment
 

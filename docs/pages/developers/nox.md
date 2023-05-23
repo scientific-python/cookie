@@ -11,9 +11,9 @@ parent: Developer information
 A task runner, like [make][] (fully general), [rake][] (Ruby general),
 [invoke][] (Python general), [tox][] (Python packages), or [nox][] (Python
 simi-general), is a tool that lets you specify a set of tasks via a common
-interface. These have been discouraged in Scikit-HEP in the past, since they
-can be a crutch, allowing poor packaging practices to be employed behind a
-custom script, and they can hide what is actually happening.
+interface. These have been discouraged by some community projects in the past,
+since they can be a crutch, allowing poor packaging practices to be employed
+behind a custom script, and they can hide what is actually happening.
 
 We are carefully allowing an exception: [nox][]. Nox has two strong points that
 help with the above concerns. First, it is very explicit, and even prints what
@@ -160,7 +160,7 @@ will likely look similar across different projects:
 
 #### Lint
 
-All Scikit-HEP developers should be using pre-commit directly, but this helps new users.
+Ideally, all developers should be using pre-commit directly, but this helps new users.
 
 ```python
 @nox.session
@@ -244,7 +244,7 @@ def build(session: nox.Session) -> None:
 ### Examples
 
 A standard [powered by nox](https://github.com/scikit-hep/hist/blob/main/noxfile.py)
-package in Pure Python in Scikit-HEP is Hist.
+package in Pure Python can be found in the Hist project of Scikit-HEP.
 
 A package that happens to use PDM (like Poetry but better) is Scikit-HEP UHI,
 which is [powered by nox](https://github.com/scikit-hep/uhi/blob/main/noxfile.py).
@@ -252,7 +252,7 @@ Nox can setup a conda environment with ROOT (slow, but only nox and conda are
 required). There also is a version bump session, and does some custom logic
 too.
 
-The complex testing procedure powering Scikit-HEP Cookie is [powered by
+The complex testing procedure powering Scientific Python Cookie is [powered by
 nox](https://github.com/scikit-hep/cookie/blob/main/noxfile.py). It allows the
 complex CI jobs that generate projects and lint/test/build them to be run
 locally with no other setup.

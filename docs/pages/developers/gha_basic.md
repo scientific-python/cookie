@@ -9,7 +9,7 @@ custom_title: GitHub Actions introduction
 
 {% include toc.html %}
 
-The recommended CI for Scikit-HEP is GitHub Actions (GHA), although its
+The recommended CI for scientific Python projects is GitHub Actions (GHA), although its
 predecessor Azure is also in heavy usage, and other popular services (Travis,
 Appveyor, and Circle CI) may be found in a few packages. GHA is preferred due
 to the flexible, extensible design and the tight integration with the GitHub

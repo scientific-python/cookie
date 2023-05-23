@@ -26,11 +26,11 @@ Python][gha_pure], and one for [compiled extensions][gha_wheels]. You can read
 about setting up good tests on the [pytest page][pytest].
 
 Once you have completed the guidelines, there is a [cookiecutter][] project,
-[Scikit-HEP/cookie][], that implements these guidelines and lets you setup a
+[scientific-python/cookie][], that implements these guidelines and lets you setup a
 new package from a template in less than 60 seconds!
 
 You can also evaluate your repository against the guidelines by using
-[scikit-hep-repo-review][]!
+[scientific-python-repo-review][]!
 
 [intro]: {{ site.baseurl }}{% link pages/developers/intro.md %}
 [style]: {{ site.baseurl }}{% link pages/developers/style.md %}
@@ -41,7 +41,7 @@ You can also evaluate your repository against the guidelines by using
 [gha_pure]: {{ site.baseurl }}{% link pages/developers/gha_pure.md %}
 [gha_wheels]: {{ site.baseurl }}{% link pages/developers/gha_wheels.md %}
 [pytest]: {{ site.baseurl }}{% link pages/developers/pytest.md %}
-[scikit-hep-repo-review]: {{ site.baseurl }}{% link pages/developers/repo_review.md %}
+[scientific-python-repo-review]: {{ site.baseurl }}{% link pages/developers/repo_review.md %}
 
 [cookiecutter]: https://cookiecutter.readthedocs.io
-[scikit-hep/cookie]: https://github.com/scikit-hep/cookie
+[scientific-python/cookie]: https://github.com/scientific-python/cookie
