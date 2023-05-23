@@ -17,5 +17,5 @@ build:
   jobs:
    pre_install:
       - GEM_HOME="$HOME/gems" PATH="$HOME/gems/bin:$PATH" gem install jekyll bundler
-      - cd docs && $HOME/gems/bin/bundle install
+      - GEM_HOME="$HOME/gems" PATH="$HOME/gems/bin:$PATH" cd docs && $HOME/gems/bin/bundle install
       - cd docs && $HOME/gems/bin/bundle exec jekyll build --destination ../_readthedocs/html
