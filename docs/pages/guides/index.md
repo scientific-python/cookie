@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Developer information
-permalink: /developer
-nav_order: 30
+title: Topical Guides
+permalink: /guides
+nav_order: 3
 has_children: true
 ---
 
