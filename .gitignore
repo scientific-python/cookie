@@ -142,6 +142,7 @@ src/*/version.py
 
 # Jeykll stuff
 .jekyll-cache/
+.jekyll-metadata
 _site/
 
 # NodeJS stuff, just in case (developer tooling)
