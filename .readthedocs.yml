@@ -14,6 +14,8 @@ build:
     - zlib1g-dev
   commands:
     - cd docs
-    - sudo gem install jekyll bundler
-    - sudo bundle install
+    - export GEM_HOME="$HOME/gems"
+    - export PATH="$HOME/gems/bin:$PATH"
+    - gem install jekyll bundler
+    - bundle install
     - bundle exec jekyll build --destination ../_readthedocs/html
