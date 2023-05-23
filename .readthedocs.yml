@@ -7,14 +7,9 @@ version: 2
 
 # Set the version of Python and other tools you might need
 build:
-  os: ubuntu-20.04
-  tools:
-    python: "3.9"
-  apt_packages:
-    - ruby-full
-    - build-essential
-    - zlib1g-dev
+  os: ubuntu-22.04
   commands:
+    - apt-get update  --assume-yes --quiet && apt-get install --assume-yes --quiet ruby-full build-essential zlib1g-dev
     - GEM_HOME="$HOME/gems" PATH="$HOME/gems/bin:$PATH" gem install jekyll bundler
     - cd docs && $HOME/gems/bin/bundle install
     - cd docs && $HOME/gems/bin/bundle exec jekyll build --destination ../_readthedocs/html
