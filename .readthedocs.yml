@@ -5,17 +5,15 @@
 # Required
 version: 2
 
-# Build documentation in the docs/ directory with Sphinx
-sphinx:
-  configuration: docs/conf.py
-
-# Include PDF and ePub
-formats: all
-
-python:
-  version: "3.8"
-  install:
-  - method: pip
-    path: .
-    extra_requirements:
-    - docs
+# Set the version of Python and other tools you might need
+build:
+  os: ubuntu-22.04
+  apt_packages:
+    - ruby-full
+    - build-essential
+    - zlib1g-dev
+  commands:
+    - cd docs
+    - gem install jekyll bundler
+    - bundle install
+    - bundle exec jekyll build --destination ../_readthedocs/html

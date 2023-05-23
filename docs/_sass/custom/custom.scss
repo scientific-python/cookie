@@ -1,0 +1,133 @@
+@media (min-width: 50rem) {
+  div.site-header {
+    height: 264px;
+    max-height: 264px;
+  }
+}
+
+details > summary {
+  font-weight: bold;
+}
+
+div.site-logo {
+  background-position: center center;
+}
+
+a.site-title {
+  padding: 0px 6px 0px 6px;
+}
+
+div.noted {
+  color: #ff6347;
+  font-weight: bold;
+  float: right;
+}
+
+a.package {
+  font-size: larger;
+  font-weight: bold;
+}
+
+div.project {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-shadow: 0px 5px 5px #88888840;
+  margin: 10px 0px;
+  padding: 2px;
+  border-radius: 5px;
+  background-color: #f5f6fa;
+  @media (prefers-color-scheme: dark) {
+    background-color: #000000;
+    box-shadow: 0px 0px 5px rgb(106, 143, 188);
+  }
+}
+
+div.project.affiliated {
+}
+
+div.project.deprecated {
+  background-color: #ffdad9;
+  @media (prefers-color-scheme: dark) {
+    background-color: #501109;
+  }
+}
+
+div.project .nameorlogo {
+  flex-basis: 200px;
+  flex-shrink: 0;
+  padding: 2px;
+  text-align: center;
+}
+
+div.project .nameorlogo a img {
+  vertical-align: middle;
+}
+
+div.project .description {
+  flex-basis: 150px;
+  flex-shrink: 0;
+  flex-grow: 1;
+  padding: 2px;
+}
+
+div.description .inner p {
+  display: inline;
+}
+
+pre.highlight {
+  line-height: 1.2;
+}
+
+details {
+  padding: 4px;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+    background-color: black;
+  }
+}
+
+details:not([open]) > summary::after {
+  content: "(expand)";
+  float: right;
+}
+details[open] > summary::after {
+  content: "(close)";
+  float: right;
+}
+
+details[open] {
+  summary {
+    margin-bottom: 1em;
+  }
+  padding-bottom: 0.5em;
+}
+
+blockquote {
+  display: block;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+
+  padding: 4px 1em;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+    background-color: black;
+  }
+}
+
+blockquote > h2 {
+  font-size: 16px !important;
+  text-transform: uppercase;
+  line-height: 1.25;
+  font-weight: 300;
+  letter-spacing: 2px;
+}

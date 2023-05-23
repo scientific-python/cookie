@@ -1,0 +1,20 @@
+<div id="interactive-repo-review-root">
+  Loading (requires javascript and WebAssembly)...
+</div>
+<style>
+  .main-content ul > li::before {
+    position: inherit;
+    margin-left: none;
+    color: none;
+    content: none;
+  }
+  .main-content ul {
+    padding-left: none;
+  }
+</style>
+<script type="text/babel">
+  const root = ReactDOM.createRoot(
+    document.getElementById("interactive-repo-review-root"),
+  );
+  root.render(<App header={false} />);
+</script>
