@@ -8,6 +8,8 @@ version: 2
 # Set the version of Python and other tools you might need
 build:
   os: ubuntu-22.04
+  tools:
+    node: "18"
   apt_packages:
     - ruby-full
     - build-essential
