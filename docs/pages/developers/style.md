@@ -11,13 +11,15 @@ custom_title: Style guide
 
 ## Pre-commit
 
-Scikit-HEP uses [pre-commit][] to check code style. It can be installed through
-`brew` (macOS) or `pip` (anywhere). There are two modes to use it locally; you
-can check manually with `pre-commit run` (changes only) or `pre-commit run --all-files` (all). You can also run `pre-commit install` to add checks as a
-git pre-commit hook (which is where it gets its name). It's worth trying, even
-if you've tried and failed to set up a custom pre-commit hook before; it's quite
-elegant and does not add or commit the changes, it just makes the changes and
-allows you to check and add them. You can always override the hook with `-n`.
+Scientific Python projects often use [pre-commit][] to check code style. It
+can be installed through `brew` (macOS) or `pip` (anywhere). There are two
+modes to use it locally; you can check manually with `pre-commit run` (changes
+only) or `pre-commit run --all-files` (all). You can also run `pre-commit
+install` to add checks as a git pre-commit hook (which is where it gets its
+name). It's worth trying, even if you've tried and failed to set up a custom
+pre-commit hook before; it's quite elegant and does not add or commit the
+changes, it just makes the changes and allows you to check and add them. You
+can always override the hook with `-n`.
 
 [pre-commit]: https://pre-commit.com
 
@@ -56,8 +58,8 @@ update your `rev:` versions every week or so if your checks update!
 
 To use, just go to [pre-commit.ci](https://pre-commit.ci), click
 "Log in with GitHub", click "Add an Installation" if adding for the first time
-for an org or user, or "Manage repos on GitHub" for an existing installation
-(like Scikit-HEP), then add your repository from the list in GitHub's interface.
+for an org or user, or "Manage repos on GitHub" for an existing installation,
+then add your repository from the list in GitHub's interface.
 
 Now there will be a new check, and pre-commit.ci will commit changes if the
 pre-commit check made any changes. Note that there are a couple of missing features:
@@ -77,7 +79,7 @@ nested lists, matching brackets, etc. There also is a faction of developers
 that dislikes all auto-formatting tools, but inside a system like pre-commit,
 auto-formatters are ideal. They also speed up the writing of code because you
 can ignore formatting your code when you write it. By imposing a standard,
-all Scikit-HEP developers can quickly read any package's code.
+all scientific Python developers can quickly read any package's code.
 
 Also, properly formatted code has other benefits, such as if two developers
 make the same change, they get the same formatting, and merge requests are
@@ -415,14 +417,14 @@ when clearly better (please always use them, they are faster) if you set
 ## Type checking
 
 One of the most exciting advancements in Python in the last 10 years has been
-static type hints. Scikit-HEP is just beginning to make sure packages are
-type-hint ready. One of the challenges for providing static type hints is that
-it was developed in the Python 3 era and it really shines in a Python 3.7+
-codebase (due to `from __future__ import annotations`, which turns annotations
-into strings and allows you to use future Python features in Python 3.7+
-annotations as long as your type checker supports them). For now, it is
-recommended that you make an attempt to support type checking through your
-public API in the best way that you can (based on your supported Python
+static type hints. Scientific Python projects vary in the degree to which they
+are type-hint ready. One of the challenges for providing static type hints is
+that it was developed in the Python 3 era and it really shines in a
+Python 3.7+ codebase (due to `from __future__ import annotations`, which turns
+annotations into strings and allows you to use future Python features in
+Python 3.7+ annotations as long as your type checker supports them). For now,
+it is recommended that you make an attempt to support type checking through
+your public API in the best way that you can (based on your supported Python
 versions). Stub files can be used instead for out-of-line typing.
 [MyPy](https://mypy.readthedocs.io/en/stable/) is suggested for type checking,
 though there are several other good options to try, as well. If you have

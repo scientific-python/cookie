@@ -11,10 +11,9 @@ custom_title: GitHub Actions for Binary Wheels
 
 Building binary wheels is a bit more involved, but can still be done
 effectively with GHA. This document will introduce [cibuildwheel][] for use in
-Scikit-HEP, replacing our in-house [azure-wheel-helpers][]. The benefits of
-cibuildwheel are a larger user base, fast fixes from CI and pip, works on all
-major CI vendors (no lock-in), and covers cases we were not able to cover (like
-ARM). We will focus on GHA below.
+your project. The benefits of cibuildwheel are a larger user base, fast fixes
+from CI and pip, works on all major CI vendors (no lock-in), and covers cases
+we were not able to cover (like ARM). We will focus on GHA below.
 
 ## Header
 
@@ -154,8 +153,7 @@ env:
   CIBW_MANYLINUX_I686_IMAGE: manylinux1
 ```
 
-You can even put any docker image here, including [Scikit-HEP's
-`skhep/manylinuxgcc-*`][manylinuxgcc] images with GCC 9. Note that
+You can even put any docker image here, as needed by the project. Note that
 manylinux1 was discontinued on Jan 1, 2022, and updates will cease whenever they
 break. If you always need a specific image, you can set that in the
 `pyproject.toml` file instead.
@@ -238,10 +236,8 @@ avoiding the sdist, for example).
 > to Travis CI's recent dramatic reduction on open source support, emulating
 > these architectures on GHA or Azure is probably better.
 
-[azure-wheel-helpers]: https://github.com/scikit-hep/azure-wheel-helpers
 [`cibw_before_build`]: https://cibuildwheel.readthedocs.io/en/stable/options/#before-build
 [`cibw_environment`]: https://cibuildwheel.readthedocs.io/en/stable/options/#environment
-[manylinuxgcc]: https://github.com/scikit-hep/manylinuxgcc
 [cibw custom]: https://cibuildwheel.readthedocs.io/en/stable/options/#build-skip
 [cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
 [PyPI trusted publisher docs]: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/

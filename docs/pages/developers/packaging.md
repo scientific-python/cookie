@@ -8,10 +8,10 @@ parent: Developer information
 
 {% include toc.html %}
 
-The libraries in Scikit-HEP have a variety of different packaging styles, but
-this document is intended to outline a recommended style that new packages
-should follow, and existing packages should slowly adopt. The reasoning for
-each decision is outlined as well.
+The libraries in the scientific Python ecosytem have a variety of different
+packaging styles, but this document is intended to outline a recommended style
+that new packages should follow, and existing packages should slowly adopt.
+The reasoning for each decision is outlined as well.
 
 There are currently several popular packaging systems. This guide covers
 [Setuptools][], which is currently the only system that supports compiled
@@ -78,27 +78,28 @@ you should have dev instructions on how to install requirements needed to run
 
 You can also use this to select your entire build system; we use setuptools
 above but you can also use others, such as [Flit][] or [Poetry][]. This is
-possible due to the `build-backend` selection, as described in PEP 517. No
-Scikit-HEP packages currently use these since they usually do not allow binary
-packages to be created and a few common developer needs, like editable
-installs, look slightly different (a way to include editable installs in PEP
-517 is being worked on). Usage of these "[hypermodern][]" packaging tools are
-generally not found in Scikit-HEP, but not discouraged; all tools build the
-same wheels (and they often build setuptools compliant SDists, as well).
+possible due to the `build-backend` selection, as described in PEP 517.
+Scientific Python packages don't often use these since they usually do not
+allow binary packages to be created and a few common developer needs, like
+editable installs, look slightly different (a way to include editable installs
+in PEP 517 is being worked on). Usage of these "[hypermodern][]" packaging
+tools are generally not found in scientific Python packages, but not
+discouraged; all tools build the same wheels (and they often build setuptools
+compliant SDists, as well).
 
 ### Special additions: NumPy
 
 You may want to build against NumPy (mostly for Cython packages, pybind11 does
 not need to access the NumPy headers). This is the recommendation for
-Scikit-HEP:
+scientific Python packages:
 
 ```toml
 requires = [
     "oldest-supported-numpy",
 ```
 
-This ensures the wheels built work with all versions of NumPy supported by
-Scikit-HEP. Whether you build the wheel locally or on CI, you can transfer it to
+This ensures the wheels built work with all versions of NumPy supported by your
+package. Whether you build the wheel locally or on CI, you can transfer it to
 someone else and it will work on any supported NumPy. The
 `oldest-supported-numpy` package is a SciPy metapackage from the NumPy
 developers that tracks the [correct version of NumPy to build wheels against for
@@ -109,7 +110,7 @@ for each Python version here.
 
 ## Versioning (medium/high priority)
 
-Packages in Scikit-HEP should use one of the following systems:
+Scientific Python packages should use one of the following systems:
 
 ### Git tags: official PyPA method
 
@@ -238,13 +239,6 @@ requirements only, this will fail.
 Flit will always look for `package.__version__`, and so will always import your
 package; you just have to deal with that if you use Flit.
 
-### pyhf Versioning system
-
-pyhf has a [custom version
-system](https://scikit-hep.org/pyhf/development.html#publishing) based on
-GitHub actions and bumpversion. At least one other package in Scikit-HEP is
-using this, as well.
-
 ## Setup configuration (medium priority)
 
 You should put as much as possible in your `setup.cfg`, and leave `setup.py`
@@ -259,11 +253,11 @@ name = package
 description = A great package.
 long_description = file: README.md
 long_description_content_type = text/markdown
-url = https://github.com/scikit-hep/package
+url = https://github.com/organization/package
 author = My Name
 author_email = me@email.com
-maintainer = Scikit-HEP
-maintainer_email = scikit-hep-admins@googlegroups.com
+maintainer = My Organization
+maintainer_email = organization@email.com
 license = BSD-3-Clause
 license_file = LICENSE
 classifiers =
@@ -292,8 +286,8 @@ classifiers =
     Topic :: Utilities
 project_urls =
     Documentation = https://package.readthedocs.io/
-    Bug Tracker = https://github.com/scikit-hep/package/issues
-    Discussions = https://github.com/scikit-hep/package/discussions
+    Bug Tracker = https://github.com/organization/package/issues
+    Discussions = https://github.com/organization/package/discussions
     Changelog = https://package.readthedocs.io/en/latest/changelog.html
 
 
@@ -324,7 +318,7 @@ unless you are building extensions.
 # Copyright (c) 2020, My Name
 #
 # Distributed under the 3-clause BSD license, see accompanying file LICENSE
-# or https://github.com/scikit-hep/package for details.
+# or https://github.com/organization/package for details.
 
 from setuptools import setup
 
