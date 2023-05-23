@@ -17,5 +17,5 @@ build:
   jobs:
    pre_install:
       - gem install jekyll bundler --user-install
-      - cd docs && "$(ruby -r rubygems -e 'puts Gem.user_dir')/bin/bundle" install
-      - cd docs && "$(ruby -r rubygems -e 'puts Gem.user_dir')/bin/bundle" exec jekyll build --destination ../_readthedocs/html
+      - cd docs && $(ruby -r rubygems -e 'puts Gem.user_dir')/bin/bundle install
+      - cd docs && $(ruby -r rubygems -e 'puts Gem.user_dir')/bin/bundle exec jekyll build --destination ../_readthedocs/html
