@@ -17,5 +17,5 @@ build:
   jobs:
    pre_install:
       - gem install jekyll bundler --user-install
-      - cd docs && /home/docs/.local/share/gem/ruby/3.0.0/bin/bundle install
+      - cd docs && /home/docs/.local/share/gem/ruby/3.0.0/bin/bundle install --path ~/.gem
       - cd docs && /home/docs/.local/share/gem/ruby/3.0.0/bin/bundle exec jekyll build --destination ../_readthedocs/html
