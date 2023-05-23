@@ -9,7 +9,7 @@ version: 2
 build:
   os: ubuntu-22.04
   tools:
-    node: "18"
+    nodejs: "18"
   apt_packages:
     - ruby-full
     - build-essential
