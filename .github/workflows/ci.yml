@@ -3,6 +3,9 @@ name: CI
 on:
   workflow_dispatch:
   pull_request:
+    paths-ignore:
+      # Skip testing builds if changes are only in documentation directories
+      - 'docs/**'
   push:
     branches:
       - main
