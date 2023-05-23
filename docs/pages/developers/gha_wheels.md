@@ -238,7 +238,6 @@ avoiding the sdist, for example).
 
 [`cibw_before_build`]: https://cibuildwheel.readthedocs.io/en/stable/options/#before-build
 [`cibw_environment`]: https://cibuildwheel.readthedocs.io/en/stable/options/#environment
-[manylinuxgcc]: https://github.com/scikit-hep/manylinuxgcc
 [cibw custom]: https://cibuildwheel.readthedocs.io/en/stable/options/#build-skip
 [cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
 [PyPI trusted publisher docs]: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
