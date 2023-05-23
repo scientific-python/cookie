@@ -16,6 +16,6 @@ build:
     - zlib1g-dev
   jobs:
    pre_install:
-      - GEM_HOME="$HOME/gems" PATH="$HOME/gems/bin:$PATH" gem install jekyll bundler
-      - GEM_HOME="$HOME/gems" PATH="$HOME/gems/bin:$PATH" BUNDLE_PATH="$HOME/bundle_path" cd docs && $HOME/gems/bin/bundle install --no-cache
-      - cd docs && $HOME/gems/bin/bundle exec jekyll build --destination ../_readthedocs/html
+      - gem install jekyll bundler --user-install
+      - cd docs && $HOME/.gem/ruby/3.0/bin/bundle install
+      - cd docs && $HOME/.gem/ruby/3.0/bin/bundle exec jekyll build --destination ../_readthedocs/html
