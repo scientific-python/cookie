@@ -72,7 +72,7 @@ to leave the environment (or just close your shell).
 > If you like a different shell, like fish, there are several `activate`
 > scripts; the default one expects a bash-like shell.
 
-## Option 2: Conda
+## Option 2: Using conda
 
 You can also develop in conda. This is an especially  strong option if:
 
