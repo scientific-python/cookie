@@ -12,8 +12,8 @@ pip install -v -e .[dev]
 
 # Post setup
 
-You should prepare pre-commit, which will help you by checking that commits
-pass required checks:
+You should prepare pre-commit, which will help you by checking that commits pass
+required checks:
 
 ```bash
 pip install pre-commit # or brew install pre-commit on macOS
