@@ -8,28 +8,9 @@ version: 2
 # Set the version of Python and other tools you might need
 build:
   os: ubuntu-22.04
-  tools:
-    python: "3.11"
-  apt_packages:
-    - ruby-full
-    - build-essential
-    - zlib1g-dev
-    - rbenv
-    - libssl-dev
-    - libreadline-dev
-    - zlib1g-dev
-    - autoconf
-    - bison
-    - build-essential
-    - libyaml-dev
-    - libreadline-dev
-    - libncurses5-dev
-    - libffi-dev
-    - libgdbm-dev
-  jobs:
-   pre_install:
-      - cd docs && rbenv install 2.7.1
-      - cd docs && rbenv local 2.7.1
-      - cd docs && rbenv exec gem install bundler
-      - cd docs && rbenv exec bundle install
-      - cd docs && rbenv exec bundle exec jekyll build --destination ../_readthedocs/html
+  commands:
+    - curl -sSL https://get.rvm.io | bash -s stable
+    - source ~/.rvm/scripts/rvm && rvm install ruby 3.1.2
+    - source ~/.rvm/scripts/rvm && cd docs && gem install bundler
+    - source ~/.rvm/scripts/rvm && cd docs && bundle install
+    - source ~/.rvm/scripts/rvm && cd docs && bundle exec jekyll build --destination ../_readthedocs/html
