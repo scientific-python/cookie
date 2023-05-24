@@ -13,5 +13,4 @@ build:
     - ~/.rvm/bin/rvm autolibs disable && ~/.rvm/bin/rvm install ruby 3.1.2
     - cd docs && PATH="$HOME/.rvm/rubies/ruby-3.1.2/bin:$PATH" gem install bundler
     - cd docs && PATH="$HOME/.rvm/rubies/ruby-3.1.2/bin:$PATH" bundle install
-    - cd docs && PATH="$HOME/.rvm/rubies/ruby-3.1.2/bin:$PATH" bundle exec jekyll build --destination ../_readthedocs/html
-    - env
+    - cd docs && PATH="$HOME/.rvm/rubies/ruby-3.1.2/bin:$PATH" bundle exec jekyll build --destination ../_readthedocs/html --baseurl $READTHEDOCS_CANONICAL_URL
