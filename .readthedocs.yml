@@ -20,7 +20,7 @@ build:
     - zlib1g-dev
     - autoconf
     - bison
-    - build
+    - build-essential
     - libyaml-dev
     - libreadline-dev
     - libncurses5-dev
