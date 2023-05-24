@@ -17,7 +17,8 @@ build:
     - rbenv
   jobs:
    pre_install:
-      - cd docs && rbenv install
+      - cd docs && rbenv install 2.7.1
+      - cd docs && rbenv local 2.7.1
       - cd docs && rbenv exec gem install bundler
       - cd docs && rbenv exec bundle install
       - cd docs && rbenv exec bundle exec jekyll build --destination ../_readthedocs/html
