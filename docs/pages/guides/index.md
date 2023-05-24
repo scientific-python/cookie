@@ -10,7 +10,7 @@ The pages here are intended for developers who are making or maintaining a
 package and want to follow modern best practices in Python.
 
 New developers are encouraged to read the following pages. Veteran developers
-should still check out [introduction][intro], as it has a guide on
+should still check out the [tutorials][], as it has a guide on
 recommendations for your `CONTRIBUTING.md`, and at least glance through other
 sections.
 
@@ -32,7 +32,7 @@ new package from a template in less than 60 seconds!
 You can also evaluate your repository against the guidelines by using
 [scientific-python-repo-review][]!
 
-[intro]: {{ site.baseurl }}{% link pages/guides/intro.md %}
+[tutorials]: {{ site.baseurl }}{% link pages/tutorials/index.md %}
 [style]: {{ site.baseurl }}{% link pages/guides/style.md %}
 [mypy]: {{ site.baseurl }}{% link pages/guides/mypy.md %}
 [simple packaging]: {{ site.baseurl }}{% link pages/guides/pep621.md %}
