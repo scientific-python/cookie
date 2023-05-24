@@ -1,3 +1,10 @@
+---
+layout: page
+title: Basic packaging
+permalink: /tutorials/packaging
+nav_order: 3
+parent: Tutorials
+---
 In the section you will:
 
 - Place your module in an installable package.
@@ -43,7 +50,7 @@ touch src/__init__.py
 
 Place `refraction.py`, our code from the previous section, next to it, at `src/refraction.py`.
 
-The last element your package needs is a `pyproject.toml` file, placed in the root directory:
+The last element your package needs is a `pyproject.toml` file, placed in the root directory.
 
 ```bash
 touch pyproject.yaml
@@ -68,9 +75,9 @@ contains our project's code. We have chosen `0.1.0` as the starting version for
 this package; you’ll see more in a later section about versioning, and how to
 specify this without manually writing it here.
 
-At this point, your package's file structure will look like:
+At this point, your package's file structure will look like
 
-```none
+```bash
 .
 ├── pyproject.toml
 ├── src
@@ -79,9 +86,11 @@ At this point, your package's file structure will look like:
 │       └── refraction.py
 ```
 
-## Install and use your package.
+## Install and use your package
 
-Now that your package has the necessary elements, you can install it into your virtual environment (which should already be active). From the top level of your project’s directory, enter
+Now that your package has the necessary elements, you can install it into your
+virtual environment (which should already be active). From the top level of
+your project’s directory, enter
 
 ```
 pip install -e .
@@ -91,25 +100,25 @@ The `-e` flag tells pip to install in _editable_ mode, meaning that you can
 continue developing your package on your computer as you test it without
 re-installing it each time.
 
-Then, in a Python shell or Jupyter Notebook, import your package and call the function:
+Then, in a Python shell or Jupyter Notebook, import your package and call the function.
 
 ```py
-from example.refraction import snell
-import numpy as np
-snell(np.pi/4, 1.00, 1.33)
+>>> from example.refraction import snell
+>>> import numpy as np
+>>> snell(np.pi/4, 1.00, 1.33)
 1.2239576240104186
 ```
 
 The docstring can be viewed with `help()`.
 
 ```py
-help(snell)
+>>> help(snell)
 ```
 
 Or, in Jupyter or Python, use `?` as a shortcut.
 
 ```py
-snell?
+In [1]: snell?
 ```
 
 [Version Control with Git]: https://swcarpentry.github.io/git-novice/

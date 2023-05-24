@@ -1,3 +1,13 @@
+---
+layout: page
+title: First module
+permalink: /tutorials/module
+nav_order: 2
+parent: Tutorials
+---
+
+{% include toc.html %}
+
 In this section you will:
 
 - Place some code in a module.
@@ -13,6 +23,8 @@ reusable, and/or shareable form.
 Here is the code:
 
 ```py
+# contents of refraction.py
+
 import numpy as np
 
 
