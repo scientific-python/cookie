@@ -10,7 +10,7 @@ build:
   os: ubuntu-22.04
   commands:
     - gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB && curl -sSL https://get.rvm.io | bash -s stable
-    - source ~/.rvm/scripts/rvm && rvm install ruby 3.1.2
-    - source ~/.rvm/scripts/rvm && cd docs && gem install bundler
-    - source ~/.rvm/scripts/rvm && cd docs && bundle install
-    - source ~/.rvm/scripts/rvm && cd docs && bundle exec jekyll build --destination ../_readthedocs/html
+    - . ~/.rvm/scripts/rvm && rvm install ruby 3.1.2
+    - . ~/.rvm/scripts/rvm && cd docs && gem install bundler
+    - . ~/.rvm/scripts/rvm && cd docs && bundle install
+    - . ~/.rvm/scripts/rvm && cd docs && bundle exec jekyll build --destination ../_readthedocs/html
