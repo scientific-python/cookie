@@ -1,9 +1,9 @@
 ---
 layout: page
 title: Repo Review
-permalink: /developer/reporeview
+permalink: /guides/reporeview
 nav_order: 110
-parent: Developer information
+parent: Topical Guides
 interactive_repo_review: true
 custom_title: Scikit-HEP Repo Review (beta)
 ---

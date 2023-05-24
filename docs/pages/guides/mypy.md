@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "Static type checking"
-permalink: /developer/mypy
+permalink: /guides/mypy
 nav_order: 7
-parent: Developer information
+parent: Topical Guides
 ---
 
 {% include toc.html %}
@@ -78,7 +78,7 @@ everything. Try to turn on as much as possible, and increase it until you can
 run with full `strict` checking. See the [style page][] for configuration
 suggestions.
 
-[style page]: {{ site.baseurl }}{% link pages/developers/style.md %}
+[style page]: {{ site.baseurl }}{% link pages/guides/style.md %}
 
 For a library to support typing, it has to a) add types using any of the three
 methods, and b) add a `py.typed` empty file to indicate that it's okay to look

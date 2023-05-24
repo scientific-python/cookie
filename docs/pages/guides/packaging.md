@@ -1,9 +1,9 @@
 ---
 layout: page
 title: Packaging
-permalink: /developer/packaging
+permalink: /guides/packaging
 nav_order: 5
-parent: Developer information
+parent: Topical Guides
 ---
 
 {% include toc.html %}

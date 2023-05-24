@@ -1,9 +1,9 @@
 ---
 layout: page
 title: Intro to development
-permalink: /developer/intro
+permalink: /tutorials/dev-environment
 nav_order: 1
-parent: Developer information
+parent: Tutorials
 ---
 
 {% include toc.html %}

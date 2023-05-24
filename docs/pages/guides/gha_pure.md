@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "GHA: Pure Python wheels"
-permalink: /developer/gha_pure
+permalink: /guides/gha_pure
 nav_order: 11
-parent: Developer information
+parent: Topical Guides
 custom_title: GitHub Actions for pure Python wheels
 ---
 
@@ -28,7 +28,7 @@ recommendations were followed).
 >   - Less chance of a permission issue
 > - You can look in the `.whl` (it's a `.zip`, really) and see where everything is going to go
 
-[on the next page]: {{ site.baseurl }}{% link pages/developers/gha_wheels.md %}
+[on the next page]: {{ site.baseurl }}{% link pages/guides/gha_wheels.md %}
 
 ## Job setup
 

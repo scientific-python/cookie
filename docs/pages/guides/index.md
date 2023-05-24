@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Developer information
-permalink: /developer
-nav_order: 30
+title: Topical Guides
+permalink: /guides
+nav_order: 3
 has_children: true
 ---
 
@@ -10,7 +10,7 @@ The pages here are intended for developers who are making or maintaining a
 package and want to follow modern best practices in Python.
 
 New developers are encouraged to read the following pages. Veteran developers
-should still check out [introduction][intro], as it has a guide on
+should still check out the [tutorials][], as it has a guide on
 recommendations for your `CONTRIBUTING.md`, and at least glance through other
 sections.
 
@@ -32,16 +32,16 @@ new package from a template in less than 60 seconds!
 You can also evaluate your repository against the guidelines by using
 [scientific-python-repo-review][]!
 
-[intro]: {{ site.baseurl }}{% link pages/developers/intro.md %}
-[style]: {{ site.baseurl }}{% link pages/developers/style.md %}
-[mypy]: {{ site.baseurl }}{% link pages/developers/mypy.md %}
-[simple packaging]: {{ site.baseurl }}{% link pages/developers/pep621.md %}
-[packaging]: {{ site.baseurl }}{% link pages/developers/packaging.md %}
-[gha_basic]: {{ site.baseurl }}{% link pages/developers/gha_basic.md %}
-[gha_pure]: {{ site.baseurl }}{% link pages/developers/gha_pure.md %}
-[gha_wheels]: {{ site.baseurl }}{% link pages/developers/gha_wheels.md %}
-[pytest]: {{ site.baseurl }}{% link pages/developers/pytest.md %}
-[scientific-python-repo-review]: {{ site.baseurl }}{% link pages/developers/repo_review.md %}
+[tutorials]: {{ site.baseurl }}{% link pages/tutorials/index.md %}
+[style]: {{ site.baseurl }}{% link pages/guides/style.md %}
+[mypy]: {{ site.baseurl }}{% link pages/guides/mypy.md %}
+[simple packaging]: {{ site.baseurl }}{% link pages/guides/pep621.md %}
+[packaging]: {{ site.baseurl }}{% link pages/guides/packaging.md %}
+[gha_basic]: {{ site.baseurl }}{% link pages/guides/gha_basic.md %}
+[gha_pure]: {{ site.baseurl }}{% link pages/guides/gha_pure.md %}
+[gha_wheels]: {{ site.baseurl }}{% link pages/guides/gha_wheels.md %}
+[pytest]: {{ site.baseurl }}{% link pages/guides/pytest.md %}
+[scientific-python-repo-review]: {{ site.baseurl }}{% link pages/guides/repo_review.md %}
 
 [cookiecutter]: https://cookiecutter.readthedocs.io
 [scientific-python/cookie]: https://github.com/scientific-python/cookie

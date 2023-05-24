@@ -1,9 +1,9 @@
 ---
 layout: page
 title: Task runners
-permalink: /developer/tasks
+permalink: /guides/tasks
 nav_order: 30
-parent: Developer information
+parent: Topical Guides
 ---
 
 {% include toc.html %}

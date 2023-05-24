@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "Code coverage"
-permalink: /developer/coverage
+permalink: /guides/coverage
 nav_order: 3
-parent: Developer information
+parent: Topical Guides
 ---
 
 {% include toc.html %}
