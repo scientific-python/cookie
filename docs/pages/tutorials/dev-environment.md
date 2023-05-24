@@ -8,52 +8,6 @@ parent: Tutorials
 
 {% include toc.html %}
 
-It is generally advisable for packages in the scientific Python ecosystem to try to
-follow best practices in the community for development and deployment. The following
-outlines the basics for setting up a development environment. It is recommended as a
-basis for `CONTRIBUTING.md` or `.github/CONTRIBUTING.md` in the packages.
-
-<details><summary>CONTRIBUTING.md template (click to expand)</summary>
-<pre>
-See the [Scientific Python Developer introduction][scientific-python-dev-intro] for a
-detailed description of best practices for developing Scientific Python packages.
-
-[scientific-python-dev-intro]: https://scientific-python.org/developer/intro
-
-# Setting up a development environment
-
-You can set up a development environment by running:
-
-```bash
-python3 -m venv .env
-source ./.env/bin/activate
-pip install -v -e .[dev]
-```
-
-# Post setup
-
-You should prepare pre-commit, which will help you by checking that commits
-pass required checks:
-
-```bash
-pip install pre-commit # or brew install pre-commit on macOS
-pre-commit install # Will install a pre-commit hook into the git repo
-```
-
-You can also/alternatively run `pre-commit run` (changes only) or
-`pre-commit run --all-files` to check even without installing the hook.
-
-# Testing
-
-Use pytest to run the unit checks:
-
-```bash
-pytest
-```
-
-</pre>
-</details>
-
 ## Development environment: Pip
 
 If you want to work on Python software, you should _always_ have a virtual
