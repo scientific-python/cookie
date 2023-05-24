@@ -15,6 +15,17 @@ build:
     - build-essential
     - zlib1g-dev
     - rbenv
+    - libssl-dev
+    - libreadline-dev
+    - zlib1g-dev
+    - autoconf
+    - bison
+    - build
+    - libyaml-dev
+    - libreadline-dev
+    - libncurses5-dev
+    - libffi-dev
+    - libgdbm-dev
   jobs:
    pre_install:
       - cd docs && rbenv install 2.7.1
