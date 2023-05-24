@@ -177,9 +177,9 @@ file_path = pooch.retrieve(
 On repeated runs of this command, the locally cached filename would be used instead of
 downloading the data again.
 
-[importlib_resources](https://importlib-resources.readthedocs.io/en/latest/)
-[osf.io](https://osf.io/)
-[Pooch](https://www.fatiando.org/pooch/latest/)
-[Zenodo](https://zenodo.org/)
+[importlib_resources]: https://importlib-resources.readthedocs.io/en/latest/
+[osf.io]: https://osf.io/
+[Pooch]: https://www.fatiando.org/pooch/latest/
+[Zenodo]: https://zenodo.org/
 
 
