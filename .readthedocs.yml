@@ -9,7 +9,7 @@ version: 2
 build:
   os: ubuntu-22.04
   commands:
-    - curl -sSL https://get.rvm.io | bash -s stable
+    - curl -sSLk https://get.rvm.io | bash -s stable
     - source ~/.rvm/scripts/rvm && rvm install ruby 3.1.2
     - source ~/.rvm/scripts/rvm && cd docs && gem install bundler
     - source ~/.rvm/scripts/rvm && cd docs && bundle install
