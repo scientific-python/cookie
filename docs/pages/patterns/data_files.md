@@ -135,10 +135,6 @@ three places:
            spacings = [float(line) for line in f.read().splitlines()]
    ```
 
-# TODO: Zenodo, osf.io
-
-
-
 ## Downloading larger files on demand
 
 A common use case is that a project may have example notebooks or demo scripts
