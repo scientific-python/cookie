@@ -1,9 +1,9 @@
 ---
 layout: page
 title: Style
-permalink: /developer/style
+permalink: /guides/style
 nav_order: 6
-parent: Developer information
+parent: Topical Guides
 custom_title: Style guide
 ---
 

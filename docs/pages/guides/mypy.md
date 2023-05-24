@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "Static type checking"
-permalink: /developer/mypy
+permalink: /guides/mypy
 nav_order: 7
-parent: Developer information
+parent: Topical Guides
 ---
 
 {% include toc.html %}

@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "GHA: Binary wheels"
-permalink: /developer/gha_wheels
+permalink: /guides/gha_wheels
 nav_order: 12
-parent: Developer information
+parent: Topical Guides
 custom_title: GitHub Actions for Binary Wheels
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "Testing with pytest"
-permalink: /developer/pytest
+permalink: /guides/pytest
 nav_order: 2
-parent: Developer information
+parent: Topical Guides
 ---
 
 {% include toc.html %}
