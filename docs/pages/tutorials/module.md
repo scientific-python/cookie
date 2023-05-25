@@ -124,3 +124,6 @@ second module.
 
 - Take care to avoid circular imports, wherein two modules each import the
   other.
+
+  [Snell's law]: https://en.wikipedia.org/wiki/Snell%27s_law
+  [numpydoc standard]: https://numpydoc.readthedocs.io/en/latest/format.html
