@@ -1,6 +1,6 @@
 ---
 layout: page
-title: First module
+title: Module
 permalink: /tutorials/module
 nav_order: 2
 parent: Tutorials
@@ -13,7 +13,7 @@ In this section you will:
 - Place some code in a module.
 - Provide inline documentation (a "doc-string").
 
-# First module
+# Module
 
 As a concrete example, let's suppose we have a simple function that encodes [Snell's Law][].
 Perhaps this function currently lives in a Jupyter notebook or a `.py` file in
@@ -87,3 +87,40 @@ automatically generate nice-looking HTML documentation later. Notable features:
 
 We will revisit docstrings in the section on writing documentation
 [TODO: link once this section exists].
+
+## When to expand to multiple modules
+
+We created just one module, `example.refraction`. We might eventually grow a
+second module.
+
+- When in doubt, resist the temptation to grow deep taxonomies of modules and
+  sub-packages, lest it become difficult for users and collaborators to guess
+  or remember where things are . The Python built-in libraries are generally
+  flat.
+
+- When importing from another module within the same package, we recommend
+  using "relative imports".
+
+  This works:
+
+  ```bash
+  # content of example.some_other_module
+
+  from example import refraction
+  from example.refraction import snell
+  ```
+
+  but this is equivalent, and preferred:
+
+  ```bash
+  # content of example.some_other_module
+
+  from . import refraction
+  from .refraction import snell
+  ```
+
+  For one thing, if you change the name of the package in the future, you won't
+  need to update this file.
+
+- Take care to avoid circular imports, wherein two modules each import the
+  other.

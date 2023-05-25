@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Basic packaging
+title: Package
 permalink: /tutorials/packaging
 nav_order: 3
 parent: Tutorials
@@ -11,7 +11,7 @@ In the section you will:
 - Employ version control.
 - Install and use the package.
 
-# Basic packaging
+# Package
 
 ## Create a minimal installable Python package
 
