@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Module
-permalink: /tutorials/module
+permalink: /tutorials/module/
 nav_order: 2
 parent: Tutorials
 ---

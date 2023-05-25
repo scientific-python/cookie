@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Test
-permalink: /tutorials/test
+permalink: /tutorials/test/
 nav_order: 4
 parent: Tutorials
 ---

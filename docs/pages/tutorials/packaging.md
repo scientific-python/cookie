@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Package
-permalink: /tutorials/packaging
+permalink: /tutorials/packaging/
 nav_order: 3
 parent: Tutorials
 ---
