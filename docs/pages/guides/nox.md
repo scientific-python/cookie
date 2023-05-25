@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Task runners
-permalink: /guides/tasks
+permalink: /guides/tasks/
 nav_order: 30
 parent: Topical Guides
 ---

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Repo Review
-permalink: /guides/reporeview
+permalink: /guides/reporeview/
 nav_order: 110
 parent: Topical Guides
 interactive_repo_review: true

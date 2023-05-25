@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Style
-permalink: /guides/style
+permalink: /guides/style/
 nav_order: 6
 parent: Topical Guides
 custom_title: Style guide

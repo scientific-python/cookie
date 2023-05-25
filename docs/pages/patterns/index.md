@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Patterns
-permalink: /patterns
+permalink: /patterns/
 nav_order: 4
 has_children: true
 ---
