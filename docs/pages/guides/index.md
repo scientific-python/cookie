@@ -35,7 +35,7 @@ You can also evaluate your repository against the guidelines by using
 [tutorials]: {% link pages/tutorials/index.md %}
 [style]: {% link pages/guides/style.md %}
 [mypy]: {% link pages/guides/mypy.md %}
-[simple packaging]: {% link pages/guides/pep621.md %}
+[simple packaging]: {% link pages/guides/pyproject.md %}
 [packaging]: {% link pages/guides/packaging.md %}
 [gha_basic]: {% link pages/guides/gha_basic.md %}
 [gha_pure]: {% link pages/guides/gha_pure.md %}

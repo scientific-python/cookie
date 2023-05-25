@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Packaging
+title: Classic Packaging
 permalink: /guides/packaging/
 nav_order: 5
 parent: Topical Guides
