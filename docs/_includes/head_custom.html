@@ -1,13 +1,13 @@
 <link
   rel="apple-touch-icon"
   sizes="180x180"
-  href="/assets/apple-touch-icon.png"
+  href="{{ site.baseurl }}{% link assets/apple-touch-icon.png %}"
 />
 <link
   rel="icon"
   type="image/png"
   sizes="32x32"
-  href="/assets/favicon-32x32.png"
+  href="{{ site.baseurl }}{% link assets/favicon-32x32.png %}"
 />
 <link
   rel="icon"
@@ -15,11 +15,24 @@
   sizes="16x16"
   href="/assets/favicon-16x16.png"
 />
-<link rel="manifest" href="/assets/site.webmanifest" />
-<link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#5bbad5" />
-<link rel="shortcut icon" href="/assets/favicon.ico" />
+<link
+  rel="manifest"
+  href="{{ site.baseurl }}{% link /assets/site.webmanifest %}"
+/>
+<link
+  rel="mask-icon"
+  href="{{ site.baseurl }}{% link /assets/safari-pinned-tab.svg %}"
+  color="#5bbad5"
+/>
+<link
+  rel="shortcut icon"
+  href="{{ site.baseurl }}{% link /assets/favicon.ico %}"
+/>
 <meta name="msapplication-TileColor" content="#2d89ef" />
-<meta name="msapplication-config" content="/assets/browserconfig.xml" />
+<meta
+  name="msapplication-config"
+  content="{{ site.baseurl }}{% link /assets/browserconfig.xml %}"
+/>
 <meta name="theme-color" content="#ffffff" />
 
 {%- if page.interactive_repo_review %}
@@ -60,7 +73,7 @@
 
 <script
   type="text/babel"
-  src="/assets/js/webapp.js"
+  src="{{ site.baseurl }}{% link /assets/js/webapp.js %}"
   data-presets="react"
 ></script>
 {%- endif %}
