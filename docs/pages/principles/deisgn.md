@@ -24,14 +24,14 @@ test, maintain when data formats change, or reuse for unforeseen applications.
 
 ## Duck Typing is a Good Idea
 
-[Duck typing](https://en.wikipedia.org/wiki/Duck_typing) treats objects based
-on what they can *do*, not based on what type they *are*. "If it walks like a
-duck and it quacks like a duck, then it must be a duck."
+[Duck typing][] treats objects based on what they can *do*, not based on what
+type they *are*. "If it walks like a duck and it quacks like a duck, then it
+must be a duck."
 
 Python in general and scientific Python in particular leverage *interfaces* to
 support interoperability and reuse. For example, it is possible to pass a
-pandas DataFrame to the {func}`numpy.sum` function even though pandas was
-created long after {func}`numpy.sum`. This is because {func}`numpy.sum` avoids
+pandas DataFrame to the `numpy.sum` function even though pandas was
+created long after `numpy.sum`. This is because `numpy.sum` avoids
 assuming it will be passed specific data types; it accepts any object that
 provides the right methods (interfaces). Where possible, avoid `isinstance`
 checks in your code, and try to make your functions work on the broadest
@@ -52,10 +52,9 @@ does not add value in scientific computing.
    Programming", by Alan J. Perlis of Yale University.
 ```
 
-A popular talk, "Stop Writing Classes," which you can
-[watch on YouTube](https://www.youtube.com/watch?v=o9pEzgHorH0&t=193s),
-illustrates how some situations that *seem* to lend themselves to
-object-oriented programming are much more simply handled using functions.
+A popular talk, ["Stop Writing Classes"][], illustrates how some situations
+that *seem* to lend themselves to object-oriented programming are much more
+simply handled using functions.
 
 It is often tempting to invent a custom class to express a workflow, along
 these lines.
@@ -188,7 +187,6 @@ unforeseen ways, scientific code should not bury its complexity or overly
 optimize for a specific use case. It should expose what complexity there is
 straightforwardly.
 
-:::{note}
 Even better, you should consider using "keyword-only" arguments, introduced
 in Python 3, which require the user to pass an argument by keyword rather
 than position.
@@ -203,7 +201,6 @@ Every argument after the `*` is keyword-only. Therefore, the usage
 explicitly type `get_image('thing.png', normalize=False)`. The latter is
 easier to read, and it enables the author to insert additional parameters
 without breaking backward compatibility.
-:::
 
 Similarly, it can be tempting to write one function that performs multiple
 steps and has many options instead of multiple functions that do a single step
@@ -216,8 +213,7 @@ themselves in time:
   have and have not yet been tested.
 - It is easier to compose a function with other functions and reuse it in an
   unanticipated way if its behavior is well-defined and tightly scoped. This is
-  [the UNIX philosophy](https://en.wikipedia.org/wiki/Unix_philosophy):
-  "Do one thing and do it well."
+  [the UNIX philosophy][], "Do one thing and do it well."
 - The number of possible interactions between arguments goes up with the number
   of arguments, which makes the function difficult to reason about and test. In
   particular, arguments whose meaning depends on other arguments should be
@@ -230,9 +226,13 @@ details of the function to know what type to expect for any given input. That
 makes the function harder to document, test, and use.  Python does not enforce
 return type stability, but we should try for it anyway.  If you have a function
 that returns different types of things depending on its inputs, that is a sign
-that it should be {ref}`refactored <refactor>` into multiple functions.
+that it should be refactored into multiple functions.
 
 Python is incredibly flexible. It accommodates many possible design choices.
 By exercising some restraint and consistency with the scientific Python
 ecosystem, Python can be used to build scientific tools that last and grow well
 over time.
+
+[the UNIX philosophy]: [https://en.wikipedia.org/wiki/Unix_philosophy]
+[Duck typing]: https://en.wikipedia.org/wiki/Duck_typing
+["Stop Writing Classes"]: https:k//www.youtube.com/watch?v=o9pEzgHorH0&t=193s

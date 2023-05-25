@@ -33,8 +33,6 @@ If you can bring together contributors with diverse scientific backgrounds, it
 becomes easier to identify functionality that should be generalized for reuse
 by different fields.
 
-(refactor)=
-
 ## Don't Be Afraid to Refactor
 
 No code is ever right the first (or second) time.
