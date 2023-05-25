@@ -194,6 +194,7 @@ the type annotations at runtime and you need to support Python < 3.10:
 ```python
 from typing import Union, List
 
+
 # Generic types take bracket arguments
 def f(x: int) -> List[int]:
     return list(range(x))

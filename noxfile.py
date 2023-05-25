@@ -97,7 +97,6 @@ def tests(session, backend):
 @nox.session()
 @nox.parametrize("backend", ("poetry", "pdm", "hatch"), ids=("poetry", "pdm", "hatch"))
 def native(session, backend):
-
     session.install("cookiecutter", backend)
 
     make_cookie(session, backend)
@@ -106,7 +105,7 @@ def native(session, backend):
         session.run(backend, "env", "create")
     else:
         session.run(backend, "install")
-        
+
     session.run(backend, "run", "pytest")
 
 
@@ -188,7 +187,6 @@ def pc_bump(session: nox.Session) -> None:
 
 @nox.session(venv_backend="none")
 def gha_bump(session: nox.Session) -> None:
-
     pages = list(Path("docs/pages/developers").glob("gha_*.md"))
     pages.append(Path("docs/pages/developers/style.md"))
     full_txt = "\n".join(page.read_text() for page in pages)
@@ -222,5 +220,3 @@ def sync(session: nox.Session) -> None:
         url = f"https://raw.githubusercontent.com/scikit-hep/scikit-hep.github.io/main/pages/developers/{f.name}"
         response = urllib.request.urlopen(url)
         f.write_text(response.read().decode("utf-8"))
-
-

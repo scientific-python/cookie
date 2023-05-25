@@ -96,7 +96,7 @@ a different input folder if you want.
 You could use the setup-python action, install `build` and `twine` with `pip`,
 and then use `python -m build` or `pyproject-build`, but it's better to use
 `pipx` to install and run python applications. Pipx is provided by default by
-Github Actions (in fact, they use it to setup other applications).
+GitHub Actions (in fact, they use it to setup other applications).
 
 <details markdown="1"><summary>Classic SDist builds (click to expand)</summary>
 

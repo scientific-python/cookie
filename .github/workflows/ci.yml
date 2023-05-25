@@ -3,229 +3,40 @@ name: CI
 on:
   workflow_dispatch:
   pull_request:
-    paths-ignore:
-      # Skip testing builds if changes are only in documentation directories
-      - 'docs/**'
-      - '.readthedocs.yml'
   push:
     branches:
       - main
-
-env:
-  FORCE_COLOR: 3
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  pre-commit:
-    name: Format
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+  change-detection:
+    uses: ./.github/workflows/reusable-change-detection.yml
 
-      - name: Lint setuptools
-        run: pipx run nox -s 'lint(setuptools)'
+  cookie:
+    needs: change-detection
+    if: fromJSON(needs.change-detection.outputs.run-tests)
+    uses: ./.github/workflows/reusable-cookie.yml
 
-      - name: Lint pybind11
-        run: pipx run nox -s 'lint(pybind11)'
-
-      - name: Lint scikit-build
-        run: pipx run nox -s 'lint(skbuild)'
-
-      - name: Lint meson-python
-        run: pipx run nox -s 'lint(mesonpy)'
-
-      - name: Lint poetry
-        run: pipx run nox -s 'lint(poetry)'
-
-      - name: Lint flit
-        run: pipx run nox -s 'lint(flit)'
-
-      - name: Lint pdm
-        run: pipx run nox -s 'lint(pdm)'
-
-      - name: Lint trampolim
-        run: pipx run nox -s 'lint(trampolim)'
-
-      - name: Lint whey
-        run: pipx run nox -s 'lint(whey)'
-
-      - name: Lint maturin
-        run: pipx run nox -s 'lint(maturin)'
-
-      - name: Lint hatch
-        run: pipx run nox -s 'lint(hatch)'
-
-      - name: Lint setuptools PEP 621
-        run: pipx run nox -s 'lint(setuptools621)'
-
-  checks:
-    name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
-    runs-on: ${{ matrix.runs-on }}
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.7", "3.11"]
-        runs-on: [ubuntu-latest, macos-latest, windows-latest]
-
-        include:
-          - python-version: pypy-3.8
-            runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install nox
-        run: pip install nox
-
-      - name: Test setuptools
-        run: nox -s 'tests(setuptools)'
-
-      - name: Test pybind11
-        run: nox -s 'tests(pybind11)'
-
-      - name: Test scikit-build
-        run: nox -s 'tests(skbuild)'
-
-      - name: Test poetry
-        run: nox -s 'tests(poetry)'
-
-      - name: Test flit
-        run: nox -s 'tests(flit)'
-
-      - name: Test pdm
-        run: nox -s 'tests(pdm)'
-
-      - name: Test trampolim
-        run: nox -s 'tests(trampolim)'
-
-      - name: Test whey
-        run: nox -s 'tests(whey)'
-
-      - name: Test maturin
-        run: nox -s 'tests(maturin)'
-
-      - name: Test hatch
-        run: nox -s 'tests(hatch)'
-
-      - name: Test setuptools PEP 621
-        run: nox -s 'tests(setuptools621)'
-
-      - name: Native poetry tooling
-        run: nox -s 'native(poetry)'
-
-      - name: Native pdm tooling
-        if: matrix.python-version != 'pypy-3.7'
-        run: nox -s 'native(pdm)'
-
-      - name: Activate MSVC for Meson
-        if: runner.os == 'Windows'
-        uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Test meson-python
-        run: nox -s 'tests(mesonpy)'
-
-  nox:
-    name: Check included Noxfile
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Test setuptools
-        run: |
-          pipx run nox -s 'nox(setuptools)'
-          pipx run nox -s 'nox(setuptools)' -- docs
-
-      - name: Test pybind11
-        run: |
-          pipx run nox -s 'nox(pybind11)'
-          pipx run nox -s 'nox(pybind11)' -- docs
-
-      - name: Test scikit-build
-        run: |
-          pipx run nox -s 'nox(skbuild)'
-          pipx run nox -s 'nox(skbuild)' -- docs
-
-      - name: Test poetry
-        run: |
-          pipx run nox -s 'nox(poetry)'
-          pipx run nox -s 'nox(poetry)' -- docs
-
-      - name: Test flit
-        run: |
-          pipx run nox -s 'nox(flit)'
-          pipx run nox -s 'nox(flit)' -- docs
-
-      - name: Test pdm
-        run: |
-          pipx run nox -s 'nox(pdm)'
-          pipx run nox -s 'nox(pdm)' -- docs
-
-      - name: Test trampolim
-        run: |
-          pipx run nox -s 'nox(trampolim)'
-          pipx run nox -s 'nox(trampolim)' -- docs
-
-      - name: Test whey
-        run: |
-          pipx run nox -s 'nox(whey)'
-          pipx run nox -s 'nox(whey)' -- docs
-
-      - name: Test maturin
-        run: |
-          pipx run nox -s 'nox(maturin)'
-          pipx run nox -s 'nox(maturin)' -- docs
-
-      - name: Test hatch
-        run: |
-          pipx run nox -s 'nox(hatch)'
-          pipx run nox -s 'nox(hatch)' -- docs
-
-      - name: Test setuptools PEP 621
-        run: |
-          pipx run nox -s 'nox(setuptools621)'
-          pipx run nox -s 'nox(setuptools621)' -- docs
-
-      - name: Activate MSVC for Meson
-        if: runner.os == 'Windows'
-        uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Test meson-python
-        run: |
-          pipx run nox -s 'nox(mesonpy)'
-          pipx run nox -s 'nox(mesonpy)' -- docs
-
-
-  dist:
-    name: Distribution build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Build sdist and wheel
-        run: pipx run nox -s dist
-
-      - name: Show results
-        run: ls -l dist
-
-      - uses: actions/upload-artifact@v3
-        with:
-          path: dist
-          
   pass:
     if: always()
-    needs: [dist, nox, checks, pre-commit]
+    needs:
+      - change-detection
+      - cookie
     runs-on: ubuntu-latest
+
     steps:
       - name: Decide whether the needed jobs succeeded or failed
         uses: re-actors/alls-green@release/v1
         with:
+          allowed-skips: >-
+            ${{
+              fromJSON(needs.change-detection.outputs.run-tests)
+              && ''
+              || '
+              cookie,
+              '
+            }}
           jobs: ${{ toJSON(needs) }}
