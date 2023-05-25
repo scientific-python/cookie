@@ -2,7 +2,20 @@ from pathlib import Path
 
 project_name = "{{ cookiecutter.project_name }}"
 project_type = "{{ cookiecutter.project_type }}"
-project_types = {"setuptools", "pybind11", "skbuild", "mesonpy", "poetry", "flit", "trampolim", "whey", "pdm", "maturin", "hatch", "setuptools621"}
+project_types = {
+    "setuptools",
+    "pybind11",
+    "skbuild",
+    "mesonpy",
+    "poetry",
+    "flit",
+    "trampolim",
+    "whey",
+    "pdm",
+    "maturin",
+    "hatch",
+    "setuptools621",
+}
 other_project_types = project_types - {project_type}
 
 files = (p for p in Path(".").rglob("*") if p.is_file() and "-" in p.stem)

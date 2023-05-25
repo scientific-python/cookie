@@ -1,0 +1,53 @@
+ci:
+  autoupdate_commit_msg: "chore: update pre-commit hooks"
+  autofix_commit_msg: "style: pre-commit fixes"
+
+exclude: "^({{cookiecutter\\.project_name}}|hooks/pre_gen_project.py$)"
+
+repos:
+  - repo: https://github.com/psf/black
+    rev: "23.3.0"
+    hooks:
+      - id: black-jupyter
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: "v4.4.0"
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-yaml
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "v2.7.1"
+    hooks:
+      - id: prettier
+        types_or: [yaml, html, css, scss, javascript, json]
+        args: [--prose-wrap=always]
+        exclude: ^.readthedocs.yml
+
+  - repo: https://github.com/asottile/blacken-docs
+    rev: "1.13.0"
+    hooks:
+      - id: blacken-docs
+        additional_dependencies: [black==23.3.0]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: "v2.2.4"
+    hooks:
+      - id: codespell
+        exclude: ^docs/Gemfile\.lock$
+        args: ["-Lnd"]
+
+  - repo: local
+    hooks:
+      - id: disallow-caps
+        name: Disallow improper capitalization
+        language: pygrep
+        entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
+        exclude: (.pre-commit-config.yaml|docs/pages/guides/style\.md)$
