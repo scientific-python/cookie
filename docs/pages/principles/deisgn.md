@@ -42,15 +42,11 @@ possible range of input types.
 Not everything needs to be object-oriented. Object-oriented design frequently
 does not add value in scientific computing.
 
-```{eval-rst}
-.. epigraph::
-
-   It is better to have 100 functions operate on one data structure than 10
-   functions on 10 data structures.
-
-   -- From ACM's SIGPLAN publication, (September, 1982), Article "Epigrams in
-   Programming", by Alan J. Perlis of Yale University.
-```
+>  It is better to have 100 functions operate on one data structure than 10
+>  functions on 10 data structures.
+>
+>  -- From ACM's SIGPLAN publication, (September, 1982), Article "Epigrams in
+>     Programming", by Alan J. Perlis of Yale University.
 
 A popular talk, ["Stop Writing Classes"][], illustrates how some situations
 that *seem* to lend themselves to object-oriented programming are much more
