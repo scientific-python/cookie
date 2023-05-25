@@ -85,8 +85,8 @@ Things to notice:
   monolithic, multi-step tests fails, it’s difficult to figure out why.
 - When comparing floating-point numbers (as opposed to integers) you should not
   test for exact equality. Use `numpy.allclose()`, which checks for equality
-  within a (configurable) tolerance. Numpy provides several testing utilities,
-  which should always be used when testing numpy arrays.
+  within a (configurable) tolerance. NumPy provides several testing utilities,
+  which should always be used when testing NumPy arrays.
 - The names of all test modules and functions must begin with `test`.
   (Otherwise, they will not be picked up by the automatic test-running we will
   be using below.)
