@@ -150,7 +150,7 @@ Some projects have multiple larger datasets used for examples or testing that
 can be automatically downloaded on demand to a local cache on first use in a
 way that is transparent to the user of the package. For example, the datasets
 under `scipy.datasets` do not live in the main SciPy repository, but instead
-are stored in independent repositories under the SciPy Github organization.
+are stored in independent repositories under the SciPy GitHub organization.
 A tool called [Pooch][] is used to handle fetching these datasets from an
 external repository URL for the user the first time they are requested. Pooch
 takes care of comparing hash values of the downloaded data to verify its
