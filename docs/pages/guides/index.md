@@ -32,16 +32,16 @@ new package from a template in less than 60 seconds!
 You can also evaluate your repository against the guidelines by using
 [scientific-python-repo-review][]!
 
-[tutorials]: {{ site.baseurl }}{% link pages/tutorials/index.md %}
-[style]: {{ site.baseurl }}{% link pages/guides/style.md %}
-[mypy]: {{ site.baseurl }}{% link pages/guides/mypy.md %}
-[simple packaging]: {{ site.baseurl }}{% link pages/guides/pep621.md %}
-[packaging]: {{ site.baseurl }}{% link pages/guides/packaging.md %}
-[gha_basic]: {{ site.baseurl }}{% link pages/guides/gha_basic.md %}
-[gha_pure]: {{ site.baseurl }}{% link pages/guides/gha_pure.md %}
-[gha_wheels]: {{ site.baseurl }}{% link pages/guides/gha_wheels.md %}
-[pytest]: {{ site.baseurl }}{% link pages/guides/pytest.md %}
-[scientific-python-repo-review]: {{ site.baseurl }}{% link pages/guides/repo_review.md %}
+[tutorials]: {% link pages/tutorials/index.md %}
+[style]: {% link pages/guides/style.md %}
+[mypy]: {% link pages/guides/mypy.md %}
+[simple packaging]: {% link pages/guides/pep621.md %}
+[packaging]: {% link pages/guides/packaging.md %}
+[gha_basic]: {% link pages/guides/gha_basic.md %}
+[gha_pure]: {% link pages/guides/gha_pure.md %}
+[gha_wheels]: {% link pages/guides/gha_wheels.md %}
+[pytest]: {% link pages/guides/pytest.md %}
+[scientific-python-repo-review]: {% link pages/guides/repo_review.md %}
 
 [cookiecutter]: https://cookiecutter.readthedocs.io
 [scientific-python/cookie]: https://github.com/scientific-python/cookie

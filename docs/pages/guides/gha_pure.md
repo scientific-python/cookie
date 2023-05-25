@@ -28,7 +28,7 @@ recommendations were followed).
 >   - Less chance of a permission issue
 > - You can look in the `.whl` (it's a `.zip`, really) and see where everything is going to go
 
-[on the next page]: {{ site.baseurl }}{% link pages/guides/gha_wheels.md %}
+[on the next page]: {% link pages/guides/gha_wheels.md %}
 
 ## Job setup
 
@@ -315,4 +315,4 @@ jobs:
 [pep 518]: https://www.python.org/dev/peps/pep-0518/
 [PyPI trusted publisher docs]: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
 
-<script src="{{ site.baseurl }}/assets/js/tabs.js"></script>
+<script src="{% link assets/js/tabs.js %}"></script>

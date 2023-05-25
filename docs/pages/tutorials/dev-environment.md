@@ -135,4 +135,4 @@ setup time quite quickly when developing.
 [`vim`]: https://www.vim.org/
 [`emacs`]: https://www.gnu.org/software/emacs/
 
-<script src="{{ site.baseurl }}/assets/js/tabs.js"></script>
+<script src="{% link assets/js/tabs.js %}"></script>

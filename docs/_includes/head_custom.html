@@ -1,37 +1,31 @@
 <link
   rel="apple-touch-icon"
   sizes="180x180"
-  href="{{ site.baseurl }}{% link assets/apple-touch-icon.png %}"
+  href="{% link assets/apple-touch-icon.png %}"
 />
 <link
   rel="icon"
   type="image/png"
   sizes="32x32"
-  href="{{ site.baseurl }}{% link assets/favicon-32x32.png %}"
+  href="{% link assets/favicon-32x32.png %}"
 />
 <link
   rel="icon"
   type="image/png"
   sizes="16x16"
-  href="/assets/favicon-16x16.png"
+  href="{% link assets/favicon-16x16.png %}"
 />
-<link
-  rel="manifest"
-  href="{{ site.baseurl }}{% link /assets/site.webmanifest %}"
-/>
+<link rel="manifest" href="{% link assets/site.webmanifest %}" />
 <link
   rel="mask-icon"
-  href="{{ site.baseurl }}{% link /assets/safari-pinned-tab.svg %}"
+  href="{% link assets/safari-pinned-tab.svg %}"
   color="#5bbad5"
 />
-<link
-  rel="shortcut icon"
-  href="{{ site.baseurl }}{% link /assets/favicon.ico %}"
-/>
+<link rel="shortcut icon" href="{% link assets/favicon.ico %}" />
 <meta name="msapplication-TileColor" content="#2d89ef" />
 <meta
   name="msapplication-config"
-  content="{{ site.baseurl }}{% link /assets/browserconfig.xml %}"
+  content="{% link assets/browserconfig.xml %}"
 />
 <meta name="theme-color" content="#ffffff" />
 
@@ -73,7 +67,7 @@
 
 <script
   type="text/babel"
-  src="{{ site.baseurl }}{% link /assets/js/webapp.js %}"
+  src="{% link assets/js/webapp.js %}"
   data-presets="react"
 ></script>
 {%- endif %}

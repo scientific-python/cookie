@@ -242,4 +242,4 @@ avoiding the sdist, for example).
 [cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
 [PyPI trusted publisher docs]: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
 
-<script src="{{ site.baseurl }}/assets/js/tabs.js"></script>
+<script src="{% link assets/js/tabs.js %}"></script>
