@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Code coverage"
-permalink: /guides/coverage
+permalink: /guides/coverage/
 nav_order: 3
 parent: Topical Guides
 ---
