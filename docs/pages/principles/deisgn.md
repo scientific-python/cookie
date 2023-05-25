@@ -1,3 +1,13 @@
+---
+layout: page
+title: Design Recommendations
+permalink: /principles/design/
+nav_order: 2
+parent: Principles
+---
+
+{% include toc.html %}
+
 # Design Recommendations
 
 ## Keep I/O Separate

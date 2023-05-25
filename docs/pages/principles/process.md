@@ -1,3 +1,13 @@
+---
+layout: page
+title: Process Recommendations
+permalink: /principles/process/
+nav_order: 1
+parent: Principles
+---
+
+{% include toc.html %}
+
 # Process Recommendations
 
 ## Collaborate
