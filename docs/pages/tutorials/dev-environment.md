@@ -6,12 +6,12 @@ nav_order: 1
 parent: Tutorials
 ---
 
+{% include toc.html %}
+
 In this section you will:
 
 * Create an isolated software area ("virtual environment") to work in.
 * Open a code editor.
-
-{% include toc.html %}
 
 # Development environment
 
@@ -29,7 +29,7 @@ system environment.
 
 There are many (arguably _too_ many) ways to do this in Python. Any modern tool
 should be fine, but here we recommend two options popular in the scientific
-Python community.
+Python community. If you already use a different way, that's fine, use that.
 
 ## Option 1: Using pip
 
@@ -47,9 +47,26 @@ virtual environment.
 
 To activate the virtual environment, type:
 
+<div class="skhep-bar d-flex m-2" style="justify-content:center;">
+  <button class="skhep-bar-item munix-btn btn m-2 btn-purple" onclick="openTab('unix')">Linux/macOS</button>
+  <button class="skhep-bar-item windows-btn btn m-2" onclick="openTab('windows')">Windows</button>
+</div>
+
+<div class="skhep-tab unix-tab" markdown="1">
+
 ```bash
-. .env/bin/activate
+. .venv/bin/activate
 ```
+
+</div>
+<div class="skhep-tab windows-tab" markdown="1" style="display:none;">
+
+```bat
+.venv\bin\Activate.bat
+```
+
+</div>
+
 
 You need to do this step every time you open a new shell (i.e. Terminal,
 Command Prompt) to work on your project. The `.` is short for `source`, which
@@ -74,16 +91,16 @@ to leave the environment (or just close your shell).
 
 ## Option 2: Using conda
 
-You can also develop in conda. This is an especially  strong option if:
+You can also develop in conda. This is an especially good option if:
 
 * You want an easy way to choose a specific version of Python
-* Your project will depend on complex software libraries that are
-  not readily pip-installable
+* Your project will depend on complex software libraries that are not readily
+  pip-installable
 
 The creation of an environment looks like this:
 
 ```bash
-conda create -n env_name python=3.8
+conda create -n env_name python=3.11
 ```
 
 You can use `-n name` or `-p path` to specify the environment by name or
@@ -102,10 +119,11 @@ To deactivate, use `conda deactivate`, or leave your shell.
 
 Any plain text editor will serve our purposes for this guide. Bare bones
 editors like Notepad or `nano` will do the job. More feature-rich Integrated
-Development Environments (IDEs) such as [PyCharm][] or [Visual Code Studio][]
+Development Environments (IDEs) such as [PyCharm][] or [Visual Studio Code][]
 can provide useful additions, such as syntax highlighting, tab completion,
-and more. Classic text editors like [`vim`][] and [`emacs`][] can do the same,
-and are often readily available on shared institutional systems.
+and more. Classic text editors like [`vim`][] and [`emacs`][] can do the same
+with configuration, and are often readily available on shared institutional
+systems.
 
 You can instruct an IDE to use the virtual environment (pip or conda) that you
 set up. Setting up an IDE takes extra time but often provides tools (like smart
@@ -113,6 +131,8 @@ renaming) that are useful, and if you use type hints, will probably pay for the
 setup time quite quickly when developing.
 
 [PyCharm]: https://www.jetbrains.com/pycharm/
-[Visual Code Studio]: https://code.visualstudio.com/
+[Visual Studio Code]: https://code.visualstudio.com/
 [`vim`]: https://www.vim.org/
 [`emacs`]: https://www.gnu.org/software/emacs/
+
+<script src="{{ site.baseurl }}/assets/js/tabs.js"></script>
