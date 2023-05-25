@@ -53,7 +53,7 @@ What's the problem we are solving here? If your Python program needs to access
 a data file, the naïve solution is just to hard-code the path to that file.
 
 ```python
-data_file = open('peak_spacings/LaB6.txt')
+data_file = open("peak_spacings/LaB6.txt")
 ```
 
 But this is not a good solution because:
@@ -93,13 +93,15 @@ three places:
    ```python
    # setup.py (excerpt)
 
-   package_data={
-       'YOUR_PACKAGE_NAME': [
-           # When adding files here, remember to update MANIFEST.in as well,
-           # or else they will not be included in the distribution on PyPI!
-           'peak_spacings/*.txt',
+   package_data = (
+       {
+           "YOUR_PACKAGE_NAME": [
+               # When adding files here, remember to update MANIFEST.in as well,
+               # or else they will not be included in the distribution on PyPI!
+               "peak_spacings/*.txt",
            ]
        },
+   )
    ```
 
    We have used the wildcard `*` to capture *all* filenames that end in
@@ -125,7 +127,7 @@ three places:
    import importlib_resources as resources
 
 
-   ref = resources.files('peak_spacings') / 'LaB6.txt'
+   ref = resources.files("peak_spacings") / "LaB6.txt"
 
    # `ref` is a traversible object representing the package and its resources
    # as_file is a context manager providing a pathlib.Path object
@@ -142,7 +144,7 @@ which require data not distributed with the project itself. One approach in
 these cases is to provide a download script that the user can run to retrieve
 their data from a provided URL. There are free data hosting options such as
 [Zenodo][], [osf.io][] or a data-specific repository on a service like GitHub
-or GitLab. 
+or GitLab.
 
 Some projects have multiple larger datasets used for examples or testing that
 can be automatically downloaded on demand to a local cache on first use in a
@@ -177,5 +179,3 @@ downloading the data again.
 [osf.io]: https://osf.io/
 [Pooch]: https://www.fatiando.org/pooch/latest/
 [Zenodo]: https://zenodo.org/
-
-
