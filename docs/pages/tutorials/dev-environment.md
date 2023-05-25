@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Intro to development
-permalink: /tutorials/dev-environment
+permalink: /tutorials/dev-environment/
 nav_order: 1
 parent: Tutorials
 ---

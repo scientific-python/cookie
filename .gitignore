@@ -149,3 +149,6 @@ _site/
 node_modules/
 package-lock.json
 package.json
+
+# readthedocs
+_readthedocs

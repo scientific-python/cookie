@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Static type checking"
-permalink: /guides/mypy
+permalink: /guides/mypy/
 nav_order: 7
 parent: Topical Guides
 ---

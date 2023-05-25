@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "GHA: GitHub Actions intro"
-permalink: /guides/gha_basic
+permalink: /guides/gha_basic/
 nav_order: 10
 parent: Topical Guides
 custom_title: GitHub Actions introduction

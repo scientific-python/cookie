@@ -3,8 +3,8 @@ email: scikit-hep-admins@googlegroups.com
 description: >-
   The Scikit-HEP Developer pages guide new users through the development
   process.
-baseurl: ""
-url: "https://scikit-hep.github.io/cookie"
+baseurl: ""  # Set by rtd
+url: "https://scikit-hep-cookie.readthedocs.io"
 github_username: scikit-hep
 
 # Build settings

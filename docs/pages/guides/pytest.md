@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Testing with pytest"
-permalink: /guides/pytest
+permalink: /guides/pytest/
 nav_order: 2
 parent: Topical Guides
 ---

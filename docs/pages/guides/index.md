@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Topical Guides
-permalink: /guides
+permalink: /guides/
 nav_order: 3
 has_children: true
 ---
