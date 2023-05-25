@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Module
+title: Inline documentation
 permalink: /tutorials/module/
 nav_order: 2
 parent: Tutorials
@@ -11,14 +11,14 @@ parent: Tutorials
 In this section you will:
 
 - Place some code in a module.
-- Provide inline documentation (a "doc-string").
+- Provide inline documentation (a "docstring").
 
 # Module
 
-As a concrete example, let's suppose we have a simple function that encodes [Snell's Law][].
-Perhaps this function currently lives in a Jupyter notebook or a `.py` file in
-an email attachment. We want to put into some more lasting, maintainable,
-reusable, and/or shareable form.
+As a concrete example, let's suppose we have a simple function that encodes
+[Snell's Law][].  Perhaps this function currently lives in a Jupyter notebook
+or a `.py` file in an email attachment. We want to put into some more lasting,
+maintainable, reusable, and/or shareable form.
 
 Here is the code:
 
@@ -28,7 +28,7 @@ Here is the code:
 import numpy as np
 
 
-def snell(theta_inc, n1, n2):
+def snell(theta_inc: float, n1: float, n2: float) -> float:
     """
     Compute the refraction angle using Snell's Law.
 
@@ -57,9 +57,10 @@ def snell(theta_inc, n1, n2):
     return np.arcsin(n1 / n2 * np.sin(theta_inc))
 ```
 
-Notice that this example includes inline documentation --- a "doc-string". This
+Notice that this example includes inline documentation --- a "docstring". This
 is extremely useful for collaborators, and the most common collaborator is
-Future You!
+Future You! It also includes type hints; this tells a programmer, type checker,
+or IDE what types are expected in an out of the function.
 
 Further, by following the [numpydoc standard][], we will be able to
 automatically generate nice-looking HTML documentation later. Notable features:
@@ -90,13 +91,12 @@ We will revisit docstrings in the section on writing documentation
 
 ## When to expand to multiple modules
 
-We created just one module, `example.refraction`. We might eventually grow a
-second module.
+We created just one module, `refraction`. We might eventually split this into
+submodules.
 
 - When in doubt, resist the temptation to grow deep taxonomies of modules and
   sub-packages, lest it become difficult for users and collaborators to guess
-  or remember where things are . The Python built-in libraries are generally
-  flat.
+  or remember where things are.
 
 - When importing from another module within the same package, we recommend
   using "relative imports".
@@ -125,5 +125,10 @@ second module.
 - Take care to avoid circular imports, wherein two modules each import the
   other.
 
-  [Snell's law]: https://en.wikipedia.org/wiki/Snell%27s_law
-  [numpydoc standard]: https://numpydoc.readthedocs.io/en/latest/format.html
+- Importing things inside your `__init__.py` will always run, even if you are
+  only using a subpackage. Adding imports here can simplify your API, but at
+  the expense of doing extra work importing things the user isn't using and
+  more circular import issues.
+  
+[Snell's law]: https://en.wikipedia.org/wiki/Snell%27s_law
+[numpydoc standard]: https://numpydoc.readthedocs.io/en/latest/format.html
