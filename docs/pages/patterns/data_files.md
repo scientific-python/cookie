@@ -45,7 +45,8 @@ cookiecutter template. This helps protect you against accidentally committing
 the file to git.
 
 If the file in question is a text file and not very large (\< 100 kB) than it's
-reasonable to just bundle it with the package.
+reasonable to just bundle it with the package. If not, see the recommendation
+at the end.
 
 ## How to Package Data Files
 
@@ -53,7 +54,9 @@ What's the problem we are solving here? If your Python program needs to access
 a data file, the naïve solution is just to hard-code the path to that file.
 
 ```python
-data_file = open("peak_spacings/LaB6.txt")
+from pathlib import Path
+
+spacings_txt = Path("peak_spacings/LaB6.txt").read_text(encoding="utf=8")
 ```
 
 But this is not a good solution because:
@@ -62,13 +65,15 @@ But this is not a good solution because:
   install` your package will find it's missing!
 - The path to the data file depends on the platform and on how the package is
   installed. We need Python to handle those details for us.
+- Your package might not even be installed on a file system, it might be in a
+  zip file or database.
 
 As an example, suppose we have text files with Bragg peak spacings of various
 crystalline structures, and we want to use these files in our Python package.
-Let's put them in a new directory named `peak_spacings/`.
+Let's put them in a new directory in our package, such as `src/package/peak_spacings/`.
 
 ```text
-# peak_spacings/LaB6.txt
+# src/package/peak_spacings/LaB6.txt
 
 4.15772
 2.94676
@@ -76,7 +81,7 @@ Let's put them in a new directory named `peak_spacings/`.
 ```
 
 ```text
-# peak_spacings/Si.txt
+# src/package/peak_spacings/Si.txt
 
 3.13556044
 1.92013079
@@ -84,58 +89,79 @@ Let's put them in a new directory named `peak_spacings/`.
 1.04518681
 ```
 
-To access these files from the Python package, you need to edit the code in
-three places:
+To make these available to the Python loading mechanism, the easiest way is to
+add an `__init__.py` in `src/package/peak_spacing`. This can be an empty file; it's
+purpose is to tell Python that this can be loaded.
 
-1. Include the data files' paths to `setup.py` to make them accessible from
-   the package.
+You'll want to make sure your Python building backend is placing these files in
+the SDist and wheel. If you are using anything other than setuptools, this
+should be automatic.
 
-   ```python
-   # setup.py (excerpt)
+<details markdown="1"><summary>Setuptools-specific instructions</summary>
 
-   package_data = (
-       {
-           "YOUR_PACKAGE_NAME": [
-               # When adding files here, remember to update MANIFEST.in as well,
-               # or else they will not be included in the distribution on PyPI!
-               "peak_spacings/*.txt",
-           ]
-       },
-   )
-   ```
+There are two ways to include data files in setuptools. You can either list the
+package data explicitly:
 
-   We have used the wildcard `*` to capture *all* filenames that end in
-   `.txt`. We could alternatively have listed the specific filenames.
+```ini
+# setup.cfg
+[options.package_data]
+package.peak_spacings =
+    *.txt
+```
 
-2. Add the data files' paths to `MANIFEST.in` to include them in the source
-   distribution. By default the distribution omits extraneous files that are
-   not `.py` files, so we need to specifically include them.
+**Or**, you can use automatic data inclusion (this is the default if you use
+`pyproject.toml` `[project]` config in Setuptools 61+):
 
-   ```text
-   # MANIFEST.in (excerpt)
+```ini
+[options]
+include_package_data = True
+```
 
-   include peak_spacings/*.txt
-   ```
+But then you'll need to *also* make sure the files are in the SDist, too:
 
-3. Finally, wherever we actually use the files in our scientific code, we can
-   access them using `importlib_resources`. For users with Python >= 3.9 the
-   standard library `importlib.resources` module can be used directly instead
-   of relying on `importlib_resources`.
+```text
+# MANIFEST.in
+include src/package/peak_spacings/*.txt
+```
 
-   ```python
-   # from importlib import resources   # Python >= 3.9 only
-   import importlib_resources as resources
+</details>
+
+Finally, wherever we actually use the files in our scientific code, we can
+access them using `importlib_resources`. For users with Python >= 3.9 the
+standard library `importlib.resources` module can be used directly instead
+of relying on `importlib_resources`.
+
+```python
+# from importlib import resources   # Python >= 3.9 only
+import importlib_resources as resources
 
 
-   ref = resources.files("peak_spacings") / "LaB6.txt"
+ref = resources.files("package.peak_spacings") / "LaB6.txt"
 
-   # `ref` is a traversible object representing the package and its resources
-   # as_file is a context manager providing a pathlib.Path object
-   with resources.as_file(ref) as path:
-       with open(path) as f:
-           # Read in each line and convert the string to a number.
-           spacings = [float(line) for line in f.read().splitlines()]
-   ```
+spacings_txt = ref.read_text(encoding="utf=8")
+
+# If you have an API that requires an on-disk file, you can do this instead:
+with resources.as_file(ref) as path:
+    # Now path is guaranteed to live somewhere on disk
+    with path.open(encoding="utf-8") as f:
+        spacings_txt = f.read()
+```
+
+
+### Using the init
+
+Instead of having an empty init, you can instead move the `files(...)` into the
+`__init__.py`. That would look like this:
+
+```python
+import importlib_resources as resources
+
+files = resources.files(__name__)
+LaB6 = files / "LaB6.txt"
+# Provide whatever is useful for your project here
+```
+
+Now, a user can simply import and use `package.peakspacing.LaB6` and such directly.
 
 ## Downloading larger files on demand
 
