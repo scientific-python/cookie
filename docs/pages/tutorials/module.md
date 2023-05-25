@@ -129,6 +129,6 @@ submodules.
   only using a subpackage. Adding imports here can simplify your API, but at
   the expense of doing extra work importing things the user isn't using and
   more circular import issues.
-  
+
 [Snell's law]: https://en.wikipedia.org/wiki/Snell%27s_law
 [numpydoc standard]: https://numpydoc.readthedocs.io/en/latest/format.html
