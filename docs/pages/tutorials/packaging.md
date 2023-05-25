@@ -11,6 +11,8 @@ In the section you will:
 - Employ version control.
 - Install and use the package.
 
+Once you complete this, see our [packaging guide][].
+
 # Package
 
 ## Create a minimal installable Python package
@@ -121,4 +123,7 @@ Or, in Jupyter or Python, use `?` as a shortcut.
 In [1]: snell?
 ```
 
+For more about packaging, also see our [packaging guide][].
+
 [Version Control with Git]: https://swcarpentry.github.io/git-novice/
+[packaging guide]: {% link pages/guides/pep621.md %}
