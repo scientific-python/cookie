@@ -42,8 +42,7 @@ Some **bold** or _italicized_ text!
 ```python
 # A code block
 
->>> 1 + 1
-2
+1 + 1
 ```
 ````
 
