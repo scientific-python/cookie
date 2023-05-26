@@ -4,7 +4,6 @@ description: >-
   This guide is maintained by the scientific Python community for the benefit of
   fellow scientists and research software engineers.
 url: "https://learn.scientific-python.org"
-baseurl: "/development" # Set by rtd
 github_username: scientific-python
 source: docs
 
