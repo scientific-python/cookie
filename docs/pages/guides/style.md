@@ -2,7 +2,7 @@
 layout: page
 title: Style
 permalink: /guides/style/
-nav_order: 6
+nav_order: 8
 parent: Topical Guides
 custom_title: Style guide
 ---

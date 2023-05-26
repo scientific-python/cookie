@@ -2,7 +2,7 @@
 layout: page
 title: Simple Packaging
 permalink: /guides/packaging-simple/
-nav_order: 4
+nav_order: 5
 parent: Topical Guides
 ---
 

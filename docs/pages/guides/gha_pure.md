@@ -2,7 +2,7 @@
 layout: page
 title: "GHA: Pure Python wheels"
 permalink: /guides/gha_pure/
-nav_order: 11
+nav_order: 12
 parent: Topical Guides
 custom_title: GitHub Actions for pure Python wheels
 ---
