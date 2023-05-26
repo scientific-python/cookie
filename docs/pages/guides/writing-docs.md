@@ -215,9 +215,10 @@ Or you can generate a table that links out to documentation for each object.
 ```
 ````
 
+<!-- prettier-ignore-start -->
 [diátaxis]: https://diataxis.fr/
 [sphinx]: https://www.sphinx-doc.org/
 [myst]: https://myst-parser.readthedocs.io/
-[organizing content]:
-  https://myst-parser.readthedocs.io/en/latest/syntax/organising_content.html
+[organizing content]: https://myst-parser.readthedocs.io/en/latest/syntax/organising_content.html
 [sphinx-autodoc2]: https://sphinx-autodoc2.readthedocs.io/
+<!-- prettier-ignore-end -->
