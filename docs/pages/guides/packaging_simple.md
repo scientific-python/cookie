@@ -12,11 +12,11 @@ Python packages without binary extensions and fairly simple builds can use a
 modern build system instead of the classic but verbose setuptools and
 `setup.py`. The one you select doesn't really matter that much; they all use a
 [standard configuration language][metadata] introduced in [PEP 621][]. The
-PyPA's Flit is a great option. In the future, scikit-build and meson may support
-this sort of configuration, enabling binary extension packages to benefit too.
-These [PEP 621][] tools currently include [Hatch][], [PDM][], [Flit][],
-[Trampolim][], [Whey][], and [Setuptools][]. [Poetry][] will eventually gain
-support in 2.0.
+PyPA's Flit is a great option. [scikit-build-core][] and [meson-python][] are
+being developed to support this sort of configuration, enabling binary
+extension packages to benefit too.  These [PEP 621][] tools currently include
+[Hatch][], [PDM][], [Flit][], [Trampolim][], [Whey][], and [Setuptools][].
+[Poetry][] will eventually gain support in 2.0.
 
 Binaries mostly are unsupported in existing PEP 621 tools, though better support
 is coming.
@@ -259,5 +259,7 @@ recommend providing at least `test`, `docs`, and `dev`.
 [setuptools]: https://setuptools.readthedocs.io
 [pep 621]: https://www.python.org/dev/peps/pep-0621
 [metadata]: https://packaging.python.org/en/latest/specifications/core-metadata/
+[scikit-build-core]: https://scikit-build-core.readthedocs.io
+[meson-python]: https://meson-python.readthedocs.io
 
 <script src="{% link assets/js/tabs.js %}"></script>

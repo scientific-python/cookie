@@ -259,7 +259,7 @@ can setup a conda environment with ROOT (slow, but only nox and conda are
 required). There also is a version bump session, and does some custom logic too.
 
 The complex testing procedure powering Scientific Python Cookie is
-[powered by nox](https://github.com/scikit-hep/cookie/blob/main/noxfile.py). It
+[powered by nox](https://github.com/scientific-python/cookie/blob/main/noxfile.py). It
 allows the complex CI jobs that generate projects and lint/test/build them to be
 run locally with no other setup.
 

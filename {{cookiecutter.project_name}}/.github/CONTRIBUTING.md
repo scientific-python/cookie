@@ -1,7 +1,7 @@
-See the [Scikit-HEP Developer introduction][skhep-dev-intro] for a detailed
-description of best practices for developing Scikit-HEP packages.
+See the [Scientific Python Developer Guide][spc-dev-intro] for a detailed
+description of best practices for developing scientific packages.
 
-[skhep-dev-intro]: https://scikit-hep.org/developer/intro
+[spc-dev-intro]: https://scientific-python-cookie.readthedocs.io/guide/intro
 
 # Quick development
 

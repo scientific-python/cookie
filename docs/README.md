@@ -1,4 +1,4 @@
-# Scikit-HEP Developer pages
+# Scientific Python Developer Guide
 
 ## Developer info
 
