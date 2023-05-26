@@ -1,8 +1,8 @@
-title: Scientific Python Developer Guide
-email: scikit-hep-admins@googlegroups.com
+title: Scientific Python Development Guide
+email: guide@scientific-python.org
 description: >-
-  The Scientific Python Developer Guide guide new users through the development
-  process.
+  This guide is maintained by the scientific Python community for the benefit of
+  fellow scientists and research software engineers.
 url: "https://learn.scientific-python.org"
 baseurl: "/development" # Set by rtd
 github_username: scientific-python
