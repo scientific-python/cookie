@@ -11,29 +11,30 @@ parent: Topical Guides
 Python packages without binary extensions and fairly simple builds can use a
 modern build system instead of the classic but verbose setuptools and
 `setup.py`. The one you select doesn't really matter that much; they all use a
-[standard configuration language][metadata] introduced in [PEP 621][]. The PyPA's Flit is a
-great option. In the future, scikit-build and meson may support this sort of
-configuration, enabling binary extension packages to benefit too. These [PEP
-621][] tools currently include [Hatch][], [PDM][], [Flit][], [Trampolim][],
-[Whey][], and [Setuptools][]. [Poetry][] will eventually gain support in 2.0.
+[standard configuration language][metadata] introduced in [PEP 621][]. The
+PyPA's Flit is a great option. In the future, scikit-build and meson may support
+this sort of configuration, enabling binary extension packages to benefit too.
+These [PEP 621][] tools currently include [Hatch][], [PDM][], [Flit][],
+[Trampolim][], [Whey][], and [Setuptools][]. [Poetry][] will eventually gain
+support in 2.0.
 
 Binaries mostly are unsupported in existing PEP 621 tools, though better support
 is coming.
 
 > ## Classic files
 >
-> These systems do not use or require `setup.py`, `setup.cfg`, or
-> `MANIFEST.in`. Those are for setuptools. Unless you are using
-> setuptools, of course, which still uses `MANIFEST.in`. You
-> can convert the old files using `pipx run hatch new --init`
-> or with [ini2toml](https://ini2toml.readthedocs.io/en/latest/).
+> These systems do not use or require `setup.py`, `setup.cfg`, or `MANIFEST.in`.
+> Those are for setuptools. Unless you are using setuptools, of course, which
+> still uses `MANIFEST.in`. You can convert the old files using
+> `pipx run hatch new --init` or with
+> [ini2toml](https://ini2toml.readthedocs.io/en/latest/).
 
 > ## Selecting a backend
 >
 > Backends handle metadata the same way, so the choice comes down to how you
-> specify what files go into an SDist and extra features, like getting a
-> version from VCS. If you don't have an existing preference, hatchling is an
-> excellent choice, balancing speed, configurability, and extendability.
+> specify what files go into an SDist and extra features, like getting a version
+> from VCS. If you don't have an existing preference, hatchling is an excellent
+> choice, balancing speed, configurability, and extendability.
 
 ## pyproject.toml: build-system
 
@@ -116,37 +117,38 @@ Discussions = "https://github.com/organization/package/discussions"
 Changelog = "https://package.readthedocs.io/en/latest/changelog.html"
 ```
 
-You can read more about each field, and all allowed fields, in [packaging.python.org][metadata],
+You can read more about each field, and all allowed fields, in
+[packaging.python.org][metadata],
 [Flit](https://flit.readthedocs.io/en/latest/pyproject_toml.html#new-style-metadata)
 or [Whey](https://whey.readthedocs.io/en/latest/configuration.html). Note that
 "Homepage" is special, and replaces the old url setting.
 
 ## Package structure
 
-All packages _should_ have a `src` folder, with the package code residing
-inside it, such as `src/<package>/`. This may seem like extra hassle; after
-all, you can type "`python`" in the main directory and avoid installing it if
-you don't have a `src` folder! However, this is a bad practice, and it causes
-several common bugs, such as running `pytest` and getting the local version
-instead of the installed version - this obviously tends to break if you build
-parts of the library or if you access package metadata.
+All packages _should_ have a `src` folder, with the package code residing inside
+it, such as `src/<package>/`. This may seem like extra hassle; after all, you
+can type "`python`" in the main directory and avoid installing it if you don't
+have a `src` folder! However, this is a bad practice, and it causes several
+common bugs, such as running `pytest` and getting the local version instead of
+the installed version - this obviously tends to break if you build parts of the
+library or if you access package metadata.
 
-This sadly is not part of the standard metadata in `[project]`, so it depends
-on what backend you you use. Hatchling, Flit, PDM, and setuptools
-use automatic detection, while Trampolim and whey do not, requiring a `tool`
-setting.
+This sadly is not part of the standard metadata in `[project]`, so it depends on
+what backend you you use. Hatchling, Flit, PDM, and setuptools use automatic
+detection, while Trampolim and whey do not, requiring a `tool` setting.
 
 If you don't match your package name and import name (which you should except
 for very special cases), you will likely need extra configuration here.
 
 ## Versioning
 
-You can specify the version manually (as shown in the example), but the
-backends usually provide some automatic features to help you avoid this. Flit
-will pull this from a file if you ask it to. Hatchling and PDM can be instructed
-to look in a file or use git.
+You can specify the version manually (as shown in the example), but the backends
+usually provide some automatic features to help you avoid this. Flit will pull
+this from a file if you ask it to. Hatchling and PDM can be instructed to look
+in a file or use git.
 
-You will always need to specify that the version will be supplied dynamically with:
+You will always need to specify that the version will be supplied dynamically
+with:
 
 ```toml
 dynamic = ["version"]
@@ -200,10 +202,12 @@ support versioning.
 
 This is tool specific.
 
-- [Hatchling info here](https://hatch.pypa.io/latest/config/build/#file-selection). Hatchling
-  uses your VCS ignore file by default, so make sure it is accurate (which is a good idea anyway).
-- [Flit info here](https://flit.readthedocs.io/en/latest/pyproject_toml.html#sdist-section). Flit requires manual
-  inclusion/exclusion in many cases, like using a dirty working directory.
+- [Hatchling info here](https://hatch.pypa.io/latest/config/build/#file-selection).
+  Hatchling uses your VCS ignore file by default, so make sure it is accurate
+  (which is a good idea anyway).
+- [Flit info here](https://flit.readthedocs.io/en/latest/pyproject_toml.html#sdist-section).
+  Flit requires manual inclusion/exclusion in many cases, like using a dirty
+  working directory.
 - [PDM info here](https://pdm.fming.dev/pyproject/tool-pdm/#include-and-exclude-package-files).
 - Setuptools still uses `MANIFEST.in`.
 
@@ -242,8 +246,9 @@ mpl = [
 ]
 ```
 
-Self dependencies can be used by using the name of the package, such as `dev = ["package[test,examples]"]`, but this requires Pip 21.2 or newer. We recommend
-providing at least `test`, `docs`, and `dev`.
+Self dependencies can be used by using the name of the package, such as
+`dev = ["package[test,examples]"]`, but this requires Pip 21.2 or newer. We
+recommend providing at least `test`, `docs`, and `dev`.
 
 [flit]: https://flit.readthedocs.io
 [poetry]: https://python-poetry.org

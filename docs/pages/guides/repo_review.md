@@ -16,8 +16,7 @@ check was skipped because a previous required check failed. Some checks will
 fail, that's okay - the goal is bring all possible issues to your attention, not
 to force compliance with arbitrary checks.
 
-You can also run [this tool](https://github.com/scikit-hep/repo-review)
-locally:
+You can also run [this tool](https://github.com/scikit-hep/repo-review) locally:
 
 ```bash
 pipx run 'scikit-hep-repo-review[cli]' <path to repo>

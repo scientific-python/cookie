@@ -27,7 +27,7 @@ repos:
     rev: "v2.7.1"
     hooks:
       - id: prettier
-        types_or: [yaml, html, css, scss, javascript, json]
+        types_or: [yaml, markdown, html, css, scss, javascript, json]
         args: [--prose-wrap=always]
         exclude: ^.readthedocs.yml
 

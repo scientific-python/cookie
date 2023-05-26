@@ -27,7 +27,8 @@ hand, from `{{cookiecutter.project_name}}/`).
 During generation you can select from the following backends for your package:
 
 1. [hatch][]: This uses hatchling, a modern builder with nice file inclusion,
-   extendable via plugins, and good error messages. **(Recommended for pure Python projects)**
+   extendable via plugins, and good error messages. **(Recommended for pure
+   Python projects)**
 2. [setuptools][]: The classic build system. Most powerful, but high learning
    curve and lots of configuration required.
 3. [setuptools621][setuptools]: The classic build system, but with the new
@@ -37,21 +38,22 @@ During generation you can select from the following backends for your package:
 5. [scikit-build][]: A scikit-build (CMake) project also using pybind11, using
    scikit-build-core. **(Recommended for C++ projects)**
 6. [meson-python][]: A Meson project also using pybind11.
-6. [poetry][]: An all-in-one solution to pure Python projects. Replaces
+7. [poetry][]: An all-in-one solution to pure Python projects. Replaces
    setuptools, venv/pipenv, pip, wheel, and twine. Higher learning curve, but is
    all-in-one. Makes some bad default assumptions for libraries.
-7. [flit][]: A modern, lightweight [PEP 621][] build system for pure Python
+8. [flit][]: A modern, lightweight [PEP 621][] build system for pure Python
    projects. Replaces setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low
    learning curve. Easy to bootstrap into new distributions. Difficult to get
    the right files included, little dynamic metadata support.
-8. [pdm][]: A modern, less opinionated all-in-one solution to pure Python
+9. [pdm][]: A modern, less opinionated all-in-one solution to pure Python
    projects supporting standards. Replaces setuptools, venv/pipenv, pip, wheel,
    and twine. Supports [PEP 621][], and also the unaccepted [PEP 582][].
-9. [trampolim][]: A modern [PEP 621][] builder with support for tasks, allowing
-   arbitrary Python to run during the build process if needed.
-10. [whey][]: A modern [PEP 621][] builder with some automation options for Trove
-    classifiers. Development seems to be stalled, possibly.
-11. [maturin][]: A [PEP 621][] builder for Rust binary extensions. **(Recommended for Rust projects)**
+10. [trampolim][]: A modern [PEP 621][] builder with support for tasks, allowing
+    arbitrary Python to run during the build process if needed.
+11. [whey][]: A modern [PEP 621][] builder with some automation options for
+    Trove classifiers. Development seems to be stalled, possibly.
+12. [maturin][]: A [PEP 621][] builder for Rust binary extensions.
+    **(Recommended for Rust projects)**
 
 Currently, the best choice is probably hatch for pure Python projects, and
 setuptools (such as the pybind11 choice) for binary projects.
@@ -146,6 +148,8 @@ compiled projects. It currently dumps all development dependencies into a shared
 environment, causing long solve times and high chance of conflicts. It also does
 not use pre-commit properly. It also has quite a bit of custom code.
 
+<!-- prettier-ignore-start -->
+
 [actions-badge]: https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
 [actions-link]: https://github.com/scikit-hep/cookie/actions
 [conda-badge]: https://img.shields.io/conda/vn/conda-forge/cookie
@@ -173,3 +177,5 @@ not use pre-commit properly. It also has quite a bit of custom code.
 [meson-python]: https://meson-python.readthedocs.io
 [pep 582]: https://www.python.org/dev/peps/pep-0582
 [pep 621]: https://www.python.org/dev/peps/pep-0621
+
+<!-- prettier-ignore-end -->
