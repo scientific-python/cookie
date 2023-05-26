@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Process Recommendations
+title: Process recommendations
 permalink: /principles/process/
 nav_order: 1
 parent: Principles

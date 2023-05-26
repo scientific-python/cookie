@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Design Recommendations
+title: Design recommendations
 permalink: /principles/design/
 nav_order: 2
 parent: Principles
@@ -28,19 +28,21 @@ test, maintain when data formats change, or reuse for unforeseen applications.
 type they *are*. "If it walks like a duck and it quacks like a duck, then it
 must be a duck."
 
-Python in general and scientific Python in particular leverage *interfaces* to
-support interoperability and reuse. For example, it is possible to pass a
-pandas DataFrame to the `numpy.sum` function even though pandas was
-created long after `numpy.sum`. This is because `numpy.sum` avoids
-assuming it will be passed specific data types; it accepts any object that
-provides the right methods (interfaces). Where possible, avoid `isinstance`
-checks in your code, and try to make your functions work on the broadest
-possible range of input types.
+Python in general and scientific Python in particular leverage *interfaces*
+(also known as Protocols) to support interoperability and reuse. For example,
+it is possible to pass a pandas DataFrame to the `numpy.sum` function even
+though pandas was created long after `numpy.sum`. This is because `numpy.sum`
+avoids assuming it will be passed specific data types; it accepts any object
+that provides the right methods (interfaces). Where possible, avoid
+`isinstance` checks in your code, and try to make your functions work on the
+broadest possible range of input types.
 
 ## Consider: Can this just be a function?
 
-Not everything needs to be object-oriented. Object-oriented design frequently
-does not add value in scientific computing.
+Not everything needs to be object-oriented. Object-oriented design needs to
+follow the same principles as other code, like modularity, and be well tested.
+If you can get away with writing functions processing existing datatypes like a
+DataFrame, do so.
 
 >  It is better to have 100 functions operate on one data structure than 10
 >  functions on 10 data structures.
@@ -50,7 +52,10 @@ does not add value in scientific computing.
 
 A popular talk, ["Stop Writing Classes"][], illustrates how some situations
 that *seem* to lend themselves to object-oriented programming are much more
-simply handled using functions.
+simply handled using functions. The biggest danger of reaching for OO design when
+it's not needed is the following: changing states.
+
+## Avoid changing state
 
 It is often tempting to invent a custom class to express a workflow, along
 these lines.
@@ -67,7 +72,7 @@ That’s easy and simple. **Unless you forget a step.** Oh, yeah, and static
 analysis tools can't tell you if you forget a step, the API doesn't statically
 "know" that `.prepare()` is required, for example. Tab completion tells you that
 `.plot()` is valid immediately. The underlying problem is that `Data` has a
-changing state, and not all operations are valid in all possible states.
+implicit changing state, and not all operations are valid in all possible states.
 
 One alternative replace `Data` with multiple immutable classes representing the
 state at each step.
@@ -102,10 +107,11 @@ extended in unforeseen ways.
 
 As an example, the widely-used library scikit-image initially experimented
 with using an `Image` class, but ultimately decided that it was better to use
-plain old numpy arrays. All scientific Python libraries understand numpy
+plain old NumPy arrays. All scientific Python libraries understand NumPy
 arrays, but they don't understand custom classes, so it is better to pass
 application-specific metadata *alongside* a standard array than to try to
-encapsulate all of that information in a new, bespoke object.
+encapsulate all of that information in a new, bespoke object. (Modern NumPy
+uses Protocols to make this type of use much easier).
 
 When you want to group data together into one object for convenience,
 consider dataclasses.
@@ -120,6 +126,24 @@ class Data:
     temperature: float
     count: int
 ```
+
+## Static typing is verbose, but makes code more readable
+
+Code with static types has a lot of extra characters, but it provides more
+_information_ to the reader; `timestamp: int` or `timestamp: float` provides
+valuable information to the reader about the types that might be hard to infer
+from the variable name alone, and therefore what is valid and what isn't. It
+also can be verified in static typing checkers, like MyPy, so that it is more
+likely to be correct than types in docstrings.
+
+There's another benefit: if you design your code with types in mind, you'll
+tend toward simpler, less dynamic designs with a clearly defined expected
+usage.  You'll remember (well, at least you are more likely to remember) to
+handle special cases like lists vs strings or values that could also be `None`.
+
+When using static typing, duck typing is expressed via Protocols. These should be
+strongly preferred over older solutions like inheritance or ABCs if possible, as they
+trade a little extra code to remove dependencies between objects.
 
 ## Permissiveness Isn't Always Convenient
 
@@ -163,20 +187,25 @@ For example, it is often tempting to hide certain reused keywords in a
 function, shortening this:
 
 ```python
-def get_image(filename, normalize=True, beginning=0, end=None):
+def get_image(
+    filename: Path,
+    normalize: bool = True,
+    beginning: int = 0,
+    end: int | None = None,
+) -> np.ndarray:
     ...
 ```
 
 into this:
 
 ```python
-def get_image(filename, options={}):
+def get_image(filename: Path, **kwargs: Any) -> np.ndarray:
     ...
 ```
 
 Although the interface appears to have been simplified through hidden keyword
-arguments, now the user needs to remember what the `options` are or dig
-through documentation to better understand how to use them.
+arguments, now the user needs to remember what the `kwargs` are or dig
+through documentation to better understand how to use them. You also lose static typing.
 
 Because new science occurs when old ideas are reapplied or extended in
 unforeseen ways, scientific code should not bury its complexity or overly
@@ -188,7 +217,13 @@ in Python 3, which require the user to pass an argument by keyword rather
 than position.
 
 ```python
-def get_image(filename, *, normalize=True, beginning=0, end=None):
+def get_image(
+    filename: Path,
+    *,
+    normalize: bool = True,
+    beginning: int = 0,
+    end: int | None = None
+) -> np.ndarray:
     ...
 ```
 
