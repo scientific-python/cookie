@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Packaging
-permalink: /guides/packaging/
+title: Classic Packaging
+permalink: /guides/packaging_classic/
 nav_order: 5
 parent: Topical Guides
 ---
