@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/universal
 {
-  "name": "Default Linux Universal",
+  "name": "scientific-python-cookie[dev]",
   "image": "mcr.microsoft.com/devcontainers/python:0-3.11",
   "features": {
     "ghcr.io/devcontainers/features/rust:1": {},
