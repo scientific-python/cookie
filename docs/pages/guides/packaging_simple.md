@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Simple Packaging
-permalink: /guides/pyproject/
+permalink: /guides/packaging-simple/
 nav_order: 4
 parent: Topical Guides
 ---

@@ -126,4 +126,4 @@ In [1]: snell?
 For more about packaging, also see our [packaging guide][].
 
 [Version Control with Git]: https://swcarpentry.github.io/git-novice/
-[packaging guide]: {% link pages/guides/pep621.md %}
+[packaging guide]: {% link pages/guides/packaging_simple.md %}

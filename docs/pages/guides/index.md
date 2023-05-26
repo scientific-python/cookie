@@ -17,7 +17,7 @@ sections.
 Following that, there are recommendations for [style][], intended to promote
 good practices and to ensure continuity across the packages. There is a
 [dedicated page for static type checking with MyPy][mypy]. There is then a guide on
-[simple packaging][] or [compiled / complex packaging][packaging], which should help
+[simple packaging][] or [classic packaging][], which should help
 in ensuring a consistent developer and user experience when working with distribution.
 
 A section on CI follows, with a [general setup guide][gha_basic], and then two
@@ -35,8 +35,8 @@ You can also evaluate your repository against the guidelines by using
 [tutorials]: {% link pages/tutorials/index.md %}
 [style]: {% link pages/guides/style.md %}
 [mypy]: {% link pages/guides/mypy.md %}
-[simple packaging]: {% link pages/guides/pyproject.md %}
-[packaging]: {% link pages/guides/packaging.md %}
+[simple packaging]: {% link pages/guides/packaging_simple.md %}
+[classic packaging]: {% link pages/guides/packaging_classic.md %}
 [gha_basic]: {% link pages/guides/gha_basic.md %}
 [gha_pure]: {% link pages/guides/gha_pure.md %}
 [gha_wheels]: {% link pages/guides/gha_wheels.md %}
