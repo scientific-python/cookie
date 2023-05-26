@@ -135,13 +135,13 @@ instead.
 
 [Hypermodern-Python][hypermodern] is another project worth checking out with
 many similarities, like great documentation for each feature and many of the
-same tools used. It has a slightly different set of features, and has a
-stronger focus on GitHub Actions - most our guide could be adapted to a
-different CI system fairly easily if you don't want to use GHA. It also forces
-the use of Poetry (instead of having a backend selection), and doesn't support
-compiled projects. It currently dumps all development dependencies into a
-shared environment, causing long solve times and high chance of conflicts. It
-also does not use pre-commit properly. It also has quite a bit of custom code.
+same tools used. It has a slightly different set of features, and has a stronger
+focus on GitHub Actions - most our guide could be adapted to a different CI
+system fairly easily if you don't want to use GHA. It also forces the use of
+Poetry (instead of having a backend selection), and doesn't support compiled
+projects. It currently dumps all development dependencies into a shared
+environment, causing long solve times and high chance of conflicts. It also does
+not use pre-commit properly. It also has quite a bit of custom code.
 
 <!-- prettier-ignore-start -->
 

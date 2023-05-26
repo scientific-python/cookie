@@ -13,10 +13,10 @@ modern build system instead of the classic but verbose setuptools and
 `setup.py`. The one you select doesn't really matter that much; they all use a
 [standard configuration language][metadata] introduced in [PEP 621][]. The
 PyPA's Flit is a great option. [scikit-build-core][] and [meson-python][] are
-being developed to support this sort of configuration, enabling binary
-extension packages to benefit too.  These [PEP 621][] tools currently include
-[Hatch][], [PDM][], [Flit][], [Trampolim][], [Whey][], and [Setuptools][].
-[Poetry][] will eventually gain support in 2.0.
+being developed to support this sort of configuration, enabling binary extension
+packages to benefit too. These [PEP 621][] tools currently include [Hatch][],
+[PDM][], [Flit][], [Trampolim][], [Whey][], and [Setuptools][]. [Poetry][] will
+eventually gain support in 2.0.
 
 Binaries mostly are unsupported in existing PEP 621 tools, though better support
 is coming.
