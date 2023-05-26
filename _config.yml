@@ -3,9 +3,10 @@ email: scikit-hep-admins@googlegroups.com
 description: >-
   The Scientific Python Developer Guide guide new users through the development
   process.
-baseurl: "" # Set by rtd
-url: "https://scientific-python-cookie.readthedocs.io"
+url: "https://learn.scientific-python.org"
+baseurl: "/development" # Set by rtd
 github_username: scientific-python
+source: docs
 
 # Build settings
 markdown: kramdown

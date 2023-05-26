@@ -41,7 +41,7 @@ repos:
     rev: "v2.2.4"
     hooks:
       - id: codespell
-        exclude: ^docs/Gemfile\.lock$
+        exclude: ^Gemfile\.lock$
         args: ["-Lnd"]
 
   - repo: local
