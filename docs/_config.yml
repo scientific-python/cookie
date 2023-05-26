@@ -1,11 +1,11 @@
-title: Scikit-HEP Developer Pages
+title: Scientific Python Developer Guide
 email: scikit-hep-admins@googlegroups.com
 description: >-
-  The Scikit-HEP Developer pages guide new users through the development
+  The Scientific Python Developer Guide guide new users through the development
   process.
 baseurl: "" # Set by rtd
-url: "https://scikit-hep-cookie.readthedocs.io"
-github_username: scikit-hep
+url: "https://scientific-python-cookie.readthedocs.io"
+github_username: scientific-python
 
 # Build settings
 markdown: kramdown
@@ -17,19 +17,19 @@ plugins:
 
 color_scheme: skhep
 
-logo: "/assets/images/logo.png"
+logo: "/assets/images/logo.svg"
 
 # Enable or disable the site search
 search_enabled: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "Scikit-HEP on GitHub":
-    - "//github.com/scikit-hep"
+  "Scientific Python Cookie":
+    - "//github.com/scientific-python/cookie"
 
 gh_edit_link: true
 gh_edit_link_text: "View source for this page on GitHub."
-gh_edit_repository: "https://github.com/scikit-hep/cookie"
+gh_edit_repository: "https://github.com/scientific-python/cookie"
 gh_edit_branch: "main"
 gh_edit_view_mode: "tree" # "tree" or "edit"
 

@@ -1,16 +1,13 @@
-# Scikit-HEP: cookie
+# Scientific Python: cookie
 
 [![Actions Status][actions-badge]][actions-link]
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
-[![Gitter][gitter-badge]][gitter-link]
-[![Scikit-HEP][sk-badge]](https://scikit-hep.org/)
 
-A cookiecutter template for new Python projects, either targeting Scikit-HEP
-inclusion, or for general software packages - the only Scikit-HEP specific parts
-are in a few defaults. What makes this different from other cookie cutter
-templates for Python packages?
+A cookiecutter template for new Python projects based on the Scientific Python
+Developer Guide. What makes this different from other cookie cutter templates
+for Python packages?
 
-- Designed from the [Scikit-HEP developer guidelines][]: Every decision is
+- Designed from the [Scientific Python Developer Guide][]: Every decision is
   clearly documented and every tool described.
 - Template generation tested in GitHub Actions using nox.
 - Twelve different backends to choose from for building packages.
@@ -18,7 +15,7 @@ templates for Python packages?
   all platforms using cibuildwheel.
 - Follows PyPA best practices.
 
-Be sure you have read the [Scikit-HEP developer guidelines][] first, and
+Be sure you have read the [Scientific Python Developer Guide][] first, and
 possibly used them on a project or two. This is _not_ a minimal example or
 tutorial. It is a collection of useful tooling for starting a new project using
 cookiecutter, or for copying in individual files for an existing project (by
@@ -68,9 +65,7 @@ below, and skip installation). Then run:
 cookiecutter gh:scikit-hep/cookie
 ```
 
-Answer all the questions. If you are not making a Scikit-HEP repo, just enter a
-different org name. (You can also use `pipx run cookiecutter` without
-installing).
+You can also use `pipx run cookiecutter` without installing.
 
 Check the key setup files, `pyproject.toml`, and possibly `setup.cfg` and
 `setup.py` (pybind11 example). Update README.md. Also update and add docs to
@@ -84,8 +79,8 @@ free to change it to whatever you actually need/want.
 - GitHub Actions runs testing for the generation itself
   - Uses nox so cookie development can be checked locally
 - GitHub actions deploy
-  - Be sure to add a token
   - C++ backends include cibuildwheel for wheel builds
+  - Uses PyPI trusted publisher deployment
 - Dependabot keeps actions up to date periodically, through useful pull requests
 - Formatting handled by pre-commit
   - No reason not to be strict on a new project; remove what you don't want.
@@ -141,10 +136,10 @@ instead.
 [Hypermodern-Python][hypermodern] is another project worth checking out with
 many similarities, like great documentation for each feature and many of the
 same tools used. It has a slightly different set of features, and has a stronger
-focus on GitHub Actions - most of Scikit-HEP cookie could be adapted to a
-different CI system fairly easily if you don't want to use GHA. It also forces
-the use of Poetry (instead of having a backend selection), and doesn't support
-compiled projects. It currently dumps all development dependencies into a shared
+focus on GitHub Actions - most our guide could be adapted to a different CI
+system fairly easily if you don't want to use GHA. It also forces the use of
+Poetry (instead of having a backend selection), and doesn't support compiled
+projects. It currently dumps all development dependencies into a shared
 environment, causing long solve times and high chance of conflicts. It also does
 not use pre-commit properly. It also has quite a bit of custom code.
 
@@ -156,9 +151,6 @@ not use pre-commit properly. It also has quite a bit of custom code.
 [conda-link]: https://github.com/conda-forge/cookie-feedstock
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
 [github-discussions-link]: https://github.com/scikit-hep/cookie/discussions
-[gitter-badge]: https://badges.gitter.im/Scikit-HEP/community.svg
-[gitter-link]: https://gitter.im/Scikit-HEP/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
-[sk-badge]: https://scikit-hep.org/assets/images/Scikit--HEP-Project-blue.svg
 [scikit-hep developer guidelines]: https://scikit-hep.org/developer
 [cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
 [scikit-build]: https://scikit-build.readthedocs.io/en/latest/
