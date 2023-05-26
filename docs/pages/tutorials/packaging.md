@@ -11,7 +11,7 @@ In the section you will:
 - Employ version control.
 - Install and use the package.
 
-Once you complete this, see our [packaging guide][].
+For more about packaging, see our [packaging guide][].
 
 # Package
 
@@ -28,7 +28,7 @@ cd example
 
 You should immediately initialize an empty Git repository in this directory; if
 you need a refresher on using Git for version control, check out the Software
-Carpentry lesson [Version Control with Git]. You should commit changes regularly
+Carpentry lesson [Version Control with Git][]. You should commit changes regularly
 throughout what follows. This tutorial will not explicitly remind you to commit
 your work after this point.
 

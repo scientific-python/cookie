@@ -36,7 +36,7 @@ touch tests/test_snell.py
 
 Your package directory structure should now look like:
 
-```txt
+```bash
 example
 ├── noxfile.py
 ├── pyproject.toml
@@ -134,7 +134,8 @@ example/tests/test_snell.py ..                                                  
 The output of `pytest` is customizable. Commonly useful command-line
 arguments include:
 
-- `-v` verbose
+- `-v` Verbose output. Can be given twice.
+- `-x` Stop on first failed test. Great for long tracebacks.
 - `-s` Display output to stdout/stderr (e.g. output of `print`). By default, it is hidden.
 - `-k EXPRESSION` Filter tests by pattern-matching test name.
 - `--lf` Run only tests that failed on the previous run (**l**ast **f**ail).
