@@ -96,7 +96,7 @@ set of operations each time.
 ## Consider: Do I really want a custom class?
 
 Using built-in Python types (`int`, `float`, `str`) and standard scientific
-Python types like Numpy array and Pandas DataFrame makes code interoperable.
+Python types like NumPy array and Pandas DataFrame makes code interoperable.
 It enables data to flow between different libraries smoothly, and to be
 extended in unforeseen ways.
 
@@ -188,7 +188,7 @@ in Python 3, which require the user to pass an argument by keyword rather
 than position.
 
 ```python
-get_image(filename, *, normalize=True, beginning=0, end=None):
+def get_image(filename, *, normalize=True, beginning=0, end=None):
     ...
 ```
 
