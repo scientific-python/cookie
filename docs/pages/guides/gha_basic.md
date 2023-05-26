@@ -9,11 +9,12 @@ custom_title: GitHub Actions introduction
 
 {% include toc.html %}
 
-The recommended CI for scientific Python projects is GitHub Actions (GHA), although its
-predecessor Azure is also in heavy usage, and other popular services (Travis,
-Appveyor, and Circle CI) may be found in a few packages. GHA is preferred due
-to the flexible, extensible design and the tight integration with the GitHub
-permissions model (and UI). Here is a guide in setting up a new package with GHA.
+The recommended CI for scientific Python projects is GitHub Actions (GHA),
+although its predecessor Azure is also in heavy usage, and other popular
+services (Travis, Appveyor, and Circle CI) may be found in a few packages. GHA
+is preferred due to the flexible, extensible design and the tight integration
+with the GitHub permissions model (and UI). Here is a guide in setting up a new
+package with GHA.
 
 GHA is made up of workflows which consist of actions. Here are some of the
 workflows you will probably want in your package. These should be in a file
@@ -44,8 +45,8 @@ PRs targeting those branches only).
 ## Pre-commit
 
 If you use [pre-commit](https://pre-commit.com) (and you should), and you don't
-want to / can't use [pre-commit.ci](https://pre-commit.ci) yet,
-then this is a job that will check pre-commit for you:
+want to / can't use [pre-commit.ci](https://pre-commit.ci) yet, then this is a
+job that will check pre-commit for you:
 
 {% raw %}
 
@@ -63,11 +64,11 @@ lint:
 
 {% endraw %}
 
-If you do use [pre-commit.ci](https://pre-commit.ci), but you
-need this job to run a manual check, like check-manifest, then you can keep it
-but just use `with: extra_args: --all-files --hook-stage manual check-manifest`
-to run just this one check. You can also use `needs: lint` in your other jobs
-to keep them from running if the lint check does not pass.
+If you do use [pre-commit.ci](https://pre-commit.ci), but you need this job to
+run a manual check, like check-manifest, then you can keep it but just use
+`with: extra_args: --all-files --hook-stage manual check-manifest` to run just
+this one check. You can also use `needs: lint` in your other jobs to keep them
+from running if the lint check does not pass.
 
 ## Unit tests
 
@@ -123,8 +124,8 @@ you were building a final package.
 ## Updating
 
 If you use non-default actions in your repository (you will see some in the
-following pages), then it's a good idea to keep them up to date. GitHub
-provided a way to do this with dependabot. Just add the following file as
+following pages), then it's a good idea to keep them up to date. GitHub provided
+a way to do this with dependabot. Just add the following file as
 `.github/dependabot.yml`:
 
 ```yaml
@@ -137,12 +138,11 @@ updates:
       interval: "weekly"
 ```
 
-This will check to see if there are updates to the action weekly, and
-will make a PR if there are updates, including the changelog and commit summary
-in the PR. If you select a name like `v1`, this should only look for updates
-of the same form (since April 2022) - there is no need to restrict updates for
-"moving tag" updates anymore. You can also use SHA's and dependabot will
-respect that too.
+This will check to see if there are updates to the action weekly, and will make
+a PR if there are updates, including the changelog and commit summary in the PR.
+If you select a name like `v1`, this should only look for updates of the same
+form (since April 2022) - there is no need to restrict updates for "moving tag"
+updates anymore. You can also use SHA's and dependabot will respect that too.
 
 You can use this for other ecosystems too, including Python.
 
@@ -150,7 +150,8 @@ You can use this for other ecosystems too, including Python.
 
 ### Single OS steps
 
-If you need to have a step run only on a specific OS, use an if on that step with `runner.os`:
+If you need to have a step run only on a specific OS, use an if on that step
+with `runner.os`:
 
 ```yaml
 if: runner.os != 'Windows' # also 'macOS' and 'Linux'
@@ -161,8 +162,8 @@ environment variable `$RUNNER_OS` as well. Single quotes are required here.
 
 ### Changing the environment in a step
 
-If you need to change environment variables for later steps, such combining
-with an if condition for only for one OS, then you add it to a special file:
+If you need to change environment variables for later steps, such combining with
+an if condition for only for one OS, then you add it to a special file:
 
 ```yaml
 run: echo "MY_VAR=1" >> $GITHUB_ENV
@@ -174,45 +175,75 @@ Later steps will see this environment variable.
 
 There are a variety of useful actions. There are GitHub supplied ones:
 
-- [actions/checkout](https://github.com/actions/checkout): Almost always the first action. v2+ does not keep Git history unless `with: fetch-depth: 0` is included (important for SCM versioning). v1 works on very old docker images.
-- [actions/setup-python](https://github.com/actions/setup-python): Do not use v1; v2+ can setup any Python, including uninstalled ones and pre-releases. v4 requires a Python version to be selected.
-- [actions/cache](https://github.com/actions/cache): Can store files and restore them on future runs, with a settable key.
-- [actions/upload-artifact](https://github.com/actions/upload-artifact): Upload a file to be accessed from the UI or from a later job.
-- [actions/download-artifact](https://github.com/actions/download-artifact): Download a file that was previously uploaded, often for releasing. Match upload-artifact version.
+- [actions/checkout](https://github.com/actions/checkout): Almost always the
+  first action. v2+ does not keep Git history unless `with: fetch-depth: 0` is
+  included (important for SCM versioning). v1 works on very old docker images.
+- [actions/setup-python](https://github.com/actions/setup-python): Do not use
+  v1; v2+ can setup any Python, including uninstalled ones and pre-releases. v4
+  requires a Python version to be selected.
+- [actions/cache](https://github.com/actions/cache): Can store files and restore
+  them on future runs, with a settable key.
+- [actions/upload-artifact](https://github.com/actions/upload-artifact): Upload
+  a file to be accessed from the UI or from a later job.
+- [actions/download-artifact](https://github.com/actions/download-artifact):
+  Download a file that was previously uploaded, often for releasing. Match
+  upload-artifact version.
 
 And many other useful ones:
 
-- [ilammy/msvc-dev-cmd](https://github.com/ilammy/msvc-dev-cmd): Setup MSVC compilers.
-- [jwlawson/actions-setup-cmake](https://github.com/jwlawson/actions-setup-cmake): Setup any version of CMake on almost any image.
-- [wntrblm/nox](https://github.com/wntrblm/nox): Setup all versions of Python and provide nox.
-- [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish): Publish Python packages to PyPI.
-- [pre-commit/action](https://github.com/pre-commit/action): Run pre-commit with built-in caching.
-- [conda-incubator/setup-miniconda](https://github.com/conda-incubator/setup-miniconda): Setup conda or mamba on GitHub Actions.
-- [ruby/setup-ruby](https://github.com/ruby/setup-ruby) Setup Ruby if you need it for something.
+- [ilammy/msvc-dev-cmd](https://github.com/ilammy/msvc-dev-cmd): Setup MSVC
+  compilers.
+- [jwlawson/actions-setup-cmake](https://github.com/jwlawson/actions-setup-cmake):
+  Setup any version of CMake on almost any image.
+- [wntrblm/nox](https://github.com/wntrblm/nox): Setup all versions of Python
+  and provide nox.
+- [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish):
+  Publish Python packages to PyPI.
+- [pre-commit/action](https://github.com/pre-commit/action): Run pre-commit with
+  built-in caching.
+- [conda-incubator/setup-miniconda](https://github.com/conda-incubator/setup-miniconda):
+  Setup conda or mamba on GitHub Actions.
+- [ruby/setup-ruby](https://github.com/ruby/setup-ruby) Setup Ruby if you need
+  it for something.
 
-There are also a few useful tools installed which can really simplify your workflow or adding custom actions. This includes system package managers (like brew, chocolaty, NuGet, Vcpkg, etc), as well as a fantastic cross platform one:
+There are also a few useful tools installed which can really simplify your
+workflow or adding custom actions. This includes system package managers (like
+brew, chocolaty, NuGet, Vcpkg, etc), as well as a fantastic cross platform one:
 
-- [pipx](https://github.com/pypy/pipx): This is pre-installed on all runners (GitHub uses to set up other things), and is kept up to date. It enables you to use any PyPI application in a single line with `pipx run <app>`.
+- [pipx](https://github.com/pypy/pipx): This is pre-installed on all runners
+  (GitHub uses to set up other things), and is kept up to date. It enables you
+  to use any PyPI application in a single line with `pipx run <app>`.
 
 You can also run GitHub Actions locally:
 
-- [act](https://github.com/nektos/act): Run GitHub Actions in a docker image locally.
+- [act](https://github.com/nektos/act): Run GitHub Actions in a docker image
+  locally.
 
 ### Custom actions
 
-You can [write your own actions](https://docs.github.com/en/actions/creating-actions) locally or in a shared GitHub repo in either GitHub actions syntax itself (called "composite"), JavaScript, or Docker. Combined with pipx, composite actions are very easy to write!
+You can
+[write your own actions](https://docs.github.com/en/actions/creating-actions)
+locally or in a shared GitHub repo in either GitHub actions syntax itself
+(called "composite"), JavaScript, or Docker. Combined with pipx, composite
+actions are very easy to write!
 
 You can also make reusable workflows.
 
 ### GitHub pages
 
-GitHub has finished moving their pages build infrastructure to Actions, and they [now provide](https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/) the ability to directly push to Pages from Actions. This replaced the old workarounds of (force) pushing output to a branch or to separate repository.
+GitHub has finished moving their pages build infrastructure to Actions, and they
+[now provide](https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/)
+the ability to directly push to Pages from Actions. This replaced the old
+workarounds of (force) pushing output to a branch or to separate repository.
 
 <details markdown="1"><summary>Setting up GitHub Pages custom builds</summary>
 
 Before starting, make sure in the Pages settings the source is set to "Actions".
 
-You'll probably want this job to run on both your main branch, as well as `workflow_dispatch`, just in case you want to manually trigger a rebuild. You should set the permission so that the built-in `GITHUB_TOKEN` can write to pages:
+You'll probably want this job to run on both your main branch, as well as
+`workflow_dispatch`, just in case you want to manually trigger a rebuild. You
+should set the permission so that the built-in `GITHUB_TOKEN` can write to
+pages:
 
 ```yaml
 permissions:
@@ -229,7 +260,8 @@ concurrency:
   cancel-in-progress: true
 ```
 
-Now you'll want three custom actions in your `steps:`. First, you need to configure Pages.
+Now you'll want three custom actions in your `steps:`. First, you need to
+configure Pages.
 
 ```yaml
 - name: Setup Pages
@@ -239,7 +271,11 @@ Now you'll want three custom actions in your `steps:`. First, you need to config
 
 {% raw %}
 
-Notice this action sets an `id:`; this will allow you to use the outputs from this action later; specifically, may want to use `${{ steps.pages.outputs.base_path }}` when building (you can also get `origin`, `base_url`, or `host` - see the action [config](https://github.com/actions/configure-pages/blob/main/action.yml)).
+Notice this action sets an `id:`; this will allow you to use the outputs from
+this action later; specifically, may want to use
+`${{ steps.pages.outputs.base_path }}` when building (you can also get `origin`,
+`base_url`, or `host` - see the action
+[config](https://github.com/actions/configure-pages/blob/main/action.yml)).
 
 {% endraw %}
 
@@ -248,9 +284,12 @@ Notice this action sets an `id:`; this will allow you to use the outputs from th
   uses: actions/upload-pages-artifact@v1
 ```
 
-This actions defaults to uploading `_site`, but you can give any `with: path:` if you want, including `"."` which is the whole repository.
+This actions defaults to uploading `_site`, but you can give any `with: path:`
+if you want, including `"."` which is the whole repository.
 
-Finally, you'll need to deploy the artifact (named `github-pages`) to Pages. You can make this a custom job with `needs:` pointing at your previous job (in this example, the previous job is called `build`):
+Finally, you'll need to deploy the artifact (named `github-pages`) to Pages. You
+can make this a custom job with `needs:` pointing at your previous job (in this
+example, the previous job is called `build`):
 
 {% raw %}
 
@@ -269,9 +308,13 @@ deploy:
 
 {% endraw %}
 
-The deploy-pages job gives a `page_url`, which is the same as `base_url` on the configure step, and can be set in the `environment`. If you want to do everything in one job, you only need one of these.
+The deploy-pages job gives a `page_url`, which is the same as `base_url` on the
+configure step, and can be set in the `environment`. If you want to do
+everything in one job, you only need one of these.
 
-See the [official starter workflows](https://github.com/actions/starter-workflows/tree/main/pages) for examples.
+See the
+[official starter workflows](https://github.com/actions/starter-workflows/tree/main/pages)
+for examples.
 
 </details>
 
@@ -281,7 +324,8 @@ These are some things you might need.
 
 ### Cancel existing runs
 
-If you add the following, you can ensure only one run per PR/branch happens at a time, cancelling the old run when a new one starts:
+If you add the following, you can ensure only one run per PR/branch happens at a
+time, cancelling the old run when a new one starts:
 
 {% raw %}
 
@@ -293,4 +337,7 @@ concurrency:
 
 {% endraw %}
 
-Anything with a matching group name will count in the same group - the ref is the "from" name for the PR. If you want, you can replace `github.ref` with `github.event.pull_request.number || github.sha`; this will still cancel on PR pushes but will build each commit on `main`.
+Anything with a matching group name will count in the same group - the ref is
+the "from" name for the PR. If you want, you can replace `github.ref` with
+`github.event.pull_request.number || github.sha`; this will still cancel on PR
+pushes but will build each commit on `main`.

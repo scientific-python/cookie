@@ -15,10 +15,10 @@ If you already know pytest, check our advanced [pytest guide][].
 # Test
 
 You should add a test right away while the details are still fresh in mind.
-Writing tests lets you make future improvements with confidence that
-any unintended changes or breakage with not go unnoticed. Writing tests also
-tends to encouraging you to write modular, reusable code, because it is easier
-to test.
+Writing tests lets you make future improvements with confidence that any
+unintended changes or breakage with not go unnoticed. Writing tests also tends
+to encouraging you to write modular, reusable code, because it is easier to
+test.
 
 ## Write some tests
 
@@ -28,7 +28,8 @@ Make a directory for tests. We recommend putting it next to the `src` directory.
 mkdir tests
 ```
 
-Make a file to put your first test in. The name of the file should begin with `test_`.
+Make a file to put your first test in. The name of the file should begin with
+`test_`.
 
 ```bash
 touch tests/test_snell.py
@@ -86,7 +87,7 @@ Things to notice:
 - It is tempting to put multiple assert statements in one test, but try to
   resist. You should make a separate test for each behavior that you are
   checking, as pytest will only report the first test, which gives you an
-  incomplete picture of the failure.  This is often referred to as the
+  incomplete picture of the failure. This is often referred to as the
   Arrange-Act-Assert pattern.
 - When comparing floating-point numbers (as opposed to integers) you should not
   test for exact equality. `pytest.approx` supports fuzzy comparisons and
@@ -98,8 +99,8 @@ Things to notice:
 
 ## Run the tests
 
-Scientific Python packages generally use a program called `pytest` to run
-their tests and report successes and failures. Install `pytest`.
+Scientific Python packages generally use a program called `pytest` to run their
+tests and report successes and failures. Install `pytest`.
 
 ```bash
 pip install pytest
@@ -131,16 +132,22 @@ example/tests/test_snell.py ..                                                  
 ===================================== 2 passed in 0.02 seconds ======================================
 ```
 
-The output of `pytest` is customizable. Commonly useful command-line
-arguments include:
+The output of `pytest` is customizable. Commonly useful command-line arguments
+include:
 
 - `-v` Verbose output. Can be given twice.
 - `-x` Stop on first failed test. Great for long tracebacks.
-- `-s` Display output to stdout/stderr (e.g. output of `print`). By default, it is hidden.
+- `-s` Display output to stdout/stderr (e.g. output of `print`). By default, it
+  is hidden.
 - `-k EXPRESSION` Filter tests by pattern-matching test name.
 - `--lf` Run only tests that failed on the previous run (**l**ast **f**ail).
 
-Consult the [pytest documentation][] for more. For more advanced pytest suggestions, see our [pytest guide][].
+Consult the [pytest documentation][] for more. For more advanced pytest
+suggestions, see our [pytest guide][].
+
+<!-- prettier-ignore-start -->
 
 [pytest documentation]: https://docs.pytest.org/en/latest/
 [pytest guide]: {% link pages/guides/pytest.md %}
+
+<!-- prettier-ignore-end -->

@@ -16,7 +16,7 @@ One of the biggest impediments to reuse of scientific code is when I/O
 code---assuming certain file locations, names, formats, or layouts---is
 interspersed with scientific logic.
 
-I/O-related functions should *only* perform I/O. For example, they should take
+I/O-related functions should _only_ perform I/O. For example, they should take
 in a filepath and return a numpy array, or a dictionary of arrays and metadata.
 The valuable scientific logic should be encoded in functions that take in
 standard data types and return standard data types. This makes them easier to
@@ -24,18 +24,18 @@ test, maintain when data formats change, or reuse for unforeseen applications.
 
 ## Duck Typing is a Good Idea
 
-[Duck typing][] treats objects based on what they can *do*, not based on what
-type they *are*. "If it walks like a duck and it quacks like a duck, then it
+[Duck typing][] treats objects based on what they can _do_, not based on what
+type they _are_. "If it walks like a duck and it quacks like a duck, then it
 must be a duck."
 
-Python in general and scientific Python in particular leverage *interfaces*
-(also known as Protocols) to support interoperability and reuse. For example,
-it is possible to pass a pandas DataFrame to the `numpy.sum` function even
-though pandas was created long after `numpy.sum`. This is because `numpy.sum`
-avoids assuming it will be passed specific data types; it accepts any object
-that provides the right methods (interfaces). Where possible, avoid
-`isinstance` checks in your code, and try to make your functions work on the
-broadest possible range of input types.
+Python in general and scientific Python in particular leverage _interfaces_
+(also known as Protocols) to support interoperability and reuse. For example, it
+is possible to pass a pandas DataFrame to the `numpy.sum` function even though
+pandas was created long after `numpy.sum`. This is because `numpy.sum` avoids
+assuming it will be passed specific data types; it accepts any object that
+provides the right methods (interfaces). Where possible, avoid `isinstance`
+checks in your code, and try to make your functions work on the broadest
+possible range of input types.
 
 ## Consider: Can this just be a function?
 
@@ -44,21 +44,21 @@ follow the same principles as other code, like modularity, and be well tested.
 If you can get away with writing functions processing existing datatypes like a
 DataFrame, do so.
 
->  It is better to have 100 functions operate on one data structure than 10
->  functions on 10 data structures.
+> It is better to have 100 functions operate on one data structure than 10
+> functions on 10 data structures.
 >
->  -- From ACM's SIGPLAN publication, (September, 1982), Article "Epigrams in
->     Programming", by Alan J. Perlis of Yale University.
+> -- From ACM's SIGPLAN publication, (September, 1982), Article "Epigrams in
+> Programming", by Alan J. Perlis of Yale University.
 
-A popular talk, ["Stop Writing Classes"][], illustrates how some situations
-that *seem* to lend themselves to object-oriented programming are much more
-simply handled using functions. The biggest danger of reaching for OO design when
-it's not needed is the following: changing states.
+A popular talk, ["Stop Writing Classes"][], illustrates how some situations that
+_seem_ to lend themselves to object-oriented programming are much more simply
+handled using functions. The biggest danger of reaching for OO design when it's
+not needed is the following: changing states.
 
 ## Avoid changing state
 
-It is often tempting to invent a custom class to express a workflow, along
-these lines.
+It is often tempting to invent a custom class to express a workflow, along these
+lines.
 
 ```py
 data = Data()
@@ -72,7 +72,8 @@ That’s easy and simple. **Unless you forget a step.** Oh, yeah, and static
 analysis tools can't tell you if you forget a step, the API doesn't statically
 "know" that `.prepare()` is required, for example. Tab completion tells you that
 `.plot()` is valid immediately. The underlying problem is that `Data` has a
-implicit changing state, and not all operations are valid in all possible states.
+implicit changing state, and not all operations are valid in all possible
+states.
 
 One alternative replace `Data` with multiple immutable classes representing the
 state at each step.
@@ -92,30 +93,29 @@ computed_data = EmptyData().load_data().prepare().do_calculations()
 computed_data.plot()
 ```
 
-These classes don’t have to be immutable. Maybe you can load more data to
-loaded data. But they are easier to use correctly when they at least avoid
-a mutating state that makes subsets of available operations (i.e. methods)
-invalid. Note that tab completion in this case would show exactly the allowed
-set of operations each time.
+These classes don’t have to be immutable. Maybe you can load more data to loaded
+data. But they are easier to use correctly when they at least avoid a mutating
+state that makes subsets of available operations (i.e. methods) invalid. Note
+that tab completion in this case would show exactly the allowed set of
+operations each time.
 
 ## Consider: Do I really want a custom class?
 
 Using built-in Python types (`int`, `float`, `str`) and standard scientific
-Python types like NumPy array and Pandas DataFrame makes code interoperable.
-It enables data to flow between different libraries smoothly, and to be
-extended in unforeseen ways.
+Python types like NumPy array and Pandas DataFrame makes code interoperable. It
+enables data to flow between different libraries smoothly, and to be extended in
+unforeseen ways.
 
-As an example, the widely-used library scikit-image initially experimented
-with using an `Image` class, but ultimately decided that it was better to use
-plain old NumPy arrays. All scientific Python libraries understand NumPy
-arrays, but they don't understand custom classes, so it is better to pass
-application-specific metadata *alongside* a standard array than to try to
-encapsulate all of that information in a new, bespoke object. (Modern NumPy
-uses Protocols to make this type of use much easier).
+As an example, the widely-used library scikit-image initially experimented with
+using an `Image` class, but ultimately decided that it was better to use plain
+old NumPy arrays. All scientific Python libraries understand NumPy arrays, but
+they don't understand custom classes, so it is better to pass
+application-specific metadata _alongside_ a standard array than to try to
+encapsulate all of that information in a new, bespoke object. (Modern NumPy uses
+Protocols to make this type of use much easier).
 
-When you want to group data together into one object for convenience,
-consider dataclasses.
-
+When you want to group data together into one object for convenience, consider
+dataclasses.
 
 ```py
 from dataclasses import dataclass
@@ -136,14 +136,14 @@ from the variable name alone, and therefore what is valid and what isn't. It
 also can be verified in static typing checkers, like MyPy, so that it is more
 likely to be correct than types in docstrings.
 
-There's another benefit: if you design your code with types in mind, you'll
-tend toward simpler, less dynamic designs with a clearly defined expected
-usage.  You'll remember (well, at least you are more likely to remember) to
-handle special cases like lists vs strings or values that could also be `None`.
+There's another benefit: if you design your code with types in mind, you'll tend
+toward simpler, less dynamic designs with a clearly defined expected usage.
+You'll remember (well, at least you are more likely to remember) to handle
+special cases like lists vs strings or values that could also be `None`.
 
-When using static typing, duck typing is expressed via Protocols. These should be
-strongly preferred over older solutions like inheritance or ABCs if possible, as they
-trade a little extra code to remove dependencies between objects.
+When using static typing, duck typing is expressed via Protocols. These should
+be strongly preferred over older solutions like inheritance or ABCs if possible,
+as they trade a little extra code to remove dependencies between objects.
 
 ## Permissiveness Isn't Always Convenient
 
@@ -153,7 +153,7 @@ users wants, separate it into two layers: a thin "friendly" layer on top of a
 "cranky" layer that takes in only exactly what it needs and does the actual
 work. The cranky layer should be easy to test; it should be constrained about
 what it accepts and what it returns. This layered design makes it possible to
-write *many* friendly layers with different opinions and different defaults.
+write _many_ friendly layers with different opinions and different defaults.
 
 When it doubt, make function arguments required. Optional arguments are harder
 to discover and can hide important choices that the user should know that they
@@ -161,8 +161,8 @@ are making.
 
 Exceptions should just be raised: don't catch them and print. Exceptions are a
 tool for being clear about what the code needs and letting the caller decide
-what to do about it. *Application* code (e.g. GUIs) should catch and handle
-errors to avoid crashing, but *library* code should generally raise errors
+what to do about it. _Application_ code (e.g. GUIs) should catch and handle
+errors to avoid crashing, but _library_ code should generally raise errors
 unless it is sure how the user or the caller wants to handle them.
 
 ## Write Useful Error Messages
@@ -175,16 +175,16 @@ it needs, it should say what it was looking for and where it looked.
 
 Unless you are writing a script that you plan to delete tomorrow or next week,
 your code will probably be read many more times than it is written. And today's
-"temporary solution" often becomes tomorrow's critical code. Therefore,
-optimize for clarity over brevity, using descriptive and consistent names.
+"temporary solution" often becomes tomorrow's critical code. Therefore, optimize
+for clarity over brevity, using descriptive and consistent names.
 
 ## Complexity is Always Conserved
 
 Complexity is always conserved and is strictly greater than the system the code
 is modeling. Attempts to hide complexity from the user frequently backfire.
 
-For example, it is often tempting to hide certain reused keywords in a
-function, shortening this:
+For example, it is often tempting to hide certain reused keywords in a function,
+shortening this:
 
 ```python
 def get_image(
@@ -204,17 +204,17 @@ def get_image(filename: Path, **kwargs: Any) -> np.ndarray:
 ```
 
 Although the interface appears to have been simplified through hidden keyword
-arguments, now the user needs to remember what the `kwargs` are or dig
-through documentation to better understand how to use them. You also lose static typing.
+arguments, now the user needs to remember what the `kwargs` are or dig through
+documentation to better understand how to use them. You also lose static typing.
 
 Because new science occurs when old ideas are reapplied or extended in
 unforeseen ways, scientific code should not bury its complexity or overly
 optimize for a specific use case. It should expose what complexity there is
 straightforwardly.
 
-Even better, you should consider using "keyword-only" arguments, introduced
-in Python 3, which require the user to pass an argument by keyword rather
-than position.
+Even better, you should consider using "keyword-only" arguments, introduced in
+Python 3, which require the user to pass an argument by keyword rather than
+position.
 
 ```python
 def get_image(
@@ -228,15 +228,15 @@ def get_image(
 ```
 
 Every argument after the `*` is keyword-only. Therefore, the usage
-`get_image('thing.png', False)` will not be allowed; the caller must
-explicitly type `get_image('thing.png', normalize=False)`. The latter is
-easier to read, and it enables the author to insert additional parameters
-without breaking backward compatibility.
+`get_image('thing.png', False)` will not be allowed; the caller must explicitly
+type `get_image('thing.png', normalize=False)`. The latter is easier to read,
+and it enables the author to insert additional parameters without breaking
+backward compatibility.
 
-Similarly, it can be tempting to write one function that performs multiple
-steps and has many options instead of multiple functions that do a single step
-and have few options. The advantages of "many small functions" reveal
-themselves in time:
+Similarly, it can be tempting to write one function that performs multiple steps
+and has many options instead of multiple functions that do a single step and
+have few options. The advantages of "many small functions" reveal themselves in
+time:
 
 - Small functions are easier to explain and document because their behavior is
   well-scoped.
@@ -251,19 +251,22 @@ themselves in time:
   avoided.
 
 Functions should return the same kind of thing no matter what their arguments,
-particularly their optional arguments.  Violating "return type stability" puts
-a burden on the function's caller, which now must understand the internal
-details of the function to know what type to expect for any given input. That
-makes the function harder to document, test, and use.  Python does not enforce
-return type stability, but we should try for it anyway.  If you have a function
-that returns different types of things depending on its inputs, that is a sign
-that it should be refactored into multiple functions.
+particularly their optional arguments. Violating "return type stability" puts a
+burden on the function's caller, which now must understand the internal details
+of the function to know what type to expect for any given input. That makes the
+function harder to document, test, and use. Python does not enforce return type
+stability, but we should try for it anyway. If you have a function that returns
+different types of things depending on its inputs, that is a sign that it should
+be refactored into multiple functions.
 
-Python is incredibly flexible. It accommodates many possible design choices.
-By exercising some restraint and consistency with the scientific Python
-ecosystem, Python can be used to build scientific tools that last and grow well
-over time.
+Python is incredibly flexible. It accommodates many possible design choices. By
+exercising some restraint and consistency with the scientific Python ecosystem,
+Python can be used to build scientific tools that last and grow well over time.
+
+<!-- prettier-ignore-start -->
 
 [the UNIX philosophy]: [https://en.wikipedia.org/wiki/Unix_philosophy]
 [Duck typing]: https://en.wikipedia.org/wiki/Duck_typing
 ["Stop Writing Classes"]: https:k//www.youtube.com/watch?v=o9pEzgHorH0&t=193s
+
+<!-- prettier-ignore-end -->

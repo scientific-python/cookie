@@ -12,33 +12,33 @@ parent: Topical Guides
 
 The most exciting thing happening right now in Python development is static
 typing. Since Python 3.0, we've had function annotations, and since 3.6,
-variable annotations. In 3.5, we got a "typing" library, which provides tools
-to describe types. This is what static type hints look like:
+variable annotations. In 3.5, we got a "typing" library, which provides tools to
+describe types. This is what static type hints look like:
 
 ```python
 def f(x: int) -> int:
     return x * 5
 ```
 
-This does nothing at runtime, except store the object. If you add `from
-__future__ import annotations`, it doesn't even store the actual object, just
-the string you type here, so then anything that can pass the Python parser is
-allowed here.
+This does nothing at runtime, except store the object. If you add
+`from __future__ import annotations`, it doesn't even store the actual object,
+just the string you type here, so then anything that can pass the Python parser
+is allowed here.
 
 It is not useless though! For one, it helps the reader. Knowing the types
 expected really gives you a much better idea of what is going on and what you
 can do and can't do.
 
-But the key goal is: static type checking! There are a collection of static
-type checkers, the most "official" and famous of which is MyPy. You can think
-of this as the "compiler" for compiled languages like C++; it checks to make
-sure you are not lying about the types. For example, passing in anything that
-is not an int to `f` will fail a mypy check, _before you run or deploy any code_.
+But the key goal is: static type checking! There are a collection of static type
+checkers, the most "official" and famous of which is MyPy. You can think of this
+as the "compiler" for compiled languages like C++; it checks to make sure you
+are not lying about the types. For example, passing in anything that is not an
+int to `f` will fail a mypy check, _before you run or deploy any code_.
 
 Your tests cannot test every possible branch, every line of code. MyPy can
 (though it doesn't by default, due to gradual typing). You may have code that
-runs rarely, that requires remote resources, that is slow, etc. All those can
-be checked by MyPy. It also keeps you (too?) truthful in your types.
+runs rarely, that requires remote resources, that is slow, etc. All those can be
+checked by MyPy. It also keeps you (too?) truthful in your types.
 
 ### Adding types
 
@@ -48,21 +48,21 @@ There are three ways to add types.
 2. They can be in special "type comments". Originally designed for Python 2
    code, and still requires the proper imports.
 3. They can be in a separate file with the same name but with a `.pyi`
-   extension. This is important for type stubs or for cases where you don't
-   want to add imports or touch the original code. You can annotate compiled
-   files or libraries you don't control this way.
+   extension. This is important for type stubs or for cases where you don't want
+   to add imports or touch the original code. You can annotate compiled files or
+   libraries you don't control this way.
 
 If you have a library you don't control, you can add "type stubs" for it, then
-give MyPy your stubs directory. MyPy will pull the types from your stubs. If
-you are writing code for a Raspberry Pi, for example, you could add the stubs
-for the Pi libraries, and then validate your code, without ever even installing
-the Pi-only libraries!
+give MyPy your stubs directory. MyPy will pull the types from your stubs. If you
+are writing code for a Raspberry Pi, for example, you could add the stubs for
+the Pi libraries, and then validate your code, without ever even installing the
+Pi-only libraries!
 
 You do not have to add types for every object - most of the time, you just need
 it for parameters and returns from functions. When running MyPy, you can use
 `reveal_type(...)` to show the inferred type of any object, which is like a
-print statement but at type-checking time, or `reveal_locals()` to see all
-local types.
+print statement but at type-checking time, or `reveal_locals()` to see all local
+types.
 
 ### Configuration
 
@@ -135,8 +135,8 @@ class Duck(Protocol):
         ...
 ```
 
-Now any object that can "quack" (and return a string) is a Duck. We can even
-add `@runtime_checkable` which will allow us to check this (minus the types) at
+Now any object that can "quack" (and return a string) is a Duck. We can even add
+`@runtime_checkable` which will allow us to check this (minus the types) at
 runtime in `isinstance`. So now we can design code like this:
 
 ```python
@@ -164,9 +164,10 @@ if typing.TYPE_CHECKING:
 ```
 
 Notice the complete lack of dependencies here. We don’t need `MyDuck` to write
-`pester_duck`, or vice-versa. And, we don't even need `Duck` to write either one at
-runtime! The dependence on `Duck` for `pester_duck` is entirely a type-check-time
-dependence (unless we want to use a `runtime_checkable` powered `isinstance`).
+`pester_duck`, or vice-versa. And, we don't even need `Duck` to write either one
+at runtime! The dependence on `Duck` for `pester_duck` is entirely a
+type-check-time dependence (unless we want to use a `runtime_checkable` powered
+`isinstance`).
 
 There are lots of built-in Protocols, most of which pre-date typing and are
 available in an Abstract Base Class form. Most of them check for one or more
@@ -181,15 +182,15 @@ Static typing has some great features worth checking out:
 - Literals
 - TypedDict
 - Nicer NamedTuple definition (very popular in Python 3 code)
-- MyPy validates with the Python version you ask for, regardless of what
-  version you are actually running.
+- MyPy validates with the Python version you ask for, regardless of what version
+  you are actually running.
 
 ## Complete example
 
 ### Runtime compatible types
 
-Here's the classic syntax, which you need to use if you want to access
-the type annotations at runtime and you need to support Python < 3.10:
+Here's the classic syntax, which you need to use if you want to access the type
+annotations at runtime and you need to support Python < 3.10:
 
 ```python
 from typing import Union, List
@@ -215,8 +216,8 @@ def g(x: Union[str, int]) -> None:
 
 If you don't access the types at runtime, or if you use Python 3.10+ only, then
 you can use a much nicer syntax. The `annotations` future feature causes the
-annotations to be stored as strings and not evaluated, which allows you to
-write things that are not yet valid, like `list[int]`!
+annotations to be stored as strings and not evaluated, which allows you to write
+things that are not yet valid, like `list[int]`!
 
 ```python
 from __future__ import annotations
@@ -233,10 +234,10 @@ def g(x: str | int) -> None:
         print("int", x)
 ```
 
-Notice that there are no imports from typing! Note that you cannot use the
-"new" syntax in non annotation locations (like unions in `isinstance`) unless
-Python supports it at runtime. And some libraries, like Typer and cattrs, use
-the annotations at runtime.
+Notice that there are no imports from typing! Note that you cannot use the "new"
+syntax in non annotation locations (like unions in `isinstance`) unless Python
+supports it at runtime. And some libraries, like Typer and cattrs, use the
+annotations at runtime.
 
 You can use the above in earlier Python versions if you use strings manually,
 with the same caveats.
@@ -254,5 +255,5 @@ def compute(timestamp):
 ```
 
 You don't know "what" timestamp is. Is it an int? A float? An object? With
-types, you'll know what I was intending to give you. You can use type aliases
-to really give expressive names here!
+types, you'll know what I was intending to give you. You can use type aliases to
+really give expressive names here!

@@ -5,6 +5,7 @@ permalink: /tutorials/packaging/
 nav_order: 3
 parent: Tutorials
 ---
+
 In the section you will:
 
 - Place your module in an installable package.
@@ -19,7 +20,8 @@ For more about packaging, see our [packaging guide][].
 
 Let’s create a Python package that contains this function.
 
-First, create a new directory for your software package, called `example`, and move into that:
+First, create a new directory for your software package, called `example`, and
+move into that:
 
 ```bash
 mkdir example
@@ -28,9 +30,9 @@ cd example
 
 You should immediately initialize an empty Git repository in this directory; if
 you need a refresher on using Git for version control, check out the Software
-Carpentry lesson [Version Control with Git][]. You should commit changes regularly
-throughout what follows. This tutorial will not explicitly remind you to commit
-your work after this point.
+Carpentry lesson [Version Control with Git][]. You should commit changes
+regularly throughout what follows. This tutorial will not explicitly remind you
+to commit your work after this point.
 
 ```bash
 git init
@@ -43,23 +45,26 @@ for the source code.
 mkdir src
 ```
 
-Create a file at `src/__init__.py`. This is what identifies the directory as a "package"
-to Python. It may remain empty.
+Create a file at `src/__init__.py`. This is what identifies the directory as a
+"package" to Python. It may remain empty.
 
 ```bash
 touch src/__init__.py
 ```
 
-Place `refraction.py`, our code from the previous section, next to it, at `src/refraction.py`.
+Place `refraction.py`, our code from the previous section, next to it, at
+`src/refraction.py`.
 
-The last element your package needs is a `pyproject.toml` file, placed in the root directory.
+The last element your package needs is a `pyproject.toml` file, placed in the
+root directory.
 
 ```bash
 touch pyproject.yaml
 ```
 
-Fill in the minimally required metadata, which includes the package name, version, and some
-options related to how to install it, which you can copy as is.
+Fill in the minimally required metadata, which includes the package name,
+version, and some options related to how to install it, which you can copy as
+is.
 
 ```bash
 # contents of pyproject.toml
@@ -91,8 +96,8 @@ At this point, your package's file structure will look like
 ## Install and use your package
 
 Now that your package has the necessary elements, you can install it into your
-virtual environment (which should already be active). From the top level of
-your project’s directory, enter
+virtual environment (which should already be active). From the top level of your
+project’s directory, enter
 
 ```
 pip install -e .
@@ -102,7 +107,8 @@ The `-e` flag tells pip to install in _editable_ mode, meaning that you can
 continue developing your package on your computer as you test it without
 re-installing it each time.
 
-Then, in a Python shell or Jupyter Notebook, import your package and call the function.
+Then, in a Python shell or Jupyter Notebook, import your package and call the
+function.
 
 ```py
 >>> from example.refraction import snell
@@ -125,5 +131,9 @@ In [1]: snell?
 
 For more about packaging, also see our [packaging guide][].
 
-[Version Control with Git]: https://swcarpentry.github.io/git-novice/
+<!-- prettier-ignore-start -->
+
+[version control with git]: https://swcarpentry.github.io/git-novice/
 [packaging guide]: {% link pages/guides/packaging_simple.md %}
+
+<!-- prettier-ignore-end -->

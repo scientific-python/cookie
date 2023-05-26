@@ -19,8 +19,8 @@ We are carefully allowing an exception: [nox][]. Nox has two strong points that
 help with the above concerns. First, it is very explicit, and even prints what
 it is doing as it operates. Unlike the older tox, it does not have any implicit
 assumptions built-in. Second, it has very elegant built-in support for both
-virtual and Conda environments. This can greatly reduce new contributor
-friction with your codebase.
+virtual and Conda environments. This can greatly reduce new contributor friction
+with your codebase.
 
 A daily developer is _not_ expected to use nox for simple tasks, like running
 tests or linting. You should _not_ rely on nox to make a task that should be
@@ -29,16 +29,16 @@ expected to use nox for linting on CI, or often even for testing on CI, even if
 those tasks are provided for users. Nox is a few seconds slower than running
 directly in a custom environment - but for new users, and rarely run tasks, it
 is _much_ faster than explaining how to get setup or manually messing with
-virtual environments. It is also highly reproducible, creating and destroying the
-temporary environment each time.
+virtual environments. It is also highly reproducible, creating and destroying
+the temporary environment each time.
 
 You _should_ use nox to make it easy and simple for new contributors to run
 things. You _should_ use nox to make specialized developer tasks easy. You
 _should_ use nox to avoid making single-use virtual environments for docs and
 other rarely run tasks.
 
-Nox doesn't handle binary builds very well, so for compiled projects, it might be
-best left to just specialized tasks.
+Nox doesn't handle binary builds very well, so for compiled projects, it might
+be best left to just specialized tasks.
 
 [nox]: https://nox.thea.codes
 [tox]: https://tox.readthedocs.io
@@ -51,11 +51,13 @@ best left to just specialized tasks.
 ### Installing
 
 Installing nox should be handled like any other Python _application_. You should
-either use a good package manager, like brew on macOS, or you should use pipx; either
-permanently (`pipx install nox`) or by running `pipx run nox` instead of `nox`.
+either use a good package manager, like brew on macOS, or you should use pipx;
+either permanently (`pipx install nox`) or by running `pipx run nox` instead of
+`nox`.
 
 On GitHub Actions or Azure, pipx is available by default, so you should use
-`pipx run nox`. To give it access to all Python versions, you can use this action:
+`pipx run nox`. To give it access to all Python versions, you can use this
+action:
 
 ```yaml
 - uses: wntrblm/nox@2022.8.7
@@ -76,7 +78,8 @@ of Python prepared for you, then use this input:
 
 Nox is a tool for running tasks, called "sessions", inside temporary virtual
 environments. It is configured through Python and is designed to resemble
-pytest. The file it looks for is called `noxfile.py` by default. This is an example of a simple nox file:
+pytest. The file it looks for is called `noxfile.py` by default. This is an
+example of a simple nox file:
 
 ```python
 import nox
@@ -94,8 +97,8 @@ def tests(session: nox.Session) -> None:
 This will create a session called `tests`. The function receives the "session"
 argument, which gives you access to the virtual environment it creates. You can
 use `.install()` to install inside the environment, and `.run()` to run inside
-the environment. We are also using `session.posargs` to allow extra arguments
-to be passed through to pytest. There are
+the environment. We are also using `session.posargs` to allow extra arguments to
+be passed through to pytest. There are
 [more useful methods](https://nox.thea.codes/en/stable/config.html#module-nox.sessions)
 as well.
 
@@ -111,7 +114,8 @@ You can see all defined sessions (along with the docstrings) using:
 $ nox -l
 ```
 
-It is a good idea to list the sessions you want by default by setting `nox.options.sessions` near the top of your file:
+It is a good idea to list the sessions you want by default by setting
+`nox.options.sessions` near the top of your file:
 
 ```python
 nox.options.sessions = ["lint", "tests"]
@@ -160,7 +164,8 @@ will likely look similar across different projects:
 
 #### Lint
 
-Ideally, all developers should be using pre-commit directly, but this helps new users.
+Ideally, all developers should be using pre-commit directly, but this helps new
+users.
 
 ```python
 @nox.session
@@ -243,26 +248,27 @@ def build(session: nox.Session) -> None:
 
 ### Examples
 
-A standard [powered by nox](https://github.com/scikit-hep/hist/blob/main/noxfile.py)
+A standard
+[powered by nox](https://github.com/scikit-hep/hist/blob/main/noxfile.py)
 package in Pure Python can be found in the Hist project of Scikit-HEP.
 
 A package that happens to use PDM (like Poetry but better) is Scikit-HEP UHI,
-which is [powered by nox](https://github.com/scikit-hep/uhi/blob/main/noxfile.py).
-Nox can setup a conda environment with ROOT (slow, but only nox and conda are
-required). There also is a version bump session, and does some custom logic
-too.
+which is
+[powered by nox](https://github.com/scikit-hep/uhi/blob/main/noxfile.py). Nox
+can setup a conda environment with ROOT (slow, but only nox and conda are
+required). There also is a version bump session, and does some custom logic too.
 
-The complex testing procedure powering Scientific Python Cookie is [powered by
-nox](https://github.com/scikit-hep/cookie/blob/main/noxfile.py). It allows the
-complex CI jobs that generate projects and lint/test/build them to be run
-locally with no other setup.
+The complex testing procedure powering Scientific Python Cookie is
+[powered by nox](https://github.com/scikit-hep/cookie/blob/main/noxfile.py). It
+allows the complex CI jobs that generate projects and lint/test/build them to be
+run locally with no other setup.
 
-PyPA's cibuildwheel also is [powered by
-nox](https://github.com/pypa/cibuildwheel/blob/main/noxfile.py), running
-pip-tools' compile on every Python version to pin dependencies, as well as providing
-a standard interface to update Python and project listing update scripts. The docs
-job there runs mkdocs instead of Sphinx. Other PyPA projects using nox include
-[pip](https://github.com/pypa/pip/blob/main/noxfile.py),
+PyPA's cibuildwheel also is
+[powered by nox](https://github.com/pypa/cibuildwheel/blob/main/noxfile.py),
+running pip-tools' compile on every Python version to pin dependencies, as well
+as providing a standard interface to update Python and project listing update
+scripts. The docs job there runs mkdocs instead of Sphinx. Other PyPA projects
+using nox include [pip](https://github.com/pypa/pip/blob/main/noxfile.py),
 [pipx](https://github.com/pypa/pipx/blob/main/noxfile.py),
 [manylinux](https://github.com/pypa/manylinux/blob/main/noxfile.py),
 [packaging](https://github.com/pypa/packaging/blob/main/noxfile.py), and
