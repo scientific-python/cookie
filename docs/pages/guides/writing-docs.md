@@ -1,8 +1,8 @@
--We --
+---
 layout: page
 title: Writing documentation
 permalink: /guides/writing-docs/
-nav_order: 30
+nav_order: 4
 parent: Topical Guides
 ---
 

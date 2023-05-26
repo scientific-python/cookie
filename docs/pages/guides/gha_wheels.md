@@ -2,7 +2,7 @@
 layout: page
 title: "GHA: Binary wheels"
 permalink: /guides/gha_wheels/
-nav_order: 12
+nav_order: 13
 parent: Topical Guides
 custom_title: GitHub Actions for Binary Wheels
 ---
