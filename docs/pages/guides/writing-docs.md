@@ -92,14 +92,14 @@ example/
 (...)
 ```
 
-To build HTML from this source, install sphinx and the MyST Markdown parser.
+To build HTML from this source, install sphinx and the MyST Markdown parser
 
 ```bash
 pip install sphinx myst-parser
 ```
 
-and run `sphinx-build`, pointing it to your directory of source files and a
-target directory for writing rendered (HTML) output files.
+and then run `sphinx-build`, pointing it to your directory of source files and
+a target directory for writing rendered (HTML) output files.
 
 ```bash
 sphinx-build docs/ docs/build/
@@ -166,11 +166,11 @@ inputs and outputs of every public object in the codebase. This should not be
 written by hand; that would be tedious and have a high probably of human error
 or drifting out of sync over time.
 
-MyST recommends using [sphinx-autodoc2][]. However, we currently recommend using
-the built-in sphinx autodoc extension because it interoperates well with
-docstrings written to the numpydoc standard. Unfortunately, this requires a
-different syntax (rST) shown below. Fortunately, you can simply copy/paste these
-examples.
+MyST recommends using [sphinx-autodoc2][]. However, we currently recommend
+using the built-in sphinx `autodoc` and `autosummary` extensions because they
+interoperates well with docstrings written to the numpydoc standard. To invoke
+them, we need to employ yet another syntax (reST). F:ortunately, you can simply
+copy/paste these examples.
 
 Install `numpydoc`.
 
