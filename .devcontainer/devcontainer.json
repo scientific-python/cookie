@@ -1,21 +1,21 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/universal
 {
-	"name": "Default Linux Universal",
-	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
-	"features": {
-		"ghcr.io/devcontainers/features/rust:1": {},
-		"ghcr.io/devcontainers/features/ruby:1" : {
-			"version" : "3.1"
-		}
-	},
-	"postCreateCommand": "pipx install nox && cd docs && bundle install",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-python.python",
-				"donjayamanne.python-environment-manager"
-			]
-		}
-	}
+  "name": "Default Linux Universal",
+  "image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/rust:1": {},
+    "ghcr.io/devcontainers/features/ruby:1": {
+      "version": "3.1"
+    }
+  },
+  "postCreateCommand": "pipx install nox && cd docs && bundle install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "donjayamanne.python-environment-manager"
+      ]
+    }
+  }
 }
