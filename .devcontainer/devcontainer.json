@@ -9,7 +9,7 @@
       "version": "3.1"
     }
   },
-  "postCreateCommand": "pipx install nox && cd docs && bundle install",
+  "postCreateCommand": "pipx install nox && bundle install",
   "customizations": {
     "vscode": {
       "extensions": [

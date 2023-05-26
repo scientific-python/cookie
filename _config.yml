@@ -6,6 +6,7 @@ description: >-
 baseurl: "" # Set by rtd
 url: "https://scientific-python-cookie.readthedocs.io"
 github_username: scientific-python
+source: docs
 
 # Build settings
 markdown: kramdown
