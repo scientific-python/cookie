@@ -265,7 +265,7 @@ Python can be used to build scientific tools that last and grow well over time.
 
 <!-- prettier-ignore-start -->
 
-[the UNIX philosophy]: [https://en.wikipedia.org/wiki/Unix_philosophy]
+[the UNIX philosophy]: https://en.wikipedia.org/wiki/Unix_philosophy
 [Duck typing]: https://en.wikipedia.org/wiki/Duck_typing
 ["Stop Writing Classes"]: https:k//www.youtube.com/watch?v=o9pEzgHorH0&t=193s
 

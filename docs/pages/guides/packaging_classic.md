@@ -22,7 +22,7 @@ systems.
 Also see the [Python packaging guide][], especially the [Python packaging
 tutorial][].
 
-> <h2 style="no_toc">Note:</h2>
+> <h2 class="no_toc">Note:</h2>
 >
 > Raw source lives in git and has a `setup.py`. You _can_ install directly from
 > git via pip, but normally users install from distributions hosted on PyPI.
