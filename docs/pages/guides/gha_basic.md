@@ -90,6 +90,7 @@ tests:
       python-version:
         - "3.7"
         - "3.11"
+        - "3.12-dev"
   name: Check Python ${{ matrix.python-version }}
   steps:
     - uses: actions/checkout@v3
