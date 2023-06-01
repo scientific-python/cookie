@@ -17,7 +17,7 @@ function Heading(props) {
             Scikit-HEP-Repo-Review
           </MaterialUI.Typography>
           <MaterialUI.Button
-            href="https://scientific-python-cookie.readthedocs.io"
+            href="https://scikit-hep.org/developer"
             color="inherit"
           >
             Developer Guidelines
@@ -39,6 +39,12 @@ function Results(props) {
   for (const key in props.results) {
     const inner_results = props.results[key];
     const results_components = inner_results.map((result) => {
+      const text_color =
+        result.state === false
+          ? "error.main"
+          : result.state === true
+          ? "text.primary"
+          : "info.main";
       const details =
         result.state === false ? (
           <span dangerouslySetInnerHTML={{ __html: result.err_msg }} />
@@ -48,21 +54,23 @@ function Results(props) {
           ? "error"
           : result.state === true
           ? "success"
-          : "warning";
+          : "info";
       const icon = (
         <MaterialUI.Icon color={color}>
           {result.state === false
-            ? "error"
+            ? "report"
             : result.state === true
-            ? "check_circle"
-            : "warning"}
+            ? "check_box"
+            : "info"}
         </MaterialUI.Icon>
       );
+
       const skipped = (
         <MaterialUI.Typography
           sx={{ display: "inline" }}
           component="span"
           variant="body2"
+          color="text.disabled"
         >
           {" [skipped]"}
         </MaterialUI.Typography>
@@ -73,11 +81,19 @@ function Results(props) {
             sx={{ display: "inline" }}
             component="span"
             variant="body2"
-            color="text.primary"
+            color={text_color}
           >
             {result.name + ": "}
           </MaterialUI.Typography>
-          <React.Fragment>{result.description}</React.Fragment>
+          <React.Fragment>
+            <MaterialUI.Typography
+              sx={{ display: "inline" }}
+              component="span"
+              color={text_color}
+            >
+              {result.description}
+            </MaterialUI.Typography>
+          </React.Fragment>
           {result.state === undefined && skipped}
         </React.Fragment>
       );
@@ -92,7 +108,9 @@ function Results(props) {
     output.push(
       <li key={`section-${key}`}>
         <ul>
-          <MaterialUI.ListSubheader>{key}</MaterialUI.ListSubheader>
+          <MaterialUI.ListSubheader>
+            {props.families[key]}
+          </MaterialUI.ListSubheader>
           {results_components}
         </ul>
       </li>
@@ -114,7 +132,7 @@ async function prepare_pyodide() {
   await pyodide.loadPackage("micropip");
   await pyodide.runPythonAsync(`
         import micropip
-        await micropip.install(["scikit_hep_repo_review==0.5.0"])
+        await micropip.install(["scikit_hep_repo_review==0.6.1"])
     `);
   return pyodide;
 }
@@ -177,19 +195,18 @@ class App extends React.Component {
     });
     const state = this.state;
     pyodide_promise.then((pyodide) => {
-      var results_dict;
+      var families_checks;
       try {
-        results_dict = pyodide.runPython(`
-                    from pyodide.http import open_url
-                    from scikit_hep_repo_review.processor import process
-                    from scikit_hep_repo_review.ghpath import GHPath
+        families_checks = pyodide.runPython(`
+            from pyodide.http import open_url
+            from scikit_hep_repo_review.processor import process
+            from scikit_hep_repo_review.ghpath import GHPath
 
-                    GHPath.open_url = staticmethod(open_url)
+            GHPath.open_url = staticmethod(open_url)
 
-                    package = GHPath(repo="${state.repo}", branch="${state.branch}")
-                    results_dict = process(package)
-                    results_dict
-                `);
+            package = GHPath(repo="${state.repo}", branch="${state.branch}")
+            process(package)
+        `);
       } catch (e) {
         if (e.message.includes("KeyError: 'tree'")) {
           this.setState({
@@ -206,27 +223,35 @@ class App extends React.Component {
         return;
       }
 
+      const families_dict = families_checks.get(0);
+      const results_list = families_checks.get(1);
+
       const results = {};
-      for (const res of results_dict) {
-        const vals = results_dict.get(res);
-        const inner_results = [];
-        for (const val of vals) {
-          inner_results.push({
-            name: val.name.toString(),
-            description: val.description.toString(),
-            state: val.result,
-            err_msg: val.err_markdown().toString(),
-          });
-        }
-        results[res] = inner_results;
+      const families = {};
+      for (const val of families_dict) {
+        results[val] = [];
+        families[val] = families_dict.get(val).get("name");
+      }
+      console.log(families);
+      for (const val of results_list) {
+        results[val.family].push({
+          name: val.name.toString(),
+          description: val.description.toString(),
+          state: val.result,
+          err_msg: val.err_markdown().toString(),
+        });
       }
 
       this.setState({
         results: results,
+        families: families,
         msg: `Results for ${state.repo}@${state.branch}`,
         progress: false,
         err_msg: "",
       });
+
+      results_list.destroy();
+      families_dict.destroy();
     });
   }
 
@@ -305,7 +330,10 @@ class App extends React.Component {
                 </MaterialUI.Typography>
               )}
             </MaterialUI.Box>
-            <Results results={this.state.results} />
+            <Results
+              results={this.state.results}
+              families={this.state.families}
+            />
           </MaterialUI.Paper>
         </MaterialUI.Box>
       </MyThemeProvider>
