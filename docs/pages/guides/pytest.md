@@ -73,7 +73,10 @@ addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
 xfail_strict = true
 filterwarnings = ["error"]
 log_cli_level = "info"
-testpaths = ["tests"]
+testpaths = [
+  "tests",
+  "ignore:(ast.Str|Attribute s|ast.NameConstant|ast.Num) is deprecated:DeprecationWarning:_pytest",
+]
 ```
 
 The `minversion` will print a nicer error if your `pytest` is too old (though,
@@ -87,10 +90,10 @@ unspecified fixture. And `--strict-config` will error if you make a mistake in
 your config. `xfail_strict` will change the default for `xfail` to fail the
 tests if it doesn't fail - you can still override locally in a specific xfail
 for a flaky failure. `filter_warnings` will cause all warnings to be errors (you
-can add allowed warnings here too). `log_cli_level` will report `INFO` and above
-log messages on a failure. Finally, `testpaths` will limit `pytest` to just
-looking in the folders given - useful if it tries to pick up things that are not
-tests from other directories.
+can add allowed warnings here too, see below). `log_cli_level` will report
+`INFO` and above log messages on a failure. Finally, `testpaths` will limit
+`pytest` to just looking in the folders given - useful if it tries to pick up
+things that are not tests from other directories.
 [See the docs](https://docs.pytest.org/en/stable/customize.html) for more
 options.
 
@@ -110,7 +113,11 @@ nice to users. If you are a developer, you don't want it to be "nice". You want
 to find and fix warnings before they cause user errors! Locally, you should run
 with `-Wd`, or set `export PYTHONWARNINGS=d` in your environment. The `pytest`
 warning filter "error" will ensure that `pytest` will fail if it finds any
-warnings.
+warnings. You can list warnings that should be hidden or just shown without
+becoming errors using the syntax
+`"<action>:Regex for warning message:Warning:package"`, where `<action>` can
+tends to be `default` (show the first time) or `ignore` (never show). The regex
+matches at the beginning of the error unless you prefix it with `.*`.
 
 ### Running pytest
 

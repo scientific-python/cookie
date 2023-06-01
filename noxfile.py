@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 import json
-import os
 import re
-import sys
 import urllib.request
 from pathlib import Path
 
 import nox
+
+nox.needs_version = ">=2022.1.7"
 
 DIR = Path(__file__).parent.resolve()
 with DIR.joinpath("cookiecutter.json").open() as f:
@@ -24,8 +24,6 @@ nox.options.sessions = ["lint", "tests", "native"]
 
 def make_cookie(session: nox.Session, backend: str) -> None:
     tmp_dir = session.create_tmp()
-    # Nox sets TMPDIR to a relative path - fixed in nox 2022.1.7
-    session.env["TMPDIR"] = os.path.abspath(tmp_dir)
     session.cd(tmp_dir)
 
     package_dir = Path(f"cookie-{backend}")
