@@ -17,7 +17,7 @@ function Heading(props) {
             Scikit-HEP-Repo-Review
           </MaterialUI.Typography>
           <MaterialUI.Button
-            href="scientific-python-cookie.readthedocs.io"
+            href="https://scientific-python-cookie.readthedocs.io"
             color="inherit"
           >
             Developer Guidelines
