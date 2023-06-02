@@ -1,0 +1,168 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "sp_repo_review"
+authors = [
+  { name = "Henry Schreiner", email = "henryfs@princeton.edu" },
+]
+license = { file = "LICENSE" }
+description = "Review repos for compliance to the Scientific-Python development guidelines"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+  "License :: OSI Approved :: BSD License",
+  "Topic :: Scientific/Engineering",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Development Status :: 4 - Beta",
+]
+dynamic = ["version"]
+dependencies = [
+  "pyyaml",
+  "repo-review",
+]
+
+[project.optional-dependencies]
+cli = [
+  "click>=8",
+  "rich>=12.2",
+]
+test = [
+  "pytest >=7",
+]
+dev = [
+  "pytest >=7",
+]
+
+[project.urls]
+homepage = "https://github.com/scientific-python/cookie"
+webpage = "https://scientific-python.github.io/cookie"
+
+[project.scripts]
+sp-repo-review = "repo_review.__main__:main"
+
+[project.entry-points."repo_review.checks"]
+general = "sp_repo_review.checks.general:repo_review_checks"
+pyproject = "sp_repo_review.checks.pyproject:repo_review_checks"
+precommit = "sp_repo_review.checks.precommit:repo_review_checks"
+ruff = "sp_repo_review.checks.ruff:repo_review_checks"
+mypy = "sp_repo_review.checks.mypy:repo_review_checks"
+github = "sp_repo_review.checks.github:repo_review_checks"
+
+[project.entry-points."repo_review.fixtures"]
+workflows = "sp_repo_review.checks.github:workflows"
+dependabot = "sp_repo_review.checks.github:dependabot"
+precommit = "sp_repo_review.checks.precommit:precommit"
+
+[project.entry-points."repo_review.families"]
+scikit-hep = "sp_repo_review.families:get_familes"
+
+[tool.hatch]
+version.path = "src/sp_repo_review/__init__.py"
+
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = ["-ra", "--strict-markers", "--strict-config"]
+xfail_strict = true
+log_cli_level = "INFO"
+filterwarnings = [
+  'error',
+  'ignore:(ast.Str|Attribute s|ast.NameConstant|ast.Num) is deprecated:DeprecationWarning:_pytest',
+]
+norecursedirs = ['{{cookiecutter.project_name}}']
+testpaths = ["tests"]
+
+
+[tool.mypy]
+files = ["src", "web", "tests"]
+python_version = "3.10"
+warn_unused_configs = true
+strict = true
+show_error_codes = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+warn_unreachable = true
+disallow_untyped_defs = false
+
+[[tool.mypy.overrides]]
+module = "sp_repo_review.*"
+disallow_untyped_defs = true
+
+[tool.pylint]
+master.py-version = "3.10"
+master.ignore-paths= ["src/sp_repo_review/_version.py"]
+reports.output-format = "colorized"
+similarities.ignore-imports = "yes"
+messages_control.disable = [
+  "design",
+  "fixme",
+  "line-too-long",
+  "wrong-import-position",
+  "redefined-builtin",
+  "missing-module-docstring",
+  "missing-class-docstring",
+  "missing-function-docstring",
+  "invalid-name",
+  "redefined-outer-name",
+  "no-member",  # better handled by mypy, etc.
+]
+
+
+[tool.ruff]
+select = [
+  "E", "F", "W", # flake8
+  "B", "B904",   # flake8-bugbear
+  "I",           # isort
+  "ARG",         # flake8-unused-arguments
+  "C4",          # flake8-comprehensions
+  "EM",          # flake8-errmsg
+  "ICN",         # flake8-import-conventions
+  "ISC",         # flake8-implicit-str-concat
+  "PGH",         # pygrep-hooks
+  "PIE",         # flake8-pie
+  "PL",          # pylint
+  "PT",          # flake8-pytest-style
+  "PTH",         # flake8-use-pathlib
+  "RET",         # flake8-return
+  "RUF",         # Ruff-specific
+  "SIM",         # flake8-simplify
+  "TID251",      # flake8-tidy-imports.banned-api
+  "T20",         # flake8-print
+  "UP",          # pyupgrade
+  "YTT",         # flake8-2020
+]
+extend-ignore = [
+  "PLR",    # Design related pylint codes
+  "E501",   # Line too long
+  "PT004",  # Incorrect check, usefixtures is the correct way to do this
+]
+target-version = "py310"
+src = ["src"]
+unfixable = [
+  "T20",  # Removes print statements
+  "F841", # Removes unused variables
+]
+exclude = []
+flake8-unused-arguments.ignore-variadic-names = true
+
+[tool.ruff.flake8-tidy-imports.banned-api]
+"typing.Callable".msg = "Use collections.abc.Callable instead."
+"typing.Iterator".msg = "Use collections.abc.Iterator instead."
+"typing.Mapping".msg = "Use collections.abc.Mapping instead."
+"typing.Sequence".msg = "Use collections.abc.Sequence instead."
+"typing.Set".msg = "Use collections.abc.Set instead."
+"importlib.abc".msg = "Use sp_repo_review._compat.importlib.resources.abc instead."
+"importlib.resources.abc".msg = "Use sp_repo_review._compat.importlib.resources.abc instead."
+
+[tool.ruff.per-file-ignores]
+"src/sp_repo_review/_compat/**.py" = ["TID251"]

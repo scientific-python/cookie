@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import urllib.request
 from pathlib import Path
 
@@ -28,8 +29,7 @@ def make_cookie(session: nox.Session, backend: str) -> None:
 
     package_dir = Path(f"cookie-{backend}")
 
-    with open("input.yml", "w") as f:
-        f.write(JOB_FILE.format(backend=backend))
+    Path("input.yml").write_text(JOB_FILE.format(backend=backend), encoding="utf-8")
 
     session.run(
         "cookiecutter",
@@ -193,7 +193,7 @@ def gha_bump(session: nox.Session) -> None:
     old_versions = {m[1]: m[2] for m in GHA_VERS.finditer(full_txt)}
 
     for repo, old_version in old_versions.items():
-        print(f"{repo}: {old_version}")
+        session.log(f"{repo}: {old_version}")
         response = urllib.request.urlopen(f"https://api.github.com/repos/{repo}/tags")
         tags_js = json.loads(response.read())
         tags = [
@@ -201,7 +201,7 @@ def gha_bump(session: nox.Session) -> None:
         ]
         new_version = tags[0]
         if new_version != old_version:
-            print(f"Convert {repo}: {old_version} -> {new_version}")
+            session.log(f"Convert {repo}: {old_version} -> {new_version}")
             for page in pages:
                 txt = page.read_text()
                 txt = txt.replace(
@@ -210,11 +210,57 @@ def gha_bump(session: nox.Session) -> None:
                 page.write_text(txt)
 
 
-@nox.session(venv_backend=None)
-def sync(session: nox.Session) -> None:
-    for f in Path("docs/pages/developers").glob("*.md"):
-        if f.name == "index.md":
-            continue
-        url = f"https://raw.githubusercontent.com/scikit-hep/scikit-hep.github.io/main/pages/developers/{f.name}"
-        response = urllib.request.urlopen(url)
-        f.write_text(response.read().decode("utf-8"))
+# -- Repo review --
+
+
+@nox.session(reuse_venv=True)
+def rr_run(session: nox.Session) -> None:
+    """
+    Run the program
+    """
+
+    session.install("-e", ".[cli]")
+    session.run("python", "-m", "repo_review", *session.posargs)
+
+
+@nox.session
+def rr_lint(session: nox.Session) -> None:
+    """
+    Run the linter.
+    """
+    session.install("pre-commit")
+    session.run("pre-commit", "run", "--all-files", *session.posargs)
+
+
+@nox.session
+def rr_pylint(session: nox.Session) -> None:
+    """
+    Run PyLint.
+    """
+    # This needs to be installed into the package environment, and is slower
+    # than a pre-commit check
+    session.install("-e.[cli]", "pylint")
+    session.run("pylint", "src", *session.posargs)
+
+
+@nox.session
+def rr_tests(session: nox.Session) -> None:
+    """
+    Run the unit and regular tests.
+    """
+    session.install("-e.[test,cli]")
+    session.run("pytest", *session.posargs)
+
+
+@nox.session(reuse_venv=True)
+def rr_build(session: nox.Session) -> None:
+    """
+    Build an SDist and wheel.
+    """
+
+    build_p = DIR.joinpath("build")
+    if build_p.exists():
+        shutil.rmtree(build_p)
+
+    session.install("build")
+    session.run("python", "-m", "build")
