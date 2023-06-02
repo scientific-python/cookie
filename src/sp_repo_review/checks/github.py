@@ -11,8 +11,8 @@ import yaml
 from .._compat.importlib.resources.abc import Traversable
 
 
-def workflows(package: Traversable) -> dict[str, Any]:
-    workflows_base_path = package.joinpath(".github/workflows")
+def workflows(root: Traversable) -> dict[str, Any]:
+    workflows_base_path = root.joinpath(".github/workflows")
     workflows_dict: dict[str, Any] = {}
     if workflows_base_path.is_dir():
         for workflow_path in workflows_base_path.iterdir():
@@ -23,8 +23,8 @@ def workflows(package: Traversable) -> dict[str, Any]:
     return workflows_dict
 
 
-def dependabot(package: Traversable) -> dict[str, Any]:
-    dependabot_path = package.joinpath(".github/dependabot.yml")
+def dependabot(root: Traversable) -> dict[str, Any]:
+    dependabot_path = root.joinpath(".github/dependabot.yml")
     if dependabot_path.is_file():
         with dependabot_path.open("rb") as f:
             result: dict[str, Any] = yaml.safe_load(f)

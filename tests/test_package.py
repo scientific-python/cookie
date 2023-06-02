@@ -3,7 +3,6 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-
 import repo_review as m
 from repo_review.ghpath import GHPath
 from repo_review.processor import process

@@ -50,7 +50,8 @@ repos:
     hooks:
       - id: mypy
         files: "(src|web|tests)"
-        args:
+        args: []
+        additional_dependencies:
           - click
           - markdown-it-py
           - pytest
@@ -58,7 +59,6 @@ repos:
           - rich
           - tomli
           - types-PyYAML
-        additional_dependencies:
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: "v2.7.1"

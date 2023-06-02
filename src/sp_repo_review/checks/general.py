@@ -26,11 +26,11 @@ class PY002(General):
     "Has a README.(md|rst) file"
 
     @staticmethod
-    def check(package: Traversable) -> bool:
+    def check(root: Traversable) -> bool:
         "Projects must have a readme file"
         return (
-            package.joinpath("README.md").is_file()
-            or package.joinpath("README.rst").is_file()
+            root.joinpath("README.md").is_file()
+            or root.joinpath("README.rst").is_file()
         )
 
 
@@ -65,22 +65,21 @@ class PY006(General):
     "Has pre-commit config"
 
     @staticmethod
-    def check(package: Traversable) -> bool:
+    def check(root: Traversable) -> bool:
         "Projects must have a `.pre-commit-config.yaml` file"
-        return package.joinpath(".pre-commit-config.yaml").is_file()
+        return root.joinpath(".pre-commit-config.yaml").is_file()
 
 
 class PY007(General):
     "Supports an easy task runner (nox or tox)"
 
     @staticmethod
-    def check(package: Traversable) -> bool:
+    def check(root: Traversable) -> bool:
         """
         Projects must have a `noxfile.py` or `tox.ini` to encourage new contributors.
         """
         return (
-            package.joinpath("noxfile.py").is_file()
-            or package.joinpath("tox.ini").is_file()
+            root.joinpath("noxfile.py").is_file() or root.joinpath("tox.ini").is_file()
         )
 
 
