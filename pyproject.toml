@@ -29,13 +29,12 @@ classifiers = [
 dynamic = ["version"]
 dependencies = [
   "pyyaml",
-  "repo-review",
+  "repo-review>=0.7.0b3,<0.8",
 ]
 
 [project.optional-dependencies]
 cli = [
-  "click>=8",
-  "rich>=12.2",
+  "repo-review[cli]",
 ]
 test = [
   "pytest >=7",

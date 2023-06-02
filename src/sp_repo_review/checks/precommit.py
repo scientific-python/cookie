@@ -10,8 +10,8 @@ import yaml
 from .._compat.importlib.resources.abc import Traversable
 
 
-def precommit(package: Traversable) -> dict[str, Any]:
-    precommit_path = package.joinpath(".pre-commit-config.yaml")
+def precommit(root: Traversable) -> dict[str, Any]:
+    precommit_path = root.joinpath(".pre-commit-config.yaml")
     if precommit_path.is_file():
         with precommit_path.open("rb") as f:
             return yaml.safe_load(f)  # type: ignore[no-any-return]
@@ -29,7 +29,7 @@ class PreCommit:
 
     @classmethod
     def check(cls: type[PreCommitMixin], precommit: dict[str, Any]) -> bool | None:
-        "Must have `{cls.repo}` repo in `.pre-commit-config.yaml`"
+        "Must have `{self.repo}` repo in `.pre-commit-config.yaml`"
         for repo in precommit.get("repos", {}):
             if "repo" in repo and repo["repo"].lower() == cls.repo:
                 return True

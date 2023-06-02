@@ -2,9 +2,12 @@ name: Change detection
 on:
   workflow_call:
     outputs:
-      run-tests:
+      run-cookie:
         description: Whether or not run the cookiecutter tests
-        value: ${{ jobs.change-detection.outputs.run-tests || false }}
+        value: ${{ jobs.change-detection.outputs.run-cookie || false }}
+      run-rr:
+        description: Whether or not run the repo-review tests
+        value: ${{ jobs.change-detection.outputs.run-cookie || false }}
 
 jobs:
   change-detection:
@@ -12,13 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     outputs:
-      run-tests: ${{ steps.tests-changes.outputs.run-tests || false }}
+      run-cookie: ${{ steps.cookie-changes.outputs.run-cookie || false }}
+      run-rr: ${{ steps.rr-changes.outputs.run-rr || false }}
     steps:
       - uses: actions/checkout@v3
 
       - name: Get a list of the changed runtime-related files
         if: github.event_name == 'pull_request'
-        id: changed-testable-files
+        id: changed-cookie-files
         uses: Ana06/get-changed-files@v2.2.0
         with:
           filter: |
@@ -31,6 +35,25 @@ jobs:
       - name: Set a flag for running the tests
         if: >-
           github.event_name != 'pull_request' ||
-          steps.changed-testable-files.outputs.added_modified_renamed != ''
-        id: tests-changes
-        run: echo "run-tests=true" >> "${GITHUB_OUTPUT}"
+          steps.changed-cookie-files.outputs.added_modified_renamed != ''
+        id: cookie-changes
+        run: echo "run-cookie=true" >> "${GITHUB_OUTPUT}"
+
+      - name: Get a list of the changed runtime-related files
+        if: github.event_name == 'pull_request'
+        id: changed-rr-files
+        uses: Ana06/get-changed-files@v2.2.0
+        with:
+          filter: |
+            tests/**
+            .github/workflows/ci.yml
+            .github/workflows/reusable-rr-tests.yml
+            noxfile.py
+            src/**
+            pyproject.toml
+      - name: Set a flag for running the tests
+        if: >-
+          github.event_name != 'pull_request' ||
+          steps.changed-rr-files.outputs.added_modified_renamed != ''
+        id: rr-changes
+        run: echo "run-rr=true" >> "${GITHUB_OUTPUT}"

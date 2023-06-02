@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import importlib.metadata
 import typing
 
 __all__ = ["Family", "get_familes"]
