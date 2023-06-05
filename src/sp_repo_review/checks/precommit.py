@@ -8,6 +8,7 @@ from typing import Any, ClassVar, Protocol
 import yaml
 
 from .._compat.importlib.resources.abc import Traversable
+from . import mk_url
 
 
 def precommit(root: Traversable) -> dict[str, Any]:
@@ -26,6 +27,7 @@ class PreCommitMixin(Protocol):
 class PreCommit:
     family = "pre-commit"
     requires = {"PY006"}
+    url = mk_url("style")
 
     @classmethod
     def check(cls: type[PreCommitMixin], precommit: dict[str, Any]) -> bool | None:
@@ -52,10 +54,9 @@ class PC111(PreCommit):
     repo = "https://github.com/asottile/blacken-docs"
 
 
-# PC120 was isort
-# PC130 was flake8
-# PC131 was flake8-bugbear
-# PC150 was pyupgrade
+class PC190(PreCommit):
+    "Uses Ruff"
+    repo = "https://github.com/charliermarsh/ruff-pre-commit"
 
 
 class PC140(PreCommit):
@@ -76,11 +77,6 @@ class PC170(PreCommit):
 class PC180(PreCommit):
     "Uses prettier"
     repo = "https://github.com/pre-commit/mirrors-prettier"
-
-
-class PC190(PreCommit):
-    "Uses Ruff"
-    repo = "https://github.com/charliermarsh/ruff-pre-commit"
 
 
 class PC191(PreCommit):

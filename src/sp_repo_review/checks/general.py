@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from .._compat.importlib.resources.abc import Traversable
+from . import mk_url
 
 # PY: Python Project
 ## 0xx: File existence
@@ -12,6 +13,7 @@ class General:
 
 class PY001(General):
     "Has a pyproject.toml"
+    url = mk_url("packaging_simple")
 
     @staticmethod
     def check(package: Traversable) -> bool:
@@ -24,6 +26,7 @@ class PY001(General):
 
 class PY002(General):
     "Has a README.(md|rst) file"
+    url = mk_url("packaging_simple")
 
     @staticmethod
     def check(root: Traversable) -> bool:
@@ -36,6 +39,7 @@ class PY002(General):
 
 class PY003(General):
     "Has a LICENSE* file"
+    url = mk_url("packaging_simple")
 
     @staticmethod
     def check(package: Traversable) -> bool:
@@ -45,6 +49,7 @@ class PY003(General):
 
 class PY004(General):
     "Has docs folder"
+    url = mk_url("packaging_simple")
 
     @staticmethod
     def check(package: Traversable) -> bool:
@@ -54,15 +59,27 @@ class PY004(General):
 
 class PY005(General):
     "Has tests folder"
+    url = mk_url("packaging_simple")
 
     @staticmethod
     def check(package: Traversable) -> bool:
-        "Projects must have a folder called tests"
-        return len([p for p in package.iterdir() if "test" in p.name]) > 0
+        "Projects must have a folder called `*test*` or `src/*/*test*`"
+        # Out-of-source tests
+        if len([p for p in package.iterdir() if "test" in p.name]) > 0:
+            return True
+
+        # In-source tests
+        src = package.joinpath("src")
+        if src.is_dir():
+            for pkg in src.iterdir():
+                if len([p for p in pkg.iterdir() if "test" in p.name]) > 0:
+                    return True
+        return False
 
 
 class PY006(General):
     "Has pre-commit config"
+    url = mk_url("style")
 
     @staticmethod
     def check(root: Traversable) -> bool:
@@ -72,6 +89,7 @@ class PY006(General):
 
 class PY007(General):
     "Supports an easy task runner (nox or tox)"
+    url = mk_url("nox")
 
     @staticmethod
     def check(root: Traversable) -> bool:

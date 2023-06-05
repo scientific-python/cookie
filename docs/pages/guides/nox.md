@@ -32,10 +32,10 @@ is _much_ faster than explaining how to get setup or manually messing with
 virtual environments. It is also highly reproducible, creating and destroying
 the temporary environment each time.
 
-You _should_ use nox to make it easy and simple for new contributors to run
-things. You _should_ use nox to make specialized developer tasks easy. You
-_should_ use nox to avoid making single-use virtual environments for docs and
-other rarely run tasks.
+{% include rr.html id="PY007" %} You _should_ use nox to make it easy and simple
+for new contributors to run things. You _should_ use nox to make specialized
+developer tasks easy. You _should_ use nox to avoid making single-use virtual
+environments for docs and other rarely run tasks.
 
 Nox doesn't handle binary builds very well, so for compiled projects, it might
 be best left to just specialized tasks.

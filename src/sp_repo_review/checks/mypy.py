@@ -2,17 +2,18 @@ from __future__ import annotations
 
 from typing import Any
 
-## PP2xx: MyPy
+from . import mk_url
 
 
 class MyPy:
     family = "mypy"
 
 
-class PP200(MyPy):
+class MY100(MyPy):
     "Uses MyPy (pyproject config)"
 
     requires = {"PY001"}
+    url = mk_url("style")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -28,10 +29,11 @@ class PP200(MyPy):
                 return False
 
 
-class PP201(MyPy):
+class MY101(MyPy):
     "MyPy strict mode"
 
-    requires = {"PP200"}
+    requires = {"MY100"}
+    url = mk_url("style")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -48,10 +50,11 @@ class PP201(MyPy):
                 return False
 
 
-class PP202(MyPy):
+class MY102(MyPy):
     "MyPy show error codes"
 
-    requires = {"PP200"}
+    requires = {"MY100"}
+    url = mk_url("style")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -67,10 +70,11 @@ class PP202(MyPy):
                 return False
 
 
-class PP203(MyPy):
+class MY103(MyPy):
     "MyPy warn unreachable"
 
-    requires = {"PP200"}
+    requires = {"MY100"}
+    url = mk_url("style")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -88,10 +92,11 @@ class PP203(MyPy):
                 return False
 
 
-class PP204(MyPy):
+class MY104(MyPy):
     "MyPy enables ignore-without-code"
 
-    requires = {"PP200"}
+    requires = {"MY100"}
+    url = mk_url("style")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -108,10 +113,11 @@ class PP204(MyPy):
                 return False
 
 
-class PP205(MyPy):
+class MY105(MyPy):
     "MyPy enables redundant-expr"
 
-    requires = {"PP200"}
+    requires = {"MY100"}
+    url = mk_url("style")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -127,10 +133,11 @@ class PP205(MyPy):
                 return False
 
 
-class PP206(MyPy):
+class MY106(MyPy):
     "MyPy enables truthy-bool"
 
-    requires = {"PP200"}
+    requires = {"MY100"}
+    url = mk_url("style")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
