@@ -131,3 +131,21 @@ blockquote > h2 {
   font-weight: 300;
   letter-spacing: 2px;
 }
+
+.rr-btn {
+  border-radius: 4px;
+  background-color: #808080;
+  color: white;
+  padding: 1px 4px;
+  font-size: 9pt;
+  font-family: sans-serif;
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+}
+.rr-btn::before {
+  content: "sp-repo-review";
+  font-size: 5pt;
+  display: block;
+  text-align: center;
+}

@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, ClassVar, Protocol
 
 from .._compat.importlib.resources.abc import Traversable
+from . import mk_url
 
 ## R0xx: Ruff general
 ## R1xx: Ruff checks
@@ -10,11 +11,12 @@ from .._compat.importlib.resources.abc import Traversable
 
 class Ruff:
     family = "ruff"
-    requires = {"PY001"}
+    url = mk_url("style")
 
 
-class R001(Ruff):
+class RF001(Ruff):
     "Has Ruff config"
+    requires = {"PY001"}
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -30,9 +32,9 @@ class R001(Ruff):
                 return False
 
 
-class R002(Ruff):
+class RF002(Ruff):
     "Target version must be set"
-    requires = {"R001"}
+    requires = {"RF001"}
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -48,10 +50,10 @@ class R002(Ruff):
                 return False
 
 
-class R003(Ruff):
+class RF003(Ruff):
     "src directory specified if used"
 
-    requires = {"R001"}
+    requires = {"RF001"}
 
     @staticmethod
     def check(pyproject: dict[str, Any], package: Traversable) -> bool | None:
@@ -76,9 +78,9 @@ class RuffMixin(Protocol):
     name: ClassVar[str]
 
 
-class R1xx(Ruff):
+class RF1xx(Ruff):
     family = "ruff"
-    requires = {"R001"}
+    requires = {"RF001"}
 
     @classmethod
     def check(cls: type[RuffMixin], pyproject: dict[str, Any]) -> bool:
@@ -98,26 +100,26 @@ class R1xx(Ruff):
                 return False
 
 
-class R101(R1xx):
+class RF101(RF1xx):
     "Bugbear must be selected"
     code = "B"
     name = "flake8-bugbear"
 
 
-class R102(R1xx):
+class RF102(RF1xx):
     "isort must be selected"
     code = "I"
     name = "isort"
 
 
-class R103(R1xx):
+class RF103(RF1xx):
     "pyupgrade must be selected"
     code = "UP"
     name = "pyupgrade"
 
 
 def repo_review_checks() -> dict[str, Ruff]:
-    base_classes = set(Ruff.__subclasses__()) - {R1xx}
-    r1xx_classes = set(R1xx.__subclasses__())
-    repo_review_checks = base_classes | r1xx_classes
+    base_classes = set(Ruff.__subclasses__()) - {RF1xx}
+    rf1xx_classes = set(RF1xx.__subclasses__())
+    repo_review_checks = base_classes | rf1xx_classes
     return {p.__name__: p() for p in repo_review_checks}

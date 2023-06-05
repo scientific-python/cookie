@@ -9,12 +9,12 @@ custom_title: GitHub Actions introduction
 
 {% include toc.html %}
 
-The recommended CI for scientific Python projects is GitHub Actions (GHA),
-although its predecessor Azure is also in heavy usage, and other popular
-services (Travis, Appveyor, and Circle CI) may be found in a few packages. GHA
-is preferred due to the flexible, extensible design and the tight integration
-with the GitHub permissions model (and UI). Here is a guide in setting up a new
-package with GHA.
+{% include rr.html id="GH100" %} The recommended CI for scientific Python
+projects is GitHub Actions (GHA), although its predecessor Azure is also in
+heavy usage, and other popular services (Travis, Appveyor, and Circle CI) may be
+found in a few packages. GHA is preferred due to the flexible, extensible design
+and the tight integration with the GitHub permissions model (and UI). Here is a
+guide in setting up a new package with GHA.
 
 GHA is made up of workflows which consist of actions. Here are some of the
 workflows you will probably want in your package. These should be in a file
@@ -36,11 +36,11 @@ on:
 jobs:
 ```
 
-This gives the workflow a nice name, and defines the conditions under which it
-runs. This will run on all pull requests, or pushes to main. If you use a
-develop branch, you probably will want to include that. You can also specify
-specific branches for pull requests instead of running on all PRs (will run on
-PRs targeting those branches only).
+This gives the workflow a nice name {% include rr.html id="GH101" %}, and
+defines the conditions under which it runs. This will run on all pull requests,
+or pushes to main. If you use a develop branch, you probably will want to
+include that. You can also specify specific branches for pull requests instead
+of running on all PRs (will run on PRs targeting those branches only).
 
 ## Pre-commit
 
@@ -124,9 +124,10 @@ you were building a final package.
 
 ## Updating
 
-If you use non-default actions in your repository (you will see some in the
-following pages), then it's a good idea to keep them up to date. GitHub provided
-a way to do this with dependabot. Just add the following file as
+{% include rr.html id="GH200" %} {% include rr.html id="GH210" %} If you use
+non-default actions in your repository (you will see some in the following
+pages), then it's a good idea to keep them up to date. GitHub provided a way to
+do this with dependabot. Just add the following file as
 `.github/dependabot.yml`:
 
 ```yaml
@@ -143,7 +144,8 @@ This will check to see if there are updates to the action weekly, and will make
 a PR if there are updates, including the changelog and commit summary in the PR.
 If you select a name like `v1`, this should only look for updates of the same
 form (since April 2022) - there is no need to restrict updates for "moving tag"
-updates anymore. You can also use SHA's and dependabot will respect that too.
+updates anymore {% include rr.html id="PY006" %}. You can also use SHA's and
+dependabot will respect that too.
 
 You can use this for other ecosystems too, including Python.
 
@@ -253,7 +255,8 @@ permissions:
   id-token: write
 ```
 
-You probably only want one deployment at a time, so you can use:
+{% include rr.html id="GH103" %} You probably only want one deployment at a
+time, so you can use:
 
 ```yaml
 concurrency:
@@ -325,8 +328,9 @@ These are some things you might need.
 
 ### Cancel existing runs
 
-If you add the following, you can ensure only one run per PR/branch happens at a
-time, cancelling the old run when a new one starts:
+{% include rr.html id="GH102" %} If you add the following, you can ensure only
+one run per PR/branch happens at a time, cancelling the old run when a new one
+starts:
 
 {% raw %}
 

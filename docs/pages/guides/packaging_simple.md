@@ -38,7 +38,8 @@ is coming.
 
 ## pyproject.toml: build-system
 
-Packages must have a `pyproject.toml` file that selects the backend:
+{% include rr.html id="PY001" %} Packages must have a `pyproject.toml` file
+{% include rr.html id="PP001" %} that selects the backend:
 
 <div class="skhep-bar d-flex m-2" style="justify-content:center;">
   <button class="skhep-bar-item hatch-btn btn m-2 btn-purple" onclick="openTab('hatch')">Hatchling</button>
@@ -140,6 +141,11 @@ detection, while Trampolim and whey do not, requiring a `tool` setting.
 
 If you don't match your package name and import name (which you should except
 for very special cases), you will likely need extra configuration here.
+
+You should have a `README` {% include rr.html id="PY002" %} and a `LICENSE` {%
+include rr.html id="PY003" %} file. You should have a `docs/` folder {% include
+rr.html id="PY003" %}. You should have a `/tests` folder (recommended) and/or a
+`src/<package>/tests` folder.
 
 ## Versioning
 

@@ -32,6 +32,7 @@ repos:
       - id: check-yaml
       - id: debug-statements
       - id: end-of-file-fixer
+        exclude: ^docs/_includes/rr.html$
       - id: mixed-line-ending
       - id: name-tests-test
         args: ["--pytest-test-first"]
@@ -66,7 +67,7 @@ repos:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json]
         args: [--prose-wrap=always]
-        exclude: ^.readthedocs.yml
+        exclude: ^docs/_includes/rr.html$
 
   - repo: https://github.com/codespell-project/codespell
     rev: "v2.2.4"

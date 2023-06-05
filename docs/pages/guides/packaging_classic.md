@@ -87,6 +87,9 @@ generally not found in scientific Python packages, but not discouraged; all
 tools build the same wheels (and they often build setuptools compliant SDists,
 as well).
 
+{% include rr.html id="PP003" %} Note that `"wheel"` is never required; it is
+injected automatically by setuptools only when needed.
+
 ### Special additions: NumPy
 
 You may want to build against NumPy (mostly for Cython packages, pybind11 does

@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-# PP: PyProject.toml
-## PP0xx: Build system
+from . import mk_url
 
 
 class PyProject:
@@ -14,6 +13,7 @@ class PP002(PyProject):
     "Has a proper build-system table"
 
     requires = {"PY001"}
+    url = mk_url("packaging_simple")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -33,6 +33,7 @@ class PP003(PyProject):
     "Does not list wheel as a build-dep"
 
     requires = {"PY001"}
+    url = mk_url("packaging_classic")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -53,6 +54,7 @@ class PP301(PyProject):
     "Has pytest in pyproject"
 
     requires = {"PY001"}
+    url = mk_url("pytest")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -72,6 +74,7 @@ class PP301(PyProject):
 class PP302(PyProject):
     "Sets a minimum pytest to at least 6"
     requires = {"PP301"}
+    url = mk_url("pytest")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -86,6 +89,7 @@ class PP302(PyProject):
 class PP303(PyProject):
     "Sets the test paths"
     requires = {"PP301"}
+    url = mk_url("pytest")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -97,6 +101,7 @@ class PP303(PyProject):
 class PP304(PyProject):
     "Sets the log level in pytest"
     requires = {"PP301"}
+    url = mk_url("pytest")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -110,6 +115,7 @@ class PP304(PyProject):
 class PP305(PyProject):
     "Specifies xfail_strict"
     requires = {"PP301"}
+    url = mk_url("pytest")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -124,6 +130,7 @@ class PP305(PyProject):
 class PP306(PyProject):
     "Specifies strict config"
     requires = {"PP301"}
+    url = mk_url("pytest")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -138,6 +145,7 @@ class PP306(PyProject):
 class PP307(PyProject):
     "Specifies strict markers"
     requires = {"PP301"}
+    url = mk_url("pytest")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -152,6 +160,7 @@ class PP307(PyProject):
 class PP308(PyProject):
     "Specifies useful pytest summary"
     requires = {"PP301"}
+    url = mk_url("pytest")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -163,6 +172,7 @@ class PP308(PyProject):
 class PP309(PyProject):
     "Filter warnings specified"
     requires = {"PP301"}
+    url = mk_url("pytest")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
