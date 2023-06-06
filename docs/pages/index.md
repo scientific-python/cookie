@@ -20,7 +20,9 @@ maintainable, reusable, and shareable form? Start at the
 guides]({% link pages/guides/index.md %}) provide task-based instruction on
 topics that scientists and research software engineers may encounter as their
 projects evolve and grow. This covers everything from writing and building
-documentation to modern Python packaging.
+documentation to modern Python packaging. This comes with a cookiecutter for
+making new repos, [scientific-python/cookie][], and [sp-repo-review][], a tool
+for comparing your repository with the guidelines, runnable in WebAssembly.
 
 **Learn to write better research code.** A high-level document on
 [principles]({% link pages/principles/index.md %}) provides advice based on the
@@ -40,3 +42,8 @@ libraries. We recommend the [SciPy Lecture Notes](https://scipy-lectures.org/).
 This guide also does not cover version control, but it is essential to have a
 basic facility with git to use these tools successfully. We recommend the
 [Software Carpentry lesson on git](https://swcarpentry.github.io/git-novice/).
+
+<!-- prettier-ignore-start -->
+[scientific-python/cookie]: https://github.com/scientific-python/cookie
+[sp-repo-review]: {% link pages/guides/repo-review.md %}
+<!-- prettier-ignore-end -->
