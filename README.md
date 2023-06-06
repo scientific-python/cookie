@@ -2,6 +2,7 @@
 
 [![Actions Status][actions-badge]][actions-link]
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
+[![Live ReadTheDocs][rtd-badge]][rtd-link]
 
 A cookiecutter template for new Python projects based on the Scientific Python
 Developer Guide. What makes this different from other cookie cutter templates
@@ -155,10 +156,10 @@ NSLS-II guide during the 2023 Scientific-Python Developers Summit.
 
 [actions-badge]: https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
 [actions-link]: https://github.com/scikit-hep/cookie/actions
-[conda-badge]: https://img.shields.io/conda/vn/conda-forge/cookie
-[conda-link]: https://github.com/conda-forge/cookie-feedstock
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
 [github-discussions-link]: https://github.com/scikit-hep/cookie/discussions
+[rtd-badge]: https://readthedocs.org/projects/scientific-python-cookie/badge/?version=latest
+[rtd-link]: https://scientific-python-cookie.readthedocs.io/en/latest/?badge=latest
 [scientific-python development guide]: https://learn.scientific-python.org/development
 [cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
 [scikit-build]: https://scikit-build.readthedocs.io/en/latest/
