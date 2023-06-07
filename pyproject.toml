@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 
@@ -8,23 +8,26 @@ name = "sp_repo_review"
 authors = [
   { name = "Henry Schreiner", email = "henryfs@princeton.edu" },
 ]
-license = { file = "LICENSE" }
 description = "Review repos for compliance to the Scientific-Python development guidelines"
-readme = "README.md"
+readme = "README-rr.md"
 requires-python = ">=3.10"
 classifiers = [
-  "License :: OSI Approved :: BSD License",
-  "Topic :: Scientific/Engineering",
-  "Intended Audience :: Science/Research",
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Environment :: WebAssembly :: Emscripten",
   "Intended Audience :: Developers",
-  "Operating System :: OS Independent",
+  "Intended Audience :: Science/Research",
   "License :: OSI Approved :: BSD License",
-  "Programming Language :: Python",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Software Development :: Quality Assurance",
+  "Typing :: Typed",
 ]
 dynamic = ["version"]
 dependencies = [
@@ -44,10 +47,12 @@ dev = [
 ]
 
 [project.urls]
-homepage = "https://github.com/scientific-python/cookie"
-webpage = "https://scientific-python.github.io/cookie"
+Homepage = "https://github.com/scientific-python/cookie"
+Webpage = "https://scientific-python.github.io/cookie"
+Preview = "https://scientific-python-cookie.readthedocs.io"
 
-[project.scripts]
+
+[project.entry-points."pipx.run"]
 sp-repo-review = "repo_review.__main__:main"
 
 [project.entry-points."repo_review.checks"]
@@ -67,7 +72,8 @@ precommit = "sp_repo_review.checks.precommit:precommit"
 scikit-hep = "sp_repo_review.families:get_familes"
 
 [tool.hatch]
-version.path = "src/sp_repo_review/__init__.py"
+version.source = "vcs"
+build.hooks.vcs.version-file = "src/sp_repo_review/_version.py"
 
 
 [tool.pytest.ini_options]
