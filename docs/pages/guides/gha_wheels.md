@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "GHA: Binary wheels"
-permalink: /guides/gha_wheels/
+permalink: /guides/gha-wheels/
 nav_order: 13
 parent: Topical Guides
 custom_title: GitHub Actions for Binary Wheels
@@ -39,10 +39,9 @@ click a button in the GUI to trigger a build, which is perfect for testing
 wheels before making a release; you can download them from "artifacts". You can
 even define variables that you can set in the GUI and access in the CI!
 
-[workflow_dispatch]:
-  https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
-
 <!-- prettier-ignore-start -->
+[workflow_dispatch]: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
+
 ### Useful suggestion:
 {: .no_toc }
 <!-- prettier-ignore-end -->

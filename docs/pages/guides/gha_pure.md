@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "GHA: Pure Python wheels"
-permalink: /guides/gha_pure/
+permalink: /guides/gha-pure/
 nav_order: 12
 parent: Topical Guides
 custom_title: GitHub Actions for pure Python wheels

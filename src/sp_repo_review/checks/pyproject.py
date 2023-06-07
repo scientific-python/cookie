@@ -13,7 +13,7 @@ class PP002(PyProject):
     "Has a proper build-system table"
 
     requires = {"PY001"}
-    url = mk_url("packaging_simple")
+    url = mk_url("packaging-simple")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
@@ -33,7 +33,7 @@ class PP003(PyProject):
     "Does not list wheel as a build-dep"
 
     requires = {"PY001"}
-    url = mk_url("packaging_classic")
+    url = mk_url("packaging-classic")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:

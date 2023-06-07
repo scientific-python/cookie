@@ -2,20 +2,23 @@
 
 [![Actions Status][actions-badge]][actions-link]
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
+[![Live ReadTheDocs][rtd-badge]][rtd-link]
 
 A cookiecutter template for new Python projects based on the Scientific Python
 Developer Guide. What makes this different from other cookie cutter templates
 for Python packages?
 
-- Designed from the [Scientific Python Developer Guide][]: Every decision is
+- Lives with the [Scientific Python Development Guide][]: Every decision is
   clearly documented and every tool described.
-- Template generation tested in GitHub Actions using nox.
 - Twelve different backends to choose from for building packages.
+- Template generation tested in GitHub Actions using nox.
 - Includes several compiled backends using pybind11, with wheels produced for
   all platforms using cibuildwheel.
-- Follows PyPA best practices.
+- Follows PyPA best practices and regularly updated.
+- Provides `sp-repo-review` to evaluate existing repos against the guidelines,
+  with a WebAssembly version integrated with the guide. All checks cross-linked.
 
-Be sure you have read the [Scientific Python Developer Guide][] first, and
+Be sure you have read the [Scientific Python Development Guide][] first, and
 possibly used them on a project or two. This is _not_ a minimal example or
 tutorial. It is a collection of useful tooling for starting a new project using
 cookiecutter, or for copying in individual files for an existing project (by
@@ -44,7 +47,7 @@ During generation you can select from the following backends for your package:
    the right files included, little dynamic metadata support.
 9. [pdm][]: A modern, less opinionated all-in-one solution to pure Python
    projects supporting standards. Replaces setuptools, venv/pipenv, pip, wheel,
-   and twine. Supports [PEP 621][], and also the unaccepted [PEP 582][].
+   and twine. Supports [PEP 621][].
 10. [trampolim][]: A modern [PEP 621][] builder with support for tasks, allowing
     arbitrary Python to run during the build process if needed.
 11. [whey][]: A modern [PEP 621][] builder with some automation options for
@@ -62,7 +65,7 @@ otherwise with `pipx install cookiecutter` (or prepend `pipx run` to the command
 below, and skip installation). Then run:
 
 ```bash
-cookiecutter gh:scikit-hep/cookie
+cookiecutter gh:scientific-python/cookie
 ```
 
 You can also use `pipx run cookiecutter` without installing.
@@ -143,15 +146,21 @@ projects. It currently dumps all development dependencies into a shared
 environment, causing long solve times and high chance of conflicts. It also does
 not use pre-commit properly. It also has quite a bit of custom code.
 
+#### History
+
+A lot of the guide, cookiecutter, and repo-review started out as part of
+Scikit-HEP. These projects were merged, generalized, and combined with the
+NSLS-II guide during the 2023 Scientific-Python Developers Summit.
+
 <!-- prettier-ignore-start -->
 
 [actions-badge]: https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
 [actions-link]: https://github.com/scikit-hep/cookie/actions
-[conda-badge]: https://img.shields.io/conda/vn/conda-forge/cookie
-[conda-link]: https://github.com/conda-forge/cookie-feedstock
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
 [github-discussions-link]: https://github.com/scikit-hep/cookie/discussions
-[scikit-hep developer guidelines]: https://scikit-hep.org/developer
+[rtd-badge]: https://readthedocs.org/projects/scientific-python-cookie/badge/?version=latest
+[rtd-link]: https://scientific-python-cookie.readthedocs.io/en/latest/?badge=latest
+[scientific-python development guide]: https://learn.scientific-python.org/development
 [cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
 [scikit-build]: https://scikit-build.readthedocs.io/en/latest/
 [flit]: https://flit.readthedocs.io/en/latest/
@@ -167,7 +176,6 @@ not use pre-commit properly. It also has quite a bit of custom code.
 [hypermodern]: https://github.com/cjolowicz/cookiecutter-hypermodern-python
 [hatch]: https://github.com/ofek/hatch
 [meson-python]: https://meson-python.readthedocs.io
-[pep 582]: https://www.python.org/dev/peps/pep-0582
 [pep 621]: https://www.python.org/dev/peps/pep-0621
 
 <!-- prettier-ignore-end -->

@@ -67,7 +67,6 @@ repos:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json]
         args: [--prose-wrap=always]
-        exclude: ^docs/_includes/rr.html$
 
   - repo: https://github.com/codespell-project/codespell
     rev: "v2.2.4"

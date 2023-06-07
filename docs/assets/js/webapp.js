@@ -14,16 +14,16 @@ function Heading(props) {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            Scikit-HEP-Repo-Review
+            SP-Repo-Review
           </MaterialUI.Typography>
           <MaterialUI.Button
-            href="https://scientific-python-cookie.readthedocs.io"
+            href="https://learn.scientific-python.org/development"
             color="inherit"
           >
             Developer Guidelines
           </MaterialUI.Button>
           <MaterialUI.Button
-            href="https://github.com/scikit-hep/repo-review"
+            href="https://github.com/scientific-python/repo-review"
             color="inherit"
           >
             Source
@@ -31,6 +31,34 @@ function Heading(props) {
         </MaterialUI.Toolbar>
       </MaterialUI.AppBar>
     </MaterialUI.Box>
+  );
+}
+
+function IfUrlLink({ name, url, color }) {
+  if (url) {
+    return (
+      <MaterialUI.Typography
+        sx={{ display: "inline" }}
+        component="span"
+        variant="body2"
+        color={color}
+        component="a"
+        href={url}
+        target="_blank"
+      >
+        {name}
+      </MaterialUI.Typography>
+    );
+  }
+  return (
+    <MaterialUI.Typography
+      sx={{ display: "inline" }}
+      component="span"
+      variant="body2"
+      color={color}
+    >
+      {name}
+    </MaterialUI.Typography>
   );
 }
 
@@ -77,14 +105,8 @@ function Results(props) {
       );
       const msg = (
         <React.Fragment>
-          <MaterialUI.Typography
-            sx={{ display: "inline" }}
-            component="span"
-            variant="body2"
-            color={text_color}
-          >
-            {result.name + ": "}
-          </MaterialUI.Typography>
+          <IfUrlLink name={result.name} url={result.url} color={text_color} />
+          <IfUrlLink name={": "} url={""} color={text_color} />
           <React.Fragment>
             <MaterialUI.Typography
               sx={{ display: "inline" }}
@@ -100,7 +122,11 @@ function Results(props) {
       return (
         <MaterialUI.ListItem disablePadding key={result.name}>
           <MaterialUI.ListItemIcon>{icon}</MaterialUI.ListItemIcon>
-          <MaterialUI.ListItemText primary={msg} secondary={details} />
+          <MaterialUI.ListItemText
+            primary={msg}
+            secondary={details}
+            href={result.url}
+          />
         </MaterialUI.ListItem>
       );
     });
@@ -132,7 +158,7 @@ async function prepare_pyodide() {
   await pyodide.loadPackage("micropip");
   await pyodide.runPythonAsync(`
         import micropip
-        await micropip.install(["scikit_hep_repo_review==0.6.1"])
+        await micropip.install(["sp_repo_review==2023.06.01", "repo-review==0.7.0b4"])
     `);
   return pyodide;
 }
@@ -171,6 +197,7 @@ class App extends React.Component {
       msg: DEFAULT_MSG,
       progress: false,
       err_msg: "",
+      url: "",
     };
   }
 
@@ -199,8 +226,8 @@ class App extends React.Component {
       try {
         families_checks = pyodide.runPython(`
             from pyodide.http import open_url
-            from scikit_hep_repo_review.processor import process
-            from scikit_hep_repo_review.ghpath import GHPath
+            from repo_review.processor import process
+            from repo_review.ghpath import GHPath
 
             GHPath.open_url = staticmethod(open_url)
 
@@ -239,6 +266,7 @@ class App extends React.Component {
           description: val.description.toString(),
           state: val.result,
           err_msg: val.err_markdown().toString(),
+          url: val.url.toString(),
         });
       }
 
@@ -248,6 +276,7 @@ class App extends React.Component {
         msg: `Results for ${state.repo}@${state.branch}`,
         progress: false,
         err_msg: "",
+        url: "",
       });
 
       results_list.destroy();
