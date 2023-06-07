@@ -16,5 +16,10 @@
   const root = ReactDOM.createRoot(
     document.getElementById("interactive-repo-review-root")
   );
-  root.render(<App header={false} />);
+  root.render(
+    <App
+      header={false}
+      deps={["sp_repo_review==2023.06.01", "repo-review==0.7.0b8"]}
+    />
+  );
 </script>

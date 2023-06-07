@@ -4,21 +4,25 @@
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
 [![Live ReadTheDocs][rtd-badge]][rtd-link]
 
+[![PyPI version][pypi-version]][pypi-link]
+[![PyPI platforms][pypi-platforms]][pypi-link]
+
 A cookiecutter template for new Python projects based on the Scientific Python
 Developer Guide. What makes this different from other cookie cutter templates
 for Python packages?
 
-- Lives with the [Scientific Python Development Guide][]: Every decision is
+- Lives with the [Scientific-Python Development Guide][]: Every decision is
   clearly documented and every tool described.
 - Twelve different backends to choose from for building packages.
 - Template generation tested in GitHub Actions using nox.
 - Includes several compiled backends using pybind11, with wheels produced for
   all platforms using cibuildwheel.
 - Follows PyPA best practices and regularly updated.
-- Provides `sp-repo-review` to evaluate existing repos against the guidelines,
-  with a WebAssembly version integrated with the guide. All checks cross-linked.
+- Provides [`sp-repo-review`][pypi-link] to evaluate existing repos against the
+  guidelines, with a WebAssembly version integrated with the guide. All checks
+  cross-linked.
 
-Be sure you have read the [Scientific Python Development Guide][] first, and
+Be sure you have read the [Scientific-Python Development Guide][] first, and
 possibly used them on a project or two. This is _not_ a minimal example or
 tutorial. It is a collection of useful tooling for starting a new project using
 cookiecutter, or for copying in individual files for an existing project (by
@@ -156,26 +160,29 @@ NSLS-II guide during the 2023 Scientific-Python Developers Summit.
 
 [actions-badge]: https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
 [actions-link]: https://github.com/scikit-hep/cookie/actions
+[cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
+[flit]: https://flit.readthedocs.io/en/latest/
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
 [github-discussions-link]: https://github.com/scikit-hep/cookie/discussions
+[hatch]: https://github.com/ofek/hatch
+[hypermodern]: https://github.com/cjolowicz/cookiecutter-hypermodern-python
+[maturin]: https://maturin.rs
+[meson-python]: https://meson-python.readthedocs.io
+[nox]: https://nox.thea.codes/en/stable/
+[pdm]: https://pdm.fming.dev
+[pep 621]: https://www.python.org/dev/peps/pep-0621
+[pipx]: https://pypa.github.io/pipx/
+[poetry]: https://python-poetry.org
+[pybind11]: https://pybind11.readthedocs.io/en/stable/
+[pypi-link]: https://pypi.org/project/sp-repo-review/
+[pypi-platforms]: https://img.shields.io/pypi/pyversions/sp-repo-review
+[pypi-version]: https://badge.fury.io/py/sp-repo-review.svg
 [rtd-badge]: https://readthedocs.org/projects/scientific-python-cookie/badge/?version=latest
 [rtd-link]: https://scientific-python-cookie.readthedocs.io/en/latest/?badge=latest
 [scientific-python development guide]: https://learn.scientific-python.org/development
-[cibuildwheel]: https://cibuildwheel.readthedocs.io/en/stable/
 [scikit-build]: https://scikit-build.readthedocs.io/en/latest/
-[flit]: https://flit.readthedocs.io/en/latest/
-[nox]: https://nox.thea.codes/en/stable/
-[pdm]: https://pdm.fming.dev
-[poetry]: https://python-poetry.org
-[pybind11]: https://pybind11.readthedocs.io/en/stable/
 [setuptools]: https://setuptools.readthedocs.io/en/latest/
 [trampolim]: https://trampolim.readthedocs.io/en/latest/
-[pipx]: https://pypa.github.io/pipx/
 [whey]: https://whey.readthedocs.io/en/latest/
-[maturin]: https://maturin.rs
-[hypermodern]: https://github.com/cjolowicz/cookiecutter-hypermodern-python
-[hatch]: https://github.com/ofek/hatch
-[meson-python]: https://meson-python.readthedocs.io
-[pep 621]: https://www.python.org/dev/peps/pep-0621
 
 <!-- prettier-ignore-end -->

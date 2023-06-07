@@ -1,3 +1,10 @@
+"""
+Nox runner for cookie & sp-repo-review.
+
+sp-repo-review checks start with "rr-".
+"""
+
+
 from __future__ import annotations
 
 import json
@@ -159,9 +166,12 @@ GHA_VERS = re.compile(r"[\s\-]+uses: (.*?)@([^\s]+)")
 
 @nox.session(reuse_venv=True)
 def pc_bump(session: nox.Session) -> None:
+    """
+    Bump the pre-commit versions mentioned in the pages.
+    """
     session.install("lastversion")
 
-    style = Path("docs/pages/developers/style.md")
+    style = Path("docs/pages/guides/style.md")
     txt = style.read_text()
     old_versions = {m[1]: m[2].strip('"') for m in PC_VERS.finditer(txt)}
 
@@ -185,8 +195,11 @@ def pc_bump(session: nox.Session) -> None:
 
 @nox.session(venv_backend="none")
 def gha_bump(session: nox.Session) -> None:
-    pages = list(Path("docs/pages/developers").glob("gha_*.md"))
-    pages.append(Path("docs/pages/developers/style.md"))
+    """
+    Bump the GitHub Actions mentioned in the pages.
+    """
+    pages = list(Path("docs/pages/guides").glob("gha_*.md"))
+    pages.append(Path("docs/pages/guides/style.md"))
     full_txt = "\n".join(page.read_text() for page in pages)
 
     # This assumes there is a single version per action
@@ -199,6 +212,8 @@ def gha_bump(session: nox.Session) -> None:
         tags = [
             x["name"] for x in tags_js if x["name"].count(".") == old_version.count(".")
         ]
+        if not tags:
+            continue
         new_version = tags[0]
         if new_version != old_version:
             session.log(f"Convert {repo}: {old_version} -> {new_version}")
@@ -216,7 +231,7 @@ def gha_bump(session: nox.Session) -> None:
 @nox.session(reuse_venv=True)
 def rr_run(session: nox.Session) -> None:
     """
-    Run the program
+    Run sp-repo-review.
     """
 
     session.install("-e", ".[cli]")
@@ -246,7 +261,7 @@ def rr_pylint(session: nox.Session) -> None:
 @nox.session
 def rr_tests(session: nox.Session) -> None:
     """
-    Run the unit and regular tests.
+    Run the unit and regular tests for sp-repo-review.
     """
     session.install("-e.[test,cli]")
     session.run("pytest", *session.posargs)
@@ -255,7 +270,7 @@ def rr_tests(session: nox.Session) -> None:
 @nox.session(reuse_venv=True)
 def rr_build(session: nox.Session) -> None:
     """
-    Build an SDist and wheel.
+    Build an SDist and wheel for sp-repo-review.
     """
 
     build_p = DIR.joinpath("build")

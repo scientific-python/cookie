@@ -1,0 +1,30 @@
+name: sp-repo-review
+description: "Runs sp-repo-review"
+inputs:
+  package-dir:
+    description: "Path to Python package, if different from repo root"
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v4
+      id: python
+      with:
+        python-version: "3.11"
+        update-environment: false
+
+    # prettier-ignore
+    - name: Run repo-review
+      shell: bash
+      run: >
+        pipx run
+        --python '${{ steps.python.outputs.python-path }}'
+        --spec '${{ github.action_path }}[cli]'
+        repo-review .
+        --stderr html
+        --select "${{ inputs.select }}"
+        --ignore "${{ inputs.ignore }}"
+        --package-dir "${{ inputs.package-dir }}"
+        >> $GITHUB_STEP_SUMMARY
