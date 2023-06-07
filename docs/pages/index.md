@@ -45,5 +45,5 @@ basic facility with git to use these tools successfully. We recommend the
 
 <!-- prettier-ignore-start -->
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
-[sp-repo-review]: {% link pages/guides/repo-review.md %}
+[sp-repo-review]: {% link pages/guides/repo_review.md %}
 <!-- prettier-ignore-end -->
