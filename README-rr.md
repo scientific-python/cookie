@@ -38,11 +38,13 @@ somewhere else, then all the pytest checks will be skipped.
 
 [actions-badge]: https://github.com/scientific-python/cookie/workflows/CI/badge.svg
 [actions-link]: https://github.com/scientific-python/cookie/actions
+[github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
+[github-discussions-link]: https://github.com/scikit-hep/cookie/discussions
 [pypi-link]: https://pypi.org/project/sp-repo-review/
 [pypi-platforms]: https://img.shields.io/pypi/pyversions/sp-repo-review
 [pypi-version]: https://badge.fury.io/py/sp-repo-review.svg
-[docs-badge]: https://readthedocs.org/projects/scientific-python-cookie/badge/?version=latest
-[docs-link]: https://scientific-python-cookie.readthedocs.io/en/latest/?badge=latest
+[rtd-badge]: https://readthedocs.org/projects/scientific-python-cookie/badge/?version=latest
+[rtd-link]: https://scientific-python-cookie.readthedocs.io/en/latest/?badge=latest
 [scientific-python development guide]: https://learn.scientific-python.org/development
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 [scikit-hep]: https://scikit-hep.org
