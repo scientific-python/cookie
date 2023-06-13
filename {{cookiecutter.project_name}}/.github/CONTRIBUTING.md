@@ -30,7 +30,7 @@ environment for each run.
 
 You can set up a development environment by running:
 
-{% if cookiecutter.project_type == "poetry" -%}
+{% if cookiecutter.backend == "poetry" -%}
 
 ```bash
 poetry install

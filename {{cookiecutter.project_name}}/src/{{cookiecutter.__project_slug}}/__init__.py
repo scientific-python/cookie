@@ -7,7 +7,7 @@ Copyright (c) {{ cookiecutter.year }} {{ cookiecutter.full_name }}. All rights r
 
 from __future__ import annotations
 
-{% if cookiecutter.project_type == "setuptools" or cookiecutter.project_type == "pybind11" -%}
+{% if cookiecutter.backend == "setuptools" or cookiecutter.backend == "pybind11" -%}
 from ._version import version as __version__
 {%- else -%}
 __version__ = "0.1.0"

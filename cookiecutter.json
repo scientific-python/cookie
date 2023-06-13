@@ -3,7 +3,7 @@
   "org": "org",
   "url": "https://github.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
   "full_name": "My Name",
-  "project_type": [
+  "backend": [
     "hatch",
     "setuptools",
     "setuptools621",

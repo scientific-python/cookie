@@ -50,7 +50,7 @@ repos:
       - id: ruff
         args: ["--fix", "--show-fixes"]
 
-{%- if cookiecutter.project_type == "setuptools" or cookiecutter.project_type == "pybind11" %}
+{%- if cookiecutter.backend == "setuptools" or cookiecutter.backend == "pybind11" %}
 
   - repo: https://github.com/asottile/setup-cfg-fmt
     rev: "v2.2.0"
@@ -60,7 +60,7 @@ repos:
 
 {%- endif %}
 
-{%- if cookiecutter.project_type in ["pybind11", "skbuild", "mesonpy"] %}
+{%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
     rev: "v16.0.2"
@@ -97,7 +97,7 @@ repos:
         entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
         exclude: .pre-commit-config.yaml
 
-{%- if cookiecutter.project_type in ["setuptools", "pybind11"] %}
+{%- if cookiecutter.backend in ["setuptools", "pybind11"] %}
 
   - repo: https://github.com/mgedmin/check-manifest
     rev: "0.49"
@@ -106,7 +106,7 @@ repos:
         stages: [manual]
 {%- endif %}
 
-{%- if cookiecutter.project_type == "skbuild" %}
+{%- if cookiecutter.backend == "skbuild" %}
 
   - repo: https://github.com/cheshirekow/cmake-format-precommit
     rev: "v0.6.13"
