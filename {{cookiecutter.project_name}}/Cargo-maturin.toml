@@ -1,5 +1,5 @@
 [package]
-name = "{{ cookiecutter.project_slug }}"
+name = "{{ cookiecutter.__project_slug }}"
 version = "0.1.0"
 edition = "2018"
 
@@ -9,8 +9,8 @@ name = "_core"
 crate-type = ["cdylib"]
 
 [package.metadata.maturin]
-name = "{{ cookiecutter.project_slug }}._core"
-python-packages = ["{{ cookiecutter.project_slug }}"]
+name = "{{ cookiecutter.__project_slug }}._core"
+python-packages = ["{{ cookiecutter.__project_slug }}"]
 python-source = "src"
 
 [dependencies]

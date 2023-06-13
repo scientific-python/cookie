@@ -21,5 +21,6 @@
   "project_short_description": "A great package.",
   "year": "{% now 'utc', '%Y' %}",
   "license": ["BSD", "Apache", "MIT"],
-  "_extensions": ["jinja2_time.TimeExtension"]
+  "_extensions": ["jinja2_time.TimeExtension"],
+  "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}"
 }
