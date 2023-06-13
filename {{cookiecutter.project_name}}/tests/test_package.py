@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import {{ cookiecutter.project_slug }} as m
-from {{ cookiecutter.project_slug }}._compat.typing import Protocol, runtime_checkable
+import {{ cookiecutter.__project_slug }} as m
+from {{ cookiecutter.__project_slug }}._compat.typing import Protocol, runtime_checkable
 
 
 def test_version():

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import {{ cookiecutter.project_slug }}._core as m
+import {{ cookiecutter.__project_slug }}._core as m
 
 
 def test_add():

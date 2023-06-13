@@ -41,7 +41,7 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.setuptools_scm]
-write_to = "src/{{ cookiecutter.project_slug }}/_version.py"
+write_to = "src/{{ cookiecutter.__project_slug }}/_version.py"
 
 
 [tool.check-manifest]
@@ -202,7 +202,7 @@ source-dir = "src"
 module-location = "src"
 {%- elif cookiecutter.project_type == "hatch" %}
 [tool.hatch]
-version.path = "src/{{ cookiecutter.project_slug  }}/__init__.py"
+version.path = "src/{{ cookiecutter.__project_slug  }}/__init__.py"
 envs.default.dependencies = [
   "pytest",
   "pytest-cov",
@@ -228,7 +228,7 @@ testpaths = [
 
 
 [tool.coverage]
-run.source = ["{{ cookiecutter.project_slug }}"]
+run.source = ["{{ cookiecutter.__project_slug }}"]
 port.exclude_lines = [
   'pragma: no cover',
   '\.\.\.',
@@ -247,7 +247,7 @@ disallow_untyped_defs = false
 disallow_incomplete_defs = false
 
 [[tool.mypy.overrides]]
-module = "{{ cookiecutter.project_slug  }}.*"
+module = "{{ cookiecutter.__project_slug  }}.*"
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
 
@@ -283,7 +283,7 @@ extend-ignore = [
   "E501",   # Line too long
 ]
 target-version = "py37"
-typing-modules = ["{{ cookiecutter.project_slug }}._compat.typing"]
+typing-modules = ["{{ cookiecutter.__project_slug }}._compat.typing"]
 src = ["src"]
 unfixable = [
   "T20",  # Removes print statements
@@ -300,7 +300,7 @@ isort.required-imports = ["from __future__ import annotations"]
 
 [tool.pylint]
 py-version = "3.7"
-ignore-paths= ["src/{{ cookiecutter.project_slug }}/_version.py"]
+ignore-paths= ["src/{{ cookiecutter.__project_slug }}/_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
 messages_control.disable = [
