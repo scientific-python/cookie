@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 import argparse
-{%- if cookiecutter.project_type != "pybind11" %}
+{%- if cookiecutter.backend != "pybind11" %}
 import shutil
 from pathlib import Path
 {%- endif %}
 
 import nox
 
-{% if cookiecutter.project_type != "pybind11" -%}
+{% if cookiecutter.backend != "pybind11" -%}
 DIR = Path(__file__).parent.resolve()
 
 {% endif -%}
@@ -83,7 +83,7 @@ def build_api_docs(session: nox.Session) -> None:
     )
 
 
-{%- if cookiecutter.project_type != "pybind11" %}
+{%- if cookiecutter.backend != "pybind11" %}
 
 
 @nox.session

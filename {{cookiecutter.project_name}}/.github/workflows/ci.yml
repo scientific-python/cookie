@@ -1,4 +1,4 @@
-{%- set compiled = cookiecutter.project_type in ["pybind11", "maturin", "skbuild", "mesonpy"] -%}
+{%- set compiled = cookiecutter.backend in ["pybind11", "maturin", "skbuild", "mesonpy"] -%}
 name: CI
 
 on:
@@ -64,7 +64,7 @@ jobs:
         with:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
 
-      {%- if cookiecutter.project_type == "mesonpy" %}
+      {%- if cookiecutter.backend == "mesonpy" %}
       - name: Activate MSVC for Meson
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
@@ -100,7 +100,7 @@ jobs:
         with:
           path: dist
 
-      {%- if cookiecutter.project_type != "trampolim" %}
+      {%- if cookiecutter.backend != "trampolim" %}
 
       - name: Check products
         run: pipx run twine check dist/*
@@ -128,7 +128,7 @@ jobs:
           # Remember to tell (test-)pypi about this repo before publishing
           # Remove this line to publish to PyPI
           repository-url: https://test.pypi.org/legacy/
-          {%- if cookiecutter.project_type == "trampolim" %}
+          {%- if cookiecutter.backend == "trampolim" %}
           # Check not supported currently by twine + trampolim
           verify-metadata: false
           {%- endif %}

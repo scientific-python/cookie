@@ -19,12 +19,12 @@ nox.needs_version = ">=2022.1.7"
 
 DIR = Path(__file__).parent.resolve()
 with DIR.joinpath("cookiecutter.json").open() as f:
-    BACKENDS = json.load(f)["project_type"]
+    BACKENDS = json.load(f)["backend"]
 
 JOB_FILE = """\
 default_context:
   project_name: cookie-{backend}
-  project_type: {backend}
+  backend: {backend}
 """
 
 nox.options.sessions = ["lint", "tests", "native"]

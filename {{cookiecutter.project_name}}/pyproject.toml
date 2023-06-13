@@ -1,43 +1,43 @@
 [build-system]
-{%- if cookiecutter.project_type == "trampolim" %}
+{%- if cookiecutter.backend == "trampolim" %}
 requires = ["trampolim>=0.1.0"]
 build-backend = "trampolim"
-{%- elif cookiecutter.project_type == "whey" %}
+{%- elif cookiecutter.backend == "whey" %}
 requires = ["whey>=0.0.17"]
 build-backend = "whey"
-{%- elif cookiecutter.project_type == "pdm" %}
+{%- elif cookiecutter.backend == "pdm" %}
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
-{%- elif cookiecutter.project_type == "maturin" %}
+{%- elif cookiecutter.backend == "maturin" %}
 requires = ["maturin>=0.12,<0.15"]
 build-backend = "maturin"
-{%- elif cookiecutter.project_type == "hatch" %}
+{%- elif cookiecutter.backend == "hatch" %}
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-{%- elif cookiecutter.project_type == "setuptools621" %}
+{%- elif cookiecutter.backend == "setuptools621" %}
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
-{%- elif cookiecutter.project_type == "flit" %}
+{%- elif cookiecutter.backend == "flit" %}
 requires = ["flit_core >=3.4"]
 build-backend = "flit_core.buildapi"
-{%- elif cookiecutter.project_type == "setuptools" %}
+{%- elif cookiecutter.backend == "setuptools" %}
 requires = ["setuptools>=42", "setuptools_scm[toml]>=3.4"]
 build-backend = "setuptools.build_meta"
-{%- elif cookiecutter.project_type == "pybind11" %}
+{%- elif cookiecutter.backend == "pybind11" %}
 requires = ["setuptools>=42", "setuptools_scm[toml]>=3.4", "pybind11"]
 build-backend = "setuptools.build_meta"
-{%- elif cookiecutter.project_type == "skbuild"  %}
+{%- elif cookiecutter.backend == "skbuild"  %}
 requires = ["pybind11", "scikit-build-core"]
 build-backend = "scikit_build_core.build"
-{%- elif cookiecutter.project_type == "mesonpy"  %}
+{%- elif cookiecutter.backend == "mesonpy"  %}
 requires = ["pybind11", "meson-python"]
 build-backend = "mesonpy"
-{%- elif cookiecutter.project_type == "poetry" %}
+{%- elif cookiecutter.backend == "poetry" %}
 requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 {%- endif %}
 
-{%- if cookiecutter.project_type in ["setuptools", "pybind11"] %}
+{%- if cookiecutter.backend in ["setuptools", "pybind11"] %}
 
 
 [tool.setuptools_scm]
@@ -54,7 +54,7 @@ ignore = [
   "noxfile.py",
 ]
 
-{%- elif cookiecutter.project_type == "poetry" %}
+{%- elif cookiecutter.backend == "poetry" %}
 
 
 [tool.poetry]
@@ -120,7 +120,7 @@ docs = [
 
 [project]
 name = "{{ cookiecutter.project_name }}"
-{%- if cookiecutter.project_type not in ["trampolim", "flit", "hatch"] %}
+{%- if cookiecutter.backend not in ["trampolim", "flit", "hatch"] %}
 version = "0.1.0"
 {%- endif %}
 authors = [
@@ -158,7 +158,7 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
-{%- if cookiecutter.project_type in ["trampolim", "flit", "hatch"] %}
+{%- if cookiecutter.backend in ["trampolim", "flit", "hatch"] %}
 dynamic = ["version"]
 {%- endif %}
 dependencies = [
@@ -190,24 +190,24 @@ Changelog = "{{ cookiecutter.url }}/releases"
 {%- endif %}
 
 
-{%- if cookiecutter.project_type == "skbuild" %}
+{%- if cookiecutter.backend == "skbuild" %}
 [tool.scikit-build]
 minimum-version = "0.2"
 build-dir = "build/{cache_tag}"
-{%- elif cookiecutter.project_type == "whey" %}
+{%- elif cookiecutter.backend == "whey" %}
 [tool.whey]
 source-dir = "src"
-{%- elif cookiecutter.project_type == "trampolim" %}
+{%- elif cookiecutter.backend == "trampolim" %}
 [tool.trampolim]
 module-location = "src"
-{%- elif cookiecutter.project_type == "hatch" %}
+{%- elif cookiecutter.backend == "hatch" %}
 [tool.hatch]
 version.path = "src/{{ cookiecutter.__project_slug  }}/__init__.py"
 envs.default.dependencies = [
   "pytest",
   "pytest-cov",
 ]
-{%- elif cookiecutter.project_type == "pdm" %}
+{%- elif cookiecutter.backend == "pdm" %}
 [tool.pdm.dev-dependencies]
 devtest = ["pytest", "pytest-cov"]
 {%- endif %}
