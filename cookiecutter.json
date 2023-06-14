@@ -22,5 +22,6 @@
   "year": "{% now 'utc', '%Y' %}",
   "license": ["BSD", "Apache", "MIT"],
   "_extensions": ["jinja2_time.TimeExtension"],
-  "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}"
+  "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
+  "__type": "{{ 'compiled' if cookiecutter.backend in ['pybind11', 'skbuild', 'mesonpy', 'maturin'] else 'pure' }}"
 }
