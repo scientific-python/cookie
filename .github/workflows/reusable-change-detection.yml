@@ -7,7 +7,7 @@ on:
         value: ${{ jobs.change-detection.outputs.run-cookie || false }}
       run-rr:
         description: Whether or not run the repo-review tests
-        value: ${{ jobs.change-detection.outputs.run-cookie || false }}
+        value: ${{ jobs.change-detection.outputs.run-rr || false }}
 
 jobs:
   change-detection:
@@ -20,11 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get a list of the changed runtime-related files
+      - name: Changed cookie-related files
         if: github.event_name == 'pull_request'
         id: changed-cookie-files
         uses: Ana06/get-changed-files@v2.2.0
         with:
+          format: "json"
           filter: |
             {{cookiecutter.project_name}}/**
             .github/workflows/ci.yml
@@ -35,15 +36,16 @@ jobs:
       - name: Set a flag for running the tests
         if: >-
           github.event_name != 'pull_request' ||
-          steps.changed-cookie-files.outputs.added_modified_renamed != ''
+          steps.changed-cookie-files.outputs.added_modified_renamed != '[]'
         id: cookie-changes
         run: echo "run-cookie=true" >> "${GITHUB_OUTPUT}"
 
-      - name: Get a list of the changed runtime-related files
+      - name: Changed sp-repo-review-related files
         if: github.event_name == 'pull_request'
         id: changed-rr-files
         uses: Ana06/get-changed-files@v2.2.0
         with:
+          format: "json"
           filter: |
             tests/**
             .github/workflows/ci.yml
@@ -54,6 +56,6 @@ jobs:
       - name: Set a flag for running the tests
         if: >-
           github.event_name != 'pull_request' ||
-          steps.changed-rr-files.outputs.added_modified_renamed != ''
+          steps.changed-rr-files.outputs.added_modified_renamed != '[]'
         id: rr-changes
         run: echo "run-rr=true" >> "${GITHUB_OUTPUT}"
