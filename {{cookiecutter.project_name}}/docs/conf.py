@@ -12,7 +12,7 @@ from __future__ import annotations
 # -- Project information -----------------------------------------------------
 
 project = "{{ cookiecutter.project_name }}"
-copyright = "{{ cookiecutter.year }}, {{ cookiecutter.full_name }}"
+copyright = "{{ cookiecutter.__year }}, {{ cookiecutter.full_name }}"
 author = "{{ cookiecutter.full_name }}"
 
 

@@ -1,4 +1,4 @@
-# Copyright (c) {{ cookiecutter.year }}, {{ cookiecutter.full_name }}
+# Copyright (c) {{ cookiecutter.__year }}, {{ cookiecutter.full_name }}
 #
 # Distributed under the 3-clause BSD license, see accompanying file LICENSE
 # or {{ cookiecutter.url }} for details.
