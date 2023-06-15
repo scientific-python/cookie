@@ -8,20 +8,21 @@
   "license": ["BSD", "Apache", "MIT"],
   "backend": [
     "hatch",
-    "setuptools",
-    "setuptools621",
-    "pybind11",
-    "skbuild",
-    "mesonpy",
-    "poetry",
     "flit",
     "pdm",
     "trampolim",
     "whey",
+    "poetry",
+    "setuptools621",
+    "setuptools",
+    "pybind11",
+    "skbuild",
+    "mesonpy",
     "maturin"
   ],
   "_extensions": ["jinja2_time.TimeExtension"],
   "__year": "{% now 'utc', '%Y' %}",
   "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
-  "__type": "{{ 'compiled' if cookiecutter.backend in ['pybind11', 'skbuild', 'mesonpy', 'maturin'] else 'pure' }}"
+  "__type": "{{ 'compiled' if cookiecutter.backend in ['pybind11', 'skbuild', 'mesonpy', 'maturin'] else 'pure' }}",
+  "__answers": ""
 }

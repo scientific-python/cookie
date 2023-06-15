@@ -120,6 +120,9 @@ jobs:
       - name: Test meson-python
         run: nox -s 'tests(mesonpy)'
 
+      - name: Compare template generation
+        run: nox -s compare
+
   nox:
     name: Check included Noxfile
     runs-on: ubuntu-latest

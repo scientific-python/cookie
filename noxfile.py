@@ -7,9 +7,11 @@ sp-repo-review checks start with "rr-".
 
 from __future__ import annotations
 
+import difflib
 import json
 import re
 import shutil
+import sys
 import urllib.request
 from pathlib import Path
 
@@ -30,25 +32,58 @@ default_context:
 nox.options.sessions = ["lint", "tests", "native"]
 
 
-def make_cookie(session: nox.Session, backend: str) -> None:
-    tmp_dir = session.create_tmp()
-    session.cd(tmp_dir)
+def make_copier(session: nox.Session, backend: str) -> None:
+    package_dir = Path(f"copy-{backend}")
+    if package_dir.exists():
+        shutil.rmtree(package_dir)
 
+    session.run(
+        "copier",
+        "copy",
+        f"{DIR}",
+        f"{package_dir}",
+        "--defaults",
+        "--UNSAFE",
+        "--vcs-ref=HEAD",
+        f"--data=project_name=cookie-{backend}",
+        "--data=org=org",
+        f"--data=backend={backend}",
+        "--data=full_name=My Name",
+        "--data=email=me@email.com",
+        "--data=license=BSD",
+    )
+
+    init_git(session, package_dir)
+
+    return package_dir
+
+
+def make_cookie(session: nox.Session, backend: str) -> None:
     package_dir = Path(f"cookie-{backend}")
+    if package_dir.exists():
+        shutil.rmtree(package_dir)
 
     Path("input.yml").write_text(JOB_FILE.format(backend=backend), encoding="utf-8")
 
     session.run(
         "cookiecutter",
         "--no-input",
-        str(DIR),
+        f"{DIR}",
         "--config-file=input.yml",
     )
-    session.cd(package_dir)
-    session.run("git", "init", "-q", external=True)
-    session.run("git", "add", ".", external=True)
+
+    init_git(session, package_dir)
+
+    return package_dir
+
+
+def init_git(session: nox.Session, package_dir: Path) -> None:
+    session.run("git", "-C", f"{package_dir}", "init", "-q", external=True)
+    session.run("git", "-C", f"{package_dir}", "add", ".", external=True)
     session.run(
         "git",
+        "-C",
+        f"{package_dir}",
         "-c",
         "user.name=Bot",
         "-c",
@@ -58,7 +93,33 @@ def make_cookie(session: nox.Session, backend: str) -> None:
         "feat: initial version",
         external=True,
     )
-    session.run("git", "tag", "v0.1.0", external=True)
+    session.run("git", "-C", f"{package_dir}", "tag", "v0.1.0", external=True)
+
+
+def valid_path(path: Path):
+    return path.is_file() and not {"__pycache__", ".git", ".copier-answers.yml"} & set(
+        path.parts
+    )
+
+
+def diff_files(p1: Path, p2: Path) -> bool:
+    f1set = {p.relative_to(p1) for p in p1.rglob("*") if valid_path(p)}
+    f2set = {p.relative_to(p2) for p in p2.rglob("*") if valid_path(p)}
+
+    same = True
+
+    for f in sorted(f1set | f2set):
+        f1 = p1 / f
+        f2 = p2 / f
+        with f1.open(encoding="utf-8") as c1, f2.open(encoding="utf-8") as c2:
+            diff = list(
+                difflib.unified_diff(c1.readlines(), c2.readlines(), f"{f1}", f"{f2}")
+            )
+        if diff:
+            sys.stdout.writelines(diff)
+            same = False
+
+    return same
 
 
 @nox.session()
@@ -66,7 +127,10 @@ def make_cookie(session: nox.Session, backend: str) -> None:
 def lint(session: nox.Session, backend: str) -> None:
     session.install("cookiecutter", "pre-commit")
 
-    make_cookie(session, backend)
+    tmp_dir = session.create_tmp()
+    session.cd(tmp_dir)
+    cookie = make_cookie(session, backend)
+    session.chdir(cookie)
 
     session.run(
         "pre-commit",
@@ -82,7 +146,10 @@ def lint(session: nox.Session, backend: str) -> None:
 def autoupdate(session, backend):
     session.install("cookiecutter", "pre-commit")
 
-    make_cookie(session, backend)
+    tmp_dir = session.create_tmp()
+    session.cd(tmp_dir)
+    cookie = make_cookie(session, backend)
+    session.chdir(cookie)
 
     session.run("pre-commit", "autoupdate")
     session.run("git", "diff", "--exit-code", external=True)
@@ -93,10 +160,30 @@ def autoupdate(session, backend):
 def tests(session, backend):
     session.install("cookiecutter")
 
-    make_cookie(session, backend)
+    tmp_dir = session.create_tmp()
+    session.cd(tmp_dir)
+    cookie = make_cookie(session, backend)
+    session.chdir(cookie)
 
     session.install(".[test]")
     session.run("python", "-m", "pytest", "-ra")
+
+
+@nox.session()
+def compare(session):
+    session.install("cookiecutter", "copier", "copier-templates-extensions")
+
+    tmp_dir = session.create_tmp()
+    session.cd(tmp_dir)
+
+    for backend in BACKENDS:
+        cookie = make_cookie(session, backend)
+        copier = make_copier(session, backend)
+
+        if diff_files(cookie, copier):
+            session.log(f"{backend} passed")
+        else:
+            session.error(f"{backend} files are not the same!")
 
 
 @nox.session()
@@ -104,7 +191,10 @@ def tests(session, backend):
 def native(session, backend):
     session.install("cookiecutter", backend)
 
-    make_cookie(session, backend)
+    tmp_dir = session.create_tmp()
+    session.cd(tmp_dir)
+    cookie = make_cookie(session, backend)
+    session.chdir(cookie)
 
     if backend == "hatch":
         session.run(backend, "env", "create")
@@ -119,7 +209,10 @@ def native(session, backend):
 def dist(session, backend):
     session.install("cookiecutter", "build", "twine")
 
-    make_cookie(session, backend)
+    tmp_dir = session.create_tmp()
+    session.cd(tmp_dir)
+    cookie = make_cookie(session, backend)
+    session.chdir(cookie)
 
     session.run("python", "-m", "build", silent=True)
     (sdist,) = Path("dist").glob("*.tar.gz")
@@ -128,7 +221,7 @@ def dist(session, backend):
     if "0.1.0" not in str(wheel):
         session.error(f"{wheel} must be version 0.1.0")
 
-    session.run("twine", "check", str(sdist), str(wheel))
+    session.run("twine", "check", f"{sdist}", f"{wheel}")
 
     dist = DIR / "dist"
     dist.mkdir(exist_ok=True)
@@ -141,7 +234,10 @@ def dist(session, backend):
 def nox_session(session, backend):
     session.install("cookiecutter", "nox")
 
-    make_cookie(session, backend)
+    tmp_dir = session.create_tmp()
+    session.cd(tmp_dir)
+    cookie = make_cookie(session, backend)
+    session.chdir(cookie)
 
     if session.posargs:
         session.run("nox", "-s", *session.posargs)
