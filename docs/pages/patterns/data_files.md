@@ -40,9 +40,9 @@ Alternatives:
   need to download large datasets for their examples and tests.
 
 If you use one these alternatives, add the names of the generated or downloaded
-files to the project's `.gitignore` file, which was provided by the cookiecutter
-template. This helps protect you against accidentally committing the file to
-git.
+files to the project's `.gitignore` file, which is provided by the
+[copier][]/[cookiecutter][] template. This helps protect you against
+accidentally committing the file to git.
 
 If the file in question is a text file and not very large (\< 100 kB) than it's
 reasonable to just bundle it with the package. If not, see the recommendation at
@@ -201,7 +201,11 @@ file_path = pooch.retrieve(
 On repeated runs of this command, the locally cached filename would be used
 instead of downloading the data again.
 
+<!-- prettier-ignore-start -->
 [importlib_resources]: https://importlib-resources.readthedocs.io/en/latest/
 [osf.io]: https://osf.io/
 [pooch]: https://www.fatiando.org/pooch/latest/
 [zenodo]: https://zenodo.org/
+[copier]: https://copier.readthedocs.io
+[cookiecutter]: https://cookiecutter.readthedocs.io
+<!-- prettier-ignore-end -->

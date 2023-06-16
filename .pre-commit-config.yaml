@@ -50,7 +50,7 @@ repos:
     rev: v1.3.0
     hooks:
       - id: mypy
-        files: "(src|web|tests)"
+        files: "(src|tests)"
         args: []
         additional_dependencies:
           - click

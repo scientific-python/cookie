@@ -1,0 +1,70 @@
+project_name:
+  type: str
+  help: The name of your project
+  validator: >-
+    {% if not project_name %} You must provide a name for the project. {% endif
+    %}
+
+org:
+  type: str
+  help: The name of your (GitHub?) org
+  validator: >-
+    {% if not project_name %} You must provide a org for the project. It might
+    just be your user name on the site (like GitHub) you are targeting. {% endif
+    %}
+
+url:
+  type: str
+  help: The URL for your repository
+  default: "https://github.com/{{ org }}/{{ project_name }}"
+
+full_name:
+  type: str
+  help: Your name
+  placeholder: My Name
+  validator: >-
+    {% if not full_name %} You must provide a name (possibly yours) to place in
+    your config files. {% endif %}
+
+email:
+  type: str
+  help: Your email
+  placeholder: me@email.com
+  validator: >-
+    {% if not email %} You must provide an email (possibly yours) to place in
+    your config files, as required by PyPI. {% endif %}
+
+project_short_description:
+  type: str
+  default: A great package.
+
+license:
+  help: Select a license
+  choices:
+    - BSD
+    - Apache
+    - MIT
+
+backend:
+  help: Choose a build backend
+  choices:
+    "Hatchling                      - Pure Python (recommended)": hatch
+    "Flit-core                      - Pure Python (minimal)": flit
+    "PDM-backend                    - Pure Python": pdm
+    "Trampolim                      - Pure Python": trampolim
+    "Whey                           - Pure Python": whey
+    "Poetry                         - Pure Python": poetry
+    "Setuptools with pyproject.toml - Pure Python": setuptools621
+    "Setuptools with setup.py       - Pure Python": setuptools
+    "Setuptools and pybind11        - Compiled C++": pybind11
+    "Scikit-build-core              - Compiled C++ (recommended)": skbuild
+    "Meson-python                   - Compiled C++ (also good)": mesonpy
+    "Maturin                        - Compiled Rust (recommended)": maturin
+
+_templates_suffix: ""
+
+_subdirectory: "{% raw %}{{cookiecutter.project_name}}{% endraw %}"
+
+_jinja_extensions:
+  - copier_templates_extensions.TemplateExtensionLoader
+  - extensions.py:CookiecutterNamespace
