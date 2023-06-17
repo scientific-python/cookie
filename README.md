@@ -21,7 +21,7 @@ templates for Python packages?
 - Provides [`sp-repo-review`][pypi-link] to evaluate existing repos against the
   guidelines, with a WebAssembly version integrated with the guide. All checks
   cross-linked.
-- Follows PyPA best practices and regularly updated.
+- Follows [PyPA][] best practices and regularly updated.
 
 Be sure you have read the [Scientific-Python Development Guide][] first, and
 possibly used them on a project or two. This is _not_ a minimal example or
@@ -175,29 +175,31 @@ not use pre-commit properly. It also has quite a bit of custom code.
 #### History
 
 A lot of the guide, cookiecutter, and repo-review started out as part of
-Scikit-HEP. These projects were merged, generalized, and combined with the
-NSLS-II guide during the 2023 Scientific-Python Developers Summit.
+[Scikit-HEP][]. These projects were merged, generalized, and combined with the
+[NSLS-II][] guide during the 2023 Scientific-Python Developers Summit.
 
 <!-- prettier-ignore-start -->
 
-[actions-badge]: https://github.com/scikit-hep/cookie/workflows/CI/badge.svg
-[actions-link]: https://github.com/scikit-hep/cookie/actions
+[actions-badge]: https://github.com/scientific-python/cookie/workflows/CI/badge.svg
+[actions-link]: https://github.com/scientific-python/cookie/actions
 [cibuildwheel]: https://cibuildwheel.readthedocs.io
 [cookiecutter]: https://cookiecutter.readthedocs.io
 [copier]: https://copier.readthedocs.io
 [flit]: https://flit.readthedocs.io/en/latest/
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
-[github-discussions-link]: https://github.com/scikit-hep/cookie/discussions
+[github-discussions-link]: https://github.com/scientific-python/cookie/discussions
 [hatch]: https://github.com/ofek/hatch
 [hypermodern]: https://github.com/cjolowicz/cookiecutter-hypermodern-python
 [maturin]: https://maturin.rs
 [meson-python]: https://meson-python.readthedocs.io
 [nox]: https://nox.thea.codes/en/stable/
+[nsls-ii]: https://nsls-ii.github.io/scientific-python-cookiecutter/
 [pdm]: https://pdm.fming.dev
 [pep 621]: https://www.python.org/dev/peps/pep-0621
 [pipx]: https://pypa.github.io/pipx/
 [poetry]: https://python-poetry.org
 [pybind11]: https://pybind11.readthedocs.io
+[pypa]: https://www.pypa.io
 [pypi-link]: https://pypi.org/project/sp-repo-review/
 [pypi-platforms]: https://img.shields.io/pypi/pyversions/sp-repo-review
 [pypi-version]: https://badge.fury.io/py/sp-repo-review.svg
@@ -205,6 +207,7 @@ NSLS-II guide during the 2023 Scientific-Python Developers Summit.
 [rtd-link]: https://scientific-python-cookie.readthedocs.io/en/latest/?badge=latest
 [scientific-python development guide]: https://learn.scientific-python.org/development
 [scikit-build]: https://scikit-build.readthedocs.io
+[scikit-hep]: https://scikit-hep.org
 [setuptools]: https://setuptools.readthedocs.io
 [trampolim]: https://trampolim.readthedocs.io
 [whey]: https://whey.readthedocs.io

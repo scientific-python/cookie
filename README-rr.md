@@ -34,12 +34,15 @@ follow them, some of the checks might not work. For example, the guidelines
 specify pytest configuration be placed in `pyproject.toml`. If you place it
 somewhere else, then all the pytest checks will be skipped.
 
+This was originally developed for [Scikit-HEP][] before moving to Scientific
+Python.
+
 <!-- prettier-ignore-start -->
 
 [actions-badge]: https://github.com/scientific-python/cookie/workflows/CI/badge.svg
 [actions-link]: https://github.com/scientific-python/cookie/actions
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
-[github-discussions-link]: https://github.com/scikit-hep/cookie/discussions
+[github-discussions-link]: https://github.com/scientific-python/cookie/discussions
 [pypi-link]: https://pypi.org/project/sp-repo-review/
 [pypi-platforms]: https://img.shields.io/pypi/pyversions/sp-repo-review
 [pypi-version]: https://badge.fury.io/py/sp-repo-review.svg
