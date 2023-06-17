@@ -47,9 +47,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/scientific-python/cookie"
-Webpage = "https://scientific-python.github.io/cookie"
+Guide = "https://learn.scientific-python.org/development"
+Homepage = "https://scientific-python.github.io/cookie"
 Preview = "https://scientific-python-cookie.readthedocs.io"
+Source = "https://github.com/scientific-python/cookie"
 
 
 [project.entry-points."pipx.run"]
