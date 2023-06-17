@@ -8,7 +8,7 @@
 [![PyPI platforms][pypi-platforms]][pypi-link]
 
 `sp-repo-review` provides checks based on the [Scientific-Python Development
-Guide][] at [scientific-python/cookie][].
+Guide][] at [scientific-python/cookie][] for [repo-review][].
 
 This tool can check the style of a repository. Use like this:
 
@@ -37,6 +37,21 @@ somewhere else, then all the pytest checks will be skipped.
 This was originally developed for [Scikit-HEP][] before moving to Scientific
 Python.
 
+You can also use GitHub Actions:
+
+```yaml
+- uses: scientific-python/cookie@<version>
+```
+
+Or pre-commit:
+
+```yaml
+- repo: https://github.com/scientific-python/cookie
+  rev: <version>
+  hooks:
+    - id: sp-repo-review
+```
+
 <!-- prettier-ignore-start -->
 
 [actions-badge]: https://github.com/scientific-python/cookie/workflows/CI/badge.svg
@@ -46,6 +61,7 @@ Python.
 [pypi-link]: https://pypi.org/project/sp-repo-review/
 [pypi-platforms]: https://img.shields.io/pypi/pyversions/sp-repo-review
 [pypi-version]: https://badge.fury.io/py/sp-repo-review.svg
+[repo-review]: https://repo-review.readthedocs.io
 [rtd-badge]: https://readthedocs.org/projects/scientific-python-cookie/badge/?version=latest
 [rtd-link]: https://scientific-python-cookie.readthedocs.io/en/latest/?badge=latest
 [scientific-python development guide]: https://learn.scientific-python.org/development
