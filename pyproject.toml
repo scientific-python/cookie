@@ -32,7 +32,7 @@ classifiers = [
 dynamic = ["version"]
 dependencies = [
   "pyyaml",
-  "repo-review>=0.7.0b4,<0.8",
+  "repo-review~=0.7.0",
 ]
 
 [project.optional-dependencies]
