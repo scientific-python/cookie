@@ -183,7 +183,7 @@ function MyThemeProvider(props) {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const deps_str = props.deps.map((i) => `"${i}"`).join(", ");
+    const deps_str = props.deps.join(" ");
     this.state = {
       results: [],
       repo: urlParams.get("repo") || "",
@@ -260,7 +260,7 @@ class App extends React.Component {
           name: val.name.toString(),
           description: val.description.toString(),
           state: val.result,
-          err_msg: val.err_markdown().toString(),
+          err_msg: val.err_as_html().toString(),
           url: val.url.toString(),
         });
       }
