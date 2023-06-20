@@ -76,7 +76,7 @@ pipx inject copier copier-templates-extensions
 Now, run copier to generate your project:
 
 ```bash
-copier copy gh:scientific-python/cookie <pkg> --UNSAFE --vcs-ref=HEAD
+copier copy gh:scientific-python/cookie <pkg> --UNSAFE
 ```
 
 (`<pkg>` is the path to put the new project.)
@@ -86,8 +86,7 @@ answer validation. You will also get a `.copier-answers.yml` file, which will
 allow you to perform updates in the future.
 
 > Note: Add `--vcs-ref=HEAD` to get the latest version instead of the last
-> tagged version; this is required until there's a tagged version, and still
-> recommended after that.
+> tagged version; HEAD always passes tests (and is what cookiecutter uses).
 
 #### To use (classic cookiecutter version)
 
