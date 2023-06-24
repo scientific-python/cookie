@@ -22,7 +22,8 @@ a consistent developer and user experience when working with distribution.
 A section on CI follows, with a [general setup guide][gha_basic], and then two
 choices for using CI to distribute your package, on for [pure Python][gha_pure],
 and one for [compiled extensions][gha_wheels]. You can read about setting up
-good tests on the [pytest page][pytest].
+good tests on the [pytest page][pytest]. There's also a page on setting up
+[docs][], as well.
 
 Once you have completed the guidelines, there is a [copier][]/[cookiecutter][]
 project, [scientific-python/cookie][], that implements these guidelines and lets
@@ -36,6 +37,7 @@ You can also evaluate your repository against the guidelines by using
 [tutorials]: {% link pages/tutorials/index.md %}
 [style]: {% link pages/guides/style.md %}
 [mypy]: {% link pages/guides/mypy.md %}
+[docs]: {% link pages/guides/docs.md %}
 [simple packaging]: {% link pages/guides/packaging_simple.md %}
 [classic packaging]: {% link pages/guides/packaging_classic.md %}
 [gha_basic]: {% link pages/guides/gha_basic.md %}

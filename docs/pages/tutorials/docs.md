@@ -1,29 +1,14 @@
 ---
 layout: page
 title: Writing documentation
-permalink: /guides/writing-docs/
-nav_order: 4
-parent: Topical Guides
+permalink: /tutorials/docs/
+nav_order: 5
+parent: Tutorials
 ---
 
 {% include toc.html %}
 
 # Writing Documentation
-
-## What to include
-
-Ideally, software documentation should include:
-
-- Introductory **tutorials**, to help new users (or potential users) understand
-  what the software can do and take their first steps
-- Task-oriented **guides**, examples that address specific uses
-- **Reference**, specifying the detailed inputs and outputs of every public
-  object in the codebase
-- **Explanations** to convey deeper understanding of why and how the software
-  operates the way it does
-
-This overall framework has a name, [Diátaxis][], and you can read more about it
-if you are interested.
 
 ## Build the documentation
 
@@ -70,6 +55,7 @@ In this directory, we will create a minimal Sphinx configuration file at
 
 project = "example"
 extensions = ["myst_parser"]
+source_suffix = [".rst", ".md"]
 ```
 
 And, at `docs/index.md`, we will create a minimal front page for our
@@ -168,29 +154,22 @@ or drifting out of sync over time.
 MyST recommends using [sphinx-autodoc2][]. However, we currently recommend using
 the built-in sphinx `autodoc` and `autosummary` extensions because they
 interoperates well with docstrings written to the numpydoc standard. To invoke
-them, we need to employ yet another syntax (reST). F:ortunately, you can simply
+them, we need to employ yet another syntax (reST). Fortunately, you can simply
 copy/paste these examples.
-
-Install `numpydoc`.
-
-```bash
-pip install numpydoc
-```
 
 In `docs/conf.py`, add to the list of extensions.
 
 ```py
 extensions = [
     # whatever you already have in here...
-
-    "numpydoc",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
+    "sphinx.ext.napoleon",
 ]
 ```
 
-(Note that `sphinx.ext.autodoc` and `sphinx.ext.autosummary` come installed with
-`sphinx`, so there is nothing more to install.)
+(Note that these extensions come with `sphinx`, so there is nothing more to
+install.)
 
 You can document a single object (e.g. function), shown inline on the page
 
@@ -213,6 +192,9 @@ Or you can generate a table that links out to documentation for each object.
     example.refraction.snell
 ```
 ````
+
+See the [guide]({% link pages/guides/docs.md %}) for more information on how to
+integrate this into a package, and setup for nox.
 
 <!-- prettier-ignore-start -->
 [diátaxis]: https://diataxis.fr/
