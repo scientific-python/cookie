@@ -150,7 +150,7 @@ skipped. You can use a Docker container to run in an environment where all
 Python's (3.6+) are available:
 
 ```console
-$ docker run --rm -itv $PWD:/src -w /src quay.io/pypa/manylinux_2_24_x86_64:latest pipx run nox
+$ docker run --rm -itv $PWD:/src -w /src quay.io/pypa/manylinux_2_28_x86_64:latest pipx run nox
 ```
 
 Another container you can use is `thekevjames/nox:latest`; this has nox
@@ -198,28 +198,37 @@ def tests(session: nox.Session) -> None:
 #### Docs
 
 ```python
-@nox.session
+@nox.session(reuse_venv=True)
 def docs(session: nox.Session) -> None:
     """
-    Build the docs. Pass "serve" to serve.
+    Build the docs. Pass "--serve" to serve.
     """
 
-    session.install(".[docs]")
-    session.chdir("docs")
-    session.run("sphinx-build", "-M", "html", ".", "_build")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--serve", action="store_true", help="Serve after building")
+    args, posargs = parser.parse_known_args(session.posargs)
 
-    if session.posargs:
-        if "serve" in session.posargs:
-            print("Launching docs at http://localhost:8000/ - use Ctrl-C to quit")
-            session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
-        else:
-            print("Unsupported argument to docs")
+    session.install("-e.[docs]")
+    session.chdir("docs")
+
+    session.run(
+        "sphinx-build",
+        "-b",
+        "html",
+        ".",
+        f"_build/html",
+        *posargs,
+    )
+
+    if args.serve:
+        session.log("Launching docs at http://localhost:8000/ - use Ctrl-C to quit")
+        session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
 ```
 
 This supports setting up a quick server as well, run like this:
 
 ```console
-$ nox -s docs -- serve
+$ nox -s docs -- --serve
 ```
 
 #### Build (pure Python)
@@ -239,9 +248,9 @@ def build(session: nox.Session) -> None:
     Build an SDist and wheel.
     """
 
-    build_p = DIR.joinpath("build")
-    if build_p.exists():
-        shutil.rmtree(build_p)
+    build_path = DIR.joinpath("build")
+    if build_path.exists():
+        shutil.rmtree(build_path)
 
     session.install("build")
     session.run("python", "-m", "build")

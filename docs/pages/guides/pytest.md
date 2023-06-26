@@ -75,7 +75,6 @@ filterwarnings = ["error"]
 log_cli_level = "info"
 testpaths = [
   "tests",
-  "ignore:(ast.Str|Attribute s|ast.NameConstant|ast.Num) is deprecated:DeprecationWarning:_pytest",
 ]
 ```
 

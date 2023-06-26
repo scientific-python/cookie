@@ -31,6 +31,7 @@ gh_edit_link: true
 gh_edit_link_text: "View source for this page on GitHub."
 gh_edit_repository: "https://github.com/scientific-python/cookie"
 gh_edit_branch: "main"
+gh_edit_source: "docs"
 gh_edit_view_mode: "tree" # "tree" or "edit"
 
 # Exclude from processing.

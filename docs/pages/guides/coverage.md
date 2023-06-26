@@ -46,7 +46,7 @@ coverage value. The value of `--cov` option should be set to the name of your
 package. For example, run the following command to run tests to generate a
 `.coverage` file for the vector package -
 
-```
+```bash
 python -m pytest -ra --cov=vector --cov-branch tests/
 ```
 
@@ -62,7 +62,7 @@ to your package name. For example -
 
 ```yaml
 - name: Test package
-  run: python -m pytest -ra --cov=vector tests/
+  run: python -m pytest --cov=vector tests/
 ```
 
 This will automatically invoke `pytest-cov`, and generate a `.coverage` file,
