@@ -139,10 +139,10 @@ supports markdown and restructured text. Note that because black is in
 
 ```yaml
 - repo: https://github.com/asottile/blacken-docs
-  rev: "1.13.0"
+  rev: "1.14.0"
   hooks:
     - id: blacken-docs
-      additional_dependencies: [black==23.1.0]
+      additional_dependencies: [black==23.3.0]
 ```
 
 </details>
@@ -156,11 +156,11 @@ compiled in, so you can't get new failures from plugins updating without
 updating your pre-commit hook.
 
 [ruff docs]: https://beta.ruff.rs
-[ruff]: https://github.com/charliermarsh/ruff
+[ruff]: https://github.com/astral-sh/ruff
 
 ```yaml
-- repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: "v0.0.271"
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: "v0.0.275"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -380,7 +380,7 @@ required.
 
 ```yaml
 - repo: https://github.com/asottile/yesqa
-  rev: "v1.4.0"
+  rev: "v1.5.0"
   hooks:
     - id: yesqa
 ```
@@ -427,7 +427,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.4.0"
+  rev: "v3.7.0"
   hooks:
     - id: pyupgrade
       args: ["--py37-plus"]
@@ -473,7 +473,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.3.0"
+  rev: "v1.4.1"
   hooks:
     - id: mypy
       files: src
@@ -608,7 +608,7 @@ looks for, rather than a list of "valid" words. To use:
 
 ```yaml
 - repo: https://github.com/codespell-project/codespell
-  rev: "v2.2.4"
+  rev: "v2.2.5"
   hooks:
     - id: codespell
       args: ["-L", "sur,nd"]
@@ -680,7 +680,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v16.0.4"
+  rev: "v16.0.6"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -780,7 +780,7 @@ You can adapt most tools to notebooks using
   rev: "1.7.0"
   hooks:
     - id: nbqa-ruff
-      additional_dependencies: [ruff==0.0.253]
+      additional_dependencies: [ruff==0.0.275]
 ```
 
 You can pass extra flags to Ruff via the hook, like

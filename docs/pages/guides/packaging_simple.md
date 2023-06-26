@@ -255,7 +255,9 @@ mpl = [
 
 Self dependencies can be used by using the name of the package, such as
 `dev = ["package[test,examples]"]`, but this requires Pip 21.2 or newer. We
-recommend providing at least `test`, `docs`, and `dev`.
+recommend providing at least `test` and `docs`.
+
+## Command line
 
 [flit]: https://flit.readthedocs.io
 [poetry]: https://python-poetry.org
