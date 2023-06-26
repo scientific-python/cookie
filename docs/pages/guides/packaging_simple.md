@@ -92,7 +92,7 @@ authors = [
 maintainers = [
   { name = "My Organization", email = "myemail@email.com" },
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 
 dependencies = [
   "numpy>=1.13.3",
@@ -102,7 +102,6 @@ classifiers = [
   "Development Status :: 4 - Beta",
   "License :: OSI Approved :: BSD License",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",

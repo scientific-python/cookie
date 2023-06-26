@@ -88,9 +88,9 @@ tests:
     fail-fast: false
     matrix:
       python-version:
-        - "3.7"
+        - "3.8"
         - "3.11"
-        - "3.12-dev"
+        - "3.12"
   name: Check Python ${{ matrix.python-version }}
   steps:
     - uses: actions/checkout@v3
@@ -101,6 +101,7 @@ tests:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
+        allow-prereleases: true
 
     - name: Install package
       run: python -m pip install -e .[test]

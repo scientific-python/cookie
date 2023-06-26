@@ -134,11 +134,10 @@ If a test fails, you have lots of options to save time in debugging. Adding
 be added by default, see above). You can run `pytest` with `--pdb`, which will
 drop you into a debugger on each failure. Or you can use `--trace` which will
 drop you into a debugger at the start of each test selected (so probably use the
-selection methods above). `pytest` also supports `breakpoint()` in Python 3.7+.
-You can also start out in your debugger at the beginning of the last failed test
-with `--trace --lf`.
-[See the docs](https://docs.pytest.org/en/stable/usage.html) for more running
-tips.
+selection methods above). `pytest` also supports `breakpoint()`. You can also
+start out in your debugger at the beginning of the last failed test with
+`--trace --lf`. [See the docs](https://docs.pytest.org/en/stable/usage.html) for
+more running tips.
 
 ## Guidelines for writing good tests
 
@@ -280,13 +279,13 @@ pytest to run a group of marked tests. This is an expression; you can use
 Probably the most useful built-in mark is `skipif`:
 
 ```python
-@pytest.mark.skipif("sys.version_info >= (3, 7)")
-def test_only_on_37plus():
+@pytest.mark.skipif("sys.version_info >= (3, 8)")
+def test_only_on_38plus():
     x = 3
     assert f"{x = }" == "x = 3"
 ```
 
-Now this test will only run on Python 3.7 or newer, and will be skipped on
+Now this test will only run on Python 3.8 or newer, and will be skipped on
 earlier versions. You don't have to use a string for the condition, but if you
 don't, add a `reason=` so there will still be a nice printout explaining why the
 test was skipped.

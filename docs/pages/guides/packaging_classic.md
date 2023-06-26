@@ -217,8 +217,8 @@ And `.gitattributes` (or add this line if you are already using this file):
 ```
 
 This will allow git archives (including the ones generated from GitHub) to also
-support versioning. This will only work with `setuptools_scm>=7`, which requires
-Python 3.7+ (though adding the files won't hurt older versions).
+support versioning. This will only work with `setuptools_scm>=7` (though adding
+the files won't hurt older versions).
 
 ### Classic in-source versioning
 
@@ -276,7 +276,6 @@ classifiers =
     Programming Language :: C++
     Programming Language :: Python
     Programming Language :: Python :: 3 :: Only
-    Programming Language :: Python :: 3.7
     Programming Language :: Python :: 3.8
     Programming Language :: Python :: 3.9
     Programming Language :: Python :: 3.10
@@ -299,7 +298,7 @@ project_urls =
 packages = find:
 install_requires =
     numpy>=1.13.3
-python_requires = >=3.7
+python_requires = >=3.8
 include_package_data = True
 package_dir =
     =src
