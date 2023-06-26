@@ -242,6 +242,58 @@ annotations at runtime.
 You can use the above in earlier Python versions if you use strings manually,
 with the same caveats.
 
+## Tips for good types
+
+These are some guidelines to help you in writing good type hints.
+
+### Loose vs. specific types
+
+When you have a function, you should take as generic a type as possible, and
+return as specific a type as possible. For example:
+
+```python
+from __future__ import annotations
+from collections.abc import Iterable, Mapping
+
+
+# Bad!!!
+def count(x: list[str]) -> Mapping[str, int]:
+    result = {}
+    for item in x:
+        result[x] = result.get(x, 0) + 1
+    return result
+```
+
+This will require the user pass a list to use this function, when in fact any
+iterable of strings would work just fine. Then, using valid dictionary
+operations on the return value, like mutating operations, will be marked as
+invalid, since your type checker don't know you have an actual dict. Compare
+with this:
+
+```python
+# Good
+def count(x: Iterable[str]) -> dict[str, int]:
+    result = {}
+    for item in x:
+        result[x] = result.get(x, 0) + 1
+    return result
+```
+
+Now all iterables are accepted, and the type checkers knows you have an actual
+dict in the return. Usually functions should take `Iterable` (if the argument is
+iterated once) or `Sequence` (if it is iterated multiple times or used with
+`in`), or `Mapping`, or `Set`. Very rarely you might need `MutableMapping` or
+`MutableSet`, and if you really do, having it in the type helps a reader know
+that it's going to be mutated.
+
+If you have an output type that depends on an input type, try to pass that
+through, usually using TypeVar (or the new generic syntax in Python 3.12, but
+that's not available for older Pythons via an import).
+
+Also note that the best place to get these in modern Python is
+`collections.abc`, but if you need to subscript them at runtime, you'll need
+Python 3.9+ or the versions in `typing`.
+
 ## Final words
 
 When run alongside a good linter like flake8, this can catch a huge number of
