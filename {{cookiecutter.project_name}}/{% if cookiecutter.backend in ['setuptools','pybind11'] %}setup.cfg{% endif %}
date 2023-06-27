@@ -29,11 +29,11 @@ classifiers =
     Programming Language :: Python
     Programming Language :: Python :: 3
     Programming Language :: Python :: 3 :: Only
-    Programming Language :: Python :: 3.7
     Programming Language :: Python :: 3.8
     Programming Language :: Python :: 3.9
     Programming Language :: Python :: 3.10
     Programming Language :: Python :: 3.11
+    Programming Language :: Python :: 3.12
     Topic :: Scientific/Engineering
     Typing :: Typed
 project_urls =
@@ -45,8 +45,8 @@ project_urls =
 [options]
 packages = find:
 install_requires =
-    typing-extensions>=3.7;python_version<'3.8'
-python_requires = >=3.7
+    typing-extensions>=4.6;python_version<'3.11'
+python_requires = >=3.8
 include_package_data = True
 package_dir =
     =src

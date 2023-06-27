@@ -90,8 +90,8 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.7"
-typing_extensions = { version = ">=3.7", python = "<3.8" }
+python = ">=3.8"
+typing_extensions = { version = ">=4.6", python = "<3.11" }
 
 furo = { version = ">=22", optional = true }
 myst_parser = { version = ">=0.13", optional = true }
@@ -133,7 +133,7 @@ maintainers = [
 {%- endif %}
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 classifiers = [
   "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
@@ -149,7 +149,6 @@ classifiers = [
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
@@ -162,7 +161,7 @@ classifiers = [
 dynamic = ["version"]
 {%- endif %}
 dependencies = [
-  "typing_extensions >=3.7; python_version<'3.8'",
+  "typing_extensions >=4.6; python_version<'3.11'",
 ]
 
 [project.optional-dependencies]
@@ -237,7 +236,7 @@ port.exclude_lines = [
 
 [tool.mypy]
 files = ["src", "tests"]
-python_version = "3.7"
+python_version = "3.8"
 warn_unused_configs = true
 strict = true
 show_error_codes = true
@@ -282,7 +281,7 @@ extend-ignore = [
   "PLR",    # Design related pylint codes
   "E501",   # Line too long
 ]
-target-version = "py37"
+target-version = "py38"
 typing-modules = ["{{ cookiecutter.__project_slug }}._compat.typing"]
 src = ["src"]
 unfixable = [
@@ -299,7 +298,7 @@ isort.required-imports = ["from __future__ import annotations"]
 
 
 [tool.pylint]
-py-version = "3.7"
+py-version = "3.8"
 ignore-paths= ["src/{{ cookiecutter.__project_slug }}/_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"

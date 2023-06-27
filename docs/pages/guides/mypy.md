@@ -127,7 +127,7 @@ Protocols - formalized duck-typing, basically. This allows cross library
 interoperability, unlike traditional inheritance. Here’s how it works:
 
 ```python
-from typing import Protocol  # or typing_extensions for < 3.8
+from typing import Protocol
 
 
 class Duck(Protocol):

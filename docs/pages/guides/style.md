@@ -204,7 +204,7 @@ extend-ignore = [
   "E501",   # Line too long
   "PT004",  # Use underscore for non-returning fixture (use usefixture instead)
 ]
-target-version = "py37"
+target-version = "py38"
 typing-modules = ["mypackage._compat.typing"]
 src = ["src"]
 unfixable = [
@@ -430,15 +430,15 @@ when clearly better (please always use them, they are faster) if you set
   rev: "v3.7.0"
   hooks:
     - id: pyupgrade
-      args: ["--py37-plus"]
+      args: ["--py38-plus"]
 ```
 
 [pyupgrade]: https://github.com/asottile/pyupgrade:
 
 > <h4 class="no_toc">Note:</h4>
 >
-> If you set this to `--py37-plus`, you can add the annotations import by adding
-> the following line to your isort pre-commit hook configuration:
+> If you set this to at least `--py37-plus`, you can add the annotations import
+> by adding the following line to your isort pre-commit hook configuration:
 >
 > ```yaml
 > args: ["-a", "from __future__ import annotations"]
@@ -494,7 +494,7 @@ that looks like this:
 ```ini
 [tool.mypy]
 files = "src"
-python_version = "3.7"
+python_version = "3.8"
 strict = true
 show_error_codes = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
@@ -742,7 +742,7 @@ check than Flake8. Here is a suggested pyproject.toml entry to get you started:
 
 ```toml
 [tool.pylint]
-py-version = "3.7"
+py-version = "3.8"
 jobs = "0"
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"

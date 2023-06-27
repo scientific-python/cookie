@@ -50,7 +50,7 @@ During generation you can select from the following backends for your package:
    all-in-one. Makes some bad default assumptions for libraries. The only one
    with a non-standard pyproject.toml config.
 7. [setuptools621][setuptools]: The classic build system, but with the new
-   standardized configuration. Python 3.7+.
+   standardized configuration.
 8. [setuptools][]: The classic build system. Most powerful, but high learning
    curve and lots of configuration required.
 9. [pybind11][]: This is setuptools but with an C++ extension written in
@@ -102,7 +102,7 @@ Check the key setup files, `pyproject.toml`, and possibly `setup.cfg` and
 `setup.py` (pybind11 example). Update README.md. Also update and add docs to
 `docs/`.
 
-There are a few example dependencies and a minimum Python version of 3.7, feel
+There are a few example dependencies and a minimum Python version of 3.8, feel
 free to change it to whatever you actually need/want.
 
 #### Contained components:
