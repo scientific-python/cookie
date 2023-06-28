@@ -63,7 +63,7 @@ version = "0.1.0"
 authors = [
   "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
 ]
-{%- if cookiecutter.org == "Scikit-HEP" %}
+{%- if cookiecutter.org == "scikit-hep" %}
 maintainers = [
   "The Scikit-HEP admins <scikit-hep-admins@googlegroups.com>",
 ]
@@ -126,7 +126,7 @@ version = "0.1.0"
 authors = [
   { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
 ]
-{%- if cookiecutter.org == "Scikit-HEP" %}
+{%- if cookiecutter.org | lower == "scikit-hep" %}
 maintainers = [
   { name = "The Scikit-HEP admins", email = "scikit-hep-admins@googlegroups.com" },
 ]
