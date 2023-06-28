@@ -14,6 +14,9 @@ and may cover common tools related to that pattern.
 
 If you want to put data in a package and load it, see [Including data files][].
 
+If you would like to use backport packages, see [Backports][].
+
 <!-- prettier-ignore-start -->
 [including data files]: {% link pages/patterns/data_files.md %}
+[backports]: {% link pages/patterns/backports.md %}
 <!-- prettier-ignore-end -->
