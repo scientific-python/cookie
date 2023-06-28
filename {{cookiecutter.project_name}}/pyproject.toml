@@ -49,7 +49,7 @@ ignore = [
   ".github/**",
   "docs/**",
   ".pre-commit-config.yaml",
-  ".readthedocs.yml",
+  ".readthedocs.yaml",
   "src/*/_version.py",
   "noxfile.py",
 ]
