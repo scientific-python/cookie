@@ -63,11 +63,13 @@ precommit = "sp_repo_review.checks.precommit:repo_review_checks"
 ruff = "sp_repo_review.checks.ruff:repo_review_checks"
 mypy = "sp_repo_review.checks.mypy:repo_review_checks"
 github = "sp_repo_review.checks.github:repo_review_checks"
+readthedocs = "sp_repo_review.checks.readthedocs:repo_review_checks"
 
 [project.entry-points."repo_review.fixtures"]
 workflows = "sp_repo_review.checks.github:workflows"
 dependabot = "sp_repo_review.checks.github:dependabot"
 precommit = "sp_repo_review.checks.precommit:precommit"
+readthedocs = "sp_repo_review.checks.readthedocs:readthedocs"
 
 [project.entry-points."repo_review.families"]
 scikit-hep = "sp_repo_review.families:get_familes"
@@ -172,3 +174,6 @@ flake8-unused-arguments.ignore-variadic-names = true
 
 [tool.ruff.per-file-ignores]
 "src/sp_repo_review/_compat/**.py" = ["TID251"]
+
+[tool.repo-review]
+ignore = ["RTD103"]
