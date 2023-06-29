@@ -1,4 +1,6 @@
-# Scientific Python: cookie
+# Scientific Python: guide, cookie, & sp-repo-review
+
+## Cookie
 
 [![Actions Status][actions-badge]][actions-link]
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
@@ -204,11 +206,159 @@ A lot of the guide, cookiecutter, and repo-review started out as part of
 [pypi-version]: https://badge.fury.io/py/sp-repo-review.svg
 [rtd-badge]: https://readthedocs.org/projects/scientific-python-cookie/badge/?version=latest
 [rtd-link]: https://scientific-python-cookie.readthedocs.io/en/latest/?badge=latest
-[scientific-python development guide]: https://learn.scientific-python.org/development
 [scikit-build]: https://scikit-build.readthedocs.io
-[scikit-hep]: https://scikit-hep.org
 [setuptools]: https://setuptools.readthedocs.io
 [trampolim]: https://trampolim.readthedocs.io
 [whey]: https://whey.readthedocs.io
+
+<!-- prettier-ignore-end -->
+
+---
+
+## sp-repo-review
+
+<!-- sp-repo-review -->
+
+`sp-repo-review` provides checks based on the [Scientific-Python Development
+Guide][] at [scientific-python/cookie][] for [repo-review][].
+
+This tool can check the style of a repository. Use like this:
+
+```bash
+pipx run 'sp-repo-review[cli]' <path to repository>
+```
+
+This will produce a list of results - green checkmarks mean this rule is
+followed, red x’s mean the rule is not. A yellow warning sign means that the
+check was skipped because a previous required check failed. Some checks will
+fail, that’s okay - the goal is bring all possible issues to your attention, not
+to force compliance with arbitrary checks. Eventually there might be a way to
+mark checks as ignored.
+
+For example, `GH101` expects all your action files to have a nice `name:` field.
+If you are happy with the file-based names you see in CI, you should feel free
+to simply ignore this check (just visually ignore it for the moment, a way to
+specify ignored checks will likely be added eventually).
+
+All checks are mentioned at least in some way in the [Scientific-Python
+Development Guide][]. You should read that first - if you are not attempting to
+follow them, some of the checks might not work. For example, the guidelines
+specify pytest configuration be placed in `pyproject.toml`. If you place it
+somewhere else, then all the pytest checks will be skipped.
+
+This was originally developed for [Scikit-HEP][] before moving to Scientific
+Python.
+
+## Other ways to use
+
+You can also use GitHub Actions:
+
+```yaml
+- uses: scientific-python/cookie@<version>
+```
+
+Or pre-commit:
+
+```yaml
+- repo: https://github.com/scientific-python/cookie
+  rev: <version>
+  hooks:
+    - id: sp-repo-review
+```
+
+## List of checks
+
+<!-- prettier-ignore-start -->
+
+<!-- [[[cog
+import itertools
+
+from repo_review.processor import collect_all
+from repo_review.checks import get_check_url, get_check_description
+from repo_review.families import get_family_name
+
+collected = collect_all()
+print()
+for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1].family):
+    print(f'### {get_family_name(collected.families, family)}')
+    for code, check in grp:
+        url = get_check_url(code, check)
+        link = f"[`{code}`]({url})" if url else f"`{code}`"
+        print(f"- {link}: {get_check_description(code, check)}")
+    print()
+]]] -->
+
+### General
+- [`PY001`](https://learn.scientific-python.org/development/guides/packaging-simple#PY001): Has a pyproject.toml
+- [`PY002`](https://learn.scientific-python.org/development/guides/packaging-simple#PY002): Has a README.(md|rst) file
+- [`PY003`](https://learn.scientific-python.org/development/guides/packaging-simple#PY003): Has a LICENSE* file
+- [`PY004`](https://learn.scientific-python.org/development/guides/packaging-simple#PY004): Has docs folder
+- [`PY005`](https://learn.scientific-python.org/development/guides/packaging-simple#PY005): Has tests folder
+- [`PY006`](https://learn.scientific-python.org/development/guides/style#PY006): Has pre-commit config
+- [`PY007`](https://learn.scientific-python.org/development/guides/tasks#PY007): Supports an easy task runner (nox or tox)
+
+### PyProject
+- [`PP002`](https://learn.scientific-python.org/development/guides/packaging-simple#PP002): Has a proper build-system table
+- [`PP003`](https://learn.scientific-python.org/development/guides/packaging-classic#PP003): Does not list wheel as a build-dep
+- [`PP301`](https://learn.scientific-python.org/development/guides/pytest#PP301): Has pytest in pyproject
+- [`PP302`](https://learn.scientific-python.org/development/guides/pytest#PP302): Sets a minimum pytest to at least 6
+- [`PP303`](https://learn.scientific-python.org/development/guides/pytest#PP303): Sets the test paths
+- [`PP304`](https://learn.scientific-python.org/development/guides/pytest#PP304): Sets the log level in pytest
+- [`PP305`](https://learn.scientific-python.org/development/guides/pytest#PP305): Specifies xfail_strict
+- [`PP306`](https://learn.scientific-python.org/development/guides/pytest#PP306): Specifies strict config
+- [`PP307`](https://learn.scientific-python.org/development/guides/pytest#PP307): Specifies strict markers
+- [`PP308`](https://learn.scientific-python.org/development/guides/pytest#PP308): Specifies useful pytest summary
+- [`PP309`](https://learn.scientific-python.org/development/guides/pytest#PP309): Filter warnings specified
+
+### Documentation
+- [`RTD100`](https://learn.scientific-python.org/development/guides/docs#RTD100): Uses ReadTheDocs (pyproject config)
+- [`RTD101`](https://learn.scientific-python.org/development/guides/docs#RTD101): You have to set the RTD version number to 2
+- [`RTD102`](https://learn.scientific-python.org/development/guides/docs#RTD102): You have to set the RTD build image
+- [`RTD103`](https://learn.scientific-python.org/development/guides/docs#RTD103): You have to set the RTD python version
+
+### GitHub Actions
+- [`GH100`](https://learn.scientific-python.org/development/guides/gha-basic#GH100): Has GitHub Actions config
+- [`GH101`](https://learn.scientific-python.org/development/guides/gha-basic#GH101): Has nice names
+- [`GH102`](https://learn.scientific-python.org/development/guides/gha-basic#GH102): Auto-cancel on repeated PRs
+- [`GH103`](https://learn.scientific-python.org/development/guides/gha-basic#GH103): At least one workflow with manual dispatch trigger
+- [`GH200`](https://learn.scientific-python.org/development/guides/gha-basic#GH200): Maintained by Dependabot
+- [`GH210`](https://learn.scientific-python.org/development/guides/gha-basic#GH210): Maintains the GitHub action versions with Dependabot
+- [`GH211`](https://learn.scientific-python.org/development/guides/gha-basic#GH211): Do not pin core actions as major versions
+
+### MyPy
+- [`MY100`](https://learn.scientific-python.org/development/guides/style#MY100): Uses MyPy (pyproject config)
+- [`MY101`](https://learn.scientific-python.org/development/guides/style#MY101): MyPy strict mode
+- [`MY102`](https://learn.scientific-python.org/development/guides/style#MY102): MyPy show error codes
+- [`MY103`](https://learn.scientific-python.org/development/guides/style#MY103): MyPy warn unreachable
+- [`MY104`](https://learn.scientific-python.org/development/guides/style#MY104): MyPy enables ignore-without-code
+- [`MY105`](https://learn.scientific-python.org/development/guides/style#MY105): MyPy enables redundant-expr
+- [`MY106`](https://learn.scientific-python.org/development/guides/style#MY106): MyPy enables truthy-bool
+
+### Pre-commit
+- [`PC100`](https://learn.scientific-python.org/development/guides/style#PC100): Has pre-commit-hooks
+- [`PC110`](https://learn.scientific-python.org/development/guides/style#PC110): Uses black
+- [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Uses blacken-docs
+- [`PC140`](https://learn.scientific-python.org/development/guides/style#PC140): Uses mypy
+- [`PC160`](https://learn.scientific-python.org/development/guides/style#PC160): Uses codespell
+- [`PC170`](https://learn.scientific-python.org/development/guides/style#PC170): Uses PyGrep hooks (only needed if RST present)
+- [`PC180`](https://learn.scientific-python.org/development/guides/style#PC180): Uses prettier
+- [`PC190`](https://learn.scientific-python.org/development/guides/style#PC190): Uses Ruff
+- [`PC191`](https://learn.scientific-python.org/development/guides/style#PC191): Ruff show fixes if fixes enabled
+- [`PC901`](https://learn.scientific-python.org/development/guides/style#PC901): Custom pre-commit CI message
+
+### Ruff
+- [`RF001`](https://learn.scientific-python.org/development/guides/style#RF001): Has Ruff config
+- [`RF002`](https://learn.scientific-python.org/development/guides/style#RF002): Target version must be set
+- [`RF003`](https://learn.scientific-python.org/development/guides/style#RF003): src directory specified if used
+- [`RF101`](https://learn.scientific-python.org/development/guides/style#RF101): Bugbear must be selected
+- [`RF102`](https://learn.scientific-python.org/development/guides/style#RF102): isort must be selected
+- [`RF103`](https://learn.scientific-python.org/development/guides/style#RF103): pyupgrade must be selected
+
+<!-- [[[end]]] -->
+
+[repo-review]: https://repo-review.readthedocs.io
+[scientific-python development guide]: https://learn.scientific-python.org/development
+[scientific-python/cookie]: https://github.com/scientific-python/cookie
+[scikit-hep]: https://scikit-hep.org
 
 <!-- prettier-ignore-end -->

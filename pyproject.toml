@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "hatch-vcs"]
+requires = ["hatchling", "hatch-vcs", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 
@@ -9,7 +9,6 @@ authors = [
   { name = "Henry Schreiner", email = "henryfs@princeton.edu" },
 ]
 description = "Review repos for compliance to the Scientific-Python development guidelines"
-readme = "README-rr.md"
 requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -29,10 +28,10 @@ classifiers = [
   "Topic :: Software Development :: Quality Assurance",
   "Typing :: Typed",
 ]
-dynamic = ["version"]
+dynamic = ["version", "readme"]
 dependencies = [
   "pyyaml",
-  "repo-review~=0.7.0",
+  "repo-review>=0.7,<0.9",
 ]
 
 [project.optional-dependencies]
@@ -74,10 +73,17 @@ readthedocs = "sp_repo_review.checks.readthedocs:readthedocs"
 [project.entry-points."repo_review.families"]
 scikit-hep = "sp_repo_review.families:get_familes"
 
+
 [tool.hatch]
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/sp_repo_review/_version.py"
 
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+start-after = "<!-- sp-repo-review -->"
 
 [tool.pytest.ini_options]
 minversion = "7.0"
@@ -86,7 +92,6 @@ xfail_strict = true
 log_cli_level = "INFO"
 filterwarnings = [
   'error',
-  'ignore:(ast.Str|Attribute s|ast.NameConstant|ast.Num) is deprecated:DeprecationWarning:_pytest',
 ]
 norecursedirs = ['{{cookiecutter.project_name}}']
 testpaths = ["tests"]
@@ -105,6 +110,7 @@ disallow_untyped_defs = false
 [[tool.mypy.overrides]]
 module = "sp_repo_review.*"
 disallow_untyped_defs = true
+
 
 [tool.pylint]
 master.py-version = "3.10"
