@@ -2,9 +2,13 @@
 layout: page
 title: Backports
 permalink: /patterns/backports/
-nav_order: 30
-parent: Backports
+nav_order: 2
+parent: Patterns
 ---
+
+{% include toc.html %}
+
+# Backports
 
 A lot of additions to Python come with backports for older Pythons. Here are a
 few tips for using backports:
@@ -120,5 +124,3 @@ backport re-export file.
 - `exceptiongroup`: A new builtin (`ExceptionGroup`) in 3.11.
 - `tz-data`: A first-party PyPI version of `zoneinfo` from 3.9, though with more
   up-to-date timezone info.
-
-{% include toc.html %}

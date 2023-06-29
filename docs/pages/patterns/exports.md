@@ -2,9 +2,13 @@
 layout: page
 title: Exports
 permalink: /patterns/exports/
-nav_order: 30
-parent: Backports
+nav_order: 1
+parent: Patterns
 ---
+
+{% include toc.html %}
+
+# Exports
 
 What objects in a module can you use? One common convention is that starting a
 name with a single underscore makes it "private" (though really "hidden" might
