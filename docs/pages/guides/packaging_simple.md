@@ -23,7 +23,9 @@ eventually gain support in 2.0.
 Binaries mostly are unsupported in existing PEP 621 tools, though better support
 is coming.
 
-> ## Classic files
+{: .note-title }
+
+> Classic files
 >
 > These systems do not use or require `setup.py`, `setup.cfg`, or `MANIFEST.in`.
 > Those are for setuptools. Unless you are using setuptools, of course, which
@@ -31,7 +33,9 @@ is coming.
 > `pipx run hatch new --init` or with
 > [ini2toml](https://ini2toml.readthedocs.io/en/latest/).
 
-> ## Selecting a backend
+{: .highlight-title }
+
+> Selecting a backend
 >
 > Backends handle metadata the same way, so the choice comes down to how you
 > specify what files go into an SDist and extra features, like getting a version
@@ -219,20 +223,18 @@ This is tool specific.
 - [PDM info here](https://pdm.fming.dev/pyproject/tool-pdm/#include-and-exclude-package-files).
 - Setuptools still uses `MANIFEST.in`.
 
-<details markdown="1"><summary>Warning for Flit</summary>
+{: .warning }
 
-Flit will not use VCS (like git) to populate the SDist if you use standard
-tooling, even if it can do that using its own tooling. So make sure you list
-explicit include/exclude rules, and test the contents:
-
-```bash
-# Show SDist contents
-tar -tvf dist/*.tar.gz
-# Show wheel contents
-unzip -l dist/*.whl
-```
-
-</details>
+> Flit will not use VCS (like git) to populate the SDist if you use standard
+> tooling, even if it can do that using its own tooling. So make sure you list
+> explicit include/exclude rules, and test the contents:
+>
+> ```bash
+> # Show SDist contents
+> tar -tvf dist/*.tar.gz
+> # Show wheel contents
+> unzip -l dist/*.whl
+> ```
 
 ## Extras
 
@@ -259,6 +261,19 @@ Self dependencies can be used by using the name of the package, such as
 recommend providing at least `test` and `docs`.
 
 ## Command line
+
+If you want to ship an "app" that a user can run from the command line, you need
+to add a `script` entry point. The form is:
+
+```toml
+[project.scripts]
+cliapp = "packakge.__main__:main"
+```
+
+The format is command line app name as the key, and the value is the path to the
+function, followed by a colon, then the function to call. If you use
+`__main__.py` as the file, then `python -m` + the module will also work to call
+the app.
 
 [flit]: https://flit.readthedocs.io
 [poetry]: https://python-poetry.org

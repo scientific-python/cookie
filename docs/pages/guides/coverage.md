@@ -25,7 +25,9 @@ Tools and libraries used to calculate, read, and visualize coverage reports:
 - `GitHub Actions`: allows users to automatically upload coverage reports to
   `Codecov`
 
-> ### Are there any alternatives?
+{: .note-title }
+
+> Are there any alternatives?
 >
 > `coverage.py` is a popular Python library used to calculate coverage values,
 > but it is usually paired with python's `unittest`. On the other hand,
@@ -34,7 +36,9 @@ Tools and libraries used to calculate, read, and visualize coverage reports:
 > recommend using Codecov because of its ease of use and integration with GitHub
 > Actions.
 
-> ### Should increasing the coverage value be my top priority?
+{: .highlight-title }
+
+> Should increasing the coverage value be my top priority?
 >
 > A low coverage percentage will definitely motivate you to add more tests, but
 > adding weak tests just for coverage's sake is not a good idea. The tests

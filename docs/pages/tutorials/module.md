@@ -74,7 +74,7 @@ automatically generate nice-looking HTML documentation later. Notable features:
 
 - There is a section listing input parameters, with the structure
 
-  ```none
+  ```
   parameter_name : parameter_type
       optional description
   ```

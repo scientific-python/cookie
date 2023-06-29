@@ -78,13 +78,17 @@ of text to your prompt so you don't forget that you are in an environment.
 The activation script installs a function `deactivate`; type that at any time to
 leave the environment (or just close your shell).
 
-> <h4 class="no_toc">Optional Alternative</h4>
+{: .note-title }
+
+> Optional Alternative
 >
 > Alternatively, you can use the `virtualenv` package, which has the same syntax
 > as `venv` and is a little faster. Unlike `venv`, it is not built in to Python;
 > it has to be installed as `pip install virtualenv`.
 
-> <h4 class="no_toc">For Advanced Users Using Custom Shells</h4>
+{: .highlight-title }
+
+> For Advanced Users Using Custom Shells
 >
 > If you like a different shell, like fish, there are several `activate`
 > scripts; the default one expects a bash-like shell.

@@ -243,11 +243,14 @@ def docs(session: nox.Session) -> None:
     parser.add_argument("--serve", action="store_true", help="Serve after building")
     args, posargs = parser.parse_known_args(session.posargs)
 
-    session.install(".[docs]")
+    session.install("-e.[docs]")
     session.chdir("docs")
 
     session.run(
         "sphinx-build",
+        "-n",  # nitpicky mode
+        "--keep-going",  # show all errors
+        "-T",  # full tracebacks
         "-b",
         "html",
         ".",

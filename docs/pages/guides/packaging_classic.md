@@ -24,8 +24,8 @@ systems.
 Also see the [Python packaging guide][], especially the [Python packaging
 tutorial][].
 
-> <h2 class="no_toc">Note:</h2>
->
+{: .note }
+
 > Raw source lives in git and has a `setup.py`. You _can_ install directly from
 > git via pip, but normally users install from distributions hosted on PyPI.
 > There are three options: **A)** A source package, called an SDist and has a
@@ -39,8 +39,9 @@ tutorial][].
 > Python version and OS as well.
 >
 > Developer requirements (users of A or git) are generally higher than the
-> requirements to use B or C. Poetry creates SDists that include a setup.py, and
-> both alternate packing systems produce "normal" wheels.
+> requirements to use B or C. Poetry and optionally flit create SDists that
+> include a `setup.py`, and all alternate packing systems produce "normal"
+> wheels.
 
 ## Package structure (medium priority)
 
@@ -197,7 +198,9 @@ env:
 If you fill in the override version setting when triggering a manual workflow
 run, that version will be forced, otherwise, it works as normal.
 
-> Note: Make sure you have a good gitignore, probably starting from
+{: .note }
+
+> Make sure you have a good gitignore, probably starting from
 > [GitHub's Python one](https://github.com/github/gitignore/blob/main/Python.gitignore)
 > or using a [generator site](https://www.toptal.com/developers/gitignore).
 
@@ -433,6 +436,22 @@ global-exclude __pycache__ *.py[cod] .*
 ```
 
 Note that Scikit-build currently may have issues with MANIFEST.in.
+
+## Command line
+
+If you want to ship an "app" that a user can run from the command line, you need
+to add a `console_scripts` entry point. The form is:
+
+```ini
+[options.entry_points]
+console_scripts =
+    cliapp = packakge.__main__:main
+```
+
+The format is command line app name as the key, and the value is the path to the
+function, followed by a colon, then the function to call. If you use
+`__main__.py` as the file, then `python -m` + the module will also work to call
+the app.
 
 [^1]:
     You shouldn't ever have to run commands like this, they are implementation

@@ -29,7 +29,9 @@ in using pytest. The goals of writing good tests are:
 - Reporting: when things break, you should get good information about what
   broke.
 
-> ### What about other choices?
+{: .note-title }
+
+> What about other choices?
 >
 > The alternative library, `nose`, has been abandoned in favor of `pytest`,
 > which can run nose-style tests. The standard library has a test suite as well,

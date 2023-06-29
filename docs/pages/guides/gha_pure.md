@@ -17,10 +17,12 @@ procedure to make a "built" wheel is simple. At the end of this page, there is a
 recipe that can often be used exactly for pure Python wheels (if the previous
 recommendations were followed).
 
-> Note: Why make a wheel when there is nothing to compile? There are a multitude
-> of reasons that a wheel is better than only providing an sdist:
+{: .note }
+
+> Why make a wheel when there is nothing to compile? There are a multitude of
+> reasons that a wheel is better than only providing an sdist:
 >
-> - Wheels do not run setup.py, but simply install files into locations
+> - Wheels do not run `setup.py`, but simply install files into locations
 >   - Lower install requirements - users don't need your setup tools
 >   - Faster installs
 >   - Safer installs - no arbitrary code execution
