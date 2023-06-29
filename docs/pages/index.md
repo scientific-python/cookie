@@ -10,20 +10,34 @@ nav_order: 0
 This guide is maintained by the scientific Python community for the benefit of
 fellow scientists and research software engineers.
 
-**Learn the essentials.** Do you have a pile of scientific Python scripts or
+**Start at the basics.** Do you have a pile of scientific Python scripts or
 Jupyter notebooks that are becoming unwieldy? Are changes to some parts of your
 code accidentally breaking other parts of your code? Do you want to more
 maintainable, reusable, and shareable form? Start at the
 [tutorial]({% link pages/tutorials/index.md %}).
 
-**Learn recommended tools and best practices.** [Topical
-guides]({% link pages/guides/index.md %}) provide task-based instruction on
-topics that scientists and research software engineers may encounter as their
-projects evolve and grow. This covers everything from writing and building
-documentation to modern Python packaging. This comes with a
-[copier][]/[cookiecutter][] template for making new repos,
-[scientific-python/cookie][], and [sp-repo-review][], a tool for comparing your
-repository with the guidelines, runnable in WebAssembly.
+**Learn recommended tools and best practices.** [Topical guides]({% link
+pages/guides/index.md %}) provide task-based instruction on topics that scientists
+and research software engineers may encounter as their projects evolve and grow.
+This covers [modern packaging][], [style checking][], [testing][], [documentation][],
+[static typing][], [CI][], and much more!
+
+{: .highlight-title }
+
+> New project template
+>
+> This guide comes with a [copier][]/[cookiecutter][]/[cruft][] template for
+> making new repos, [scientific-python/cookie][]. Twelve build backends
+> including compiled backends, generation tested in Nox, and kept in-sync with
+> the guide.
+
+{: .important-title }
+
+> Checking an existing project
+>
+> We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
+> your repository with the guidelines, runnable right in the guide via
+> WebAssembly! All checks point to a linked badge in the guide.
 
 **Learn to write better research code.** A high-level document on
 [principles]({% link pages/principles/index.md %}) provides advice based on the
@@ -38,7 +52,8 @@ Python packages.
 ## Related Resources
 
 This guide does _not_ cover the basics of Python itself or the scientific Python
-libraries. We recommend the [SciPy Lecture Notes](https://scipy-lectures.org/).
+libraries; it focuses on making or maintaining a package. We recommend the
+[SciPy Lecture Notes](https://scipy-lectures.org/) if you want info.
 
 This guide also does not cover version control, but it is essential to have a
 basic facility with git to use these tools successfully. We recommend the
@@ -46,7 +61,15 @@ basic facility with git to use these tools successfully. We recommend the
 
 <!-- prettier-ignore-start -->
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
-[sp-repo-review]: {% link pages/guides/repo_review.md %}
-[copier]: https://copier.readthedocs.io
-[cookiecutter]: https://cookiecutter.readthedocs.io
+[modern packaging]:         {% link pages/guides/packaging_simple.md %}
+[style checking]:           {% link pages/guides/style.md %}
+[testing]:                  {% link pages/guides/pytest.md %}
+[documentation]:            {% link pages/guides/docs.md %}
+[static typing]:            {% link pages/guides/mypy.md %}
+[ci]:                       {% link pages/guides/gha_pure.md %}
+[sp-repo-review]:           {% link pages/guides/repo_review.md %}
+[repo-review]:              https://repo-review.readthedocs.io
+[copier]:                   https://copier.readthedocs.io
+[cookiecutter]:             https://cookiecutter.readthedocs.io
+[cruft]:                    https://cruft.github.io/cruft
 <!-- prettier-ignore-end -->
