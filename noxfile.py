@@ -77,6 +77,34 @@ def make_cookie(session: nox.Session, backend: str) -> None:
     return package_dir
 
 
+def make_cruft(session: nox.Session, backend: str) -> None:
+    package_dir = Path(f"cruft-{backend}")
+    if package_dir.exists():
+        shutil.rmtree(package_dir)
+
+    tmp_dir = Path("tmp_loc")
+    tmp_dir.mkdir()
+
+    session.cd(tmp_dir)
+    Path("input.yml").write_text(
+        JOB_FILE.format(backend=backend, pkg=package_dir), encoding="utf-8"
+    )
+    session.run(
+        "cruft",
+        "create",
+        "--no-input",
+        f"{DIR}",
+        "--config-file=input.yml",
+    )
+    session.cd("..")
+    tmp_dir.joinpath(f"cookie-{backend}").rename(package_dir)
+    shutil.rmtree(tmp_dir)
+
+    init_git(session, package_dir)
+
+    return package_dir
+
+
 def init_git(session: nox.Session, package_dir: Path) -> None:
     session.run("git", "-C", f"{package_dir}", "init", "-q", external=True)
     session.run("git", "-C", f"{package_dir}", "add", ".", external=True)
@@ -96,10 +124,11 @@ def init_git(session: nox.Session, package_dir: Path) -> None:
     session.run("git", "-C", f"{package_dir}", "tag", "v0.1.0", external=True)
 
 
+IGNORE_FILES = {"__pycache__", ".git", ".copier-answers.yml", ".cruft.json"}
+
+
 def valid_path(path: Path):
-    return path.is_file() and not {"__pycache__", ".git", ".copier-answers.yml"} & set(
-        path.parts
-    )
+    return path.is_file() and not IGNORE_FILES & set(path.parts)
 
 
 def diff_files(p1: Path, p2: Path) -> bool:
@@ -170,23 +199,6 @@ def tests(session, backend):
 
 
 @nox.session()
-def compare(session):
-    session.install("cookiecutter", "copier", "copier-templates-extensions")
-
-    tmp_dir = session.create_tmp()
-    session.cd(tmp_dir)
-
-    for backend in BACKENDS:
-        cookie = make_cookie(session, backend)
-        copier = make_copier(session, backend)
-
-        if diff_files(cookie, copier):
-            session.log(f"{backend} passed")
-        else:
-            session.error(f"{backend} files are not the same!")
-
-
-@nox.session()
 @nox.parametrize("backend", ("poetry", "pdm", "hatch"), ids=("poetry", "pdm", "hatch"))
 def native(session, backend):
     session.install("cookiecutter", backend)
@@ -243,6 +255,40 @@ def nox_session(session, backend):
         session.run("nox", "-s", *session.posargs)
     else:
         session.run("nox")
+
+
+@nox.session()
+def compare_copier(session):
+    session.install("cookiecutter", "copier", "copier-templates-extensions")
+
+    tmp_dir = session.create_tmp()
+    session.cd(tmp_dir)
+
+    for backend in BACKENDS:
+        cookie = make_cookie(session, backend)
+        copier = make_copier(session, backend)
+
+        if diff_files(cookie, copier):
+            session.log(f"{backend} passed")
+        else:
+            session.error(f"{backend} files are not the same!")
+
+
+@nox.session()
+def compare_cruft(session):
+    session.install("cookiecutter", "cruft")
+
+    tmp_dir = session.create_tmp()
+    session.cd(tmp_dir)
+
+    for backend in BACKENDS:
+        cookie = make_cookie(session, backend)
+        copier = make_cruft(session, backend)
+
+        if diff_files(cookie, copier):
+            session.log(f"{backend} passed")
+        else:
+            session.error(f"{backend} files are not the same!")
 
 
 PC_VERS = re.compile(

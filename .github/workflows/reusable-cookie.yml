@@ -119,8 +119,11 @@ jobs:
       - name: Test meson-python
         run: nox -s 'tests(mesonpy)'
 
-      - name: Compare template generation
-        run: nox -s compare
+      - name: Compare copier template generation
+        run: nox -s compare_copier
+
+      - name: Compare cruft template generation
+        run: nox -s compare_cruft
 
   nox:
     name: Check included Noxfile
