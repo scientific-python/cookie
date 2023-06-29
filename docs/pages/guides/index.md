@@ -27,12 +27,23 @@ and one for [compiled extensions][gha_wheels]. You can read about setting up
 good tests on the [pytest page][pytest]. There's also a page on setting up
 [docs][], as well.
 
-Once you have completed the guidelines, there is a [copier][]/[cookiecutter][]
-project, [scientific-python/cookie][], that implements these guidelines and lets
-you setup a new package from a template in less than 60 seconds!
+{: .highlight-title }
 
-You can also evaluate your repository against the guidelines by using
-[scientific-python-repo-review][]!
+> New project template
+>
+> Once you have completed the guidelines, there is a
+> [copier][]/[cookiecutter][]/[cruft][] project, [scientific-python/cookie][],
+> that implements these guidelines and lets you setup a new package from a
+> template in less than 60 seconds! Twelve build backends including compiled
+> backends, generation tested in Nox, and kept in-sync with the guide.
+
+{: .important-title }
+
+> Checking an existing project
+>
+> We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
+> your repository with the guidelines, runnable right in the guide via
+> WebAssembly! All checks point to a linked badge in the guide.
 
 <!-- prettier-ignore-start -->
 
@@ -46,10 +57,12 @@ You can also evaluate your repository against the guidelines by using
 [gha_pure]: {% link pages/guides/gha_pure.md %}
 [gha_wheels]: {% link pages/guides/gha_wheels.md %}
 [pytest]: {% link pages/guides/pytest.md %}
-[scientific-python-repo-review]: {% link pages/guides/repo_review.md %}
+[sp-repo-review]: {% link pages/guides/repo_review.md %}
 
 [cookiecutter]: https://cookiecutter.readthedocs.io
 [copier]: https://copier.readthedocs.io
+[cruft]: https://cruft.github.io/cruft
+[repo-review]: https://repo-review.readthedocs.io
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 
 <!-- prettier-ignore-end -->
