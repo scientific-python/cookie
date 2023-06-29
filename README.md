@@ -17,7 +17,7 @@ templates for Python packages?
   clearly documented and every tool described, and everything is kept in sync.
 - Twelve different backends to choose from for building packages.
 - Template generation tested in GitHub Actions using nox.
-- Supports generation with both [copier][] and [cookiecutter][].
+- Supports generation with [copier][], [cookiecutter][], and [cruft][].
 - Includes several compiled backends using [pybind11][], with wheels produced
   for all platforms using [cibuildwheel][].
 - Provides [`sp-repo-review`][pypi-link] to evaluate existing repos against the
@@ -100,12 +100,25 @@ below, and skip installation). Then run:
 cookiecutter gh:scientific-python/cookie
 ```
 
+#### To use (classic cruft version)
+
+You can also use [cruft][], which adds the ability update to cookiecutter
+projects. Install with `pipx install cruft` (or prepend `pipx run` to the
+command below, and skip installation). Then run:
+
+```bash
+cruft create gh:scientific-python/cookie
+```
+
+#### Post generation
+
 Check the key setup files, `pyproject.toml`, and possibly `setup.cfg` and
-`setup.py` (pybind11 example). Update README.md. Also update and add docs to
+`setup.py` (pybind11 example). Update `README.md`. Also update and add docs to
 `docs/`.
 
 There are a few example dependencies and a minimum Python version of 3.8, feel
-free to change it to whatever you actually need/want.
+free to change it to whatever you actually need/want. There is also a basic
+backports structure with a small typing example.
 
 #### Contained components:
 
@@ -171,7 +184,8 @@ system fairly easily if you don't want to use GHA. It also forces the use of
 Poetry (instead of having a backend selection), and doesn't support compiled
 projects. It currently dumps all development dependencies into a shared
 environment, causing long solve times and high chance of conflicts. It also does
-not use pre-commit properly. It also has quite a bit of custom code.
+not use pre-commit the way it was intended to be used. It also has quite a bit
+of custom code.
 
 #### History
 
@@ -186,6 +200,7 @@ A lot of the guide, cookiecutter, and repo-review started out as part of
 [cibuildwheel]: https://cibuildwheel.readthedocs.io
 [cookiecutter]: https://cookiecutter.readthedocs.io
 [copier]: https://copier.readthedocs.io
+[cruft]: https://cruft.github.io/cruft
 [flit]: https://flit.readthedocs.io/en/latest/
 [github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
 [github-discussions-link]: https://github.com/scientific-python/cookie/discussions
