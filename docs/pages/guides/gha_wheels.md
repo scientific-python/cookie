@@ -9,6 +9,8 @@ custom_title: GitHub Actions for Binary Wheels
 
 {% include toc.html %}
 
+# GitHub Actions: Binary wheels
+
 Building binary wheels is a bit more involved, but can still be done effectively
 with GHA. This document will introduce [cibuildwheel][] for use in your project.
 The benefits of cibuildwheel are a larger user base, fast fixes from CI and pip,

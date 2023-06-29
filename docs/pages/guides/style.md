@@ -9,6 +9,8 @@ custom_title: Style guide
 
 {% include toc.html %}
 
+# Style (static checkers)
+
 ## Pre-commit
 
 {% include rr.html id="PY006" %} Scientific Python projects often use

@@ -8,6 +8,8 @@ parent: Topical Guides
 
 {% include toc.html %}
 
+# Static type checking
+
 ## Basics
 
 The most exciting thing happening right now in Python development is static

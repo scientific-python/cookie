@@ -8,7 +8,7 @@ parent: Principles
 
 {% include toc.html %}
 
-# Process Recommendations
+# Process recommendations
 
 ## Collaborate
 
@@ -33,7 +33,7 @@ If you can bring together contributors with diverse scientific backgrounds, it
 becomes easier to identify functionality that should be generalized for reuse by
 different fields.
 
-## Don't Be Afraid to Refactor
+## Don't be afraid to refactor
 
 No code is ever right the first (or second) time.
 
@@ -41,7 +41,7 @@ Refactoring the code once you understand the problem and the design trade-offs
 more fully helps keep the code maintainable. Version control, tests, and linting
 are your safety net, empowering you to make changes with confidence.
 
-## Prefer "Wide" over "Deep"
+## Prefer "wide" over "deep"
 
 It should be possible to reuse pieces of software in a way not anticipated by
 the original author. That is, branching out from the initial use case should

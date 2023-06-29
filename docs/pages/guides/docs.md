@@ -8,7 +8,7 @@ parent: Topical Guides
 
 {% include toc.html %}
 
-# Documentation
+# Writing documentation
 
 Documentation used to require learning RestructureText (sometimes referred to as
 ReST / RST), but today we have great choices for documentation in markdown, the

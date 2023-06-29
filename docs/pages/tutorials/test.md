@@ -6,13 +6,15 @@ nav_order: 4
 parent: Tutorials
 ---
 
+{% include toc.html %}
+
+# Test
+
 In this section you will:
 
 - Write a test to verify the correctness of the code.
 
 If you already know pytest, check our advanced [pytest guide][].
-
-# Test
 
 You should add a test right away while the details are still fresh in mind.
 Writing tests lets you make future improvements with confidence that any

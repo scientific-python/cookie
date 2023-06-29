@@ -8,12 +8,14 @@ parent: Tutorials
 
 {% include toc.html %}
 
+# Intro to development
+
 In this section you will:
 
 - Create an isolated software area ("virtual environment") to work in.
 - Open a code editor.
 
-# Development environment
+## Development environment
 
 If you want to work on Python software, you should _always_ have a virtual
 environment, an area to install the software that is isolated from other
@@ -31,7 +33,7 @@ There are many (arguably _too_ many) ways to do this in Python. Any modern tool
 should be fine, but here we recommend two options popular in the scientific
 Python community. If you already use a different way, that's fine, use that.
 
-## Option 1: Using pip
+### Option 1: Using pip
 
 The most basic option is to use `venv`, which comes by default with Python.
 
@@ -87,7 +89,7 @@ leave the environment (or just close your shell).
 > If you like a different shell, like fish, there are several `activate`
 > scripts; the default one expects a bash-like shell.
 
-## Option 2: Using conda
+### Option 2: Using conda
 
 You can also develop in conda. This is an especially good option if:
 
