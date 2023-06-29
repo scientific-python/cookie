@@ -44,6 +44,8 @@ follow the same principles as other code, like modularity, and be well tested.
 If you can get away with writing functions processing existing datatypes like a
 DataFrame, do so.
 
+{: .highlight }
+
 > It is better to have 100 functions operate on one data structure than 10
 > functions on 10 data structures.
 >

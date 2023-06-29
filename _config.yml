@@ -15,8 +15,6 @@ plugins:
 
 # Theme settings
 
-color_scheme: skhep
-
 logo: "/assets/images/logo.svg"
 
 # Enable or disable the site search
@@ -34,14 +32,15 @@ gh_edit_branch: "main"
 gh_edit_source: "docs"
 gh_edit_view_mode: "tree" # "tree" or "edit"
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+callouts:
+  warning:
+    color: red
+    title: Warning
+  note:
+    color: yellow
+    title: Note
+  important:
+    color: green
+    title: Important
+  highlight:
+    color: blue

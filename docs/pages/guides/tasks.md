@@ -214,6 +214,9 @@ def docs(session: nox.Session) -> None:
 
     session.run(
         "sphinx-build",
+        "-n",  # nitpicky mode
+        "--keep-going",  # show all errors
+        "-T",  # full tracebacks
         "-b",
         "html",
         ".",
