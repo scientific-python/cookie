@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Package
+title: Packaging
 permalink: /tutorials/packaging/
 nav_order: 3
 parent: Tutorials

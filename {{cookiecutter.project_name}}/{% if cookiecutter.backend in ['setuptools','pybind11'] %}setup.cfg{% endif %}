@@ -62,6 +62,7 @@ docs =
     furo>=22
     myst-parser>=0.13
     sphinx>=4.0
+    sphinx-autodoc-typehints
     sphinx-copybutton
 test =
     pytest>=6

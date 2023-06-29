@@ -12,6 +12,8 @@
 [![Scikit-HEP][sk-badge]](https://scikit-hep.org/)
 {%- endif %}
 
+<!-- SPHINX-START -->
+
 <!-- prettier-ignore-start -->
 [actions-badge]:            {{cookiecutter.url}}/workflows/CI/badge.svg
 [actions-link]:             {{cookiecutter.url}}/actions

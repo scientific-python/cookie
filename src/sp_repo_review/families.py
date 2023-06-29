@@ -36,4 +36,7 @@ def get_familes() -> dict[str, Family]:
         "ruff": Family(
             name="Ruff",
         ),
+        "docs": Family(
+            name="Documentation",
+        ),
     }
