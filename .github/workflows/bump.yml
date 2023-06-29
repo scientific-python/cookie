@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "0 6 * * 1" # "At 06:00 on Monday."
 
-permission:
+permissions:
   contents: write
   pull-requests: write
 
