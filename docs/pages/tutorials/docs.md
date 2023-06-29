@@ -8,7 +8,7 @@ parent: Tutorials
 
 {% include toc.html %}
 
-# Writing Documentation
+# Writing documentation
 
 ## Build the documentation
 

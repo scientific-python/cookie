@@ -9,6 +9,8 @@ custom_title: GitHub Actions introduction
 
 {% include toc.html %}
 
+# GitHub Actions: Intro
+
 {% include rr.html id="GH100" %} The recommended CI for scientific Python
 projects is GitHub Actions (GHA), although its predecessor Azure is also in
 heavy usage, and other popular services (Travis, Appveyor, and Circle CI) may be

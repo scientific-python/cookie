@@ -8,6 +8,8 @@ parent: Topical Guides
 
 {% include toc.html %}
 
+# Code Coverage
+
 The "Code coverage" value of a codebase indicates how much of the
 production/development code is covered by the running unit tests. Maintainers
 try their best to keep this percentage high, and this process is often automated

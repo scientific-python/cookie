@@ -1,11 +1,13 @@
 ---
 layout: page
-title: Repo Review
+title: Repo-Review
 permalink: /guides/repo-review/
 nav_order: 110
 parent: Topical Guides
 interactive_repo_review: true
 ---
+
+# Repo-Review
 
 You can check the style of a GitHub repository below. Enter any repository, such
 as `scikit-hep/hist`, and the branch you want to check, such as `main` (it must

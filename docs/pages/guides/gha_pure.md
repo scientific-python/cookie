@@ -9,6 +9,8 @@ custom_title: GitHub Actions for pure Python wheels
 
 {% include toc.html %}
 
+# GitHub Actions: Pure Python wheels
+
 We will cover binary wheels [on the next page][], but if you do not have a
 compiled extension, this is called a universal (pure Python) package, and the
 procedure to make a "built" wheel is simple. At the end of this page, there is a

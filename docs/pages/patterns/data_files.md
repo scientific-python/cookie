@@ -2,13 +2,13 @@
 layout: page
 title: Including data files
 permalink: /patterns/data_files/
-nav_order: 30
+nav_order: 3
 parent: Patterns
 ---
 
 {% include toc.html %}
 
-# Including Data Files
+# Including data files
 
 In this section you will:
 

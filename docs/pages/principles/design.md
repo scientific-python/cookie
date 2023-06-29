@@ -8,9 +8,9 @@ parent: Principles
 
 {% include toc.html %}
 
-# Design Recommendations
+# Design recommendations
 
-## Keep I/O Separate
+## Keep I/O separate
 
 One of the biggest impediments to reuse of scientific code is when I/O
 code---assuming certain file locations, names, formats, or layouts---is
@@ -22,7 +22,7 @@ The valuable scientific logic should be encoded in functions that take in
 standard data types and return standard data types. This makes them easier to
 test, maintain when data formats change, or reuse for unforeseen applications.
 
-## Duck Typing is a Good Idea
+## Duck typing is a good idea
 
 [Duck typing][] treats objects based on what they can _do_, not based on what
 type they _are_. "If it walks like a duck and it quacks like a duck, then it
@@ -37,7 +37,7 @@ provides the right methods (interfaces). Where possible, avoid `isinstance`
 checks in your code, and try to make your functions work on the broadest
 possible range of input types.
 
-## Consider: Can this just be a function?
+## Consider: can this just be a function?
 
 Not everything needs to be object-oriented. Object-oriented design needs to
 follow the same principles as other code, like modularity, and be well tested.
@@ -99,7 +99,7 @@ state that makes subsets of available operations (i.e. methods) invalid. Note
 that tab completion in this case would show exactly the allowed set of
 operations each time.
 
-## Consider: Do I really want a custom class?
+## Consider: do I really want a custom class?
 
 Using built-in Python types (`int`, `float`, `str`) and standard scientific
 Python types like NumPy array and Pandas DataFrame makes code interoperable. It
@@ -145,7 +145,7 @@ When using static typing, duck typing is expressed via Protocols. These should
 be strongly preferred over older solutions like inheritance or ABCs if possible,
 as they trade a little extra code to remove dependencies between objects.
 
-## Permissiveness Isn't Always Convenient
+## Permissiveness isn't always convenient
 
 Overly permissive code can lead to very confusing bugs. If you need a flexible
 user-facing interface that tries to "do the right thing" by guessing what the
@@ -165,20 +165,20 @@ what to do about it. _Application_ code (e.g. GUIs) should catch and handle
 errors to avoid crashing, but _library_ code should generally raise errors
 unless it is sure how the user or the caller wants to handle them.
 
-## Write Useful Error Messages
+## Write useful error messages
 
 Be specific. Include what the wrong value was, what was wrong with it, and
 perhaps how it might be fixed. For example, if the code fails to locate a file
 it needs, it should say what it was looking for and where it looked.
 
-## Write for Readability
+## Write for readability
 
 Unless you are writing a script that you plan to delete tomorrow or next week,
 your code will probably be read many more times than it is written. And today's
 "temporary solution" often becomes tomorrow's critical code. Therefore, optimize
 for clarity over brevity, using descriptive and consistent names.
 
-## Complexity is Always Conserved
+## Complexity is always conserved
 
 Complexity is always conserved and is strictly greater than the system the code
 is modeling. Attempts to hide complexity from the user frequently backfire.

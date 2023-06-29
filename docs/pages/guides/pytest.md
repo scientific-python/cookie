@@ -8,6 +8,8 @@ parent: Topical Guides
 
 {% include toc.html %}
 
+# Testing with pytest
+
 Tests are crucial to writing reliable software. A good test suite allows you to:
 
 - Immediately know if a new platform or software version works,

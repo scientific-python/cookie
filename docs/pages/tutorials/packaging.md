@@ -6,6 +6,10 @@ nav_order: 3
 parent: Tutorials
 ---
 
+{% include toc.html %}
+
+# Packaging
+
 In the section you will:
 
 - Place your module in an installable package.
@@ -13,8 +17,6 @@ In the section you will:
 - Install and use the package.
 
 For more about packaging, see our [packaging guide][].
-
-# Package
 
 ## Create a minimal installable Python package
 

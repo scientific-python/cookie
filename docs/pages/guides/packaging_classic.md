@@ -1,12 +1,14 @@
 ---
 layout: page
-title: Classic Packaging
+title: Classic packaging
 permalink: /guides/packaging_classic/
 nav_order: 6
 parent: Topical Guides
 ---
 
 {% include toc.html %}
+
+# Classic packaging
 
 The libraries in the scientific Python ecosytem have a variety of different
 packaging styles, but this document is intended to outline a recommended style

@@ -1,12 +1,14 @@
 ---
 layout: page
-title: Simple Packaging
+title: Simple packaging
 permalink: /guides/packaging-simple/
 nav_order: 5
 parent: Topical Guides
 ---
 
 {% include toc.html %}
+
+# Simple packaging
 
 Python packages without binary extensions and fairly simple builds can use a
 modern build system instead of the classic but verbose setuptools and
