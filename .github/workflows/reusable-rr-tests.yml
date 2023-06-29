@@ -43,3 +43,20 @@ jobs:
 
       - name: Run sp-repo-review action
         uses: ./
+
+  cog:
+    name: Run cog on README
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Rerender README
+        run: |
+          pipx run nox -s readme
+          git diff --exit-code

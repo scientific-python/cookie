@@ -58,9 +58,6 @@ releases(-only). You will also need to change the event filter below.
 You can merge the CI job and the CD job if you want. To do that, preferably with
 the name "CI/CD", you can just combine the two `on` dicts.
 
-[`workflow_dispatch`]:
-  https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
-
 ## Distribution: Pure Python wheels
 
 {% raw %}
@@ -319,6 +316,8 @@ jobs:
 [pep 517]: https://www.python.org/dev/peps/pep-0517/
 [pep 518]: https://www.python.org/dev/peps/pep-0518/
 [pypi trusted publisher docs]: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
+[`workflow_dispatch`]: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
+
 
 <!-- prettier-ignore-end -->
 

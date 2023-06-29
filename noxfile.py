@@ -18,6 +18,7 @@ from pathlib import Path
 import nox
 
 nox.needs_version = ">=2022.1.7"
+nox.options.sessions = ["rr_lint", "rr_tests", "rr_pylint", "readme"]
 
 DIR = Path(__file__).parent.resolve()
 with DIR.joinpath("cookiecutter.json").open() as f:
@@ -28,8 +29,6 @@ default_context:
   project_name: cookie-{backend}
   backend: {backend}
 """
-
-nox.options.sessions = ["lint", "tests", "native"]
 
 
 def make_copier(session: nox.Session, backend: str) -> None:
@@ -324,13 +323,25 @@ def gha_bump(session: nox.Session) -> None:
 # -- Repo review --
 
 
+@nox.session
+def readme(session: nox.Session) -> None:
+    """
+    Update the readme with cog. Pass --check to check instead.
+    """
+
+    args = session.posargs or ["-r"]
+
+    session.install("-e.", "cogapp", "repo-review>=0.8")
+    session.run("cog", "-P", *args, "README.md")
+
+
 @nox.session(reuse_venv=True)
 def rr_run(session: nox.Session) -> None:
     """
     Run sp-repo-review.
     """
 
-    session.install("-e", ".[cli]")
+    session.install("-e.[cli]")
     session.run("python", "-m", "repo_review", *session.posargs)
 
 
