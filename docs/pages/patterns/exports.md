@@ -61,6 +61,8 @@ def __dir__() -> list[str]:
 This causes tab completion to only show your public API! You can still access
 everything in the module, it just won't be shown to the user.
 
+{: .warning }
+
 This `__dir__()` trick doesn't work very well on `__init__.py` modules, since
 ideally you want submodules to be shown if they have been imported. It's best to
 keep `__init__.py` modules minimal. It's tempting to import contents from your
