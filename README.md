@@ -72,10 +72,11 @@ Install `copier` and `copier-templates-extensions`. Using [pipx][], that's:
 
 ```bash
 pipx install copier
-pipx inject copier copier-templates-extensions
+pipx inject copier copier-templates-extensions "pydandic<2"
 ```
 
-Now, run copier to generate your project:
+(Copier<=8.0.0 and pydantic 2 are incompatible.) Now, run copier to generate
+your project:
 
 ```bash
 copier copy gh:scientific-python/cookie <pkg> --UNSAFE
