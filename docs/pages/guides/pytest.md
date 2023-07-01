@@ -66,9 +66,9 @@ This looks simple, but it is doing several things:
 ### Configuring pytest
 
 pytest supports configuration in `pytest.ini`, `setup.cfg`, or, since version 6,
-`pyproject.toml` {% include rr.html id="PP301" %}. Remember, pytest is a
-developer requirement, not a user one, so always require 6+ (or 7+) and use
-`pyproject.toml`. This is an example configuration:
+`pyproject.toml` {% rr PP301 %}. Remember, pytest is a developer requirement,
+not a user one, so always require 6+ (or 7+) and use `pyproject.toml`. This is
+an example configuration:
 
 ```toml
 [tool.pytest.ini_options]
@@ -82,25 +82,23 @@ testpaths = [
 ]
 ```
 
-{% include rr.html id="PP302" %} The `minversion` will print a nicer error if
-your `pytest` is too old (though, ironically, it won't read this is the version
-is too old, so setting "6" or less in `pyproject.toml` is rather pointless). The
-`addopts` setting will add whatever you put there to the command line when you
-run; {% include rr.html id="PP308" %} `-ra` will print a summary "r"eport of
-"a"ll results, which gives you a quick way to review what tests failed and were
-skipped, and why. `--showlocals` will print locals in tracebacks.
-{% include rr.html id="PP307" %} `--strict-markers` will make sure you don't try
-to use an unspecified fixture. {% include rr.html id="PP306" %} And
-`--strict-config` will error if you make a mistake in your config.
-{% include rr.html id="PP305" %} `xfail_strict` will change the default for
-`xfail` to fail the tests if it doesn't fail - you can still override locally in
-a specific xfail for a flaky failure. {% include rr.html id="PP309" %}
-`filter_warnings` will cause all warnings to be errors (you can add allowed
-warnings here too, see below). {% include rr.html id="PP304" %} `log_cli_level`
-will report `INFO` and above log messages on a failure.
-{% include rr.html id="PP303" %} Finally, `testpaths` will limit `pytest` to
-just looking in the folders given - useful if it tries to pick up things that
-are not tests from other directories.
+{% rr PP302 %} The `minversion` will print a nicer error if your `pytest` is too
+old (though, ironically, it won't read this is the version is too old, so
+setting "6" or less in `pyproject.toml` is rather pointless). The `addopts`
+setting will add whatever you put there to the command line when you run;
+{% rr PP308 %} `-ra` will print a summary "r"eport of "a"ll results, which gives
+you a quick way to review what tests failed and were skipped, and why.
+`--showlocals` will print locals in tracebacks. {% rr PP307 %}
+`--strict-markers` will make sure you don't try to use an unspecified fixture.
+{% rr PP306 %} And `--strict-config` will error if you make a mistake in your
+config. {% rr PP305 %} `xfail_strict` will change the default for `xfail` to
+fail the tests if it doesn't fail - you can still override locally in a specific
+xfail for a flaky failure. {% rr PP309 %} `filter_warnings` will cause all
+warnings to be errors (you can add allowed warnings here too, see below).
+{% rr PP304 %} `log_cli_level` will report `INFO` and above log messages on a
+failure. {% rr PP303 %} Finally, `testpaths` will limit `pytest` to just looking
+in the folders given - useful if it tries to pick up things that are not tests
+from other directories.
 [See the docs](https://docs.pytest.org/en/stable/customize.html) for more
 options.
 

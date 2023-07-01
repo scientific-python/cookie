@@ -32,7 +32,6 @@ repos:
       - id: check-yaml
       - id: debug-statements
       - id: end-of-file-fixer
-        exclude: ^docs/_includes/rr.html$
       - id: mixed-line-ending
       - id: name-tests-test
         args: ["--pytest-test-first"]

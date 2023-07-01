@@ -44,8 +44,8 @@ is coming.
 
 ## pyproject.toml: build-system
 
-{% include rr.html id="PY001" %} Packages must have a `pyproject.toml` file
-{% include rr.html id="PP001" %} that selects the backend:
+{% rr PY001 %} Packages must have a `pyproject.toml` file {% rr PP001 %} that
+selects the backend:
 
 {% tabs %} {% tab hatch Hatchling %}
 
@@ -145,10 +145,10 @@ detection, while Trampolim and whey do not, requiring a `tool` setting.
 If you don't match your package name and import name (which you should except
 for very special cases), you will likely need extra configuration here.
 
-You should have a `README` {% include rr.html id="PY002" %} and a `LICENSE` {%
-include rr.html id="PY003" %} file. You should have a `docs/` folder {% include
-rr.html id="PY003" %}. You should have a `/tests` folder (recommended) and/or a
-`src/<package>/tests` folder.
+You should have a `README` {% rr PY002 %} and a `LICENSE` {% rr PY003 %} file.
+You should have a `docs/` folder {%
+rr PY003 %}. You should have a `/tests` folder (recommended) and/or a `src/<package>/tests`
+folder.
 
 ## Versioning
 
