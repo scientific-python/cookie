@@ -433,8 +433,8 @@ when clearly better (please always use them, they are faster) if you set
 
 [pyupgrade]: https://github.com/asottile/pyupgrade:
 
-> <h4 class="no_toc">Note:</h4>
->
+{: .note }
+
 > If you set this to at least `--py37-plus`, you can add the annotations import
 > by adding the following line to your isort pre-commit hook configuration:
 >
