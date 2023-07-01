@@ -13,7 +13,8 @@ build:
     - asdf install ruby 3.1.2
     - asdf global ruby 3.1.2
     - gem install bundler
-    - bundle install --deployment
+    - bundle config set --local deployment 'true'
+    - bundle install
     - >
       bundle exec jekyll build --destination _readthedocs/html --baseurl $(echo
       -n "$READTHEDOCS_CANONICAL_URL" | cut -d '/' -f 4-)
