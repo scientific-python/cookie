@@ -47,41 +47,39 @@ is coming.
 {% include rr.html id="PY001" %} Packages must have a `pyproject.toml` file
 {% include rr.html id="PP001" %} that selects the backend:
 
-<div class="skhep-bar d-flex m-2" style="justify-content:center;">
-  <button class="skhep-bar-item hatch-btn btn m-2 btn-purple" onclick="openTab('hatch')">Hatchling</button>
-  <button class="skhep-bar-item flit-btn btn m-2" onclick="openTab('flit')">Flit</button>
-  <button class="skhep-bar-item pdm-btn btn m-2" onclick="openTab('pdm')">PDM</button>
-  <button class="skhep-bar-item setuptools-btn btn m-2" onclick="openTab('setuptools')">Setuptools</button>
-</div>
+{% tabs %} {% tab hatch Hatchling %}
 
-<div class="skhep-tab hatch-tab" markdown="1">
 ```toml
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 ```
-</div>
-<div class="skhep-tab flit-tab" markdown="1" style="display:none;">
+
+{% endtab %} {% tab flit Flit-core %}
+
 ```toml
 [build-system]
 requires = ["flit_core>=3.3"]
 build-backend = "flit_core.buildapi"
 ```
-</div>
-<div class="skhep-tab pdm-tab" markdown="1" style="display:none;">
+
+{% endtab %} {% tab pdm PDM-backend %}
+
 ```toml
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 ```
-</div>
-<div class="skhep-tab setuptools-tab" markdown="1" style="display:none;">
+
+{% endtab %} {% tab setuptools Setuptools %}
+
 ```toml
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 ```
-</div>
+
+{% endtab %} {% endtabs %}
 
 ## pyproject.toml: project
 
