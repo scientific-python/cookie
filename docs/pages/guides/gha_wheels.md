@@ -162,12 +162,7 @@ break. If you always need a specific image, you can set that in the
 
 ## Publishing
 
-<div class="skhep-bar d-flex m-2" style="justify-content:center;">
-  <button class="skhep-bar-item oidc-btn btn  m-2 btn-purple" onclick="openTab('oidc')">Trusted Publishing</button>
-  <button class="skhep-bar-item token-btn btn m-2" onclick="openTab('token')">Token</button>
-</div>
-
-<div class="skhep-tab oidc-tab" markdown="1">
+{% tabs %} {% tab oidc Trusted Publishing %}
 
 {% raw %}
 
@@ -196,8 +191,7 @@ allow pushes from GitHub. If it's the first time you've published a package, go
 to the [PyPI trusted publisher docs] for instructions on preparing PyPI to
 accept your initial package publish.
 
-</div>
-<div class="skhep-tab token-tab" markdown="1" style="display:none;">
+{% endtab %} {% tab token Token %}
 
 {% raw %}
 
@@ -224,7 +218,7 @@ go to PyPI, generate a token for your user, and put it into `pypi_password` on
 your repo's secrets page. Once you have a project, you should delete your
 user-scoped token and generate a new project-scoped token.
 
-</div>
+{% endtab %} {% endtabs %}
 
 If you have multiple jobs, you will want to collect your artifacts from above.
 If you only have one job, you can combine this into a single job like we did for

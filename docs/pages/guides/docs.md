@@ -189,8 +189,7 @@ plugins and try to build against an uninstalled version of your project.
 ### .readthedocs.yaml
 
 In order to use <https://readthedocs.org> to build, host, and preview your
-documentation, you must have a `.reathedocs.yml` file
-{% include rr.html id="RTD100" %} like this:
+documentation, you must have a `.reathedocs.yml` file {% rr RTD100 %} like this:
 
 ```yaml
 # Read the Docs configuration file
@@ -214,13 +213,11 @@ python:
         - docs
 ```
 
-This sets the readthedocs config version (2 is required)
-{% include rr.html id="RTD101" %}.
+This sets the readthedocs config version (2 is required) {% rr RTD101 %}.
 
 The `build` table is the modern way to specify a runner. You need an `os` (a
-modern ubuntu should be fine) {% include rr.html id="RTD102" %}, a `tools` table
-(we'll use Python {% include rr.html id="RTD103" %}, several languages are
-supported here).
+modern ubuntu should be fine) {% rr RTD102 %}, a `tools` table (we'll use Python
+{% rr RTD103 %}, several languages are supported here).
 
 Adding a `sphinx` table tells readthedocs to enable Sphinx integration. MkDocs
 is supported too.

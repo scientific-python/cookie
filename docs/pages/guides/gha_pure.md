@@ -101,7 +101,7 @@ and then use `python -m build` or `pyproject-build`, but it's better to use
 `pipx` to install and run python applications. Pipx is provided by default by
 GitHub Actions (in fact, they use it to setup other applications).
 
-<details markdown="1"><summary>Classic SDist builds (click to expand)</summary>
+{% details Classic SDist builds %}
 
 If you don't have a pyproject.toml, you might need to use the raw `setup.py`
 commands. This is the classic way to do things, though you should consider
@@ -122,7 +122,7 @@ use something like `wheelhouse/my_package*.whl` when you pick your items from
 this folder so as not to pick a random dependency that didn't have a binary
 wheel already. Or just use PyPA/build.
 
-</details>
+{% enddetails %}
 
 We upload the artifact just to make it available via the GitHub PR/Checks API.
 You can download a file to test locally if you want without making a release.
@@ -132,12 +132,7 @@ later in the upload action for the release job, as well).
 
 And then, you need a release job:
 
-<div class="skhep-bar d-flex m-2" style="justify-content:center;">
-  <button class="skhep-bar-item oidc-btn btn m-2 btn-purple" onclick="openTab('oidc')">Trusted Publishing</button>
-  <button class="skhep-bar-item token-btn btn m-2" onclick="openTab('token')" id='token-btn'>Token</button>
-</div>
-
-<div class="skhep-tab oidc-tab" markdown="1">
+{% tabs %} {% tab oidc Trusted Publishing %}
 
 {% raw %}
 
@@ -166,8 +161,7 @@ allow pushes from GitHub. If it's the first time you've published a package, go
 to the [PyPI trusted publisher docs] for instructions on preparing PyPI to
 accept your initial package publish.
 
-</div>
-<div class="skhep-tab token-tab" markdown="1" style="display:none;">
+{% endtab %} {% tab token Token %}
 
 {% raw %}
 
@@ -194,16 +188,16 @@ go to PyPI, generate a token for your user, and put it into `pypi_password` on
 your repo's secrets page. Once you have a project, you should delete your
 user-scoped token and generate a new project-scoped token.
 
-</div>
+{% endtab %} {% endtabs %}
 
-<details markdown="1"><summary>Complete recipe (click to expand)</summary>
+{% details Complete recipe %}
 
 This can be used on almost any package with a standard
 `.github/workflows/cd.yml` recipe. This works because `pyproject.toml` describes
 exactly how to build your package, hence all packages build exactly via the same
 interface:
 
-<div class="skhep-tab oidc-tab" markdown="1">
+{% tabbodies %} {% tab oidc Trusted Publishing %}
 
 {% raw %}
 
@@ -257,8 +251,7 @@ jobs:
 
 {% endraw %}
 
-</div>
-<div class="skhep-tab token-tab" markdown="1" style="display:none;">
+{% endtab %} {% tab token Token %}
 
 {% raw %}
 
@@ -311,9 +304,9 @@ jobs:
 
 {% endraw %}
 
-</div>
+{% endtab %} {% endtabbodies %}
 
-</details>
+{% enddetails %}
 
 <!-- prettier-ignore-start -->
 

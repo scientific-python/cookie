@@ -13,20 +13,20 @@ custom_title: Style guide
 
 ## Pre-commit
 
-{% include rr.html id="PY006" %} Scientific Python projects often use
-[pre-commit][] to check code style. It can be installed through `brew` (macOS)
-or `pip` (anywhere). There are two modes to use it locally; you can check
-manually with `pre-commit run` (changes only) or `pre-commit run --all-files`
-(all). You can also run `pre-commit install` to add checks as a git pre-commit
-hook (which is where it gets its name). It's worth trying, even if you've tried
-and failed to set up a custom pre-commit hook before; it's quite elegant and
-does not add or commit the changes, it just makes the changes and allows you to
-check and add them. You can always override the hook with `-n`.
+{% rr PY006 %} Scientific Python projects often use [pre-commit][] to check code
+style. It can be installed through `brew` (macOS) or `pip` (anywhere). There are
+two modes to use it locally; you can check manually with `pre-commit run`
+(changes only) or `pre-commit run --all-files` (all). You can also run
+`pre-commit install` to add checks as a git pre-commit hook (which is where it
+gets its name). It's worth trying, even if you've tried and failed to set up a
+custom pre-commit hook before; it's quite elegant and does not add or commit the
+changes, it just makes the changes and allows you to check and add them. You can
+always override the hook with `-n`.
 
 [pre-commit]: https://pre-commit.com
 
-{% include rr.html id="PC100" %} Here is a minimal `.pre-commit-config.yaml`
-file with some handy options:
+{% rr PC100 %} Here is a minimal `.pre-commit-config.yaml` file with some handy
+options:
 
 ```yaml
 repos:
@@ -72,7 +72,7 @@ docker), you cannot enable a `--manual` flag, so extra checks will not run, and
 jobs should not download packages (use `additional-dependencies:` to add what
 you need).
 
-{% include rr.html id="PC901" %} You can customize the pre-commit message with:
+{% rr PC901 %} You can customize the pre-commit message with:
 
 ```yaml
 ci:
@@ -81,18 +81,18 @@ ci:
 
 ## Black
 
-{% include rr.html id="PC110" %}
-[Black](https://black.readthedocs.io/en/latest/) is a popular auto-formatter
-from the Python Software Foundation. One of the main features of Black is that
-it is "opinionated"; that is, it is almost completely unconfigurable. Instead of
-allowing you to come up with your own format, it enforces one on you. While I am
-quite sure you can come up with a better format, having a single standard makes
-it possible to learn to read code very fast - you can immediately see nested
-lists, matching brackets, etc. There also is a faction of developers that
-dislikes all auto-formatting tools, but inside a system like pre-commit,
-auto-formatters are ideal. They also speed up the writing of code because you
-can ignore formatting your code when you write it. By imposing a standard, all
-scientific Python developers can quickly read any package's code.
+{% rr PC110 %} [Black](https://black.readthedocs.io/en/latest/) is a popular
+auto-formatter from the Python Software Foundation. One of the main features of
+Black is that it is "opinionated"; that is, it is almost completely
+unconfigurable. Instead of allowing you to come up with your own format, it
+enforces one on you. While I am quite sure you can come up with a better format,
+having a single standard makes it possible to learn to read code very fast - you
+can immediately see nested lists, matching brackets, etc. There also is a
+faction of developers that dislikes all auto-formatting tools, but inside a
+system like pre-commit, auto-formatters are ideal. They also speed up the
+writing of code because you can ignore formatting your code when you write it.
+By imposing a standard, all scientific Python developers can quickly read any
+package's code.
 
 Also, properly formatted code has other benefits, such as if two developers make
 the same change, they get the same formatting, and merge requests are easier.
@@ -111,7 +111,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
     - id: black
 ```
 
-<details markdown="1"><summary>You can add a Black badge to your repo as well</summary>
+{% details You can add a Black badge to your repo as well %}
 
 ```md
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -122,7 +122,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
     :target: https://github.com/psf/black
 ```
 
-</details>
+{% enddetails %}
 
 In _very_ specific situations, you may want to retain special formatting. After
 carefully deciding that it is a special use case, you can use `# fmt: on` and
@@ -132,11 +132,11 @@ a way to make the Blacked code look better by rewriting your code; factor out
 long unreadable portions into a variable, avoid writing matrices as 1D lists,
 etc.
 
-<details markdown="1"><summary>Documentation / README snippets support</summary>
+{% details Documentation / README snippets support %}
 
-{% include rr.html id="PC111" %} If you want Black used in your documentation,
-you can use blacken-docs. This can even catch syntax errors in code snippets! It
-supports markdown and restructured text. Note that because black is in
+{% rr PC111 %} If you want Black used in your documentation, you can use
+blacken-docs. This can even catch syntax errors in code snippets! It supports
+markdown and restructured text. Note that because black is in
 `additional_dependencies`, you'll have to keep it up to date manually.
 
 ```yaml
@@ -147,15 +147,15 @@ supports markdown and restructured text. Note that because black is in
       additional_dependencies: [black==23.3.0]
 ```
 
-</details>
+{% enddetails %}
 
 ## Ruff
 
-{% include rr.html id="PC190" %} [Ruff][] [(docs)][ruff docs] is a Python code
-linter and autofixer that replaces many other tools in the ecosystem with a
-ultra-fast (written in Rust), single zero-dependency package. All plugins are
-compiled in, so you can't get new failures from plugins updating without
-updating your pre-commit hook.
+{% rr PC190 %} [Ruff][] [(docs)][ruff docs] is a Python code linter and
+autofixer that replaces many other tools in the ecosystem with a ultra-fast
+(written in Rust), single zero-dependency package. All plugins are compiled in,
+so you can't get new failures from plugins updating without updating your
+pre-commit hook.
 
 [ruff docs]: https://beta.ruff.rs
 [ruff]: https://github.com/astral-sh/ruff
@@ -168,11 +168,10 @@ updating your pre-commit hook.
       args: ["--fix", "--show-fixes"]
 ```
 
-{% include rr.html id="PC191" %} The `--fix` argument is optional, but
-recommended, since you can inspect and undo changes in git.
+{% rr PC191 %} The `--fix` argument is optional, but recommended, since you can
+inspect and undo changes in git.
 
-{% include rr.html id="RF001" %} Ruff is configured in your `pyproject.toml`.
-Here's an example:
+{% rr RF001 %} Ruff is configured in your `pyproject.toml`. Here's an example:
 
 ```toml
 [tool.ruff]
@@ -232,27 +231,25 @@ disable auto-fixing for specific error codes via `unfixable`.
 
 There are other configuration options, such as `target-version`, which selects
 the minimum version you want to target (primarily for `"UP"` and `"I"`)
-{% include rr.html id="RF002" %}, the `src` list which tells it where to look
-for top level packages (mostly for "I" codes, which also have a lot of custom
-configuration options) {% include rr.html id="RF003" %}, `typing-modules`, which
-helps apply typing-specific rules to a re-exported typing module (a common
-practice for unifying typing and `typing_extensions` based on Python version).
-There's also a file `exclude` set, which you can override if you are running
-this entirely from pre-commit (default excludes include "build", so if you have
-a `build` module or file named `build.py`, it would get skipped by default
-without this).
+{% rr RF002 %}, the `src` list which tells it where to look for top level
+packages (mostly for "I" codes, which also have a lot of custom configuration
+options) {% rr RF003 %}, `typing-modules`, which helps apply typing-specific
+rules to a re-exported typing module (a common practice for unifying typing and
+`typing_extensions` based on Python version). There's also a file `exclude` set,
+which you can override if you are running this entirely from pre-commit (default
+excludes include "build", so if you have a `build` module or file named
+`build.py`, it would get skipped by default without this).
 
 Here are some good error codes to enable on most (but not all!) projects:
 
 - `E`, `F`, `W`: These are the standard flake8 checks, classic checks that have
   stood the test of time.
-- `B`: This finds patterns that are very bug-prone.
-  {% include rr.html id="RF101" %}
+- `B`: This finds patterns that are very bug-prone. {% rr RF101 %}
 - `I`: This sorts your includes. There are multiple benefits, such as smaller
   diffs, fewer conflicts, a way to auto-inject `__future__` imports, and easier
   for readers to tell what's built-in, third-party, and local. It has a lot of
   configuration options, but defaults to a Black-compatible style.
-  {% include rr.html id="RF102" %}
+  {% rr RF102 %}
 - `ARG`: This looks for unused arguments. You might need to `# noqa: ARG001`
   occasionally, but it's overall pretty useful.
 - `C4`: This looks for places that could use comprehensions, and can autofix
@@ -274,13 +271,12 @@ Here are some good error codes to enable on most (but not all!) projects:
 - `RUF`: Codes specific to Ruff, including removing noqa's that aren't used.
 - `T20`: Disallow `print` in your code (built on the assumption that it's a
   common debugging tool).
-- `UP`: Upgrade old Python syntax to your `target-version`.
-  {% include rr.html id="RF103" %}
+- `UP`: Upgrade old Python syntax to your `target-version`. {% rr RF103 %}
 
 A few others small ones are included above, and there are even more available in
 Ruff.
 
-<details markdown="1"><summary>Separate tools that Ruff replaces</summary>
+{% details Separate tools that Ruff replaces %}
 
 ### PyCln
 
@@ -357,7 +353,7 @@ enable more checks. A few interesting plugins:
 - [`flake8-print`](https://pypi.org/project/pep8-naming/): Makes sure you don't
   have print statements that sneak in. Code: `T`
 
-<details markdown="1"><summary>Flake8-print details:</summary>
+{% details Flake8-print details %}
 
 Having something verify you don't add a print statement by mistake is _very_
 useful. A common need for the print checker would be to add it to a single
@@ -372,7 +368,7 @@ per-file-ignores =
     examples/*: T
 ```
 
-</details>
+{% enddetails %}
 
 ### YesQA
 
@@ -437,8 +433,8 @@ when clearly better (please always use them, they are faster) if you set
 
 [pyupgrade]: https://github.com/asottile/pyupgrade:
 
-> <h4 class="no_toc">Note:</h4>
->
+{: .note }
+
 > If you set this to at least `--py37-plus`, you can add the annotations import
 > by adding the following line to your isort pre-commit hook configuration:
 >
@@ -449,25 +445,24 @@ when clearly better (please always use them, they are faster) if you set
 > Also make sure isort comes before pyupgrade. Now when you run pre-commit, it
 > will clean up your annotations to 3.7+ style, too!
 
-</details>
+{% enddetails %}
 
 ## Type checking
 
-{% include rr.html id="PC140" %} One of the most exciting advancements in Python
-in the last 10 years has been static type hints. Scientific Python projects vary
-in the degree to which they are type-hint ready. One of the challenges for
-providing static type hints is that it was developed in the Python 3 era and it
-really shines in a Python 3.7+ codebase (due to
-`from __future__ import annotations`, which turns annotations into strings and
-allows you to use future Python features in Python 3.7+ annotations as long as
-your type checker supports them). For now, it is recommended that you make an
-attempt to support type checking through your public API in the best way that
-you can (based on your supported Python versions). Stub files can be used
-instead for out-of-line typing. [MyPy](https://mypy.readthedocs.io/en/stable/)
-is suggested for type checking, though there are several other good options to
-try, as well. If you have built-in support for type checking, you need to add
-empty `py.typed` files to all packages/subpackages to indicate that you support
-it.
+{% rr PC140 %} One of the most exciting advancements in Python in the last 10
+years has been static type hints. Scientific Python projects vary in the degree
+to which they are type-hint ready. One of the challenges for providing static
+type hints is that it was developed in the Python 3 era and it really shines in
+a Python 3.7+ codebase (due to `from __future__ import annotations`, which turns
+annotations into strings and allows you to use future Python features in Python
+3.7+ annotations as long as your type checker supports them). For now, it is
+recommended that you make an attempt to support type checking through your
+public API in the best way that you can (based on your supported Python
+versions). Stub files can be used instead for out-of-line typing.
+[MyPy](https://mypy.readthedocs.io/en/stable/) is suggested for type checking,
+though there are several other good options to try, as well. If you have
+built-in support for type checking, you need to add empty `py.typed` files to
+all packages/subpackages to indicate that you support it.
 
 Read more about type checking on the [dedicated page][mypy page].
 
@@ -490,8 +485,8 @@ add items to the virtual environment setup for MyPy by pre-commit, for example:
 additional_dependencies: [attrs==21.2.0]
 ```
 
-{% include rr.html id="MY100" %} MyPy has a config section in `pyproject.toml`
-that looks like this:
+{% rr MY100 %} MyPy has a config section in `pyproject.toml` that looks like
+this:
 
 ```ini
 [tool.mypy]
@@ -518,17 +513,15 @@ enable `check_untyped_defs` first, followed by `disallow_untyped_defs` then
 `disallow_incomplete_defs`. You can add these _per file_ by adding a
 `# mypy: <option>` at the top of a file. You can also pass `--strict` on the
 command line. `strict = true` is now allowed in config files, too
-{% include rr.html id="MY101" %}.
+{% rr MY101 %}.
 
-The extra strict options shown above, like `warn_unreachable`
-{% include rr.html id="MY103" %}, and `ignore-without-code`
-{% include rr.html id="MY104" %}, `redundant-expr`
-{% include rr.html id="MY105" %}, and `truthy-bool`
-{% include rr.html id="MY106" %} can trigger too often (like on `sys.platform`
+The extra strict options shown above, like `warn_unreachable` {% rr MY103 %},
+and `ignore-without-code` {% rr MY104 %}, `redundant-expr` {% rr MY105 %}, and
+`truthy-bool` {% rr MY106 %} can trigger too often (like on `sys.platform`
 checks) and have to be ignored occasionally, but can find some signifiant logic
 errors in your typing.
 
-{% include rr.html id="MY102" %} You should enable `show_error_codes`.
+{% rr MY102 %} You should enable `show_error_codes`.
 
 [mypy page]: {% link pages/guides/mypy.md %}
 
@@ -536,7 +529,7 @@ errors in your typing.
 
 If you use setuptools, these checks are useful:
 
-<details markdown="1"><summary>Setuptools-only checks</summary>
+{% details Setuptools-only checks %}
 
 ### Check-Manifest (setuptools only)
 
@@ -568,7 +561,7 @@ If you use `setuptools_scm`, you might want to add:
 additional_dependencies: ["setuptools_scm[toml]"]
 ```
 
-<details markdown="1"><summary>If this is too slow:</summary>
+{% details If this is too slow: %}
 
 **Warning**: For a complex package, this may be slow. You can optionally set
 `stages: [manual]` just below the id, and then only run this explicitly
@@ -581,7 +574,7 @@ run all checks:
     extra_args: --show-diff-on-failure --all-files --hook-stage manual
 ```
 
-</details>
+{% enddetails %}
 
 ### Setup.cfg format (setuptools only)
 
@@ -599,14 +592,14 @@ important parts (like Python classifiers) are in sync. This tool,
 
 Make sure you list the highest version of Python you are testing with here.
 
-</details>
+{% enddetails %}
 
 ## Spelling
 
-{% include rr.html id="PC160" %} You can and should check for spelling errors in
-your code too. If you want to add this, you can use [codespell][] for common
-spelling mistakes. Unlike most spell checkers, this has a list of mistakes it
-looks for, rather than a list of "valid" words. To use:
+{% rr PC160 %} You can and should check for spelling errors in your code too. If
+you want to add this, you can use [codespell][] for common spelling mistakes.
+Unlike most spell checkers, this has a list of mistakes it looks for, rather
+than a list of "valid" words. To use:
 
 ```yaml
 - repo: https://github.com/codespell-project/codespell
@@ -645,7 +638,7 @@ corrections if you have a lot of them when first adding the check.
 
 ## PyGrep hooks
 
-{% include rr.html id="PC170" %} This is a repository with a
+{% rr PC170 %} This is a repository with a
 [collection of pre-commit extra hooks](https://github.com/pre-commit/pygrep-hooks)
 that protect against some common, easy to detect, mistakes. You can pick and
 choose the hooks you want from the repo; here are some common ones:
@@ -706,8 +699,8 @@ If you have shell scripts, you can protect against common mistakes using
 
 ## Prettier
 
-{% include rr.html id="PC180" %} The [prettier](https://prettier.io) tool can
-format a large number of different file types. An example of usage:
+{% rr PC180 %} The [prettier](https://prettier.io) tool can format a large
+number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier

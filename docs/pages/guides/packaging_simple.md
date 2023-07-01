@@ -44,44 +44,42 @@ is coming.
 
 ## pyproject.toml: build-system
 
-{% include rr.html id="PY001" %} Packages must have a `pyproject.toml` file
-{% include rr.html id="PP001" %} that selects the backend:
+{% rr PY001 %} Packages must have a `pyproject.toml` file {% rr PP001 %} that
+selects the backend:
 
-<div class="skhep-bar d-flex m-2" style="justify-content:center;">
-  <button class="skhep-bar-item hatch-btn btn m-2 btn-purple" onclick="openTab('hatch')">Hatchling</button>
-  <button class="skhep-bar-item flit-btn btn m-2" onclick="openTab('flit')">Flit</button>
-  <button class="skhep-bar-item pdm-btn btn m-2" onclick="openTab('pdm')">PDM</button>
-  <button class="skhep-bar-item setuptools-btn btn m-2" onclick="openTab('setuptools')">Setuptools</button>
-</div>
+{% tabs %} {% tab hatch Hatchling %}
 
-<div class="skhep-tab hatch-tab" markdown="1">
 ```toml
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 ```
-</div>
-<div class="skhep-tab flit-tab" markdown="1" style="display:none;">
+
+{% endtab %} {% tab flit Flit-core %}
+
 ```toml
 [build-system]
 requires = ["flit_core>=3.3"]
 build-backend = "flit_core.buildapi"
 ```
-</div>
-<div class="skhep-tab pdm-tab" markdown="1" style="display:none;">
+
+{% endtab %} {% tab pdm PDM-backend %}
+
 ```toml
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 ```
-</div>
-<div class="skhep-tab setuptools-tab" markdown="1" style="display:none;">
+
+{% endtab %} {% tab setuptools Setuptools %}
+
 ```toml
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 ```
-</div>
+
+{% endtab %} {% endtabs %}
 
 ## pyproject.toml: project
 
@@ -147,10 +145,10 @@ detection, while Trampolim and whey do not, requiring a `tool` setting.
 If you don't match your package name and import name (which you should except
 for very special cases), you will likely need extra configuration here.
 
-You should have a `README` {% include rr.html id="PY002" %} and a `LICENSE` {%
-include rr.html id="PY003" %} file. You should have a `docs/` folder {% include
-rr.html id="PY003" %}. You should have a `/tests` folder (recommended) and/or a
-`src/<package>/tests` folder.
+You should have a `README` {% rr PY002 %} and a `LICENSE` {% rr PY003 %} file.
+You should have a `docs/` folder {%
+rr PY003 %}. You should have a `/tests` folder (recommended) and/or a `src/<package>/tests`
+folder.
 
 ## Versioning
 
@@ -168,7 +166,7 @@ dynamic = ["version"]
 
 Then you'll configure your backend to compute the version.
 
-<details markdown="1"><summary>Hatchling dynamic versioning</summary>
+{% details Hatchling dynamic versioning %}
 
 You can tell hatchling to get the version from VCS. Add `hatch-vcs` to your
 `build-backend.requires`, then add the following configuration:
@@ -208,7 +206,7 @@ And `.gitattributes` (or add this line if you are already using this file):
 This will allow git archives (including the ones generated from GitHub) to also
 support versioning.
 
-</details>
+{% enddetails %}
 
 ## Including/excluding files in the SDist
 

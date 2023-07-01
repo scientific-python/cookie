@@ -49,25 +49,19 @@ environment.
 
 To activate the virtual environment, type:
 
-<div class="skhep-bar d-flex m-2" style="justify-content:center;">
-  <button class="skhep-bar-item munix-btn btn m-2 btn-purple" onclick="openTab('unix')">Linux/macOS</button>
-  <button class="skhep-bar-item windows-btn btn m-2" onclick="openTab('windows')">Windows</button>
-</div>
-
-<div class="skhep-tab unix-tab" markdown="1">
+{% tabs %} {% tab unix Linux/macOS %}
 
 ```bash
 . .venv/bin/activate
 ```
 
-</div>
-<div class="skhep-tab windows-tab" markdown="1" style="display:none;">
+{% endtab %} {% tab windows Windows %}
 
 ```bat
 .venv\bin\Activate.bat
 ```
 
-</div>
+{% endtab %} {% endtabs %}
 
 You need to do this step every time you open a new shell (i.e. Terminal, Command
 Prompt) to work on your project. The `.` is short for `source`, which runs the
