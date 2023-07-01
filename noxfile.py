@@ -399,6 +399,17 @@ def readme(session: nox.Session) -> None:
 
 
 @nox.session(reuse_venv=True)
+def pages(session: nox.Session) -> None:
+    """
+    Update the pages with cog. Pass --check to check instead.
+    """
+    args = session.posargs or ["-r"]
+
+    session.install("cogapp", "cookiecutter")
+    session.run("cog", "-P", *args, "docs/pages/guides/packaging_compiled.md")
+
+
+@nox.session(reuse_venv=True)
 def rr_run(session: nox.Session) -> None:
     """
     Run sp-repo-review.

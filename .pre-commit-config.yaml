@@ -81,3 +81,9 @@ repos:
         language: pygrep
         entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
         exclude: (.pre-commit-config.yaml|docs/pages/guides/style\.md)$
+      - id: cog
+        name: Cog the pages
+        language: python
+        entry: cog -P -r -I ./helpers
+        files: "^docs/pages/guides/packaging_compiled.md"
+        additional_dependencies: [cogapp, cookiecutter]

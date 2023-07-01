@@ -2,7 +2,7 @@
 layout: page
 title: "Static type checking"
 permalink: /guides/mypy/
-nav_order: 8
+nav_order: 9
 parent: Topical Guides
 ---
 

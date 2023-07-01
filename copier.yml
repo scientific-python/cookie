@@ -66,4 +66,4 @@ _subdirectory: "{% raw %}{{cookiecutter.project_name}}{% endraw %}"
 
 _jinja_extensions:
   - copier_templates_extensions.TemplateExtensionLoader
-  - extensions.py:CookiecutterNamespace
+  - helpers/extensions.py:CookiecutterNamespace

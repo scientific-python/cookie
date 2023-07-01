@@ -2,7 +2,7 @@
 layout: page
 title: Classic packaging
 permalink: /guides/packaging_classic/
-nav_order: 6
+nav_order: 7
 parent: Topical Guides
 ---
 
