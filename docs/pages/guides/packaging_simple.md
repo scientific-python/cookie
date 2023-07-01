@@ -166,7 +166,7 @@ dynamic = ["version"]
 
 Then you'll configure your backend to compute the version.
 
-<details markdown="1"><summary>Hatchling dynamic versioning</summary>
+{% details Hatchling dynamic versioning %}
 
 You can tell hatchling to get the version from VCS. Add `hatch-vcs` to your
 `build-backend.requires`, then add the following configuration:
@@ -206,7 +206,7 @@ And `.gitattributes` (or add this line if you are already using this file):
 This will allow git archives (including the ones generated from GitHub) to also
 support versioning.
 
-</details>
+{% enddetails %}
 
 ## Including/excluding files in the SDist
 

@@ -111,7 +111,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
     - id: black
 ```
 
-<details markdown="1"><summary>You can add a Black badge to your repo as well</summary>
+{% details You can add a Black badge to your repo as well %}
 
 ```md
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -122,7 +122,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
     :target: https://github.com/psf/black
 ```
 
-</details>
+{% enddetails %}
 
 In _very_ specific situations, you may want to retain special formatting. After
 carefully deciding that it is a special use case, you can use `# fmt: on` and
@@ -132,7 +132,7 @@ a way to make the Blacked code look better by rewriting your code; factor out
 long unreadable portions into a variable, avoid writing matrices as 1D lists,
 etc.
 
-<details markdown="1"><summary>Documentation / README snippets support</summary>
+{% details Documentation / README snippets support %}
 
 {% include rr.html id="PC111" %} If you want Black used in your documentation,
 you can use blacken-docs. This can even catch syntax errors in code snippets! It
@@ -147,7 +147,7 @@ supports markdown and restructured text. Note that because black is in
       additional_dependencies: [black==23.3.0]
 ```
 
-</details>
+{% enddetails %}
 
 ## Ruff
 
@@ -280,7 +280,7 @@ Here are some good error codes to enable on most (but not all!) projects:
 A few others small ones are included above, and there are even more available in
 Ruff.
 
-<details markdown="1"><summary>Separate tools that Ruff replaces</summary>
+{% details Separate tools that Ruff replaces %}
 
 ### PyCln
 
@@ -357,7 +357,7 @@ enable more checks. A few interesting plugins:
 - [`flake8-print`](https://pypi.org/project/pep8-naming/): Makes sure you don't
   have print statements that sneak in. Code: `T`
 
-<details markdown="1"><summary>Flake8-print details:</summary>
+{% details Flake8-print details %}
 
 Having something verify you don't add a print statement by mistake is _very_
 useful. A common need for the print checker would be to add it to a single
@@ -372,7 +372,7 @@ per-file-ignores =
     examples/*: T
 ```
 
-</details>
+{% enddetails %}
 
 ### YesQA
 
@@ -449,7 +449,7 @@ when clearly better (please always use them, they are faster) if you set
 > Also make sure isort comes before pyupgrade. Now when you run pre-commit, it
 > will clean up your annotations to 3.7+ style, too!
 
-</details>
+{% enddetails %}
 
 ## Type checking
 
@@ -536,7 +536,7 @@ errors in your typing.
 
 If you use setuptools, these checks are useful:
 
-<details markdown="1"><summary>Setuptools-only checks</summary>
+{% details Setuptools-only checks %}
 
 ### Check-Manifest (setuptools only)
 
@@ -568,7 +568,7 @@ If you use `setuptools_scm`, you might want to add:
 additional_dependencies: ["setuptools_scm[toml]"]
 ```
 
-<details markdown="1"><summary>If this is too slow:</summary>
+{% details If this is too slow: %}
 
 **Warning**: For a complex package, this may be slow. You can optionally set
 `stages: [manual]` just below the id, and then only run this explicitly
@@ -581,7 +581,7 @@ run all checks:
     extra_args: --show-diff-on-failure --all-files --hook-stage manual
 ```
 
-</details>
+{% enddetails %}
 
 ### Setup.cfg format (setuptools only)
 
@@ -599,7 +599,7 @@ important parts (like Python classifiers) are in sync. This tool,
 
 Make sure you list the highest version of Python you are testing with here.
 
-</details>
+{% enddetails %}
 
 ## Spelling
 

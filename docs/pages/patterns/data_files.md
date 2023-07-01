@@ -98,7 +98,7 @@ You'll want to make sure your Python building backend is placing these files in
 the SDist and wheel. If you are using anything other than setuptools, this
 should be automatic.
 
-<details markdown="1"><summary>Setuptools-specific instructions</summary>
+{% details Setuptools-specific instructions %}
 
 There are two ways to include data files in setuptools. You can either list the
 package data explicitly:
@@ -125,7 +125,7 @@ But then you'll need to _also_ make sure the files are in the SDist, too:
 include src/package/peak_spacings/*.txt
 ```
 
-</details>
+{% enddetails %}
 
 Finally, wherever we actually use the files in our scientific code, we can
 access them using `importlib_resources`. For users with Python >= 3.9 the
