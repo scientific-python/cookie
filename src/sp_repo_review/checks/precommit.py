@@ -56,7 +56,7 @@ class PC111(PreCommit):
 
 class PC190(PreCommit):
     "Uses Ruff"
-    repo = "https://github.com/charliermarsh/ruff-pre-commit"
+    repo = "https://github.com/astral-sh/ruff-pre-commit"
 
 
 class PC140(PreCommit):
