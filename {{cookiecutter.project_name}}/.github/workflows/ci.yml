@@ -80,7 +80,7 @@ jobs:
           --durations=20
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v3.1.1
+        uses: codecov/codecov-action@v3.1.4
 
   {%- if not compiled %}
 

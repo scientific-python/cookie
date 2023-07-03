@@ -267,7 +267,7 @@ author_email = me@email.com
 maintainer = My Organization
 maintainer_email = organization@email.com
 license = BSD-3-Clause
-license_file = LICENSE
+license_files = LICENSE
 classifiers =
     Development Status :: 4 - Beta
     Intended Audience :: Developers
