@@ -160,7 +160,6 @@ extend-ignore = [
   "E501",   # Line too long
   "PT004",  # Incorrect check, usefixtures is the correct way to do this
 ]
-target-version = "py310"
 src = ["src"]
 unfixable = [
   "T20",  # Removes print statements
