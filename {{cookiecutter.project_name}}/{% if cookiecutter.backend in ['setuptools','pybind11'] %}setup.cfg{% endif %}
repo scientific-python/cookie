@@ -10,8 +10,14 @@ author_email = {{ cookiecutter.email }}
 maintainer = The Scikit-HEP admins
 maintainer_email = scikit-hep-admins@googlegroups.com
 {%- endif %}
+{%- if cookiecutter.license == "BSD" %}
 license = BSD-3-Clause
-license_file = LICENSE
+{%- elif cookiecutter.license == "Apache" %}
+license = Apache-2.0
+{%- elif cookiecutter.license == "MIT" %}
+license = MIT
+{%- endif %}
+license_files = LICENSE
 platforms =
     Any
 classifiers =
