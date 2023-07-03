@@ -81,6 +81,10 @@ repos:
         language: pygrep
         entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
         exclude: (.pre-commit-config.yaml|docs/pages/guides/style\.md)$
+      - id: disallow-bad-permalinks
+        name: Disallow _ in permalinks
+        language: pygrep
+        entry: "^permalink:.*_.*"
       - id: cog
         name: Cog the pages
         language: python
