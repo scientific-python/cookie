@@ -2,7 +2,7 @@
 layout: page
 title: "GHA: GitHub Actions intro"
 permalink: /guides/gha-basic/
-nav_order: 11
+nav_order: 10
 parent: Topical Guides
 custom_title: GitHub Actions introduction
 ---
