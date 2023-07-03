@@ -56,7 +56,7 @@ class PC111(PreCommit):
 
 class PC190(PreCommit):
     "Uses Ruff"
-    repo = "https://github.com/charliermarsh/ruff-pre-commit"
+    repo = "https://github.com/astral-sh/ruff-pre-commit"
 
 
 class PC140(PreCommit):
@@ -82,7 +82,7 @@ class PC180(PreCommit):
 class PC191(PreCommit):
     "Ruff show fixes if fixes enabled"
     requires = {"PC190"}
-    repo = "https://github.com/charliermarsh/ruff-pre-commit"
+    repo = "https://github.com/astral-sh/ruff-pre-commit"
 
     @classmethod
     def check(cls, precommit: dict[str, Any]) -> bool | None:
