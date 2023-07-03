@@ -205,7 +205,6 @@ extend-ignore = [
   "E501",   # Line too long
   "PT004",  # Use underscore for non-returning fixture (use usefixture instead)
 ]
-target-version = "py38"
 typing-modules = ["mypackage._compat.typing"]
 src = ["src"]
 unfixable = [
@@ -229,16 +228,27 @@ ignore certain error codes via `extend-ignore`. You can also set codes per paths
 to ignore in `per-file-ignores`. If you don't like certain auto-fixes, you can
 disable auto-fixing for specific error codes via `unfixable`.
 
-There are other configuration options, such as `target-version`, which selects
-the minimum version you want to target (primarily for `"UP"` and `"I"`)
-{% rr RF002 %}, the `src` list which tells it where to look for top level
-packages (mostly for "I" codes, which also have a lot of custom configuration
-options) {% rr RF003 %}, `typing-modules`, which helps apply typing-specific
-rules to a re-exported typing module (a common practice for unifying typing and
-`typing_extensions` based on Python version). There's also a file `exclude` set,
-which you can override if you are running this entirely from pre-commit (default
-excludes include "build", so if you have a `build` module or file named
-`build.py`, it would get skipped by default without this).
+There are other configuration options, such as the `src` list which tells it
+where to look for top level packages (mostly for "I" codes, which also have a
+lot of custom configuration options) {% rr RF003 %}, `typing-modules`, which
+helps apply typing-specific rules to a re-exported typing module (a common
+practice for unifying typing and `typing_extensions` based on Python version).
+There's also a file `exclude` set, which you can override if you are running
+this entirely from pre-commit (default excludes include "build", so if you have
+a `build` module or file named `build.py`, it would get skipped by default
+without this).
+
+{: .warning }
+
+> If you don't use a `[project]` table (older setuptools or Poetry), then you
+> should also set:
+>
+> ```toml
+> target-version = "py38"
+> ```
+>
+> This selects the minimum version you want to target (primarily for `"UP"` and
+> `"I"`) {% rr RF002 %},
 
 Here are some good error codes to enable on most (but not all!) projects:
 
