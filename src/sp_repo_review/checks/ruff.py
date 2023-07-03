@@ -40,11 +40,13 @@ class RF002(Ruff):
     def check(pyproject: dict[str, Any]) -> bool:
         """
         Must select a minimum version to target. Affects pyupgrade,
-        isort, and others.
+        isort, and others. Can be inferred from `project.requires-python`.
         """
 
         match pyproject:
             case {"tool": {"ruff": {"target-version": str()}}}:
+                return True
+            case {"project": {"requires-python": str()}}:
                 return True
             case _:
                 return False
