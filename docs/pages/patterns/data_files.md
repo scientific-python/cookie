@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Including data files
-permalink: /patterns/data_files/
+permalink: /patterns/data-files/
 nav_order: 3
 parent: Patterns
 ---
