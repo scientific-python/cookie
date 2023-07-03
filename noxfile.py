@@ -318,6 +318,7 @@ def pc_bump(session: nox.Session) -> None:
     pages = [
         Path("docs/pages/guides/style.md"),
         Path("{{cookiecutter.project_name}}/.pre-commit-config.yaml"),
+        Path(".pre-commit-config.yaml"),
     ]
 
     for page in pages:
