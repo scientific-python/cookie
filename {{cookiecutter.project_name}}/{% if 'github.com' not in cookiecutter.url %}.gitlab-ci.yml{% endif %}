@@ -1,5 +1,3 @@
-{%- set compiled = cookiecutter.project_type in ["pybind11", "maturin", "skbuild"] -%}
-
 stages:
   - check
   - test
@@ -49,7 +47,7 @@ tests:
     matrix:
       - IMAGE: ['python:3.7-buster', 'python:3.10-buster']
 
-{%- if not compiled %}
+{%- if not cookiecutter.__compiled %}
 package:
   stage: build
   script:
@@ -106,7 +104,7 @@ make_wheels:
 .deploy:
   stage: deploy
   dependencies:
-    {%- if not compiled %}
+    {%- if not cookiecutter.__compiled %}
     - package
     {%- else %}
     - make_sdist
