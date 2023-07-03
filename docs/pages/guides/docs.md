@@ -28,8 +28,21 @@ Ideally, software documentation should include:
 - **Explanations** to convey deeper understanding of why and how the software
   operates the way it does.
 
-This overall framework has a name, [Diátaxis][], and you can read more about it
-if you are interested.
+{: .note-title }
+
+> The Diátaxis framework
+>
+> This overall framework has a name, [Diátaxis][], and you can read more about
+> it if you are interested.
+
+<!-- [[[cog
+from cog_helpers import render_cookie
+with render_cookie() as package:
+    docs_conf_py = package.joinpath("docs/conf.py").read_text(encoding="utf-8").strip()
+    docs_index_md = package.joinpath("docs/index.md").read_text(encoding="utf-8").strip()
+    readthedocs_yaml = package.joinpath(".readthedocs.yml").read_text(encoding="utf-8").strip()
+]]] -->
+<!-- [[[end]]] -->
 
 ## Hand-written docs
 
@@ -40,15 +53,21 @@ is our recommended starting point for `conf.py`:
 
 ### conf.py
 
+<!-- prettier-ignore-start -->
+<!-- [[[cog
+print("```python")
+print(docs_conf_py)
+print("```")
+]]] -->
 ```python
 from __future__ import annotations
 
 import importlib.metadata
 
-project = "<package-name-here>"
-copyright = "2023, Your Name"
-author = "Your Name"
-version = release = importlib.metadata.version("<package-name-here>")
+project = "package"
+copyright = "2023, My Name"
+author = "My Name"
+version = release = importlib.metadata.version("package")
 
 extensions = [
     "myst_parser",
@@ -60,25 +79,25 @@ extensions = [
     "sphinx_copybutton",
 ]
 
-source_suffix = [".md", ".rst"]
+source_suffix = [".rst", ".md"]
 exclude_patterns = [
     "_build",
+    "**.ipynb_checkpoints",
     "Thumbs.db",
     ".DS_Store",
-    "**.ipynb_checkpoints",
     ".env",
     ".venv",
 ]
 
 html_theme = "furo"
 
-intersphinx_mapping = {
-    "python": ("https://docs.python.org/3", None),
-}
-
 myst_enable_extensions = [
     "colon_fence",
 ]
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+}
 
 nitpick_ignore = [
     ("py:class", "_io.StringIO"),
@@ -87,6 +106,8 @@ nitpick_ignore = [
 
 always_document_param_types = True
 ```
+<!-- [[[end]]] -->
+<!-- prettier-ignore-end -->
 
 We start by setting some configuration values, but most notably we are getting
 the package version from the installed version of your package. We are listing
@@ -132,12 +153,18 @@ docstrings, even if the parameter isn't documented yet. Feel free to check
 [sphinx-autodoc-typehints](https://github.com/tox-dev/sphinx-autodoc-typehints)
 for more options.
 
-## index.md
+### index.md
 
 Your `index.md` file can start out like this:
 
+<!-- prettier-ignore-start -->
+<!-- [[[cog
+print("````md")
+print(docs_index_md)
+print("````")
+]]] -->
 ````md
-# Project name
+# package
 
 ```{toctree}
 :maxdepth: 2
@@ -155,6 +182,8 @@ Your `index.md` file can start out like this:
 - {ref}`modindex`
 - {ref}`search`
 ````
+<!-- [[[end]]] -->
+<!-- prettier-ignore-end -->
 
 You can put your project name in as the title. The `toctree` directive houses
 your table of contents; you'll list each new page you add inside that directive.
@@ -191,6 +220,12 @@ plugins and try to build against an uninstalled version of your project.
 In order to use <https://readthedocs.org> to build, host, and preview your
 documentation, you must have a `.reathedocs.yml` file {% rr RTD100 %} like this:
 
+<!-- prettier-ignore-start -->
+<!-- [[[cog
+print("```yaml")
+print(readthedocs_yaml)
+print("```")
+]]] -->
 ```yaml
 # Read the Docs configuration file
 # See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
@@ -201,7 +236,6 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.11"
-
 sphinx:
   configuration: docs/conf.py
 
@@ -212,6 +246,8 @@ python:
       extra_requirements:
         - docs
 ```
+<!-- [[[end]]] -->
+<!-- prettier-ignore-end -->
 
 This sets the readthedocs config version (2 is required) {% rr RTD101 %}.
 

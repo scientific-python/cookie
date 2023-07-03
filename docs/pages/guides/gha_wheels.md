@@ -227,10 +227,15 @@ multiple places, you can set `skip_existing` (but generally it's better to not
 try to upload the same file from two places - you can trick Travis into avoiding
 the sdist, for example).
 
+{: .note-title }
+
+> Other architectures
+>
 > On Travis, `cibuildwheel` even has the ability to create ARM and PowerPC
 > builds natively. IBM Z builds are also available but in beta. However, due to
 > Travis CI's recent dramatic reduction on open source support, emulating these
-> architectures on GHA or Azure is probably better.
+> architectures on GHA or Azure is probably better. Maybe look into Cirrus CI,
+> which has some harder-to-find architectures.
 
 <!-- prettier-ignore-start -->
 

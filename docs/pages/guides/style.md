@@ -791,6 +791,13 @@ You can adapt most tools to notebooks using
 You can pass extra flags to Ruff via the hook, like
 `args: ["--extend-ignore=F821,F401"]`.
 
+{: .note-title }
+
+> Native notebook support
+>
+> Ruff 0.257 added experimental notebook support! You currently have to enable
+> checking `.ipynb` files both in Ruff and pre-commit to use it.
+
 ### Black
 
 For Black, just make sure you use the `id: black-jupyter` hook instead of

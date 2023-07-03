@@ -103,17 +103,31 @@ One can also configure `Codecov` and coverage reports passed to `Codecov` using
 with your `workflows` folder. Additionally, `Codecov` allows you to create and
 edit this `YAML` file directly through your `Codecov` project's settings!
 
-A recommended configuration for `Codecov`:
+A recommended configuration for `.github/codecov.yml`:
 
 ```yaml
 codecov:
   notify:
     after_n_builds: x
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 5%
+    patch:
+      default:
+        informational: true
 ```
 
 where `x` is the number of uploaded reports `Codecov` should wait to receive
 before sending statuses. This would ensure that the `Codecov` checks don't fail
-before all the coverage reports are uploaded. See the
+before all the coverage reports are uploaded. You can control the levels which
+are considered failing; the config above sets a loss of up to 5% as okay, and
+avoids patch coverage reporting a failure (otherwise, just changing a single
+uncovered line could cause a "failure" report on the PR). If you have 100%
+coverage, then you can remove the coverage failure settings, as you want any
+loss of coverage to fail. See the
 [docs](https://docs.codecov.com/docs/codecov-yaml) for all the options.
 
 <!-- ### Coverage for projects written in Python and C++
