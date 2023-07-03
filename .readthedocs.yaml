@@ -17,5 +17,6 @@ build:
     - bundle config set --local without development
     - bundle install
     - >
-       JEKYLL_ENV=production bundle exec jekyll build --destination _readthedocs/html
-       --baseurl $(echo -n "$READTHEDOCS_CANONICAL_URL" | cut -d '/' -f 4-)
+      JEKYLL_ENV=production bundle exec jekyll build --destination
+      _readthedocs/html --baseurl $(echo -n "$READTHEDOCS_CANONICAL_URL" | cut
+      -d '/' -f 4-)

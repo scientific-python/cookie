@@ -295,14 +295,14 @@ def compare_cruft(session):
 
 PC_VERS = re.compile(
     r"""\
-^- repo: (.*?)
-  rev: (.*?)$""",
+^( *)- repo: (.*?)
+ *  rev: (.*?)$""",
     re.MULTILINE,
 )
 
 PC_REPL_LINE = '''\
-- repo: {0}
-  rev: "{1}"'''
+{2}- repo: {0}
+{2}  rev: "{1}"'''
 
 
 GHA_VERS = re.compile(r"[\s\-]+uses: (.*?)@([^\s]+)")
@@ -311,50 +311,64 @@ GHA_VERS = re.compile(r"[\s\-]+uses: (.*?)@([^\s]+)")
 @nox.session(reuse_venv=True)
 def pc_bump(session: nox.Session) -> None:
     """
-    Bump the pre-commit versions mentioned in the pages.
+    Bump the pre-commit versions.
     """
     session.install("lastversion")
+    versions = {}
+    pages = [
+        Path("docs/pages/guides/style.md"),
+        Path("{{cookiecutter.project_name}}/.pre-commit-config.yaml"),
+    ]
 
-    style = Path("docs/pages/guides/style.md")
-    txt = style.read_text()
-    old_versions = {m[1]: m[2].strip('"') for m in PC_VERS.finditer(txt)}
+    for page in pages:
+        txt = page.read_text()
+        old_versions = {m[2]: (m[3].strip('"'), m[1]) for m in PC_VERS.finditer(txt)}
 
-    for proj, old_version in old_versions.items():
-        new_version = session.run("lastversion", proj, silent=True).strip()
+        for proj, (old_version, space) in old_versions.items():
+            if proj not in versions:
+                versions[proj] = session.run("lastversion", proj, silent=True).strip()
+            new_version = versions[proj]
 
-        if old_version.lstrip("v") == new_version:
-            continue
+            if old_version.lstrip("v") == new_version:
+                continue
 
-        if old_version.startswith("v"):
-            new_version = f"v{new_version}"
+            if old_version.startswith("v"):
+                new_version = f"v{new_version}"
 
-        before = PC_REPL_LINE.format(proj, old_version)
-        after = PC_REPL_LINE.format(proj, new_version)
+            before = PC_REPL_LINE.format(proj, old_version, space)
+            after = PC_REPL_LINE.format(proj, new_version, space)
 
-        session.log(f"Bump: {old_version} -> {new_version}")
-        txt = txt.replace(before, after)
+            session.log(f"Bump: {old_version} -> {new_version} ({page})")
+            txt = txt.replace(before, after)
 
-    style.write_text(txt)
+            page.write_text(txt)
 
 
 @nox.session(venv_backend="none")
 def gha_bump(session: nox.Session) -> None:
     """
-    Bump the GitHub Actions mentioned in the pages.
+    Bump the GitHub Actions.
     """
     pages = list(Path("docs/pages/guides").glob("gha_*.md"))
+    pages.extend(Path("{{cookiecutter.project_name}}/.github/workflows").iterdir())
     pages.append(Path("docs/pages/guides/style.md"))
     full_txt = "\n".join(page.read_text() for page in pages)
 
     # This assumes there is a single version per action
     old_versions = {m[1]: m[2] for m in GHA_VERS.finditer(full_txt)}
+    versions = {}
 
     for repo, old_version in old_versions.items():
         session.log(f"{repo}: {old_version}")
-        response = urllib.request.urlopen(f"https://api.github.com/repos/{repo}/tags")
-        tags_js = json.loads(response.read())
+        if repo not in versions:
+            response = urllib.request.urlopen(
+                f"https://api.github.com/repos/{repo}/tags"
+            )
+            versions[repo] = json.loads(response.read())
         tags = [
-            x["name"] for x in tags_js if x["name"].count(".") == old_version.count(".")
+            x["name"]
+            for x in versions[repo]
+            if x["name"].count(".") == old_version.count(".")
         ]
         if not tags:
             continue
