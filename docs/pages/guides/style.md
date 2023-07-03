@@ -492,7 +492,7 @@ designed to avoid configuration, but you should add configuration. You can also
 add items to the virtual environment setup for MyPy by pre-commit, for example:
 
 ```yaml
-additional_dependencies: [attrs==21.2.0]
+additional_dependencies: [attrs==23.1.0]
 ```
 
 {% rr MY100 %} MyPy has a config section in `pyproject.toml` that looks like
