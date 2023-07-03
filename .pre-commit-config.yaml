@@ -16,7 +16,7 @@ repos:
       - id: blacken-docs
         additional_dependencies: [black==23.1.0]
 
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
+  - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: "v0.0.270"
     hooks:
       - id: ruff
