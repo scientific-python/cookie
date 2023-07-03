@@ -422,20 +422,16 @@ procedure, so you should have at least one CI run that does not include the `-e`
 The files that go into the SDist are controlled by [MANIFEST.in][], which
 generally should be specified. If you use `setuptools_scm`, the [default should
 be all of git][setuptools_scm file]; if you do not, the default is a few common
-files, like any `.py` files and standard tooling. Here is a useful default for
-complete control over a src structure, though be sure to update it to include
-any files that need to be included:
+files, like any `.py` files and standard tooling. Here is a useful default,
+though be sure to update it to include any files that need to be included:
 
 ```
-prune **
 graft src
 graft tests
 
 include LICENSE README.md pyproject.toml setup.py setup.cfg
-global-exclude __pycache__ *.py[cod] .*
+global-exclude __pycache__ *.py[cod] .venv
 ```
-
-Note that Scikit-build currently may have issues with MANIFEST.in.
 
 ## Command line
 
