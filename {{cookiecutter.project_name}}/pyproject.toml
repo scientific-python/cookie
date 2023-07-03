@@ -284,6 +284,9 @@ extend-ignore = [
   "PLR",    # Design related pylint codes
   "E501",   # Line too long
 ]
+{%- if cookiecutter.backend in ["setuptools", "pybind11", "poetry"] %}
+target-version = "py38"
+{%- endif %}
 typing-modules = ["{{ cookiecutter.__project_slug }}._compat.typing"]
 src = ["src"]
 unfixable = [
