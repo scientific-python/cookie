@@ -284,7 +284,6 @@ extend-ignore = [
   "PLR",    # Design related pylint codes
   "E501",   # Line too long
 ]
-target-version = "py38"
 typing-modules = ["{{ cookiecutter.__project_slug }}._compat.typing"]
 src = ["src"]
 unfixable = [
