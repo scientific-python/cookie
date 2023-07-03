@@ -11,15 +11,15 @@ variables:
 cache:
   paths:
     - .cache/pip
-    - venv/
+    - .venv/
 
-image: python:3.7-buster
+image: python:3.8-buster
 before_script:
   # want to set up a virtualenv to cache
   - apt-get install -y --no-install-recommends git
   - python -V
-  - python -m venv venv
-  - source venv/bin/activate
+  - python -m venv .venv
+  - source .venv/bin/activate
   - python -m pip install -U pip pipx
   - python -m pipx ensurepath
   - python -m pip freeze
@@ -45,7 +45,7 @@ tests:
     - python -m pytest -ra --cov={{ cookiecutter.project_name }}
   parallel:
     matrix:
-      - IMAGE: ['python:3.7-buster', 'python:3.10-buster']
+      - IMAGE: ['python:3.8-buster', 'python:3.11-buster']
 
 {%- if not cookiecutter.__compiled %}
 package:
@@ -83,8 +83,8 @@ make_wheels:
       entrypoint: ["env", "-u", "DOCKER_HOST"]
       command: ["dockerd-entrypoint.sh"]
   matrix:
-    - CIBW_BUILD: ['cp36-*', 'cp37-*', 'cp38-*', 'cp39-*', 'cp310-*']
-      CIBW_PLATFORM: ['linux', 'windows'] # 'macos' not supported by CIBW on GitLab CI
+    - CIBW_BUILD: ['cp38-*', 'cp39-*', 'cp310-*', 'cp311-*', 'cp312-*']
+      CIBW_PLATFORM: ['linux', 'windows']  # 'macos' not supported by CIBW on GitLab CI
   variables:
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
@@ -92,6 +92,7 @@ make_wheels:
     DOCKER_TLS_CERTDIR: ""
     CIBW_ARCHS_LINUX: x86_64
     CIBW_ARCHS_MACOS: x86_64
+    CIBW_ALLOW_PRERELEASES: "1"
   script:
     - curl -sSL https://get.docker.com/ | sh
     - python -m pip install cibuildwheel
