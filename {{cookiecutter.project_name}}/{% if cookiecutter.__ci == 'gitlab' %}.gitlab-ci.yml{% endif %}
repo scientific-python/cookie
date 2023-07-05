@@ -53,7 +53,7 @@ pre-commit-autoupdate:
       allow_failure: true
   script:
     - python -m pip install pre-commit
-    - .ci/pre-commit-update.sh
+    - .github/pre-commit-update.sh
   cache:
     key:
       files:
