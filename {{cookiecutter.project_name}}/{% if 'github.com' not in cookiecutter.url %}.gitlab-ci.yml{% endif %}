@@ -1,4 +1,5 @@
 stages:
+  - autoupdate
   - check
   - test
   - build
@@ -26,19 +27,52 @@ before_script:
 
 pre-commit:
   stage: check
+  variables:
+    PRE_COMMIT_HOME: "$CI_PROJECT_DIR/.cache/pre-commit"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
   script:
     - python -m pip install pre-commit
-    - pre-commit run --all-files --hook-stage manual
+    - pre-commit run --hook-stage manual --all-files
+  cache:
+    key:
+      files:
+        - .pre-commit-config.yaml
+    paths:
+      - .cache/pre-commit
+
+pre-commit-autoupdate:
+  stage: autoupdate
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if:
+        $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+      # manual jobs need allow_failure: https://gitlab.com/gitlab-org/gitlab/-/issues/233876
+      allow_failure: true
+  script:
+    - python -m pip install pre-commit
+    - ci/pre-commit-update.sh
+  cache:
+    key:
+      files:
+        - .pre-commit-config.yaml
+    paths:
+      - .cache/pre-commit
 
 lint:
   stage: check
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
   script:
     - pipx run nox -s pylint
-
 
 tests:
   stage: test
   image: $IMAGE
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
   script:
     - python -V
     - python -m pip install .[test]
@@ -50,6 +84,8 @@ tests:
 {%- if not cookiecutter.__compiled %}
 package:
   stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
   script:
     - pipx run build
     {%- if cookiecutter.project_type != "trampolim" %}
@@ -63,6 +99,8 @@ package:
 {%- else %}
 make_sdist:
   stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
   script:
     - pipx run build --sdist
     {%- if cookiecutter.project_type != "trampolim" %}
@@ -75,6 +113,8 @@ make_sdist:
 
 make_wheels:
   stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
   # make a docker daemon available for cibuildwheel to use
   tags:
     - docker-privileged
@@ -117,7 +157,8 @@ make_wheels:
 deploy_staging:
   extends: .deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if:
+        $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
   variables:
     TWINE_REPOSITORY: testpypi
     TWINE_USERNAME: __token__
