@@ -18,8 +18,8 @@ templates for Python packages?
 - Twelve different backends to choose from for building packages.
 - Template generation tested in GitHub Actions using nox.
 - Supports generation with [copier][], [cookiecutter][], and [cruft][].
-- Supports GitHub Actions if targeting `github.com` (the default), and GitLab CI
-  otherwise.
+- Supports GitHub Actions if targeting a `github.com` url (the default), and adds
+  experimental GitLab CI support otherwise.
 - Includes several compiled backends using [pybind11][], with wheels produced
   for all platforms using [cibuildwheel][].
 - Provides [`sp-repo-review`][pypi-link] to evaluate existing repos against the
