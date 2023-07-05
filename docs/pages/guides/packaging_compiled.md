@@ -84,14 +84,14 @@ options in `tool.*` settings.
 <!-- [[[cog
 from cog_helpers import render_cookie
 with render_cookie(backend="skbuild") as skbuild:
-    skbuild_cmakelists_txt = skbuild.joinpath("CMakeLists.txt").read_text(encoding="utf-8")
-    skbuild_src_main_cpp = skbuild.joinpath("src/main.cpp").read_text(encoding="utf-8")
+    skbuild_cmakelists_txt = skbuild.joinpath("CMakeLists.txt").read_text(encoding="utf-8").strip()
+    skbuild_src_main_cpp = skbuild.joinpath("src/main.cpp").read_text(encoding="utf-8").strip()
 with render_cookie(backend="mesonpy") as mesonpy:
-    mesonpy_meson_build = mesonpy.joinpath("meson.build").read_text(encoding="utf-8")
-    mesonpy_src_main_cpp = mesonpy.joinpath("src/main.cpp").read_text(encoding="utf-8")
+    mesonpy_meson_build = mesonpy.joinpath("meson.build").read_text(encoding="utf-8").strip()
+    mesonpy_src_main_cpp = mesonpy.joinpath("src/main.cpp").read_text(encoding="utf-8").strip()
 with render_cookie(backend="maturin") as maturin:
-    maturin_cargo_toml = maturin.joinpath("Cargo.toml").read_text(encoding="utf-8")
-    maturin_src_lib_rs = maturin.joinpath("src/lib.rs").read_text(encoding="utf-8")
+    maturin_cargo_toml = maturin.joinpath("Cargo.toml").read_text(encoding="utf-8").strip()
+    maturin_src_lib_rs = maturin.joinpath("src/lib.rs").read_text(encoding="utf-8").strip()
 ]]] -->
 <!-- [[[end]]] -->
 
@@ -109,16 +109,13 @@ print("```")
 ]]] -->
 ```cmake
 cmake_minimum_required(VERSION 3.15...3.26)
-project(
-  ${SKBUILD_PROJECT_NAME}
-  VERSION ${SKBUILD_PROJECT_VERSION}
-  LANGUAGES CXX)
+project(${SKBUILD_PROJECT_NAME} LANGUAGES CXX)
 
+set(PYBIND11_FINDPYTHON ON)
 find_package(pybind11 CONFIG REQUIRED)
 
 pybind11_add_module(_core MODULE src/main.cpp)
 install(TARGETS _core DESTINATION ${SKBUILD_PROJECT_NAME})
-
 ```
 <!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
@@ -168,7 +165,6 @@ py.extension_module('_core',
         'cpp_rtti=true',
     ]
 )
-
 ```
 <!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
@@ -205,7 +201,6 @@ version = "0.18.1"
 # "extension-module" tells pyo3 we want to build an extension module (skips linking against libpython.so)
 # "abi3-py38" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.8
 features = ["extension-module", "abi3-py38"]
-
 ```
 <!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
@@ -253,7 +248,6 @@ PYBIND11_MODULE(_core, m) {
       Some other explanation about the subtract function.
   )pbdoc");
 }
-
 ```
 <!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
@@ -297,7 +291,6 @@ PYBIND11_MODULE(_core, m) {
       Some other explanation about the subtract function.
   )pbdoc");
 }
-
 ```
 <!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
@@ -334,7 +327,6 @@ fn _core(_py: Python, m: &PyModule) -> PyResult<()> {
 
     Ok(())
 }
-
 ```
 <!-- [[[end]]] -->
 <!-- prettier-ignore-end -->

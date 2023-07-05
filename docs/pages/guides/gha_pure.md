@@ -101,34 +101,29 @@ and then use `python -m build` or `pyproject-build`, but it's better to use
 `pipx` to install and run python applications. Pipx is provided by default by
 GitHub Actions (in fact, they use it to setup other applications).
 
-{% details Classic SDist builds %}
-
-If you don't have a pyproject.toml, you might need to use the raw `setup.py`
-commands. This is the classic way to do things, though you should consider
-direct usage of setup.py to be an implementation detail, and setup.py is not
-even required in modern packages.
-
-You must install SDist requirements by hand since `python setup.py sdist` does
-not get the benefits of having pip install things. If you have any special
-requirements in your `pyproject.toml` (and still don't want to use `build`),
-you'll need to list them. This is special just for the SDist, not for making
-wheels (which should be done by the PEP 517/518 process for you because you will
-use `build` or `pip`).
-
-To build the wheel, you can use `python -m pip wheel . -w wheelhouse`. Unlike
-build, this is a wheelhouse, not the output wheel; any wheels it makes during
-the process will be put here, not just the one you wanted to upload. Be sure to
-use something like `wheelhouse/my_package*.whl` when you pick your items from
-this folder so as not to pick a random dependency that didn't have a binary
-wheel already. Or just use PyPA/build.
-
-{% enddetails %}
-
 We upload the artifact just to make it available via the GitHub PR/Checks API.
 You can download a file to test locally if you want without making a release.
 
 We also add an optional check using twine for the metadata (it will be tested
 later in the upload action for the release job, as well).
+
+{: .highlight-title }
+
+> All-in-one action
+>
+> There is an
+> [all-in-one action](https://github.com/hynek/build-and-inspect-python-package)
+> that does all the work for you for a pure Python package, including extra
+> pre-upload checks & nice GitHub summaries.
+>
+> ```yaml
+> steps:
+>   - uses: actions/checkout@v3
+>   - uses: hynek/build-and-inspect-python-package@v1
+> ```
+>
+> The artifact it produces is named `Packages`, so that's what you need to use
+> later to publish.
 
 And then, you need a release job:
 
@@ -218,19 +213,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
         with:
           fetch-depth: 0
 
-      - name: Build SDist and wheel
-        run: pipx run build
-
-      - uses: actions/upload-artifact@v3
-        with:
-          path: dist/*
-
-      - name: Check metadata
-        run: pipx run twine check dist/*
+      - uses: hynek/build-and-inspect-python-package@v1
 
   publish:
     needs: [dist]
@@ -272,19 +258,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
         with:
           fetch-depth: 0
 
-      - name: Build SDist and wheel
-        run: pipx run build
-
-      - uses: actions/upload-artifact@v3
-        with:
-          path: dist/*
-
-      - name: Check metadata
-        run: pipx run twine check dist/*
+      - uses: hynek/build-and-inspect-python-package@v1
 
   publish:
     needs: [dist]
@@ -294,7 +271,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: artifact
+          name: Packages
           path: dist
 
       - uses: pypa/gh-action-pypi-publish@release/v1
