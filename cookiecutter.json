@@ -24,5 +24,6 @@
   "__year": "{% now 'utc', '%Y' %}",
   "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
   "__type": "{{ 'compiled' if cookiecutter.backend in ['pybind11', 'skbuild', 'mesonpy', 'maturin'] else 'pure' }}",
-  "__answers": ""
+  "__answers": "",
+  "__ci": "{{ 'github' if 'github.com' in cookiecutter.url else 'gitlab' }}"
 }

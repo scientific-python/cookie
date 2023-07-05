@@ -1,0 +1,174 @@
+stages:
+  - autoupdate
+  - check
+  - test
+  - build
+  - deploy
+
+variables:
+  # see https://docs.gitlab.com/ee/ci/caching/#cache-python-dependencies
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+    - .venv/
+
+image: python:3.8-buster
+before_script:
+  # want to set up a virtualenv to cache
+  - apt-get install -y --no-install-recommends git
+  - python -V
+  - python -m venv .venv
+  - source .venv/bin/activate
+  - python -m pip install -U pip pipx
+  - python -m pipx ensurepath
+  - python -m pip freeze
+
+pre-commit:
+  stage: check
+  variables:
+    PRE_COMMIT_HOME: "$CI_PROJECT_DIR/.cache/pre-commit"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+  script:
+    - python -m pip install pre-commit
+    - pre-commit run --hook-stage manual --all-files
+  cache:
+    key:
+      files:
+        - .pre-commit-config.yaml
+    paths:
+      - .cache/pre-commit
+
+pre-commit-autoupdate:
+  stage: autoupdate
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if:
+        $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+      # manual jobs need allow_failure: https://gitlab.com/gitlab-org/gitlab/-/issues/233876
+      allow_failure: true
+  script:
+    - python -m pip install pre-commit
+    - .github/pre-commit-update.sh
+  cache:
+    key:
+      files:
+        - .pre-commit-config.yaml
+    paths:
+      - .cache/pre-commit
+
+lint:
+  stage: check
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+  script:
+    - pipx run nox -s pylint
+
+tests:
+  stage: test
+  image: $IMAGE
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+  script:
+    - python -V
+    - python -m pip install .[test]
+    - python -m pytest -ra --cov={{ cookiecutter.project_name }}
+  parallel:
+    matrix:
+      - IMAGE: ['python:3.8-buster', 'python:3.11-buster']
+
+{%- if not cookiecutter.__compiled %}
+package:
+  stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+  script:
+    - pipx run build
+    {%- if cookiecutter.project_type != "trampolim" %}
+    - pipx run twine check dist/*
+    {%- endif %}
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 day
+
+{%- else %}
+make_sdist:
+  stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+  script:
+    - pipx run build --sdist
+    {%- if cookiecutter.project_type != "trampolim" %}
+    - pipx run twine check dist/*
+    {%- endif %}
+  artifacts:
+    paths:
+      - dist/*.tar.gz
+    expire_in: 1 day
+
+make_wheels:
+  stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+  # make a docker daemon available for cibuildwheel to use
+  tags:
+    - docker-privileged
+  services:
+    - name: docker:dind
+      entrypoint: ["env", "-u", "DOCKER_HOST"]
+      command: ["dockerd-entrypoint.sh"]
+  matrix:
+    - CIBW_BUILD: ['cp38-*', 'cp39-*', 'cp310-*', 'cp311-*', 'cp312-*']
+      CIBW_PLATFORM: ['linux', 'windows']  # 'macos' not supported by CIBW on GitLab CI
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+    # See https://github.com/docker-library/docker/pull/166
+    DOCKER_TLS_CERTDIR: ""
+    CIBW_ARCHS_LINUX: x86_64
+    CIBW_ARCHS_MACOS: x86_64
+    CIBW_ALLOW_PRERELEASES: "1"
+  script:
+    - curl -sSL https://get.docker.com/ | sh
+    - python -m pip install cibuildwheel
+    - cibuildwheel --output-dir dist
+  artifacts:
+    paths:
+      - dist/*.whl
+    expire_in: 1 day
+
+.deploy:
+  stage: deploy
+  dependencies:
+    {%- if not cookiecutter.__compiled %}
+    - package
+    {%- else %}
+    - make_sdist
+    - make_wheels
+    {%- endif %}
+  script:
+    - pipx run twine upload --verbose dist/*whl dist/*gz
+
+deploy_staging:
+  extends: .deploy
+  rules:
+    - if:
+        $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+  variables:
+    TWINE_REPOSITORY: testpypi
+    TWINE_USERNAME: __token__
+    TWINE_PASSWORD: $TESTPYPI_TOKEN
+
+deploy_production:
+  extends: .deploy
+  only:
+    - tags
+  variables:
+    TWINE_REPOSITORY: pypi
+    TWINE_USERNAME: __token__
+    TWINE_PASSWORD: $PYPI_TOKEN
