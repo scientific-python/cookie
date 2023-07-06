@@ -18,14 +18,15 @@ for your `CONTRIBUTING.md`, and at least glance through other sections.
 Following that, there are recommendations for [style][], intended to promote
 good practices and to ensure continuity across the packages. There is a
 [dedicated page for static type checking with MyPy][mypy]. There is then a guide
-on [simple packaging][] or [classic packaging][], which should help in ensuring
-a consistent developer and user experience when working with distribution.
+on [simple packaging][], [compiled packaging][], or even [classic packaging][],
+which should help in ensuring a consistent developer and user experience when
+working with distribution.
 
 A section on CI follows, with a [general setup guide][gha_basic], and then two
 choices for using CI to distribute your package, on for [pure Python][gha_pure],
 and one for [compiled extensions][gha_wheels]. You can read about setting up
-good tests on the [pytest page][pytest]. There's also a page on setting up
-[docs][], as well.
+good tests on the [pytest page][pytest], with [coverage][]. There's also a page
+on setting up [docs][], as well.
 
 {: .highlight-title }
 
@@ -52,11 +53,14 @@ good tests on the [pytest page][pytest]. There's also a page on setting up
 [mypy]: {% link pages/guides/mypy.md %}
 [docs]: {% link pages/guides/docs.md %}
 [simple packaging]: {% link pages/guides/packaging_simple.md %}
+[compiled packaging]: {% link pages/guides/packaging_compiled.md %}
 [classic packaging]: {% link pages/guides/packaging_classic.md %}
+[coverage]: {% link pages/guides/coverage.md %}
 [gha_basic]: {% link pages/guides/gha_basic.md %}
 [gha_pure]: {% link pages/guides/gha_pure.md %}
 [gha_wheels]: {% link pages/guides/gha_wheels.md %}
 [pytest]: {% link pages/guides/pytest.md %}
+[task runners]: {% link pages/guides/tasks.md  %}
 [sp-repo-review]: {% link pages/guides/repo_review.md %}
 
 [cookiecutter]: https://cookiecutter.readthedocs.io
