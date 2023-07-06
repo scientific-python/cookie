@@ -20,8 +20,7 @@
     "mesonpy",
     "maturin"
   ],
-  "_extensions": ["jinja2_time.TimeExtension"],
-  "__year": "{% now 'utc', '%Y' %}",
+  "__year": "2023",
   "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
   "__type": "{{ 'compiled' if cookiecutter.backend in ['pybind11', 'skbuild', 'mesonpy', 'maturin'] else 'pure' }}",
   "__answers": "",
