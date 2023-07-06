@@ -103,6 +103,8 @@ below, and skip installation). Then run:
 cookiecutter gh:scientific-python/cookie
 ```
 
+If you are using cookiecutter 2.2+, you will get descriptions for the options.
+
 #### To use (classic cruft version)
 
 You can also use [cruft][], which adds the ability update to cookiecutter
