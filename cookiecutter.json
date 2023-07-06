@@ -24,5 +24,15 @@
   "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
   "__type": "{{ 'compiled' if cookiecutter.backend in ['pybind11', 'skbuild', 'mesonpy', 'maturin'] else 'pure' }}",
   "__answers": "",
-  "__ci": "{{ 'github' if 'github.com' in cookiecutter.url else 'gitlab' }}"
+  "__ci": "{{ 'github' if 'github.com' in cookiecutter.url else 'gitlab' }}",
+  "__prompts__": {
+    "project_name": "The name of your project",
+    "org": "The name of your (GitHub?) org",
+    "url": "The url to your GitHub or GitLab repository",
+    "full_name": "Your name",
+    "email": "Your email",
+    "project_short_description": "A short description of your project",
+    "license": "Select a license",
+    "backend": "Choose a build backend"
+  }
 }

@@ -89,5 +89,5 @@ repos:
         name: Cog the pages
         language: python
         entry: cog -P -r -I ./helpers
-        files: "^docs/pages/guides/(packaging_compiled|docs).md"
+        files: "^docs/pages/guides/(packaging_compiled|docs).md|^copier.yml"
         additional_dependencies: [cogapp, cookiecutter]
