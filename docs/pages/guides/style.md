@@ -141,7 +141,7 @@ markdown and restructured text. Note that because black is in
 
 ```yaml
 - repo: https://github.com/asottile/blacken-docs
-  rev: "1.14.0"
+  rev: "1.15.0"
   hooks:
     - id: blacken-docs
       additional_dependencies: [black==23.3.0]
@@ -162,7 +162,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.0.276"
+  rev: "v0.0.277"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -435,7 +435,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.8.0"
+  rev: "v3.9.0"
   hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
@@ -714,7 +714,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier
-  rev: "v2.7.1"
+  rev: "v3.0.0"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]

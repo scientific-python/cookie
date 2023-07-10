@@ -84,7 +84,9 @@ details {
   padding: 4px;
   margin-bottom: 1.5rem;
   border-radius: 4px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.12),
+    0 3px 10px rgba(0, 0, 0, 0.08);
   @media (prefers-color-scheme: dark) {
     box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
     background-color: black;
@@ -117,7 +119,9 @@ blockquote {
   padding: 4px 1em;
   margin-bottom: 1.5rem;
   border-radius: 4px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.12),
+    0 3px 10px rgba(0, 0, 0, 0.08);
   @media (prefers-color-scheme: dark) {
     box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
     background-color: black;
