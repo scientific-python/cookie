@@ -59,6 +59,16 @@ This guide also does not cover version control, but it is essential to have a
 basic facility with git to use these tools successfully. We recommend the
 [Software Carpentry lesson on git](https://swcarpentry.github.io/git-novice/).
 
+{: .note-title }
+
+> History
+>
+> This guide (along with cookie & repo-review) started in [Scikit-HEP][]
+> in 2020. It was merged with the [NSLS-II][] guidelines and moved to Scientific
+> Python at the [2023 Scientific Python Developer Summit][2023 spdev], along
+> with many updates. Improved support for compiled components supported in part
+> by NSF cooperative agreement [OAC-2209877][].
+
 <!-- prettier-ignore-start -->
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 [modern packaging]:         {% link pages/guides/packaging_simple.md %}
@@ -72,4 +82,8 @@ basic facility with git to use these tools successfully. We recommend the
 [copier]:                   https://copier.readthedocs.io
 [cookiecutter]:             https://cookiecutter.readthedocs.io
 [cruft]:                    https://cruft.github.io/cruft
+[2023 spdev]:               https://scientific-python.org/summits/developer/2023
+[scikit-hep]:               https://scikit-hep.org
+[OAC-2209877]:              https://www.nsf.gov/awardsearch/showAward?AWD_ID=2209877&HistoricalAwards=false
+[nsls-ii]:                  https://nsls-ii.github.io
 <!-- prettier-ignore-end -->
