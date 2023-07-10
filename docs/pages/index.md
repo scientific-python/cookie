@@ -19,8 +19,8 @@ maintainable, reusable, and shareable form? Start at the
 **Learn recommended tools and best practices.** [Topical guides]({% link
 pages/guides/index.md %}) provide task-based instruction on topics that scientists
 and research software engineers may encounter as their projects evolve and grow.
-This covers [modern packaging][], [style checking][], [testing][], [documentation][],
-[static typing][], [CI][], and much more!
+This covers modern packaging([simple][] or [compiled][]), [style checking][], [testing][],
+[documentation][], [static typing][], [CI][], and much more!
 
 {: .highlight-title }
 
@@ -61,7 +61,8 @@ basic facility with git to use these tools successfully. We recommend the
 
 <!-- prettier-ignore-start -->
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
-[modern packaging]:         {% link pages/guides/packaging_simple.md %}
+[simple]:                   {% link pages/guides/packaging_simple.md %}
+[compiled]:                 {% link pages/guides/packaging_compiled.md %}
 [style checking]:           {% link pages/guides/style.md %}
 [testing]:                  {% link pages/guides/pytest.md %}
 [documentation]:            {% link pages/guides/docs.md %}
