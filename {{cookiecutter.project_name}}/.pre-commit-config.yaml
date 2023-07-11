@@ -8,6 +8,12 @@ repos:
     hooks:
       - id: black-jupyter
 
+  - repo: https://github.com/asottile/blacken-docs
+    rev: "1.15.0"
+    hooks:
+      - id: blacken-docs
+        additional_dependencies: [black==23.7.0]
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: "v4.4.0"
     hooks:
@@ -37,12 +43,6 @@ repos:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json]
         args: [--prose-wrap=always]
-
-  - repo: https://github.com/asottile/blacken-docs
-    rev: "1.15.0"
-    hooks:
-      - id: blacken-docs
-        additional_dependencies: [black==23.3.0]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: "v0.0.277"

@@ -144,7 +144,7 @@ markdown and restructured text. Note that because black is in
   rev: "1.15.0"
   hooks:
     - id: blacken-docs
-      additional_dependencies: [black==23.3.0]
+      additional_dependencies: [black==23.7.0]
 ```
 
 {% enddetails %}
