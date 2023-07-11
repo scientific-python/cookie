@@ -106,7 +106,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black
-  rev: "23.3.0"
+  rev: "23.7.0"
   hooks:
     - id: black
 ```
@@ -144,7 +144,7 @@ markdown and restructured text. Note that because black is in
   rev: "1.15.0"
   hooks:
     - id: blacken-docs
-      additional_dependencies: [black==23.3.0]
+      additional_dependencies: [black==23.7.0]
 ```
 
 {% enddetails %}

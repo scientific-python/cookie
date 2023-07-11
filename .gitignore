@@ -152,3 +152,6 @@ package.json
 
 # readthedocs
 _readthedocs
+
+# Default cookiecutter output
+/package

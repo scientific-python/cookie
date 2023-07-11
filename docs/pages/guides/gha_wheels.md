@@ -121,7 +121,7 @@ build_wheels:
         fetch-depth: 0
         submodules: true
 
-    - uses: pypa/cibuildwheel@v2.13.1
+    - uses: pypa/cibuildwheel@v2.14.0
 
     - name: Upload wheels
       uses: actions/upload-artifact@v3
