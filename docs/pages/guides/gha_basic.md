@@ -653,7 +653,7 @@ this action later; specifically, may want to use
 
 ```yaml
 - name: Upload artifact
-  uses: actions/upload-pages-artifact@v1
+  uses: actions/upload-pages-artifact@v2
 ```
 
 This actions defaults to uploading `_site`, but you can give any `with: path:`
