@@ -3,7 +3,6 @@ email: guide@scientific-python.org
 description: >-
   This guide is maintained by the scientific Python community for the benefit of
   fellow scientists and research software engineers.
-url: "https://learn.scientific-python.org"
 github_username: scientific-python
 source: docs
 
@@ -23,7 +22,7 @@ search_enabled: true
 # Aux links for the upper right navigation
 aux_links:
   "Scientific Python Cookie":
-    - "//github.com/scientific-python/cookie"
+    - "https://github.com/scientific-python/cookie"
 
 gh_edit_link: true
 gh_edit_link_text: "View source for this page on GitHub."

@@ -205,8 +205,9 @@ shown on the summary page.
 You can output annotations, as well; these show up inline on the code in the PR.
 This can be done by
 [setting special double-colon outputs](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-error-message),
-like `echo "::error file=app.js,line=1::Missing semicolon"`. See []() for a
-plugin to do this with pytest.
+like `echo "::error file=app.js,line=1::Missing semicolon"`. See
+[pytest-github-actions-annotate-failures](https://github.com/pytest-dev/pytest-github-actions-annotate-failures)
+for a plugin to do this with pytest.
 
 You can also do this
 [by supplying matchers](https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md),
@@ -274,7 +275,7 @@ There are also a few useful tools installed which can really simplify your
 workflow or adding custom actions. This includes system package managers (like
 brew, chocolaty, NuGet, Vcpkg, etc), as well as a fantastic cross platform one:
 
-- [pipx](https://github.com/pypy/pipx): This is pre-installed on all runners
+- [pipx](https://github.com/pypa/pipx): This is pre-installed on all runners
   (GitHub uses to set up other things), and is kept up to date. It enables you
   to use any PyPI application in a single line with `pipx run <app>`.
 

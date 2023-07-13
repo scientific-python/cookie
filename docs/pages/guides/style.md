@@ -441,7 +441,7 @@ when clearly better (please always use them, they are faster) if you set
       args: ["--py38-plus"]
 ```
 
-[pyupgrade]: https://github.com/asottile/pyupgrade:
+[pyupgrade]: https://github.com/asottile/pyupgrade
 
 {: .note }
 
