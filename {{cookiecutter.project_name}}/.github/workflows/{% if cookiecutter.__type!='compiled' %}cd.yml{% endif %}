@@ -1,0 +1,71 @@
+name: CD
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - master
+      - main
+      - develop
+  release:
+    types:
+      - published
+
+concurrency:
+  group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
+  cancel-in-progress: true
+
+env:
+  FORCE_COLOR: 3
+
+jobs:
+  dist:
+    needs: [pre-commit]
+    name: Distribution build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Build sdist and wheel
+        run: pipx run build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: dist
+
+      {%- if cookiecutter.backend != "trampolim" %}
+
+      - name: Check products
+        run: pipx run twine check dist/*
+
+      {%- endif %}
+
+  publish:
+    needs: [dist]
+    name: Publish to PyPI
+    environment: pypi
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: artifact
+          path: dist
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        if: github.event_name == 'release' && github.event.action == 'published'
+        with:
+          # Remember to tell (test-)pypi about this repo before publishing
+          # Remove this line to publish to PyPI
+          repository-url: https://test.pypi.org/legacy/
+          {%- if cookiecutter.backend == "trampolim" %}
+          # Check not supported currently by twine + trampolim
+          verify-metadata: false
+          {%- endif %}
