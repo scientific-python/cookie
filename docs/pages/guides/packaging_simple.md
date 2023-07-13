@@ -169,7 +169,7 @@ This is tool specific.
 - [Flit info here](https://flit.readthedocs.io/en/latest/pyproject_toml.html#sdist-section).
   Flit requires manual inclusion/exclusion in many cases, like using a dirty
   working directory.
-- [PDM info here](https://pdm.fming.dev/pyproject/tool-pdm/#include-and-exclude-package-files).
+- [PDM info here](https://pdm-backend.fming.dev/build_config/#include-or-exclude-files).
 - Setuptools still uses `MANIFEST.in`.
 
 {: .warning }

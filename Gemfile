@@ -28,6 +28,11 @@ end
 group :development do
   # Verify good coding practices in Ruby files
   gem 'rubocop', '~>1.52', require: false
+
+  # Check links. Use:
+  #   bundle exec jekyll build
+  #   bundle exec htmlproofer --assume_extension '.html' ./_site
+  gem 'html-proofer'
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
