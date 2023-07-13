@@ -87,9 +87,9 @@ class RF1xx(Ruff):
     @classmethod
     def check(cls: type[RuffMixin], pyproject: dict[str, Any]) -> bool:
         """
-        Must select the {cls.name} `{cls.code}` checks. Recommended:
+        Must select the {self.name} `{self.code}` checks. Recommended:
         ```toml
-        select = ["{cls.code}"]  # {cls.name}
+        select = ["{self.code}"]  # {self.name}
         ```
         """
 
