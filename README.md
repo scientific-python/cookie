@@ -74,7 +74,7 @@ Install `copier` and `copier-templates-extensions`. Using [pipx][], that's:
 
 ```bash
 pipx install copier
-pipx inject copier copier-templates-extensions "pydandic<2"
+pipx inject copier copier-templates-extensions "pydantic<2"
 ```
 
 (Copier<=8.0.0 and pydantic 2 are incompatible.) Now, run copier to generate
