@@ -162,7 +162,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.0.277"
+  rev: "v0.0.278"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
