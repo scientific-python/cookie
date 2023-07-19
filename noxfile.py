@@ -258,10 +258,7 @@ def nox_session(session, backend):
 
 @nox.session()
 def compare_copier(session):
-    # Pydantic 2.0 breaks copier <= 8.0.0
-    session.install(
-        "cookiecutter", "copier", "copier-templates-extensions", "pydantic<2"
-    )
+    session.install("cookiecutter", "copier", "copier-templates-extensions")
 
     tmp_dir = session.create_tmp()
     session.cd(tmp_dir)

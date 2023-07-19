@@ -74,21 +74,21 @@ Install `copier` and `copier-templates-extensions`. Using [pipx][], that's:
 
 ```bash
 pipx install copier
-pipx inject copier copier-templates-extensions "pydantic<2"
+pipx inject copier copier-templates-extensions
 ```
 
-(Copier<=8.0.0 and pydantic 2 are incompatible.) Now, run copier to generate
-your project:
+Now, run copier to generate your project:
 
 ```bash
-copier copy gh:scientific-python/cookie <pkg> --UNSAFE
+copier copy gh:scientific-python/cookie <pkg> --trust
 ```
 
-(`<pkg>` is the path to put the new project.)
+(`<pkg>` is the path to put the new project. If copier is old, use `--UNSAFE`
+instead of `--trust`)
 
-You will get a much, much nicer CLI experience with helpful descriptions and
-answer validation. You will also get a `.copier-answers.yml` file, which will
-allow you to perform updates in the future.
+You will get a nicer CLI experience with answer validation. You will also get a
+`.copier-answers.yml` file, which will allow you to perform updates in the
+future.
 
 > Note: Add `--vcs-ref=HEAD` to get the latest version instead of the last
 > tagged version; HEAD always passes tests (and is what cookiecutter uses).
@@ -103,7 +103,8 @@ below, and skip installation). Then run:
 cookiecutter gh:scientific-python/cookie
 ```
 
-If you are using cookiecutter 2.2+, you will get descriptions for the options.
+If you are using cookiecutter 2.2.3+, you will get nice descriptions for the
+options like copier!
 
 #### To use (classic cruft version)
 
