@@ -53,7 +53,7 @@ Python packages.
 
 This guide does _not_ cover the basics of Python itself or the scientific Python
 libraries; it focuses on making or maintaining a package. We recommend the
-[SciPy Lecture Notes](https://scipy-lectures.org/) if you want info.
+[Scientific Python Lectures](https://lectures.scientific-python.org/) if you want info.
 
 This guide also does not cover version control, but it is essential to have a
 basic facility with git to use these tools successfully. We recommend the
