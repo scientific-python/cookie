@@ -99,7 +99,8 @@ with render_cookie(backend="maturin") as maturin:
 
 {% tabs %} {% tab skbc Scikit-build-core %}
 
-Example `CMakeLists.txt` file:
+Example `CMakeLists.txt` file (using pybind11, so include `pybind11` in
+`build-system.requires` too):
 
 <!-- prettier-ignore-start -->
 <!-- [[[cog
@@ -122,7 +123,8 @@ install(TARGETS _core DESTINATION ${SKBUILD_PROJECT_NAME})
 
 {% endtab %} {% tab meson Meson-python %}
 
-Example `meson.build` file:
+Example `meson.build` file (using pybind11, so include `pybind11` in
+`build-system.requires` too):
 
 <!-- prettier-ignore-start -->
 <!-- [[[cog
@@ -170,6 +172,8 @@ py.extension_module('_core',
 <!-- prettier-ignore-end -->
 
 {% endtab %} {% tab maturin Maturin %}
+
+Example `Cargo.toml` file:
 
 <!-- prettier-ignore-start -->
 <!-- [[[cog

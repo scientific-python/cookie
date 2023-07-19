@@ -27,7 +27,7 @@ org:
 url:
   type: str
   help: The url to your GitHub or GitLab repository
-  #[[[end]]]
+  # [[[end]]]
   default: "https://github.com/{{ org }}/{{ project_name }}"
 
 # [[[cog print(cc.full_name.yaml()) ]]]
@@ -44,7 +44,7 @@ full_name:
 email:
   type: str
   help: Your email
-  #[[[end]]]
+  # [[[end]]]
   placeholder: me@email.com
   validator: >-
     {% if not email %} You must provide an email (possibly yours) to place in
@@ -54,22 +54,21 @@ email:
 project_short_description:
   type: str
   help: A short description of your project
-  #[[[end]]]
+  # [[[end]]]
   default: A great package.
 
 # [[[cog print(cc.license.yaml()) ]]]
 license:
   help: Select a license
-  #[[[end]]]
   choices:
     - BSD
     - Apache
     - MIT
+  # [[[end]]]
 
 # [[[cog print(cc.backend.yaml()) ]]]
 backend:
   help: Choose a build backend
-  #[[[end]]]
   choices:
     "Hatchling                      - Pure Python (recommended)": hatch
     "Flit-core                      - Pure Python (minimal)": flit
@@ -83,6 +82,7 @@ backend:
     "Scikit-build-core              - Compiled C++ (recommended)": skbuild
     "Meson-python                   - Compiled C++ (also good)": mesonpy
     "Maturin                        - Compiled Rust (recommended)": maturin
+  # [[[end]]]
 
 _templates_suffix: ""
 
