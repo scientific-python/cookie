@@ -30,7 +30,7 @@ build-backend = "setuptools.build_meta"
 requires = ["pybind11", "scikit-build-core"]
 build-backend = "scikit_build_core.build"
 {%- elif cookiecutter.backend == "mesonpy"  %}
-requires = ["pybind11", "meson-python"]
+requires = ["meson-python", "pybind11"]
 build-backend = "mesonpy"
 {%- elif cookiecutter.backend == "poetry" %}
 requires = ["poetry_core>=1.0.0"]
@@ -193,25 +193,50 @@ Changelog = "{{ cookiecutter.url }}/releases"
 
 
 {%- if cookiecutter.backend == "skbuild" %}
+
+
 [tool.scikit-build]
-minimum-version = "0.2"
-build-dir = "build/{cache_tag}"
+minimum-version = "0.4"
+build-dir = "build/{wheel_tag}"
+
 {%- elif cookiecutter.backend == "whey" %}
+
+
 [tool.whey]
 source-dir = "src"
+
 {%- elif cookiecutter.backend == "trampolim" %}
+
+
 [tool.trampolim]
 module-location = "src"
+
 {%- elif cookiecutter.backend == "hatch" %}
+
+
 [tool.hatch]
 version.path = "src/{{ cookiecutter.__project_slug  }}/__init__.py"
 envs.default.dependencies = [
   "pytest",
   "pytest-cov",
 ]
+
 {%- elif cookiecutter.backend == "pdm" %}
+
+
 [tool.pdm.dev-dependencies]
 devtest = ["pytest", "pytest-cov"]
+
+{%- endif %}
+
+
+{%- if cookiecutter.__type == "compiled" %}
+
+
+[tool.cibuildwheel]
+test-command = "pytest {project}/tests"
+test-extras = ["test"]
+test-skip = ["*universal2:arm64"]
 {%- endif %}
 
 
