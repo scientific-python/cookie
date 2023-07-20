@@ -206,7 +206,7 @@ with code_fence("python"):
 @nox.session
 def tests(session: nox.Session) -> None:
     """
-    Run the unit and regular tests. Use --cov to activate coverage.
+    Run the unit and regular tests.
     """
     session.install(".[test]")
     session.run("pytest", *session.posargs)

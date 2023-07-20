@@ -3,22 +3,24 @@ from __future__ import annotations
 import ast
 import contextlib
 import tempfile
+import typing
 from collections.abc import Generator
 from pathlib import Path
 from types import SimpleNamespace
-from typing import Self
+
+if typing.TYPE_CHECKING:
+    from typing import Self
 
 from cookiecutter.main import cookiecutter
 
 DIR = Path(__file__).parent.resolve()
-PKG = DIR.parent
 
 
 @contextlib.contextmanager
 def render_cookie(**context: str) -> Generator[Path, None, None]:
     with tempfile.TemporaryDirectory() as tmpdir:
         cookiecutter(
-            str(PKG),
+            str(DIR.parent),
             no_input=True,
             default_config=True,
             output_dir=tmpdir,
