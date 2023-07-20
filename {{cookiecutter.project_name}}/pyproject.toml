@@ -215,6 +215,14 @@ devtest = ["pytest", "pytest-cov"]
 {%- endif %}
 
 
+{%- if cookiecutter.__type == "compiled" %}
+[tool.cibuildwheel]
+test-command = "pytest {project}/tests"
+test-extras = ["test"]
+test-skip = ["*universal2:arm64"]
+{%- endif %}
+
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
