@@ -272,7 +272,7 @@ with code_fence("python"):
 @nox.session(reuse_venv=True)
 def docs(session: nox.Session) -> None:
     """
-    Build the docs. Pass "--serve" to serve.
+    Build the docs. Pass "--serve" to serve. Pass "-b linkcheck" to check links.
     """
 
     parser = argparse.ArgumentParser()
@@ -285,7 +285,9 @@ def docs(session: nox.Session) -> None:
     if args.builder != "html" and args.serve:
         session.error("Must not specify non-HTML builder with --serve")
 
-    session.install(".[docs]")
+    extra_installs = ["sphinx-autobuild"] if args.serve else []
+
+    session.install("-e.[docs]", *extra_installs)
     session.chdir("docs")
 
     if args.builder == "linkcheck":
@@ -294,29 +296,41 @@ def docs(session: nox.Session) -> None:
         )
         return
 
-    session.run(
-        "sphinx-build",
+    shared_args = (
         "-n",  # nitpicky mode
         "-T",  # full tracebacks
-        "-W",  # Warnings as errors
-        "--keep-going",  # See all errors
-        "-b",
-        args.builder,
+        f"-b={args.builder}",
         ".",
         f"_build/{args.builder}",
         *posargs,
     )
 
     if args.serve:
-        session.log("Launching docs at http://localhost:8000/ - use Ctrl-C to quit")
-        session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
+        session.run("sphinx-autobuild", *shared_args)
+    else:
+        session.run("sphinx-build", "--keep-going", *shared_args)
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
+This is a more complex nox job just because it's taking some options (the
+ability to build and serve instead of just build, and the ability to select the
+builder). The first portion is just setting up argument parsing. Then it does
+some conditional installs based on arguments (sphinx-autobuild is only needed if
+serving). It does an editable install of your package so that you can skip the
+install steps with `-R` and still get updated documentation.
+
+Then there's a dedicated handler for the 'linkcheck' builder, which just checks
+links, and doesn't really produce output. Finally, we collect some useful args,
+and run either the autobuild (for `--serve`) or regular build. We could have
+just added `python -m http.server` pointing at the built documentation, but
+autobuild will rebuild if you change a file while serving.
+
 ## API docs
 
-To build API docs, you need to add the following nox job:
+To build API docs, you need to add the following nox job. It will rerun
+`sphinx-apidoc` to generate the sphinx autodoc pages for each of your public
+modules.
 
 ### noxfile.py additions
 
