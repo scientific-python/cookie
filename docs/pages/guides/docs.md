@@ -36,11 +36,12 @@ Ideally, software documentation should include:
 > it if you are interested.
 
 <!-- [[[cog
-from cog_helpers import render_cookie
+from cog_helpers import code_fence, render_cookie, Matcher
 with render_cookie() as package:
     docs_conf_py = package.joinpath("docs/conf.py").read_text(encoding="utf-8").strip()
     docs_index_md = package.joinpath("docs/index.md").read_text(encoding="utf-8").strip()
     readthedocs_yaml = package.joinpath(".readthedocs.yml").read_text(encoding="utf-8").strip()
+    noxfile = Matcher.from_file(package / "noxfile.py")
 ]]] -->
 <!-- [[[end]]] -->
 
@@ -53,12 +54,11 @@ is our recommended starting point for `conf.py`:
 
 ### conf.py
 
-<!-- prettier-ignore-start -->
 <!-- [[[cog
-print("```python")
-print(docs_conf_py)
-print("```")
+with code_fence("python"):
+    print(docs_conf_py)
 ]]] -->
+<!-- prettier-ignore-start -->
 ```python
 from __future__ import annotations
 
@@ -106,8 +106,8 @@ nitpick_ignore = [
 
 always_document_param_types = True
 ```
-<!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 We start by setting some configuration values, but most notably we are getting
 the package version from the installed version of your package. We are listing
@@ -157,12 +157,11 @@ for more options.
 
 Your `index.md` file can start out like this:
 
-<!-- prettier-ignore-start -->
 <!-- [[[cog
-print("````md")
-print(docs_index_md)
-print("````")
+with code_fence("md", width=4):
+    print(docs_index_md)
 ]]] -->
+<!-- prettier-ignore-start -->
 ````md
 # package
 
@@ -182,8 +181,8 @@ print("````")
 - {ref}`modindex`
 - {ref}`search`
 ````
-<!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 You can put your project name in as the title. The `toctree` directive houses
 your table of contents; you'll list each new page you add inside that directive.
@@ -220,12 +219,11 @@ plugins and try to build against an uninstalled version of your project.
 In order to use <https://readthedocs.org> to build, host, and preview your
 documentation, you must have a `.reathedocs.yml` file {% rr RTD100 %} like this:
 
-<!-- prettier-ignore-start -->
 <!-- [[[cog
-print("```yaml")
-print(readthedocs_yaml)
-print("```")
+with code_fence("yaml"):
+    print(readthedocs_yaml)
 ]]] -->
+<!-- prettier-ignore-start -->
 ```yaml
 # Read the Docs configuration file
 # See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
@@ -246,8 +244,8 @@ python:
       extra_requirements:
         - docs
 ```
-<!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 This sets the readthedocs config version (2 is required) {% rr RTD101 %}.
 
@@ -265,6 +263,11 @@ install our project. This will enable our "docs" extra.
 
 Add a session to your `noxfile.py` to generate docs:
 
+<!-- [[[cog
+with code_fence("python"):
+    print(noxfile.get_source("docs"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```python
 @nox.session(reuse_venv=True)
 def docs(session: nox.Session) -> None:
@@ -274,20 +277,33 @@ def docs(session: nox.Session) -> None:
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--serve", action="store_true", help="Serve after building")
+    parser.add_argument(
+        "-b", dest="builder", default="html", help="Build target (default: html)"
+    )
     args, posargs = parser.parse_known_args(session.posargs)
 
-    session.install("-e.[docs]")
+    if args.builder != "html" and args.serve:
+        session.error("Must not specify non-HTML builder with --serve")
+
+    session.install(".[docs]")
     session.chdir("docs")
+
+    if args.builder == "linkcheck":
+        session.run(
+            "sphinx-build", "-b", "linkcheck", ".", "_build/linkcheck", *posargs
+        )
+        return
 
     session.run(
         "sphinx-build",
         "-n",  # nitpicky mode
-        "--keep-going",  # show all errors
         "-T",  # full tracebacks
+        "-W",  # Warnings as errors
+        "--keep-going",  # See all errors
         "-b",
-        "html",
+        args.builder,
         ".",
-        f"_build/html",
+        f"_build/{args.builder}",
         *posargs,
     )
 
@@ -295,6 +311,8 @@ def docs(session: nox.Session) -> None:
         session.log("Launching docs at http://localhost:8000/ - use Ctrl-C to quit")
         session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 ## API docs
 
@@ -302,12 +320,19 @@ To build API docs, you need to add the following nox job:
 
 ### noxfile.py additions
 
+<!-- [[[cog
+with code_fence("python"):
+    txt = noxfile.get_source("build_api_docs")
+    print(txt.replace("package", "<package-name-here>"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```python
 @nox.session
 def build_api_docs(session: nox.Session) -> None:
     """
     Build (regenerate) API docs.
     """
+
     session.install("sphinx")
     session.chdir("docs")
     session.run(
@@ -320,6 +345,8 @@ def build_api_docs(session: nox.Session) -> None:
         "../src/<package-name-here>",
     )
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 And you'll need this added to your `docs/index.md`:
 

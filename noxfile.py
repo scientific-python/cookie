@@ -350,6 +350,8 @@ def gha_bump(session: nox.Session) -> None:
     pages = list(Path("docs/pages/guides").glob("gha_*.md"))
     pages.extend(Path("{{cookiecutter.project_name}}/.github/workflows").iterdir())
     pages.append(Path("docs/pages/guides/style.md"))
+    pages.append(Path("docs/pages/guides/tasks.md"))
+    pages.append(Path("docs/pages/guides/coverage.md"))
     full_txt = "\n".join(page.read_text() for page in pages)
 
     # This assumes there is a single version per action

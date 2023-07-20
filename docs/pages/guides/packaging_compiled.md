@@ -82,7 +82,7 @@ These tools all read the project table. They also have extra configuration
 options in `tool.*` settings.
 
 <!-- [[[cog
-from cog_helpers import render_cookie
+from cog_helpers import code_fence, render_cookie
 with render_cookie(backend="skbuild") as skbuild:
     skbuild_cmakelists_txt = skbuild.joinpath("CMakeLists.txt").read_text(encoding="utf-8").strip()
     skbuild_src_main_cpp = skbuild.joinpath("src/main.cpp").read_text(encoding="utf-8").strip()
@@ -102,12 +102,11 @@ with render_cookie(backend="maturin") as maturin:
 Example `CMakeLists.txt` file (using pybind11, so include `pybind11` in
 `build-system.requires` too):
 
-<!-- prettier-ignore-start -->
 <!-- [[[cog
-print("```cmake")
-print(skbuild_cmakelists_txt)
-print("```")
+with code_fence("cmake"):
+    print(skbuild_cmakelists_txt)
 ]]] -->
+<!-- prettier-ignore-start -->
 ```cmake
 cmake_minimum_required(VERSION 3.15...3.26)
 project(${SKBUILD_PROJECT_NAME} LANGUAGES CXX)
@@ -118,20 +117,19 @@ find_package(pybind11 CONFIG REQUIRED)
 pybind11_add_module(_core MODULE src/main.cpp)
 install(TARGETS _core DESTINATION ${SKBUILD_PROJECT_NAME})
 ```
-<!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 {% endtab %} {% tab meson Meson-python %}
 
 Example `meson.build` file (using pybind11, so include `pybind11` in
 `build-system.requires` too):
 
-<!-- prettier-ignore-start -->
 <!-- [[[cog
-print("```meson")
-print(mesonpy_meson_build)
-print("```")
+with code_fence("meson"):
+    print(mesonpy_meson_build)
 ]]] -->
+<!-- prettier-ignore-start -->
 ```meson
 project(
   'package',
@@ -168,19 +166,18 @@ py.extension_module('_core',
     ]
 )
 ```
-<!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 {% endtab %} {% tab maturin Maturin %}
 
 Example `Cargo.toml` file:
 
-<!-- prettier-ignore-start -->
 <!-- [[[cog
-print("```toml")
-print(maturin_cargo_toml)
-print("```")
+with code_fence("toml"):
+    print(maturin_cargo_toml)
 ]]] -->
+<!-- prettier-ignore-start -->
 ```toml
 [package]
 name = "package"
@@ -206,8 +203,8 @@ version = "0.18.1"
 # "abi3-py38" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.8
 features = ["extension-module", "abi3-py38"]
 ```
-<!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 {% endtab %} {% endtabs %}
 
@@ -217,12 +214,11 @@ features = ["extension-module", "abi3-py38"]
 
 Example `src/main.cpp` file:
 
-<!-- prettier-ignore-start -->
 <!-- [[[cog
-print("```cpp")
-print(skbuild_src_main_cpp)
-print("```")
+with code_fence("cpp"):
+    print(skbuild_src_main_cpp)
 ]]] -->
+<!-- prettier-ignore-start -->
 ```cpp
 #include <pybind11/pybind11.h>
 
@@ -253,19 +249,18 @@ PYBIND11_MODULE(_core, m) {
   )pbdoc");
 }
 ```
-<!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 {% endtab %} {% tab meson Meson-python %}
 
 Example `src/main.cpp` file:
 
-<!-- prettier-ignore-start -->
 <!-- [[[cog
-print("```cpp")
-print(mesonpy_src_main_cpp)
-print("```")
+with code_fence("cpp"):
+    print(mesonpy_src_main_cpp)
 ]]] -->
+<!-- prettier-ignore-start -->
 ```cpp
 #include <pybind11/pybind11.h>
 
@@ -296,17 +291,16 @@ PYBIND11_MODULE(_core, m) {
   )pbdoc");
 }
 ```
-<!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 {% endtab %} {% tab maturin Maturin %}
 
-<!-- prettier-ignore-start -->
 <!-- [[[cog
-print("```rs")
-print(maturin_src_lib_rs)
-print("```")
+with code_fence("rs"):
+    print(maturin_src_lib_rs)
 ]]] -->
+<!-- prettier-ignore-start -->
 ```rs
 use pyo3::prelude::*;
 
@@ -332,8 +326,8 @@ fn _core(_py: Python, m: &PyModule) -> PyResult<()> {
     Ok(())
 }
 ```
-<!-- [[[end]]] -->
 <!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 {% endtab %} {% endtabs %}
 
