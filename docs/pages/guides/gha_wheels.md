@@ -113,7 +113,7 @@ build_wheels:
   strategy:
     fail-fast: false
     matrix:
-      os: [ubuntu-20.04, windows-2019, macos-10.15]
+      os: [ubuntu-latest, windows-latest, macos-latest]
 
   steps:
     - uses: actions/checkout@v3
@@ -121,7 +121,7 @@ build_wheels:
         fetch-depth: 0
         submodules: true
 
-    - uses: pypa/cibuildwheel@v2.14.1
+    - uses: pypa/cibuildwheel@v2.14
 
     - name: Upload wheels
       uses: actions/upload-artifact@v3
