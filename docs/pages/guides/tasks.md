@@ -10,6 +10,13 @@ parent: Topical Guides
 
 # Task runners
 
+<!-- [[[cog
+from cog_helpers import  code_fence, render_cookie, Matcher
+with render_cookie() as package:
+    noxfile = Matcher.from_file(package / "noxfile.py")
+]]] -->
+<!-- [[[end]]] -->
+
 A task runner, like [make][] (fully general), [rake][] (Ruby general),
 [invoke][] (Python general), [tox][] (Python packages), or [nox][] (Python
 simi-general), is a tool that lets you specify a set of tasks via a common
@@ -62,7 +69,7 @@ On GitHub Actions or Azure, pipx is available by default, so you should use
 action:
 
 ```yaml
-- uses: wntrblm/nox@2022.8.7
+- uses: wntrblm/nox@2023.04.22
 ```
 
 You can now access all current versions of Python from nox. At least in GitHub
@@ -71,7 +78,7 @@ your logs, or set `env: FORCE_COLOR: 3`. If you'd like to customise the versions
 of Python prepared for you, then use this input:
 
 ```yaml
-- uses: wntrblm/nox@2022.8.7
+- uses: wntrblm/nox@2023.04.22
   with:
     python-versions: "3.8, 3.9, 3.10, 3.11, 3.12, pypy-3.9, pypy-3.10-nightly"
 ```
@@ -169,6 +176,11 @@ will likely look similar across different projects:
 Ideally, all developers should be using pre-commit directly, but this helps new
 users.
 
+<!-- [[[cog
+with code_fence("python"):
+    print(noxfile.get_source("lint"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```python
 @nox.session
 def lint(session: nox.Session) -> None:
@@ -177,27 +189,38 @@ def lint(session: nox.Session) -> None:
     """
     session.install("pre-commit")
     session.run(
-        "pre-commit", "run", "--show-diff-on-failure", "--all-files", *session.posargs
+        "pre-commit", "run", "--all-files", "--show-diff-on-failure", *session.posargs
     )
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 #### Tests
 
+<!-- [[[cog
+with code_fence("python"):
+    print(noxfile.get_source("tests"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```python
-import nox
-
-
 @nox.session
 def tests(session: nox.Session) -> None:
     """
-    Run the unit and regular tests.
+    Run the unit and regular tests. Use --cov to activate coverage.
     """
     session.install(".[test]")
     session.run("pytest", *session.posargs)
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 #### Docs
 
+<!-- [[[cog
+with code_fence("python"):
+    print(noxfile.get_source("docs"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```python
 @nox.session(reuse_venv=True)
 def docs(session: nox.Session) -> None:
@@ -207,20 +230,33 @@ def docs(session: nox.Session) -> None:
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--serve", action="store_true", help="Serve after building")
+    parser.add_argument(
+        "-b", dest="builder", default="html", help="Build target (default: html)"
+    )
     args, posargs = parser.parse_known_args(session.posargs)
 
-    session.install("-e.[docs]")
+    if args.builder != "html" and args.serve:
+        session.error("Must not specify non-HTML builder with --serve")
+
+    session.install(".[docs]")
     session.chdir("docs")
+
+    if args.builder == "linkcheck":
+        session.run(
+            "sphinx-build", "-b", "linkcheck", ".", "_build/linkcheck", *posargs
+        )
+        return
 
     session.run(
         "sphinx-build",
         "-n",  # nitpicky mode
-        "--keep-going",  # show all errors
         "-T",  # full tracebacks
+        "-W",  # Warnings as errors
+        "--keep-going",  # See all errors
         "-b",
-        "html",
+        args.builder,
         ".",
-        f"_build/html",
+        f"_build/{args.builder}",
         *posargs,
     )
 
@@ -228,6 +264,8 @@ def docs(session: nox.Session) -> None:
         session.log("Launching docs at http://localhost:8000/ - use Ctrl-C to quit")
         session.run("python", "-m", "http.server", "8000", "-d", "_build/html")
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 This supports setting up a quick server as well, run like this:
 
@@ -239,9 +277,20 @@ $ nox -s docs -- --serve
 
 For pure Python packages, this could be useful:
 
+<!-- [[[cog
+with code_fence("python"):
+    print("import shutil")
+    print("from pathlib import Path")
+    print()
+    print("DIR = Path(__file__).parent.resolve()")
+    print()
+    print()
+    print(noxfile.get_source("build"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```python
-from pathlib import Path
 import shutil
+from pathlib import Path
 
 DIR = Path(__file__).parent.resolve()
 
@@ -259,6 +308,8 @@ def build(session: nox.Session) -> None:
     session.install("build")
     session.run("python", "-m", "build")
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 ### Examples
 

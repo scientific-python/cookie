@@ -22,7 +22,9 @@ def lint(session: nox.Session) -> None:
     Run the linter.
     """
     session.install("pre-commit")
-    session.run("pre-commit", "run", "--all-files", *session.posargs)
+    session.run(
+        "pre-commit", "run", "--all-files", "--show-diff-on-failure", *session.posargs
+    )
 
 
 @nox.session
@@ -45,7 +47,7 @@ def tests(session: nox.Session) -> None:
     session.run("pytest", *session.posargs)
 
 
-@nox.session
+@nox.session(reuse_venv=True)
 def docs(session: nox.Session) -> None:
     """
     Build the docs. Pass "--serve" to serve.
@@ -116,9 +118,9 @@ def build(session: nox.Session) -> None:
     Build an SDist and wheel.
     """
 
-    build_p = DIR.joinpath("build")
-    if build_p.exists():
-        shutil.rmtree(build_p)
+    build_path = DIR.joinpath("build")
+    if build_path.exists():
+        shutil.rmtree(build_path)
 
     session.install("build")
     session.run("python", "-m", "build")
