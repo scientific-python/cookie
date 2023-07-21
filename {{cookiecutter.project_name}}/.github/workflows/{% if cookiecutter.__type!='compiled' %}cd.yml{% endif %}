@@ -35,12 +35,8 @@ jobs:
         with:
           path: dist
 
-      {%- if cookiecutter.backend != "trampolim" %}
-
       - name: Check products
         run: pipx run twine check dist/*
-
-      {%- endif %}
 
   publish:
     needs: [dist]
@@ -63,7 +59,3 @@ jobs:
           # Remember to tell (test-)pypi about this repo before publishing
           # Remove this line to publish to PyPI
           repository-url: https://test.pypi.org/legacy/
-          {%- if cookiecutter.backend == "trampolim" %}
-          # Check not supported currently by twine + trampolim
-          verify-metadata: false
-          {%- endif %}

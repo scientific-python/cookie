@@ -16,8 +16,8 @@ much; they all use a [standard configuration language][metadata] introduced in
 [PEP 621][]. The PyPA's Flit is a great option. [scikit-build-core][] and
 [meson-python][] are being developed to support this sort of configuration,
 enabling binary extension packages to benefit too. These [PEP 621][] tools
-currently include [Hatch][], [PDM][], [Flit][], [Trampolim][], [Whey][], and
-[Setuptools][]. [Poetry][] will eventually gain support in 2.0.
+currently include [Hatch][], [PDM][], [Flit][], [Whey][], and [Setuptools][].
+[Poetry][] will eventually gain support in 2.0.
 
 {: .note-title }
 
@@ -91,7 +91,7 @@ library or if you access package metadata.
 
 This sadly is not part of the standard metadata in `[project]`, so it depends on
 what backend you you use. Hatchling, Flit, PDM, and setuptools use automatic
-detection, while Trampolim and whey do not, requiring a `tool` setting.
+detection, while Whey does not, requiring a `tool` setting.
 
 If you don't match your package name and import name (which you should except
 for very special cases), you will likely need extra configuration here.
@@ -190,7 +190,6 @@ This is tool specific.
 [flit]: https://flit.readthedocs.io
 [poetry]: https://python-poetry.org
 [pdm]: https://pdm.fming.dev
-[trampolim]: https://github.com/FFY00/trampolim
 [whey]: https://whey.readthedocs.io
 [hatch]: https://hatch.pypa.io/latest
 [setuptools]: https://setuptools.readthedocs.io

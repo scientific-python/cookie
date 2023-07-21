@@ -73,7 +73,6 @@ backend:
     "Hatchling                      - Pure Python (recommended)": hatch
     "Flit-core                      - Pure Python (minimal)": flit
     "PDM-backend                    - Pure Python": pdm
-    "Trampolim                      - Pure Python": trampolim
     "Whey                           - Pure Python": whey
     "Poetry                         - Pure Python": poetry
     "Setuptools with pyproject.toml - Pure Python": setuptools621

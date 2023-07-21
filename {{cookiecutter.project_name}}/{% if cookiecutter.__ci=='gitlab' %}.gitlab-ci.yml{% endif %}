@@ -88,9 +88,7 @@ package:
     - if: $CI_PIPELINE_SOURCE == "push"
   script:
     - pipx run build
-    {%- if cookiecutter.project_type != "trampolim" %}
     - pipx run twine check dist/*
-    {%- endif %}
   artifacts:
     paths:
       - dist/
@@ -103,9 +101,7 @@ make_sdist:
     - if: $CI_PIPELINE_SOURCE == "push"
   script:
     - pipx run build --sdist
-    {%- if cookiecutter.project_type != "trampolim" %}
     - pipx run twine check dist/*
-    {%- endif %}
   artifacts:
     paths:
       - dist/*.tar.gz

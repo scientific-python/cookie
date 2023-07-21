@@ -1,8 +1,5 @@
 [build-system]
-{%- if cookiecutter.backend == "trampolim" %}
-requires = ["trampolim>=0.1.0"]
-build-backend = "trampolim"
-{%- elif cookiecutter.backend == "whey" %}
+{%- if cookiecutter.backend == "whey" %}
 requires = ["whey>=0.0.17"]
 build-backend = "whey"
 {%- elif cookiecutter.backend == "pdm" %}
@@ -121,7 +118,7 @@ docs = [
 
 [project]
 name = "{{ cookiecutter.project_name }}"
-{%- if cookiecutter.backend not in ["trampolim", "flit", "hatch"] %}
+{%- if cookiecutter.backend not in ["flit", "hatch"] %}
 version = "0.1.0"
 {%- endif %}
 authors = [
@@ -158,7 +155,7 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
-{%- if cookiecutter.backend in ["trampolim", "flit", "hatch"] %}
+{%- if cookiecutter.backend in ["flit", "hatch"] %}
 dynamic = ["version"]
 {%- endif %}
 dependencies = []
@@ -201,12 +198,6 @@ build-dir = "build/{wheel_tag}"
 
 [tool.whey]
 source-dir = "src"
-
-{%- elif cookiecutter.backend == "trampolim" %}
-
-
-[tool.trampolim]
-module-location = "src"
 
 {%- elif cookiecutter.backend == "hatch" %}
 

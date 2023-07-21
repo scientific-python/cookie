@@ -65,11 +65,7 @@ def docs(session: nox.Session) -> None:
 
     extra_installs = ["sphinx-autobuild"] if args.serve else []
 
-    {% if cookiecutter.backend == "trampolim" -%}
-    session.install(".[docs]", *extra_installs)
-    {% else -%}
     session.install("-e.[docs]", *extra_installs)
-    {% endif -%}
     session.chdir("docs")
 
     if args.builder == "linkcheck":
