@@ -189,16 +189,11 @@ name = "_core"
 # "cdylib" is necessary to produce a shared library for Python to import from.
 crate-type = ["cdylib"]
 
-[package.metadata.maturin]
-name = "package._core"
-python-packages = ["package"]
-python-source = "src"
-
 [dependencies]
 rand = "0.8.3"
 
 [dependencies.pyo3]
-version = "0.18.1"
+version = "0.19.1"
 # "extension-module" tells pyo3 we want to build an extension module (skips linking against libpython.so)
 # "abi3-py38" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.8
 features = ["extension-module", "abi3-py38"]

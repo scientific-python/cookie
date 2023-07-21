@@ -6,7 +6,7 @@ build-backend = "whey"
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 {%- elif cookiecutter.backend == "maturin" %}
-requires = ["maturin>=0.12,<0.15"]
+requires = ["maturin>=0.15,<2"]
 build-backend = "maturin"
 {%- elif cookiecutter.backend == "hatch" %}
 requires = ["hatchling"]
@@ -15,7 +15,7 @@ build-backend = "hatchling.build"
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.backend == "flit" %}
-requires = ["flit_core >=3.4"]
+requires = ["flit_core>=3.4"]
 build-backend = "flit_core.buildapi"
 {%- elif cookiecutter.backend == "setuptools" %}
 requires = ["setuptools>=42", "setuptools_scm[toml]>=3.4"]
@@ -198,6 +198,15 @@ build-dir = "build/{wheel_tag}"
 
 [tool.whey]
 source-dir = "src"
+
+{%- elif cookiecutter.backend == "maturin" %}
+
+
+[tool.maturin]
+module-name = "{{ cookiecutter.__project_slug }}._core"
+python-packages = ["{{ cookiecutter.__project_slug }}"]
+python-source = "src"
+sdist-generator = "git"  # default is cargo
 
 {%- elif cookiecutter.backend == "hatch" %}
 
