@@ -61,7 +61,7 @@ The last element your package needs is a `pyproject.toml` file, placed in the
 root directory.
 
 ```bash
-touch pyproject.yaml
+touch pyproject.toml
 ```
 
 Fill in the minimally required metadata, which includes the package name,
