@@ -34,9 +34,6 @@ jobs:
       - name: Lint pdm
         run: pipx run nox -s 'lint(pdm)'
 
-      - name: Lint trampolim
-        run: pipx run nox -s 'lint(trampolim)'
-
       - name: Lint whey
         run: pipx run nox -s 'lint(whey)'
 
@@ -90,9 +87,6 @@ jobs:
 
       - name: Test pdm
         run: nox -s 'tests(pdm)'
-
-      - name: Test trampolim
-        run: nox -s 'tests(trampolim)'
 
       - name: Test whey
         run: nox -s 'tests(whey)'
@@ -161,11 +155,6 @@ jobs:
         run: |
           pipx run nox -s 'nox(pdm)'
           pipx run nox -s 'nox(pdm)' -- docs
-
-      - name: Test trampolim
-        run: |
-          pipx run nox -s 'nox(trampolim)'
-          pipx run nox -s 'nox(trampolim)' -- docs
 
       - name: Test whey
         run: |

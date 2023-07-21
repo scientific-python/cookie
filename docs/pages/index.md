@@ -27,7 +27,7 @@ This covers modern packaging([simple][] or [compiled][]), [style checking][], [t
 > New project template
 >
 > This guide comes with a [copier][]/[cookiecutter][]/[cruft][] template for
-> making new repos, [scientific-python/cookie][]. Twelve build backends
+> making new repos, [scientific-python/cookie][]. Eleven build backends
 > including compiled backends, generation tested in Nox, and kept in-sync with
 > the guide.
 
