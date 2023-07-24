@@ -162,7 +162,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.0.278"
+  rev: "v0.0.280"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -297,7 +297,7 @@ use the manual stage, it's opt-in instead of automatic.
 
 ```yaml
 - repo: https://github.com/hadialqattan/pycln
-  rev: "v2.1.5"
+  rev: "v2.1.6"
   hooks:
     - id: pycln
       args: [--all]
