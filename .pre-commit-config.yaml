@@ -1,6 +1,7 @@
 ci:
   autoupdate_commit_msg: "chore: update pre-commit hooks"
   autofix_commit_msg: "style: pre-commit fixes"
+  autoupdate_schedule: "quarterly"
 
 exclude: "^({{cookiecutter\\.project_name}}|hooks/pre_gen_project.py$)"
 
