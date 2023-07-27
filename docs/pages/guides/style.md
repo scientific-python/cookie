@@ -765,9 +765,9 @@ And a noxfile entry:
 ```python
 @nox.session
 def pylint(session: nox.Session) -> None:
-    session.install("-e", ".")
+    session.install("-e.")
     session.install("pylint")
-    session.run("pylint", "src", *session.posargs)
+    session.run("pylint", "<your package>", *session.posargs)
 ```
 
 And you can add this to your GitHub Actions using `run: pipx run nox -s pylint`.

@@ -81,7 +81,7 @@ tests:
     matrix:
       - IMAGE: ['python:3.8-buster', 'python:3.11-buster']
 
-{%- if not cookiecutter.__compiled %}
+{%- if cookiecutter.__type == "pure" %}
 package:
   stage: build
   rules:
@@ -141,7 +141,7 @@ make_wheels:
 .deploy:
   stage: deploy
   dependencies:
-    {%- if not cookiecutter.__compiled %}
+    {%- if cookiecutter.__type == "pure" %}
     - package
     {%- else %}
     - make_sdist
