@@ -326,7 +326,10 @@ isort.required-imports = ["from __future__ import annotations"]
 
 [tool.pylint]
 py-version = "3.8"
-ignore-paths= ["src/{{ cookiecutter.__project_slug }}/_version.py"]
+ignore-paths = [".*/_version.py"]
+{%- if cookiecutter.__type == "compiled" %}
+extension-pkg-allow-list = ["{{ cookiecutter.__project_slug }}._core"]
+{%- endif %}
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
 messages_control.disable = [
