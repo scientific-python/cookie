@@ -297,7 +297,7 @@ use the manual stage, it's opt-in instead of automatic.
 
 ```yaml
 - repo: https://github.com/hadialqattan/pycln
-  rev: "v2.1.6"
+  rev: "v2.1.7"
   hooks:
     - id: pycln
       args: [--all]
@@ -337,7 +337,7 @@ the flake8 addition for pre-commit, with the `bugbear` plugin:
 
 ```yaml
 - repo: https://github.com/pycqa/flake8
-  rev: "6.0.0"
+  rev: "6.1.0"
   hooks:
     - id: flake8
       additional_dependencies: [flake8-bugbear]
@@ -435,7 +435,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.9.0"
+  rev: "v3.10.1"
   hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
