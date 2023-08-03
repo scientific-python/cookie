@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import typing
+from typing import Any
 
-__all__ = ["Family", "get_familes"]
+__all__ = ["Family", "get_families"]
 
 
 def __dir__() -> list[str]:
@@ -12,13 +13,26 @@ def __dir__() -> list[str]:
 class Family(typing.TypedDict, total=False):
     name: str  # defaults to key
     order: int  # defaults to 0
+    description: str  # Defaults to empty
 
 
-def get_familes() -> dict[str, Family]:
+def get_families(
+    pyproject: dict[str, Any] = {},  # noqa: B006
+) -> dict[str, Family]:
+    pyproject_description = f"- Detected build backend: `{pyproject.get('build-system', {}).get('build-backend', 'MISSING')}`"
+    if classifiers := pyproject.get("project", {}).get("classifiers", []):
+        licenses = [
+            c.removeprefix("License :: ").removeprefix("OSI Approved :: ")
+            for c in classifiers
+            if c.startswith("License :: ")
+        ]
+        if licenses:
+            pyproject_description += f"\n- Detected license(s): {', '.join(licenses)}"
     return {
         "general": Family(
             name="General",
             order=-3,
+            description=pyproject_description,
         ),
         "pyproject": Family(
             name="PyProject",
