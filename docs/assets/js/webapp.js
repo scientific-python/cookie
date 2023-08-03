@@ -129,8 +129,13 @@ function Results(props) {
       <li key={`section-${key}`}>
         <ul>
           <MaterialUI.ListSubheader>
-            {props.families[key]}
+            {props.families[key].name}
           </MaterialUI.ListSubheader>
+          {props.families[key].description && (
+            <MaterialUI.ListItem>
+              <span dangerouslySetInnerHTML={props.families[key].description} />
+            </MaterialUI.ListItem>
+          )}
           {results_components}
         </ul>
       </li>,
@@ -221,13 +226,19 @@ class App extends React.Component {
       try {
         families_checks = pyodide.runPython(`
           from pyodide.http import open_url
-          from repo_review.processor import process
+          from repo_review.processor import process, md_as_html
           from repo_review.ghpath import GHPath
 
           GHPath.open_url = staticmethod(open_url)
 
           package = GHPath(repo="${state.repo}", branch="${state.branch}")
-          process(package)
+          result = process(package)
+
+          for v in result[0].values():
+              if v.get("description"):
+                  v["description"] = md_as_html(v["description"])
+
+          result
           `);
       } catch (e) {
         if (e.message.includes("KeyError: 'tree'")) {
@@ -251,8 +262,12 @@ class App extends React.Component {
       const results = {};
       const families = {};
       for (const val of families_dict) {
+        const descr = families_dict.get(val).get("description");
         results[val] = [];
-        families[val] = families_dict.get(val).get("name");
+        families[val] = {
+          name: families_dict.get(val).get("name").toString(),
+          description: descr && descr.toString(),
+        };
       }
       console.log(families);
       for (const val of results_list) {
@@ -305,7 +320,7 @@ class App extends React.Component {
               variant="outlined"
               autoFocus={true}
               onKeyDown={(e) => {
-                if (event.keyCode === 13)
+                if (e.keyCode === 13)
                   document.getElementById("branch-select").focus();
               }}
               onInput={(e) => this.setState({ repo: e.target.value })}
@@ -318,7 +333,7 @@ class App extends React.Component {
               options={common_branches}
               freeSolo={true}
               onKeyDown={(e) => {
-                if (event.keyCode === 13) this.handleCompute();
+                if (e.keyCode === 13) this.handleCompute();
               }}
               onInputChange={(e, value) => this.setState({ branch: value })}
               defaultValue={urlParams.get("branch")}
