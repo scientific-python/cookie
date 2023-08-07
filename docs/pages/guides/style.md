@@ -162,7 +162,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.0.280"
+  rev: "v0.0.282"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -297,7 +297,7 @@ use the manual stage, it's opt-in instead of automatic.
 
 ```yaml
 - repo: https://github.com/hadialqattan/pycln
-  rev: "v2.1.7"
+  rev: "v2.2.1"
   hooks:
     - id: pycln
       args: [--all]
@@ -714,7 +714,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier
-  rev: "v3.0.0"
+  rev: "v3.0.1"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
