@@ -82,6 +82,7 @@ tests:
       - IMAGE: ['python:3.8-buster', 'python:3.11-buster']
 
 {%- if cookiecutter.__type == "pure" %}
+
 package:
   stage: build
   rules:
@@ -95,6 +96,7 @@ package:
     expire_in: 1 day
 
 {%- else %}
+
 make_sdist:
   stage: build
   rules:
@@ -137,6 +139,8 @@ make_wheels:
     paths:
       - dist/*.whl
     expire_in: 1 day
+
+{%- endif %}
 
 .deploy:
   stage: deploy
