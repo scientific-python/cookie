@@ -133,7 +133,11 @@ function Results(props) {
           </MaterialUI.ListSubheader>
           {props.families[key].description && (
             <MaterialUI.ListItem>
-              <span dangerouslySetInnerHTML={props.families[key].description} />
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: props.families[key].description,
+                }}
+              />
             </MaterialUI.ListItem>
           )}
           {results_components}
