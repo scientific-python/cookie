@@ -65,7 +65,11 @@ class CC:
                     name,
                     value,
                     prompt,
-                    "str" if isinstance(value, str) else "",
+                    "str"
+                    if isinstance(value, str)
+                    else "bool"
+                    if isinstance(value, bool)
+                    else "",
                     choices=choices,
                 ),
             )

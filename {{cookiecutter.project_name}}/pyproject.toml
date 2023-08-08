@@ -9,36 +9,58 @@ build-backend = "pdm.backend"
 requires = ["maturin>=0.15,<2"]
 build-backend = "maturin"
 {%- elif cookiecutter.backend == "hatch" %}
+{%- if cookiecutter.vcs %}
+requires = ["hatchling", "hatch-vcs"]
+{%- else %}
 requires = ["hatchling"]
+{%- endif %}
 build-backend = "hatchling.build"
 {%- elif cookiecutter.backend == "setuptools621" %}
-requires = ["setuptools>=61.0"]
+{%- if cookiecutter.vcs %}
+requires = ["setuptools>=61", "setuptools_scm[toml]>=7"]
+{%- else %}
+requires = ["setuptools>=61"]
+{%- endif %}
 build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.backend == "flit" %}
+{%- if cookiecutter.vcs %}
+requires = ["flit_scm"]
+build-backend = "flit_scm:buildapi"
+{%- else %}
 requires = ["flit_core>=3.4"]
 build-backend = "flit_core.buildapi"
+{%- endif %}
 {%- elif cookiecutter.backend == "setuptools" %}
+{%- if cookiecutter.vcs %}
 requires = ["setuptools>=42", "setuptools_scm[toml]>=3.4"]
+{%- else %}
+requires = ["setuptools>=42"]
+{%- endif %}
 build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.backend == "pybind11" %}
+{%- if cookiecutter.vcs %}
 requires = ["setuptools>=42", "setuptools_scm[toml]>=3.4", "pybind11"]
+{%- else %}
+requires = ["setuptools>=42", "pybind11"]
+{%- endif %}
 build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.backend == "skbuild"  %}
 requires = ["pybind11", "scikit-build-core"]
 build-backend = "scikit_build_core.build"
-{%- elif cookiecutter.backend == "mesonpy"  %}
+{%- elif cookiecutter.backend == "mesonpy" %}
 requires = ["meson-python", "pybind11"]
 build-backend = "mesonpy"
 {%- elif cookiecutter.backend == "poetry" %}
+{%- if cookiecutter.vcs %}
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
+{%- else %}
 requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 {%- endif %}
+{%- endif %}
 
 {%- if cookiecutter.backend in ["setuptools", "pybind11"] %}
-
-
-[tool.setuptools_scm]
-write_to = "src/{{ cookiecutter.__project_slug }}/_version.py"
 
 
 [tool.check-manifest]
@@ -56,7 +78,11 @@ ignore = [
 
 [tool.poetry]
 name = "{{ cookiecutter.project_name }}"
+{%- if cookiecutter.vcs %}
+version = "0.0.0"
+{%- else %}
 version = "0.1.0"
+{%- endif %}
 authors = [
   "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
 ]
@@ -112,13 +138,18 @@ docs = [
   "sphinx_copybutton",
 ]
 
+{%- if cookiecutter.vcs %}
 
+[tool.poetry-dynamic-versioning]
+enable = true
+substitution.files = ["src/{{ cookiecutter.__project_slug }}/__init__.py"]
+{%- endif %}
 {%- else %}
 
 
 [project]
 name = "{{ cookiecutter.project_name }}"
-{%- if cookiecutter.backend not in ["flit", "hatch"] %}
+{%- if cookiecutter.backend in ['maturin', 'mesonpy', 'whey'] or not cookiecutter.vcs and cookiecutter.backend in ['setuptools621', 'skbuild'] %}
 version = "0.1.0"
 {%- endif %}
 authors = [
@@ -155,7 +186,7 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
-{%- if cookiecutter.backend in ["flit", "hatch"] %}
+{%- if cookiecutter.backend not in ['maturin', 'mesonpy', 'whey'] and cookiecutter.vcs or cookiecutter.backend in ['pdm', 'hatch', 'flit'] %}
 dynamic = ["version"]
 {%- endif %}
 dependencies = []
@@ -192,6 +223,11 @@ Changelog = "{{ cookiecutter.url }}/releases"
 [tool.scikit-build]
 minimum-version = "0.4"
 build-dir = "build/{wheel_tag}"
+{%- if cookiecutter.vcs %}
+metadata.version.provider = "scikit_build_core.metadata.setuptools_scm"
+sdist.include = ["src/{{ cookiecutter.__project_slug }}/_version.py"]
+{%- endif %}
+
 
 {%- elif cookiecutter.backend == "whey" %}
 
@@ -212,18 +248,45 @@ sdist-generator = "git"  # default is cargo
 
 
 [tool.hatch]
+{%- if not cookiecutter.vcs %}
 version.path = "src/{{ cookiecutter.__project_slug  }}/__init__.py"
+{%- else %}
+version.source = "vcs"
+build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.py"
+{%- endif %}
 envs.default.dependencies = [
   "pytest",
   "pytest-cov",
 ]
 
 {%- elif cookiecutter.backend == "pdm" %}
+{%- if cookiecutter.vcs %}
 
+
+[tool.pdm.version]
+source = "scm"
+write_to = "{{ cookiecutter.__project_slug }}/_version.py"
+write_template = "version = '{}'"
+
+{%- else %}
+
+
+[tool.pdm.version]
+source = "file"
+path = "src/{{ cookiecutter.__project_slug }}/__init__.py"
+
+{%- endif %}
 
 [tool.pdm.dev-dependencies]
 devtest = ["pytest", "pytest-cov"]
 
+{%- endif %}
+
+{%- if cookiecutter.backend in ["setuptools", "pybind11", "poetry", "flit", "skbuild", "setuptools621"] and cookiecutter.vcs %}
+
+
+[tool.setuptools_scm]
+write_to = "src/{{ cookiecutter.__project_slug }}/_version.py"
 {%- endif %}
 
 

@@ -7,10 +7,18 @@ Copyright (c) {{ cookiecutter.__year }} {{ cookiecutter.full_name }}. All rights
 
 from __future__ import annotations
 
-{% if cookiecutter.backend == "setuptools" or cookiecutter.backend == "pybind11" -%}
+{%- if cookiecutter.backend in ["setuptools", "pybind11", "hatch", "skbuild", "setuptools621", "pdm", "flit"] and cookiecutter.vcs %}
+
 from ._version import version as __version__
-{%- else -%}
+
+{%- elif cookiecutter.backend == "poetry" and cookiecutter.vcs %}
+
+__version__ = "0.0.0"
+
+{%- else %}
+
 __version__ = "0.1.0"
+
 {%- endif %}
 
 __all__ = ("__version__",)
