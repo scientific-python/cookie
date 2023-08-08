@@ -13,38 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Lint setuptools
-        run: pipx run nox -s 'lint(setuptools)'
-
-      - name: Lint pybind11
-        run: pipx run nox -s 'lint(pybind11)'
-
-      - name: Lint scikit-build
-        run: pipx run nox -s 'lint(skbuild)'
-
-      - name: Lint meson-python
-        run: pipx run nox -s 'lint(mesonpy)'
-
-      - name: Lint poetry
-        run: pipx run nox -s 'lint(poetry)'
-
-      - name: Lint flit
-        run: pipx run nox -s 'lint(flit)'
-
-      - name: Lint pdm
-        run: pipx run nox -s 'lint(pdm)'
-
-      - name: Lint whey
-        run: pipx run nox -s 'lint(whey)'
-
-      - name: Lint maturin
-        run: pipx run nox -s 'lint(maturin)'
-
-      - name: Lint hatch
-        run: pipx run nox -s 'lint(hatch)'
-
-      - name: Lint setuptools PEP 621
-        run: pipx run nox -s 'lint(setuptools621)'
+      - name: Lint all
+        run: pipx run nox -s 'lint'
 
   checks:
     name: Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}
@@ -71,47 +41,48 @@ jobs:
         run: pip install nox
 
       - name: Test setuptools
-        run: nox -s 'tests(setuptools)'
+        run: nox -s 'tests(setuptools, novcs)' -s 'tests(setuptools, vcs)'
 
       - name: Test pybind11
-        run: nox -s 'tests(pybind11)'
+        run: nox -s 'tests(pybind11, novcs)' -s 'tests(pybind11, vcs)'
 
       - name: Test scikit-build
-        run: nox -s 'tests(skbuild)'
+        run: nox -s 'tests(skbuild, novcs)' -s 'tests(skbuild, vcs)'
 
       - name: Test poetry
-        run: nox -s 'tests(poetry)'
+        run: nox -s 'tests(poetry, novcs)' -s 'tests(poetry, vcs)'
 
       - name: Test flit
-        run: nox -s 'tests(flit)'
+        run: nox -s 'tests(flit, novcs)' -s 'tests(flit, vcs)'
 
       - name: Test pdm
-        run: nox -s 'tests(pdm)'
+        run: nox -s 'tests(pdm, novcs)' -s 'tests(pdm, vcs)'
 
       - name: Test whey
-        run: nox -s 'tests(whey)'
+        run: nox -s 'tests(whey, novcs)'
 
       - name: Test maturin
-        run: nox -s 'tests(maturin)'
+        run: nox -s 'tests(maturin, novcs)'
 
       - name: Test hatch
-        run: nox -s 'tests(hatch)'
+        run: nox -s 'tests(hatch, novcs)' -s 'tests(hatch, vcs)'
 
       - name: Test setuptools PEP 621
-        run: nox -s 'tests(setuptools621)'
+        run: nox -s 'tests(setuptools621, novcs)' -s 'tests(setuptools621, vcs)'
 
       - name: Native poetry tooling
-        run: nox -s 'native(poetry)'
+        run: nox -s 'native(poetry, novcs)' -s 'native(poetry, vcs)'
 
       - name: Native pdm tooling
-        run: nox -s 'native(pdm)'
+
+        run: nox -s 'native(pdm, novcs)' -s 'native(pdm, vcs)'
 
       - name: Activate MSVC for Meson
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Test meson-python
-        run: nox -s 'tests(mesonpy)'
+        run: nox -s 'tests(mesonpy, novcs)'
 
       - name: Compare copier template generation
         run: nox -s compare_copier
@@ -128,53 +99,53 @@ jobs:
 
       - name: Test setuptools
         run: |
-          pipx run nox -s 'nox(setuptools)'
-          pipx run nox -s 'nox(setuptools)' -- docs
+          pipx run nox -s 'nox(setuptools, vcs)'
+          pipx run nox -s 'nox(setuptools, vcs)' -- docs
 
       - name: Test pybind11
         run: |
-          pipx run nox -s 'nox(pybind11)'
-          pipx run nox -s 'nox(pybind11)' -- docs
+          pipx run nox -s 'nox(pybind11, vcs)'
+          pipx run nox -s 'nox(pybind11, vcs)' -- docs
 
       - name: Test scikit-build
         run: |
-          pipx run nox -s 'nox(skbuild)'
-          pipx run nox -s 'nox(skbuild)' -- docs
+          pipx run nox -s 'nox(skbuild, vcs)'
+          pipx run nox -s 'nox(skbuild, vcs)' -- docs
 
       - name: Test poetry
         run: |
-          pipx run nox -s 'nox(poetry)'
-          pipx run nox -s 'nox(poetry)' -- docs
+          pipx run nox -s 'nox(poetry, novcs)'
+          pipx run nox -s 'nox(poetry, novcs)' -- docs
 
       - name: Test flit
         run: |
-          pipx run nox -s 'nox(flit)'
-          pipx run nox -s 'nox(flit)' -- docs
+          pipx run nox -s 'nox(flit, novcs)'
+          pipx run nox -s 'nox(flit, novcs)' -- docs
 
       - name: Test pdm
         run: |
-          pipx run nox -s 'nox(pdm)'
-          pipx run nox -s 'nox(pdm)' -- docs
+          pipx run nox -s 'nox(pdm, vcs)'
+          pipx run nox -s 'nox(pdm, vcs)' -- docs
 
       - name: Test whey
         run: |
-          pipx run nox -s 'nox(whey)'
-          pipx run nox -s 'nox(whey)' -- docs
+          pipx run nox -s 'nox(whey, novcs)'
+          pipx run nox -s 'nox(whey, novcs)' -- docs
 
       - name: Test maturin
         run: |
-          pipx run nox -s 'nox(maturin)'
-          pipx run nox -s 'nox(maturin)' -- docs
+          pipx run nox -s 'nox(maturin, novcs)'
+          pipx run nox -s 'nox(maturin, novcs)' -- docs
 
       - name: Test hatch
         run: |
-          pipx run nox -s 'nox(hatch)'
-          pipx run nox -s 'nox(hatch)' -- docs
+          pipx run nox -s 'nox(hatch, vcs)'
+          pipx run nox -s 'nox(hatch, vcs)' -- docs
 
       - name: Test setuptools PEP 621
         run: |
-          pipx run nox -s 'nox(setuptools621)'
-          pipx run nox -s 'nox(setuptools621)' -- docs
+          pipx run nox -s 'nox(setuptools621, vcs)'
+          pipx run nox -s 'nox(setuptools621, vcs)' -- docs
 
       - name: Activate MSVC for Meson
         if: runner.os == 'Windows'
@@ -182,8 +153,8 @@ jobs:
 
       - name: Test meson-python
         run: |
-          pipx run nox -s 'nox(mesonpy)'
-          pipx run nox -s 'nox(mesonpy)' -- docs
+          pipx run nox -s 'nox(mesonpy, novcs)'
+          pipx run nox -s 'nox(mesonpy, novcs)' -- docs
 
   dist:
     name: Distribution build
