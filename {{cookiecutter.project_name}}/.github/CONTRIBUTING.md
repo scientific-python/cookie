@@ -7,7 +7,7 @@ description of best practices for developing scientific packages.
 
 The fastest way to start with development is to use nox. If you don't have nox,
 you can use `pipx run nox` to run it without installing, or `pipx install nox`.
-If you don't have pipx (pip for applications), then you can install with with
+If you don't have pipx (pip for applications), then you can install with
 `pip install pipx` (the only case were installing an application with regular
 pip is reasonable). If you use macOS, then pipx and nox are both in brew, use
 `brew install pipx nox`.
