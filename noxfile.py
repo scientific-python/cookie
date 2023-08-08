@@ -9,10 +9,13 @@ from __future__ import annotations
 
 import difflib
 import json
+import os
 import re
 import shutil
+import stat
 import sys
 import urllib.request
+from collections.abc import Callable
 from pathlib import Path
 
 import nox
@@ -32,6 +35,18 @@ default_context:
 """
 
 
+def _remove_readonly(func: Callable[[str], None], path: str, _: object) -> None:
+    os.chmod(path, stat.S_IWRITE)  # noqa: PTH101
+    func(path)
+
+
+def rmtree_ro(path: Path) -> None:
+    if sys.version_info >= (3, 12):
+        shutil.rmtree(path, onexc=_remove_readonly)
+    else:
+        shutil.rmtree(path, onerror=_remove_readonly)
+
+
 def get_expected_version(backend: str, vcs: bool) -> str:
     return "0.2.3" if vcs and backend not in {"whey", "maturin", "mesonpy"} else "0.1.0"
 
@@ -39,7 +54,7 @@ def get_expected_version(backend: str, vcs: bool) -> str:
 def make_copier(session: nox.Session, backend: str, vcs: bool) -> None:
     package_dir = Path(f"copy-{backend}")
     if package_dir.exists():
-        shutil.rmtree(package_dir)
+        rmtree_ro(package_dir)
 
     session.run(
         "copier",
@@ -66,7 +81,7 @@ def make_copier(session: nox.Session, backend: str, vcs: bool) -> None:
 def make_cookie(session: nox.Session, backend: str, vcs: bool) -> None:
     package_dir = Path(f"cookie-{backend}")
     if package_dir.exists():
-        shutil.rmtree(package_dir)
+        rmtree_ro(package_dir)
 
     Path("input.yml").write_text(
         JOB_FILE.format(backend=backend, vcs=vcs), encoding="utf-8"
@@ -87,7 +102,7 @@ def make_cookie(session: nox.Session, backend: str, vcs: bool) -> None:
 def make_cruft(session: nox.Session, backend: str, vcs: bool) -> None:
     package_dir = Path(f"cruft-{backend}")
     if package_dir.exists():
-        shutil.rmtree(package_dir)
+        rmtree_ro(package_dir)
 
     tmp_dir = Path("tmp_loc")
     tmp_dir.mkdir()
