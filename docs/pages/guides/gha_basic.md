@@ -428,7 +428,7 @@ action.
 
 You can also make reusable workflows. One reason to do this is it allows you to
 use `needs` or communicate values between workflows. It's an easy way to make
-one workflow (which con contain multiple jobs, even a matrix) depend on anther.
+one workflow (which can contain multiple jobs, even a matrix) depend on another.
 
 To use a reusable workflow, you replace the triggers with:
 
