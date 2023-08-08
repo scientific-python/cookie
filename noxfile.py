@@ -32,6 +32,10 @@ default_context:
 """
 
 
+def get_expected_version(backend: str, vcs: bool) -> str:
+    return "0.2.3" if vcs and backend not in {"whey", "maturin", "mesonpy"} else "0.1.0"
+
+
 def make_copier(session: nox.Session, backend: str, vcs: bool) -> None:
     package_dir = Path(f"copy-{backend}")
     if package_dir.exists():
@@ -208,11 +212,8 @@ def tests(session: nox.Session, backend: str, vcs: bool) -> None:
         f'import importlib.metadata as m; print(m.version("{name}"))',
         silent=True,
     ).strip()
-    assert (
-        version == "0.2.3"
-        if vcs and backend not in {"whey", "maturin", "mesonpy"}
-        else "0.1.0"
-    ), f"{version=} incorrect"
+    expected_version = get_expected_version(backend, vcs)
+    assert version == expected_version, f"{version=} != {expected_version=}"
 
 
 @nox.session()
@@ -249,8 +250,9 @@ def dist(session: nox.Session, backend: str, vcs: bool) -> None:
     (sdist,) = Path("dist").glob("*.tar.gz")
     (wheel,) = Path("dist").glob("*.whl")
 
-    if "0.1.0" not in str(wheel):
-        session.error(f"{wheel} must be version 0.1.0")
+    expected_version = get_expected_version(backend, vcs)
+    if expected_version not in str(wheel):
+        session.error(f"{wheel} must be version {expected_version}")
 
     session.run("twine", "check", f"{sdist}", f"{wheel}")
 
