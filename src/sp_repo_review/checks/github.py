@@ -78,7 +78,7 @@ class GH102(GitHub):
 
         ```yaml
         concurrency:
-          group: ${{{{ github.workflow }}}}-${{{{ github.head_ref }}}}
+          group: ${{{{ github.workflow }}}}-${{{{ github.ref }}}}
           cancel-in-progress: true
         ```
         """
