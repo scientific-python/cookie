@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import Any, ClassVar, Protocol
+from typing import Any, ClassVar
 
 import yaml
 
@@ -20,23 +20,22 @@ def precommit(root: Traversable) -> dict[str, Any]:
     return {}
 
 
-class PreCommitMixin(Protocol):
-    repo: ClassVar[str]
-
-
 class PreCommit:
     family = "pre-commit"
     requires = {"PY006"}
     url = mk_url("style")
+    renamed: ClassVar[str | None] = None
+    repo: ClassVar[str | None] = None
 
     @classmethod
-    def check(
-        cls: type[PreCommitMixin], precommit: dict[str, Any]
-    ) -> bool | None | str:
+    def check(cls, precommit: dict[str, Any]) -> bool | None | str:
         "Must have `{self.repo}` repo in `.pre-commit-config.yaml`"
+        assert cls.repo is not None
         for repo in precommit.get("repos", {}):
-            if "repo" in repo and repo["repo"].lower() == cls.repo:
+            if repo.get("repo", "").lower() == cls.repo:
                 return True
+            if cls.renamed is not None and repo.get("repo", "").lower() == cls.renamed:
+                return f"Use `{cls.repo}` instead of `{cls.renamed}` in `.pre-commit-config.yaml`"
         return False
 
 
@@ -48,19 +47,7 @@ class PC100(PreCommit):
 class PC110(PreCommit):
     "Uses black"
     repo = "https://github.com/psf/black-pre-commit-mirror"
-
-    @classmethod
-    def check(cls: type[PreCommitMixin], precommit: dict[str, Any]) -> bool | str:
-        "Must have `{self.repo}` repo in `.pre-commit-config.yaml`"
-        for repo in precommit.get("repos", {}):
-            if repo.get("repo", "").lower() == cls.repo:
-                return True
-            if repo.get("repo", "").lower() == "https://github.com/psf/black":
-                return (
-                    "Use https://github.com/psf/black-pre-commit-mirror for black, "
-                    "which is 2-3x faster because it gets pre-compiled black from PyPI."
-                )
-        return False
+    renamed = "https://github.com/psf/black"
 
 
 class PC111(PreCommit):
@@ -72,6 +59,7 @@ class PC111(PreCommit):
 class PC190(PreCommit):
     "Uses Ruff"
     repo = "https://github.com/astral-sh/ruff-pre-commit"
+    renamed = "https://github.com/charliermarsh/ruff-pre-commit"
 
 
 class PC140(PreCommit):
