@@ -105,7 +105,7 @@ normalization, and to change the line length, and those go in your
 Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
-- repo: https://github.com/psf/black
+- repo: https://github.com/psf/black-pre-commit-mirror
   rev: "23.7.0"
   hooks:
     - id: black
