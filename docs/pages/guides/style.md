@@ -651,17 +651,13 @@ corrections if you have a lot of them when first adding the check.
 {% rr PC170 %} This is a repository with a
 [collection of pre-commit extra hooks](https://github.com/pre-commit/pygrep-hooks)
 that protect against some common, easy to detect, mistakes. You can pick and
-choose the hooks you want from the repo; here are some common ones:
+choose the hooks you want from the repo; here are some common ones for
+Restructured Text:
 
 ```yaml
 - repo: https://github.com/pre-commit/pygrep-hooks
   rev: "v1.10.0"
   hooks:
-    - id: python-check-blanket-noqa
-    - id: python-check-blanket-type-ignore
-    - id: python-no-log-warn
-    - id: python-no-eval
-    - id: python-use-type-annotations
     - id: rst-backticks
     - id: rst-directive-colons
     - id: rst-inline-touching-normal
@@ -676,7 +672,18 @@ called `mypy_error_report.txt`, then run `pipx run mypy_clean_slate -a`.
 
 [codespell]: https://github.com/codespell-project/codespell
 
-Note that if you are using Ruff, you don't need the `python-*` hooks above.
+{: .note }
+
+> Note that if you are not using Ruff's "PGH" code, there are `python-*` hooks
+> also:
+>
+> ```yaml
+> - id: python-check-blanket-noqa
+> - id: python-check-blanket-type-ignore
+> - id: python-no-log-warn
+> - id: python-no-eval
+> - id: python-use-type-annotations
+> ```
 
 ## Clang-format (C++ only)
 
