@@ -30,7 +30,9 @@ class PreCommit:
     url = mk_url("style")
 
     @classmethod
-    def check(cls: type[PreCommitMixin], precommit: dict[str, Any]) -> bool | None:
+    def check(
+        cls: type[PreCommitMixin], precommit: dict[str, Any]
+    ) -> bool | None | str:
         "Must have `{self.repo}` repo in `.pre-commit-config.yaml`"
         for repo in precommit.get("repos", {}):
             if "repo" in repo and repo["repo"].lower() == cls.repo:
@@ -45,7 +47,20 @@ class PC100(PreCommit):
 
 class PC110(PreCommit):
     "Uses black"
-    repo = "https://github.com/psf/black"
+    repo = "https://github.com/psf/black-pre-commit-mirror"
+
+    @classmethod
+    def check(cls: type[PreCommitMixin], precommit: dict[str, Any]) -> bool | str:
+        "Must have `{self.repo}` repo in `.pre-commit-config.yaml`"
+        for repo in precommit.get("repos", {}):
+            if repo.get("repo", "").lower() == cls.repo:
+                return True
+            if repo.get("repo", "").lower() == "https://github.com/psf/black":
+                return (
+                    "Use https://github.com/psf/black-pre-commit-mirror for black, "
+                    "which is 2-3x faster because it gets pre-compiled black from PyPI."
+                )
+        return False
 
 
 class PC111(PreCommit):
