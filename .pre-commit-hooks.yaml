@@ -1,7 +1,8 @@
 - id: sp-repo-review
   name: sp-repo-review
   description: Check for configuration best practices
-  entry: repo-review
+  entry: repo-review .
   language: python
   types_or: [text]
+  pass_filenames: false
   minimum_pre_commit_version: 2.9.0
