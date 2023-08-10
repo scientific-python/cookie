@@ -283,6 +283,7 @@ Or pre-commit:
   rev: <version>
   hooks:
     - id: sp-repo-review
+      additional_dependencies: ["repo-review[cli]"]
 ```
 
 ## List of checks
