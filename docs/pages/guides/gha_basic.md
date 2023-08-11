@@ -357,7 +357,7 @@ locally or in a shared GitHub repo in either GitHub actions syntax itself
 (called "composite"), JavaScript, or Docker. Combined with pipx, composite
 actions are very easy to write!
 
-To create a custom action, either places it in `.github/acitons` (Just for
+To create a custom action, either places it in `.github/actions` (Just for
 internal use in that repo's workflows), or in `action.yml` if you want to allow
 others to use your repository as an action. The start of the file looks like:
 
