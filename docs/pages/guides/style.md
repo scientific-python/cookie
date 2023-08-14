@@ -162,7 +162,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.0.282"
+  rev: "v0.0.284"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -297,7 +297,7 @@ use the manual stage, it's opt-in instead of automatic.
 
 ```yaml
 - repo: https://github.com/hadialqattan/pycln
-  rev: "v2.2.1"
+  rev: "v2.2.2"
   hooks:
     - id: pycln
       args: [--all]
@@ -480,7 +480,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.4.1"
+  rev: "v1.5.0"
   hooks:
     - id: mypy
       files: src
