@@ -12,9 +12,27 @@ parent: Topical Guides
 
 Documentation used to require learning RestructureText (sometimes referred to as
 ReST / RST), but today we have great choices for documentation in markdown, the
-same format used by GitHub, Wikipedia, and others. There are two two major
-documentation toolchains, sphinx and mkdocs. This guide covers Sphinx, and uses
-the modern MyST plugin to get markdown support.
+same format used by GitHub, Wikipedia, and others. This guide covers Sphinx, and
+uses the modern MyST plugin to get markdown support.
+
+{: .note-title }
+
+> Other frameworks
+>
+> There are other frameworks as well; these often are simpler, but are not as
+> commonly used, and have somewhat fewer examples and plugins. They are:
+>
+> - [JupyterBook](): A powerful system for rendering a collection of notebooks
+>   using Sphinx internally. Can also be used for docs, though, see
+>   [echopype](https://echopype.readthedocs.io).
+> - [MkDocs](): a from-scratch new documentation system based on markdown and
+>   HTML. Less support for man pages & pdfs than Sphinx, since it doesn't use
+>   docutils. Has over [200 plugins](https://github.com/mkdocs/catalog) - they
+>   are much easier to write than Sphinx. Examples include
+>   [hatch](https://hatch.pypa.io), [PDM](https://pdm.fming.dev),
+>   [cibuildwheel](https://cibuildwheel.readthedocs.io),
+>   [Textual](https://textual.textualize.io), and
+>   [Pipx](https://pypa.github.io/pipx/).
 
 ## What to include
 
@@ -375,6 +393,32 @@ api/<package-name-here>
 ````
 
 Note that your docstrings are still parsed as Restructured Text.
+
+## Notebooks in docs
+
+You can combine notebooks into your docs. The tool for this is `nbsphinx`. If
+you want to use it, add `nbsphinx` to your documentation requirements, add
+`"nbsphinx"` to your `conf.py`'s `extensions =` list, and add some options for
+nbsphinx in `conf.py`:
+
+```python
+nbsphinx_execute = "auto"
+
+nbsphinx_execute_arguments = [
+    "--InlineBackend.figure_formats={'png2x'}",
+    "--InlineBackend.rc=figure.dpi=96",
+]
+
+nbsphinx_kernel_name = "python3"
+```
+
+You can set `nbsphinx_execute` to `always`, `never`, or `auto` - `auto` will
+only execute empty notebooks. The execute arguments shown above will produce
+"retina" images from matplotlib. You can set the kernel name (make sure you can
+execute all of your (unexecuted) notebooks).
+
+If you want to use markdown instead of notebooks, you can use jupytext (see
+[here](https://nbsphinx.readthedocs.io/en/0.9.2/a-markdown-file.html)).
 
 <!-- prettier-ignore-start -->
 [diátaxis]: https://diataxis.fr/
