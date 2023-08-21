@@ -62,7 +62,7 @@ not needed is the following: changing states.
 It is often tempting to invent a custom class to express a workflow, along these
 lines.
 
-```py
+```python
 data = Data()
 data.load_data()
 data.prepare()
@@ -80,7 +80,7 @@ states.
 One alternative replace `Data` with multiple immutable classes representing the
 state at each step.
 
-```py
+```python
 empty_data = EmptyData()
 loaded_data = empty_data.load_data()
 prepared_data = loaded_data.prepare()
@@ -90,7 +90,7 @@ computed_data.plot()
 
 We could avoid naming the temporaries, too:
 
-```py
+```python
 computed_data = EmptyData().load_data().prepare().do_calculations()
 computed_data.plot()
 ```
@@ -119,8 +119,9 @@ Protocols to make this type of use much easier).
 When you want to group data together into one object for convenience, consider
 dataclasses.
 
-```py
+```python
 from dataclasses import dataclass
+
 
 @dataclass
 class Data:

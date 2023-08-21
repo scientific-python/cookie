@@ -112,22 +112,22 @@ re-installing it each time.
 Then, in a Python shell or Jupyter Notebook, import your package and call the
 function.
 
-```py
+```pycon
 >>> from example.refraction import snell
 >>> import numpy as np
->>> snell(np.pi/4, 1.00, 1.33)
+>>> snell(np.pi / 4, 1.00, 1.33)
 1.2239576240104186
 ```
 
 The docstring can be viewed with `help()`.
 
-```py
+```pycon
 >>> help(snell)
 ```
 
 Or, in Jupyter or Python, use `?` as a shortcut.
 
-```py
+```ipython
 In [1]: snell?
 ```
 
