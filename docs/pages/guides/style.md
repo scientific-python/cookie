@@ -141,7 +141,7 @@ markdown and restructured text. Note that because black is in
 
 ```yaml
 - repo: https://github.com/asottile/blacken-docs
-  rev: "1.15.0"
+  rev: "1.16.0"
   hooks:
     - id: blacken-docs
       additional_dependencies: [black==23.7.0]
@@ -162,7 +162,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.0.284"
+  rev: "v0.0.285"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -480,7 +480,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.5.0"
+  rev: "v1.5.1"
   hooks:
     - id: mypy
       files: src
@@ -721,7 +721,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier
-  rev: "v3.0.1"
+  rev: "v3.0.2"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
