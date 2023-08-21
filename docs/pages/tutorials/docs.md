@@ -50,7 +50,7 @@ mkdir docs
 In this directory, we will create a minimal Sphinx configuration file at
 `docs/conf.py`.
 
-```py
+```python
 # content of docs/conf.py
 
 project = "example"
@@ -159,7 +159,7 @@ copy/paste these examples.
 
 In `docs/conf.py`, add to the list of extensions.
 
-```py
+```python
 extensions = [
     # whatever you already have in here...
     "sphinx.ext.autodoc",

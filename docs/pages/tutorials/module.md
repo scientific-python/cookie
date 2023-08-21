@@ -24,7 +24,7 @@ maintainable, reusable, and/or shareable form.
 
 Here is the code:
 
-```py
+```python
 # contents of refraction.py
 
 import numpy as np

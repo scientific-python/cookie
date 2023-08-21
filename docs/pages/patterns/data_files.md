@@ -188,7 +188,7 @@ are two concrete examples of how to use Pooch in this way in a project. It is
 also possible to use Pooch in a simpler download script to just fetch a single
 file as in the following small example:
 
-```py
+```python
 import pooch
 
 file_path = pooch.retrieve(

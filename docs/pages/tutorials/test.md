@@ -56,7 +56,7 @@ example
 
 Write some example tests into `tests/test_snell.py`, such as the following:
 
-```py
+```python
 # contents of tests/test_snell.py
 
 import numpy as np
