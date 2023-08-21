@@ -68,9 +68,9 @@ dev =
     pytest>=6
     pytest-cov>=3
 docs =
-    furo>=22
+    furo>=2023.08.17
     myst-parser>=0.13
-    sphinx>=4.0
+    sphinx>=7.0
     sphinx-autodoc-typehints
     sphinx-copybutton
 test =
