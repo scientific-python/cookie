@@ -56,7 +56,7 @@ data file, the naïve solution is just to hard-code the path to that file.
 ```python
 from pathlib import Path
 
-spacings_txt = Path("peak_spacings/LaB6.txt").read_text(encoding="utf=8")
+spacings_txt = Path("peak_spacings/LaB6.txt").read_text(encoding="utf-8")
 ```
 
 But this is not a good solution because:
@@ -111,7 +111,8 @@ package.peak_spacings =
 ```
 
 **Or**, you can use automatic data inclusion (this is the default if you use
-`pyproject.toml` `[project]` config in Setuptools 61+):
+`pyproject.toml` `[project]` config in Setuptools 61+). To enable this with
+`setup.cfg`:
 
 ```ini
 [options]
@@ -139,7 +140,7 @@ import importlib_resources as resources
 
 ref = resources.files("package.peak_spacings") / "LaB6.txt"
 
-spacings_txt = ref.read_text(encoding="utf=8")
+spacings_txt = ref.read_text(encoding="utf-8")
 
 # If you have an API that requires an on-disk file, you can do this instead:
 with resources.as_file(ref) as path:
