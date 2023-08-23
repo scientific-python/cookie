@@ -17,7 +17,7 @@ def workflows(root: Traversable) -> dict[str, Any]:
     workflows_dict: dict[str, Any] = {}
     if workflows_base_path.is_dir():
         for workflow_path in workflows_base_path.iterdir():
-            if workflow_path.name.endswith(".yml"):
+            if workflow_path.name.endswith((".yml", ".yaml")):
                 with workflow_path.open("rb") as f:
                     workflows_dict[Path(workflow_path.name).stem] = yaml.safe_load(f)
 
