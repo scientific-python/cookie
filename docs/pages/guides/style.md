@@ -140,7 +140,7 @@ markdown and restructured text. Note that because black is in
 `additional_dependencies`, you'll have to keep it up to date manually.
 
 ```yaml
-- repo: https://github.com/asottile/blacken-docs
+- repo: https://github.com/adamchainz/blacken-docs
   rev: "1.16.0"
   hooks:
     - id: blacken-docs
