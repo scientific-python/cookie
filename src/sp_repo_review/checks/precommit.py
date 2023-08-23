@@ -53,7 +53,8 @@ class PC110(PreCommit):
 class PC111(PreCommit):
     "Uses blacken-docs"
     requires = {"PY006", "PC110"}
-    repo = "https://github.com/asottile/blacken-docs"
+    repo = "https://github.com/adamchainz/blacken-docs"
+    renamed = "https://github.com/asottile/blacken-docs"
 
 
 class PC190(PreCommit):
