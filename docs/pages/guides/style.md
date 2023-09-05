@@ -162,7 +162,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.0.285"
+  rev: "v0.0.287"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -721,7 +721,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier
-  rev: "v3.0.2"
+  rev: "v3.0.3"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
