@@ -70,7 +70,7 @@ the name "CI/CD", you can just combine the two `on` dicts.
 dist:
   runs-on: ubuntu-latest
   steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -118,7 +118,7 @@ later in the upload action for the release job, as well).
 >
 > ```yaml
 > steps:
->   - uses: actions/checkout@v3
+>   - uses: actions/checkout@v4
 >   - uses: hynek/build-and-inspect-python-package@v1
 > ```
 >
@@ -212,7 +212,7 @@ jobs:
   dist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -257,7 +257,7 @@ jobs:
   dist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 

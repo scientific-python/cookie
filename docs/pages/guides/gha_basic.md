@@ -59,7 +59,7 @@ lint:
   name: Lint
   runs-on: ubuntu-latest
   steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
       with:
         python-version: "3.x"
@@ -97,7 +97,7 @@ tests:
         - "3.12"
   name: Check Python ${{ matrix.python-version }}
   steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0 # Only needed if using setuptools-scm
 
@@ -493,7 +493,7 @@ jobs:
       # more here if you have more situations to detect
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Changed test-related files
         if: github.event_name == 'pull_request'
