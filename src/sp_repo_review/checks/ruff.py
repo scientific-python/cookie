@@ -21,7 +21,7 @@ class RF001(Ruff):
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
         """
-        Must have `tool.ruff` section in `pyproject.toml`. Other forms of
+        Must have `[tool.ruff]` section in `pyproject.toml`. Other forms of
         configuration are not supported by this check.
         """
 
@@ -39,8 +39,8 @@ class RF002(Ruff):
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
         """
-        Must select a minimum version to target. Affects pyupgrade,
-        isort, and others. Can be inferred from `project.requires-python`.
+        Must select a minimum version to target. Affects pyupgrade, isort, and
+        others. Will be inferred from `project.requires-python`.
         """
 
         match pyproject:
@@ -61,7 +61,9 @@ class RF003(Ruff):
     def check(pyproject: dict[str, Any], package: Traversable) -> bool | None:
         """
         Must specify `src` directory if it exists.
+
         ```toml
+        [tool.ruff]
         src = ["src"]
         ```
         """
@@ -88,8 +90,12 @@ class RF1xx(Ruff):
     def check(cls: type[RuffMixin], pyproject: dict[str, Any]) -> bool:
         """
         Must select the {self.name} `{self.code}` checks. Recommended:
+
         ```toml
-        select = ["{self.code}"]  # {self.name}
+        [tool.ruff]
+        select = [
+          "{self.code}",  # {self.name}
+        ]
         ```
         """
 
@@ -97,7 +103,7 @@ class RF1xx(Ruff):
             case {"tool": {"ruff": {"select": list(x)}}} | {
                 "tool": {"ruff": {"extend-select": list(x)}}
             }:
-                return cls.code in x
+                return cls.code in x or "ALL" in x
             case _:
                 return False
 

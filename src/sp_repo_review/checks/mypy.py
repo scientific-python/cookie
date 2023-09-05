@@ -38,13 +38,19 @@ class MY101(MyPy):
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
         """
-        Must have `strict = true` in the mypy config. MyPy is best with strict
-        or nearly strict configuration. If you are happy with the strictness of
-        your settings already, ignore this check.
+        Must have `strict` in the mypy config. MyPy is best with strict or
+        nearly strict configuration. If you are happy with the strictness of
+        your settings already, ignore this check or set `strict = false`
+        explicitly.
+
+        ```toml
+        [tool.mypy]
+        strict = true
+        ```
         """
 
         match pyproject:
-            case {"tool": {"mypy": {"strict": True}}}:
+            case {"tool": {"mypy": {"strict": bool()}}}:
                 return True
             case _:
                 return False
@@ -61,6 +67,11 @@ class MY102(MyPy):
         """
         Must have `show_error_codes = true`. This will print helpful error codes
         for users that clarify why something fails if you need to skip it.
+
+        ```toml
+        [tool.mypy]
+        show_error_codes = true
+        ```
         """
 
         match pyproject:
@@ -83,6 +94,11 @@ class MY103(MyPy):
         occasionally false positives (often due to platform or Python version
         static checks), so it's okay to ignore this check. But try it first - it
         can catch real bugs too.
+
+        ```toml
+        [tool.mypy]
+        warn_unreachable = true
+        ```
         """
 
         match pyproject:
@@ -104,6 +120,11 @@ class MY104(MyPy):
         Must have `"ignore-without-code"` in `enable_error_code = [...]`. This
         will force all skips in your project to include the error code, which
         makes them more readable, and avoids skipping something unintended.
+
+        ```toml
+        [tool.mypy]
+        enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+        ```
         """
 
         match pyproject:
@@ -124,6 +145,11 @@ class MY105(MyPy):
         """
         Must have `"redundant-expr"` in `enable_error_code = [...]`. This helps
         catch useless lines of code, like checking the same condition twice.
+
+        ```toml
+        [tool.mypy]
+        enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+        ```
         """
 
         match pyproject:
@@ -144,6 +170,11 @@ class MY106(MyPy):
         """
         Must have `"truthy-bool"` in `enable_error_code = []`. This catches
         mistakes in using a value as truthy if it cannot be falsey.
+
+        ```toml
+        [tool.mypy]
+        enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+        ```
         """
 
         match pyproject:
