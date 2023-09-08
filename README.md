@@ -65,7 +65,8 @@ During generation you can select from the following backends for your package:
     versioning) **(Recommended for Rust projects)**
 
 Currently, the best choice is probably hatch for pure Python projects, and
-setuptools (such as the pybind11 choice) for binary projects.
+scikit-build (such as the scikit-build-core + pybind11 choice) for binary
+projects.
 
 #### To use (modern copier version)
 
