@@ -10,10 +10,10 @@ parent: Topical Guides
 
 # Writing documentation
 
-Documentation used to require learning reStructuredText (sometimes referred to as
-reST / RST), but today we have great choices for documentation in markdown, the
-same format used by GitHub, Wikipedia, and others. This guide covers Sphinx, and
-uses the modern MyST plugin to get Markdown support.
+Documentation used to require learning reStructuredText (sometimes referred to
+as reST / RST), but today we have great choices for documentation in markdown,
+the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx,
+and uses the modern MyST plugin to get Markdown support.
 
 {: .note-title }
 
@@ -146,9 +146,9 @@ several good extensions:
 We are including both possible file extensions. We are also avoiding some common
 file patterns, just in case.
 
-For theme, you have several good options. The clean, light-weight Furo theme
-is shown above. Many scientific packages choose the
-`sphinx-py-data` theme, which is also a good choice (no dark mode, though).
+For theme, you have several good options. The clean, light-weight Furo theme is
+shown above. Many scientific packages choose the `sphinx-py-data` theme, which
+is also a good choice (no dark mode, though).
 
 We are enabling a useful MyST extension: `colon_fence` allows you to use three
 colons for directives, which might be highlighted better if the directive
