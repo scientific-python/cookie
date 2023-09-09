@@ -10,10 +10,10 @@ parent: Topical Guides
 
 # Writing documentation
 
-Documentation used to require learning RestructureText (sometimes referred to as
-ReST / RST), but today we have great choices for documentation in markdown, the
+Documentation used to require learning reStructuredText (sometimes referred to as
+reST / RST), but today we have great choices for documentation in markdown, the
 same format used by GitHub, Wikipedia, and others. This guide covers Sphinx, and
-uses the modern MyST plugin to get markdown support.
+uses the modern MyST plugin to get Markdown support.
 
 {: .note-title }
 
@@ -26,13 +26,13 @@ uses the modern MyST plugin to get markdown support.
 >   using Sphinx internally. Can also be used for docs, though, see
 >   [echopype](https://echopype.readthedocs.io).
 > - [MkDocs](): a from-scratch new documentation system based on markdown and
->   HTML. Less support for man pages & pdfs than Sphinx, since it doesn't use
+>   HTML. Less support for man pages & PDFs than Sphinx, since it doesn't use
 >   docutils. Has over [200 plugins](https://github.com/mkdocs/catalog) - they
 >   are much easier to write than Sphinx. Examples include
 >   [hatch](https://hatch.pypa.io), [PDM](https://pdm.fming.dev),
 >   [cibuildwheel](https://cibuildwheel.readthedocs.io),
 >   [Textual](https://textual.textualize.io), and
->   [Pipx](https://pypa.github.io/pipx/).
+>   [pipx](https://pypa.github.io/pipx/).
 
 ## What to include
 
@@ -67,7 +67,7 @@ with render_cookie() as package:
 
 Create `docs/` directory within your project (i.e. next to `src/`). There is a
 sphinx-quickstart tool, but unnecessary files (make/bat, we recommend a
-cross-platform noxfile instead), and uses rst instead of markdown. Instead, this
+cross-platform noxfile instead), and uses RST instead of Markdown. Instead, this
 is our recommended starting point for `conf.py`:
 
 ### conf.py
@@ -131,10 +131,10 @@ We start by setting some configuration values, but most notably we are getting
 the package version from the installed version of your package. We are listing
 several good extensions:
 
-- [`myst_parser`][myst] is the markdown parsing engine for sphinx.
-- `sphinx.ext.autodoc` will help us build API docs via Restructured Text and
+- [`myst_parser`][myst] is the Markdown parsing engine for Sphinx.
+- `sphinx.ext.autodoc` will help us build API docs via reStructuredText and
   dynamic analysis. Also see the package [sphinx-autodoc2][], which supports
-  markdown and uses static analysis; it might not be as battle tested at this
+  Markdown and uses static analysis; it might not be as battle tested at this
   time, though.
 - `sphinx.ext.intersphinx` will cross-link to other documentation.
 - `sphinx.ext.mathjax` allows you to include mathematical formulas.
@@ -146,9 +146,8 @@ several good extensions:
 We are including both possible file extensions. We are also avoiding some common
 file patterns, just in case.
 
-For theme, you have several good options. The clean, light-weight `furo` theme
-is shown above; a related theme from the same author is being used for the
-CPython documentation in CPython 3.13. Many scientific packages choose the
+For theme, you have several good options. The clean, light-weight Furo theme
+is shown above. Many scientific packages choose the
 `sphinx-py-data` theme, which is also a good choice (no dark mode, though).
 
 We are enabling a useful MyST extension: `colon_fence` allows you to use three
@@ -156,7 +155,7 @@ colons for directives, which might be highlighted better if the directive
 contains text than three backticks. See more built-in extensions in
 [MyST's docs](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html).
 
-One key feature of Sphinx is interphinx, which allows documentation to
+One key feature of Sphinx is intersphinx, which allows documentation to
 cross-reference each other. You can list other projects you are using, but a
 good minimum is to at least link to the CPython docs. You need to provide the
 path to the `objects.inv` file, usually at the main documentation URL.
@@ -229,7 +228,7 @@ docs = [
 
 While there are other ways to specify docs, and you don't have to make the docs
 requirements an extra, this is a good idea as it forces docs building to always
-install the project, rather than being tempted to install only sphinx and
+install the project, rather than being tempted to install only Sphinx and
 plugins and try to build against an uninstalled version of your project.
 
 ### .readthedocs.yaml
@@ -265,13 +264,13 @@ python:
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
-This sets the readthedocs config version (2 is required) {% rr RTD101 %}.
+This sets the Read the Docs config version (2 is required) {% rr RTD101 %}.
 
 The `build` table is the modern way to specify a runner. You need an `os` (a
-modern ubuntu should be fine) {% rr RTD102 %}, a `tools` table (we'll use Python
+modern Ubuntu should be fine) {% rr RTD102 %}, a `tools` table (we'll use Python
 {% rr RTD103 %}, several languages are supported here).
 
-Adding a `sphinx` table tells readthedocs to enable Sphinx integration. MkDocs
+Adding a `sphinx` table tells Read the Docs to enable Sphinx integration. MkDocs
 is supported too.
 
 Finally, we have a `python` table with an `install` key to describe how to
@@ -331,7 +330,7 @@ def docs(session: nox.Session) -> None:
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
-This is a more complex nox job just because it's taking some options (the
+This is a more complex Nox job just because it's taking some options (the
 ability to build and serve instead of just build, and the ability to select the
 builder). The first portion is just setting up argument parsing. Then it does
 some conditional installs based on arguments (sphinx-autobuild is only needed if
@@ -346,7 +345,7 @@ autobuild will rebuild if you change a file while serving.
 
 ## API docs
 
-To build API docs, you need to add the following nox job. It will rerun
+To build API docs, you need to add the following Nox job. It will rerun
 `sphinx-apidoc` to generate the sphinx autodoc pages for each of your public
 modules.
 
@@ -392,7 +391,7 @@ api/<package-name-here>
 ```
 ````
 
-Note that your docstrings are still parsed as Restructured Text.
+Note that your docstrings are still parsed as reStructuredText.
 
 ## Notebooks in docs
 
@@ -414,10 +413,10 @@ nbsphinx_kernel_name = "python3"
 
 You can set `nbsphinx_execute` to `always`, `never`, or `auto` - `auto` will
 only execute empty notebooks. The execute arguments shown above will produce
-"retina" images from matplotlib. You can set the kernel name (make sure you can
+"retina" images from Matplotlib. You can set the kernel name (make sure you can
 execute all of your (unexecuted) notebooks).
 
-If you want to use markdown instead of notebooks, you can use jupytext (see
+If you want to use Markdown instead of notebooks, you can use jupytext (see
 [here](https://nbsphinx.readthedocs.io/en/0.9.2/a-markdown-file.html)).
 
 <!-- prettier-ignore-start -->
