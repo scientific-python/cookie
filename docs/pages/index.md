@@ -19,7 +19,7 @@ maintainable, reusable, and shareable form? Start at the
 **Learn recommended tools and best practices.** [Topical guides]({% link
 pages/guides/index.md %}) provide task-based instruction on topics that scientists
 and research software engineers may encounter as their projects evolve and grow.
-This covers modern packaging([simple][] or [compiled][]), [style checking][], [testing][],
+This covers modern packaging ([simple][] or [compiled][]), [style checking][], [testing][],
 [documentation][], [static typing][], [CI][], and much more!
 
 {: .highlight-title }
@@ -58,7 +58,7 @@ want info.
 
 This guide also does not cover version control, but it is essential to have a
 basic facility with git to use these tools successfully. We recommend the
-[Software Carpentry lesson on git](https://swcarpentry.github.io/git-novice/).
+[Software Carpentry lesson on Git](https://swcarpentry.github.io/git-novice/).
 
 {: .note-title }
 
