@@ -162,7 +162,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.0.290"
+  rev: "v0.0.291"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -435,7 +435,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.11.2"
+  rev: "v3.13.0"
   hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
@@ -709,7 +709,7 @@ If you have shell scripts, you can protect against common mistakes using
 
 ```yaml
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: "v0.9.0.5"
+  rev: "v0.9.0.6"
   hooks:
     - id: shellcheck
 ```
