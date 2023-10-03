@@ -73,7 +73,7 @@ repos:
     hooks:
       - id: codespell
         exclude: ^Gemfile\.lock$
-        args: ["-Lnd"]
+        args: ["-Lnd", "-w"]
 
   - repo: local
     hooks:

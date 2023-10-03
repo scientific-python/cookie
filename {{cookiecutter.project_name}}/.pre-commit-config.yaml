@@ -45,7 +45,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.0.291"
+    rev: "v0.0.292"
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
@@ -53,7 +53,7 @@ repos:
 {%- if cookiecutter.backend == "setuptools" or cookiecutter.backend == "pybind11" %}
 
   - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: "v2.4.0"
+    rev: "v2.5.0"
     hooks:
       - id: setup-cfg-fmt
         args: [--include-version-classifiers, --max-py-version=3.12]
@@ -80,7 +80,7 @@ repos:
           - pytest
 
   - repo: https://github.com/codespell-project/codespell
-    rev: "v2.2.5"
+    rev: "v2.2.6"
     hooks:
       - id: codespell
 
