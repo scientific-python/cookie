@@ -23,7 +23,7 @@ could be changed at any time.
 
 However, this convention has limits. What about imports? You usually don't (and
 shouldn't) rename your imports. But they don't start with an underscore, so does
-that make them public? Even `from __future__ import anotations` will add an
+that make them public? Even `from __future__ import annotations` will add an
 `annotations` object, publicly visible, to your project!
 
 A second solution sometimes attempted is deleting things after using them. This

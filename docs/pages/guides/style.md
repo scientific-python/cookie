@@ -162,7 +162,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.0.291"
+  rev: "v0.0.292"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -435,7 +435,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.13.0"
+  rev: "v3.14.0"
   hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
@@ -594,7 +594,7 @@ important parts (like Python classifiers) are in sync. This tool,
 
 ```yaml
 - repo: https://github.com/asottile/setup-cfg-fmt
-  rev: "v2.4.0"
+  rev: "v2.5.0"
   hooks:
     - id: setup-cfg-fmt
       args: [--include-version-classifiers, --max-py-version=3.12]
@@ -613,7 +613,7 @@ than a list of "valid" words. To use:
 
 ```yaml
 - repo: https://github.com/codespell-project/codespell
-  rev: "v2.2.5"
+  rev: "v2.2.6"
   hooks:
     - id: codespell
       args: ["-L", "sur,nd"]
@@ -629,6 +629,9 @@ can instead use a comma separated list in `setup.cfg` or `.codespellrc`:
 ignore-words-list = sur,nd
 ```
 
+If you add the `toml` extra (or use Python 3.11+), you can instead put a
+`tool.codespell` section in your `pyproject.toml`.
+
 You can also use a local pygrep check to eliminate common capitalization errors,
 such as the one below:
 
@@ -643,8 +646,8 @@ such as the one below:
 ```
 
 You can also add the `-w` flag to have it automatically correct errors - this is
-probably not something you want regularly, but is very helpful to quickly make
-corrections if you have a lot of them when first adding the check.
+very helpful to quickly make corrections if you have a lot of them when first
+adding the check.
 
 ## PyGrep hooks
 

@@ -531,7 +531,7 @@ there are returned files, we set `run-tests=true`; otherwise, we don't (if we
 are in a PR and there were no matches).
 
 Everything else in the job is about getting the output from the step
-`changed-tests-files` to `tests-changes`, then from there into the resusable
+`changed-tests-files` to `tests-changes`, then from there into the reusable
 workflow output as `run-tests`.
 
 {: .note }
