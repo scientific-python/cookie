@@ -1,7 +1,7 @@
 See the [Scientific Python Developer Guide][spc-dev-intro] for a detailed
 description of best practices for developing scientific packages.
 
-[spc-dev-intro]: https://scientific-python-cookie.readthedocs.io/guide/intro
+[spc-dev-intro]: https://learn.scientific-python.org/development/
 
 # Quick development
 
