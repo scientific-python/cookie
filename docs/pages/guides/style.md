@@ -31,7 +31,7 @@ options:
 ```yaml
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v4.4.0"
+    rev: "v4.5.0"
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -435,7 +435,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.14.0"
+  rev: "v3.15.0"
   hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
