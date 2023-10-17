@@ -21,8 +21,12 @@ search_enabled: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "Scientific Python Cookie":
-    - "https://github.com/scientific-python/cookie"
+  Scientific Python:
+    - https://scientific-python.org
+  Learn:
+    - https://learn.scientific-python.org
+  Cookie:
+    - https://github.com/scientific-python/cookie
 
 gh_edit_link: true
 gh_edit_link_text: "View source for this page on GitHub."
