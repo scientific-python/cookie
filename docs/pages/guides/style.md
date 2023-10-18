@@ -106,7 +106,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "23.9.1"
+  rev: "23.10.0"
   hooks:
     - id: black
 ```
@@ -144,7 +144,7 @@ markdown and restructured text. Note that because black is in
   rev: "1.16.0"
   hooks:
     - id: blacken-docs
-      additional_dependencies: [black==23.7.0]
+      additional_dependencies: [black==23.10.0]
 ```
 
 {% enddetails %}
@@ -480,7 +480,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.6.0"
+  rev: "v1.6.1"
   hooks:
     - id: mypy
       files: src
@@ -695,7 +695,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v17.0.2"
+  rev: "v17.0.3"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
