@@ -371,6 +371,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`RF001`](https://learn.scientific-python.org/development/guides/style#RF001): Has Ruff config
 - [`RF002`](https://learn.scientific-python.org/development/guides/style#RF002): Target version must be set
 - [`RF003`](https://learn.scientific-python.org/development/guides/style#RF003): src directory specified if used
+- `RF004`: Deprecated config options should be avoided
 - [`RF101`](https://learn.scientific-python.org/development/guides/style#RF101): Bugbear must be selected
 - [`RF102`](https://learn.scientific-python.org/development/guides/style#RF102): isort must be selected
 - [`RF103`](https://learn.scientific-python.org/development/guides/style#RF103): pyupgrade must be selected

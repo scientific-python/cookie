@@ -200,7 +200,7 @@ select = [
   "NPY",         # NumPy specific rules
   "PD",          # pandas-vet
 ]
-extend-ignore = [
+ignore = [
   "PLR",    # Design related pylint codes
   "E501",   # Line too long
   "PT004",  # Use underscore for non-returning fixture (use usefixture instead)
@@ -224,8 +224,8 @@ select what you want from these. Like Flake8, plugins match by whole letter
 sequences (with the special exception of pylint's "PL" shortcut), then you can
 also include leading or whole error codes. Codes starting with 9 must be
 selected explicitly, with at least the letters followed by a 9. You can also
-ignore certain error codes via `extend-ignore`. You can also set codes per paths
-to ignore in `per-file-ignores`. If you don't like certain auto-fixes, you can
+ignore certain error codes via `ignore`. You can also set codes per paths to
+ignore in `per-file-ignores`. If you don't like certain auto-fixes, you can
 disable auto-fixing for specific error codes via `unfixable`.
 
 There are other configuration options, such as the `src` list which tells it

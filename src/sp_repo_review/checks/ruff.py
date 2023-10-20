@@ -70,11 +70,28 @@ class RF003(Ruff):
         if not package.joinpath("src").is_dir():
             return None
 
-        match pyproject:
-            case {"tool": {"ruff": {"src": list(x)}}}:
+        match pyproject["tool"]["ruff"]:
+            case {"src": list(x)}:
                 return "src" in x
             case _:
                 return False
+
+
+class RF004(Ruff):
+    "Deprecated config options should be avoided"
+
+    requires = {"RF001"}
+    url = ""
+
+    @staticmethod
+    def check(pyproject: dict[str, Any]) -> str:
+        match pyproject["tool"]["ruff"]:
+            case {"extend-unfixable": object()}:
+                return "`extend-unfixable` deprecated, use `unfixable` (identical)"
+            case {"extend-ignore": object()}:
+                return "`extend-ignore` deprecated, use `ignore` (identical)"
+            case _:
+                return ""
 
 
 class RuffMixin(Protocol):
@@ -99,10 +116,8 @@ class RF1xx(Ruff):
         ```
         """
 
-        match pyproject:
-            case {"tool": {"ruff": {"select": list(x)}}} | {
-                "tool": {"ruff": {"extend-select": list(x)}}
-            }:
+        match pyproject["tool"]["ruff"]:
+            case {"select": list(x)} | {"extend-select": list(x)}:
                 return cls.code in x or "ALL" in x
             case _:
                 return False

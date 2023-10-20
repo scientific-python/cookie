@@ -363,7 +363,7 @@ select = [
   "NPY",         # NumPy specific rules
   "PD",          # pandas-vet
 ]
-extend-ignore = [
+ignore = [
   "PLR",    # Design related pylint codes
   "E501",   # Line too long
 ]
