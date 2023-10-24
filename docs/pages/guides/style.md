@@ -175,6 +175,10 @@ inspect and undo changes in git.
 
 ```toml
 [tool.ruff]
+src = ["src"]
+exclude = []
+
+[tool.ruff.lint]
 select = [
   "E", "F", "W", # flake8
   "B",           # flake8-bugbear
@@ -206,16 +210,14 @@ ignore = [
   "PT004",  # Use underscore for non-returning fixture (use usefixture instead)
 ]
 typing-modules = ["mypackage._compat.typing"]
-src = ["src"]
 unfixable = [
   "T20",  # Removes print statements
   "F841", # Removes unused variables
 ]
-exclude = []
 flake8-unused-arguments.ignore-variadic-names = true
 isort.required-imports = ["from __future__ import annotations"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
 ```
 

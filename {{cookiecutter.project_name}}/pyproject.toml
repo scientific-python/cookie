@@ -338,6 +338,12 @@ disallow_incomplete_defs = true
 
 
 [tool.ruff]
+src = ["src"]
+{%- if cookiecutter.backend in ["setuptools", "pybind11", "poetry"] %}
+target-version = "py38"
+{%- endif %}
+
+[tool.ruff.lint]
 select = [
   "E", "F", "W", # flake8
   "B",           # flake8-bugbear
@@ -367,21 +373,16 @@ ignore = [
   "PLR",    # Design related pylint codes
   "E501",   # Line too long
 ]
-{%- if cookiecutter.backend in ["setuptools", "pybind11", "poetry"] %}
-target-version = "py38"
-{%- endif %}
-src = ["src"]
 unfixable = [
   "T20",  # Removes print statements
   "F841", # Removes unused variables
 ]
-exclude = []
 flake8-unused-arguments.ignore-variadic-names = true
 isort.required-imports = ["from __future__ import annotations"]
 # Uncomment if using a _compat.typing backport
 # typing-modules = ["{{ cookiecutter.__project_slug }}._compat.typing"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
 "noxfile.py" = ["T20"]
 
