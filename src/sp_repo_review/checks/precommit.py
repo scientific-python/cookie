@@ -102,8 +102,7 @@ class PC191(PreCommit):
                         and "--fix" in hook["args"]
                     ):
                         return "--show-fixes" in hook["args"]
-                    return None
-
+                return None
         return False
 
 
