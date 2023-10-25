@@ -374,6 +374,8 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`RF101`](https://learn.scientific-python.org/development/guides/style#RF101): Bugbear must be selected
 - [`RF102`](https://learn.scientific-python.org/development/guides/style#RF102): isort must be selected
 - [`RF103`](https://learn.scientific-python.org/development/guides/style#RF103): pyupgrade must be selected
+- `RF201`: Avoid using deprecated config settings
+- `RF202`: Use (new) lint config section
 
 <!-- [[[end]]] -->
 

@@ -1,17 +1,35 @@
 from __future__ import annotations
 
+from collections.abc import Generator
 from typing import Any, ClassVar, Protocol
 
+from .._compat import tomllib
 from .._compat.importlib.resources.abc import Traversable
 from . import mk_url
 
 ## R0xx: Ruff general
 ## R1xx: Ruff checks
+## R2xx: Ruff deprecations
+
+
+def ruff(pyproject: dict[str, Any], root: Traversable) -> dict[str, Any] | None:
+    """
+    Returns the ruff configuration, or None if the configuration doesn't exist.
+    Respects ``ruff.toml`` and ``.ruff.toml`` in addition to
+    ``pyproject.toml``.
+    """
+    paths = [root.joinpath(".ruff.toml"), root.joinpath("ruff.toml")]
+    for path in paths:
+        if path.is_file():
+            with path.open("rb") as f:
+                return tomllib.load(f)
+    return pyproject.get("tool", {}).get("ruff", None)  # type: ignore[no-any-return]
 
 
 class Ruff:
     family = "ruff"
     url = mk_url("style")
+    requires = {"RF001"}
 
 
 class RF001(Ruff):
@@ -19,33 +37,29 @@ class RF001(Ruff):
     requires = {"PY001"}
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(ruff: dict[str, Any] | None) -> bool:
         """
         Must have `[tool.ruff]` section in `pyproject.toml`. Other forms of
         configuration are not supported by this check.
         """
 
-        match pyproject:
-            case {"tool": {"ruff": object()}}:
-                return True
-            case _:
-                return False
+        return ruff is not None
 
 
 class RF002(Ruff):
     "Target version must be set"
-    requires = {"RF001"}
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pyproject: dict[str, Any], ruff: dict[str, Any]) -> bool:
         """
         Must select a minimum version to target. Affects pyupgrade, isort, and
         others. Will be inferred from `project.requires-python`.
         """
 
+        if "target-version" in ruff:
+            return True
+
         match pyproject:
-            case {"tool": {"ruff": {"target-version": str()}}}:
-                return True
             case {"project": {"requires-python": str()}}:
                 return True
             case _:
@@ -55,10 +69,8 @@ class RF002(Ruff):
 class RF003(Ruff):
     "src directory specified if used"
 
-    requires = {"RF001"}
-
     @staticmethod
-    def check(pyproject: dict[str, Any], package: Traversable) -> bool | None:
+    def check(ruff: dict[str, Any], package: Traversable) -> bool | None:
         """
         Must specify `src` directory if it exists.
 
@@ -70,24 +82,21 @@ class RF003(Ruff):
         if not package.joinpath("src").is_dir():
             return None
 
-        match pyproject:
-            case {"tool": {"ruff": {"src": list(x)}}}:
+        match ruff:
+            case {"src": list(x)}:
                 return "src" in x
             case _:
                 return False
 
 
-class RuffMixin(Protocol):
+class RF1xxMixin(Protocol):
     code: ClassVar[str]
     name: ClassVar[str]
 
 
 class RF1xx(Ruff):
-    family = "ruff"
-    requires = {"RF001"}
-
     @classmethod
-    def check(cls: type[RuffMixin], pyproject: dict[str, Any]) -> bool:
+    def check(cls: type[RF1xxMixin], ruff: dict[str, Any]) -> bool:
         """
         Must select the {self.name} `{self.code}` checks. Recommended:
 
@@ -99,10 +108,10 @@ class RF1xx(Ruff):
         ```
         """
 
-        match pyproject:
-            case {"tool": {"ruff": {"select": list(x)}}} | {
-                "tool": {"ruff": {"extend-select": list(x)}}
-            }:
+        match ruff:
+            case {"lint": {"select": list(x)} | {"extend-select": list(x)}} | {
+                "select": list(x)
+            } | {"extend-select": list(x)}:
                 return cls.code in x or "ALL" in x
             case _:
                 return False
@@ -126,8 +135,95 @@ class RF103(RF1xx):
     name = "pyupgrade"
 
 
+class RF2xxMixin(Protocol):
+    @staticmethod
+    def iter_check(ruff: dict[str, Any]) -> Generator[str, None, None]:
+        ...
+
+
+class RF2xx(Ruff):
+    url = ""
+
+    @classmethod
+    def check(cls: type[RF2xxMixin], ruff: dict[str, Any]) -> str:
+        return "\n\n".join(cls.iter_check(ruff))
+
+
+class RF201(RF2xx):
+    "Avoid using deprecated config settings"
+
+    @staticmethod
+    def iter_check(ruff: dict[str, Any]) -> Generator[str, None, None]:
+        match ruff:
+            case {"extend-unfixable": object()} | {
+                "lint": {"extend-unfixable": object()}
+            }:
+                yield "`extend-unfixable` deprecated, use `unfixable` instead (identical)"
+            case {"extend-ignore": object()} | {"lint": {"extend-ignore": object()}}:
+                yield "`extend-ignore` deprecated, use `ignore` instead (identical)"
+            case _:
+                pass
+
+
+RUFF_LINT = {
+    "allowed-confusables",
+    "dummy-variable-rgx",
+    "explicit-preview-rules",
+    "extend-fixable",
+    "extend-ignore",
+    "extend-per-file-ignores",
+    "extend-safe-fixes",
+    "extend-select",
+    "extend-unfixable",
+    "extend-unsafe-fixes",
+    "external",
+    "fixable",
+    "flake8-annotations",
+    "flake8-bandit",
+    "flake8-bugbear",
+    "flake8-builtins",
+    "flake8-comprehensions",
+    "flake8-copyright",
+    "flake8-errmsg",
+    "flake8-gettext",
+    "flake8-implicit-str-concat",
+    "flake8-import-conventions",
+    "flake8-pytest-style",
+    "flake8-quotes",
+    "flake8-self",
+    "flake8-tidy-imports",
+    "flake8-type-checking",
+    "flake8-unused-arguments",
+    "ignore",
+    "ignore-init-module-imports",
+    "isort",
+    "logger-objects",
+    "mccabe",
+    "pep8-naming",
+    "per-file-ignores",
+    "pycodestyle",
+    "pydocstyle",
+    "pyflakes",
+    "pylint",
+    "pyupgrade",
+    "select",
+    "task-tags",
+    "typing-modules",
+    "unfixable",
+}
+
+
+class RF202(RF2xx):
+    "Use (new) lint config section"
+
+    @staticmethod
+    def iter_check(ruff: dict[str, Any]) -> Generator[str, None, None]:
+        for item in sorted(set(ruff) & RUFF_LINT):
+            yield f"`{item}` should be set as `lint.{item}` instead"
+
+
 def repo_review_checks() -> dict[str, Ruff]:
-    base_classes = set(Ruff.__subclasses__()) - {RF1xx}
-    rf1xx_classes = set(RF1xx.__subclasses__())
-    repo_review_checks = base_classes | rf1xx_classes
-    return {p.__name__: p() for p in repo_review_checks}
+    classes = set(Ruff.__subclasses__()) - {RF1xx, RF2xx}
+    classes |= set(RF1xx.__subclasses__())
+    classes |= set(RF2xx.__subclasses__())
+    return {p.__name__: p() for p in classes}
