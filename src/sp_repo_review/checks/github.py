@@ -40,6 +40,7 @@ class GitHub:
 
 class GH100(GitHub):
     "Has GitHub Actions config"
+
     url = mk_url("gha-basic")
 
     @staticmethod
@@ -54,6 +55,7 @@ class GH100(GitHub):
 
 class GH101(GitHub):
     "Has nice names"
+
     requires = {"GH100"}
     url = mk_url("gha-basic")
 
@@ -68,6 +70,7 @@ class GH101(GitHub):
 
 class GH102(GitHub):
     "Auto-cancel on repeated PRs"
+
     requires = {"GH100"}
     url = mk_url("gha-basic")
 
@@ -87,6 +90,7 @@ class GH102(GitHub):
 
 class GH103(GitHub):
     "At least one workflow with manual dispatch trigger"
+
     requires = {"GH100"}
     url = mk_url("gha-basic")
 
@@ -105,6 +109,7 @@ class GH103(GitHub):
 
 class GH200(GitHub):
     "Maintained by Dependabot"
+
     url = mk_url("gha-basic")
 
     @staticmethod
@@ -128,6 +133,7 @@ class GH200(GitHub):
 
 class GH210(GitHub):
     "Maintains the GitHub action versions with Dependabot"
+
     requires = {"GH200"}
     url = mk_url("gha-basic")
 
@@ -154,6 +160,7 @@ class GH210(GitHub):
 
 class GH211(GitHub):
     "Do not pin core actions as major versions"
+
     requires = {"GH200", "GH210"}  # Currently listing both helps - TODO: remove GH200
     url = mk_url("gha-basic")
 

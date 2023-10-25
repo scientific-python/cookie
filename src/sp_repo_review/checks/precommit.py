@@ -41,17 +41,32 @@ class PreCommit:
 
 class PC100(PreCommit):
     "Has pre-commit-hooks"
+
     repo = "https://github.com/pre-commit/pre-commit-hooks"
 
 
 class PC110(PreCommit):
-    "Uses black"
+    "Uses black or ruff-format"
+
     repo = "https://github.com/psf/black-pre-commit-mirror"
     renamed = "https://github.com/psf/black"
+    alternate = "https://github.com/astral-sh/ruff-pre-commit"
+
+    @classmethod
+    def check(cls, precommit: dict[str, Any]) -> bool | None | str:
+        "Must have `{self.repo}` or `{self.alternate}` + `id: ruff-format` in `.pre-commit-config.yaml`"
+        for repo in precommit.get("repos", {}):
+            if repo.get("repo", "").lower() == cls.alternate and any(
+                hook.get("id", "") == "ruff-format" for hook in repo.get("hooks", {})
+            ):
+                return True
+
+        return super().check(precommit)
 
 
 class PC111(PreCommit):
     "Uses blacken-docs"
+
     requires = {"PY006", "PC110"}
     repo = "https://github.com/adamchainz/blacken-docs"
     renamed = "https://github.com/asottile/blacken-docs"
@@ -59,32 +74,38 @@ class PC111(PreCommit):
 
 class PC190(PreCommit):
     "Uses Ruff"
+
     repo = "https://github.com/astral-sh/ruff-pre-commit"
     renamed = "https://github.com/charliermarsh/ruff-pre-commit"
 
 
 class PC140(PreCommit):
     "Uses mypy"
+
     repo = "https://github.com/pre-commit/mirrors-mypy"
 
 
 class PC160(PreCommit):
     "Uses codespell"
+
     repo = "https://github.com/codespell-project/codespell"
 
 
 class PC170(PreCommit):
     "Uses PyGrep hooks (only needed if RST present)"
+
     repo = "https://github.com/pre-commit/pygrep-hooks"
 
 
 class PC180(PreCommit):
     "Uses prettier"
+
     repo = "https://github.com/pre-commit/mirrors-prettier"
 
 
 class PC191(PreCommit):
     "Ruff show fixes if fixes enabled"
+
     requires = {"PC190"}
     repo = "https://github.com/astral-sh/ruff-pre-commit"
 

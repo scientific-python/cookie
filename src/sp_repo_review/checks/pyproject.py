@@ -73,6 +73,7 @@ class PP301(PyProject):
 
 class PP302(PyProject):
     "Sets a minimum pytest to at least 6"
+
     requires = {"PP301"}
     url = mk_url("pytest")
 
@@ -93,6 +94,7 @@ class PP302(PyProject):
 
 class PP303(PyProject):
     "Sets the test paths"
+
     requires = {"PP301"}
     url = mk_url("pytest")
 
@@ -112,6 +114,7 @@ class PP303(PyProject):
 
 class PP304(PyProject):
     "Sets the log level in pytest"
+
     requires = {"PP301"}
     url = mk_url("pytest")
 
@@ -132,6 +135,7 @@ class PP304(PyProject):
 
 class PP305(PyProject):
     "Specifies xfail_strict"
+
     requires = {"PP301"}
     url = mk_url("pytest")
 
@@ -152,6 +156,7 @@ class PP305(PyProject):
 
 class PP306(PyProject):
     "Specifies strict config"
+
     requires = {"PP301"}
     url = mk_url("pytest")
 
@@ -172,6 +177,7 @@ class PP306(PyProject):
 
 class PP307(PyProject):
     "Specifies strict markers"
+
     requires = {"PP301"}
     url = mk_url("pytest")
 
@@ -192,6 +198,7 @@ class PP307(PyProject):
 
 class PP308(PyProject):
     "Specifies useful pytest summary"
+
     requires = {"PP301"}
     url = mk_url("pytest")
 
@@ -211,6 +218,7 @@ class PP308(PyProject):
 
 class PP309(PyProject):
     "Filter warnings specified"
+
     requires = {"PP301"}
     url = mk_url("pytest")
 

@@ -12,7 +12,9 @@ class General:
 
 
 class PY001(General):
+
     "Has a pyproject.toml"
+
     url = mk_url("packaging-simple")
 
     @staticmethod
@@ -26,6 +28,7 @@ class PY001(General):
 
 class PY002(General):
     "Has a README.(md|rst) file"
+
     url = mk_url("packaging-simple")
 
     @staticmethod
@@ -39,6 +42,7 @@ class PY002(General):
 
 class PY003(General):
     "Has a LICENSE* file"
+
     url = mk_url("packaging-simple")
 
     @staticmethod
@@ -49,6 +53,7 @@ class PY003(General):
 
 class PY004(General):
     "Has docs folder"
+
     url = mk_url("packaging-simple")
 
     @staticmethod
@@ -59,6 +64,7 @@ class PY004(General):
 
 class PY005(General):
     "Has tests folder"
+
     url = mk_url("packaging-simple")
 
     @staticmethod
@@ -79,6 +85,7 @@ class PY005(General):
 
 class PY006(General):
     "Has pre-commit config"
+
     url = mk_url("style")
 
     @staticmethod
@@ -89,6 +96,7 @@ class PY006(General):
 
 class PY007(General):
     "Supports an easy task runner (nox or tox)"
+
     url = mk_url("tasks")
 
     @staticmethod
