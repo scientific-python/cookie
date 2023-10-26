@@ -134,8 +134,9 @@ look like Black, but run 30x faster. Here is the snippet to add Black to your
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.1.0"
+  rev: "v0.1.3"
   hooks:
+    #  id: ruff would go here if using both
     - id: ruff-format
 ```
 

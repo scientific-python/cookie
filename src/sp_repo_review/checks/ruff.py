@@ -219,6 +219,9 @@ RUFF_LINT = {
     "unfixable",
 }
 
+# exclude isn't the same - outer exclude avoids loading config files, so it
+# might be desired.
+
 
 class RF202(RF2xx):
     "Use (new) lint config section"
