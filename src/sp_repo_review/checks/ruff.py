@@ -34,6 +34,7 @@ class Ruff:
 
 class RF001(Ruff):
     "Has Ruff config"
+
     requires = {"PY001"}
 
     @staticmethod
@@ -109,9 +110,11 @@ class RF1xx(Ruff):
         """
 
         match ruff:
-            case {"lint": {"select": list(x)} | {"extend-select": list(x)}} | {
-                "select": list(x)
-            } | {"extend-select": list(x)}:
+            case (
+                {"lint": {"select": list(x)} | {"extend-select": list(x)}}
+                | {"select": list(x)}
+                | {"extend-select": list(x)}
+            ):
                 return cls.code in x or "ALL" in x
             case _:
                 return False
@@ -119,18 +122,21 @@ class RF1xx(Ruff):
 
 class RF101(RF1xx):
     "Bugbear must be selected"
+
     code = "B"
     name = "flake8-bugbear"
 
 
 class RF102(RF1xx):
     "isort must be selected"
+
     code = "I"
     name = "isort"
 
 
 class RF103(RF1xx):
     "pyupgrade must be selected"
+
     code = "UP"
     name = "pyupgrade"
 
@@ -155,9 +161,10 @@ class RF201(RF2xx):
     @staticmethod
     def iter_check(ruff: dict[str, Any]) -> Generator[str, None, None]:
         match ruff:
-            case {"extend-unfixable": object()} | {
-                "lint": {"extend-unfixable": object()}
-            }:
+            case (
+                {"extend-unfixable": object()}
+                | {"lint": {"extend-unfixable": object()}}
+            ):
                 yield "`extend-unfixable` deprecated, use `unfixable` instead (identical)"
             case {"extend-ignore": object()} | {"lint": {"extend-ignore": object()}}:
                 yield "`extend-ignore` deprecated, use `ignore` instead (identical)"
@@ -211,6 +218,9 @@ RUFF_LINT = {
     "typing-modules",
     "unfixable",
 }
+
+# exclude isn't the same - outer exclude avoids loading config files, so it
+# might be desired.
 
 
 class RF202(RF2xx):

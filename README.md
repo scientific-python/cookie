@@ -357,7 +357,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 
 ### Pre-commit
 - [`PC100`](https://learn.scientific-python.org/development/guides/style#PC100): Has pre-commit-hooks
-- [`PC110`](https://learn.scientific-python.org/development/guides/style#PC110): Uses black
+- [`PC110`](https://learn.scientific-python.org/development/guides/style#PC110): Uses black or ruff-format
 - [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Uses blacken-docs
 - [`PC140`](https://learn.scientific-python.org/development/guides/style#PC140): Uses mypy
 - [`PC160`](https://learn.scientific-python.org/development/guides/style#PC160): Uses codespell

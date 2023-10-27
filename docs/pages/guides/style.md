@@ -79,7 +79,7 @@ ci:
   autoupdate_commit_msg: "chore: update pre-commit hooks"
 ```
 
-## Black
+## Format
 
 {% rr PC110 %} [Black](https://black.readthedocs.io/en/latest/) is a popular
 auto-formatter from the Python Software Foundation. One of the main features of
@@ -102,6 +102,8 @@ There are a _few_ options, mostly to enable/disable certain files, remove string
 normalization, and to change the line length, and those go in your
 `pyproject.toml` file.
 
+{% tabs %} {% tab black Black %}
+
 Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
@@ -123,6 +125,37 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 ```
 
 {% enddetails %}
+
+{% endtab %} {% tab ruff Ruff-format %}
+
+Ruff, the powerful Rust-based linter, also has a formatter that is designed to
+look like Black, but run 30x faster. Here is the snippet to add Black to your
+`.pre-commit-config.yml` (combine with Ruff below):
+
+```yaml
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: "v0.1.3"
+  hooks:
+    #  id: ruff would go here if using both
+    - id: ruff-format
+```
+
+{% details You can add a Ruff badge to your repo as well %}
+
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json))](https://github.com/astral-sh/ruff)
+
+```md
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json))](https://github.com/astral-sh/ruff)
+```
+
+```rst
+.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json
+    :target: https://github.com/astral-sh/ruff
+```
+
+{% enddetails %}
+
+{% endtab %} {% endtabs %}
 
 In _very_ specific situations, you may want to retain special formatting. After
 carefully deciding that it is a special use case, you can use `# fmt: on` and
@@ -179,15 +212,13 @@ src = ["src"]
 exclude = []
 
 [tool.ruff.lint]
-select = [
-  "E", "F", "W", # flake8
+extend-select = [
   "B",           # flake8-bugbear
   "I",           # isort
   "ARG",         # flake8-unused-arguments
   "C4",          # flake8-comprehensions
   "EM",          # flake8-errmsg
   "ICN",         # flake8-import-conventions
-  "ISC",         # flake8-implicit-str-concat
   "G",           # flake8-logging-format
   "PGH",         # pygrep-hooks
   "PIE",         # flake8-pie
@@ -203,6 +234,8 @@ select = [
   "EXE",         # flake8-executable
   "NPY",         # NumPy specific rules
   "PD",          # pandas-vet
+  "FURB",        # referb
+  "PYI",         # flake8-pyi
 ]
 ignore = [
   "PLR",    # Design related pylint codes
@@ -255,7 +288,8 @@ without this).
 Here are some good error codes to enable on most (but not all!) projects:
 
 - `E`, `F`, `W`: These are the standard flake8 checks, classic checks that have
-  stood the test of time.
+  stood the test of time. Not required if you use `extend-select` (`W` not
+  needed if you use a formatter)
 - `B`: This finds patterns that are very bug-prone. {% rr RF101 %}
 - `I`: This sorts your includes. There are multiple benefits, such as smaller
   diffs, fewer conflicts, a way to auto-inject `__future__` imports, and easier
@@ -270,7 +304,7 @@ Here are some good error codes to enable on most (but not all!) projects:
   error string directly in the exception you are throwing, producing a cleaner
   traceback without duplicating the error string.
 - `ISC`: Checks for implicit string concatenation, which can help catch mistakes
-  with missing commas.
+  with missing commas. (May collide with formatter)
 - `PGH`: Checks for patterns, such as type ignores or noqa's without a specific
   error code.
 - `PL`: A set of four code groups that cover some (200 or so out of 600 rules)
@@ -284,9 +318,28 @@ Here are some good error codes to enable on most (but not all!) projects:
 - `T20`: Disallow `print` in your code (built on the assumption that it's a
   common debugging tool).
 - `UP`: Upgrade old Python syntax to your `target-version`. {% rr RF103 %}
+- `FURB`: From the refurb tool, a collection of helpful cleanups.
+- `PYI`: Typing related checks
 
 A few others small ones are included above, and there are even more available in
-Ruff.
+Ruff. You can use `ALL` to get them all, then ignore the ones you want to
+ignore. New checks go into `--preview` before being activated in a minor
+release.
+
+{% details You can add a Ruff badge to your repo as well %}
+
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json))](https://github.com/astral-sh/ruff)
+
+```md
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json))](https://github.com/astral-sh/ruff)
+```
+
+```rst
+.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
+    :target: https://github.com/astral-sh/ruff
+```
+
+{% enddetails %}
 
 {% details Separate tools that Ruff replaces %}
 
@@ -867,3 +920,5 @@ You also might like the following hook, which cleans Jupyter outputs:
 [schemastore]: https://schemastore.org
 
 <!-- prettier-ignore-end -->
+
+<script src="{% link assets/js/tabs.js %}"></script>
