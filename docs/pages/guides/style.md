@@ -748,6 +748,37 @@ be set to `"never"` or `"always"` to have prettier reflow text. You can turn off
 prettier for blocks with
 [comments depending on language](https://prettier.io/docs/en/ignore.html).
 
+## Schema validation
+
+There are two tools, both based on JSON Schema, that you can use to validate
+various configuration files. The first, [validate-pyproject][], validates your
+`pyproject.toml` file. By default, it checks the standards-defined sections
+(`build-system` and `project`), along with `tool.setuptools`. There are also
+plugins for some other tools, like `scikit-build-core` and `cibuildwheel`. Using
+it looks like this:
+
+```yaml
+- repo: https://github.com/abravalheri/validate-pyproject
+  rev: v0.15
+  hooks:
+    - id: validate-pyproject
+```
+
+You can also validate various other types of files with [check-jsonschema]. It
+supports a variety of common files built-in ([see the docs][cjs-common]) like
+various CI configuration files. You can also write/provide your own schemas and
+validate using those - [SchemaStore][] provides a few hundred different common
+schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
+
+```yaml
+- repo: https://github.com/python-jsonschema/check-jsonschema
+  rev: 0.27.0
+  hooks:
+    - id: check-dependabot
+    - id: check-github-workflows
+    - id: check-readthedocs
+```
+
 ## PyLint (noisy)
 
 PyLint is very opinionated, with a high signal-to-noise ratio. However, by
@@ -826,5 +857,13 @@ You also might like the following hook, which cleans Jupyter outputs:
     - id: nbstripout
 ```
 
+<!-- prettier-ignore-start -->
+
 [flake8]: https://github.com/pycqa/flake8
 [pycln]: https://hadialqattan.github.io/pycln
+[validate-pyproject]: https://validate-pyproject.readthedocs.io
+[check-jsonschema]: https://check-jsonschema.readthedocs.io/en/latest/
+[cjs-common]: https://check-jsonschema.readthedocs.io/en/latest/precommit_usage.html#supported-hooks
+[schemastore]: https://schemastore.org
+
+<!-- prettier-ignore-end -->
