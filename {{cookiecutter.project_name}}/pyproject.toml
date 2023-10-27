@@ -369,13 +369,7 @@ extend-select = [
 ]
 ignore = [
   "PLR",    # Design related pylint codes
-  "E501",   # Line too long
 ]
-unfixable = [
-  "T20",  # Removes print statements
-  "F841", # Removes unused variables
-]
-flake8-unused-arguments.ignore-variadic-names = true
 isort.required-imports = ["from __future__ import annotations"]
 # Uncomment if using a _compat.typing backport
 # typing-modules = ["{{ cookiecutter.__project_slug }}._compat.typing"]
