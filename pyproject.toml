@@ -135,7 +135,6 @@ messages_control.disable = [
 
 [tool.ruff]
 src = ["src"]
-exclude = []
 
 [tool.ruff.lint]
 extend-select = [
@@ -160,15 +159,9 @@ extend-select = [
 ]
 ignore = [
   "PLR",    # Design related pylint codes
-  "E501",   # Line too long
   "PT004",  # Incorrect check, usefixtures is the correct way to do this
   "RUF012", # Would require a lot of ClassVar's
 ]
-unfixable = [
-  "T20",  # Removes print statements
-  "F841", # Removes unused variables
-]
-flake8-unused-arguments.ignore-variadic-names = true
 
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
 "typing.Callable".msg = "Use collections.abc.Callable instead."

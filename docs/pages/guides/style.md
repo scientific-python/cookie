@@ -108,18 +108,20 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "23.10.0"
+  rev: "23.10.1"
   hooks:
     - id: black
 ```
 
 {% details You can add a Black badge to your repo as well %}
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 ```md
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ```
 
-```rst
+```
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 ```
@@ -142,13 +144,13 @@ look like Black, but run 30x faster. Here is the snippet to add Black to your
 
 {% details You can add a Ruff badge to your repo as well %}
 
-[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json))](https://github.com/astral-sh/ruff)
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 
 ```md
-[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json))](https://github.com/astral-sh/ruff)
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 ```
 
-```rst
+```
 .. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json
     :target: https://github.com/astral-sh/ruff
 ```
@@ -157,13 +159,13 @@ look like Black, but run 30x faster. Here is the snippet to add Black to your
 
 {% endtab %} {% endtabs %}
 
-In _very_ specific situations, you may want to retain special formatting. After
-carefully deciding that it is a special use case, you can use `# fmt: on` and
-`# fmt: off` around a code block to have it keep custom formatting. _Always_
-consider refactoring before you try this option! Most of the time, you can find
-a way to make the Blacked code look better by rewriting your code; factor out
-long unreadable portions into a variable, avoid writing matrices as 1D lists,
-etc.
+In _very_ specific situations, like when making a 2D array, you may want to
+retain special formatting. After carefully deciding that it is a special use
+case, you can use `# fmt: on` and `# fmt: off` around a code block to have it
+keep custom formatting. _Always_ consider refactoring before you try this
+option! Most of the time, you can find a way to make the Blacked code look
+better by rewriting your code; factor out long unreadable portions into a
+variable, avoid writing matrices as 1D lists, etc.
 
 {% details Documentation / README snippets support %}
 
@@ -177,7 +179,7 @@ markdown and restructured text. Note that because black is in
   rev: "1.16.0"
   hooks:
     - id: blacken-docs
-      additional_dependencies: [black==23.10.0]
+      additional_dependencies: [black==23.*]
 ```
 
 {% enddetails %}
@@ -195,7 +197,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.1.1"
+  rev: "v0.1.3"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -209,7 +211,6 @@ inspect and undo changes in git.
 ```toml
 [tool.ruff]
 src = ["src"]
-exclude = []
 
 [tool.ruff.lint]
 extend-select = [
@@ -239,15 +240,8 @@ extend-select = [
 ]
 ignore = [
   "PLR",    # Design related pylint codes
-  "E501",   # Line too long
-  "PT004",  # Use underscore for non-returning fixture (use usefixture instead)
 ]
 typing-modules = ["mypackage._compat.typing"]
-unfixable = [
-  "T20",  # Removes print statements
-  "F841", # Removes unused variables
-]
-flake8-unused-arguments.ignore-variadic-names = true
 isort.required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint.per-file-ignores]
@@ -283,7 +277,7 @@ without this).
 > ```
 >
 > This selects the minimum version you want to target (primarily for `"UP"` and
-> `"I"`) {% rr RF002 %},
+> `"I"`) {% rr RF002 %}
 
 Here are some good error codes to enable on most (but not all!) projects:
 
@@ -839,7 +833,8 @@ limiting the default checks or by starting off a new project using them, you can
 get some very nice linting, including catching some problematic code that
 otherwise is hard to catch. PyLint is generally not a good candidate for
 pre-commit, since it needs to have your package installed - it is less static of
-check than Flake8. Here is a suggested pyproject.toml entry to get you started:
+check than Ruff or Flake8. Here is a suggested `pyproject.toml` entry to get you
+started:
 
 ```toml
 [tool.pylint]
@@ -871,33 +866,22 @@ You can replace `src` with the module name.
 
 ## Jupyter notebook support
 
-### NBQA
+### Ruff
 
-You can adapt most tools to notebooks using
-[nbQA](https://github.com/nbQA-dev/nbQA). The most useful one is probably Ruff:
-
-```yaml
-- repo: https://github.com/nbQA-dev/nbQA
-  rev: "1.7.0"
-  hooks:
-    - id: nbqa-ruff
-      additional_dependencies: [ruff==0.0.275]
-```
-
-You can pass extra flags to Ruff via the hook, like
-`args: ["--extend-ignore=F821,F401"]`.
-
-{: .note-title }
-
-> Native notebook support
->
-> Ruff 0.257 added experimental notebook support! You currently have to enable
-> checking `.ipynb` files both in Ruff and pre-commit to use it.
+Ruff natively supports notebooks. You have to enable checking `.ipynb` files in
+pre-commit to use it with `types_or: [python, pyi, jupyter]`. This should be on
+both hooks if using both the linter and the formatter.
 
 ### Black
 
 For Black, just make sure you use the `id: black-jupyter` hook instead of
 `id: black`; that will also include notebooks.
+
+### NBQA
+
+You can adapt other tools to notebooks using
+[nbQA](https://github.com/nbQA-dev/nbQA). However, check to see if the tool
+natively supports notebooks first, several of them do now.
 
 ### Stripping output
 
