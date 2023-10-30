@@ -466,7 +466,7 @@ the app.
 [poetry]: https://python-poetry.org
 [hatch]: https://hatch.pypa.io
 [hypermodern]: https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
-[setuptools_scm file]: https://github.com/pypa/setuptools_scm/#file-finders-hook-makes-most-of-manifestin-unnecessary
+[setuptools_scm file]: https://setuptools-scm.readthedocs.io/en/latest/usage/#file-finders-hook-makes-most-of-manifestin-unnecessary
 [manifest.in]: https://packaging.python.org/guides/using-manifest-in/
 [setuptools]: https://setuptools.readthedocs.io/en/latest/userguide/index.html
 [setuptools cfg]: https://setuptools.readthedocs.io/en/latest/userguide/declarative_config.html
