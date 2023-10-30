@@ -22,14 +22,15 @@ and uses the modern MyST plugin to get Markdown support.
 > There are other frameworks as well; these often are simpler, but are not as
 > commonly used, and have somewhat fewer examples and plugins. They are:
 >
-> - [JupyterBook](): A powerful system for rendering a collection of notebooks
->   using Sphinx internally. Can also be used for docs, though, see
->   [echopype](https://echopype.readthedocs.io).
-> - [MkDocs](): a from-scratch new documentation system based on markdown and
->   HTML. Less support for man pages & PDFs than Sphinx, since it doesn't use
->   docutils. Has over [200 plugins](https://github.com/mkdocs/catalog) - they
->   are much easier to write than Sphinx. Examples include
->   [hatch](https://hatch.pypa.io), [PDM](https://pdm.fming.dev),
+> - [JupyterBook](https://jupyterbook.org): A powerful system for rendering a
+>   collection of notebooks using Sphinx internally. Can also be used for docs,
+>   though, see [echopype](https://echopype.readthedocs.io).
+> - [MkDocs](https://www.mkdocs.org): a from-scratch new documentation system
+>   based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
+>   since it doesn't use docutils. Has over
+>   [200 plugins](https://github.com/mkdocs/catalog) - they are much easier to
+>   write than Sphinx. Examples include [hatch](https://hatch.pypa.io),
+>   [PDM](https://pdm.fming.dev),
 >   [cibuildwheel](https://cibuildwheel.readthedocs.io),
 >   [Textual](https://textual.textualize.io), and
 >   [pipx](https://pypa.github.io/pipx/).
