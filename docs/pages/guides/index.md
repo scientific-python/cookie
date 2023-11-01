@@ -43,30 +43,31 @@ on setting up [docs][], as well.
 > Checking an existing project
 >
 > We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
-> your repository with the guidelines, runnable right in the guide via
+> your repository with the guidelines, runnable [right in the guide][] via
 > WebAssembly! All checks point to a linked badge in the guide.
 
 <!-- prettier-ignore-start -->
 
-[tutorials]: {% link pages/tutorials/index.md %}
-[style]: {% link pages/guides/style.md %}
-[mypy]: {% link pages/guides/mypy.md %}
-[docs]: {% link pages/guides/docs.md %}
-[simple packaging]: {% link pages/guides/packaging_simple.md %}
+[tutorials]:          {% link pages/tutorials/index.md %}
+[style]:              {% link pages/guides/style.md %}
+[mypy]:               {% link pages/guides/mypy.md %}
+[docs]:               {% link pages/guides/docs.md %}
+[simple packaging]:   {% link pages/guides/packaging_simple.md %}
 [compiled packaging]: {% link pages/guides/packaging_compiled.md %}
-[classic packaging]: {% link pages/guides/packaging_classic.md %}
-[coverage]: {% link pages/guides/coverage.md %}
-[gha_basic]: {% link pages/guides/gha_basic.md %}
-[gha_pure]: {% link pages/guides/gha_pure.md %}
-[gha_wheels]: {% link pages/guides/gha_wheels.md %}
-[pytest]: {% link pages/guides/pytest.md %}
-[task runners]: {% link pages/guides/tasks.md  %}
-[sp-repo-review]: {% link pages/guides/repo_review.md %}
+[classic packaging]:  {% link pages/guides/packaging_classic.md %}
+[coverage]:           {% link pages/guides/coverage.md %}
+[gha_basic]:          {% link pages/guides/gha_basic.md %}
+[gha_pure]:           {% link pages/guides/gha_pure.md %}
+[gha_wheels]:         {% link pages/guides/gha_wheels.md %}
+[pytest]:             {% link pages/guides/pytest.md %}
+[task runners]:       {% link pages/guides/tasks.md  %}
+[sp-repo-review]:     {% link pages/guides/repo_review.md %}
 
-[cookiecutter]: https://cookiecutter.readthedocs.io
-[copier]: https://copier.readthedocs.io
-[cruft]: https://cruft.github.io/cruft
-[repo-review]: https://repo-review.readthedocs.io
+[cookiecutter]:             https://cookiecutter.readthedocs.io
+[copier]:                   https://copier.readthedocs.io
+[cruft]:                    https://cruft.github.io/cruft
+[repo-review]:              https://repo-review.readthedocs.io
+[sp-repo-review]:           https://pypi.org/project/sp-repo-review
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 
 <!-- prettier-ignore-end -->
