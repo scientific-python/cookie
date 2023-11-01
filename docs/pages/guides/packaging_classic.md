@@ -237,7 +237,7 @@ a simple file that includes a line with a simple PEP 440 style version, like
 version = attr: package._version.version
 ```
 
-Setuptools will look in the AST of `_verison.py` for a simple assignment; if
+Setuptools will look in the AST of `_version.py` for a simple assignment; if
 that works, it will not actually import your package during the setup phase
 (which is bad). Older versions of setuptools or complex version files will
 import your package; if it is not importable with the pyproject.toml
@@ -441,7 +441,7 @@ to add a `console_scripts` entry point. The form is:
 ```ini
 [options.entry_points]
 console_scripts =
-    cliapp = packakge.__main__:main
+    cliapp = package.__main__:main
 ```
 
 The format is command line app name as the key, and the value is the path to the

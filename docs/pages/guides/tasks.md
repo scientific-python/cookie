@@ -19,7 +19,7 @@ with render_cookie() as package:
 
 A task runner, like [make][] (fully general), [rake][] (Ruby general),
 [invoke][] (Python general), [tox][] (Python packages), or [nox][] (Python
-simi-general), is a tool that lets you specify a set of tasks via a common
+semi-general), is a tool that lets you specify a set of tasks via a common
 interface. These have been discouraged by some community projects in the past,
 since they can be a crutch, allowing poor packaging practices to be employed
 behind a custom script, and they can hide what is actually happening.
