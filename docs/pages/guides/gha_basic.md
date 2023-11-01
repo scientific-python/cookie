@@ -341,7 +341,7 @@ list; this tells it what is required.
 
 We use `re-actors/alls-green` to evaluate whether required jobs have passed. You
 need to tell it what jobs are required, which you can do without repeating the
-needs list by taking the `needs` list and inputing it as json to `with: jobs:`.
+needs list by taking the `needs` list and inputting it as json to `with: jobs:`.
 
 This will also support jobs that are allowed to fail (`allowed-failures:`) and
 allowed to be skipped (`allowed-skips:`) too.

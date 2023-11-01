@@ -235,7 +235,7 @@ extend-select = [
   "EXE",         # flake8-executable
   "NPY",         # NumPy specific rules
   "PD",          # pandas-vet
-  "FURB",        # referb
+  "FURB",        # refurb
   "PYI",         # flake8-pyi
 ]
 ignore = [
