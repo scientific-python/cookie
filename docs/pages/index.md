@@ -36,7 +36,7 @@ This covers modern packaging ([simple][] or [compiled][]), [style checking][], [
 > Checking an existing project
 >
 > We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
-> your repository with the guidelines, runnable right in the guide via
+> your repository with the guidelines, runnable [right in the guide][] via
 > WebAssembly! All checks point to a linked badge in the guide.
 
 **Learn to write better research code.** A high-level document on
@@ -71,7 +71,6 @@ basic facility with git to use these tools successfully. We recommend the
 > by NSF cooperative agreement [OAC-2209877][].
 
 <!-- prettier-ignore-start -->
-[scientific-python/cookie]: https://github.com/scientific-python/cookie
 [simple]:                   {% link pages/guides/packaging_simple.md %}
 [compiled]:                 {% link pages/guides/packaging_compiled.md %}
 [style checking]:           {% link pages/guides/style.md %}
@@ -79,13 +78,16 @@ basic facility with git to use these tools successfully. We recommend the
 [documentation]:            {% link pages/guides/docs.md %}
 [static typing]:            {% link pages/guides/mypy.md %}
 [ci]:                       {% link pages/guides/gha_pure.md %}
-[sp-repo-review]:           {% link pages/guides/repo_review.md %}
+[right in the guide]:       {% link pages/guides/repo_review.md %}
+
+[scientific-python/cookie]: https://github.com/scientific-python/cookie
 [repo-review]:              https://repo-review.readthedocs.io
 [copier]:                   https://copier.readthedocs.io
 [cookiecutter]:             https://cookiecutter.readthedocs.io
 [cruft]:                    https://cruft.github.io/cruft
 [2023 spdev]:               https://scientific-python.org/summits/developer/2023
 [scikit-hep]:               https://scikit-hep.org
-[OAC-2209877]:              https://www.nsf.gov/awardsearch/showAward?AWD_ID=2209877&HistoricalAwards=false
+[OAC-2209877]:              https://www.nsf.gov/awardsearch/showAward?AWD_ID=2209877
 [nsls-ii]:                  https://nsls-ii.github.io
+[sp-repo-review]:           https://pypi.org/project/sp-repo-review
 <!-- prettier-ignore-end -->
