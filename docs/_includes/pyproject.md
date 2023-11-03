@@ -76,7 +76,7 @@ to add a `script` entry point. The form is:
 
 ```toml
 [project.scripts]
-cliapp = "packakge.__main__:main"
+cliapp = "package.__main__:main"
 ```
 
 The format is command line app name as the key, and the value is the path to the
