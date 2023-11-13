@@ -108,7 +108,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "23.10.1"
+  rev: "23.11.0"
   hooks:
     - id: black
 ```
@@ -136,7 +136,7 @@ look like Black, but run 30x faster. Here is the snippet to add Black to your
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.1.3"
+  rev: "v0.1.5"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -197,7 +197,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.1.3"
+  rev: "v0.1.5"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -529,7 +529,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.6.1"
+  rev: "v1.7.0"
   hooks:
     - id: mypy
       files: src
@@ -744,7 +744,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v17.0.3"
+  rev: "v17.0.4"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
