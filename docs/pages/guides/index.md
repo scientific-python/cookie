@@ -61,7 +61,7 @@ on setting up [docs][], as well.
 [gha_wheels]:         {% link pages/guides/gha_wheels.md %}
 [pytest]:             {% link pages/guides/pytest.md %}
 [task runners]:       {% link pages/guides/tasks.md  %}
-[sp-repo-review]:     {% link pages/guides/repo_review.md %}
+[right in the guide]: {% link pages/guides/repo_review.md %}
 
 [cookiecutter]:             https://cookiecutter.readthedocs.io
 [copier]:                   https://copier.readthedocs.io
