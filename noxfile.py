@@ -243,11 +243,10 @@ def native(session: nox.Session, backend: str, vcs: bool) -> None:
     session.chdir(cookie)
 
     if backend == "hatch":
-        session.run(backend, "env", "create")
+        session.run(backend, "run", "test")
     else:
         session.run(backend, "install")
-
-    session.run(backend, "run", "pytest")
+        session.run(backend, "run", "pytest")
 
 
 @nox.session()
