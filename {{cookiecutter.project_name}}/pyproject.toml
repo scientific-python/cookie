@@ -253,10 +253,11 @@ version.path = "src/{{ cookiecutter.__project_slug  }}/__init__.py"
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.py"
 {%- endif %}
-envs.default.dependencies = [
-  "pytest",
-  "pytest-cov",
-]
+
+[tool.hatch.env.default]
+features = ["test"]
+scripts.test = "pytest {args}"
+
 
 {%- elif cookiecutter.backend == "pdm" %}
 {%- if cookiecutter.vcs %}
