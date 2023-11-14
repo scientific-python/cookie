@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from .._compat.importlib.resources.abc import Traversable
 from . import mk_url
 
@@ -100,13 +102,25 @@ class PY007(General):
     url = mk_url("tasks")
 
     @staticmethod
-    def check(root: Traversable) -> bool:
+    def check(root: Traversable, pyproject: dict[str, Any]) -> bool:
         """
-        Projects must have a `noxfile.py` or `tox.ini` to encourage new contributors.
+        Projects must have a `noxfile.py`, `tox.ini`, or
+        `tool.hatch.envs`/`tool.spin`/`tool.tox` in `pyproject.toml` to encourage new
+        contributors.
         """
-        return (
-            root.joinpath("noxfile.py").is_file() or root.joinpath("tox.ini").is_file()
-        )
+        if root.joinpath("noxfile.py").is_file():
+            return True
+        if root.joinpath("tox.ini").is_file():
+            return True
+        match pyproject.get("tool", {}):
+            case {"hatch": {"envs": object()}}:
+                return True
+            case {"spin": object()}:
+                return True
+            case {"tox": object()}:
+                return True
+            case _:
+                return False
 
 
 def repo_review_checks() -> dict[str, General]:

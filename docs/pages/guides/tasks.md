@@ -18,37 +18,43 @@ with render_cookie() as package:
 <!-- [[[end]]] -->
 
 A task runner, like [make][] (fully general), [rake][] (Ruby general),
-[invoke][] (Python general), [tox][] (Python packages), or [nox][] (Python
-semi-general), is a tool that lets you specify a set of tasks via a common
-interface. These have been discouraged by some community projects in the past,
-since they can be a crutch, allowing poor packaging practices to be employed
-behind a custom script, and they can hide what is actually happening.
+[invoke][] (Python general), [hatch][] (Python packages), [tox][] (Python
+packages), or [nox][] (Python semi-general), is a tool that lets you specify a
+set of tasks via a common interface. These have been discouraged by some
+community projects in the past, since they can be a crutch, allowing poor
+packaging practices to be employed behind a custom script, and they can hide
+what is actually happening.
 
-We are carefully allowing an exception: [nox][]. Nox has two strong points that
-help with the above concerns. First, it is very explicit, and even prints what
-it is doing as it operates. Unlike the older tox, it does not have any implicit
-assumptions built-in. Second, it has very elegant built-in support for both
-virtual and Conda environments. This can greatly reduce new contributor friction
-with your codebase.
+As long as you don't rely on it to hide packaging issues, a great choice for
+many packages is [nox][]. Nox has two strong points that help with the above
+concerns. First, it is very explicit, and even prints what it is doing as it
+operates. Unlike the older tox, it does not have any implicit assumptions
+built-in. Second, it has very elegant built-in support for both virtual and
+Conda environments. This can greatly reduce new contributor friction with your
+codebase.
 
 A daily developer is _not_ expected to use nox for simple tasks, like running
 tests or linting. You should _not_ rely on nox to make a task that should be
-made simple and standard (like building a package) complicated. You are not
-expected to use nox for linting on CI, or often even for testing on CI, even if
-those tasks are provided for users. Nox is a few seconds slower than running
-directly in a custom environment - but for new users, and rarely run tasks, it
-is _much_ faster than explaining how to get setup or manually messing with
-virtual environments. It is also highly reproducible, creating and destroying
-the temporary environment each time.
+made simple and standard (like building a package) complicated. You do not need
+to use nox for linting on CI, or often even for testing on CI, even if those
+tasks are provided for users. Nox is a few seconds slower than running directly
+in a custom environment - but for new users, and rarely run tasks, it is _much_
+faster than explaining how to get setup or manually messing with virtual
+environments. It is also highly reproducible, creating and destroying the
+temporary environment each time. And, if you pass `-R` when rerunning it, you
+can skip the setup and install steps, making it nearly as fast as directly
+running the commands!
 
-{% rr PY007 %} You _should_ use nox to make it easy and simple for new
-contributors to run things. You _should_ use nox to make specialized developer
-tasks easy. You _should_ use nox to avoid making single-use virtual environments
-for docs and other rarely run tasks.
+{% rr PY007 %} You _should_ use a task runner to make it easy and simple for new
+contributors to run things. You _should_ use a task runner to make specialized
+developer tasks easy. You _should_ use a task runner to avoid making single-use
+virtual environments for docs and other rarely run tasks. Nox is recommended,
+but tox and hatch both are also acceptable.
 
 Nox doesn't handle binary builds very well, so for compiled projects, it might
 be best left to just specialized tasks.
 
+[hatch]: https://hatch.pypi.io
 [nox]: https://nox.thea.codes
 [tox]: https://tox.readthedocs.io
 [invoke]: https://www.pyinvoke.org
@@ -69,18 +75,18 @@ On GitHub Actions or Azure, pipx is available by default, so you should use
 action:
 
 ```yaml
-- uses: wntrblm/nox@v0.19.1
+- uses: wntrblm/nox@2023.04.22
 ```
 
 You can now access all current versions of Python from nox. At least in GitHub
 Actions, you should add `--forcecolor` to your nox runs to get color output in
 your logs, or set `env: FORCE_COLOR: 3`. If you'd like to customise the versions
-of Python prepared for you, then use this input:
+of Python prepared for you, then use input like this:
 
 ```yaml
-- uses: wntrblm/nox@v0.19.1
+- uses: wntrblm/nox@2023.04.22
   with:
-    python-versions: "3.8, 3.9, 3.10, 3.11, 3.12, pypy-3.9, pypy-3.10-nightly"
+    python-versions: "3.8, 3.9, 3.10, 3.11, 3.12, pypy-3.9, pypy-3.10"
 ```
 
 ### Introduction
