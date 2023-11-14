@@ -349,7 +349,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 ### MyPy
 - [`MY100`](https://learn.scientific-python.org/development/guides/style#MY100): Uses MyPy (pyproject config)
 - [`MY101`](https://learn.scientific-python.org/development/guides/style#MY101): MyPy strict mode
-- [`MY102`](https://learn.scientific-python.org/development/guides/style#MY102): MyPy show error codes
+- `MY102`: MyPy show_error_codes deprecated
 - [`MY103`](https://learn.scientific-python.org/development/guides/style#MY103): MyPy warn unreachable
 - [`MY104`](https://learn.scientific-python.org/development/guides/style#MY104): MyPy enables ignore-without-code
 - [`MY105`](https://learn.scientific-python.org/development/guides/style#MY105): MyPy enables redundant-expr

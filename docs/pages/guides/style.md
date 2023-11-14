@@ -552,7 +552,6 @@ this:
 files = "src"
 python_version = "3.8"
 strict = true
-show_error_codes = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 warn_unreachable = true
 
@@ -579,8 +578,6 @@ and `ignore-without-code` {% rr MY104 %}, `redundant-expr` {% rr MY105 %}, and
 `truthy-bool` {% rr MY106 %} can trigger too often (like on `sys.platform`
 checks) and have to be ignored occasionally, but can find some signifiant logic
 errors in your typing.
-
-{% rr MY102 %} You should enable `show_error_codes`.
 
 [mypy page]: {% link pages/guides/mypy.md %}
 

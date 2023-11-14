@@ -57,28 +57,21 @@ class MY101(MyPy):
 
 
 class MY102(MyPy):
-    "MyPy show error codes"
+    "MyPy show_error_codes deprecated"
 
     requires = {"MY100"}
-    url = mk_url("style")
 
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
         """
-        Must have `show_error_codes = true`. This will print helpful error codes
-        for users that clarify why something fails if you need to skip it.
-
-        ```toml
-        [tool.mypy]
-        show_error_codes = true
-        ```
+        Must not have `show_error_codes`. Use `hide_error_codes` instead (since MyPy v0.990).
         """
 
         match pyproject:
-            case {"tool": {"mypy": {"show_error_codes": True}}}:
-                return True
-            case _:
+            case {"tool": {"mypy": {"show_error_codes": object()}}}:
                 return False
+            case _:
+                return True
 
 
 class MY103(MyPy):
