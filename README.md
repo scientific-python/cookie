@@ -284,8 +284,11 @@ Or pre-commit:
   rev: <version>
   hooks:
     - id: sp-repo-review
-      additional_dependencies: ["repo-review[cli]"]
 ```
+
+If you use `additional_dependencies` to add more plugins, like
+`validate-pyproject`, you should also include `"repo-review[cli]"` to ensure the
+CLI requirements are included.
 
 ## List of checks
 

@@ -6,3 +6,4 @@
   types_or: [text]
   pass_filenames: false
   minimum_pre_commit_version: 2.9.0
+  additional_dependencies: ["repo-review[cli]"]
