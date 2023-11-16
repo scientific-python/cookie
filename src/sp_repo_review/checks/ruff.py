@@ -12,17 +12,31 @@ from . import mk_url
 ## R2xx: Ruff deprecations
 
 
+def merge(start: dict[str, Any], add: dict[str, Any]) -> dict[str, Any]:
+    merged = start.copy()
+    for key, value in add.items():
+        merged[key] = (
+            merge(start.get(key, {}), value) if isinstance(value, dict) else value
+        )
+    return merged
+
+
 def ruff(pyproject: dict[str, Any], root: Traversable) -> dict[str, Any] | None:
     """
     Returns the ruff configuration, or None if the configuration doesn't exist.
     Respects ``ruff.toml`` and ``.ruff.toml`` in addition to
-    ``pyproject.toml``.
+    ``pyproject.toml``. Respects the extend option.
     """
     paths = [root.joinpath(".ruff.toml"), root.joinpath("ruff.toml")]
     for path in paths:
         if path.is_file():
             with path.open("rb") as f:
-                return tomllib.load(f)
+                contents = tomllib.load(f)
+            if contents.get("extend", "") == "pyproject.toml":
+                extend = pyproject.get("tool", {}).get("ruff", {})
+                return merge(extend, contents)
+            return contents
+
     return pyproject.get("tool", {}).get("ruff", None)  # type: ignore[no-any-return]
 
 
@@ -35,13 +49,13 @@ class Ruff:
 class RF001(Ruff):
     "Has Ruff config"
 
-    requires = {"PY001"}
+    requires = set()
 
     @staticmethod
     def check(ruff: dict[str, Any] | None) -> bool:
         """
-        Must have `[tool.ruff]` section in `pyproject.toml`. Other forms of
-        configuration are not supported by this check.
+        Must have `[tool.ruff]` section in `pyproject.toml` or
+        `ruff.toml`/`.ruff.toml`.
         """
 
         return ruff is not None
@@ -102,7 +116,7 @@ class RF1xx(Ruff):
         Must select the {self.name} `{self.code}` checks. Recommended:
 
         ```toml
-        [tool.ruff]
+        [tool.ruff.lint]
         select = [
           "{self.code}",  # {self.name}
         ]
