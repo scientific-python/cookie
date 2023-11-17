@@ -205,7 +205,8 @@ class PP308(PyProject):
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
         """
-        `-ra` should be in `addopts = [...]` (print summary of all fails/errors).
+        An explicit summary flag like `-ra` should be in `addopts = [...]`
+        (print summary of all fails/errors).
 
         ```toml
         [tool.pytest.ini_options]
@@ -213,7 +214,7 @@ class PP308(PyProject):
         ```
         """
         options = pyproject["tool"]["pytest"]["ini_options"]
-        return "-ra" in options.get("addopts", [])
+        return any(opt.startswith("-r") for opt in options.get("addopts", []))
 
 
 class PP309(PyProject):
