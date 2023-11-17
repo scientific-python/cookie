@@ -346,7 +346,7 @@ use the manual stage, it's opt-in instead of automatic.
 
 ```yaml
 - repo: https://github.com/hadialqattan/pycln
-  rev: "v2.3.0"
+  rev: "v2.4.0"
   hooks:
     - id: pycln
       args: [--all]
@@ -741,7 +741,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v17.0.4"
+  rev: "v17.0.5"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -770,7 +770,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier
-  rev: "v3.0.3"
+  rev: "v3.1.0"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
