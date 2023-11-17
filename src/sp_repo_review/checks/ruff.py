@@ -117,7 +117,7 @@ class RF1xx(Ruff):
 
         ```toml
         [tool.ruff.lint]
-        select = [
+        extend-select = [
           "{self.code}",  # {self.name}
         ]
         ```
