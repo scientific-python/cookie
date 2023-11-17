@@ -1,15 +1,15 @@
 ---
 layout: page
-title: Style
+title: Style & static checks
 permalink: /guides/style/
 nav_order: 8
 parent: Topical Guides
-custom_title: Style guide
+custom_title: Style and static checks
 ---
 
 {% include toc.html %}
 
-# Style (static checkers)
+# Style and static checks
 
 ## Pre-commit
 
