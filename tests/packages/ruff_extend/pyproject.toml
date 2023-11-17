@@ -1,0 +1,5 @@
+[tool.repo-review]
+select = ["RF", "PY001"]
+
+[tool.ruff.lint]
+select = ["ALL"]

@@ -26,3 +26,12 @@ def test_local():
     package = DIR.parent
     results = process(package)
     assert results
+
+
+@pytest.mark.parametrize("name", ["ruff_extend"])
+def test_examples(name: str) -> None:
+    package = DIR / "packages" / name
+    _, results = process(package)
+
+    failures = [r for r in results if r.result is not None and not r.result]
+    assert not failures
