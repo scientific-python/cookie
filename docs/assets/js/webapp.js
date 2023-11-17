@@ -65,8 +65,8 @@ function Results(props) {
         result.state === false
           ? "error.main"
           : result.state === true
-          ? "text.primary"
-          : "info.main";
+            ? "text.primary"
+            : "info.main";
       const details =
         result.state === false ? (
           <span dangerouslySetInnerHTML={{ __html: result.err_msg }} />
@@ -75,15 +75,15 @@ function Results(props) {
         result.state === false
           ? "error"
           : result.state === true
-          ? "success"
-          : "info";
+            ? "success"
+            : "info";
       const icon = (
         <MaterialUI.Icon color={color}>
           {result.state === false
             ? "report"
             : result.state === true
-            ? "check_box"
-            : "info"}
+              ? "check_box"
+              : "info"}
         </MaterialUI.Icon>
       );
 
