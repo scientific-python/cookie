@@ -377,13 +377,11 @@ def pc_bump(session: nox.Session) -> None:
             page.write_text(txt)
 
 
-@nox.session(reuse_venv=True)
+@nox.session(venv_backend="none")
 def gha_bump(session: nox.Session) -> None:
     """
     Bump the GitHub Actions.
     """
-    session.install("lastversion")
-
     pages = list(Path("docs/pages/guides").glob("gha_*.md"))
     pages.extend(Path("{{cookiecutter.project_name}}/.github/workflows").iterdir())
     pages.append(Path("docs/pages/guides/style.md"))
