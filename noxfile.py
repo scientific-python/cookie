@@ -8,13 +8,16 @@ sp-repo-review checks start with "rr-".
 from __future__ import annotations
 
 import difflib
+import email.message
 import json
 import os
 import re
 import shutil
 import stat
 import sys
+import tarfile
 import urllib.request
+import zipfile
 from collections.abc import Callable
 from pathlib import Path
 
@@ -269,6 +272,27 @@ def dist(session: nox.Session, backend: str, vcs: bool) -> None:
         session.error(f"{wheel} must be version {expected_version}")
 
     session.run("twine", "check", f"{sdist}", f"{wheel}")
+
+    # Check for LICENSE in SDist
+    with tarfile.open(sdist) as tf:
+        names = tf.getnames()
+    if not any(n.endswith("LICENSE") for n in names):
+        msg = f"license file missing from {backend} vcs={vcs}'s sdist. Found: {names}"
+        session.error(msg)
+
+    # Check for LICENSE in wheel
+    with zipfile.ZipFile(wheel) as zf:
+        names = zf.namelist()
+        metadata_path = next(iter(n for n in names if n.endswith("METADATA")))
+        with zf.open(metadata_path) as mfile:
+            txt = mfile.read()
+    license_fields = email.message.EmailMessage(txt).get_all("License", [])
+    if license_fields:
+        msg = f"Should not have anything in the License slot, got {license_fields}"
+        session.error(msg)
+    if not any(n.endswith("LICENSE") for n in names):
+        msg = f"license file missing from {backend} vcs={vcs}'s wheel. Found: {names}"
+        session.error(msg)
 
     dist = DIR / "dist"
     dist.mkdir(exist_ok=True)
