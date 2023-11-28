@@ -136,7 +136,7 @@ look like Black, but run 30x faster. Here is the snippet to add Black to your
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.1.5"
+  rev: "v0.1.6"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -197,7 +197,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.1.5"
+  rev: "v0.1.6"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -529,7 +529,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.7.0"
+  rev: "v1.7.1"
   hooks:
     - id: mypy
       files: src
