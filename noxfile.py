@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import difflib
 import email.message
+import functools
 import json
 import os
 import re
@@ -20,6 +21,7 @@ import urllib.request
 import zipfile
 from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 import nox
 
@@ -401,6 +403,32 @@ def pc_bump(session: nox.Session) -> None:
             page.write_text(txt)
 
 
+@functools.lru_cache(maxsize=None)  # noqa: UP033
+def get_latest_version_tag(repo: str, old_version: str) -> dict[str, Any] | None:
+    auth = os.environ.get("GITHUB_TOKEN", os.environ.get("GITHUB_API_TOKEN", ""))
+    request = urllib.request.Request(
+        f"https://api.github.com/repos/{repo}/tags?per_page=100"
+    )
+    request.add_header("Accept", "application/vnd.github+json")
+    request.add_header("X-GitHub-Api-Version", "2022-11-28")
+    if auth:
+        request.add_header("Authorization", f"Bearer: {auth}")
+    response = urllib.request.urlopen(request)
+    results = json.loads(response.read())
+    if not results:
+        msg = f"No results for {repo}"
+        raise RuntimeError(msg)
+    tags = [
+        x["name"]
+        for x in results
+        if x["name"].count(".") == old_version.count(".")
+        and x["name"].startswith("v") == old_version.startswith("v")
+    ]
+    if tags:
+        return tags[0]
+    return None
+
+
 @nox.session(venv_backend="none")
 def gha_bump(session: nox.Session) -> None:
     """
@@ -415,23 +443,12 @@ def gha_bump(session: nox.Session) -> None:
 
     # This assumes there is a single version per action
     old_versions = {m[1]: m[2] for m in GHA_VERS.finditer(full_txt)}
-    versions = {}
 
     for repo, old_version in old_versions.items():
         session.log(f"{repo}: {old_version}")
-        if repo not in versions:
-            response = urllib.request.urlopen(
-                f"https://api.github.com/repos/{repo}/tags"
-            )
-            versions[repo] = json.loads(response.read())
-        tags = [
-            x["name"]
-            for x in versions[repo]
-            if x["name"].count(".") == old_version.count(".")
-        ]
-        if not tags:
+        new_version = get_latest_version_tag(repo, old_version)
+        if not new_version:
             continue
-        new_version = tags[0]
         if new_version != old_version:
             session.log(f"Convert {repo}: {old_version} -> {new_version}")
             for page in pages:
