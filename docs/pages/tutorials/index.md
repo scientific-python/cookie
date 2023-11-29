@@ -10,8 +10,8 @@ has_children: true
 
 Do you have a pile of scientific Python scripts or Jupyter notebooks that are
 becoming unwieldy? Are changes to some parts of your code accidentally breaking
-other parts of your code? Do you want to more maintainable, reusable, and
-shareable form?
+other parts of your code? Do you want to present them in a more maintainable,
+reusable, and shareable form?
 
 This tutorial aims to help scientists who write code find good practices and
 standard tools, and to help small- and medium-sized scientific software projects
