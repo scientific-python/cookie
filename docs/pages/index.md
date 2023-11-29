@@ -68,7 +68,7 @@ basic facility with git to use these tools successfully. We recommend the
 > in 2020. It was merged with the [NSLS-II][] guidelines and moved to Scientific
 > Python at the [2023 Scientific Python Developer Summit][2023 spdev], along
 > with many updates. Improved support for compiled components supported in part
-> by NSF cooperative agreement [OAC-2209877][].
+> by NSF grant [OAC-2209877][].
 
 <!-- prettier-ignore-start -->
 [simple]:                   {% link pages/guides/packaging_simple.md %}
