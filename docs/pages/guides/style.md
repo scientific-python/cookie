@@ -102,7 +102,40 @@ There are a _few_ options, mostly to enable/disable certain files, remove string
 normalization, and to change the line length, and those go in your
 `pyproject.toml` file.
 
-{% tabs %} {% tab black Black %}
+{% tabs %} {% tab ruff Ruff-format %}
+
+Ruff, the powerful Rust-based linter, has a formatter that is designed with the
+help of some of the Black authors to look 99.9% like Black, but run 30x faster.
+Here is the snippet to add the formatter to your `.pre-commit-config.yml`
+(combine with the Ruff linter below):
+
+```yaml
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: "v0.1.6"
+  hooks:
+    #  id: ruff would go here if using both
+    - id: ruff-format
+```
+
+As you likely will be using Ruff if you follow this guide, the formatter is
+recommended as well.
+
+{% details You can add a Ruff badge to your repo as well %}
+
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
+
+```md
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
+```
+
+```
+.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json
+    :target: https://github.com/astral-sh/ruff
+```
+
+{% enddetails %}
+
+{% endtab %} {% tab black Black %}
 
 Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
@@ -124,35 +157,6 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 ```
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
-```
-
-{% enddetails %}
-
-{% endtab %} {% tab ruff Ruff-format %}
-
-Ruff, the powerful Rust-based linter, also has a formatter that is designed to
-look like Black, but run 30x faster. Here is the snippet to add Black to your
-`.pre-commit-config.yml` (combine with Ruff below):
-
-```yaml
-- repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.1.6"
-  hooks:
-    #  id: ruff would go here if using both
-    - id: ruff-format
-```
-
-{% details You can add a Ruff badge to your repo as well %}
-
-[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
-
-```md
-[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
-```
-
-```
-.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json
-    :target: https://github.com/astral-sh/ruff
 ```
 
 {% enddetails %}
@@ -214,32 +218,34 @@ src = ["src"]
 
 [tool.ruff.lint]
 extend-select = [
-  "B",           # flake8-bugbear
-  "I",           # isort
-  "ARG",         # flake8-unused-arguments
-  "C4",          # flake8-comprehensions
-  "EM",          # flake8-errmsg
-  "ICN",         # flake8-import-conventions
-  "G",           # flake8-logging-format
-  "PGH",         # pygrep-hooks
-  "PIE",         # flake8-pie
-  "PL",          # pylint
-  "PT",          # flake8-pytest-style
-  "PTH",         # flake8-use-pathlib
-  "RET",         # flake8-return
-  "RUF",         # Ruff-specific
-  "SIM",         # flake8-simplify
-  "T20",         # flake8-print
-  "UP",          # pyupgrade
-  "YTT",         # flake8-2020
-  "EXE",         # flake8-executable
-  "NPY",         # NumPy specific rules
-  "PD",          # pandas-vet
-  "FURB",        # refurb
-  "PYI",         # flake8-pyi
+  "B",        # flake8-bugbear
+  "I",        # isort
+  "ARG",      # flake8-unused-arguments
+  "C4",       # flake8-comprehensions
+  "EM",       # flake8-errmsg
+  "ICN",      # flake8-import-conventions
+  "G",        # flake8-logging-format
+  "PGH",      # pygrep-hooks
+  "PIE",      # flake8-pie
+  "PL",       # pylint
+  "PT",       # flake8-pytest-style
+  "PTH",      # flake8-use-pathlib
+  "RET",      # flake8-return
+  "RUF",      # Ruff-specific
+  "SIM",      # flake8-simplify
+  "T20",      # flake8-print
+  "UP",       # pyupgrade
+  "YTT",      # flake8-2020
+  "EXE",      # flake8-executable
+  "NPY",      # NumPy specific rules
+  "PD",       # pandas-vet
+  "FURB",     # refurb
+  "PYI",      # flake8-pyi
 ]
 ignore = [
-  "PLR",    # Design related pylint codes
+  "PLR09",    # Too many <...>
+  "PLR2004",  # Magic value used in comparison
+  "ISC001",   # Conflicts with formatter
 ]
 typing-modules = ["mypackage._compat.typing"]
 isort.required-imports = ["from __future__ import annotations"]
