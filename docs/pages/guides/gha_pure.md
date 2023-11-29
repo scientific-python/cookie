@@ -123,7 +123,7 @@ later in the upload action for the release job, as well).
 > ```
 >
 > The artifact it produces is named `Packages`, so that's what you need to use
-> later to publish.
+> later to publish. This will be used instead of the manual steps below.
 
 And then, you need a release job:
 
@@ -201,6 +201,7 @@ name: CD
 
 on:
   workflow_dispatch:
+  pull_request:
   push:
     branches:
       - main
@@ -229,7 +230,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: artifact
+          name: Packages
           path: dist
 
       - uses: pypa/gh-action-pypi-publish@release/v1
@@ -246,6 +247,7 @@ name: CD
 
 on:
   workflow_dispatch:
+  pull_request:
   push:
     branches:
       - main

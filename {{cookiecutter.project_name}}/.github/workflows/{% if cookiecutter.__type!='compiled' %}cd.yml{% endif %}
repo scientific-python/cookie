@@ -27,15 +27,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build sdist and wheel
-        run: pipx run build
-
-      - uses: actions/upload-artifact@v3
-        with:
-          path: dist
-
-      - name: Check products
-        run: pipx run twine check dist/*
+      - uses: hynek/build-and-inspect-python-package@v1
 
   publish:
     needs: [dist]
@@ -49,7 +41,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: artifact
+          name: Packages
           path: dist
 
       - uses: pypa/gh-action-pypi-publish@release/v1
