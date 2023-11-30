@@ -50,7 +50,12 @@ class PY003(General):
     @staticmethod
     def check(package: Traversable) -> bool:
         "Projects must have a license"
-        return len([p for p in package.iterdir() if "LICENSE" in p.name]) > 0
+        spellings = ("LICENSE", "LICENCE", "COPYING")
+        return any(
+            p.name.startswith(spelling)
+            for p in package.iterdir()
+            for spelling in spellings
+        )
 
 
 class PY004(General):
