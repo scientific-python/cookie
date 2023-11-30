@@ -52,7 +52,7 @@ class PY003(General):
         "Projects must have a license"
         spellings = ("LICENSE", "LICENCE", "COPYING")
         return any(
-            spelling in p.name for spelling in spellings for p in package.iterdir()
+            spelling in p.name for p in package.iterdir() for spelling in spellings
         )
 
 
