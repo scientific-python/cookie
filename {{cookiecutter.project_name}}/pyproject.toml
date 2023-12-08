@@ -316,8 +316,7 @@ testpaths = [
 
 [tool.coverage]
 run.source = ["{{ cookiecutter.__project_slug }}"]
-port.exclude_lines = [
-  'pragma: no cover',
+report.exclude_also = [
   '\.\.\.',
   'if typing.TYPE_CHECKING:',
 ]
