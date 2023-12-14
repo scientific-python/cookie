@@ -217,8 +217,6 @@ upload_all:
       run: |
         mkdir dist
         mv all/*/* .
-        rmdir all/*
-        rmdir all
 
     - uses: pypa/gh-action-pypi-publish@release/v1
       with:
