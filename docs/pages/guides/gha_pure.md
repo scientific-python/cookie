@@ -79,6 +79,7 @@ dist:
 
     - uses: actions/upload-artifact@v3
       with:
+        name: Packages
         path: dist/*
 
     - name: Check metadata
@@ -103,6 +104,11 @@ GitHub Actions (in fact, they use it to setup other applications).
 
 We upload the artifact just to make it available via the GitHub PR/Checks API.
 You can download a file to test locally if you want without making a release.
+
+{: .warning }
+
+> As of `upload-artifact@v4`, the artifact name must be unique. Extending an
+> existing artifact is no longer supported.
 
 We also add an optional check using twine for the metadata (it will be tested
 later in the upload action for the release job, as well).
@@ -142,7 +148,7 @@ publish:
   steps:
     - uses: actions/download-artifact@v3
       with:
-        name: artifact
+        name: Packages
         path: dist
 
     - uses: pypa/gh-action-pypi-publish@release/v1
@@ -168,7 +174,7 @@ publish:
   steps:
     - uses: actions/download-artifact@v3
       with:
-        name: artifact
+        name: Packages
         path: dist
 
     - uses: pypa/gh-action-pypi-publish@release/v1

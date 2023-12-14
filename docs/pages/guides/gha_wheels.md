@@ -38,8 +38,8 @@ This will run on releases. If you use a develop branch, you could include
 `pull_request: branches: [stable]`, since it changes rarely. GitHub actions also
 [has a `workflow_dispatch` option][workflow_dispatch], which will allow you to
 click a button in the GUI to trigger a build, which is perfect for testing
-wheels before making a release; you can download them from "artifacts". You can
-even define variables that you can set in the GUI and access in the CI!
+wheels before making a release; you can download them from the "artifacts". You
+can even define variables that you can set in the GUI and access in the CI!
 
 <!-- prettier-ignore-start -->
 [workflow_dispatch]: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
@@ -94,6 +94,7 @@ make_sdist:
 
     - uses: actions/upload-artifact@v3
       with:
+        name: SDist
         path: dist/*.tar.gz
 ```
 
@@ -126,6 +127,7 @@ build_wheels:
     - name: Upload wheels
       uses: actions/upload-artifact@v3
       with:
+        name: Wheels-${{ matrix.os }}
         path: wheelhouse/*.whl
 ```
 
@@ -177,8 +179,14 @@ upload_all:
   steps:
     - uses: actions/download-artifact@v3
       with:
-        name: artifact
-        path: dist
+        path: all
+
+    - name: Merge files
+      run: |
+        mkdir dist
+        mv all/*/* .
+        rmdir all/*
+        rmdir all
 
     - uses: pypa/gh-action-pypi-publish@release/v1
 ```
@@ -203,8 +211,14 @@ upload_all:
   steps:
     - uses: actions/download-artifact@v3
       with:
-        name: artifact
-        path: dist
+        path: all
+
+    - name: Merge files
+      run: |
+        mkdir dist
+        mv all/*/* .
+        rmdir all/*
+        rmdir all
 
     - uses: pypa/gh-action-pypi-publish@release/v1
       with:
