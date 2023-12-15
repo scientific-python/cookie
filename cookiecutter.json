@@ -5,7 +5,7 @@
   "full_name": "My Name",
   "email": "me@email.com",
   "project_short_description": "A great package.",
-  "license": ["BSD", "Apache", "MIT"],
+  "license": ["BSD", "Apache", "MIT", "AGPL"],
   "backend": [
     "hatch",
     "flit",
