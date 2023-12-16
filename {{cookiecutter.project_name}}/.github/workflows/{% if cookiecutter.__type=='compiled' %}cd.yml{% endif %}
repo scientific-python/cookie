@@ -67,7 +67,7 @@ jobs:
       - name: Merge files
         run: |
           mkdir dist
-          mv all/*/* .
+          mv all/*/* dist
 
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:

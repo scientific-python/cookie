@@ -184,9 +184,7 @@ upload_all:
     - name: Merge files
       run: |
         mkdir dist
-        mv all/*/* .
-        rmdir all/*
-        rmdir all
+        mv all/*/* dist
 
     - uses: pypa/gh-action-pypi-publish@release/v1
 ```
@@ -216,7 +214,7 @@ upload_all:
     - name: Merge files
       run: |
         mkdir dist
-        mv all/*/* .
+        mv all/*/* dist
 
     - uses: pypa/gh-action-pypi-publish@release/v1
       with:
