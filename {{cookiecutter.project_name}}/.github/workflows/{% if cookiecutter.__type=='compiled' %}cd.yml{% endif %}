@@ -27,6 +27,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
+          name: SDist
           path: dist/*.tar.gz
 
   build_wheels:
@@ -47,6 +48,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v3
         with:
+          name: Wheel-{% raw %}${{ matrix.os }}{% endraw %}
           path: wheelhouse/*.whl
 
   upload_all:
@@ -60,8 +62,12 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: artifact
           path: dist
+
+      - name: Merge files
+        run: |
+          mkdir dist
+          mv all/*/* dist
 
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
