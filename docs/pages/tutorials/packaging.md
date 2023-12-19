@@ -44,7 +44,8 @@ Within the package directory `example`, create subdirectories `src` ("source")
 and `src/example` for the source code.
 
 ```bash
-mkdir -p src/example
+mkdir src
+mkdir src/example
 ```
 
 Create a file at `src/example/__init__.py`. This is what identifies the
