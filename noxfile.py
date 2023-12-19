@@ -393,7 +393,7 @@ def pc_bump(session: nox.Session) -> None:
                     "lastversion",
                     "--at=github",
                     "--format=tag",
-                    "--exclude=alpha|beta|rc",
+                    "--exclude=~alpha|beta|rc",
                     proj,
                     silent=True,
                 ).strip()
