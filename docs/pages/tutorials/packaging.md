@@ -41,21 +41,21 @@ git init
 ```
 
 Within the package directory `example`, create subdirectories `src` ("source")
-for the source code.
+and `src/example` for the source code.
 
 ```bash
-mkdir src
+mkdir -p src/example
 ```
 
-Create a file at `src/__init__.py`. This is what identifies the directory as a
-"package" to Python. It may remain empty.
+Create a file at `src/example/__init__.py`. This is what identifies the
+directory as a "package" to Python. It may remain empty.
 
 ```bash
-touch src/__init__.py
+touch src/example/__init__.py
 ```
 
 Place `refraction.py`, our code from the previous section, next to it, at
-`src/refraction.py`.
+`src/example/refraction.py`.
 
 The last element your package needs is a `pyproject.toml` file, placed in the
 root directory.
