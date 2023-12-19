@@ -92,7 +92,7 @@ make_sdist:
     - name: Build SDist
       run: pipx run build --sdist
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: SDist
         path: dist/*.tar.gz
@@ -125,7 +125,7 @@ build_wheels:
     - uses: pypa/cibuildwheel@v2.16
 
     - name: Upload wheels
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Wheels-${{ matrix.os }}
         path: wheelhouse/*.whl
@@ -177,7 +177,7 @@ upload_all:
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         path: all
 
@@ -207,7 +207,7 @@ upload_all:
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         path: all
 

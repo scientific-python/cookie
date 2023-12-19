@@ -654,7 +654,7 @@ this action later; specifically, may want to use
 
 ```yaml
 - name: Upload artifact
-  uses: actions/upload-pages-artifact@v2
+  uses: actions/upload-pages-artifact@v3
 ```
 
 This actions defaults to uploading `_site`, but you can give any `with: path:`
@@ -676,7 +676,7 @@ deploy:
   steps:
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v3
+      uses: actions/deploy-pages@v4
 ```
 
 {% endraw %}
