@@ -390,7 +390,12 @@ def pc_bump(session: nox.Session) -> None:
         for proj, (old_version, space) in old_versions.items():
             if proj not in versions:
                 versions[proj] = session.run(
-                    "lastversion", "--at=github", "--format=tag", proj, silent=True
+                    "lastversion",
+                    "--at=github",
+                    "--format=tag",
+                    "--exclude=alpha|beta|rc",
+                    proj,
+                    silent=True,
                 ).strip()
             new_version = versions[proj]
 
