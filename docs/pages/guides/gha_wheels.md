@@ -92,9 +92,9 @@ make_sdist:
     - name: Build SDist
       run: pipx run build --sdist
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
-        name: SDist
+        name: cibw-sdist
         path: dist/*.tar.gz
 ```
 
@@ -125,9 +125,9 @@ build_wheels:
     - uses: pypa/cibuildwheel@v2.16
 
     - name: Upload wheels
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: Wheels-${{ matrix.os }}
+        name: cibw-wheels-${{ matrix.os }}
         path: wheelhouse/*.whl
 ```
 
@@ -177,14 +177,11 @@ upload_all:
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
-        path: all
-
-    - name: Merge files
-      run: |
-        mkdir dist
-        mv all/*/* dist
+        pattern: cibw-*
+        path: dist
+        merge-multiple: true
 
     - uses: pypa/gh-action-pypi-publish@release/v1
 ```
@@ -207,14 +204,11 @@ upload_all:
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
-        path: all
-
-    - name: Merge files
-      run: |
-        mkdir dist
-        mv all/*/* dist
+        pattern: cibw-*
+        path: dist
+        merge-multiple: true
 
     - uses: pypa/gh-action-pypi-publish@release/v1
       with:
