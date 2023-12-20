@@ -107,6 +107,44 @@ class GH103(GitHub):
         return any("workflow_dispatch" in w.get(True, {}) for w in workflows.values())
 
 
+class GH104(GitHub):
+    "Use unique names for upload-artifact"
+
+    requires = {"GH100"}
+    url = mk_url("gha-wheel")
+
+    @staticmethod
+    def check(workflows: dict[str, Any]) -> bool:
+        """
+        Multiple upload-artifact usages _must_ have unique names to be
+        compatible with `v4` (which no longer merge artifacts, but instead
+        errors out). The most general solution is:
+
+        ```yaml
+        - uses: actions/upload-artifact@v4
+          with:
+            name: prefix-${{ github.job }}-${{ strategy.job-index }}
+
+        - uses: actions/download-artifact@v4
+          with:
+            pattern: prefix-*
+            merge-multiple: true
+        ```
+        """
+
+        for workflow in workflows.values():
+            names = [
+                step.get("with", {}).get("name", "")
+                for job in workflow.get("jobs", {}).values()
+                for step in job.get("steps", [])
+                if step.get("uses", "").startswith("actions/upload-artifact")
+            ]
+            names = [n for n in names if "${{" not in n]
+            if len(names) != len(set(names)):
+                return False
+        return True
+
+
 class GH200(GitHub):
     "Maintained by Dependabot"
 
