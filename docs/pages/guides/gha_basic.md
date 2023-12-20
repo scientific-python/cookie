@@ -142,14 +142,20 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "*"
 ```
 
 This will check to see if there are updates to the action weekly, and will make
 a PR if there are updates, including the changelog and commit summary in the PR.
 If you select a name like `v1`, this should only look for updates of the same
 form (since April 2022) - there is no need to restrict updates for "moving tag"
-updates anymore {% rr PY006 %}. You can also use SHA's and dependabot will
-respect that too.
+updates anymore {% rr GH211 %}. You can also use SHA's and dependabot will
+respect that too. And `groups` will combine actions updates {% rr GH212 %},
+which is both cleaner and sometimes required for dependent actions, like
+`upload-artifact`/`download-artifact`.
 
 You can use this for other ecosystems too, including Python.
 
