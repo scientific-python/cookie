@@ -149,7 +149,11 @@ class GH210(GitHub):
           - package-ecosystem: "github-actions"
             directory: "/"
             schedule:
-            interval: "weekly"
+              interval: "weekly"
+            groups:
+              actions:
+                patterns:
+                  - "*"
         ```
         """
         for ecosystem in dependabot.get("updates", []):
@@ -176,6 +180,35 @@ class GH211(GitHub):
                 for ignore in ecosystem.get("ignore", []):
                     if "actions/*" in ignore.get("dependency-name", ""):
                         return False
+        return True
+
+
+class GH212(GitHub):
+    "Require GHA update grouping"
+
+    requires = {"GH200", "GH210"}
+    url = mk_url("gha-basic")
+
+    @staticmethod
+    def check(dependabot: dict[str, Any]) -> bool:
+        """
+        Projects should group their updates to avoid extra PRs and stay in sync.
+        This is now supported by dependabot since June 2023.
+
+        ```yaml
+            groups:
+              actions:
+                patterns:
+                  - "*"
+        ```
+        """
+
+        for ecosystem in dependabot.get("updates", []):
+            if (
+                ecosystem.get("package-ecosystem", "") == "github-actions"
+                and "groups" not in ecosystem
+            ):
+                return False
         return True
 
 
