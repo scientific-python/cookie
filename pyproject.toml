@@ -47,7 +47,7 @@ dev = [
 
 [project.urls]
 Guide = "https://learn.scientific-python.org/development"
-Homepage = "https://scientific-python.github.io/cookie"
+Homepage = "https://github.com/scientific-python/cookie"
 Preview = "https://scientific-python-cookie.readthedocs.io"
 Source = "https://github.com/scientific-python/cookie"
 
