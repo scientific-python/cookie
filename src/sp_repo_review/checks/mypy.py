@@ -68,7 +68,7 @@ class MY102(MyPy):
         """
 
         match pyproject:
-            case {"tool": {"mypy": {"show_error_codes": object()}}}:
+            case {"tool": {"mypy": {"show_error_codes": bool()}}}:
                 return False
             case _:
                 return True
@@ -83,10 +83,10 @@ class MY103(MyPy):
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
         """
-        Must have `warn_unreachable = true` to pass this check. There are
+        Must have `warn_unreachable` (true/false) to pass this check. There are
         occasionally false positives (often due to platform or Python version
-        static checks), so it's okay to ignore this check. But try it first - it
-        can catch real bugs too.
+        static checks), so it's okay to set it to false if you need to. But try
+        it first - it can catch real bugs too.
 
         ```toml
         [tool.mypy]
@@ -95,7 +95,7 @@ class MY103(MyPy):
         """
 
         match pyproject:
-            case {"tool": {"mypy": {"warn_unreachable": True}}}:
+            case {"tool": {"mypy": {"warn_unreachable": bool()}}}:
                 return True
             case _:
                 return False
