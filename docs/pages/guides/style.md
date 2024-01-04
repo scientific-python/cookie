@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.1.9"
+  rev: "v0.1.11"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -141,7 +141,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "23.12.0"
+  rev: "23.12.1"
   hooks:
     - id: black
 ```
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.1.9"
+  rev: "v0.1.11"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -535,7 +535,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.7.1"
+  rev: "v1.8.0"
   hooks:
     - id: mypy
       files: src
