@@ -84,7 +84,7 @@ from __future__ import annotations
 import importlib.metadata
 
 project = "package"
-copyright = "2023, My Name"
+copyright = "2024, My Name"
 author = "My Name"
 version = release = importlib.metadata.version("package")
 
