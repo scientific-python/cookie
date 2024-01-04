@@ -31,7 +31,8 @@ def ruff(pyproject: dict[str, Any], root: Traversable) -> dict[str, Any] | None:
     for path in paths:
         if path.is_file():
             with path.open("rb") as f:
-                contents = tomllib.load(f)
+                # Type ignore fixed in https://github.com/hukkin/tomli/pull/215
+                contents = tomllib.load(f)  # type: ignore[arg-type]
             if contents.get("extend", "") == "pyproject.toml":
                 extend = pyproject.get("tool", {}).get("ruff", {})
                 return merge(extend, contents)
