@@ -107,6 +107,25 @@ class GH103(GitHub):
         return any("workflow_dispatch" in w.get(True, {}) for w in workflows.values())
 
 
+GH104_ERROR_MSG = """
+Multiple upload-artifact usages _must_ have unique names to be
+compatible with `v4` (which no longer merge artifacts, but instead
+errors out). The most general solution is:
+
+```yaml
+- uses: actions/upload-artifact@v4
+  with:
+    name: prefix-${{ github.job }}-${{ strategy.job-index }}
+
+- uses: actions/download-artifact@v4
+  with:
+    pattern: prefix-*
+    merge-multiple: true
+```
+
+"""
+
+
 class GH104(GitHub):
     "Use unique names for upload-artifact"
 
@@ -114,35 +133,29 @@ class GH104(GitHub):
     url = mk_url("gha-wheel")
 
     @staticmethod
-    def check(workflows: dict[str, Any]) -> bool:
-        """
-        Multiple upload-artifact usages _must_ have unique names to be
-        compatible with `v4` (which no longer merge artifacts, but instead
-        errors out). The most general solution is:
-
-        ```yaml
-        - uses: actions/upload-artifact@v4
-          with:
-            name: prefix-${{ github.job }}-${{ strategy.job-index }}
-
-        - uses: actions/download-artifact@v4
-          with:
-            pattern: prefix-*
-            merge-multiple: true
-        ```
-        """
-
-        for workflow in workflows.values():
-            names = [
-                step.get("with", {}).get("name", "")
-                for job in workflow.get("jobs", {}).values()
-                for step in job.get("steps", [])
-                if step.get("uses", "").startswith("actions/upload-artifact")
-            ]
-            names = [n for n in names if "${{" not in n]
-            if len(names) != len(set(names)):
-                return False
-        return True
+    def check(workflows: dict[str, Any]) -> str:
+        errors = []
+        for wname, workflow in workflows.items():
+            for jname, job in workflow.get("jobs", {}).items():
+                names = [
+                    step.get("with", {}).get("name", "")
+                    for step in job.get("steps", [])
+                    if step.get("uses", "").startswith("actions/upload-artifact")
+                ]
+                if "matrix" in job.get("strategy", {}) and not all(
+                    "${{" in n for n in names
+                ):
+                    errors.append(
+                        f"* No variable substitutions were detected in `{wname}.yml:{jname}`."
+                    )
+                names = [n for n in names if "${{" not in n]
+                if len(names) != len(set(names)):
+                    errors.append(
+                        f"* Multiple matching upload artifact names detected in `{wname}.yml:{jname}`."
+                    )
+        if errors:
+            return GH104_ERROR_MSG + "\n\n".join(errors)
+        return ""
 
 
 class GH200(GitHub):
