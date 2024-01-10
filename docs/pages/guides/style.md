@@ -392,7 +392,7 @@ the flake8 addition for pre-commit, with the `bugbear` plugin:
 
 ```yaml
 - repo: https://github.com/pycqa/flake8
-  rev: "6.1.0"
+  rev: "7.0.0"
   hooks:
     - id: flake8
       additional_dependencies: [flake8-bugbear]
