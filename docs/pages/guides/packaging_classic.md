@@ -403,15 +403,15 @@ Python packaging goes through a 3-stage procedure if you have the above
 recommended `pyproject.toml` file. If you type `pip install .`, then
 
 1. Source is processed to make an SDist (in a virtual environment mandated by
-   pyproject.toml).
+   pyproject.toml). This SDist bears a `.tar.gz` file format.
 2. SDist is processed to make a wheel (same virtual environment).
 3. The wheel is installed.
 
 The wheel does _not_ contain `setup.*`, `pyproject.toml`, or other build code.
-It simply is a `.tar.gz` file that is named `.whl` and has a simple mapping of
-directories to installation paths and a generic metadata format. "Installing"
-really is just copying files around, and pip also pre-compiles some bytecode for
-you while doing so.
+It simply is a `.zip` format archive with the `.whl` suffix and has a simple
+mapping of directories to installation paths and a generic metadata format.
+"Installing" really is just copying files around, and pip also pre-compiles some
+bytecode for you while doing so.
 
 If you don't have a `MANIFEST.in`, the "legacy" build procedure will skip the
 SDist step, making it possible for a development build to work while a published
