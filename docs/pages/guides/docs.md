@@ -235,7 +235,8 @@ plugins and try to build against an uninstalled version of your project.
 ### .readthedocs.yaml
 
 In order to use <https://readthedocs.org> to build, host, and preview your
-documentation, you must have a `.readthedocs.yaml` file {% rr RTD100 %} like this:
+documentation, you must have a `.readthedocs.yaml` file {% rr RTD100 %} like
+this:
 
 <!-- [[[cog
 with code_fence("yaml"):
