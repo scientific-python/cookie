@@ -98,8 +98,8 @@ for very special cases), you will likely need extra configuration here.
 
 You should have a `README` {% rr PY002 %} and a `LICENSE` {% rr PY003 %} file.
 You should have a `docs/` folder {%
-rr PY003 %}. You should have a `/tests` folder (recommended) and/or a `src/<package>/tests`
-folder.
+rr PY004 %}. You should have a `/tests` folder {%
+rr PY005 %} (recommended) and/or a `src/<package>/tests` folder.
 
 ## Versioning
 
