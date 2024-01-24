@@ -804,17 +804,19 @@ There are two tools, both based on JSON Schema, that you can use to validate
 various configuration files. The first, [validate-pyproject][], validates your
 `pyproject.toml` file. By default, it checks the standards-defined sections
 (`build-system` and `project`), along with `tool.setuptools`. There are also
-plugins for some other tools, like `scikit-build-core` and `cibuildwheel`. Using
-it looks like this:
+plugins for some other tools, like `scikit-build-core` and `cibuildwheel`. You
+can even get all [SchemaStore][]'s plugins with the
+[validate-pyproject-schema-store][] plugin. Using it looks like this:
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
-  rev: v0.15
+  rev: "v0.16"
   hooks:
     - id: validate-pyproject
+      additional_dependencies: [validate-pyproject-schema-store[all]]
 ```
 
-You can also validate various other types of files with [check-jsonschema]. It
+You can also validate various other types of files with [check-jsonschema][]. It
 supports a variety of common files built-in ([see the docs][cjs-common]) like
 various CI configuration files. You can also write/provide your own schemas and
 validate using those - [SchemaStore][] provides a few hundred different common
@@ -822,7 +824,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.27.0
+  rev: "0.27.3"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows

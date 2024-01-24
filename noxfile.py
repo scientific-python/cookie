@@ -362,9 +362,9 @@ PC_VERS = re.compile(
     re.MULTILINE,
 )
 
-PC_REPL_LINE = '''\
+PC_REPL_LINE = """\
 {2}- repo: {0}
-{2}  rev: "{1}"'''
+{2}  rev: {3}{1}{3}"""
 
 
 GHA_VERS = re.compile(r"[\s\-]+uses: (.*?)@([^\s]+)")
@@ -375,7 +375,7 @@ def pc_bump(session: nox.Session) -> None:
     """
     Bump the pre-commit versions.
     """
-    session.install("lastversion")
+    session.install("lastversion>=3.4")
     versions = {}
     pages = [
         Path("docs/pages/guides/style.md"),
@@ -399,11 +399,11 @@ def pc_bump(session: nox.Session) -> None:
                 ).strip()
             new_version = versions[proj]
 
-            before = PC_REPL_LINE.format(proj, old_version, space)
-            after = PC_REPL_LINE.format(proj, new_version, space)
+            after = PC_REPL_LINE.format(proj, new_version, space, '"')
 
-            session.log(f"Bump: {old_version} -> {new_version} ({page})")
-            txt = txt.replace(before, after)
+            session.log(f"Bump {proj}: {old_version} -> {new_version} ({page})")
+            txt = txt.replace(PC_REPL_LINE.format(proj, old_version, space, '"'), after)
+            txt = txt.replace(PC_REPL_LINE.format(proj, old_version, space, ""), after)
 
             page.write_text(txt)
 
