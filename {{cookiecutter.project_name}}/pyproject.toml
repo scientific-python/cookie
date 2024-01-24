@@ -255,7 +255,7 @@ version.source = "vcs"
 build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.py"
 {%- endif %}
 
-[tool.hatch.env.default]
+[tool.hatch.envs.default]
 features = ["test"]
 scripts.test = "pytest {args}"
 
