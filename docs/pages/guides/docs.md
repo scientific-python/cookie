@@ -59,7 +59,7 @@ from cog_helpers import code_fence, render_cookie, Matcher
 with render_cookie() as package:
     docs_conf_py = package.joinpath("docs/conf.py").read_text(encoding="utf-8").strip()
     docs_index_md = package.joinpath("docs/index.md").read_text(encoding="utf-8").strip()
-    readthedocs_yaml = package.joinpath(".readthedocs.yml").read_text(encoding="utf-8").strip()
+    readthedocs_yaml = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
     noxfile = Matcher.from_file(package / "noxfile.py")
 ]]] -->
 <!-- [[[end]]] -->
@@ -235,7 +235,8 @@ plugins and try to build against an uninstalled version of your project.
 ### .readthedocs.yaml
 
 In order to use <https://readthedocs.org> to build, host, and preview your
-documentation, you must have a `.reathedocs.yml` file {% rr RTD100 %} like this:
+documentation, you must have a `.readthedocs.yaml` file {% rr RTD100 %} like
+this:
 
 <!-- [[[cog
 with code_fence("yaml"):
