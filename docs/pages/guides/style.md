@@ -813,7 +813,7 @@ can even get all [SchemaStore][]'s plugins with the
   rev: "v0.16"
   hooks:
     - id: validate-pyproject
-      additional_dependencies: [validate-pyproject-schema-store[all]]
+      additional_dependencies: ["validate-pyproject-schema-store[all]"]
 ```
 
 You can also validate various other types of files with [check-jsonschema][]. It
