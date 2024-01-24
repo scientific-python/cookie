@@ -59,7 +59,7 @@ from cog_helpers import code_fence, render_cookie, Matcher
 with render_cookie() as package:
     docs_conf_py = package.joinpath("docs/conf.py").read_text(encoding="utf-8").strip()
     docs_index_md = package.joinpath("docs/index.md").read_text(encoding="utf-8").strip()
-    readthedocs_yaml = package.joinpath(".readthedocs.yml").read_text(encoding="utf-8").strip()
+    readthedocs_yaml = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
     noxfile = Matcher.from_file(package / "noxfile.py")
 ]]] -->
 <!-- [[[end]]] -->
