@@ -89,7 +89,7 @@ enough for a simple testing suite, can be written as follows:
 
 ```yaml
 - name: Upload coverage report
-  uses: codecov/codecov-action@v3.1.4
+  uses: codecov/codecov-action@v3.1.5
 ```
 
 The lines above should be added after the step that runs your tests with the

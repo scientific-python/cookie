@@ -145,15 +145,13 @@ You can parametrize sessions. either on Python or on any other item.
 ```python
 # Shortcut to parametrize Python
 @nox.session(python=["3.8", "3.9", "3.10", "3.11", "3.12"])
-def my_session(session: nox.Session) -> None:
-    ...
+def my_session(session: nox.Session) -> None: ...
 
 
 # General parametrization
 @nox.session
 @nox.parametrize("letter", ["a", "b"], ids=["a", "b"])
-def my_session(session: nox.Session, letter: str) -> None:
-    ...
+def my_session(session: nox.Session, letter: str) -> None: ...
 ```
 
 The optional `ids=` parameter can give the parametrization nice names, like in
