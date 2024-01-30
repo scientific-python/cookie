@@ -195,15 +195,13 @@ def get_image(
     normalize: bool = True,
     beginning: int = 0,
     end: int | None = None,
-) -> np.ndarray:
-    ...
+) -> np.ndarray: ...
 ```
 
 into this:
 
 ```python
-def get_image(filename: Path, **kwargs: Any) -> np.ndarray:
-    ...
+def get_image(filename: Path, **kwargs: Any) -> np.ndarray: ...
 ```
 
 Although the interface appears to have been simplified through hidden keyword
@@ -226,8 +224,7 @@ def get_image(
     normalize: bool = True,
     beginning: int = 0,
     end: int | None = None
-) -> np.ndarray:
-    ...
+) -> np.ndarray: ...
 ```
 
 Every argument after the `*` is keyword-only. Therefore, the usage

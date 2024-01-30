@@ -133,8 +133,7 @@ from typing import Protocol
 
 
 class Duck(Protocol):
-    def quack() -> str:
-        ...
+    def quack() -> str: ...
 ```
 
 Now any object that can "quack" (and return a string) is a Duck. We can even add
@@ -304,8 +303,7 @@ design_, because you are thinking about how types work and interact. It's also
 more readable, since if I give you code like this:
 
 ```python
-def compute(timestamp):
-    ...
+def compute(timestamp): ...
 ```
 
 You don't know "what" timestamp is. Is it an int? A float? An object? With
