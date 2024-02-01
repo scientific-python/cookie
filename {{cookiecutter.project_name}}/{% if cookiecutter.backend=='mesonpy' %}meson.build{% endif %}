@@ -1,5 +1,5 @@
 project(
-    'package',
+    '{{ cookiecutter.__project_slug }}',
     'cpp',
     version: '0.1.0',
     license: 'BSD',
@@ -14,15 +14,15 @@ pybind11_dep = dependency('pybind11')
 
 py.extension_module('_core',
     'src/main.cpp',
-    subdir: 'package',
+    subdir: '{{ cookiecutter.__project_slug }}',
     install: true,
     dependencies : [pybind11_dep],
 )
 
 py.install_sources(
     [
-        'src/__init__.py',
-        'src/_main.py',
+        'src/{{ cookiecutter.__project_slug }}/__init__.py',
+        'src/{{ cookiecutter.__project_slug }}/_main.py',
     ],
-    subdir: 'package'
+    subdir: '{{ cookiecutter.__project_slug }}'
 )
