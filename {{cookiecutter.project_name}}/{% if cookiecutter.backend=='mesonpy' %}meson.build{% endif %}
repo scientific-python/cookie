@@ -19,4 +19,4 @@ py.extension_module('_core',
     dependencies : [pybind11_dep],
 )
 
-install_subdir('src/{{ cookiecutter.__project_slug }}', py.get_install_dir() / '{{ cookiecutter.__project_slug }}')
+install_subdir('src/{{ cookiecutter.__project_slug }}', install_dir: py.get_install_dir() / '{{ cookiecutter.__project_slug }}')
