@@ -154,8 +154,8 @@ py.extension_module('_core',
 
 py.install_sources(
     [
-        'src/__init__.py',
-        'src/_main.py',
+        'src/package/__init__.py',
+        'src/package/_main.py',
     ],
     subdir: 'package'
 )
