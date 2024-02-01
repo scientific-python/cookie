@@ -132,38 +132,32 @@ with code_fence("meson"):
 <!-- prettier-ignore-start -->
 ```meson
 project(
-  'package',
-  'cpp',
-  version: '0.1.0',
-  license: 'BSD',
-  meson_version: '>= 0.64.0',
-  default_options: [
-    'buildtype=debugoptimized',
-    'cpp_std=c++11',
-  ],
-)
-name = 'package'
-
-py_mod = import('python')
-py = py_mod.find_installation(pure: false)
-
-pybind11_config = find_program('pybind11-config')
-pybind11_config_ret = run_command(pybind11_config, ['--includes'], check: true)
-pybind11 = declare_dependency(
-    include_directories: [pybind11_config_ret.stdout().split('-I')[-1].strip()],
+    'package',
+    'cpp',
+    version: '0.1.0',
+    license: 'BSD',
+    meson_version: '>= 1.1.0',
+    default_options: [
+        'cpp_std=c++11',
+    ],
 )
 
-install_subdir('src' / name, install_dir: py.get_install_dir() / name, strip_directory: true)
+py = import('python').find_installation(pure: false)
+pybind11_dep = dependency('pybind11')
 
 py.extension_module('_core',
     'src/main.cpp',
     subdir: 'package',
     install: true,
-    dependencies : [pybind11],
-    link_language : 'cpp',
-    override_options: [
-        'cpp_rtti=true',
-    ]
+    dependencies : [pybind11_dep],
+)
+
+py.install_sources(
+    [
+        'src/__init__.py',
+        'src/_main.py',
+    ],
+    subdir: 'package'
 )
 ```
 <!-- prettier-ignore-end -->
