@@ -152,13 +152,7 @@ py.extension_module('_core',
     dependencies : [pybind11_dep],
 )
 
-py.install_sources(
-    [
-        'src/package/__init__.py',
-        'src/package/_main.py',
-    ],
-    subdir: 'package'
-)
+install_subdir('src/package', py.get_install_dir() / 'package')
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
