@@ -152,7 +152,7 @@ py.extension_module('_core',
     dependencies : [pybind11_dep],
 )
 
-install_subdir('src/package', py.get_install_dir() / 'package')
+install_subdir('src/package', install_dir: py.get_install_dir() / 'package', strip_directory: true)
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
