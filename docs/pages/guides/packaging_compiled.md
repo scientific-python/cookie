@@ -335,6 +335,26 @@ Unlike pure Python, you'll need to build redistributable wheels for each
 platform and supported Python version if you want to avoid compilation on the
 user's system. See [the CI page on wheels][gha_wheels] for a suggested workflow.
 
+## Special considerations
+
+### NumPy
+
+Modern versions of NumPy (1.25+) allow you to target older versions when
+building, which is _highly_ recommended, and this will become required in NumPy
+2.0. Now you add:
+
+```cpp
+#define NPY_TARGET_VERSION NPY_1_22_API_VERSION
+```
+
+(Where that number is whatever version you support as a minimum) then make sure
+you build with NumPy 1.25+ (or 2.0+ when it comes out). Before 1.25, it was
+necessary to actually pin the oldest NumPy you supported (the
+`oldest-supported-numpy` package is the easiest method). If you support Python <
+3.9, you'll have to use the old method for those versions.
+
+If using pybind11, you don't need NumPy at build-time in the first place.
+
 <!-- prettier-ignore-start -->
 
 [scikit-build-core]: https://scikit-build-core.readthedocs.io
