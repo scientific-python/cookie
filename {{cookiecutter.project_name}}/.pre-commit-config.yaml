@@ -40,7 +40,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.1.15"
+    rev: "v0.2.0"
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
@@ -118,7 +118,7 @@ repos:
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.27.3"
+    rev: "0.27.4"
     hooks:
 {%- if cookiecutter.__ci == "github" %}
       - id: check-dependabot
