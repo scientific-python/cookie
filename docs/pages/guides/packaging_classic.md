@@ -19,7 +19,8 @@ There are several popular packaging systems. This guide covers [Setuptools][],
 which is the oldest system and supports compiled extensions. If you are not
 working on legacy code or are willing to make a larger change, other systems
 like [Hatch][] are drastically simpler - most of this page is unneeded for those
-systems.
+systems. Even setuptools supports modern config now, though setup.py is still
+also required for compiled packages to be supported.
 
 Also see the [Python packaging guide][], especially the [Python packaging
 tutorial][].

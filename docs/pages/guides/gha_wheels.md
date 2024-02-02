@@ -141,7 +141,7 @@ usually `CIBW_BUILD` to select the platforms you want to build for - see the
 alternative architectures need emulation, so are not shown here (adds one extra
 step).
 
-You can also select different base images (the _default_ is manylinux2014). If
+You can also select different base images (the default is `manylinux2014`). If
 you want a different supported image, set `CIBW_MANYLINUX_X86_64_IMAGE`,
 `CIBW_MANYLINUX_I686_IMAGE`, etc. If you always need a specific image, you can
 set that in the `pyproject.toml` file instead.
