@@ -13,9 +13,7 @@ custom_title: GitHub Actions for Binary Wheels
 
 Building binary wheels is a bit more involved, but can still be done effectively
 with GHA. This document will introduce [cibuildwheel][] for use in your project.
-The benefits of cibuildwheel are a larger user base, fast fixes from CI and pip,
-works on all major CI vendors (no lock-in), and covers cases we were not able to
-cover (like ARM). We will focus on GHA below.
+We will focus on GHA below.
 
 ## Header
 
@@ -58,21 +56,11 @@ test-extras = "test"
 test-command = "pytest {project}/tests"
 # Optional
 build-verbosity = 1
-
-# Optional: support Universal2 for Apple Silicon with these two lines:
-[tool.cibuildwheel.macos]
-archs = ["auto", "universal2"]
-test-skip = ["*universal2:arm64"]
 ```
 
 The `test-extras` will cause the pip install to use `[test]`. The `test-command`
 will use pytest to run your tests. You can also set the build verbosity (`-v` in
-pip) if you want to. If you support Apple Silicon, you can add the final two
-lines, the first of which enables the `universal2` wheel, which has both Intel
-and AS architectures in it, and the second explicitly skips testing the AS part
-of the wheel, since it can't be tested on Intel. If you use CMake instead of
-pure setuptools, you will likely need further customizations for AS
-cross-compiling. Only Python 3.8+ supports Apple Silicon.
+pip) if you want to.
 
 ## Making an SDist
 
@@ -114,7 +102,7 @@ build_wheels:
   strategy:
     fail-fast: false
     matrix:
-      os: [ubuntu-latest, windows-latest, macos-latest]
+      os: [ubuntu-latest, windows-latest, macos-13, macos-14]
 
   steps:
     - uses: actions/checkout@v4
@@ -139,7 +127,12 @@ builds nicely into a wheel without strange customizations (if you _really_ need
 them, check out [`CIBW_BEFORE_BUILD`][] and [`CIBW_ENVIRONMENT`][]).
 
 This lists all three OS's; if you do not support Windows, you can remove that
-here.
+here. If you would rather make universal2 wheels for macOS, you can remove
+either the Intel (`macos-13`) or Apple Silicon (`macos-14`) job and set
+`CIBW_ARCHS_MACOS` to `"universal2"`. You can also set `CIBW_TEST_SKIP` to
+`"*universal2:arm64"` if building from Intel to acknowledge you understand that
+you can't test Apple Silicon from Intel. You can do this from the
+`pyproject.toml` file instead if you want.
 
 The build step is controlled almost exclusively through environment variables,
 which makes it easier (usually) to setup in CI. The main variable needed here is
@@ -148,19 +141,10 @@ usually `CIBW_BUILD` to select the platforms you want to build for - see the
 alternative architectures need emulation, so are not shown here (adds one extra
 step).
 
-You can also select different base images (the _default_ is manylinux2010). If
-you want manylinux1, just do:
-
-```yaml
-env:
-  CIBW_MANYLINUX_X86_64_IMAGE: manylinux1
-  CIBW_MANYLINUX_I686_IMAGE: manylinux1
-```
-
-You can even put any docker image here, as needed by the project. Note that
-manylinux1 was discontinued on Jan 1, 2022, and updates will cease whenever they
-break. If you always need a specific image, you can set that in the
-`pyproject.toml` file instead.
+You can also select different base images (the _default_ is manylinux2014). If
+you want a different supported image, set `CIBW_MANYLINUX_X86_64_IMAGE`,
+`CIBW_MANYLINUX_I686_IMAGE`, etc. If you always need a specific image, you can
+set that in the `pyproject.toml` file instead.
 
 ## Publishing
 

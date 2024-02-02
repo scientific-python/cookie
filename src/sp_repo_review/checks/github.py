@@ -109,7 +109,7 @@ class GH103(GitHub):
 
 GH104_ERROR_MSG = """
 Multiple upload-artifact usages _must_ have unique names to be
-compatible with `v4` (which no longer merge artifacts, but instead
+compatible with `v4` (which no longer merges artifacts, but instead
 errors out). The most general solution is:
 
 ```yaml
@@ -130,7 +130,7 @@ class GH104(GitHub):
     "Use unique names for upload-artifact"
 
     requires = {"GH100"}
-    url = mk_url("gha-wheel")
+    url = mk_url("gha-wheels")
 
     @staticmethod
     def check(workflows: dict[str, Any]) -> str:
