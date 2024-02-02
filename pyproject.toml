@@ -44,6 +44,9 @@ test = [
 dev = [
   "pytest >=7",
 ]
+pyproject = [
+  "validate-pyproject-schema-store[all]",
+]
 
 [project.urls]
 Guide = "https://learn.scientific-python.org/development"
