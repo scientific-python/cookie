@@ -894,7 +894,7 @@ You also might like the following hook, which cleans Jupyter outputs:
 
 ```yaml
 - repo: https://github.com/kynan/nbstripout
-  rev: "0.6.1"
+  rev: "0.7.1"
   hooks:
     - id: nbstripout
 ```
