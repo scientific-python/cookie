@@ -161,6 +161,7 @@ class GH104(GitHub):
 class GH200(GitHub):
     "Maintained by Dependabot"
 
+    requires = {"GH100"}
     url = mk_url("gha-basic")
 
     @staticmethod
