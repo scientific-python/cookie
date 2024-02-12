@@ -8,13 +8,11 @@ version: 2
 # Set the version of Python and other tools you might need
 build:
   os: ubuntu-22.04
+
+  tools:
+    ruby: "3.3"
+
   commands:
-    - asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
-    - asdf install ruby 3.1.2
-    - asdf global ruby 3.1.2
-    - gem install bundler
-    - bundle config set --local deployment 'true'
-    - bundle config set --local without development
     - bundle install
     - >
       JEKYLL_ENV=production bundle exec jekyll build --destination
