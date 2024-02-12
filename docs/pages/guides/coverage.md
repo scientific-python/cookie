@@ -87,14 +87,21 @@ uploading coverage reports easy for users. A minimal working example for
 uploading coverage reports through your workflow, which should be more than
 enough for a simple testing suite, can be written as follows:
 
+{% raw %}
+
 ```yaml
 - name: Upload coverage report
   uses: codecov/codecov-action@v4.0.1
+  with:
+    token: ${{ secrets.CODECOV_TOKEN }}
 ```
+
+{% endraw %}
 
 The lines above should be added after the step that runs your tests with the
 `--cov` option. See the [docs](https://github.com/codecov/codecov-action#usage)
-for all the optional options.
+for all the optional options. You'll need to specify a `CODECOV_TOKEN` secret,
+as well.
 
 ### Using codecov.yml
 
