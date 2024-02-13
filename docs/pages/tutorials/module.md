@@ -88,8 +88,8 @@ automatically generate nice-looking HTML documentation later. Notable features:
 
 - (Optional) There is a section of one or more examples.
 
-We will revisit docstrings in the section on writing documentation [TODO: link
-once this section exists].
+We will revisit docstrings in the section on writing
+[documentation]({% link pages/tutorials/docs.md %}).
 
 [snell's law]: https://en.wikipedia.org/wiki/Snell%27s_law
 [numpydoc standard]: https://numpydoc.readthedocs.io/en/latest/format.html
