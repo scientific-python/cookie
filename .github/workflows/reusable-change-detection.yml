@@ -23,7 +23,7 @@ jobs:
       - name: Changed cookie-related files
         if: github.event_name == 'pull_request'
         id: changed-cookie-files
-        uses: Ana06/get-changed-files@v2.2.0
+        uses: Ana06/get-changed-files@v2.3.0
         with:
           format: "json"
           filter: |
@@ -45,7 +45,7 @@ jobs:
       - name: Changed sp-repo-review-related files
         if: github.event_name == 'pull_request'
         id: changed-rr-files
-        uses: Ana06/get-changed-files@v2.2.0
+        uses: Ana06/get-changed-files@v2.3.0
         with:
           format: "json"
           filter: |
