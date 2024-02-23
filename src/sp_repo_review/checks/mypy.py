@@ -64,7 +64,8 @@ class MY102(MyPy):
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
         """
-        Must not have `show_error_codes`. Use `hide_error_codes` instead (since MyPy v0.990).
+        Must not have `show_error_codes`. It is now the default, or you can
+        use `hide_error_codes` with the reverse value instead (since MyPy v0.990).
         """
 
         match pyproject:

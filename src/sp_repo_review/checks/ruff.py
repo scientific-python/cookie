@@ -66,20 +66,19 @@ class RF002(Ruff):
     "Target version must be set"
 
     @staticmethod
-    def check(pyproject: dict[str, Any], ruff: dict[str, Any]) -> bool:
+    def check(pyproject: dict[str, Any], ruff: dict[str, Any]) -> bool | str:
         """
         Must select a minimum version to target. Affects pyupgrade, isort, and
         others. Will be inferred from `project.requires-python`.
         """
 
-        if "target-version" in ruff:
-            return True
-
         match pyproject:
             case {"project": {"requires-python": str()}}:
+                if "target-version" in ruff:
+                    return "You have both Ruff's `target-version` and `project.requires-python`. You only need the later."
                 return True
             case _:
-                return False
+                return "target-version" in ruff
 
 
 class RF003(Ruff):
