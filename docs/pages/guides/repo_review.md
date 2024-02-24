@@ -18,7 +18,7 @@ fail, that's okay - the goal is bring all possible issues to your attention, not
 to force compliance with arbitrary checks.
 
 You can also run [this tool](https://github.com/scientific-python/repo-review)
-locally:
+locally (Python 3.10+ required):
 
 ```bash
 pipx run 'sp-repo-review[cli]' <path to repo>
