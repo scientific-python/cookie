@@ -14,7 +14,6 @@ class General:
 
 
 class PY001(General):
-
     "Has a pyproject.toml"
 
     url = mk_url("packaging-simple")
