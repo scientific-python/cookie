@@ -504,7 +504,7 @@ jobs:
       - name: Changed test-related files
         if: github.event_name == 'pull_request'
         id: changed-tests-files
-        uses: Ana06/get-changed-files@v2.2.0
+        uses: Ana06/get-changed-files@v2.3.0
         with:
           format: "json"
           filter: |
