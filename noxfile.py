@@ -4,7 +4,6 @@ Nox runner for cookie & sp-repo-review.
 sp-repo-review checks start with "rr-".
 """
 
-
 from __future__ import annotations
 
 import difflib

@@ -157,8 +157,7 @@ class RF103(RF1xx):
 
 class RF2xxMixin(Protocol):
     @staticmethod
-    def iter_check(ruff: dict[str, Any]) -> Generator[str, None, None]:
-        ...
+    def iter_check(ruff: dict[str, Any]) -> Generator[str, None, None]: ...
 
 
 class RF2xx(Ruff):
