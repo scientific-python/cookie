@@ -89,7 +89,7 @@ class PP302(PyProject):
         ```
         """
         options = pyproject["tool"]["pytest"]["ini_options"]
-        return "minversion" in options and float(options["minversion"]) >= 6
+        return "minversion" in options and int(options["minversion"].split(".")[0] >= 6
 
 
 class PP303(PyProject):
