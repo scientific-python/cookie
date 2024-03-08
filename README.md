@@ -137,8 +137,7 @@ backports structure with a small typing example.
 - Formatting handled by pre-commit
   - No reason not to be strict on a new project; remove what you don't want.
   - Includes MyPy - static typing
-  - Includes Black - standardizing formatting
-  - Includes strong Ruff-based linting and autofixes
+  - Includes Ruff - standard formatting, linting and autofixes
     - Replaces Flake8, isort, pyupgrade, yesqa, pycln, and dozens of plugins
   - Includes spell checking
 - An pylint nox target can be used to run pylint, which integrated GHA
