@@ -40,7 +40,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.3.0"
+    rev: "v0.3.2"
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
@@ -59,7 +59,7 @@ repos:
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: "v17.0.6"
+    rev: "v18.1.0"
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]
@@ -67,7 +67,7 @@ repos:
 {%- endif %}
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.8.0"
+    rev: "v1.9.0"
     hooks:
       - id: mypy
         files: src|tests
