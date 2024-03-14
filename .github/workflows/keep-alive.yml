@@ -1,0 +1,15 @@
+name: keep-github-actions-alive
+on:
+  schedule:
+    - cron: "0 0 * * *"
+permissions:
+  actions: write
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gautamkrishnar/keepalive-workflow@v2
+        with:
+          time_elapsed: 50
+          use_api: true
