@@ -225,8 +225,7 @@ PYBIND11_MODULE(_core, m) {
       Some other explanation about the add function.
   )pbdoc");
 
-  m.def(
-      "subtract", [](int i, int j) { return i - j; }, R"pbdoc(
+  m.def("subtract", [](int i, int j) { return i - j; }, R"pbdoc(
       Subtract two numbers
       Some other explanation about the subtract function.
   )pbdoc");
@@ -267,8 +266,7 @@ PYBIND11_MODULE(_core, m) {
       Some other explanation about the add function.
   )pbdoc");
 
-  m.def(
-      "subtract", [](int i, int j) { return i - j; }, R"pbdoc(
+  m.def("subtract", [](int i, int j) { return i - j; }, R"pbdoc(
       Subtract two numbers
       Some other explanation about the subtract function.
   )pbdoc");
