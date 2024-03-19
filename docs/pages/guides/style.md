@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.3.2"
+  rev: "v0.3.3"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -141,7 +141,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "24.2.0"
+  rev: "24.3.0"
   hooks:
     - id: black
 ```
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.3.2"
+  rev: "v0.3.3"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -747,7 +747,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v18.1.0"
+  rev: "v18.1.1"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -764,7 +764,7 @@ If you have shell scripts, you can protect against common mistakes using
 
 ```yaml
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: "v0.9.0.6"
+  rev: "v0.10.0.1"
   hooks:
     - id: shellcheck
 ```
