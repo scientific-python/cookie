@@ -189,7 +189,7 @@ class PP307(PyProject):
 
         ```toml
         [tool.pytest.ini_options]
-        addops = ["-ra", "--strict-config", "--strict-markers"]
+        addopts = ["-ra", "--strict-config", "--strict-markers"]
         ```
         """
         options = pyproject["tool"]["pytest"]["ini_options"]
@@ -210,7 +210,7 @@ class PP308(PyProject):
 
         ```toml
         [tool.pytest.ini_options]
-        addops = ["-ra", "--strict-config", "--strict-markers"]
+        addopts = ["-ra", "--strict-config", "--strict-markers"]
         ```
         """
         options = pyproject["tool"]["pytest"]["ini_options"]
