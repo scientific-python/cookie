@@ -80,7 +80,7 @@ action:
 
 You can now access all current versions of Python from nox. At least in GitHub
 Actions, you should add `--forcecolor` to your nox runs to get color output in
-your logs, or set `env: FORCE_COLOR: 3`. If you'd like to customise the versions
+your logs, or set `env: FORCE_COLOR: 3`. If you'd like to customize the versions
 of Python prepared for you, then use input like this:
 
 ```yaml
@@ -313,6 +313,36 @@ def build(session: nox.Session) -> None:
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
+
+(Removing the build directory is helpful for setuptools)
+
+### Faster with uv
+
+The [uv](https://github.com/astral-sh/uv) project is a Rust reimplementation of
+pip, pip-tools, and venv that is very, very fast. You can tell nox to use `uv`
+if it is on your system by adding the following to your `noxfile.py`:
+
+```python
+nox.needs_version = ">=2024.3.2"
+nox.options.default_venv_backend = "uv|virtualenv"
+```
+
+You can install `uv` with `pipx`, `brew`, etc. If you want to use uv in GitHub
+Actions, one way is to use this:
+
+```yaml
+- name: Setup uv
+  uses: yezz123/setup-uv@v4
+```
+
+You do not need to set `with: uv-venv: ".venv"` for `nox` to be able to use
+`uv`.
+
+Check your jobs with `uv`; most things do not need to change. The main
+difference is `uv` doesn't install `pip` unless you ask it to. If you want to
+interact with uv, nox might be getting uv from it's environment instead of the
+system environment, so you can install `uv` if `shutil.which("uv")` returns
+`None`.
 
 ### Examples
 

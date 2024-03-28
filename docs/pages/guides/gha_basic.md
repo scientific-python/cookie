@@ -261,12 +261,21 @@ And many other useful ones:
   built-in caching.
 - [conda-incubator/setup-miniconda](https://github.com/conda-incubator/setup-miniconda):
   Setup conda or mamba on GitHub Actions.
+- [prefix-dev/setup-pixi](https://github.com/prefix-dev/setup-pixi): Set up pixi
+  and install your environment(s). Try `cache: false` if saving/loading the
+  cache is slow.
 - [ruby/setup-ruby](https://github.com/ruby/setup-ruby): Setup Ruby if you need
   it for something.
 - [peter-evans/create-pull-request](https://github.com/peter-evans/create-pull-request):
   Make a new PR with the current changes (more options than just using `gh`).
   You can even auto-merge PRs with `run: gh pr merge --merge --auto "1"`
   afterwards.
+- [yezz123/setup-uv](https://github.com/yezz123/setup-uv): Set up `uv`. Has a
+  handy `uv-venv` option that will also set up and activate a virtual
+  environment for you.
+- [gautamkrishnar/keepalive-workflow](https://github.com/gautamkrishnar/keepalive-workflow):
+  Keep GitHub actions alive for more than 60 days. Not usually needed if you've
+  set up the other suggestions here, like dependabot and pre-commit.
 
 A couple more from Python developers; note these do not provide `vX` moving tags
 like the official actions and most other actions, but instead have `release/vX`
@@ -276,6 +285,8 @@ branches that you can use.
   Publish Python packages to PyPI. Supports trusted publisher deployment.
 - [re-actors/alls-green](https://github.com/re-actors/alls-green): Tooling to
   check to see if all jobs passed (supports allowed failures, too).
+- [sigstore/gh-action-sigstore-python](https://github.com/sigstore/gh-action-sigstore-python):
+  Signing files in GitHub Actions with sigstore.
 
 There are also a few useful tools installed which can really simplify your
 workflow or adding custom actions. This includes system package managers (like
