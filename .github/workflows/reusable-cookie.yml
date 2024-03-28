@@ -37,8 +37,13 @@ jobs:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
 
+      - name: Setup uv
+        uses: yezz123/setup-uv@v4
+        with:
+          uv-venv: ".venv"
+
       - name: Install nox
-        run: pip install nox
+        run: uv pip install nox
 
       - name: Test setuptools
         run: nox -s 'tests(setuptools, novcs)' -s 'tests(setuptools, vcs)'
@@ -97,55 +102,68 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
+
+      - name: Setup uv
+        uses: yezz123/setup-uv@v4
+        with:
+          uv-venv: ".venv"
+
+      - name: Install nox
+        run: uv pip install nox
+
       - name: Test setuptools
         run: |
-          pipx run nox -s 'nox(setuptools, vcs)'
-          pipx run nox -s 'nox(setuptools, vcs)' -- docs
+          nox -s 'nox(setuptools, vcs)'
+          nox -s 'nox(setuptools, vcs)' -- docs
 
       - name: Test pybind11
         run: |
-          pipx run nox -s 'nox(pybind11, vcs)'
-          pipx run nox -s 'nox(pybind11, vcs)' -- docs
+          nox -s 'nox(pybind11, vcs)'
+          nox -s 'nox(pybind11, vcs)' -- docs
 
       - name: Test scikit-build
         run: |
-          pipx run nox -s 'nox(skbuild, vcs)'
-          pipx run nox -s 'nox(skbuild, vcs)' -- docs
+          nox -s 'nox(skbuild, vcs)'
+          nox -s 'nox(skbuild, vcs)' -- docs
 
       - name: Test poetry
         run: |
-          pipx run nox -s 'nox(poetry, novcs)'
-          pipx run nox -s 'nox(poetry, novcs)' -- docs
+          nox -s 'nox(poetry, novcs)'
+          nox -s 'nox(poetry, novcs)' -- docs
 
       - name: Test flit
         run: |
-          pipx run nox -s 'nox(flit, novcs)'
-          pipx run nox -s 'nox(flit, novcs)' -- docs
+          nox -s 'nox(flit, novcs)'
+          nox -s 'nox(flit, novcs)' -- docs
 
       - name: Test pdm
         run: |
-          pipx run nox -s 'nox(pdm, vcs)'
-          pipx run nox -s 'nox(pdm, vcs)' -- docs
+          nox -s 'nox(pdm, vcs)'
+          nox -s 'nox(pdm, vcs)' -- docs
 
       - name: Test whey
         run: |
-          pipx run nox -s 'nox(whey, novcs)'
-          pipx run nox -s 'nox(whey, novcs)' -- docs
+          nox -s 'nox(whey, novcs)'
+          nox -s 'nox(whey, novcs)' -- docs
 
       - name: Test maturin
         run: |
-          pipx run nox -s 'nox(maturin, novcs)'
-          pipx run nox -s 'nox(maturin, novcs)' -- docs
+          nox -s 'nox(maturin, novcs)'
+          nox -s 'nox(maturin, novcs)' -- docs
 
       - name: Test hatch
         run: |
-          pipx run nox -s 'nox(hatch, vcs)'
-          pipx run nox -s 'nox(hatch, vcs)' -- docs
+          nox -s 'nox(hatch, vcs)'
+          nox -s 'nox(hatch, vcs)' -- docs
 
       - name: Test setuptools PEP 621
         run: |
-          pipx run nox -s 'nox(setuptools621, vcs)'
-          pipx run nox -s 'nox(setuptools621, vcs)' -- docs
+          nox -s 'nox(setuptools621, vcs)'
+          nox -s 'nox(setuptools621, vcs)' -- docs
 
       - name: Activate MSVC for Meson
         if: runner.os == 'Windows'
@@ -153,8 +171,8 @@ jobs:
 
       - name: Test meson-python
         run: |
-          pipx run nox -s 'nox(mesonpy, novcs)'
-          pipx run nox -s 'nox(mesonpy, novcs)' -- docs
+          nox -s 'nox(mesonpy, novcs)'
+          nox -s 'nox(mesonpy, novcs)' -- docs
 
   dist:
     name: Distribution build
