@@ -93,7 +93,7 @@ leave the environment (or just close your shell).
 >
 > You can also consider the [uv][] package, which is much, much faster version
 > of pip and venv implemented in Rust. Just put `uv` in front of the commands
-> you'd normally use; as long as use use venvs, it should be nearly the same.
+> you'd normally use; as long as you use venvs, it should be nearly the same.
 
 [uv]: https://github.com/astral-sh/uv
 
