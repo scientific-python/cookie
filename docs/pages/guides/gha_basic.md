@@ -656,7 +656,7 @@ configure Pages.
 ```yaml
 - name: Setup Pages
   id: pages
-  uses: actions/configure-pages@v4
+  uses: actions/configure-pages@v5
 ```
 
 {% raw %}

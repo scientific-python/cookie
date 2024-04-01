@@ -824,7 +824,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.28.0"
+  rev: "0.28.1"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
