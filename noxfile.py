@@ -24,8 +24,9 @@ from typing import Any
 
 import nox
 
-nox.needs_version = ">=2022.1.7"
+nox.needs_version = ">=2024.3.2"
 nox.options.sessions = ["rr_lint", "rr_tests", "rr_pylint", "readme"]
+nox.options.default_venv_backend = "uv|virtualenv"
 
 DIR = Path(__file__).parent.resolve()
 with DIR.joinpath("cookiecutter.json").open() as f:

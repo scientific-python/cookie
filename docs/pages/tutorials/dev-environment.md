@@ -87,6 +87,16 @@ leave the environment (or just close your shell).
 > If you like a different shell, like fish, there are several `activate`
 > scripts; the default one expects a bash-like shell.
 
+{: .note-title }
+
+> Fast alternative
+>
+> You can also consider the [uv][] package, which is much, much faster version
+> of pip and venv implemented in Rust. Just put `uv` in front of the commands
+> you'd normally use; as long as you use venvs, it should be nearly the same.
+
+[uv]: https://github.com/astral-sh/uv
+
 ### Option 2: Using conda
 
 You can also develop in conda. This is an especially good option if:
@@ -112,6 +122,16 @@ conda activate env_name
 ```
 
 To deactivate, use `conda deactivate`, or leave your shell.
+
+> Modern faster alternative
+>
+> You can also consider the [pixi][] package, which is much, much faster version
+> of conda implemented in Rust. It has been completely redesigned to work around
+> projects with a `pixi.toml` file instead of global environments. It's a new
+> way to work (more similar to pdm/hatch/poetry from Python), but very powerful
+> if you learn it.
+
+[pixi]: https://pixi.sh
 
 ## Choosing an Editor
 
