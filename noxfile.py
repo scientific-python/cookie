@@ -321,7 +321,9 @@ def nox_session(session: nox.Session, backend: str, vcs: bool) -> None:
 
 @nox.session()
 def compare_copier(session):
-    session.install("cookiecutter", "copier", "copier-templates-extensions")
+    session.install(
+        "cookiecutter", "copier", "copier-templates-extensions", "pyyaml-include<2"
+    )
 
     tmp_dir = session.create_tmp()
     session.cd(tmp_dir)
