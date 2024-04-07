@@ -74,7 +74,7 @@ Install `copier` and `copier-templates-extensions`. Using [pipx][], that's:
 
 ```bash
 pipx install copier
-pipx inject copier copier-templates-extensions 'pyyaml-include<2'
+pipx inject copier copier-templates-extensions
 ```
 
 Now, run copier to generate your project:
