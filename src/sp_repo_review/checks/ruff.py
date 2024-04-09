@@ -75,7 +75,7 @@ class RF002(Ruff):
         match pyproject:
             case {"project": {"requires-python": str()}}:
                 if "target-version" in ruff:
-                    return "You have both Ruff's `target-version` and `project.requires-python`. You only need the later."
+                    return "You have both Ruff's `target-version` and `project.requires-python`. You only need the latter."
                 return True
             case _:
                 return "target-version" in ruff
