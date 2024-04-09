@@ -582,7 +582,7 @@ command line. `strict = true` is now allowed in config files, too
 The extra strict options shown above, like `warn_unreachable` {% rr MY103 %},
 and `ignore-without-code` {% rr MY104 %}, `redundant-expr` {% rr MY105 %}, and
 `truthy-bool` {% rr MY106 %} can trigger too often (like on `sys.platform`
-checks) and have to be ignored occasionally, but can find some signifiant logic
+checks) and have to be ignored occasionally, but can find some significant logic
 errors in your typing.
 
 [mypy page]: {% link pages/guides/mypy.md %}
