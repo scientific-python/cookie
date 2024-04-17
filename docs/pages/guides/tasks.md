@@ -80,7 +80,7 @@ action:
 
 You can now access all current versions of Python from nox. At least in GitHub
 Actions, you should add `--forcecolor` to your nox runs to get color output in
-your logs, or set `env: FORCE_COLOR: 3`. If you'd like to customize the versions
+your logs, or set `env: FORCE_COLOR: 3`[^force_color]. If you'd like to customize the versions
 of Python prepared for you, then use input like this:
 
 ```yaml
@@ -371,3 +371,8 @@ using nox include [pip](https://github.com/pypa/pip/blob/main/noxfile.py),
 [manylinux](https://github.com/pypa/manylinux/blob/main/noxfile.py),
 [packaging](https://github.com/pypa/packaging/blob/main/noxfile.py), and
 [packaging.python.org](https://github.com/pypa/packaging.python.org/blob/main/noxfile.py).
+
+[^force_color]: Many color libraries just need `FORCE_COLOR` to be set to any
+  value, but at least [one](https://pypi.org/project/plumbum/) distinguishes
+  color depth, where "3" -> "256-bit color". For many use cases, using
+  `FORCE_COLOR: 1` is fine.
