@@ -164,6 +164,9 @@ deploy_staging:
   rules:
     - if:
         $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+  id_tokens:
+    PYPI_ID_TOKEN:
+      aud: testpypi
   variables:
     TWINE_REPOSITORY: testpypi
     TWINE_USERNAME: __token__
@@ -173,6 +176,9 @@ deploy_production:
   extends: .deploy
   only:
     - tags
+  id_tokens:
+    PYPI_ID_TOKEN:
+      aud: pypi
   variables:
     TWINE_REPOSITORY: pypi
     TWINE_USERNAME: __token__
