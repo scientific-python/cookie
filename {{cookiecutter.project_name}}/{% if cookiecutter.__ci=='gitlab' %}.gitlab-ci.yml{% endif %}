@@ -17,11 +17,11 @@ cache:
 image: python:3.8-buster
 before_script:
   # want to set up a virtualenv to cache
-  - apt-get install -y --no-install-recommends git
+  - apt-get install -y --no-install-recommends git jq
   - python -V
   - python -m venv .venv
   - source .venv/bin/activate
-  - python -m pip install -U pip pipx
+  - python -m pip install -U pip pipx id
   - python -m pipx ensurepath
   - python -m pip freeze
 
@@ -152,7 +152,12 @@ make_wheels:
     - make_wheels
     {%- endif %}
   script:
-    - pipx run twine upload --verbose dist/*whl dist/*gz
+    # Retrieve the OIDC token from GitLab CI/CD and exchange it for a PyPI API token
+    - oidc_token=$(python -m id PYPI)
+    - response=$(curl -X POST "${OIDC_MINT_TOKEN_URL}" -d "{\"token\":\"${oidc_token}\"}")
+    - api_token=$(jq --raw-output '.token' <<< "${response}")
+
+    - pipx run twine upload --password "${api_token}" --verbose dist/*whl dist/*gz
 
 deploy_staging:
   extends: .deploy
@@ -162,7 +167,7 @@ deploy_staging:
   variables:
     TWINE_REPOSITORY: testpypi
     TWINE_USERNAME: __token__
-    TWINE_PASSWORD: $TESTPYPI_TOKEN
+    OIDC_MINT_TOKEN_URL: "https://test.pypi.org/_/oidc/mint-token"
 
 deploy_production:
   extends: .deploy
@@ -171,4 +176,4 @@ deploy_production:
   variables:
     TWINE_REPOSITORY: pypi
     TWINE_USERNAME: __token__
-    TWINE_PASSWORD: $PYPI_TOKEN
+    OIDC_MINT_TOKEN_URL: "https://pypi.org/_/oidc/mint-token"
