@@ -32,6 +32,7 @@ dynamic = ["version", "readme"]
 dependencies = [
   "pyyaml",
   "repo-review",
+  "tomli; python_version<'3.11'",
 ]
 
 [project.optional-dependencies]
@@ -40,7 +41,7 @@ cli = [
 ]
 test = [
   "pytest >=7",
-  "repo-review >=0.10.5",
+  "repo-review >=0.10.6",
 ]
 dev = [
   "pytest >=7",
