@@ -52,7 +52,7 @@ repos:
           - click
           - markdown-it-py
           - pytest
-          - repo-review
+          - repo-review>=0.10.6
           - rich
           - tomli
           - types-PyYAML

@@ -1,33 +1,35 @@
-from sp_repo_review._compat import tomllib
-from sp_repo_review.checks import ruff
+from repo_review.testing import compute_check, toml_loads
 
 
 def test_rf003_with_rp():
-    toml = tomllib.loads("""
+    toml = toml_loads("""
         project.requires-python = ">=3.12"
         tool.ruff.anything = "1"
         """)
-    assert ruff.RF002.check(toml, toml["tool"]["ruff"])
+    assert compute_check("RF002", pyproject=toml, ruff=toml["tool"]["ruff"]).result
 
 
 def test_rf003_no_rp():
-    toml = tomllib.loads("""
+    toml = toml_loads("""
         project.name = "hi"
         tool.ruff.target-version = "3.12"
         """)
-    assert ruff.RF002.check(toml, toml["tool"]["ruff"])
+    assert compute_check("RF002", pyproject=toml, ruff=toml["tool"]["ruff"]).result
 
 
 def test_rf003_both():
-    toml = tomllib.loads("""
+    toml = toml_loads("""
         project.requires-python = ">=3.12"
         tool.ruff.target-version = "3.12"
         """)
-    assert isinstance(ruff.RF002.check(toml, toml["tool"]["ruff"]), str)
+    check_result = compute_check("RF002", pyproject=toml, ruff=toml["tool"]["ruff"])
+    assert check_result.result is False
 
 
 def test_rf003_split_ok():
-    toml = tomllib.loads("""
+    toml = toml_loads("""
         project.requires-python = ">=3.12"
         """)
-    assert ruff.RF002.check(toml, {"target-version": "3.12"})
+    assert compute_check(
+        "RF002", pyproject=toml, ruff={"target-version": "3.12"}
+    ).result
