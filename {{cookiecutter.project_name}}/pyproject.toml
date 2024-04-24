@@ -122,7 +122,7 @@ pytest-cov = { version = ">=3", optional = true }
 sphinx = { version = ">=7.0", optional = true }
 sphinx_copybutton = { version = ">=0.3.0", optional = true }
 sphinx-autodoc-typehints = { version = "*", optional = true }
-docutils = { version = "!=0.21post1", optional = true }
+docutils = { version = "!=0.21.post1", optional = true }
 
 [tool.poetry.dev-dependencies]
 pytest = ">= 6"
