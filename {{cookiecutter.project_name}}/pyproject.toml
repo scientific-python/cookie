@@ -122,6 +122,7 @@ pytest-cov = { version = ">=3", optional = true }
 sphinx = { version = ">=7.0", optional = true }
 sphinx_copybutton = { version = ">=0.3.0", optional = true }
 sphinx-autodoc-typehints = { version = "*", optional = true }
+docutils = { version = "!=0.21.post1", optional = true }
 
 [tool.poetry.dev-dependencies]
 pytest = ">= 6"
@@ -136,6 +137,7 @@ docs = [
   "sphinx",
   "sphinx_autodoc_typehints",
   "sphinx_copybutton",
+  "docutils",
 ]
 
 {%- if cookiecutter.vcs %}
@@ -297,7 +299,6 @@ write_to = "src/{{ cookiecutter.__project_slug }}/_version.py"
 [tool.cibuildwheel]
 test-command = "pytest {project}/tests"
 test-extras = ["test"]
-test-skip = ["*universal2:arm64"]
 {%- endif %}
 
 
