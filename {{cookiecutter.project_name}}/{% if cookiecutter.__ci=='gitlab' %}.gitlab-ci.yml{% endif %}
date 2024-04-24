@@ -21,7 +21,7 @@ before_script:
   - python -V
   - python -m venv .venv
   - source .venv/bin/activate
-  - python -m pip install -U pip pipx id
+  - python -m pip install -U pip pipx
   - python -m pipx ensurepath
   - python -m pip freeze
 
@@ -153,7 +153,7 @@ make_wheels:
     {%- endif %}
   script:
     # Retrieve the OIDC token from GitLab CI/CD and exchange it for a PyPI API token
-    - oidc_token=$(python -m id PYPI)
+    - oidc_token=$(pipx run id PYPI)
     - response=$(curl -X POST "${OIDC_MINT_TOKEN_URL}" -d "{\"token\":\"${oidc_token}\"}")
     - api_token=$(jq --raw-output '.token' <<< "${response}")
 
