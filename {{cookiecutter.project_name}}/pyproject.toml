@@ -297,7 +297,6 @@ write_to = "src/{{ cookiecutter.__project_slug }}/_version.py"
 [tool.cibuildwheel]
 test-command = "pytest {project}/tests"
 test-extras = ["test"]
-test-skip = ["*universal2:arm64"]
 {%- endif %}
 
 
