@@ -55,7 +55,7 @@ py -m install -v -e .[dev]
 
 {%- endif %}
 
-# Post setup
+# Pre-commit
 
 You should prepare pre-commit, which will help you by checking that commits pass
 required checks:
@@ -97,15 +97,3 @@ You can see a preview with:
 ```bash
 nox -s docs -- --serve
 ```
-
-# Pre-commit
-
-This project uses pre-commit for all style checking. While you can run it with
-nox, this is such an important tool that it deserves to be installed on its own.
-Install pre-commit and run:
-
-```bash
-pre-commit run -a
-```
-
-to check all files.
