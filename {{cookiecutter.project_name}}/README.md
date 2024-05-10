@@ -9,8 +9,7 @@
 
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
 {%- if cookiecutter.org | lower == "scikit-hep" %}
-[![Scikit-HEP][sk-badge]](https://scikit-hep.org/)
-{%- endif %}
+[![Scikit-HEP][sk-badge]](https://scikit-hep.org/) {%- endif %}
 
 <!-- SPHINX-START -->
 
