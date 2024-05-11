@@ -24,6 +24,13 @@ which consist of actions. Here are some of the workflows you will probably want
 in your package. These should be in a file named `.github/workflows/main.yml` or
 similar.
 
+<!-- [[[cog
+from cog_helpers import code_fence, render_cookie
+with render_cookie() as package:
+    github_release_yaml = package.joinpath(".github/release.yml").read_text(encoding="utf-8").strip()
+]]] -->
+<!-- [[[end]]] -->
+
 ## Header
 
 Your main CI workflow file should begin something like this:
@@ -710,3 +717,28 @@ everything in one job, you only need one of these.
 >
 > - [CLIUtils.github.io/CLI11](https://github.com/CLIUtils/CLI11/blob/main/.github/workflows/docs.yml)
 > - [iris-hep.org](https://github.com/iris-hep/iris-hep.github.io/blob/master/.github/workflows/deploy.yml)
+
+### Changelog generation
+
+Not directly part of Actions, but also in `.github` is `.github/release.yml`,
+which lets you [configure the changelog generation][gh-changelog] button when
+you make a release. The following config will remove dependabot and
+pre-commit-ci PRs for you:
+
+<!-- [[[cog
+with code_fence("yaml"):
+    print(github_release_yaml)
+]]] -->
+<!-- prettier-ignore-start -->
+```yaml
+changelog:
+  exclude:
+    authors:
+      - dependabot
+      - pre-commit-ci
+```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
+
+[gh-changelog]:
+  https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
