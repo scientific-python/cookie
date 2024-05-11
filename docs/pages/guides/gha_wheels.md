@@ -30,6 +30,9 @@ on:
   release:
     types:
       - published
+   pull_request:
+     paths:
+     - .github/workflows/cd.yml
 ```
 
 This will run on releases. If you use a develop branch, you could include
@@ -38,6 +41,7 @@ This will run on releases. If you use a develop branch, you could include
 click a button in the GUI to trigger a build, which is perfect for testing
 wheels before making a release; you can download them from the "artifacts". You
 can even define variables that you can set in the GUI and access in the CI!
+Finally, if you change the workflow itself in a PR, then rebuild the wheels too.
 
 <!-- prettier-ignore-start -->
 [workflow_dispatch]: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
