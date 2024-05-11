@@ -24,6 +24,13 @@ which consist of actions. Here are some of the workflows you will probably want
 in your package. These should be in a file named `.github/workflows/main.yml` or
 similar.
 
+<!-- [[[cog
+from cog_helpers import code_fence, render_cookie
+with render_cookie() as package:
+    github_release_yaml = package.joinpath(".github/release.yml").read_text(encoding="utf-8").strip()
+]]] -->
+<!-- [[[end]]] -->
+
 ## Header
 
 Your main CI workflow file should begin something like this:
@@ -718,6 +725,11 @@ which lets you [configure the changelog generation][gh-changelog] button when
 you make a release. The following config will remove dependabot and
 pre-commit-ci PRs for you:
 
+<!-- [[[cog
+with code_fence("yaml"):
+    print(github_release_yaml)
+]]] -->
+<!-- prettier-ignore-start -->
 ```yaml
 changelog:
   exclude:
@@ -725,6 +737,8 @@ changelog:
       - dependabot
       - pre-commit-ci
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 [gh-changelog]:
   https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
