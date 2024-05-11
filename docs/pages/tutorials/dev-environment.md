@@ -94,6 +94,11 @@ leave the environment (or just close your shell).
 > You can also consider the [uv][] package, which is much, much faster version
 > of pip and venv implemented in Rust. Just put `uv` in front of the commands
 > you'd normally use; as long as you use venvs, it should be nearly the same.
+> You can use `--system` to mimic pip, otherwise it uses the active virtualenv
+> or a `.venv` folder. `uv venv` will default to a `.venv` folder.
+>
+> This also supports `--exclude-newer DATE`, which allows you to resolve as if
+> you were at some past point in time.
 
 [uv]: https://github.com/astral-sh/uv
 

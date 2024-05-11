@@ -238,6 +238,8 @@ In order to use <https://readthedocs.org> to build, host, and preview your
 documentation, you must have a `.readthedocs.yaml` file {% rr RTD100 %} like
 this:
 
+{% tabs %} {% tab uv-sphinx uv + Sphinx %}
+
 <!-- [[[cog
 with code_fence("yaml"):
     print(readthedocs_yaml)
@@ -252,7 +254,31 @@ version: 2
 build:
   os: ubuntu-22.04
   tools:
-    python: "3.11"
+    python: "3.12"
+  commands:
+    - asdf plugin add uv
+    - asdf install uv latest
+    - asdf global uv latest
+    - uv venv
+    - uv pip install .[docs]
+    - .venv/bin/python -m sphinx -T -b html -d docs/_build/doctrees -D
+      language=en docs $READTHEDOCS_OUTPUT/html
+```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
+
+{% endtab %} {% tab pip-sphinx pip + Sphinx %}
+
+```yaml
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+version: 2
+
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.12"
 sphinx:
   configuration: docs/conf.py
 
@@ -263,8 +289,8 @@ python:
       extra_requirements:
         - docs
 ```
-<!-- prettier-ignore-end -->
-<!-- [[[end]]] -->
+
+{% endtab %} {% endtabs %}
 
 This sets the Read the Docs config version (2 is required) {% rr RTD101 %}.
 
@@ -291,41 +317,30 @@ with code_fence("python"):
 @nox.session(reuse_venv=True)
 def docs(session: nox.Session) -> None:
     """
-    Build the docs. Pass "--serve" to serve. Pass "-b linkcheck" to check links.
+    Build the docs. Pass --non-interactive to avoid serving. First positional argument is the target directory.
     """
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--serve", action="store_true", help="Serve after building")
     parser.add_argument(
         "-b", dest="builder", default="html", help="Build target (default: html)"
     )
+    parser.add_argument("output", nargs="?", help="Output directory")
     args, posargs = parser.parse_known_args(session.posargs)
+    serve = args.builder == "html" and session.interactive
 
-    if args.builder != "html" and args.serve:
-        session.error("Must not specify non-HTML builder with --serve")
-
-    extra_installs = ["sphinx-autobuild"] if args.serve else []
-
-    session.install("-e.[docs]", *extra_installs)
-    session.chdir("docs")
-
-    if args.builder == "linkcheck":
-        session.run(
-            "sphinx-build", "-b", "linkcheck", ".", "_build/linkcheck", *posargs
-        )
-        return
+    session.install("-e.[docs]", "sphinx-autobuild")
 
     shared_args = (
         "-n",  # nitpicky mode
         "-T",  # full tracebacks
         f"-b={args.builder}",
-        ".",
-        f"_build/{args.builder}",
+        "docs",
+        args.output or f"docs/_build/{args.builder}",
         *posargs,
     )
 
-    if args.serve:
-        session.run("sphinx-autobuild", *shared_args)
+    if serve:
+        session.run("sphinx-autobuild", "--open-browser", *shared_args)
     else:
         session.run("sphinx-build", "--keep-going", *shared_args)
 ```
@@ -333,8 +348,8 @@ def docs(session: nox.Session) -> None:
 <!-- [[[end]]] -->
 
 This is a more complex Nox job just because it's taking some options (the
-ability to build and serve instead of just build, and the ability to select the
-builder). The first portion is just setting up argument parsing. Then it does
+ability to build and serve instead of just build). The first portion is just
+setting up argument parsing so we can serve if building `html`. Then it does
 some conditional installs based on arguments (sphinx-autobuild is only needed if
 serving). It does an editable install of your package so that you can skip the
 install steps with `-R` and still get updated documentation.
@@ -367,15 +382,14 @@ def build_api_docs(session: nox.Session) -> None:
     """
 
     session.install("sphinx")
-    session.chdir("docs")
     session.run(
         "sphinx-apidoc",
         "-o",
-        "api/",
+        "docs/api/",
         "--module-first",
         "--no-toc",
         "--force",
-        "../src/<package-name-here>",
+        "src/<package-name-here>",
     )
 ```
 <!-- prettier-ignore-end -->
@@ -429,3 +443,5 @@ If you want to use Markdown instead of notebooks, you can use jupytext (see
 [sphinx-autodoc2]: https://sphinx-autodoc2.readthedocs.io/
 [`sphinx.ext.napoleon`]: https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
 <!-- prettier-ignore-end -->
+
+<script src="{% link assets/js/tabs.js %}"></script>

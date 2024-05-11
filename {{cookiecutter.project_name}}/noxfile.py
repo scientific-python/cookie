@@ -1,17 +1,12 @@
 from __future__ import annotations
 
 import argparse
-{%- if cookiecutter.backend != "pybind11" %}
 import shutil
 from pathlib import Path
-{%- endif %}
 
 import nox
 
-{% if cookiecutter.backend != "pybind11" -%}
 DIR = Path(__file__).parent.resolve()
-
-{% endif -%}
 
 nox.needs_version = ">=2024.3.2"
 nox.options.sessions = ["lint", "pylint", "tests"]
@@ -52,41 +47,30 @@ def tests(session: nox.Session) -> None:
 @nox.session(reuse_venv=True)
 def docs(session: nox.Session) -> None:
     """
-    Build the docs. Pass "--serve" to serve. Pass "-b linkcheck" to check links.
+    Build the docs. Pass --non-interactive to avoid serving. First positional argument is the target directory.
     """
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--serve", action="store_true", help="Serve after building")
     parser.add_argument(
         "-b", dest="builder", default="html", help="Build target (default: html)"
     )
+    parser.add_argument("output", nargs="?", help="Output directory")
     args, posargs = parser.parse_known_args(session.posargs)
+    serve = args.builder == "html" and session.interactive
 
-    if args.builder != "html" and args.serve:
-        session.error("Must not specify non-HTML builder with --serve")
-
-    extra_installs = ["sphinx-autobuild"] if args.serve else []
-
-    session.install("-e.[docs]", *extra_installs)
-    session.chdir("docs")
-
-    if args.builder == "linkcheck":
-        session.run(
-            "sphinx-build", "-b", "linkcheck", ".", "_build/linkcheck", *posargs
-        )
-        return
+    session.install("-e.[docs]", "sphinx-autobuild")
 
     shared_args = (
         "-n",  # nitpicky mode
         "-T",  # full tracebacks
         f"-b={args.builder}",
-        ".",
-        f"_build/{args.builder}",
+        "docs",
+        args.output or f"docs/_build/{args.builder}",
         *posargs,
     )
 
-    if args.serve:
-        session.run("sphinx-autobuild", *shared_args)
+    if serve:
+        session.run("sphinx-autobuild", "--open-browser", *shared_args)
     else:
         session.run("sphinx-build", "--keep-going", *shared_args)
 
@@ -98,19 +82,15 @@ def build_api_docs(session: nox.Session) -> None:
     """
 
     session.install("sphinx")
-    session.chdir("docs")
     session.run(
         "sphinx-apidoc",
         "-o",
-        "api/",
+        "docs/api/",
         "--module-first",
         "--no-toc",
         "--force",
-        "../src/{{ cookiecutter.__project_slug }}",
+        "src/{{ cookiecutter.__project_slug }}",
     )
-
-
-{%- if cookiecutter.backend != "pybind11" %}
 
 
 @nox.session
@@ -125,5 +105,3 @@ def build(session: nox.Session) -> None:
 
     session.install("build")
     session.run("python", "-m", "build")
-
-{%- endif %}
