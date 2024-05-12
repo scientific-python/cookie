@@ -5,6 +5,9 @@ on:
   release:
     types:
       - published
+  pull_request:
+    paths:
+      - .github/workflows/cd.yml
 
 concurrency:
   group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
