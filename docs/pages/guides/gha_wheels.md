@@ -30,9 +30,9 @@ on:
   release:
     types:
       - published
-   pull_request:
-     paths:
-     - .github/workflows/cd.yml
+    pull_request:
+      paths:
+        - .github/workflows/cd.yml
 ```
 
 This will run on releases. If you use a develop branch, you could include
