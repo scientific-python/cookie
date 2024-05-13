@@ -40,7 +40,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.4.3"
+    rev: "v0.4.4"
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
@@ -59,7 +59,7 @@ repos:
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: "v18.1.4"
+    rev: "v18.1.5"
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]
@@ -112,13 +112,13 @@ repos:
 {%- endif %}
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: "v0.16"
+    rev: "v0.17"
     hooks:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.28.2"
+    rev: "0.28.3"
     hooks:
 {%- if cookiecutter.__ci == "github" %}
       - id: check-dependabot

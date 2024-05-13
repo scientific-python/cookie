@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.4.3"
+  rev: "v0.4.4"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.4.3"
+  rev: "v0.4.4"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -747,7 +747,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v18.1.4"
+  rev: "v18.1.5"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -810,7 +810,7 @@ can even get all [SchemaStore][]'s plugins with the
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
-  rev: "v0.16"
+  rev: "v0.17"
   hooks:
     - id: validate-pyproject
       additional_dependencies: ["validate-pyproject-schema-store[all]"]
@@ -824,7 +824,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.28.2"
+  rev: "0.28.3"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
