@@ -224,10 +224,8 @@ for a plugin to do this with pytest.
 
 You can also do this
 [by supplying matchers](https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md),
-which tell GitHub to look for certain patterns, such as
-`echo "::add-matcher::$GITHUB_WORKSPACE/.github/matchers/pylint.json"`. Do keep
-in mind you can only see up to 10 matches per type per step, and a total of 50
-matchers.
+which tell GitHub to look for certain patterns. Do keep in mind you can only see
+up to 10 matches per type per step, and a total of 50 matchers.
 
 ### Common useful actions
 

@@ -862,12 +862,13 @@ And a noxfile entry:
 @nox.session
 def pylint(session: nox.Session) -> None:
     session.install("-e.")
-    session.install("pylint")
+    session.install("pylint>=3.2")
     session.run("pylint", "<your package>", *session.posargs)
 ```
 
-And you can add this to your GitHub Actions using `run: pipx run nox -s pylint`.
-You can replace `src` with the module name.
+And you can add this to your GitHub Actions using
+`run: pipx run nox -s pylint -- --output-format=github`. You can replace
+`<your package>` with the module name.
 
 ## Jupyter notebook support
 
