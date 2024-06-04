@@ -108,7 +108,7 @@ exclude_patterns = [
     ".venv",
 ]
 
-html_theme = "pydata_sphinx_theme"
+html_theme = "furo"
 
 myst_enable_extensions = [
     "colon_fence",
@@ -148,9 +148,9 @@ We are including both possible file extensions. We are also avoiding some common
 file patterns, just in case.
 
 For theme, many scientific packages choose the
-[pydata-sphinx-theme](https://pydata-sphinx-theme.readthedocs.io/).
-The [Furo theme](https://pradyunsg.me/furo/) is another popular choice.
-The site [sphinx-themes.org](https://sphinx-themes.org/) can be used to compare options.
+[pydata-sphinx-theme](https://pydata-sphinx-theme.readthedocs.io/). The
+[Furo theme](https://pradyunsg.me/furo/) is another popular choice. The site
+[sphinx-themes.org](https://sphinx-themes.org/) can be used to compare options.
 
 We are enabling a useful MyST extension: `colon_fence` allows you to use three
 colons for directives, which might be highlighted better if the directive
