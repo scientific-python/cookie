@@ -220,7 +220,7 @@ Setting a `docs` extra looks like this:
 ```toml
 [project.optional-dependencies]
 docs = [
-  "furo",
+  "pydata_sphinx_theme",
   "myst_parser >=0.13",
   "sphinx >=4.0",
   "sphinx-copybutton",
