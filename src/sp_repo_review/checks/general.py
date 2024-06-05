@@ -64,8 +64,21 @@ class PY004(General):
 
     @staticmethod
     def check(package: Traversable) -> bool:
-        "Projects must have documentation in a folder called docs (disable if not applicable)"
+        "Projects must have documentation in a folder called doc or docs (disable if not applicable)"
         return len([p for p in package.iterdir() if "doc" in p.name]) > 0
+
+
+class PY004b(General):
+    "Documentation folder should be `docs` not `doc`"
+
+    requires = {"PY004"}
+
+    url = mk_url("packaging-simple")
+
+    @staticmethod
+    def check(package: Traversable) -> bool:
+        "Projects must have documentation in a folder called `docs` not `doc`"
+        return any(p.name == "docs" for p in package.iterdir())
 
 
 class PY005(General):

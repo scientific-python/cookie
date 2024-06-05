@@ -241,5 +241,65 @@ class PP309(PyProject):
         return "filterwarnings" in options
 
 
+class PP310(PyProject):
+    "Tests target is test not test (spec13)"
+
+    requires = {"PP301"}
+    url = mk_url("pytest")
+
+    @staticmethod
+    def check(pyproject: dict[str, Any]) -> bool | None:
+        """
+
+        Tests target should be `tests` not `test`
+
+        ```toml
+        [project.optional-dependencies]
+        tests = [
+            'pytest',
+            ...
+        ]
+        ```
+        """
+        if "tool" not in pyproject:
+            return None
+        if "project.optional-dependencies" not in pyproject["tool"]:
+            return None
+        optional_deps = pyproject["tool"]["project.optional-dependencies"]
+        if "tests" in optional_deps:
+            return True
+        return "test" not in optional_deps
+
+
+class PP311(PyProject):
+    "Tests target is `docs not` `doc` (spec13)"
+
+    requires = {"PP301"}
+    url = mk_url("pytest")
+
+    @staticmethod
+    def check(pyproject: dict[str, Any]) -> bool | None:
+        """
+
+        docs target should be `docs` not `doc`
+
+        ```toml
+        [project.optional-dependencies]
+        docs = [
+            'sphinx',
+            ...
+        ]
+        ```
+        """
+        if "tool" not in pyproject:
+            return None
+        if "project.optional-dependencies" not in pyproject["tool"]:
+            return None
+        optional_deps = pyproject["tool"]["project.optional-dependencies"]
+        if "docs" in optional_deps:
+            return True
+        return "doc" not in optional_deps
+
+
 def repo_review_checks() -> dict[str, PyProject]:
     return {p.__name__: p() for p in PyProject.__subclasses__()}

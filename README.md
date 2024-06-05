@@ -143,7 +143,7 @@ backports structure with a small typing example.
 - An pylint nox target can be used to run pylint, which integrated GHA
   annotations
 - A ReadTheDocs-ready Sphinx docs folder and `[docs]` extra
-- A test folder and pytest `[test]` extra
+- A test folder and pytest `[tests]` extra
 - A noxfile is included with a few common targets
 
 Setuptools only:
