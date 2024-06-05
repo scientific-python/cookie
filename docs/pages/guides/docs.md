@@ -108,7 +108,7 @@ exclude_patterns = [
     ".venv",
 ]
 
-html_theme = "pydata_sphinx_theme"
+html_theme = "furo"
 
 myst_enable_extensions = [
     "colon_fence",
