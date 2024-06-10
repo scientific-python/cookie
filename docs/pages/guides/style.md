@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.4.7"
+  rev: "v0.4.8"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.4.7"
+  rev: "v0.4.8"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -490,7 +490,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.15.2"
+  rev: "v3.16.0"
   hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
@@ -747,7 +747,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v18.1.5"
+  rev: "v18.1.6"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
