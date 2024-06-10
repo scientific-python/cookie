@@ -365,7 +365,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Uses blacken-docs
 - [`PC140`](https://learn.scientific-python.org/development/guides/style#PC140): Uses mypy
 - [`PC160`](https://learn.scientific-python.org/development/guides/style#PC160): Uses codespell
-- [`PC170`](https://learn.scientific-python.org/development/guides/style#PC170): Uses PyGrep hooks (only needed if RST present)
+- [`PC170`](https://learn.scientific-python.org/development/guides/style#PC170): Uses PyGrep hooks (only needed if rST present)
 - [`PC180`](https://learn.scientific-python.org/development/guides/style#PC180): Uses prettier
 - [`PC190`](https://learn.scientific-python.org/development/guides/style#PC190): Uses Ruff
 - [`PC191`](https://learn.scientific-python.org/development/guides/style#PC191): Ruff show fixes if fixes enabled

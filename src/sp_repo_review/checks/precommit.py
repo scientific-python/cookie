@@ -92,7 +92,7 @@ class PC160(PreCommit):
 
 
 class PC170(PreCommit):
-    "Uses PyGrep hooks (only needed if RST present)"
+    "Uses PyGrep hooks (only needed if rST present)"
 
     repo = "https://github.com/pre-commit/pygrep-hooks"
 

@@ -68,7 +68,7 @@ with render_cookie() as package:
 
 Create `docs/` directory within your project (i.e. next to `src/`). There is a
 sphinx-quickstart tool, but it creates unnecessary files (make/bat, we recommend
-a cross-platform noxfile instead), and uses RST instead of Markdown. Instead,
+a cross-platform noxfile instead), and uses rST instead of Markdown. Instead,
 this is our recommended starting point for `conf.py`:
 
 ### conf.py
