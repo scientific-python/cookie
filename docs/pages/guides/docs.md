@@ -11,7 +11,7 @@ parent: Topical Guides
 # Writing documentation
 
 Documentation used to require learning reStructuredText (sometimes referred to
-as reST / RST), but today we have great choices for documentation in markdown,
+as reST / rST), but today we have great choices for documentation in markdown,
 the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx,
 and uses the modern MyST plugin to get Markdown support.
 
@@ -29,7 +29,7 @@ and uses the modern MyST plugin to get Markdown support.
 >   based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
 >   since it doesn't use docutils. Has over
 >   [200 plugins](https://github.com/mkdocs/catalog) - they are much easier to
->   write than Sphinx. Examples include [hatch](https://hatch.pypa.io),
+>   write than Sphinx. Example sites include [hatch](https://hatch.pypa.io),
 >   [PDM](https://pdm.fming.dev),
 >   [cibuildwheel](https://cibuildwheel.readthedocs.io),
 >   [Textual](https://textual.textualize.io), and
@@ -68,7 +68,7 @@ with render_cookie() as package:
 
 Create `docs/` directory within your project (i.e. next to `src/`). There is a
 sphinx-quickstart tool, but it creates unnecessary files (make/bat, we recommend
-a cross-platform noxfile instead), and uses RST instead of Markdown. Instead,
+a cross-platform noxfile instead), and uses rST instead of Markdown. Instead,
 this is our recommended starting point for `conf.py`:
 
 ### conf.py
@@ -147,9 +147,10 @@ several good extensions:
 We are including both possible file extensions. We are also avoiding some common
 file patterns, just in case.
 
-For theme, you have several good options. The clean, light-weight Furo theme is
-shown above. Many scientific packages choose the `sphinx-py-data` theme, which
-is also a good choice (no dark mode, though).
+For theme, many scientific packages choose the
+[pydata-sphinx-theme](https://pydata-sphinx-theme.readthedocs.io/). The
+[Furo theme](https://pradyunsg.me/furo/) is another popular choice. The site
+[sphinx-themes.org](https://sphinx-themes.org/) can be used to compare options.
 
 We are enabling a useful MyST extension: `colon_fence` allows you to use three
 colons for directives, which might be highlighted better if the directive
