@@ -129,7 +129,7 @@ pytest = ">= 6"
 pytest-cov = ">= 3"
 
 [tool.poetry.extras]
-test = ["pytest", "pytest-cov"]
+tests = ["pytest", "pytest-cov"]
 dev = ["pytest", "pytest-cov"]
 docs = [
   "furo",
@@ -195,7 +195,7 @@ dynamic = ["version"]
 dependencies = []
 
 [project.optional-dependencies]
-test = [
+tests = [
   "pytest >=6",
   "pytest-cov >=3",
 ]
@@ -259,7 +259,7 @@ build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.p
 
 [tool.hatch.envs.default]
 features = ["test"]
-scripts.test = "pytest {args}"
+scripts.tests = "pytest {args}"
 
 
 {%- elif cookiecutter.backend == "pdm" %}
@@ -281,7 +281,7 @@ path = "src/{{ cookiecutter.__project_slug }}/__init__.py"
 {%- endif %}
 
 [tool.pdm.dev-dependencies]
-devtest = ["pytest", "pytest-cov"]
+devtests = ["pytest", "pytest-cov"]
 
 {%- endif %}
 

@@ -62,9 +62,9 @@ test-command = "pytest {project}/tests"
 build-verbosity = 1
 ```
 
-The `test-extras` will cause the pip install to use `[test]`. The `test-command`
-will use pytest to run your tests. You can also set the build verbosity (`-v` in
-pip) if you want to.
+The `test-extras` will cause the pip install to use `[tests]`. The
+`test-command` will use pytest to run your tests. You can also set the build
+verbosity (`-v` in pip) if you want to.
 
 ## Making an SDist
 

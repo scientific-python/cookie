@@ -40,7 +40,7 @@ def tests(session: nox.Session) -> None:
     """
     Run the unit and regular tests.
     """
-    session.install(".[test]")
+    session.install(".[tests]")
     session.run("pytest", *session.posargs)
 
 

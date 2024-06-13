@@ -58,7 +58,7 @@ Here is an example of a simple extras:
 
 ```toml
 [project.optional-dependencies]
-test = [
+tests = [
   "pytest >=6.0",
 ]
 mpl = [

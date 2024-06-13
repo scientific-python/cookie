@@ -75,7 +75,7 @@ tests:
     - if: $CI_PIPELINE_SOURCE == "push"
   script:
     - python -V
-    - python -m pip install .[test]
+    - python -m pip install .[tests]
     - python -m pytest -ra --cov={{ cookiecutter.project_name }}
   parallel:
     matrix:
