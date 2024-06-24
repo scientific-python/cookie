@@ -222,7 +222,6 @@ You should also add these two files:
 node: $Format:%H$
 node-date: $Format:%cI$
 describe-name: $Format:%(describe:tags=true,match=*[0-9]*)$
-ref-names: $Format:%D$
 ```
 
 And `.gitattributes` (or add this line if you are already using this file):
