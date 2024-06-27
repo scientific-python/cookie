@@ -91,7 +91,7 @@ make_sdist:
 ```
 
 You can instead install build via pip and use `python -m build --sdist`. You can
-also pin the version with `pipx run --spec build==... build`.
+also pin the version with `pipx run build==<version>`.
 
 ## The core job (3 main OS's)
 
@@ -150,6 +150,9 @@ you want a different supported image, set `CIBW_MANYLINUX_X86_64_IMAGE`,
 `CIBW_MANYLINUX_I686_IMAGE`, etc. If you always need a specific image, you can
 set that in the `pyproject.toml` file instead.
 
+You can speed up the build by specifying the `build[uv]` build-frontend option
+and pre-installing `uv` on the runners.
+
 ## Publishing
 
 {% tabs %} {% tab oidc Trusted Publishing %}
@@ -162,6 +165,9 @@ upload_all:
   environment: pypi
   permissions:
     id-token: write
+    attestations: write
+    contents: read
+
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
@@ -170,6 +176,11 @@ upload_all:
         pattern: cibw-*
         path: dist
         merge-multiple: true
+
+    - name: Generate artifact attestations
+      uses: actions/attest-build-provenance@v1.1.2
+      with:
+        subject-path: "dist/*"
 
     - uses: pypa/gh-action-pypi-publish@release/v1
 ```
@@ -181,6 +192,9 @@ need to tell PyPI which org, repo, workflow, and set the `pypi` environment to
 allow pushes from GitHub. If it's the first time you've published a package, go
 to the [PyPI trusted publisher docs] for instructions on preparing PyPI to
 accept your initial package publish.
+
+We are also generating artifact attestations, which can allow users to verify
+that the artifacts were built on your actions.
 
 {% endtab %} {% tab token Token %}
 

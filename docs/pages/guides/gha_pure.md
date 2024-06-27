@@ -143,6 +143,8 @@ publish:
   environment: pypi
   permissions:
     id-token: write
+    attestations: write
+    contents: read
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
@@ -150,6 +152,11 @@ publish:
       with:
         name: Packages
         path: dist
+
+    - name: Generate artifact attestation for sdist and wheel
+      uses: actions/attest-build-provenance@v1.1.2
+      with:
+        subject-path: "dist/*"
 
     - uses: pypa/gh-action-pypi-publish@release/v1
 ```
@@ -161,6 +168,9 @@ need to tell PyPI which org, repo, workflow, and set the `pypi` environment to
 allow pushes from GitHub. If it's the first time you've published a package, go
 to the [PyPI trusted publisher docs] for instructions on preparing PyPI to
 accept your initial package publish.
+
+We are also generating artifact attestations, which can allow users to verify
+that the artifacts were built on your actions.
 
 {% endtab %} {% tab token Token %}
 
@@ -230,6 +240,8 @@ jobs:
     environment: pypi
     permissions:
       id-token: write
+      attestations: write
+      contents: read
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
 
@@ -238,6 +250,11 @@ jobs:
         with:
           name: Packages
           path: dist
+
+      - name: Generate artifact attestation for sdist and wheel
+        uses: actions/attest-build-provenance@v1.1.2
+        with:
+          subject-path: "dist/*"
 
       - uses: pypa/gh-action-pypi-publish@release/v1
 ```
