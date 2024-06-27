@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.4.8"
+  rev: "v0.5.0"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.4.8"
+  rev: "v0.5.0"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -392,7 +392,7 @@ the flake8 addition for pre-commit, with the `bugbear` plugin:
 
 ```yaml
 - repo: https://github.com/pycqa/flake8
-  rev: "7.0.0"
+  rev: "7.1.0"
   hooks:
     - id: flake8
       additional_dependencies: [flake8-bugbear]
@@ -535,7 +535,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.10.0"
+  rev: "v1.10.1"
   hooks:
     - id: mypy
       files: src
@@ -747,7 +747,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v18.1.6"
+  rev: "v18.1.7"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -824,7 +824,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.28.4"
+  rev: "0.28.6"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
