@@ -78,6 +78,11 @@ repos:
         language: pygrep
         entry: PyBind|Numpy|Cmake|CCache|Github|PyTest|RST
         exclude: (.pre-commit-config.yaml|docs/pages/guides/style\.md)$
+      - id: disallow-words
+        name: Disallow certain words
+        language: pygrep
+        entry: '[Ff]alsey'
+        exclude: .pre-commit-config.yaml$
       - id: disallow-bad-permalinks
         name: Disallow _ in permalinks
         language: pygrep
