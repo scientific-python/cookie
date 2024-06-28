@@ -81,7 +81,7 @@ repos:
       - id: disallow-words
         name: Disallow certain words
         language: pygrep
-        entry: '[Ff]alsey'
+        entry: "[Ff]alsey"
         exclude: .pre-commit-config.yaml$
       - id: disallow-bad-permalinks
         name: Disallow _ in permalinks
