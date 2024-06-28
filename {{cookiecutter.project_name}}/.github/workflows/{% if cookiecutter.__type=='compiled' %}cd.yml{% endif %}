@@ -61,6 +61,8 @@ jobs:
     environment: pypi
     permissions:
       id-token: write
+      attestations: write
+      contents: read
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
 
@@ -70,6 +72,11 @@ jobs:
           pattern: cibw-*
           path: dist
           merge-multiple: true
+
+      - name: Generate artifact attestations
+        uses: actions/attest-build-provenance@v1.1.2
+        with:
+          subject-path: "dist/*"
 
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
