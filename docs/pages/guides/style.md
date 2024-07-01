@@ -180,7 +180,7 @@ markdown and restructured text. Note that because black is in
 
 ```yaml
 - repo: https://github.com/adamchainz/blacken-docs
-  rev: "1.16.0"
+  rev: "1.18.0"
   hooks:
     - id: blacken-docs
       additional_dependencies: [black==24.*]
@@ -747,7 +747,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v18.1.7"
+  rev: "v18.1.8"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
