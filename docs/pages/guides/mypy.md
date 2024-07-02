@@ -77,8 +77,7 @@ to a code base. By default:
 You can add configuration to `pyproject.toml` (and a little bit to the files
 themselves), or you can go all the way and pass `--strict`, which will turn on
 everything. Try to turn on as much as possible, and increase it until you can
-run with full `strict` checking. See the [style page][] for configuration
-suggestions.
+run with full `strict` checking. See the [style page][] for configuration suggestions.
 
 [style page]: {% link pages/guides/style.md %}
 

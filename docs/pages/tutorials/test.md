@@ -146,8 +146,8 @@ include:
 - `-k EXPRESSION` Filter tests by pattern-matching test name.
 - `--lf` Run only tests that failed on the previous run (**l**ast **f**ail).
 
-Consult the [pytest documentation][] for more. For more advanced pytest
-suggestions, see our [pytest guide][].
+Consult the [pytest documentation][] for more. For more advanced pytest suggestions,
+see our [pytest guide][].
 
 <!-- prettier-ignore-start -->
 
