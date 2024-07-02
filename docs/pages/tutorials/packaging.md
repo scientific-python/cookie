@@ -32,9 +32,9 @@ cd example
 
 You should immediately initialize an empty Git repository in this directory; if
 you need a refresher on using Git for version control, check out the Software
-Carpentry lesson [Version Control with Git][]. You should commit changes
-regularly throughout what follows. This tutorial will not explicitly remind you
-to commit your work after this point.
+Carpentry lesson [Version Control with Git][]. You should commit changes regularly
+throughout what follows. This tutorial will not explicitly remind you to commit your
+work after this point.
 
 ```bash
 git init
