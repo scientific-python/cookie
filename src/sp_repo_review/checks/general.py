@@ -85,7 +85,7 @@ class PY005(General):
         if src.is_dir():
             for pkg in src.iterdir():
                 if (
-                    d.is_dir()
+                    pkg.is_dir()
                     and len([p for p in pkg.iterdir() if "test" in p.name]) > 0
                 ):
                     return True
