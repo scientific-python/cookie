@@ -18,9 +18,9 @@ for your `CONTRIBUTING.md`, and at least glance through other sections.
 Following that, there are recommendations for [style][], intended to promote
 good practices and to ensure continuity across the packages. There is a
 [dedicated page for static type checking with MyPy][mypy]. There is then a guide
-on [simple packaging][], [compiled packaging][], or even [classic packaging][],
-which should help in ensuring a consistent developer and user experience when
-working with distribution.
+on [simple packaging][], [compiled packaging][], or even [classic packaging][], which
+should help in ensuring a consistent developer and user experience when working with
+distribution.
 
 A section on CI follows, with a [general setup guide][gha_basic], and then two
 choices for using CI to distribute your package, on for [pure Python][gha_pure],
@@ -43,8 +43,8 @@ on setting up [docs][], as well.
 > Checking an existing project
 >
 > We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
-> your repository with the guidelines, runnable [right in the guide][] via
-> WebAssembly! All checks point to a linked badge in the guide.
+> your repository with the guidelines, runnable [right in the guide][] via WebAssembly!
+> All checks point to a linked badge in the guide.
 
 <!-- prettier-ignore-start -->
 

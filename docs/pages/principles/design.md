@@ -24,9 +24,9 @@ test, maintain when data formats change, or reuse for unforeseen applications.
 
 ## Duck typing is a good idea
 
-[Duck typing][] treats objects based on what they can _do_, not based on what
-type they _are_. "If it walks like a duck and it quacks like a duck, then it
-must be a duck."
+[Duck typing][] treats objects based on what they can _do_, not based on what type
+they _are_. "If it walks like a duck and it quacks like a duck, then it must be a
+duck."
 
 Python in general and scientific Python in particular leverage _interfaces_
 (also known as Protocols) to support interoperability and reuse. For example, it

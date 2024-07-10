@@ -190,8 +190,8 @@ upload_all:
 When you make a GitHub release in the web UI, we publish to PyPI. You'll just
 need to tell PyPI which org, repo, workflow, and set the `pypi` environment to
 allow pushes from GitHub. If it's the first time you've published a package, go
-to the [PyPI trusted publisher docs] for instructions on preparing PyPI to
-accept your initial package publish.
+to the [PyPI trusted publisher docs] for instructions on preparing PyPI to accept
+your initial package publish.
 
 We are also generating artifact attestations, which can allow users to verify
 that the artifacts were built on your actions.
