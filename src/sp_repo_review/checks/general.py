@@ -84,7 +84,10 @@ class PY005(General):
         src = package.joinpath("src")
         if src.is_dir():
             for pkg in src.iterdir():
-                if len([p for p in pkg.iterdir() if "test" in p.name]) > 0:
+                if (
+                    pkg.is_dir()
+                    and len([p for p in pkg.iterdir() if "test" in p.name]) > 0
+                ):
                     return True
         return False
 
