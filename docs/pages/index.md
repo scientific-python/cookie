@@ -19,8 +19,8 @@ maintainable, reusable, and shareable form? Start at the
 **Learn recommended tools and best practices.** [Topical guides]({% link
 pages/guides/index.md %}) provide task-based instruction on topics that scientists
 and research software engineers may encounter as their projects evolve and grow.
-This covers modern packaging ([simple][] or [compiled][]), [style checking][],
-[testing][], [documentation][], [static typing][], [CI][], and much more!
+This covers modern packaging ([simple][] or [compiled][]), [style checking][], [testing][],
+[documentation][], [static typing][], [CI][], and much more!
 
 {: .highlight-title }
 
@@ -36,8 +36,8 @@ This covers modern packaging ([simple][] or [compiled][]), [style checking][],
 > Checking an existing project
 >
 > We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
-> your repository with the guidelines, runnable [right in the guide][] via WebAssembly!
-> All checks point to a linked badge in the guide.
+> your repository with the guidelines, runnable [right in the guide][] via
+> WebAssembly! All checks point to a linked badge in the guide.
 
 **Learn to write better research code.** A high-level document on
 [principles]({% link pages/principles/index.md %}) provides advice based on the
