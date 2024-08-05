@@ -24,90 +24,117 @@ class PreCommit:
     family = "pre-commit"
     requires = {"PY006"}
     url = mk_url("style")
-    renamed: ClassVar[str | None] = None
-    repo: ClassVar[str | None] = None
+    renamed: ClassVar[dict[str, str]] = {}
+    repos: ClassVar[set[str]] = set()
+    ids: ClassVar[dict[str, str]] = {}
+
+    @property
+    def describe(self) -> str:
+        msgs = sorted(
+            f"`{r}` (with `{self.ids[r]}` hook)" if r in self.ids else f"`{r}`"
+            for r in self.repos
+        )
+        if not msgs:
+            return "..."
+        if len(msgs) == 1:
+            return msgs[0]
+        return "one of " + ", ".join(msgs)
 
     @classmethod
     def check(cls, precommit: dict[str, Any]) -> bool | None | str:
-        "Must have `{self.repo}` repo in `.pre-commit-config.yaml`"
-        assert cls.repo is not None
-        for repo in precommit.get("repos", {}):
-            if repo.get("repo", "").lower() == cls.repo:
-                return True
-            if cls.renamed is not None and repo.get("repo", "").lower() == cls.renamed:
-                return f"Use `{cls.repo}` instead of `{cls.renamed}` in `.pre-commit-config.yaml`"
+        "Must have {self.describe} in `.pre-commit-config.yaml`"
+        assert cls.repos, f"{cls.__name__} must have a repo, invalid class definition"
+        for repo_item in precommit.get("repos", {}):
+            repo = repo_item.get("repo", "").lower()
+            if not repo:
+                continue
+            if repo in cls.repos:
+                if cls.ids and repo in cls.ids:
+                    if any(
+                        hook.get("id", "") == cls.ids[repo]
+                        for hook in repo_item.get("hooks", {})
+                    ):
+                        return True
+                else:
+                    return True
+            if cls.renamed and repo in cls.renamed:
+                rename = cls.renamed[repo]
+                return (
+                    f"Use `{rename}` instead of `{repo}` in `.pre-commit-config.yaml`"
+                )
         return False
 
 
 class PC100(PreCommit):
     "Has pre-commit-hooks"
 
-    repo = "https://github.com/pre-commit/pre-commit-hooks"
+    repos = {"https://github.com/pre-commit/pre-commit-hooks"}
 
 
 class PC110(PreCommit):
     "Uses black or ruff-format"
 
-    repo = "https://github.com/psf/black-pre-commit-mirror"
-    renamed = "https://github.com/psf/black"
-    alternate = "https://github.com/astral-sh/ruff-pre-commit"
-
-    @classmethod
-    def check(cls, precommit: dict[str, Any]) -> bool | None | str:
-        "Must have `{self.repo}` or `{self.alternate}` + `id: ruff-format` in `.pre-commit-config.yaml`"
-        for repo in precommit.get("repos", {}):
-            if repo.get("repo", "").lower() == cls.alternate and any(
-                hook.get("id", "") == "ruff-format" for hook in repo.get("hooks", {})
-            ):
-                return True
-
-        return super().check(precommit)
+    repos = {
+        "https://github.com/psf/black-pre-commit-mirror",
+        "https://github.com/astral-sh/ruff-pre-commit",
+    }
+    renamed = {
+        "https://github.com/psf/black": "https://github.com/psf/black-pre-commit-mirror"
+    }
+    ids = {"https://github.com/astral-sh/ruff-pre-commit": "ruff-format"}
 
 
 class PC111(PreCommit):
     "Uses blacken-docs"
 
     requires = {"PY006", "PC110"}
-    repo = "https://github.com/adamchainz/blacken-docs"
-    renamed = "https://github.com/asottile/blacken-docs"
+    repos = {"https://github.com/adamchainz/blacken-docs"}
+    renamed = {
+        "https://github.com/asottile/blacken-docs": "https://github.com/adamchainz/blacken-docs"
+    }
 
 
 class PC190(PreCommit):
     "Uses Ruff"
 
-    repo = "https://github.com/astral-sh/ruff-pre-commit"
-    renamed = "https://github.com/charliermarsh/ruff-pre-commit"
+    repos = {"https://github.com/astral-sh/ruff-pre-commit"}
+    renamed = {
+        "https://github.com/charliermarsh/ruff-pre-commit": "https://github.com/astral-sh/ruff-pre-commit"
+    }
 
 
 class PC140(PreCommit):
-    "Uses mypy"
+    "Uses a type checker"
 
-    repo = "https://github.com/pre-commit/mirrors-mypy"
+    repos = {"https://github.com/pre-commit/mirrors-mypy"}
 
 
 class PC160(PreCommit):
-    "Uses codespell"
+    "Uses a spell checker"
 
-    repo = "https://github.com/codespell-project/codespell"
+    repos = {
+        "https://github.com/codespell-project/codespell",
+        "https://github.com/crate-ci/typos",
+    }
 
 
 class PC170(PreCommit):
     "Uses PyGrep hooks (only needed if rST present)"
 
-    repo = "https://github.com/pre-commit/pygrep-hooks"
+    repos = {"https://github.com/pre-commit/pygrep-hooks"}
 
 
 class PC180(PreCommit):
-    "Uses prettier"
+    "Uses a markdown formatter"
 
-    repo = "https://github.com/pre-commit/mirrors-prettier"
+    repos = {"https://github.com/pre-commit/mirrors-prettier"}
 
 
 class PC191(PreCommit):
     "Ruff show fixes if fixes enabled"
 
     requires = {"PC190"}
-    repo = "https://github.com/astral-sh/ruff-pre-commit"
+    repos = {"https://github.com/astral-sh/ruff-pre-commit"}
 
     @classmethod
     def check(cls, precommit: dict[str, Any]) -> bool | None:
@@ -115,7 +142,7 @@ class PC191(PreCommit):
         If `--fix` is present, `--show-fixes` must be too.
         """
         for repo in precommit.get("repos", {}):
-            if "repo" in repo and repo["repo"].lower() == cls.repo:
+            if "repo" in repo and repo["repo"].lower() in cls.repos:
                 for hook in repo["hooks"]:
                     if (
                         hook["id"] == "ruff"
