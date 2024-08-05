@@ -64,6 +64,7 @@ license:
     - BSD
     - Apache
     - MIT
+    - AGPL
   # [[[end]]]
 
 # [[[cog print(cc.backend.yaml()) ]]]

@@ -99,6 +99,8 @@ license = "BSD-3-Clause"
 license = "Apache-2.0"
 {%- elif cookiecutter.license == "MIT" %}
 license = "MIT"
+{%- elif cookiecutter.license == "AGPL" %}
+license = "AGPL-3.0-or-later"
 {%- endif %}
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
@@ -176,6 +178,8 @@ classifiers = [
   "License :: OSI Approved :: Apache Software License",
 {%- elif cookiecutter.license == "MIT" %}
   "License :: OSI Approved :: MIT License",
+{%- elif cookiecutter.license == "AGPL" %}
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
 {%- endif %}
   "Operating System :: OS Independent",
   "Programming Language :: Python",
