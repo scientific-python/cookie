@@ -363,10 +363,10 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PC100`](https://learn.scientific-python.org/development/guides/style#PC100): Has pre-commit-hooks
 - [`PC110`](https://learn.scientific-python.org/development/guides/style#PC110): Uses black or ruff-format
 - [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Uses blacken-docs
-- [`PC140`](https://learn.scientific-python.org/development/guides/style#PC140): Uses mypy
-- [`PC160`](https://learn.scientific-python.org/development/guides/style#PC160): Uses codespell
+- [`PC140`](https://learn.scientific-python.org/development/guides/style#PC140): Uses a type checker
+- [`PC160`](https://learn.scientific-python.org/development/guides/style#PC160): Uses a spell checker
 - [`PC170`](https://learn.scientific-python.org/development/guides/style#PC170): Uses PyGrep hooks (only needed if rST present)
-- [`PC180`](https://learn.scientific-python.org/development/guides/style#PC180): Uses prettier
+- [`PC180`](https://learn.scientific-python.org/development/guides/style#PC180): Uses a markdown formatter
 - [`PC190`](https://learn.scientific-python.org/development/guides/style#PC190): Uses Ruff
 - [`PC191`](https://learn.scientific-python.org/development/guides/style#PC191): Ruff show fixes if fixes enabled
 - [`PC901`](https://learn.scientific-python.org/development/guides/style#PC901): Custom pre-commit CI message

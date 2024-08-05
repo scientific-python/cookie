@@ -467,7 +467,7 @@ def gha_bump(session: nox.Session) -> None:
 # -- Repo review --
 
 
-@nox.session
+@nox.session(tags=["gen"])
 def readme(session: nox.Session) -> None:
     """
     Update the readme with cog. Pass --check to check instead.
