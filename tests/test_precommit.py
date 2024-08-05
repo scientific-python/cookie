@@ -124,6 +124,14 @@ def test_pc180():
     assert compute_check("PC180", precommit=precommit).result
 
 
+def test_pc180_alt_1():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/rbubley/mirrors-prettier
+    """)
+    assert compute_check("PC180", precommit=precommit).result
+
+
 def test_pc191():
     precommit = yaml.safe_load("""
         repos:
