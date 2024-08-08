@@ -73,6 +73,6 @@ docs =
     sphinx>=7.0
     sphinx-autodoc-typehints
     sphinx-copybutton
-test =
+tests =
     pytest>=6
     pytest-cov>=3

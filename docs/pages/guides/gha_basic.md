@@ -115,7 +115,7 @@ tests:
         allow-prereleases: true
 
     - name: Install package
-      run: python -m pip install -e .[test]
+      run: python -m pip install -e .[tests]
 
     - name: Test package
       run: python -m pytest

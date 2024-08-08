@@ -39,7 +39,7 @@ dependencies = [
 cli = [
   "repo-review[cli]",
 ]
-test = [
+tests = [
   "pytest >=7",
   "repo-review >=0.10.6",
 ]

@@ -375,7 +375,7 @@ called `package`:
 
 ```ini
 [options.extras_require]
-test =
+tests =
   pytest >=6.0
 mpl =
   matplotlib >=2.0
