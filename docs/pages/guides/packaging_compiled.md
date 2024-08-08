@@ -26,8 +26,8 @@ The most exciting developments have been new native build backends:
 
 {: .note }
 
-You should be familiar with [packing a pure Python
-project]({% link pages/guides/packaging_compiled.md %}) - the metadata
+You should be familiar with [packing a pure
+Python project]({% link pages/guides/packaging_compiled.md %}) - the metadata
 configuration is the same.
 
 There are also classic setuptools plugins:

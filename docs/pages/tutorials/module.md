@@ -18,9 +18,9 @@ In this section you will:
 ## Module
 
 As a concrete example, let's suppose we have a simple function that encodes
-[Snell's Law][]. Perhaps this function currently lives in a Jupyter notebook or
-a `.py` file in an email attachment. We want to put into some more lasting,
-maintainable, reusable, and/or shareable form.
+[Snell's Law][]. Perhaps this function currently lives in a Jupyter notebook or a
+`.py` file in an email attachment. We want to put into some more lasting, maintainable,
+reusable, and/or shareable form.
 
 Here is the code:
 
@@ -64,8 +64,8 @@ is extremely useful for collaborators, and the most common collaborator is
 Future You! It also includes type hints; this tells a programmer, type checker,
 or IDE what types are expected in an out of the function.
 
-Further, by following the [numpydoc standard][], we will be able to
-automatically generate nice-looking HTML documentation later. Notable features:
+Further, by following the [numpydoc standard][], we will be able to automatically
+generate nice-looking HTML documentation later. Notable features:
 
 - At the top, there is a succinct, one-line summary of the function's purpose.
   It must one line.
