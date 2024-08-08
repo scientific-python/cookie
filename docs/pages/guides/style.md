@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.5.6"
+  rev: "v0.5.7"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.5.6"
+  rev: "v0.5.7"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -775,8 +775,8 @@ If you have shell scripts, you can protect against common mistakes using
 number of different file types. An example of usage:
 
 ```yaml
-- repo: https://github.com/pre-commit/mirrors-prettier
-  rev: "v3.1.0"
+- repo: https://github.com/rbubley/mirrors-prettier
+  rev: "v3.3.3"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
