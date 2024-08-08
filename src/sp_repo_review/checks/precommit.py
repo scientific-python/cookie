@@ -130,6 +130,7 @@ class PC180(PreCommit):
     repos = {
         "https://github.com/pre-commit/mirrors-prettier",
         "https://github.com/rbubley/mirrors-prettier",
+        "https://github.com/executablebooks/mdformat",
     }
 
 
