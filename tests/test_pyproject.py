@@ -92,3 +92,35 @@ def test_PP302_too_low():
         minversion = "5"
         """)
     assert not compute_check("PP302", pyproject=toml).result
+
+
+def test_PP308_list_okay():
+    toml = toml_loads("""
+        [tool.pytest.ini_options]
+        addopts = ["-ra"]
+        """)
+    assert compute_check("PP308", pyproject=toml).result
+
+
+def test_PP308_list_missing():
+    toml = toml_loads("""
+        [tool.pytest.ini_options]
+        addopts = ["-otther"]
+        """)
+    assert not compute_check("PP308", pyproject=toml).result
+
+
+def test_PP308_string_okay():
+    toml = toml_loads("""
+        [tool.pytest.ini_options]
+        addopts = "--stuff -ra --morestuff"
+        """)
+    assert compute_check("PP308", pyproject=toml).result
+
+
+def test_PP308_string_missing():
+    toml = toml_loads("""
+        [tool.pytest.ini_options]
+        addopts = "--stuff --morestuff"
+        """)
+    assert not compute_check("PP308", pyproject=toml).result

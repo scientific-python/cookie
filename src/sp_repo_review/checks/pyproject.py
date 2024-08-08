@@ -217,7 +217,10 @@ class PP308(PyProject):
         ```
         """
         options = pyproject["tool"]["pytest"]["ini_options"]
-        return any(opt.startswith("-r") for opt in options.get("addopts", []))
+        addopts = options.get("addopts", [])
+        if isinstance(addopts, str):
+            addopts = addopts.split()
+        return any(opt.startswith("-r") for opt in addopts)
 
 
 class PP309(PyProject):
