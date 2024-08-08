@@ -29,7 +29,7 @@ repos:
         additional_dependencies: [black==24.*]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.5.6"
+    rev: "v0.5.7"
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
@@ -57,8 +57,8 @@ repos:
           - tomli
           - types-PyYAML
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v3.1.0"
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: "v3.3.3"
     hooks:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json]
