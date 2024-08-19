@@ -515,7 +515,7 @@ def rr_tests(session: nox.Session) -> None:
     Run the unit and regular tests for sp-repo-review.
     """
     session.install("-e.[test,cli]")
-    session.run("pytest", *session.posargs)
+    session.run("pytest", *session.posargs, env={"PYTHONWARNDEFAULTENCODING": "1"})
 
 
 @nox.session(reuse_venv=True)

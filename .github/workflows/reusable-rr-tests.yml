@@ -34,7 +34,7 @@ jobs:
       - name: Test package
         run: python -m pytest -ra
         env:
-          PYTHONUTF8: "1"
+          PYTHONWARNDEFAULTENCODING: 1
 
   action:
     name: Action
