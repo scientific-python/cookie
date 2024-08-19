@@ -24,12 +24,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.12"]
+        python-version: ["3.8", "3.13"]
         runs-on: [ubuntu-latest, windows-latest, macos-14]
 
         include:
           - python-version: pypy-3.9
             runs-on: ubuntu-latest
+          - python-version: "3.12"
+            runs-on: windows-latest
+        exclude:
+          # Copier doesn't work on 3.13 Windows
+          - python-version: "3.13"
+            runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -51,6 +57,7 @@ jobs:
         run: nox -s 'tests(setuptools, novcs)' -s 'tests(setuptools, vcs)'
 
       - name: Test pybind11
+        if: matrix.python-version != 'pypy-3.9'
         run: nox -s 'tests(pybind11, novcs)' -s 'tests(pybind11, vcs)'
 
       - name: Test scikit-build
