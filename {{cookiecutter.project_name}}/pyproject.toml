@@ -45,7 +45,7 @@ requires = ["setuptools>=42", "pybind11"]
 {%- endif %}
 build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.backend == "skbuild"  %}
-requires = ["pybind11", "scikit-build-core"]
+requires = ["pybind11", "scikit-build-core>=0.10"]
 build-backend = "scikit_build_core.build"
 {%- elif cookiecutter.backend == "mesonpy" %}
 requires = ["meson-python", "pybind11"]
@@ -186,6 +186,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
@@ -223,7 +224,7 @@ Changelog = "{{ cookiecutter.url }}/releases"
 
 
 [tool.scikit-build]
-minimum-version = "0.4"
+minimum-version = "build-system.requires"
 build-dir = "build/{wheel_tag}"
 {%- if cookiecutter.vcs %}
 metadata.version.provider = "scikit_build_core.metadata.setuptools_scm"
@@ -339,7 +340,6 @@ disallow_incomplete_defs = true
 
 
 [tool.ruff]
-src = ["src"]
 {%- if cookiecutter.backend in ["setuptools", "pybind11", "poetry"] %}
 target-version = "py38"
 {%- endif %}
