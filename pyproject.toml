@@ -139,9 +139,6 @@ messages_control.disable = [
 ]
 
 
-[tool.ruff]
-src = ["src"]
-
 [tool.ruff.lint]
 extend-select = [
   "B",           # flake8-bugbear
