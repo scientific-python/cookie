@@ -127,8 +127,11 @@ class PC170(PreCommit):
 class PC180(PreCommit):
     "Uses a markdown formatter"
 
+    renamed = {
+        "https://github.com/pre-commit/mirrors-prettier": "https://github.com/rbubley/mirrors-prettier"
+    }
+
     repos = {
-        "https://github.com/pre-commit/mirrors-prettier",
         "https://github.com/rbubley/mirrors-prettier",
         "https://github.com/executablebooks/mdformat",
     }
