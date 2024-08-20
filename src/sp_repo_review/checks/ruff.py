@@ -85,26 +85,24 @@ class RF002(Ruff):
 
 
 class RF003(Ruff):
-    "src directory specified if used"
+    "src directory doesn't need to be specified anymore (0.6+)"
 
     @staticmethod
     def check(ruff: dict[str, Any], package: Traversable) -> bool | None:
         """
-        Must specify `src` directory if it exists.
-
-        ```toml
-        [tool.ruff]
-        src = ["src"]
-        ```
+        Ruff now (0.6+) looks in the src directory by default. The src setting
+        doesn't need to be specified if it's just set to `["src"]`.
         """
+
         if not package.joinpath("src").is_dir():
             return None
 
         match ruff:
-            case {"src": list(x)}:
-                return "src" in x
+            case {"src": ["src"]}:
+                # See https://github.com/python/mypy/issues/16272
+                return False  # type: ignore[unreachable]
             case _:
-                return False
+                return True
 
 
 class RF1xxMixin(Protocol):

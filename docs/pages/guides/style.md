@@ -213,9 +213,6 @@ inspect and undo changes in git.
 {% rr RF001 %} Ruff is configured in your `pyproject.toml`. Here's an example:
 
 ```toml
-[tool.ruff]
-src = ["src"]
-
 [tool.ruff.lint]
 extend-select = [
   "B",        # flake8-bugbear
@@ -263,15 +260,16 @@ ignore certain error codes via `ignore`. You can also set codes per paths to
 ignore in `per-file-ignores`. If you don't like certain auto-fixes, you can
 disable auto-fixing for specific error codes via `unfixable`.
 
-There are other configuration options, such as the `src` list which tells it
-where to look for top level packages (mostly for "I" codes, which also have a
-lot of custom configuration options) {% rr RF003 %}, `typing-modules`, which
-helps apply typing-specific rules to a re-exported typing module (a common
-practice for unifying typing and `typing_extensions` based on Python version).
-There's also a file `exclude` set, which you can override if you are running
-this entirely from pre-commit (default excludes include "build", so if you have
-a `build` module or file named `build.py`, it would get skipped by default
-without this).
+There are other configuration options, such as `typing-modules`, which helps
+apply typing-specific rules to a re-exported typing module (a common practice
+for unifying typing and `typing_extensions` based on Python version). There's
+also a file `exclude` set, which you can override if you are running this
+entirely from pre-commit (default excludes include "build", so if you have a
+`build` module or file named `build.py`, it would get skipped by default without
+this).
+
+The `src` list which tells it where to look for top level packages is no longer
+needed if just set to `["src"]` in Ruff 0.6+. {% rr RF003 %}
 
 {: .warning }
 
@@ -874,9 +872,9 @@ And you can add this to your GitHub Actions using
 
 ### Ruff
 
-Ruff natively supports notebooks. You have to enable checking `.ipynb` files in
-pre-commit to use it with `types_or: [python, pyi, jupyter]`. This should be on
-both hooks if using both the linter and the formatter.
+Ruff natively supports notebooks. You no longer need to enable it, it's on by
+default with Ruff 0.6+. If you want to control rules based on being notebooks,
+you can just match with `**.ipynb` like any other file.
 
 ### Black
 
