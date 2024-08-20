@@ -1,6 +1,6 @@
 {
   "name": "scientific-python-cookie[dev]",
-  "image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+  "image": "mcr.microsoft.com/devcontainers/python:0-3.12",
   "features": {
     "ghcr.io/devcontainers/features/rust:1": {},
     "ghcr.io/devcontainers/features/ruby:1": {

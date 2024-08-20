@@ -63,7 +63,7 @@ class RTD102(ReadTheDocs):
         build:
           os: ubuntu-22.04
           tools:
-            python: "3.11"
+            python: "3.12"
         ```
         """
 
@@ -82,14 +82,14 @@ class RTD103(ReadTheDocs):
     @staticmethod
     def check(readthedocs: dict[str, Any]) -> bool:
         """
-        You must set `build: tools: python: "3.11"` or similar in the
+        You must set `build: tools: python: "3.12"` or similar in the
         `.readthedocs.yaml` file for a Python project.
 
         ```yaml
         build:
           os: ubuntu-22.04
           tools:
-            python: "3.11"
+            python: "3.12"
         ```
         """
 

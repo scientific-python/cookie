@@ -113,7 +113,7 @@ You can also develop in conda. This is an especially good option if:
 The creation of an environment looks like this:
 
 ```bash
-conda create -n env_name python=3.11
+conda create -n env_name python=3.12
 ```
 
 You can use `-n name` or `-p path` to specify the environment by name or

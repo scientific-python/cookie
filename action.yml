@@ -12,7 +12,7 @@ runs:
     - uses: actions/setup-python@v5
       id: python
       with:
-        python-version: "3.11"
+        python-version: "3.12"
         update-environment: false
 
     # prettier-ignore
