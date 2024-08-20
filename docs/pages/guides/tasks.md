@@ -86,7 +86,7 @@ customize the versions of Python prepared for you, then use input like this:
 ```yaml
 - uses: wntrblm/nox@2024.04.15
   with:
-    python-versions: "3.8, 3.9, 3.10, 3.11, 3.12, pypy-3.9, pypy-3.10"
+    python-versions: "3.8, 3.9, 3.10, 3.11, 3.12, 3.13, pypy-3.9, pypy-3.10"
 ```
 
 ### Introduction
