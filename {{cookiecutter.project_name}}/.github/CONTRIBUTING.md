@@ -19,7 +19,7 @@ specific jobs:
 ```console
 $ nox -s lint  # Lint only
 $ nox -s tests  # Python tests
-$ nox -s docs -- --serve  # Build and serve the docs
+$ nox -s docs  # Build and serve the docs
 $ nox -s build  # Make an SDist and wheel
 ```
 
@@ -86,14 +86,14 @@ pytest --cov={{ cookiecutter.project_name }}
 
 # Building docs
 
-You can build the docs using:
+You can build and serve the docs using:
 
 ```bash
 nox -s docs
 ```
 
-You can see a preview with:
+You can build the docs only with:
 
 ```bash
-nox -s docs -- --serve
+nox -s docs --non-interactive
 ```
