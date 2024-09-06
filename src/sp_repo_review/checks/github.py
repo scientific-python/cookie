@@ -25,11 +25,16 @@ def workflows(root: Traversable) -> dict[str, Any]:
 
 
 def dependabot(root: Traversable) -> dict[str, Any]:
-    dependabot_path = root.joinpath(".github/dependabot.yml")
-    if dependabot_path.is_file():
-        with dependabot_path.open("rb") as f:
-            result: dict[str, Any] = yaml.safe_load(f)
-            return result
+    dependabot_paths = [
+        root.joinpath(".github/dependabot.yml"),
+        root.joinpath(".github/dependabot.yaml"),
+    ]
+
+    for dependabot_path in dependabot_paths:
+        if dependabot_path.is_file():
+            with dependabot_path.open("rb") as f:
+                result: dict[str, Any] = yaml.safe_load(f)
+                return result
 
     return {}
 
