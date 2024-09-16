@@ -19,10 +19,11 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
-      - run: pipx run nox -s pc_bump
+      - uses: astral-sh/setup-uv@v2
+      - run: uvx nox -s pc_bump
         env:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: pipx run nox -s gha_bump
+      - run: uvx nox -s gha_bump
       - run: git diff
       - uses: peter-evans/create-pull-request@v7
         with:
