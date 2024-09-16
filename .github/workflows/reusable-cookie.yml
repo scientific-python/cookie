@@ -46,12 +46,10 @@ jobs:
           allow-prereleases: true
 
       - name: Setup uv
-        uses: yezz123/setup-uv@v4
-        with:
-          uv-venv: ".venv"
+        uses: astral-sh/setup-uv@v2
 
       - name: Install nox
-        run: uv pip install nox
+        run: uv tool install nox
 
       - name: Test setuptools
         run: nox -s 'tests(setuptools, novcs)' -s 'tests(setuptools, vcs)'
@@ -117,12 +115,10 @@ jobs:
           allow-prereleases: true
 
       - name: Setup uv
-        uses: yezz123/setup-uv@v4
-        with:
-          uv-venv: ".venv"
+        uses: astral-sh/setup-uv@v2
 
       - name: Install nox
-        run: uv pip install nox
+        run: uv tool install nox
 
       - name: Test setuptools
         run: |

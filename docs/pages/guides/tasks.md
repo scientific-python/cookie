@@ -320,12 +320,8 @@ You can install `uv` with `pipx`, `brew`, etc. If you want to use uv in GitHub
 Actions, one way is to use this:
 
 ```yaml
-- name: Setup uv
-  uses: yezz123/setup-uv@v4
+- uses: astral-sh/setup-uv@v2
 ```
-
-You do not need to set `with: uv-venv: ".venv"` for `nox` to be able to use
-`uv`.
 
 Check your jobs with `uv`; most things do not need to change. The main
 difference is `uv` doesn't install `pip` unless you ask it to. If you want to
