@@ -46,12 +46,15 @@ jobs:
           allow-prereleases: true
 
       - name: Setup uv
-        uses: yezz123/setup-uv@v4
-        with:
-          uv-venv: ".venv"
+        uses: astral-sh/setup-uv@v2
+
+      - name: Add .local/bin to Windows PATH
+        if: runner.os == 'Windows'
+        shell: bash
+        run: echo "$USERPROFILE/.local/bin" >> $GITHUB_PATH
 
       - name: Install nox
-        run: uv pip install nox
+        run: uv tool install nox
 
       - name: Test setuptools
         run: nox -s 'tests(setuptools, novcs)' -s 'tests(setuptools, vcs)'
@@ -117,12 +120,10 @@ jobs:
           allow-prereleases: true
 
       - name: Setup uv
-        uses: yezz123/setup-uv@v4
-        with:
-          uv-venv: ".venv"
+        uses: astral-sh/setup-uv@v3
 
       - name: Install nox
-        run: uv pip install nox
+        run: uv tool install nox
 
       - name: Test setuptools
         run: |
