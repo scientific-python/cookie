@@ -318,7 +318,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PY004`](https://learn.scientific-python.org/development/guides/packaging-simple#PY004): Has docs folder
 - [`PY005`](https://learn.scientific-python.org/development/guides/packaging-simple#PY005): Has tests folder
 - [`PY006`](https://learn.scientific-python.org/development/guides/style#PY006): Has pre-commit config
-- [`PY007`](https://learn.scientific-python.org/development/guides/tasks#PY007): Supports an easy task runner (nox or tox)
+- [`PY007`](https://learn.scientific-python.org/development/guides/tasks#PY007): Supports an easy task runner (nox, tox, pixi, etc.)
 
 ### PyProject
 - [`PP002`](https://learn.scientific-python.org/development/guides/packaging-simple#PP002): Has a proper build-system table

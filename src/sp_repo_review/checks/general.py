@@ -104,7 +104,7 @@ class PY006(General):
 
 
 class PY007(General):
-    "Supports an easy task runner (nox or tox)"
+    "Supports an easy task runner (nox, tox, pixi, etc.)"
 
     url = mk_url("tasks")
 
@@ -119,12 +119,16 @@ class PY007(General):
             return True
         if root.joinpath("tox.ini").is_file():
             return True
+        if root.joinpath("pixi.toml").is_file():
+            return True
         match pyproject.get("tool", {}):
             case {"hatch": {"envs": object()}}:
                 return True
             case {"spin": object()}:
                 return True
             case {"tox": object()}:
+                return True
+            case {"pixi": {"tasks": object()}}:
                 return True
             case _:
                 return False
