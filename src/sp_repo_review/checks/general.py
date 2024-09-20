@@ -128,7 +128,11 @@ class PY007(General):
                 return True
             case {"tox": object()}:
                 return True
-            case {"pixi": {"tasks": object()}}:
+            case {"pixi": {"tasks": {}}}:
+                return True
+            case {"pixi": {"feature": feats}} if any(
+                "tasks" in feat for feat in feats.values()
+            ):
                 return True
             case _:
                 return False
