@@ -113,10 +113,12 @@ strict = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 warn_unreachable = true
 disallow_untyped_defs = false
+disallow_incomplete_defs = false
 
 [[tool.mypy.overrides]]
 module = "sp_repo_review.*"
 disallow_untyped_defs = true
+disallow_incomplete_defs = true
 
 
 [tool.pylint]
