@@ -266,9 +266,11 @@ And many other useful ones:
   built-in caching.
 - [conda-incubator/setup-miniconda](https://github.com/conda-incubator/setup-miniconda):
   Setup conda or mamba on GitHub Actions.
+- [mamba-org/setup-micromamba](https://github.com/mamba-org/setup-micromamba):
+  Set up micromamba on GitHub Actions. Faster and simpler than conda/mamba, but
+  slightly different API.
 - [prefix-dev/setup-pixi](https://github.com/prefix-dev/setup-pixi): Set up pixi
-  and install your environment(s). Try `cache: false` if saving/loading the
-  cache is slow.
+  and install your environment(s).
 - [ruby/setup-ruby](https://github.com/ruby/setup-ruby): Setup Ruby if you need
   it for something.
 - [peter-evans/create-pull-request](https://github.com/peter-evans/create-pull-request):
@@ -276,6 +278,7 @@ And many other useful ones:
   You can even auto-merge PRs with `run: gh pr merge --merge --auto "1"`
   afterwards.
 - [astral-sh/setup-uv](https://github.com/astral/setup-uv): Set up `uv`.
+  Ultra-fast alternative to classic Python packaging solutions.
 - [gautamkrishnar/keepalive-workflow](https://github.com/gautamkrishnar/keepalive-workflow):
   Keep GitHub actions alive for more than 60 days. Not usually needed if you've
   set up the other suggestions here, like dependabot and pre-commit.
