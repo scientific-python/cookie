@@ -54,7 +54,7 @@ repos:
           - pytest
           - repo-review>=0.10.6
           - rich
-          - tomli
+          - tomli>=2.0.2
           - types-PyYAML
 
   - repo: https://github.com/rbubley/mirrors-prettier

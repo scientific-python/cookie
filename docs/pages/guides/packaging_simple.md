@@ -79,6 +79,11 @@ build-backend = "setuptools.build_meta"
 
 {% include pyproject.md %}
 
+For `requires-python`, you should specify the minimum you require, and you
+should not put an upper cap on it {% rr PY004 %}, as this field is used to
+back-solve for old package versions that pass this check, allowing you to safely
+drop Python versions.
+
 ## Package structure
 
 All packages _should_ have a `src` folder, with the package code residing inside
