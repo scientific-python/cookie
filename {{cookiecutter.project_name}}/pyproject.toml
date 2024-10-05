@@ -285,6 +285,18 @@ write_to = "src/{{ cookiecutter.__project_slug }}/_version.py"
 {%- endif %}
 
 
+{%- if cookiecutter.backend not in ["setuptools", "pybind11", "poetry", "whey"] %}
+
+
+[tool.uv]
+dev-dependencies = [
+  "{{ cookiecutter.__project_slug }}[test]",
+]
+
+
+{%- endif %}
+
+
 {%- if cookiecutter.__type == "compiled" %}
 
 
