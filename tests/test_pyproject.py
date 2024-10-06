@@ -1,3 +1,6 @@
+import inspect
+from pathlib import Path
+
 from repo_review.testing import compute_check, toml_loads
 
 
@@ -44,6 +47,70 @@ def test_PP003_has_wheel():
         build-backend = "setuptools.build_meta"
         """)
     assert not compute_check("PP003", pyproject=toml).result
+
+
+def test_PP004_no_cap_pyproject(tmp_path: Path):
+    toml = toml_loads("""
+       [project]
+       requires-python = ">=3.10"
+       """)
+
+    assert compute_check("PP004", pyproject=toml, package=tmp_path).result
+
+
+def test_PP004_cap_pyproject(tmp_path: Path):
+    toml = toml_loads("""
+        [project]
+        requires-python = ">=3.10, <4"
+        """)
+
+    assert compute_check("PP004", pyproject=toml, package=tmp_path).result is False
+
+
+def test_PP004_cap_tilde_pyproject(tmp_path: Path):
+    toml = toml_loads("""
+        [project]
+        requires-python = "~=3.10"
+        """)
+
+    assert compute_check("PP004", pyproject=toml, package=tmp_path).result is False
+
+
+def test_PP004_cap_caret_pyproject(tmp_path: Path):
+    toml = toml_loads("""
+        [tool.poetry.dependencies]
+        python = "^3.10"
+       """)
+
+    assert compute_check("PP004", pyproject=toml, package=tmp_path).result is False
+
+
+def test_PP004_setup_cfg_no_cap(tmp_path: Path):
+    (tmp_path / "setup.cfg").write_text(
+        inspect.cleandoc("""
+            [options]
+            python_requires = >=3.10
+            """),
+        encoding="utf-8",
+    )
+
+    assert compute_check("PP004", pyproject={}, package=tmp_path).result
+
+
+def test_PP004_setup_cfg_cap(tmp_path: Path):
+    (tmp_path / "setup.cfg").write_text(
+        inspect.cleandoc("""
+            [options]
+            python_requires = >=3.10,<4
+            """),
+        encoding="utf-8",
+    )
+
+    assert compute_check("PP004", pyproject={}, package=tmp_path).result is False
+
+
+def test_PP004_not_present(tmp_path: Path):
+    assert compute_check("PP004", pyproject={}, package=tmp_path).result is None
 
 
 def test_PP302_okay_intstr():

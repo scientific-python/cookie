@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from .._compat.importlib.resources.abc import Traversable
 from . import mk_url
 
 
@@ -48,6 +49,48 @@ class PP003(PyProject):
                 return all(not r.startswith("wheel") for r in req)
             case _:
                 return False
+
+
+class PP004(PyProject):
+    "Does not upper cap Python requires"
+
+    url = mk_url("packaging-simple")
+
+    @staticmethod
+    def check(pyproject: dict[str, Any], package: Traversable) -> bool | None:
+        """
+        You should never upper cap your Python requirement. This is rarely correct, and
+        tools like pip do not handle this properly even if it is correct. This field is used
+        to back-solve. If you want to specify versions you've tested on, use classifiers. If
+        you want to add a custom error message, add a build-type and/or runtime assert.
+        """
+
+        match pyproject:
+            case {"project": {"requires-python": requires}}:
+                return "~=" not in requires and "<" not in requires
+            case {
+                "tool": {
+                    "poetry": {
+                        "dependencies": {
+                            "python": str(requires) | {"version": str(requires)}
+                        }
+                    }
+                }
+            }:
+                return (
+                    "^" not in requires and "~=" not in requires and "<" not in requires
+                )
+
+        setup_cfg = package / "setup.cfg"
+        if setup_cfg.is_file():
+            import configparser
+
+            config = configparser.ConfigParser()
+            config.read_string(setup_cfg.read_text(encoding="utf-8"))
+            if requires := config.get("options", "python_requires"):
+                return "~=" not in requires and "<" not in requires
+
+        return None
 
 
 class PP301(PyProject):
