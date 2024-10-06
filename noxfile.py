@@ -53,7 +53,7 @@ def rmtree_ro(path: Path) -> None:
 
 
 def get_expected_version(backend: str, vcs: bool) -> str:
-    return "0.2.3" if vcs and backend not in {"whey", "maturin", "mesonpy"} else "0.1.0"
+    return "0.2.3" if vcs and backend not in {"maturin", "mesonpy"} else "0.1.0"
 
 
 def make_copier(session: nox.Session, backend: str, vcs: bool) -> None:
