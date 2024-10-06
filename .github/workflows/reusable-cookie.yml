@@ -75,9 +75,6 @@ jobs:
       - name: Test pdm
         run: nox -s 'tests(pdm, novcs)' -s 'tests(pdm, vcs)'
 
-      - name: Test whey
-        run: nox -s 'tests(whey, novcs)'
-
       - name: Test maturin
         run: nox -s 'tests(maturin, novcs)'
 
@@ -154,11 +151,6 @@ jobs:
         run: |
           nox -s 'nox(pdm, vcs)'
           nox -s 'nox(pdm, vcs)' -- docs
-
-      - name: Test whey
-        run: |
-          nox -s 'nox(whey, novcs)'
-          nox -s 'nox(whey, novcs)' -- docs
 
       - name: Test maturin
         run: |

@@ -35,7 +35,7 @@ on setting up [docs][], as well.
 > Once you have completed the guidelines, there is a
 > [copier][]/[cookiecutter][]/[cruft][] project, [scientific-python/cookie][],
 > that implements these guidelines and lets you setup a new package from a
-> template in less than 60 seconds! Eleven build backends including compiled
+> template in less than 60 seconds! Ten build backends including compiled
 > backends, generation tested in Nox, and kept in-sync with the guide.
 
 {: .important-title }

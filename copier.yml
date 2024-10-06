@@ -73,13 +73,12 @@ backend:
     "Hatchling                      - Pure Python (recommended)": hatch
     "Flit-core                      - Pure Python (minimal)": flit
     "PDM-backend                    - Pure Python": pdm
-    "Whey                           - Pure Python": whey
     "Poetry                         - Pure Python": poetry
     "Setuptools with pyproject.toml - Pure Python": setuptools621
     "Setuptools with setup.py       - Pure Python": setuptools
     "Setuptools and pybind11        - Compiled C++": pybind11
     "Scikit-build-core              - Compiled C++ (recommended)": skbuild
-    "Meson-python                   - Compiled C++ (also good)": mesonpy
+    "Meson-python                  - Compiled C++ (also good)": mesonpy
     "Maturin                        - Compiled Rust (recommended)": maturin
   # [[[end]]]
 
@@ -88,7 +87,7 @@ vcs:
   type: bool
   help: Use version control for versioning
   # [[[end]]]
-  when: "{{ backend not in ['whey', 'maturin', 'mesonpy'] }}"
+  when: "{{ backend not in ['maturin', 'mesonpy'] }}"
 
 _templates_suffix: ""
 
