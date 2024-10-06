@@ -1,6 +1,6 @@
 graft src
 graft tests
 
-include LICENSE README.md pyproject.toml setup.py setup.cfg .git_archival.txt
+include LICENSE README.md pyproject.toml setup.py .git_archival.txt
 exclude .readthedocs.yaml
 global-exclude __pycache__ *.py[cod] .venv

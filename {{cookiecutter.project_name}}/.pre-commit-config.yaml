@@ -48,7 +48,7 @@ repos:
         args: ["--fix", "--show-fixes"]
       - id: ruff-format
 
-{%- if cookiecutter.backend == "setuptools" or cookiecutter.backend == "pybind11" %}
+{%- if cookiecutter.backend == "setuptools" %}
 
   - repo: https://github.com/asottile/setup-cfg-fmt
     rev: "v2.5.0"
@@ -95,7 +95,7 @@ repos:
         entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
         exclude: .pre-commit-config.yaml
 
-{%- if cookiecutter.backend in ["setuptools", "pybind11"] %}
+{%- if cookiecutter.backend == "setuptools" %}
 
   - repo: https://github.com/mgedmin/check-manifest
     rev: "0.49"
