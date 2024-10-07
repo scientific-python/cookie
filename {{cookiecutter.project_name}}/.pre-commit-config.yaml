@@ -12,7 +12,7 @@ repos:
         additional_dependencies: [black==24.*]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v4.6.0"
+    rev: "v5.0.0"
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -42,7 +42,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.6.8"
+    rev: "v0.6.9"
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
@@ -61,7 +61,7 @@ repos:
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: "v19.1.0"
+    rev: "v19.1.1"
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]
@@ -120,7 +120,7 @@ repos:
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.29.2"
+    rev: "0.29.3"
     hooks:
 {%- if cookiecutter.__ci == "github" %}
       - id: check-dependabot
