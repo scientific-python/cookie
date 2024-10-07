@@ -290,7 +290,6 @@ classifiers =
     Programming Language :: C++
     Programming Language :: Python
     Programming Language :: Python :: 3 :: Only
-    Programming Language :: Python :: 3.8
     Programming Language :: Python :: 3.9
     Programming Language :: Python :: 3.10
     Programming Language :: Python :: 3.11
@@ -312,8 +311,8 @@ project_urls =
 [options]
 packages = find:
 install_requires =
-    numpy>=1.13.3
-python_requires = >=3.8
+    numpy>=1.19.3
+python_requires = >=3.9
 include_package_data = True
 package_dir =
     =src

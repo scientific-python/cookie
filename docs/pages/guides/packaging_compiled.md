@@ -183,8 +183,8 @@ rand = "0.8.3"
 [dependencies.pyo3]
 version = "0.19.1"
 # "extension-module" tells pyo3 we want to build an extension module (skips linking against libpython.so)
-# "abi3-py38" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.8
-features = ["extension-module", "abi3-py38"]
+# "abi3-py39" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.9
+features = ["extension-module", "abi3-py39"]
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->

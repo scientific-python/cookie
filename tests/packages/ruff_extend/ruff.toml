@@ -1,2 +1,2 @@
 extend = "pyproject.toml"
-target-version = "3.8"
+target-version = "3.9"
