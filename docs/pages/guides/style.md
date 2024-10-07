@@ -554,7 +554,7 @@ this:
 ```ini
 [tool.mypy]
 files = "src"
-python_version = "3.8"
+python_version = "3.9"
 strict = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 warn_unreachable = true
@@ -841,7 +841,7 @@ started:
 
 ```toml
 [tool.pylint]
-py-version = "3.8"
+py-version = "3.9"
 jobs = "0"
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"

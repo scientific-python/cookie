@@ -99,9 +99,9 @@ tests:
     fail-fast: false
     matrix:
       python-version:
-        - "3.8"
+        - "3.9"
         - "3.11"
-        - "3.12"
+        - "3.13"
   name: Check Python ${{ matrix.python-version }}
   steps:
     - uses: actions/checkout@v4

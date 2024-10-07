@@ -24,18 +24,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.13"]
-        runs-on: [ubuntu-latest, windows-latest, macos-14]
+        python-version: ["3.9", "3.13"]
+        runs-on: [ubuntu-latest, windows-latest, macos-latest]
 
         include:
-          - python-version: pypy-3.9
+          - python-version: pypy-3.10
             runs-on: ubuntu-latest
-          - python-version: "3.12"
-            runs-on: windows-latest
-        exclude:
-          # Copier doesn't work on 3.13 Windows
-          - python-version: "3.13"
-            runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -47,11 +41,6 @@ jobs:
 
       - name: Setup uv
         uses: astral-sh/setup-uv@v3
-
-      - name: Add .local/bin to Windows PATH
-        if: runner.os == 'Windows'
-        shell: bash
-        run: echo "$USERPROFILE/.local/bin" >> $GITHUB_PATH
 
       - name: Install nox
         run: uv tool install nox

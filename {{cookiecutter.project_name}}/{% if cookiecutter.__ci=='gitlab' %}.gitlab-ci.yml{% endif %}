@@ -14,7 +14,7 @@ cache:
     - .cache/pip
     - .venv/
 
-image: python:3.8-buster
+image: python:3.9-buster
 before_script:
   # want to set up a virtualenv to cache
   - apt-get install -y --no-install-recommends git
@@ -79,7 +79,7 @@ tests:
     - python -m pytest -ra --cov={{ cookiecutter.project_name }}
   parallel:
     matrix:
-      - IMAGE: ['python:3.8-buster', 'python:3.11-buster']
+      - IMAGE: ['python:3.9-buster', 'python:3.11-buster']
 
 {%- if cookiecutter.__type == "pure" %}
 
