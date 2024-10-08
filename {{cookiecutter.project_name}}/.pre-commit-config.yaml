@@ -48,16 +48,6 @@ repos:
         args: ["--fix", "--show-fixes"]
       - id: ruff-format
 
-{%- if cookiecutter.backend == "setuptools" %}
-
-  - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: "v2.5.0"
-    hooks:
-      - id: setup-cfg-fmt
-        args: [--include-version-classifiers, --max-py-version=3.13]
-
-{%- endif %}
-
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
@@ -94,15 +84,6 @@ repos:
         language: pygrep
         entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
         exclude: .pre-commit-config.yaml
-
-{%- if cookiecutter.backend == "setuptools" %}
-
-  - repo: https://github.com/mgedmin/check-manifest
-    rev: "0.49"
-    hooks:
-      - id: check-manifest
-        stages: [manual]
-{%- endif %}
 
 {%- if cookiecutter.backend == "skbuild" %}
 

@@ -27,16 +27,9 @@ build-backend = "flit_scm:buildapi"
 requires = ["flit_core>=3.4"]
 build-backend = "flit_core.buildapi"
 {%- endif %}
-{%- elif cookiecutter.backend == "setuptools" %}
-{%- if cookiecutter.vcs %}
-requires = ["setuptools>=42", "setuptools_scm[toml]>=3.4"]
-{%- else %}
-requires = ["setuptools>=42"]
-{%- endif %}
-build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.backend == "pybind11" %}
 {%- if cookiecutter.vcs %}
-requires = ["setuptools>=61", "setuptools_scm[toml]>=3.4", "pybind11"]
+requires = ["setuptools>=61", "setuptools_scm[toml]>=7", "pybind11"]
 {%- else %}
 requires = ["setuptools>=61", "pybind11"]
 {%- endif %}
@@ -57,20 +50,8 @@ build-backend = "poetry.core.masonry.api"
 {%- endif %}
 {%- endif %}
 
-{%- if cookiecutter.backend in ["setuptools"] %}
 
-
-[tool.check-manifest]
-ignore = [
-  ".github/**",
-  "docs/**",
-  ".pre-commit-config.yaml",
-  ".readthedocs.yaml",
-  "src/*/_version.py",
-  "noxfile.py",
-]
-
-{%- elif cookiecutter.backend == "poetry" %}
+{%- if cookiecutter.backend == "poetry" %}
 
 
 [tool.poetry]
@@ -276,7 +257,7 @@ devtest = ["pytest", "pytest-cov"]
 
 {%- endif %}
 
-{%- if cookiecutter.backend in ["setuptools", "pybind11", "poetry", "flit", "skbuild", "setuptools621"] and cookiecutter.vcs %}
+{%- if cookiecutter.backend in ["pybind11", "poetry", "flit", "skbuild", "setuptools621"] and cookiecutter.vcs %}
 
 
 [tool.setuptools_scm]
@@ -284,7 +265,7 @@ write_to = "src/{{ cookiecutter.__project_slug }}/_version.py"
 {%- endif %}
 
 
-{%- if cookiecutter.backend not in ["setuptools", "poetry"] %}
+{%- if cookiecutter.backend != "poetry" %}
 
 
 [tool.uv]
@@ -342,7 +323,7 @@ disallow_incomplete_defs = true
 
 
 [tool.ruff]
-{%- if cookiecutter.backend in ["setuptools", "poetry"] %}
+{%- if cookiecutter.backend == "poetry" %}
 target-version = "py38"
 {%- endif %}
 
