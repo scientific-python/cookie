@@ -68,7 +68,7 @@ jobs:
         run: nox -s 'tests(hatch, novcs)' -s 'tests(hatch, vcs)'
 
       - name: Test setuptools PEP 621
-        run: nox -s 'tests(setuptools621, novcs)' -s 'tests(setuptools621, vcs)'
+        run: nox -s 'tests(setuptools, novcs)' -s 'tests(setuptools, vcs)'
 
       - name: Native poetry tooling
         run: nox -s 'native(poetry, novcs)' -s 'native(poetry, vcs)'
@@ -145,8 +145,8 @@ jobs:
 
       - name: Test setuptools PEP 621
         run: |
-          nox -s 'nox(setuptools621, vcs)'
-          nox -s 'nox(setuptools621, vcs)' -- docs
+          nox -s 'nox(setuptools, vcs)'
+          nox -s 'nox(setuptools, vcs)' -- docs
 
       - name: Activate MSVC for Meson
         if: runner.os == 'Windows'
