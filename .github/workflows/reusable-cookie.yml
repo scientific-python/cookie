@@ -45,9 +45,6 @@ jobs:
       - name: Install nox
         run: uv tool install nox
 
-      - name: Test setuptools
-        run: nox -s 'tests(setuptools, novcs)' -s 'tests(setuptools, vcs)'
-
       - name: Test pybind11
         if: matrix.python-version != 'pypy-3.9'
         run: nox -s 'tests(pybind11, novcs)' -s 'tests(pybind11, vcs)'
@@ -110,11 +107,6 @@ jobs:
 
       - name: Install nox
         run: uv tool install nox
-
-      - name: Test setuptools
-        run: |
-          nox -s 'nox(setuptools, vcs)'
-          nox -s 'nox(setuptools, vcs)' -- docs
 
       - name: Test pybind11
         run: |
