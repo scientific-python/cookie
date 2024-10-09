@@ -12,7 +12,7 @@ requires = ["hatchling", "hatch-vcs"]
 requires = ["hatchling"]
 {%- endif %}
 build-backend = "hatchling.build"
-{%- elif cookiecutter.backend == "setuptools621" %}
+{%- elif cookiecutter.backend == "setuptools" %}
 {%- if cookiecutter.vcs %}
 requires = ["setuptools>=61", "setuptools_scm[toml]>=7"]
 {%- else %}
@@ -129,7 +129,7 @@ substitution.files = ["src/{{ cookiecutter.__project_slug }}/__init__.py"]
 
 [project]
 name = "{{ cookiecutter.project_name }}"
-{%- if cookiecutter.backend in ['maturin', 'mesonpy'] or not cookiecutter.vcs and cookiecutter.backend in ['setuptools621', 'pybind11', 'skbuild'] %}
+{%- if cookiecutter.backend in ['maturin', 'mesonpy'] or not cookiecutter.vcs and cookiecutter.backend in ['setuptools', 'pybind11', 'skbuild'] %}
 version = "0.1.0"
 {%- endif %}
 authors = [
@@ -257,7 +257,7 @@ devtest = ["pytest", "pytest-cov"]
 
 {%- endif %}
 
-{%- if cookiecutter.backend in ["pybind11", "poetry", "flit", "skbuild", "setuptools621"] and cookiecutter.vcs %}
+{%- if cookiecutter.backend in ["pybind11", "poetry", "flit", "skbuild", "setuptools"] and cookiecutter.vcs %}
 
 
 [tool.setuptools_scm]
