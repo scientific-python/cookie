@@ -74,7 +74,7 @@ backend:
     "Flit-core                      - Pure Python (minimal)": flit
     "PDM-backend                    - Pure Python": pdm
     "Poetry                         - Pure Python": poetry
-    "Setuptools with pyproject.toml - Pure Python": setuptools
+    "Setuptools                     - Pure Python": setuptools
     "Setuptools and pybind11        - Compiled C++": pybind11
     "Scikit-build-core              - Compiled C++ (recommended)": skbuild
     "Meson-python                  - Compiled C++ (also good)": mesonpy
