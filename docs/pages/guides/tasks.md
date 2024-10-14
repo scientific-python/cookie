@@ -75,7 +75,7 @@ On GitHub Actions or Azure, pipx is available by default, so you should use
 action:
 
 ```yaml
-- uses: wntrblm/nox@2024.04.15
+- uses: wntrblm/nox@2024.10.09
 ```
 
 You can now access all current versions of Python from nox. At least in GitHub
@@ -84,7 +84,7 @@ your logs, or set `env: FORCE_COLOR: 3`[^force_color]. If you'd like to
 customize the versions of Python prepared for you, then use input like this:
 
 ```yaml
-- uses: wntrblm/nox@2024.04.15
+- uses: wntrblm/nox@2024.10.09
   with:
     python-versions: "3.9, 3.10, 3.11, 3.12, 3.13, pypy-3.10"
 ```
