@@ -6,7 +6,7 @@ exclude: ^.cruft.json|.copier-answers.yml$
 
 repos:
   - repo: https://github.com/adamchainz/blacken-docs
-    rev: "1.18.0"
+    rev: "1.19.0"
     hooks:
       - id: blacken-docs
         additional_dependencies: [black==24.*]
@@ -101,7 +101,7 @@ repos:
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.29.3"
+    rev: "0.29.4"
     hooks:
 {%- if cookiecutter.__ci == "github" %}
       - id: check-dependabot

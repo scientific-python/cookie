@@ -141,7 +141,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "24.8.0"
+  rev: "24.10.0"
   hooks:
     - id: black
 ```
@@ -180,7 +180,7 @@ markdown and restructured text. Note that because black is in
 
 ```yaml
 - repo: https://github.com/adamchainz/blacken-docs
-  rev: "1.18.0"
+  rev: "1.19.0"
   hooks:
     - id: blacken-docs
       additional_dependencies: [black==24.*]
@@ -488,7 +488,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.17.0"
+  rev: "v3.18.0"
   hooks:
     - id: pyupgrade
       args: ["--py38-plus"]
@@ -610,7 +610,7 @@ Add the following to your pre-commit config:
 
 ```yaml
 - repo: https://github.com/mgedmin/check-manifest
-  rev: "0.49"
+  rev: "0.50"
   hooks:
     - id: check-manifest
 ```
@@ -644,7 +644,7 @@ important parts (like Python classifiers) are in sync. This tool,
 
 ```yaml
 - repo: https://github.com/asottile/setup-cfg-fmt
-  rev: "v2.5.0"
+  rev: "v2.7.0"
   hooks:
     - id: setup-cfg-fmt
       args: [--include-version-classifiers, --max-py-version=3.12]
@@ -822,7 +822,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.29.3"
+  rev: "0.29.4"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
