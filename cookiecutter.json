@@ -40,8 +40,8 @@
       "setuptools": "Setuptools                     - Pure Python",
       "pybind11": "Setuptools and pybind11        - Compiled C++",
       "skbuild": "Scikit-build-core              - Compiled C++ (recommended)",
-      "mesonpy": "Meson-python                  - Compiled C++ (also good)",
-      "maturin": "Maturin                       - Compiled Rust (recommended)"
+      "mesonpy": "Meson-python                   - Compiled C++ (also good)",
+      "maturin": "Maturin                        - Compiled Rust (recommended)"
     },
     "vcs": "Use version control for versioning"
   }
