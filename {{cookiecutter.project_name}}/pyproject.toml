@@ -142,7 +142,7 @@ maintainers = [
 {%- endif %}
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
-{%- if cookiecutter.backend in ['flit-coverage', 'mesonpy'] %}
+{%- if cookiecutter.backend in ['flit', 'mesonpy'] %}
 license.file = "LICENSE"
 {%- endif %}
 requires-python = ">=3.9"
