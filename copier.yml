@@ -77,8 +77,8 @@ backend:
     "Setuptools                     - Pure Python": setuptools
     "Setuptools and pybind11        - Compiled C++": pybind11
     "Scikit-build-core              - Compiled C++ (recommended)": skbuild
-    "Meson-python                  - Compiled C++ (also good)": mesonpy
-    "Maturin                       - Compiled Rust (recommended)": maturin
+    "Meson-python                   - Compiled C++ (also good)": mesonpy
+    "Maturin                        - Compiled Rust (recommended)": maturin
   # [[[end]]]
 
 # [[[cog print(cc.vcs.yaml()) ]]]
