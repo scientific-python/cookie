@@ -189,6 +189,11 @@ This is tool specific.
 > unzip -l dist/*.whl
 > ```
 
+{: .note-title }
+
+> Flit _requires_ `license.file` to be set in your `[project]` section to ensure
+> it finds the license file.
+
 <!-- prettier-ignore-start -->
 
 [flit]: https://flit.readthedocs.io
