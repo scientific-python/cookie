@@ -121,7 +121,7 @@ make_wheels:
       entrypoint: ["env", "-u", "DOCKER_HOST"]
       command: ["dockerd-entrypoint.sh"]
   matrix:
-    - CIBW_BUILD: ['cp38-*', 'cp39-*', 'cp310-*', 'cp311-*', 'cp312-*']
+    - CIBW_BUILD: ['cp39-*', 'cp310-*', 'cp311-*', 'cp312-*', 'cp313-*']
       CIBW_PLATFORM: ['linux', 'windows']  # 'macos' not supported by CIBW on GitLab CI
   variables:
     DOCKER_HOST: tcp://docker:2375/
