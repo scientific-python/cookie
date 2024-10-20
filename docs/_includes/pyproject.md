@@ -7,7 +7,6 @@ The metadata is specified in a [standards-based][metadata] format:
 name = "package"
 description = "A great package."
 readme = "README.md"
-license.file = "LICENSE"
 authors = [
   { name = "My Name", email = "me@email.com" },
 ]
