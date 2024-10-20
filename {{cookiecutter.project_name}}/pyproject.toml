@@ -324,7 +324,7 @@ disallow_incomplete_defs = true
 
 [tool.ruff]
 {%- if cookiecutter.backend == "poetry" %}
-target-version = "py38"
+target-version = "py39"
 {%- endif %}
 
 [tool.ruff.lint]

@@ -277,7 +277,7 @@ needed if just set to `["src"]` in Ruff 0.6+. {% rr RF003 %}
 > should also set:
 >
 > ```toml
-> target-version = "py38"
+> target-version = "py39"
 > ```
 >
 > This selects the minimum version you want to target (primarily for `"UP"` and
@@ -491,7 +491,7 @@ when clearly better (please always use them, they are faster) if you set
   rev: "v3.18.0"
   hooks:
     - id: pyupgrade
-      args: ["--py38-plus"]
+      args: ["--py39-plus"]
 ```
 
 [pyupgrade]: https://github.com/asottile/pyupgrade
