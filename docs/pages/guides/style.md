@@ -215,34 +215,34 @@ inspect and undo changes in git.
 ```toml
 [tool.ruff.lint]
 extend-select = [
-  "B",        # flake8-bugbear
-  "I",        # isort
   "ARG",      # flake8-unused-arguments
+  "B",        # flake8-bugbear
   "C4",       # flake8-comprehensions
   "EM",       # flake8-errmsg
-  "ICN",      # flake8-import-conventions
+  "EXE",      # flake8-executable
+  "FURB",     # refurb
   "G",        # flake8-logging-format
+  "I",        # isort
+  "ICN",      # flake8-import-conventions
+  "NPY",      # NumPy specific rules
+  "PD",       # pandas-vet
   "PGH",      # pygrep-hooks
   "PIE",      # flake8-pie
   "PL",       # pylint
   "PT",       # flake8-pytest-style
   "PTH",      # flake8-use-pathlib
+  "PYI",      # flake8-pyi
   "RET",      # flake8-return
   "RUF",      # Ruff-specific
   "SIM",      # flake8-simplify
   "T20",      # flake8-print
   "UP",       # pyupgrade
   "YTT",      # flake8-2020
-  "EXE",      # flake8-executable
-  "NPY",      # NumPy specific rules
-  "PD",       # pandas-vet
-  "FURB",     # refurb
-  "PYI",      # flake8-pyi
 ]
 ignore = [
+  "ISC001",   # Conflicts with formatter
   "PLR09",    # Too many <...>
   "PLR2004",  # Magic value used in comparison
-  "ISC001",   # Conflicts with formatter
 ]
 typing-modules = ["mypackage._compat.typing"]
 isort.required-imports = ["from __future__ import annotations"]
