@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.7.0"
+  rev: "v0.7.1"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -180,7 +180,7 @@ markdown and restructured text. Note that because black is in
 
 ```yaml
 - repo: https://github.com/adamchainz/blacken-docs
-  rev: "1.19.0"
+  rev: "1.19.1"
   hooks:
     - id: blacken-docs
       additional_dependencies: [black==24.*]
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.7.0"
+  rev: "v0.7.1"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -488,7 +488,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.18.0"
+  rev: "v3.19.0"
   hooks:
     - id: pyupgrade
       args: ["--py39-plus"]
@@ -533,7 +533,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.12.1"
+  rev: "v1.13.0"
   hooks:
     - id: mypy
       files: src
@@ -808,7 +808,7 @@ can even get all [SchemaStore][]'s plugins with the
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
-  rev: "v0.21"
+  rev: "v0.22"
   hooks:
     - id: validate-pyproject
       additional_dependencies: ["validate-pyproject-schema-store[all]"]
