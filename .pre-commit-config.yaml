@@ -52,6 +52,7 @@ repos:
           - click
           - markdown-it-py
           - pytest
+          - orjson
           - repo-review>=0.10.6
           - rich
           - tomli>=2.0.2
