@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.7.3"
+  rev: "v0.7.4"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.7.3"
+  rev: "v0.7.4"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -808,7 +808,7 @@ can even get all [SchemaStore][]'s plugins with the
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
-  rev: "v0.22"
+  rev: "v0.23"
   hooks:
     - id: validate-pyproject
       additional_dependencies: ["validate-pyproject-schema-store[all]"]
@@ -893,7 +893,7 @@ You also might like the following hook, which cleans Jupyter outputs:
 
 ```yaml
 - repo: https://github.com/kynan/nbstripout
-  rev: "0.8.0"
+  rev: "0.8.1"
   hooks:
     - id: nbstripout
 ```
