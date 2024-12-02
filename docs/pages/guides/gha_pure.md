@@ -11,11 +11,11 @@ custom_title: GitHub Actions for pure Python wheels
 
 # GitHub Actions: Pure Python wheels
 
-We will cover binary wheels [on the next page][], but if you do not have a compiled
-extension, this is called a universal (pure Python) package, and the procedure to
-make a "built" wheel is simple. At the end of this page, there is a recipe that can
-often be used exactly for pure Python wheels (if the previous recommendations were
-followed).
+We will cover binary wheels [on the next page][], but if you do not have a
+compiled extension, this is called a universal (pure Python) package, and the
+procedure to make a "built" wheel is simple. At the end of this page, there is a
+recipe that can often be used exactly for pure Python wheels (if the previous
+recommendations were followed).
 
 {: .note }
 
@@ -89,8 +89,8 @@ dist:
 {% endraw %}
 
 We use [PyPA-Build](https://pypa-build.readthedocs.io/en/latest/), a new build
-tool designed to make building wheels and SDists easy. It run a [PEP 517][] backend
-and can get [PEP 518][] requirements even for making SDists.
+tool designed to make building wheels and SDists easy. It run a [PEP 517][]
+backend and can get [PEP 518][] requirements even for making SDists.
 
 By default this will make an SDist and a wheel from the package in the current
 directory, and they will be placed in `./dist`. You can only build SDist (`-s`),
@@ -166,8 +166,8 @@ publish:
 When you make a GitHub release in the web UI, we publish to PyPI. You'll just
 need to tell PyPI which org, repo, workflow, and set the `pypi` environment to
 allow pushes from GitHub. If it's the first time you've published a package, go
-to the [PyPI trusted publisher docs] for instructions on preparing PyPI to accept
-your initial package publish.
+to the [PyPI trusted publisher docs] for instructions on preparing PyPI to
+accept your initial package publish.
 
 We are also generating artifact attestations, which can allow users to verify
 that the artifacts were built on your actions.
