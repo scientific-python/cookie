@@ -39,10 +39,10 @@ During generation you can select from the following backends for your package:
 1. [hatch][]: This uses hatchling, a modern builder with nice file inclusion,
    extendable via plugins, and good error messages. **(Recommended for pure
    Python projects)**
-2. [flit][]: A modern, lightweight [PEP 621][] build system for pure Python projects.
-   Replaces setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low learning curve.
-   Easy to bootstrap into new distributions. Difficult to get the right files included,
-   little dynamic metadata support.
+2. [flit][]: A modern, lightweight [PEP 621][] build system for pure Python
+   projects. Replaces setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low
+   learning curve. Easy to bootstrap into new distributions. Difficult to get
+   the right files included, little dynamic metadata support.
 3. [pdm][]: A modern, less opinionated all-in-one solution to pure Python
    projects supporting standards. Replaces setuptools, venv/pipenv, pip, wheel,
    and twine. Supports [PEP 621][].
@@ -57,8 +57,8 @@ During generation you can select from the following backends for your package:
 7. [scikit-build][]: A scikit-build (CMake) project also using pybind11, using
    scikit-build-core. **(Recommended for C++ projects)**
 8. [meson-python][]: A Meson project also using pybind11. (No VCS versioning)
-9. [maturin][]: A [PEP 621][] builder for Rust binary extensions. (No VCS versioning)
-   **(Recommended for Rust projects)**
+9. [maturin][]: A [PEP 621][] builder for Rust binary extensions. (No VCS
+   versioning) **(Recommended for Rust projects)**
 
 Currently, the best choice is probably hatch for pure Python projects, and
 scikit-build (such as the scikit-build-core + pybind11 choice) for binary
@@ -218,8 +218,8 @@ A lot of the guide, cookiecutter, and repo-review started out as part of
 
 <!-- sp-repo-review -->
 
-`sp-repo-review` provides checks based on the [Scientific-Python
-Development Guide][] at [scientific-python/cookie][] for [repo-review][].
+`sp-repo-review` provides checks based on the [Scientific-Python Development
+Guide][] at [scientific-python/cookie][] for [repo-review][].
 
 This tool can check the style of a repository. Use like this:
 
