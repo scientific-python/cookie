@@ -154,7 +154,7 @@ publish:
         path: dist
 
     - name: Generate artifact attestation for sdist and wheel
-      uses: actions/attest-build-provenance@v1.4.4
+      uses: actions/attest-build-provenance@v2.0.1
       with:
         subject-path: "dist/*"
 
@@ -252,7 +252,7 @@ jobs:
           path: dist
 
       - name: Generate artifact attestation for sdist and wheel
-        uses: actions/attest-build-provenance@v1.4.4
+        uses: actions/attest-build-provenance@v2.0.1
         with:
           subject-path: "dist/*"
 
