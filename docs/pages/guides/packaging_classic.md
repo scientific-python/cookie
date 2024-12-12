@@ -22,8 +22,8 @@ like [Hatch][] are drastically simpler - most of this page is unneeded for those
 systems. Even setuptools supports modern config now, though setup.py is still
 also required for compiled packages to be supported.
 
-Also see the [Python packaging guide][], especially the [Python
-packaging tutorial][].
+Also see the [Python packaging guide][], especially the [Python packaging
+tutorial][].
 
 {: .note }
 
