@@ -80,7 +80,7 @@ def test_py005_src(tmp_path: Path):
     src.mkdir()
     pkg = src.joinpath("pkg")
     pkg.mkdir()
-    pkg.joinpath("test").mkdir()
+    pkg.joinpath("tests").mkdir()
     assert compute_check("PY005", package=simple).result
 
 
