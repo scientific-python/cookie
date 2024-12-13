@@ -65,7 +65,9 @@ class PY004(General):
     @staticmethod
     def check(package: Traversable) -> bool:
         "Projects must have documentation in a folder called docs (disable if not applicable)"
-        return len([p for p in package.iterdir() if "doc" in p.name]) > 0
+        return (
+            len([p for p in package.iterdir() if p.is_dir() and p.name == "docs"]) > 0
+        )
 
 
 class PY005(General):
@@ -75,9 +77,18 @@ class PY005(General):
 
     @staticmethod
     def check(package: Traversable) -> bool:
-        "Projects must have a folder called `*test*` or `src/*/*test*`"
+        "Projects must have a folder called `test*` or `src/*/test*`"
         # Out-of-source tests
-        if len([p for p in package.iterdir() if "test" in p.name]) > 0:
+        if (
+            len(
+                [
+                    p
+                    for p in package.iterdir()
+                    if p.is_dir() and p.name.startswith("test")
+                ]
+            )
+            > 0
+        ):
             return True
 
         # In-source tests
@@ -86,7 +97,14 @@ class PY005(General):
             for pkg in src.iterdir():
                 if (
                     pkg.is_dir()
-                    and len([p for p in pkg.iterdir() if "test" in p.name]) > 0
+                    and len(
+                        [
+                            p
+                            for p in pkg.iterdir()
+                            if p.is_dir() and p.name.startswith("test")
+                        ]
+                    )
+                    > 0
                 ):
                     return True
         return False
