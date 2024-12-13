@@ -77,9 +77,18 @@ class PY005(General):
 
     @staticmethod
     def check(package: Traversable) -> bool:
-        "Projects must have a folder called `tests` or `src/*/tests`"
+        "Projects must have a folder called `test*` or `src/*/test*`"
         # Out-of-source tests
-        if len([p for p in package.iterdir() if p.is_dir() and p.name == "tests"]) > 0:
+        if (
+            len(
+                [
+                    p
+                    for p in package.iterdir()
+                    if p.is_dir() and p.name.startswith("test")
+                ]
+            )
+            > 0
+        ):
             return True
 
         # In-source tests
@@ -89,7 +98,11 @@ class PY005(General):
                 if (
                     pkg.is_dir()
                     and len(
-                        [p for p in pkg.iterdir() if p.is_dir() and p.name == "tests"]
+                        [
+                            p
+                            for p in pkg.iterdir()
+                            if p.is_dir() and p.name.startswith("test")
+                        ]
                     )
                     > 0
                 ):

@@ -54,6 +54,13 @@ def test_py004(tmp_path: Path):
     assert compute_check("PY004", package=simple).result
 
 
+def test_py004_not_dir(tmp_path: Path):
+    simple = tmp_path / "simple"
+    simple.mkdir()
+    simple.joinpath("docs")
+    assert not compute_check("PY004", package=simple).result
+
+
 def test_py004_missing(tmp_path: Path):
     simple = tmp_path / "simple"
     simple.mkdir()
@@ -65,6 +72,34 @@ def test_py005(tmp_path: Path):
     simple.mkdir()
     simple.joinpath("tests").mkdir()
     assert compute_check("PY005", package=simple).result
+
+
+def test_py005_alt_singular(tmp_path: Path):
+    simple = tmp_path / "simple"
+    simple.mkdir()
+    simple.joinpath("test").mkdir()
+    assert compute_check("PY005", package=simple).result
+
+
+def test_py005_alt_integration(tmp_path: Path):
+    simple = tmp_path / "simple"
+    simple.mkdir()
+    simple.joinpath("tests-integration").mkdir()
+    assert compute_check("PY005", package=simple).result
+
+
+def test_py005_not_folder(tmp_path: Path):
+    simple = tmp_path / "simple"
+    simple.mkdir()
+    simple.joinpath("tests")
+    assert not compute_check("PY005", package=simple).result
+
+
+def test_py005_not_tests(tmp_path: Path):
+    simple = tmp_path / "simple"
+    simple.mkdir()
+    simple.joinpath("fastest").mkdir()
+    assert not compute_check("PY005", package=simple).result
 
 
 def test_py005_missing(tmp_path: Path):
