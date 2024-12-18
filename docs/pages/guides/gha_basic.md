@@ -282,6 +282,8 @@ And many other useful ones:
 - [gautamkrishnar/keepalive-workflow](https://github.com/gautamkrishnar/keepalive-workflow):
   Keep GitHub actions alive for more than 60 days. Not usually needed if you've
   set up the other suggestions here, like dependabot and pre-commit.
+- [sigstore/gh-action-sigstore-python](https://github.com/sigstore/gh-action-sigstore-python):
+  Signing files in GitHub Actions with sigstore.
 
 A couple more from Python developers; note these do not provide `vX` moving tags
 like the official actions and most other actions, but instead have `release/vX`
@@ -291,8 +293,6 @@ branches that you can use.
   Publish Python packages to PyPI. Supports trusted publisher deployment.
 - [re-actors/alls-green](https://github.com/re-actors/alls-green): Tooling to
   check to see if all jobs passed (supports allowed failures, too).
-- [sigstore/gh-action-sigstore-python](https://github.com/sigstore/gh-action-sigstore-python):
-  Signing files in GitHub Actions with sigstore.
 
 There are also a few useful tools installed which can really simplify your
 workflow or adding custom actions. This includes system package managers (like
