@@ -42,94 +42,18 @@ requires = ["meson-python", "pybind11"]
 build-backend = "mesonpy"
 {%- elif cookiecutter.backend == "poetry" %}
 {%- if cookiecutter.vcs %}
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+requires = ["poetry-core>=2.0.0", "poetry-dynamic-versioning"]
 build-backend = "poetry_dynamic_versioning.backend"
 {%- else %}
-requires = ["poetry_core>=1.0.0"]
+requires = ["poetry_core>=2.0.0"]
 build-backend = "poetry.core.masonry.api"
 {%- endif %}
 {%- endif %}
 
 
-{%- if cookiecutter.backend == "poetry" %}
-
-
-[tool.poetry]
-name = "{{ cookiecutter.project_name }}"
-{%- if cookiecutter.vcs %}
-version = "0.0.0"
-{%- else %}
-version = "0.1.0"
-{%- endif %}
-authors = [
-  "{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>",
-]
-{%- if cookiecutter.org == "scikit-hep" %}
-maintainers = [
-  "The Scikit-HEP admins <scikit-hep-admins@googlegroups.com>",
-]
-{%- endif %}
-homepage = "{{ cookiecutter.url }}"
-repository = "{{ cookiecutter.url }}"
-{%- if cookiecutter.license == "BSD" %}
-license = "BSD-3-Clause"
-{%- elif cookiecutter.license == "Apache" %}
-license = "Apache-2.0"
-{%- elif cookiecutter.license == "MIT" %}
-license = "MIT"
-{%- endif %}
-description = "{{ cookiecutter.project_short_description }}"
-readme = "README.md"
-
-classifiers = [
-  "Development Status :: 1 - Planning",
-  "Intended Audience :: Science/Research",
-  "Intended Audience :: Developers",
-  "Operating System :: OS Independent",
-  "Topic :: Scientific/Engineering",
-  "Typing :: Typed",
-]
-
-[tool.poetry.dependencies]
-python = ">=3.9"
-
-furo = { version = ">=2023.08.17", optional = true }
-myst_parser = { version = ">=0.13", optional = true }
-pytest = { version = ">=6", optional = true }
-pytest-cov = { version = ">=3", optional = true }
-sphinx = { version = ">=7.0", optional = true }
-sphinx_copybutton = { version = ">=0.3.0", optional = true }
-sphinx-autodoc-typehints = { version = "*", optional = true }
-docutils = { version = "!=0.21.post1", optional = true }
-
-[tool.poetry.dev-dependencies]
-pytest = ">= 6"
-pytest-cov = ">= 3"
-
-[tool.poetry.extras]
-test = ["pytest", "pytest-cov"]
-dev = ["pytest", "pytest-cov"]
-docs = [
-  "furo",
-  "myst_parser",
-  "sphinx",
-  "sphinx_autodoc_typehints",
-  "sphinx_copybutton",
-  "docutils",
-]
-
-{%- if cookiecutter.vcs %}
-
-[tool.poetry-dynamic-versioning]
-enable = true
-substitution.files = ["src/{{ cookiecutter.__project_slug }}/__init__.py"]
-{%- endif %}
-{%- else %}
-
-
 [project]
 name = "{{ cookiecutter.project_name }}"
-{%- if cookiecutter.backend in ['maturin', 'mesonpy'] or not cookiecutter.vcs and cookiecutter.backend in ['setuptools', 'pybind11', 'skbuild'] %}
+{%- if cookiecutter.backend in ['maturin', 'mesonpy'] or not cookiecutter.vcs and cookiecutter.backend in ['setuptools', 'pybind11', 'skbuild', 'poetry'] %}
 version = "0.1.0"
 {%- endif %}
 authors = [
@@ -196,7 +120,6 @@ Homepage = "{{ cookiecutter.url }}"
 "Bug Tracker" = "{{ cookiecutter.url }}/issues"
 Discussions = "{{ cookiecutter.url }}/discussions"
 Changelog = "{{ cookiecutter.url }}/releases"
-{%- endif %}
 
 
 {%- if cookiecutter.backend == "skbuild" %}
@@ -257,26 +180,34 @@ path = "src/{{ cookiecutter.__project_slug }}/__init__.py"
 [tool.pdm.dev-dependencies]
 devtest = ["pytest", "pytest-cov"]
 
+{%- elif cookiecutter.backend == "poetry" and cookiecutter.vcs %}
+
+
+[tool.poetry]
+version = "0.0.0"
+
+[tool.poetry.requires-plugins]
+poetry-dynamic-versioning = { version = ">=1.0.0", extras = ["plugin"] }
+
+[tool.poetry-dynamic-versioning]
+enable = true
+substitution.files = ["src/{{ cookiecutter.__project_slug }}/__init__.py"]
+
 {%- endif %}
 
-{%- if cookiecutter.backend in ["pybind11", "poetry", "flit", "skbuild", "setuptools"] and cookiecutter.vcs %}
+{%- if cookiecutter.backend in ["pybind11", "flit", "skbuild", "setuptools"] and cookiecutter.vcs %}
 
 
 [tool.setuptools_scm]
 write_to = "src/{{ cookiecutter.__project_slug }}/_version.py"
+
 {%- endif %}
-
-
-{%- if cookiecutter.backend != "poetry" %}
 
 
 [tool.uv]
 dev-dependencies = [
   "{{ cookiecutter.__project_slug }}[test]",
 ]
-
-
-{%- endif %}
 
 
 {%- if cookiecutter.__type == "compiled" %}
