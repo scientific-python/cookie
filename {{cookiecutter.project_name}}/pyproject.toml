@@ -180,9 +180,8 @@ path = "src/{{ cookiecutter.__project_slug }}/__init__.py"
 [tool.pdm.dev-dependencies]
 devtest = ["pytest", "pytest-cov"]
 
-{%- elif cookiecutter.backend == "poetry" and cookiecutter.vcs %}
-
-
+{%- elif cookiecutter.backend == "poetry" %}
+{%- if cookiecutter.vcs %}
 [tool.poetry]
 version = "0.0.0"
 
@@ -192,8 +191,13 @@ poetry-dynamic-versioning = { version = ">=1.0.0", extras = ["plugin"] }
 [tool.poetry-dynamic-versioning]
 enable = true
 substitution.files = ["src/{{ cookiecutter.__project_slug }}/__init__.py"]
-
 {%- endif %}
+
+[tool.poetry.group.test.dependencies]
+pytest = ">= 6"
+pytest-cov = ">= 3"
+{%- endif %}
+
 
 {%- if cookiecutter.backend in ["pybind11", "flit", "skbuild", "setuptools"] and cookiecutter.vcs %}
 
