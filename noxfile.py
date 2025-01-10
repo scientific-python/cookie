@@ -249,6 +249,9 @@ def native(session: nox.Session, backend: str, vcs: bool) -> None:
 
     if backend == "hatch":
         session.run(backend, "run", "test")
+    elif backend == "poetry":
+        session.run(backend, "sync", env={"VIRTUAL_ENV": None})
+        session.run(backend, "run", "pytest", env={"VIRTUAL_ENV": None})
     else:
         session.run(backend, "install")
         session.run(backend, "run", "pytest")
