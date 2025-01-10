@@ -174,10 +174,9 @@ class RF201(RF2xx):
     @staticmethod
     def iter_check(ruff: dict[str, Any]) -> Generator[str, None, None]:
         match ruff:
-            case (
-                {"extend-unfixable": object()}
-                | {"lint": {"extend-unfixable": object()}}
-            ):
+            case {"extend-unfixable": object()} | {
+                "lint": {"extend-unfixable": object()}
+            }:
                 yield "`extend-unfixable` deprecated, use `unfixable` instead (identical)"
             case {"extend-ignore": object()} | {"lint": {"extend-ignore": object()}}:
                 yield "`extend-ignore` deprecated, use `ignore` instead (identical)"
