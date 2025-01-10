@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.8.4"
+  rev: "v0.9.0"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.8.4"
+  rev: "v0.9.0"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -350,7 +350,7 @@ use the manual stage, it's opt-in instead of automatic.
 
 ```yaml
 - repo: https://github.com/hadialqattan/pycln
-  rev: "v2.4.0"
+  rev: "v2.5.0"
   hooks:
     - id: pycln
       args: [--all]
@@ -533,7 +533,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.14.0"
+  rev: "v1.14.1"
   hooks:
     - id: mypy
       files: src
@@ -745,7 +745,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v19.1.5"
+  rev: "v19.1.6"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -822,7 +822,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.30.0"
+  rev: "0.31.0"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
