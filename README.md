@@ -77,8 +77,8 @@ Now, run copier to generate your project:
 copier copy gh:scientific-python/cookie <pkg> --trust --vcs-ref=HEAD
 ```
 
-(`<pkg>` is the path to put the new project. `--vcs-ref=HEAD` gets the
-current version instead of the last tag, matching cookiecutter's behavior.)
+(`<pkg>` is the path to put the new project. `--vcs-ref=HEAD` gets the current
+version instead of the last tag, matching cookiecutter's behavior.)
 
 You will get a nicer CLI experience with answer validation. You will also get a
 `.copier-answers.yml` file, which will allow you to perform updates in the
@@ -103,8 +103,8 @@ options like copier!
 #### To use (classic cruft version)
 
 You can also use [cruft][], which adds the ability update to cookiecutter
-projects. Install with `uv tool install cruft` (or prepend `uvx` to the
-command below, and skip installation). Then run:
+projects. Install with `uv tool install cruft` (or prepend `uvx` to the command
+below, and skip installation). Then run:
 
 ```bash
 cruft create gh:scientific-python/cookie
@@ -155,8 +155,7 @@ nox -s "lint(scikit-build)"
 nox -s "nox(hatch)" -- docs
 ```
 
-If you don't have `nox` locally, you can use [uv][], such as `uvx nox`
-instead.
+If you don't have `nox` locally, you can use [uv][], such as `uvx nox` instead.
 
 #### Other similar projects
 
