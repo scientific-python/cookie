@@ -48,8 +48,7 @@ During generation you can select from the following backends for your package:
    and twine. Supports [PEP 621][].
 4. [poetry][]: An all-in-one solution to pure Python projects. Replaces
    setuptools, venv/pipenv, pip, wheel, and twine. Higher learning curve, but is
-   all-in-one. Makes some bad default assumptions for libraries. The only one
-   with a non-standard pyproject.toml config.
+   all-in-one. Makes some bad default assumptions for libraries.
 5. [setuptools][]: The classic build system, but with the new standardized
    configuration.
 6. [pybind11][]: This is setuptools but with an C++ extension written in
@@ -66,21 +65,20 @@ projects.
 
 #### To use (modern copier version)
 
-Install `copier` and `copier-templates-extensions`. Using [pipx][], that's:
+Install `copier` and `copier-templates-extensions`. Using [uv][], that's:
 
 ```bash
-pipx install copier
-pipx inject copier copier-templates-extensions
+uv tool install copier --with copier-templates-extensions
 ```
 
 Now, run copier to generate your project:
 
 ```bash
-copier copy gh:scientific-python/cookie <pkg> --trust
+copier copy gh:scientific-python/cookie <pkg> --trust --vcs-ref=HEAD
 ```
 
-(`<pkg>` is the path to put the new project. If copier is old, use `--UNSAFE`
-instead of `--trust`)
+(`<pkg>` is the path to put the new project. `--vcs-ref=HEAD` gets the current
+version instead of the last tag, matching cookiecutter's behavior.)
 
 You will get a nicer CLI experience with answer validation. You will also get a
 `.copier-answers.yml` file, which will allow you to perform updates in the
@@ -92,7 +90,7 @@ future.
 #### To use (classic cookiecutter version)
 
 Install cookiecutter, ideally with `brew install cookiecutter` if you use brew,
-otherwise with `pipx install cookiecutter` (or prepend `pipx run` to the command
+otherwise with `uv tool install cookiecutter` (or prepend `uvx` to the command
 below, and skip installation). Then run:
 
 ```bash
@@ -105,8 +103,8 @@ options like copier!
 #### To use (classic cruft version)
 
 You can also use [cruft][], which adds the ability update to cookiecutter
-projects. Install with `pipx install cruft` (or prepend `pipx run` to the
-command below, and skip installation). Then run:
+projects. Install with `uv tool install cruft` (or prepend `uvx` to the command
+below, and skip installation). Then run:
 
 ```bash
 cruft create gh:scientific-python/cookie
@@ -157,8 +155,7 @@ nox -s "lint(scikit-build)"
 nox -s "nox(hatch)" -- docs
 ```
 
-If you don't have `nox` locally, you can use [pipx][], such as `pipx run nox`
-instead.
+If you don't have `nox` locally, you can use [uv][], such as `uvx nox` instead.
 
 #### Other similar projects
 
@@ -198,7 +195,6 @@ A lot of the guide, cookiecutter, and repo-review started out as part of
 [nsls-ii]: https://nsls-ii.github.io/scientific-python-cookiecutter/
 [pdm]: https://pdm.fming.dev
 [pep 621]: https://www.python.org/dev/peps/pep-0621
-[pipx]: https://pypa.github.io/pipx/
 [poetry]: https://python-poetry.org
 [pybind11]: https://pybind11.readthedocs.io
 [pypa]: https://www.pypa.io
@@ -209,6 +205,7 @@ A lot of the guide, cookiecutter, and repo-review started out as part of
 [rtd-link]: https://scientific-python-cookie.readthedocs.io/en/latest/?badge=latest
 [scikit-build]: https://scikit-build.readthedocs.io
 [setuptools]: https://setuptools.readthedocs.io
+[uv]: https://docs.astral.sh/uv
 
 <!-- prettier-ignore-end -->
 
@@ -224,7 +221,7 @@ Guide][] at [scientific-python/cookie][] for [repo-review][].
 This tool can check the style of a repository. Use like this:
 
 ```bash
-pipx run 'sp-repo-review[cli]' <path to repository>
+uv run --extra=cli sp-repo-review <path to repository>
 ```
 
 This will produce a list of results - green checkmarks mean this rule is
