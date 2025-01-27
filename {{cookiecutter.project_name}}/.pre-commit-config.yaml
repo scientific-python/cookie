@@ -71,6 +71,9 @@ repos:
     rev: "v2.4.0"
     hooks:
       - id: codespell
+{%- if "hep" in cookiecutter.org %}
+        args: ["-LHEP"]
+{%- endif %}
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: "v0.10.0.1"
