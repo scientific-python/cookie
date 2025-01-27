@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.9.2"
+  rev: "v0.9.3"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.9.2"
+  rev: "v0.9.3"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -663,7 +663,7 @@ than a list of "valid" words. To use:
 
 ```yaml
 - repo: https://github.com/codespell-project/codespell
-  rev: "v2.3.0"
+  rev: "v2.4.0"
   hooks:
     - id: codespell
       args: ["-L", "sur,nd"]
