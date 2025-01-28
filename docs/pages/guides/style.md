@@ -663,7 +663,7 @@ than a list of "valid" words. To use:
 
 ```yaml
 - repo: https://github.com/codespell-project/codespell
-  rev: "v2.4.0"
+  rev: "v2.4.1"
   hooks:
     - id: codespell
       args: ["-L", "sur,nd"]
