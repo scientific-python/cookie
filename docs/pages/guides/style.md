@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.9.3"
+  rev: "v0.9.4"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -141,7 +141,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "24.10.0"
+  rev: "25.1.0"
   hooks:
     - id: black
 ```
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.9.3"
+  rev: "v0.9.4"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -463,7 +463,7 @@ pre-commit config will work:
 
 ```yaml
 - repo: https://github.com/PyCQA/isort
-  rev: "5.13.2"
+  rev: "6.0.0"
   hooks:
     - id: isort
 ```
@@ -822,7 +822,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.31.0"
+  rev: "0.31.1"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
