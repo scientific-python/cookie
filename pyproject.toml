@@ -164,7 +164,6 @@ extend-select = [
 ]
 ignore = [
   "PLR",    # Design related pylint codes
-  "PT004",  # Incorrect check, usefixtures is the correct way to do this
   "RUF012", # Would require a lot of ClassVar's
 ]
 
@@ -180,5 +179,5 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "src/sp_repo_review/_compat/**.py" = ["TID251"]
 
-[tool.repo-review]
-ignore = ["RTD103"]
+[tool.repo-review.ignore]
+RTD103 = "Using Ruby instead of Python for docs"

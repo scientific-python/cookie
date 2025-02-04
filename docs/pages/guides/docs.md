@@ -319,7 +319,7 @@ modern Ubuntu should be fine) {% rr RTD102 %}, a `tools` table (we'll use Python
 {% rr RTD103 %}, several languages are supported here).
 
 Adding a `sphinx` table tells Read the Docs to enable Sphinx integration. MkDocs
-is supported too.
+is supported too. You must include one of these unless you use build commands {% rr RTD104 %}.
 
 Finally, we have a `python` table with an `install` key to describe how to
 install our project. This will enable our "docs" extra.
