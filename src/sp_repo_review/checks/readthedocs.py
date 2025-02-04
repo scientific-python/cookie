@@ -100,6 +100,34 @@ class RTD103(ReadTheDocs):
                 return False
 
 
+class RTD104(ReadTheDocs):
+    "You have to specify a build configuration now for readthedocs."
+
+    requires = {"RTD100"}
+
+    @staticmethod
+    def check(readthedocs: dict[str, Any]) -> bool:
+        """
+        You must set `sphinx: configuration:`, `mkdocs: configuration:` or
+        `build: commands:`. Skipping it is no longer allowed. Example:
+
+        ```yaml
+        sphinx:
+          configuration: docs/conf.py
+        ```
+        """
+
+        match readthedocs:
+            case {"build": {"commands": list()}}:
+                return True
+            case {"sphinx": {"configuration": str()}}:
+                return True
+            case {"mkdocs": {"configuration": str()}}:
+                return True
+            case _:
+                return False
+
+
 def readthedocs(root: Traversable) -> dict[str, Any]:
     for path in (".readthedocs.yaml", ".readthedocs.yml"):
         readthedocs_path = root.joinpath(path)
