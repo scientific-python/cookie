@@ -234,7 +234,8 @@ mark checks as ignored.
 For example, `GH101` expects all your action files to have a nice `name:` field.
 If you are happy with the file-based names you see in CI, you should feel free
 to simply ignore this check (you can specify ignored checks in pyproject.toml or
-by passing args to repo-review, see the [repo-review docs][repo-review configuring]).
+by passing args to repo-review, see the [repo-review
+docs][repo-review configuring]).
 
 All checks are mentioned at least in some way in the [Scientific-Python
 Development Guide][]. You should read that first - if you are not attempting to
