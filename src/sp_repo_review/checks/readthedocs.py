@@ -19,8 +19,8 @@ class RTD100(ReadTheDocs):
     @staticmethod
     def check(root: Traversable) -> bool:
         """
-        Should have a .readthedocs.yaml file in the root of the repository.
-        Modern ReadTheDocs requires (or will require soon) this file.
+        Should have a `.readthedocs.yaml` file in the root of the repository.
+        Modern ReadTheDocs requires this file.
         """
 
         return (
