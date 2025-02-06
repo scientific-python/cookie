@@ -63,3 +63,14 @@ jobs:
         run: |
           pipx run nox -s readme
           git diff --exit-code
+
+  pylint:
+    name: Run pylint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run pylint
+        run: pipx run nox[uv] -s rr_pylint -- --output-format=github
