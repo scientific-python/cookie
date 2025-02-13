@@ -70,6 +70,7 @@ jobs:
         run: nox -s 'tests(setuptools, novcs)' -s 'tests(setuptools, vcs)'
 
       - name: Native poetry tooling
+        if: matrix.python-version != 'pypy-3.10'
         run: |
           nox -s 'native(poetry, novcs)'
           nox -s 'native(poetry, vcs)'
