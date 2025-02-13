@@ -16,9 +16,7 @@ class Family(typing.TypedDict, total=False):
     description: str  # Defaults to empty
 
 
-def get_families(
-    pyproject: dict[str, Any] = {},  # noqa: B006
-) -> dict[str, Family]:
+def get_families(pyproject: dict[str, Any]) -> dict[str, Family]:
     pyproject_description = f"- Detected build backend: `{pyproject.get('build-system', {}).get('build-backend', 'MISSING')}`"
     if classifiers := pyproject.get("project", {}).get("classifiers", []):
         licenses = [

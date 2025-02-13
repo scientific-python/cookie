@@ -83,6 +83,7 @@ class PP004(PyProject):
 
         setup_cfg = package / "setup.cfg"
         if setup_cfg.is_file():
+            # pylint: disable-next=import-outside-toplevel
             import configparser
 
             config = configparser.ConfigParser()
@@ -134,7 +135,7 @@ class PP302(PyProject):
         options = pyproject["tool"]["pytest"]["ini_options"]
         return (
             "minversion" in options
-            and int(str(options["minversion"]).split(".")[0]) >= 6
+            and int(str(options["minversion"]).split(".", maxsplit=1)[0]) >= 6
         )
 
 
