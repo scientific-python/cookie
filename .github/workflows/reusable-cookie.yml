@@ -46,7 +46,6 @@ jobs:
         run: uv tool install nox
 
       - name: Test pybind11
-        if: matrix.python-version != 'pypy-3.9'
         run: nox -s 'tests(pybind11, novcs)' -s 'tests(pybind11, vcs)'
 
       - name: Test scikit-build
@@ -71,10 +70,12 @@ jobs:
         run: nox -s 'tests(setuptools, novcs)' -s 'tests(setuptools, vcs)'
 
       - name: Native poetry tooling
-        run: nox -s 'native(poetry, novcs)' -s 'native(poetry, vcs)'
+        if: matrix.python-version != 'pypy-3.10'
+        run: |
+          nox -s 'native(poetry, novcs)'
+          nox -s 'native(poetry, vcs)'
 
       - name: Native pdm tooling
-
         run: nox -s 'native(pdm, novcs)' -s 'native(pdm, vcs)'
 
       - name: Activate MSVC for Meson

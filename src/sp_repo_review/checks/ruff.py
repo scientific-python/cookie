@@ -98,8 +98,7 @@ class RF003(Ruff):
 
         match ruff:
             case {"src": ["src"]}:
-                # See https://github.com/python/mypy/issues/16272
-                return False  # type: ignore[unreachable]
+                return False
             case _:
                 return True
 
