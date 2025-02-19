@@ -94,6 +94,24 @@ class PP004(PyProject):
         return None
 
 
+class PP005(PyProject):
+    "Does not have deprecated trove classifiers"
+
+    url = mk_url("packaging-simple")
+
+    @staticmethod
+    def check(pyproject: dict[str, Any], package: Traversable) -> bool | None:
+        """
+        As of Pypi metadata 2.4, all the `License ::` classifiers are deprecated.
+        Prefer the `License-Expression`
+
+        See https://packaging.python.org/en/latest/specifications/core-metadata/#license-expression
+        """
+        match pyproject:
+            case {"project": {"classifiers": classifiers}}:
+                return len([c for c in classifiers if c.startswith("License ::")]) == 0
+
+
 class PP301(PyProject):
     "Has pytest in pyproject"
 
