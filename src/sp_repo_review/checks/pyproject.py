@@ -95,21 +95,26 @@ class PP004(PyProject):
 
 
 class PP005(PyProject):
-    "Does not have deprecated trove classifiers"
+    "Using SPDX project.license should not use deprecated trove classifiers"
 
+    requires = {"PY001"}
     url = mk_url("packaging-simple")
 
     @staticmethod
-    def check(pyproject: dict[str, Any], package: Traversable) -> bool | None:
+    def check(pyproject: dict[str, Any]) -> bool | None:
         """
-        As of Pypi metadata 2.4, all the `License ::` classifiers are deprecated.
-        Prefer the `License-Expression`
+        If you use SPDX identifiers in `project.license`, then all the `License ::`
+        classifiers are deprecated.
 
         See https://packaging.python.org/en/latest/specifications/core-metadata/#license-expression
         """
         match pyproject:
-            case {"project": {"classifiers": classifiers}}:
-                return len([c for c in classifiers if c.startswith("License ::")]) == 0
+            case {"project": {"license": str(), "classifiers": classifiers}}:
+                return all(not c.startswith("License ::") for c in classifiers)
+            case {"project": {"license": str()}}:
+                return True
+            case _:
+                return None
 
 
 class PP301(PyProject):

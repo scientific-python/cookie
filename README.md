@@ -302,6 +302,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PP002`](https://learn.scientific-python.org/development/guides/packaging-simple#PP002): Has a proper build-system table
 - [`PP003`](https://learn.scientific-python.org/development/guides/packaging-classic#PP003): Does not list wheel as a build-dep
 - [`PP004`](https://learn.scientific-python.org/development/guides/packaging-simple#PP004): Does not upper cap Python requires
+- [`PP005`](https://learn.scientific-python.org/development/guides/packaging-simple#PP005): Using SPDX project.license should not use deprecated trove classifiers
 - [`PP301`](https://learn.scientific-python.org/development/guides/pytest#PP301): Has pytest in pyproject
 - [`PP302`](https://learn.scientific-python.org/development/guides/pytest#PP302): Sets a minimum pytest to at least 6
 - [`PP303`](https://learn.scientific-python.org/development/guides/pytest#PP303): Sets the test paths

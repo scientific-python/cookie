@@ -45,6 +45,21 @@ You can read more about each field, and all allowed fields, in
 or [Whey](https://whey.readthedocs.io/en/latest/configuration.html). Note that
 "Homepage" is special, and replaces the old url setting.
 
+### License
+
+The license can be done one of two ways. The classic convention (shown above)
+uses one or more [Trove Classifiers][] to specify the license. The other way is
+to use the `license` field and an [SPDX identifier expression][spdx]:
+
+```toml
+license = "BSD-3-Clause"
+```
+
+You can also specify files to include with the `license-files` field.
+{% rr PP007 %} You should not include the `License ::` classifiers if you use
+the `license` field. Some backends do not support this fully yet (notably Poetry
+and Setuptools).
+
 ### Extras
 
 It is recommended to use extras instead of or in addition to making requirement
@@ -85,3 +100,5 @@ function, followed by a colon, then the function to call. If you use
 work to call the app (`__name__` will be `"__main__"` in that case).
 
 [metadata]: https://packaging.python.org/en/latest/specifications/core-metadata/
+[trove classifiers]: https://pypi.org/classifiers/
+[spdx]: https://spdx.org/licenses
