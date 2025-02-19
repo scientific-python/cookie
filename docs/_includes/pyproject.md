@@ -56,9 +56,10 @@ license = "BSD-3-Clause"
 ```
 
 You can also specify files to include with the `license-files` field.
-{% rr PP007 %} You should not include the `License ::` classifiers if you use
-the `license` field. Some backends do not support this fully yet (notably Poetry
-and Setuptools).
+
+You should not include the `License ::` classifiers if you use the `license`
+field {% rr PP007 %}. Some backends do not support this fully yet (notably
+Poetry and Setuptools).
 
 ### Extras
 
