@@ -113,6 +113,55 @@ def test_PP004_not_present(tmp_path: Path):
     assert compute_check("PP004", pyproject={}, package=tmp_path).result is None
 
 
+def test_PP005_no_license():
+    toml = toml_loads("""
+        [project]
+        license.text = "MIT"
+        classifiers = ["License :: OSI Approved :: MIT License"]
+        """)
+
+    assert compute_check("PP005", pyproject=toml).result is None
+
+
+def test_PP005_pass():
+    toml = toml_loads("""
+        [project]
+        license = "MIT"
+        """)
+
+    assert compute_check("PP005", pyproject=toml).result
+
+
+def test_PP005_pass_empty_classifiers():
+    toml = toml_loads("""
+        [project]
+        license = "MIT"
+        classifiers = []
+        """)
+
+    assert compute_check("PP005", pyproject=toml).result
+
+
+def test_PP005_pass_other_classifiers():
+    toml = toml_loads("""
+        [project]
+        license = "MIT"
+        classifiers = ["Something :: Else"]
+        """)
+
+    assert compute_check("PP005", pyproject=toml).result
+
+
+def test_PP005_both():
+    toml = toml_loads("""
+        [project]
+        license = "MIT"
+        classifiers = ["License :: OSI Approved :: MIT License"]
+        """)
+
+    assert not compute_check("PP005", pyproject=toml).result
+
+
 def test_PP302_okay_intstr():
     toml = toml_loads("""
         [tool.pytest.ini_options]

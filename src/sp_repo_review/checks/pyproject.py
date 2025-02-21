@@ -94,6 +94,29 @@ class PP004(PyProject):
         return None
 
 
+class PP005(PyProject):
+    "Using SPDX project.license should not use deprecated trove classifiers"
+
+    requires = {"PY001"}
+    url = mk_url("packaging-simple")
+
+    @staticmethod
+    def check(pyproject: dict[str, Any]) -> bool | None:
+        """
+        If you use SPDX identifiers in `project.license`, then all the `License ::`
+        classifiers are deprecated.
+
+        See https://packaging.python.org/en/latest/specifications/core-metadata/#license-expression
+        """
+        match pyproject:
+            case {"project": {"license": str(), "classifiers": classifiers}}:
+                return all(not c.startswith("License ::") for c in classifiers)
+            case {"project": {"license": str()}}:
+                return True
+            case _:
+                return None
+
+
 class PP301(PyProject):
     "Has pytest in pyproject"
 
