@@ -63,14 +63,15 @@ Currently, the best choice is probably hatch for pure Python projects, and
 scikit-build (such as the scikit-build-core + pybind11 choice) for binary
 projects.
 
-#### To use (modern copier version)
+#### To use (copier version)
 
 Install `copier` and `copier-templates-extensions`. Using [uv][], that's:
 
 ```bash
-uv tool install copier --with copier-templates-extensions
+uv tool install copier!=9.5.0 --with copier-templates-extensions
 ```
 
+(Copier 9.5.0 [has a bug](https://github.com/copier-org/copier/issues/1977))
 Now, run copier to generate your project:
 
 ```bash
@@ -87,7 +88,7 @@ future.
 > Note: Add `--vcs-ref=HEAD` to get the latest version instead of the last
 > tagged version; HEAD always passes tests (and is what cookiecutter uses).
 
-#### To use (classic cookiecutter version)
+#### To use (cookiecutter version)
 
 Install cookiecutter, ideally with `brew install cookiecutter` if you use brew,
 otherwise with `uv tool install cookiecutter` (or prepend `uvx` to the command
@@ -100,14 +101,14 @@ cookiecutter gh:scientific-python/cookie
 If you are using cookiecutter 2.2.3+, you will get nice descriptions for the
 options like copier!
 
-#### To use (classic cruft version)
+#### To use (cruft version)
 
 You can also use [cruft][], which adds the ability update to cookiecutter
 projects. Install with `uv tool install cruft` (or prepend `uvx` to the command
 below, and skip installation). Then run:
 
 ```bash
-cruft create gh:scientific-python/cookie
+cruft create https://github.com/scientific-python/cookie
 ```
 
 #### Post generation
