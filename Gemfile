@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 # Hello! This is where you manage which Jekyll version is used to run.
 # When you want to use a different version, change it below, save the
@@ -11,13 +11,16 @@ source "https://rubygems.org"
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
 
-gem 'jekyll', '~> 4.3'
+gem 'jekyll'
 
 # This is the theme
-gem "just-the-docs", "~> 0.5.3"
+gem 'just-the-docs'
 
 # This is needed for GitHub Flavored Markdown
 gem 'kramdown-parser-gfm'
+
+# Used to be in the stdlib
+gem 'logger'
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
@@ -38,8 +41,8 @@ end
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
 platforms :mingw, :x64_mingw, :mswin, :jruby do
-  gem "tzinfo", ">= 1", "< 3"
-  gem "tzinfo-data"
+  gem 'tzinfo'
+  gem 'tzinfo-data'
 end
 
-gem 'wdm', '~> 0.1.1', :install_if => Gem.win_platform?
+gem 'wdm', install_if: Gem.win_platform?
