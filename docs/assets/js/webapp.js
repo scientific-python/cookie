@@ -1,5 +1,5 @@
 const DEFAULT_MSG =
-  "Enter a GitHub repo and branch to review. Runs Python entirely in your browser using WebAssembly. Built with React, MaterialUI, and Pyodide.";
+  "Enter a GitHub repo and branch/tag to review. Runs Python entirely in your browser using WebAssembly. Built with React, MaterialUI, and Pyodide.";
 
 const urlParams = new URLSearchParams(window.location.search);
 const baseurl = window.location.pathname;
@@ -154,6 +154,39 @@ function Results(props) {
   );
 }
 
+async function fetchRepoRefs(repo) {
+  if (!repo) return { branches: [], tags: [] };
+  try {
+    // Fetch both branches and tags from GitHub API
+    const [branchesResponse, tagsResponse] = await Promise.all([
+      fetch(`https://api.github.com/repos/${repo}/branches`),
+      fetch(`https://api.github.com/repos/${repo}/tags`),
+    ]);
+
+    if (!branchesResponse.ok || !tagsResponse.ok) {
+      console.error("Error fetching repo data");
+      return { branches: [], tags: [] };
+    }
+
+    const branches = await branchesResponse.json();
+    const tags = await tagsResponse.json();
+
+    return {
+      branches: branches.map((branch) => ({
+        name: branch.name,
+        type: "branch",
+      })),
+      tags: tags.map((tag) => ({
+        name: tag.name,
+        type: "tag",
+      })),
+    };
+  } catch (error) {
+    console.error("Error fetching repo references:", error);
+    return { branches: [], tags: [] };
+  }
+}
+
 async function prepare_pyodide(deps) {
   const deps_str = deps.map((i) => `"${i}"`).join(", ");
   const pyodide = await loadPyodide();
@@ -196,28 +229,58 @@ class App extends React.Component {
     this.state = {
       results: [],
       repo: urlParams.get("repo") || "",
-      branch: urlParams.get("branch") || "",
+      ref: urlParams.get("ref") || "",
+      refType: urlParams.get("refType") || "branch",
+      refs: { branches: [], tags: [] },
       msg: `<p>${DEFAULT_MSG}</p><h4>Packages:</h4> ${deps_str}`,
       progress: false,
+      loadingRefs: false,
       err_msg: "",
       skip_reason: "",
       url: "",
     };
     this.pyodide_promise = prepare_pyodide(props.deps);
+    this.refInputDebounce = null;
+  }
+
+  async fetchRepoReferences(repo) {
+    if (!repo) return;
+
+    this.setState({ loadingRefs: true });
+    const refs = await fetchRepoRefs(repo);
+    this.setState({
+      refs: refs,
+      loadingRefs: false,
+    });
+  }
+
+  handleRepoChange(repo) {
+    this.setState({ repo });
+
+    // debounce the API call to avoid too many requests
+    clearTimeout(this.refInputDebounce);
+    this.refInputDebounce = setTimeout(() => {
+      this.fetchRepoReferences(repo);
+    }, 500);
+  }
+
+  handleRefChange(ref, refType) {
+    this.setState({ ref, refType });
   }
 
   handleCompute() {
-    if (!this.state.repo || !this.state.branch) {
+    if (!this.state.repo || !this.state.ref) {
       this.setState({ results: [], msg: DEFAULT_MSG });
       window.history.replaceState(null, "", baseurl);
       alert(
-        `Please enter a repo (${this.state.repo}) and branch (${this.state.branch})`,
+        `Please enter a repo (${this.state.repo}) and branch/tag (${this.state.ref})`,
       );
       return;
     }
     const local_params = new URLSearchParams({
       repo: this.state.repo,
-      branch: this.state.branch,
+      ref: this.state.ref,
+      refType: this.state.refType,
     });
     window.history.replaceState(null, "", `${baseurl}?${local_params}`);
     this.setState({
@@ -234,7 +297,7 @@ class App extends React.Component {
           from repo_review.ghpath import GHPath
           from dataclasses import replace
 
-          package = GHPath(repo="${state.repo}", branch="${state.branch}")
+          package = GHPath(repo="${state.repo}", branch="${state.ref}")
           families, checks = process(package)
 
           for v in families.values():
@@ -249,7 +312,7 @@ class App extends React.Component {
           this.setState({
             msg: DEFAULT_MSG,
             progress: false,
-            err_msg: "Invalid repository or branch. Please try again.",
+            err_msg: "Invalid repository or branch/tag. Please try again.",
           });
           return;
         }
@@ -288,7 +351,7 @@ class App extends React.Component {
       this.setState({
         results: results,
         families: families,
-        msg: `Results for ${state.repo}@${state.branch}`,
+        msg: `Results for ${state.repo}@${state.ref} (${state.refType})`,
         progress: false,
         err_msg: "",
         url: "",
@@ -300,13 +363,78 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (urlParams.get("repo") && urlParams.get("branch")) {
-      this.handleCompute();
+    if (urlParams.get("repo")) {
+      this.fetchRepoReferences(urlParams.get("repo"));
+
+      if (urlParams.get("ref")) {
+        this.handleCompute();
+      }
     }
   }
 
   render() {
-    const common_branches = ["main", "master", "develop", "stable"];
+    const priorityBranches = ["HEAD", "main", "master", "develop", "stable"];
+    const branchMap = new Map(
+      this.state.refs.branches.map((branch) => [branch.name, branch]),
+    );
+
+    let availableOptions = [];
+
+    // If no repo is entered or API hasn't returned any branches/tags yet,
+    // show all five priority branches.
+    if (
+      this.state.repo === "" ||
+      (this.state.refs.branches.length === 0 &&
+        this.state.refs.tags.length === 0)
+    ) {
+      availableOptions = [
+        { label: "HEAD (default branch)", value: "HEAD", type: "branch" },
+        { label: "main (branch)", value: "main", type: "branch" },
+        { label: "master (branch)", value: "master", type: "branch" },
+        { label: "develop (branch)", value: "develop", type: "branch" },
+        { label: "stable (branch)", value: "stable", type: "branch" },
+      ];
+    } else {
+      const prioritizedBranches = [
+        { label: "HEAD (default branch)", value: "HEAD", type: "branch" },
+      ];
+
+      priorityBranches.slice(1).forEach((branchName) => {
+        if (branchMap.has(branchName)) {
+          prioritizedBranches.push({
+            label: `${branchName} (branch)`,
+            value: branchName,
+            type: "branch",
+          });
+          // Remove from map so it doesn't get added twice.
+          branchMap.delete(branchName);
+        }
+      });
+
+      const otherBranches = [];
+      branchMap.forEach((branch) => {
+        otherBranches.push({
+          label: `${branch.name} (branch)`,
+          value: branch.name,
+          type: "branch",
+        });
+      });
+      otherBranches.sort((a, b) => a.value.localeCompare(b.value));
+
+      const tagOptions = this.state.refs.tags.map((tag) => ({
+        label: `${tag.name} (tag)`,
+        value: tag.name,
+        type: "tag",
+      }));
+      tagOptions.sort((a, b) => a.value.localeCompare(b.value));
+
+      availableOptions = [
+        ...prioritizedBranches,
+        ...otherBranches,
+        ...tagOptions,
+      ];
+    }
+
     return (
       <MyThemeProvider>
         <MaterialUI.CssBaseline />
@@ -326,29 +454,64 @@ class App extends React.Component {
               autoFocus={true}
               onKeyDown={(e) => {
                 if (e.keyCode === 13)
-                  document.getElementById("branch-select").focus();
+                  document.getElementById("ref-select").focus();
               }}
-              onInput={(e) => this.setState({ repo: e.target.value })}
+              onInput={(e) => this.handleRepoChange(e.target.value)}
               defaultValue={urlParams.get("repo")}
               sx={{ flexGrow: 3 }}
             />
             <MaterialUI.Autocomplete
               disablePortal
-              id="branch-select"
-              options={common_branches}
+              id="ref-select"
+              options={availableOptions}
+              loading={this.state.loadingRefs}
               freeSolo={true}
               onKeyDown={(e) => {
                 if (e.keyCode === 13) this.handleCompute();
               }}
-              onInputChange={(e, value) => this.setState({ branch: value })}
-              defaultValue={urlParams.get("branch")}
+              getOptionLabel={(option) =>
+                typeof option === "string" ? option : option.label
+              }
+              renderOption={(props, option) => (
+                <li {...props}>{option.label}</li>
+              )}
+              onInputChange={(e, value) => {
+                // If the user enters free text, treat it as a branch
+                if (typeof value === "string") {
+                  this.handleRefChange(value, "branch");
+                }
+              }}
+              onChange={(e, option) => {
+                if (option) {
+                  if (typeof option === "object") {
+                    this.handleRefChange(option.value, option.type);
+                  } else {
+                    this.handleRefChange(option, "branch");
+                  }
+                }
+              }}
+              defaultValue={urlParams.get("ref")}
               renderInput={(params) => (
                 <MaterialUI.TextField
                   {...params}
-                  label="Branch"
+                  label="Branch/Tag"
                   variant="outlined"
-                  helperText="e.g. main"
-                  sx={{ flexGrow: 2, minWidth: 130 }}
+                  helperText="e.g. HEAD, main, or v1.0.0"
+                  sx={{ flexGrow: 2, minWidth: 200 }}
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <React.Fragment>
+                        {this.state.loadingRefs ? (
+                          <MaterialUI.CircularProgress
+                            color="inherit"
+                            size={20}
+                          />
+                        ) : null}
+                        {params.InputProps.endAdornment}
+                      </React.Fragment>
+                    ),
+                  }}
                 />
               )}
             />
@@ -358,7 +521,7 @@ class App extends React.Component {
               variant="contained"
               size="large"
               disabled={
-                this.state.progress || !this.state.repo || !this.state.branch
+                this.state.progress || !this.state.repo || !this.state.ref
               }
             >
               <MaterialUI.Icon>start</MaterialUI.Icon>
