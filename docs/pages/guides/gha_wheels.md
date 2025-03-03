@@ -114,7 +114,7 @@ build_wheels:
         fetch-depth: 0
         submodules: true
 
-    - uses: pypa/cibuildwheel@v2.22
+    - uses: pypa/cibuildwheel@v2.23
 
     - name: Upload wheels
       uses: actions/upload-artifact@v4
@@ -178,7 +178,7 @@ upload_all:
         merge-multiple: true
 
     - name: Generate artifact attestations
-      uses: actions/attest-build-provenance@v2.2.0
+      uses: actions/attest-build-provenance@v2.2.2
       with:
         subject-path: "dist/*"
 
