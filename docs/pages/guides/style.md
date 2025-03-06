@@ -245,7 +245,6 @@ extend-select = [
 ignore = [
   "PLR09",    # Too many <...>
   "PLR2004",  # Magic value used in comparison
-  "ISC001",   # Conflicts with formatter
 ]
 typing-modules = ["mypackage._compat.typing"]
 isort.required-imports = ["from __future__ import annotations"]
