@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.9.9"
+  rev: "v0.9.10"
   hooks:
     #  id: ruff would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.9.9"
+  rev: "v0.9.10"
   hooks:
     - id: ruff
       args: ["--fix", "--show-fixes"]
@@ -774,7 +774,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.5.2"
+  rev: "v3.5.3"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
@@ -822,7 +822,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.31.2"
+  rev: "0.31.3"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
