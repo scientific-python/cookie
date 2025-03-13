@@ -212,7 +212,7 @@ def tests(session: nox.Session) -> None:
     """
     Run the unit and regular tests.
     """
-    session.install(".[test]")
+    session.install("-e.[test]")
     session.run("pytest", *session.posargs)
 ```
 <!-- prettier-ignore-end -->
