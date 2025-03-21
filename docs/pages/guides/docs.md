@@ -433,9 +433,9 @@ Note that your docstrings are still parsed as reStructuredText.
 ## Notebooks in docs
 
 You can combine notebooks into your docs. The tool for this is `nbsphinx`. If
-you want to use it, add `nbsphinx` to your documentation requirements, add
-`"nbsphinx"` to your `conf.py`'s `extensions =` list, and add some options for
-nbsphinx in `conf.py`:
+you want to use it, add `nbsphinx` and `ipykernel` to your documentation
+requirements, add `"nbsphinx"` to your `conf.py`'s `extensions =` list, and add
+some options for nbsphinx in `conf.py`:
 
 ```python
 nbsphinx_execute = "auto"
@@ -452,6 +452,9 @@ You can set `nbsphinx_execute` to `always`, `never`, or `auto` - `auto` will
 only execute empty notebooks. The execute arguments shown above will produce
 "retina" images from Matplotlib. You can set the kernel name (make sure you can
 execute all of your (unexecuted) notebooks).
+
+Note that you will also need the `pandoc` command line tool installed locally
+for this to work. CI services like readthedocs usually have it installed.
 
 If you want to use Markdown instead of notebooks, you can use jupytext (see
 [here](https://nbsphinx.readthedocs.io/en/0.9.2/a-markdown-file.html)).
