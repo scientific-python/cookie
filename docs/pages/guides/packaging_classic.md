@@ -15,20 +15,19 @@ packaging styles, but this document is intended to outline a recommended style
 that existing packages should slowly adopt. The reasoning for each decision is
 outlined as well.
 
-There are several popular packaging systems. This guide covers [Setuptools][],
-which is the oldest system and supports compiled extensions. If you are not
-working on legacy code or are willing to make a larger change, other systems
-like [Hatch][] are drastically simpler - most of this page is unneeded for those
-systems. Even setuptools supports modern config now, though setup.py is still
-also required for compiled packages to be supported.
+There are several popular packaging systems. This guide covers the old
+configuration style for [Setuptools][]. Unless you really need it, you should be
+using the modern style described in [Simple Packaging](/guides/packaging-simple/).
+The modern style is guided by Python Enhancement Proposals (PEPs), and is more
+stable than the setuptools-specific mechanisms that evolve over the years. This
+page is kept to help users with legacy code (and hopefully upgrade it).
 
-Also see the [Python packaging guide][], especially the [Python packaging
-tutorial][].
 
 {: .note }
 
-> Raw source lives in git and has a `setup.py`. You _can_ install directly from
-> git via pip, but normally users install from distributions hosted on PyPI.
+> Raw source lives in git and has a `pyproject.toml` and/or a `setup.py`. You
+> _can_ install directly from git via pip, but normally users install from
+> distributions hosted on PyPI.
 > There are three options: **A)** A source package, called an SDist and has a
 > name that ends in `.tar.gz`. This is a copy of the GitHub repository, stripped
 > of a few specifics like CI files, and possibly with submodules included (if
@@ -87,8 +86,8 @@ these "[hypermodern][]" packaging tools is growing in scientific Python
 packages. All tools build the same wheels (and they often build setuptools
 compliant SDists, as well).
 
-{% rr PP003 %} Note that `"wheel"` is never required; it is injected
-automatically by setuptools only when needed.
+{% rr PP003 %} Note that `"wheel"` is never required; it was injected
+automatically by setuptools in older versions, and is no longer used at all.
 
 ### Special additions: NumPy
 
@@ -326,9 +325,12 @@ where = src
 #     extern
 ```
 
+{% rr SCFG001 %} Note that all keys use underscores; using a dash will
+cause warnings and eventually failures.
+
 And, a possible `setup.py`; though in recent versions of pip, there no longer is
-a need to include a legacy `setup.py` file, even for editable installs, unless
-you are building extensions.
+a need to include a legacy `setup.py` file, even for editable installs or
+building extensions.
 
 ```python
 #!/usr/bin/env python
@@ -479,7 +481,5 @@ the app.
 [manifest.in]: https://packaging.python.org/guides/using-manifest-in/
 [setuptools]: https://setuptools.readthedocs.io/en/latest/userguide/index.html
 [setuptools cfg]: https://setuptools.readthedocs.io/en/latest/userguide/declarative_config.html
-[python packaging guide]: https://packaging.python.org
-[python packaging tutorial]: https://packaging.python.org/tutorials/packaging-projects/
 
 <!-- prettier-ignore-end -->
