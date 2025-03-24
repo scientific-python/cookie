@@ -17,26 +17,25 @@ outlined as well.
 
 There are several popular packaging systems. This guide covers the old
 configuration style for [Setuptools][]. Unless you really need it, you should be
-using the modern style described in [Simple Packaging](/guides/packaging-simple/).
-The modern style is guided by Python Enhancement Proposals (PEPs), and is more
-stable than the setuptools-specific mechanisms that evolve over the years. This
-page is kept to help users with legacy code (and hopefully upgrade it).
-
+using the modern style described in
+[Simple Packaging](/guides/packaging-simple/). The modern style is guided by
+Python Enhancement Proposals (PEPs), and is more stable than the
+setuptools-specific mechanisms that evolve over the years. This page is kept to
+help users with legacy code (and hopefully upgrade it).
 
 {: .note }
 
 > Raw source lives in git and has a `pyproject.toml` and/or a `setup.py`. You
 > _can_ install directly from git via pip, but normally users install from
-> distributions hosted on PyPI.
-> There are three options: **A)** A source package, called an SDist and has a
-> name that ends in `.tar.gz`. This is a copy of the GitHub repository, stripped
-> of a few specifics like CI files, and possibly with submodules included (if
-> there are any). **B)** A pure python wheel, which ends in `.whl`; this is only
-> possible if there are no compiled extensions in the library. This does _not_
-> contain a setup.py, but rather a `PKG_INFO` file that is rendered from
-> setup.py (or from another build system). **C)** If not pure Python, a
-> collection of wheels for every binary platform, generally one per supported
-> Python version and OS as well.
+> distributions hosted on PyPI. There are three options: **A)** A source
+> package, called an SDist and has a name that ends in `.tar.gz`. This is a copy
+> of the GitHub repository, stripped of a few specifics like CI files, and
+> possibly with submodules included (if there are any). **B)** A pure python
+> wheel, which ends in `.whl`; this is only possible if there are no compiled
+> extensions in the library. This does _not_ contain a setup.py, but rather a
+> `PKG_INFO` file that is rendered from setup.py (or from another build system).
+> **C)** If not pure Python, a collection of wheels for every binary platform,
+> generally one per supported Python version and OS as well.
 >
 > Developer requirements (users of A or git) are generally higher than the
 > requirements to use B or C. Poetry and optionally flit create SDists that
@@ -325,8 +324,8 @@ where = src
 #     extern
 ```
 
-{% rr SCFG001 %} Note that all keys use underscores; using a dash will
-cause warnings and eventually failures.
+{% rr SCFG001 %} Note that all keys use underscores; using a dash will cause
+warnings and eventually failures.
 
 And, a possible `setup.py`; though in recent versions of pip, there no longer is
 a need to include a legacy `setup.py` file, even for editable installs or

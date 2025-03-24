@@ -19,7 +19,8 @@ enabling binary extension packages to benefit too. These [PEP 621][] tools
 currently include [Hatch][], [PDM][], [Flit][], [Setuptools][], [Poetry][] 2.0,
 and compiled backends (see the next page).
 
-Also see the [Python packaging guide][], especially the [Python packaging tutorial][].
+Also see the [Python packaging guide][], especially the [Python packaging
+tutorial][].
 
 {: .note-title }
 
