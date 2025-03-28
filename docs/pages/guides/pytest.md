@@ -83,7 +83,7 @@ testpaths = [
 ```
 
 {% rr PP302 %} The `minversion` will print a nicer error if your `pytest` is too
-old (though, ironically, it won't read this is the version is too old, so
+old (though, ironically, it won't read this if the version is too old, so
 setting "6" or less in `pyproject.toml` is rather pointless). The `addopts`
 setting will add whatever you put there to the command line when you run;
 {% rr PP308 %} `-ra` will print a summary "r"eport of "a"ll results, which gives
