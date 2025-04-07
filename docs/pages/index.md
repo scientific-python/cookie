@@ -60,6 +60,18 @@ This guide also does not cover version control, but it is essential to have a
 basic facility with git to use these tools successfully. We recommend the
 [Software Carpentry lesson on Git](https://swcarpentry.github.io/git-novice/).
 
+Other similar resources that cover Python packaging include:
+
+- [Python Packaging User Guide](https://packaging.python.org): The official
+  guide. Doesn't cover as many extra tools that can help you, like linters and
+  CI.
+- [Python Developer Tooling Handbook](https://pydevtools.com/handbook): Lots of
+  explanation and reference.
+- [pyOpenSci Python Package Guide](https://www.pyopensci.org/python-package-guide):
+  A community created guidebook.
+- [Intersect training: Packaging](https://intersect-training.org/packaging): A
+  tutorial introducing Python packaging.
+
 {: .note-title }
 
 > History
