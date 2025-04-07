@@ -51,4 +51,7 @@ def get_families(pyproject: dict[str, Any]) -> dict[str, Family]:
         "docs": Family(
             name="Documentation",
         ),
+        "setupcfg": Family(
+            name="Setuptools Config",
+        ),
     }

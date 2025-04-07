@@ -69,6 +69,7 @@ ruff = "sp_repo_review.checks.ruff:repo_review_checks"
 mypy = "sp_repo_review.checks.mypy:repo_review_checks"
 github = "sp_repo_review.checks.github:repo_review_checks"
 readthedocs = "sp_repo_review.checks.readthedocs:repo_review_checks"
+setupcfg = "sp_repo_review.checks.setupcfg:repo_review_checks"
 
 [project.entry-points."repo_review.fixtures"]
 workflows = "sp_repo_review.checks.github:workflows"
@@ -76,6 +77,7 @@ dependabot = "sp_repo_review.checks.github:dependabot"
 precommit = "sp_repo_review.checks.precommit:precommit"
 readthedocs = "sp_repo_review.checks.readthedocs:readthedocs"
 ruff = "sp_repo_review.checks.ruff:ruff"
+setupcfg = "sp_repo_review.checks.setupcfg:setupcfg"
 
 [project.entry-points."repo_review.families"]
 scikit-hep = "sp_repo_review.families:get_families"
