@@ -306,7 +306,7 @@ Here are some good error codes to enable on most (but not all!) projects:
 - `PGH`: Checks for patterns, such as type ignores or noqa's without a specific
   error code.
 - `PL`: A set of four code groups that cover some (200 or so out of 600 rules)
-  of PyLint.
+  of Pylint.
 - `PT`: Helps tests follow best pytest practices. A few codes are not ideal, but
   many are helpful.
 - `PTH`: Want to move to using modern pathlib? This will help. There are some
@@ -829,12 +829,12 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
     - id: check-readthedocs
 ```
 
-## PyLint (noisy)
+## Pylint (noisy)
 
-PyLint is very opinionated, with a high signal-to-noise ratio. However, by
+Pylint is very opinionated, with a high signal-to-noise ratio. However, by
 limiting the default checks or by starting off a new project using them, you can
 get some very nice linting, including catching some problematic code that
-otherwise is hard to catch. PyLint is generally not a good candidate for
+otherwise is hard to catch. Pylint is generally not a good candidate for
 pre-commit, since it needs to have your package installed - it is less static of
 check than Ruff or Flake8. Here is a suggested `pyproject.toml` entry to get you
 started:
