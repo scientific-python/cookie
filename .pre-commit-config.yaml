@@ -77,7 +77,7 @@ repos:
       - id: disallow-caps
         name: Disallow improper capitalization
         language: pygrep
-        entry: PyBind|Numpy|Cmake|CCache|Github|PyTest|RST
+        entry: PyBind|Numpy|Cmake|CCache|Github|PyTest|RST|PyLint
         exclude: (.pre-commit-config.yaml|docs/pages/guides/style\.md)$
       - id: disallow-words
         name: Disallow certain words
