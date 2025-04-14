@@ -91,7 +91,7 @@ enough for a simple testing suite, can be written as follows:
 
 ```yaml
 - name: Upload coverage report
-  uses: codecov/codecov-action@v5.4.0
+  uses: codecov/codecov-action@v5.4.1-beta
   with:
     token: ${{ secrets.CODECOV_TOKEN }}
 ```
