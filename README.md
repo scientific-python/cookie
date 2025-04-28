@@ -71,8 +71,8 @@ Install `copier` and `copier-templates-extensions`. Using [uv][], that's:
 uv tool install 'copier!=9.7.*' --with copier-templates-extensions
 ```
 
-(Copier 9.5.0 [has a bug](https://github.com/copier-org/copier/issues/1977),
-and 9.7.0/9.7.1 [also have one](https://github.com/copier-org/copier/issues/2113))
+(Copier 9.5.0 [has a bug](https://github.com/copier-org/copier/issues/1977), and
+9.7.0/9.7.1 [also have one](https://github.com/copier-org/copier/issues/2113))
 
 Now, run copier to generate your project:
 
