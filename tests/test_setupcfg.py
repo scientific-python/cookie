@@ -12,6 +12,7 @@ def test_scfg001():
         description = A test package
         author = Me
         author_email = me@example.com
+        """)
     assert compute_check("SCFG001", setupcfg=setupcfg).result
 
 
