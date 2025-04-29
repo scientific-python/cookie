@@ -19,7 +19,7 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v6
       - run: uvx nox -s pc_bump
         env:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
