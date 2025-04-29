@@ -16,8 +16,11 @@ much; they all use a [standard configuration language][metadata] introduced in
 [PEP 621][]. The PyPA's Flit is a great option. [scikit-build-core][] and
 [meson-python][] are being developed to support this sort of configuration,
 enabling binary extension packages to benefit too. These [PEP 621][] tools
-currently include [Hatch][], [PDM][], [Flit][], and [Setuptools][]. [Poetry][]
-will eventually gain support in 2.0.
+currently include [Hatch][], [PDM][], [Flit][], [Setuptools][], [Poetry][] 2.0,
+and compiled backends (see the next page).
+
+Also see the [Python packaging guide][], especially the [Python packaging
+tutorial][].
 
 {: .note-title }
 
@@ -204,6 +207,8 @@ This is tool specific.
 [pep 621]: https://www.python.org/dev/peps/pep-0621
 [scikit-build-core]: https://scikit-build-core.readthedocs.io
 [meson-python]: https://meson-python.readthedocs.io
+[python packaging guide]: https://packaging.python.org
+[python packaging tutorial]: https://packaging.python.org/tutorials/packaging-projects/
 
 <!-- prettier-ignore-end -->
 

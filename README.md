@@ -365,6 +365,9 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - `RF201`: Avoid using deprecated config settings
 - `RF202`: Use (new) lint config section
 
+### Setuptools Config
+- [`SCFG001`](https://learn.scientific-python.org/development/guides/packaging-classic#SCFG001): Avoid deprecated setup.cfg names
+
 <!-- [[[end]]] -->
 
 [repo-review]: https://repo-review.readthedocs.io
