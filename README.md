@@ -68,11 +68,8 @@ projects.
 Install `copier` and `copier-templates-extensions`. Using [uv][], that's:
 
 ```bash
-uv tool install 'copier!=9.7.*' --with copier-templates-extensions
+uv tool install --with copier-templates-extensions copier
 ```
-
-(Copier 9.5.0 [has a bug](https://github.com/copier-org/copier/issues/1977), and
-9.7.0/9.7.1 [also have one](https://github.com/copier-org/copier/issues/2113))
 
 Now, run copier to generate your project:
 
@@ -81,7 +78,9 @@ copier copy gh:scientific-python/cookie <pkg> --trust --vcs-ref=HEAD
 ```
 
 (`<pkg>` is the path to put the new project. `--vcs-ref=HEAD` gets the current
-version instead of the last tag, matching cookiecutter's behavior.)
+version instead of the last tag, matching cookiecutter's behavior. Note you can
+combine these two lines into one with `uvx`, just remember to pass `--with`
+before the program name in that case.)
 
 You will get a nicer CLI experience with answer validation. You will also get a
 `.copier-answers.yml` file, which will allow you to perform updates in the

@@ -325,9 +325,7 @@ def nox_session(session: nox.Session, backend: str, vcs: bool) -> None:
 
 @nox.session(default=False)
 def compare_copier(session):
-    # Copier 9.5.0 broke `--data`
-    # Copier 9.7.0/9.7.1 broke everything
-    session.install("cookiecutter", "copier!=9.7.*", "copier-templates-extensions")
+    session.install("cookiecutter", "copier", "copier-templates-extensions")
 
     tmp_dir = session.create_tmp()
     session.cd(tmp_dir)
