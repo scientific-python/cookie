@@ -1,9 +1,11 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from .._compat.importlib.resources.abc import Traversable
 from . import mk_url
+
+if TYPE_CHECKING:
+    from configparser import ConfigParser
 
 
 class PyProject:
@@ -57,7 +59,7 @@ class PP004(PyProject):
     url = mk_url("packaging-simple")
 
     @staticmethod
-    def check(pyproject: dict[str, Any], package: Traversable) -> bool | None:
+    def check(pyproject: dict[str, Any], setupcfg: ConfigParser | None) -> bool | None:
         """
         You should never upper cap your Python requirement. This is rarely correct, and
         tools like pip do not handle this properly even if it is correct. This field is used
@@ -81,15 +83,10 @@ class PP004(PyProject):
                     "^" not in requires and "~=" not in requires and "<" not in requires
                 )
 
-        setup_cfg = package / "setup.cfg"
-        if setup_cfg.is_file():
-            # pylint: disable-next=import-outside-toplevel
-            import configparser
-
-            config = configparser.ConfigParser()
-            config.read_string(setup_cfg.read_text(encoding="utf-8"))
-            if requires := config.get("options", "python_requires"):
-                return "~=" not in requires and "<" not in requires
+        if setupcfg and (
+            requires := setupcfg.get("options", "python_requires", fallback=None)
+        ):
+            return "~=" not in requires and "<" not in requires
 
         return None
 
