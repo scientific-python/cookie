@@ -24,9 +24,10 @@ from typing import Any
 
 import nox
 
-nox.needs_version = ">=2024.3.2"
+nox.needs_version = ">=2025.2.9"
 nox.options.sessions = ["rr_lint", "rr_tests", "rr_pylint", "readme"]
 nox.options.default_venv_backend = "uv|virtualenv"
+
 
 DIR = Path(__file__).parent.resolve()
 with DIR.joinpath("cookiecutter.json").open() as f:
@@ -178,7 +179,7 @@ def diff_files(p1: Path, p2: Path) -> bool:
     return same
 
 
-@nox.session()
+@nox.session(default=False)
 @nox.parametrize("vcs", [False, True], ids=["novcs", "vcs"])
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def lint(session: nox.Session, backend: str, vcs: bool) -> None:
@@ -198,7 +199,7 @@ def lint(session: nox.Session, backend: str, vcs: bool) -> None:
     )
 
 
-@nox.session
+@nox.session(default=False)
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def autoupdate(session: nox.Session, backend: str) -> None:
     session.install("cookiecutter", "pre-commit")
@@ -212,7 +213,7 @@ def autoupdate(session: nox.Session, backend: str) -> None:
     session.run("git", "diff", "--exit-code", external=True)
 
 
-@nox.session()
+@nox.session(default=False)
 @nox.parametrize("vcs", [False, True], ids=["novcs", "vcs"])
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def tests(session: nox.Session, backend: str, vcs: bool) -> None:
@@ -236,7 +237,7 @@ def tests(session: nox.Session, backend: str, vcs: bool) -> None:
     assert version == expected_version, f"{version=} != {expected_version=}"
 
 
-@nox.session()
+@nox.session(default=False)
 @nox.parametrize("vcs", [False, True], ids=["novcs", "vcs"])
 @nox.parametrize("backend", ("poetry", "pdm", "hatch"), ids=("poetry", "pdm", "hatch"))
 def native(session: nox.Session, backend: str, vcs: bool) -> None:
@@ -257,7 +258,7 @@ def native(session: nox.Session, backend: str, vcs: bool) -> None:
         session.run(backend, "run", "pytest")
 
 
-@nox.session()
+@nox.session(default=False)
 @nox.parametrize("vcs", [False, True], ids=["novcs", "vcs"])
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def dist(session: nox.Session, backend: str, vcs: bool) -> None:
@@ -305,7 +306,7 @@ def dist(session: nox.Session, backend: str, vcs: bool) -> None:
     wheel.rename(dist / wheel.stem)
 
 
-@nox.session(name="nox")
+@nox.session(name="nox", default=False)
 @nox.parametrize("vcs", [False, True], ids=["novcs", "vcs"])
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def nox_session(session: nox.Session, backend: str, vcs: bool) -> None:
@@ -322,7 +323,7 @@ def nox_session(session: nox.Session, backend: str, vcs: bool) -> None:
         session.run("nox")
 
 
-@nox.session()
+@nox.session(default=False)
 def compare_copier(session):
     # Copier 9.5.0 broke `--data`
     # Copier 9.7.0/9.7.1 broke everything
@@ -342,7 +343,7 @@ def compare_copier(session):
                 session.error(f"{backend} {vcs=} files are not the same!")
 
 
-@nox.session()
+@nox.session(default=False)
 def compare_cruft(session):
     session.install("cookiecutter", "cruft")
 
@@ -375,7 +376,7 @@ PC_REPL_LINE = """\
 GHA_VERS = re.compile(r"[\s\-]+uses: (.*?)@([^\s]+)")
 
 
-@nox.session(reuse_venv=True)
+@nox.session(reuse_venv=True, default=False)
 def pc_bump(session: nox.Session) -> None:
     """
     Bump the pre-commit versions.
@@ -439,7 +440,7 @@ def get_latest_version_tag(repo: str, old_version: str) -> dict[str, Any] | None
     return None
 
 
-@nox.session(venv_backend="none")
+@nox.session(venv_backend="none", default=False)
 def gha_bump(session: nox.Session) -> None:
     """
     Bump the GitHub Actions.
@@ -484,7 +485,7 @@ def readme(session: nox.Session) -> None:
     session.run("cog", "-P", *args, "README.md")
 
 
-@nox.session(reuse_venv=True)
+@nox.session(reuse_venv=True, default=False)
 def rr_run(session: nox.Session) -> None:
     """
     Run sp-repo-review.
@@ -519,19 +520,18 @@ def rr_tests(session: nox.Session) -> None:
     """
     Run the unit and regular tests for sp-repo-review.
     """
-    session.install("-e.[test,cli]")
+    pyproject = nox.project.load_toml()
+    test_deps = nox.project.dependency_groups(pyproject, "test")
+
+    session.install("-e.[cli]", *test_deps)
     session.run("pytest", *session.posargs, env={"PYTHONWARNDEFAULTENCODING": "1"})
 
 
-@nox.session(reuse_venv=True)
+@nox.session(reuse_venv=True, default=False)
 def rr_build(session: nox.Session) -> None:
     """
     Build an SDist and wheel for sp-repo-review.
     """
-
-    build_p = DIR.joinpath("build")
-    if build_p.exists():
-        shutil.rmtree(build_p)
 
     session.install("build")
     session.run("python", "-m", "build")

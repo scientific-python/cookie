@@ -28,11 +28,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
 
-      - name: Install package
-        run: python -m pip install .[test,cli]
+      - uses: astral-sh/setup-uv@v6
 
       - name: Test package
-        run: python -m pytest -ra
+        run: uv run pytest -ra
         env:
           PYTHONWARNDEFAULTENCODING: 1
 
@@ -57,11 +56,13 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.13"
+
+      - uses: astral-sh/setup-uv@v6
 
       - name: Rerender README
         run: |
-          pipx run nox -s readme
+          uvx nox -s readme
           git diff --exit-code
 
   pylint:
@@ -72,5 +73,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - uses: astral-sh/setup-uv@v6
+
       - name: Run pylint
-        run: pipx run nox[uv] -s rr_pylint -- --output-format=github
+        run: uvx nox -s rr_pylint -- --output-format=github
