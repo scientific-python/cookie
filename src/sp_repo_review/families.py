@@ -18,7 +18,9 @@ class Family(typing.TypedDict, total=False):
 
 def get_families(pyproject: dict[str, Any]) -> dict[str, Family]:
     pyproject_description = f"- Detected build backend: `{pyproject.get('build-system', {}).get('build-backend', 'MISSING')}`"
-    if classifiers := pyproject.get("project", {}).get("classifiers", []):
+    if isinstance(license := pyproject.get("project", {}).get("license", {}), str):
+        pyproject_description += f"\n- SPDX license expression: `{license}`"
+    elif classifiers := pyproject.get("project", {}).get("classifiers", []):
         licenses = [
             c.removeprefix("License :: ").removeprefix("OSI Approved :: ")
             for c in classifiers
