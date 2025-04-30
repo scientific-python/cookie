@@ -43,6 +43,9 @@ cli = [
 pyproject = [
   "validate-pyproject-schema-store[all]",
 ]
+all = [
+  "sp-repo-review[cli,pyproject]",
+]
 
 [project.urls]
 Guide = "https://learn.scientific-python.org/development"
@@ -50,8 +53,7 @@ Homepage = "https://github.com/scientific-python/cookie"
 Preview = "https://scientific-python-cookie.readthedocs.io"
 Source = "https://github.com/scientific-python/cookie"
 
-
-[project.entry-points."pipx.run"]
+[project.scripts]
 sp-repo-review = "repo_review.__main__:main"
 
 [project.entry-points."repo_review.checks"]

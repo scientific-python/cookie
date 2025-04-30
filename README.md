@@ -223,7 +223,7 @@ Guide][] at [scientific-python/cookie][] for [repo-review][].
 This tool can check the style of a repository. Use like this:
 
 ```bash
-uv run --extra=cli sp-repo-review <path to repository>
+uvx sp-repo-review[cli] <path to repository>
 ```
 
 This will produce a list of results - green checkmarks mean this rule is
@@ -247,6 +247,13 @@ somewhere else, then all the pytest checks will be skipped.
 
 This was originally developed for [Scikit-HEP][] before moving to Scientific
 Python.
+
+## Extras
+
+- `cli`: Dependencies to run the CLI (not needed for programmatic access, like
+  on Web Assembly)
+- `pyproject`: Include validate pyproject with schema store.
+- `all`: All extras
 
 ## Other ways to use
 
