@@ -98,14 +98,20 @@ dynamic = ["version"]
 {%- endif %}
 dependencies = []
 
-[project.optional-dependencies]
+[project.urls]
+Homepage = "{{ cookiecutter.url }}"
+"Bug Tracker" = "{{ cookiecutter.url }}/issues"
+Discussions = "{{ cookiecutter.url }}/discussions"
+Changelog = "{{ cookiecutter.url }}/releases"
+
+
+[dependency-groups]
 test = [
   "pytest >=6",
   "pytest-cov >=3",
 ]
 dev = [
-  "pytest >=6",
-  "pytest-cov >=3",
+  { include-group = "test" },
 ]
 docs = [
   "sphinx>=7.0",
@@ -114,12 +120,6 @@ docs = [
   "sphinx_autodoc_typehints",
   "furo>=2023.08.17",
 ]
-
-[project.urls]
-Homepage = "{{ cookiecutter.url }}"
-"Bug Tracker" = "{{ cookiecutter.url }}/issues"
-Discussions = "{{ cookiecutter.url }}/discussions"
-Changelog = "{{ cookiecutter.url }}/releases"
 
 
 {%- if cookiecutter.backend == "skbuild" %}
@@ -155,7 +155,8 @@ build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.p
 {%- endif %}
 
 [tool.hatch.envs.default]
-features = ["test"]
+# duplicate for now since hatch doesn't support groups yet
+dependencies = []
 scripts.test = "pytest {args}"
 
 
@@ -206,12 +207,6 @@ pytest-cov = ">= 3"
 write_to = "src/{{ cookiecutter.__project_slug }}/_version.py"
 
 {%- endif %}
-
-
-[tool.uv]
-dev-dependencies = [
-  "{{ cookiecutter.__project_slug }}[test]",
-]
 
 
 {%- if cookiecutter.__type == "compiled" %}

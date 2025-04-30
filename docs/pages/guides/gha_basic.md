@@ -114,11 +114,11 @@ tests:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
 
-    - name: Install package
-      run: python -m pip install -e .[test]
+    - name: Download uv
+      uses: astral/setup-uv@v6
 
     - name: Test package
-      run: python -m pytest
+      run: uv run pytest
 ```
 
 {% endraw %}

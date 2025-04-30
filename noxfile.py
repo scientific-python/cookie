@@ -225,7 +225,7 @@ def tests(session: nox.Session, backend: str, vcs: bool) -> None:
     session.chdir(cookie)
 
     name = f"cookie-{backend}"
-    session.install(".[test]")
+    session.install(".", "--group=test")
     session.run("python", "-m", "pytest", "-ra")
     version = session.run(
         "python",

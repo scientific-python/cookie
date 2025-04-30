@@ -56,13 +56,16 @@ Linux and Windows):
 
 ```toml
 [tool.cibuildwheel]
-test-extras = "test"
+test-groups = ["test"]
 test-command = "pytest {project}/tests"
+build-frontend = "build[uv]"
 # Optional
 build-verbosity = 1
 ```
 
-The `test-extras` will cause the pip install to use `[test]`. The `test-command`
+The build frontend is set to `build[uv]`, which is faster than the default build
+backend; you just need uv installed, but that's easy to do.
+The `test-extras` will cause the pip install to use the dependency-group(s) specified.. The `test-command`
 will use pytest to run your tests. You can also set the build verbosity (`-v` in
 pip) if you want to.
 
@@ -114,6 +117,8 @@ build_wheels:
         fetch-depth: 0
         submodules: true
 
+    - uses: astral-sh/setup-uv@v6
+
     - uses: pypa/cibuildwheel@v2.23
 
     - name: Upload wheels
@@ -150,8 +155,8 @@ you want a different supported image, set `CIBW_MANYLINUX_X86_64_IMAGE`,
 `CIBW_MANYLINUX_I686_IMAGE`, etc. If you always need a specific image, you can
 set that in the `pyproject.toml` file instead.
 
-You can speed up the build by specifying the `build[uv]` build-frontend option
-and pre-installing `uv` on the runners.
+You can skip specifying the `build[uv]` build-frontend option and pre-installing
+`uv` on the runners, but it will be a slower.
 
 ## Publishing
 
@@ -237,7 +242,9 @@ the sdist, for example).
 
 > Other architectures
 >
-> On Travis, `cibuildwheel` even has the ability to create ARM and PowerPC
+> GitHub Actions supports ARM on Linux and Windows as well.
+> On Travis, `cibuildwheel` even has the ability to create rarer architectures
+> like PowerPC
 > builds natively. IBM Z builds are also available but in beta. However, due to
 > Travis CI's recent dramatic reduction on open source support, emulating these
 > architectures on GHA or Azure is probably better. Maybe look into Cirrus CI,
