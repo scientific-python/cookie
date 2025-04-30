@@ -250,9 +250,10 @@ Python.
 
 ## Extras
 
-* `cli`: Dependencies to run the CLI (not needed for programmatic access, like on Web Assembly)
-* `pyproject`: Include validate pyproject with schema store.
-* `all`: All extras
+- `cli`: Dependencies to run the CLI (not needed for programmatic access, like
+  on Web Assembly)
+- `pyproject`: Include validate pyproject with schema store.
+- `all`: All extras
 
 ## Other ways to use
 
