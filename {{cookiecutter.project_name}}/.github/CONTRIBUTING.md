@@ -6,8 +6,8 @@ description of best practices for developing scientific packages.
 # Quick development
 
 The fastest way to start with development is to use nox. If you don't have nox,
-you can use `uvx nox` to run it without installing, or `uv tool install nox`.
-If you don't have uv, you can
+you can use `uvx nox` to run it without installing, or `uv tool install nox`. If
+you don't have uv, you can
 [install it a variety of ways](https://docs.astral.sh/uv/getting-started/installation/),
 including with pip, pipx, brew, and just downloading the binary (single file).
 

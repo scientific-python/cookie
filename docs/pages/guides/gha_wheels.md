@@ -64,10 +64,10 @@ build-verbosity = 1
 ```
 
 The build frontend is set to `build[uv]`, which is faster than the default build
-backend; you just need uv installed, but that's easy to do.
-The `test-extras` will cause the pip install to use the dependency-group(s) specified.. The `test-command`
-will use pytest to run your tests. You can also set the build verbosity (`-v` in
-pip) if you want to.
+backend; you just need uv installed, but that's easy to do. The `test-extras`
+will cause the pip install to use the dependency-group(s) specified.. The
+`test-command` will use pytest to run your tests. You can also set the build
+verbosity (`-v` in pip) if you want to.
 
 ## Making an SDist
 
@@ -242,9 +242,8 @@ the sdist, for example).
 
 > Other architectures
 >
-> GitHub Actions supports ARM on Linux and Windows as well.
-> On Travis, `cibuildwheel` even has the ability to create rarer architectures
-> like PowerPC
+> GitHub Actions supports ARM on Linux and Windows as well. On Travis,
+> `cibuildwheel` even has the ability to create rarer architectures like PowerPC
 > builds natively. IBM Z builds are also available but in beta. However, due to
 > Travis CI's recent dramatic reduction on open source support, emulating these
 > architectures on GHA or Azure is probably better. Maybe look into Cirrus CI,

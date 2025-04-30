@@ -98,7 +98,6 @@ function, followed by a colon, then the function to call. If you use
 `__main__.py` as the file, then `python -m` followed by the module will also
 work to call the app (`__name__` will be `"__main__"` in that case).
 
-
 ### Development dependencies
 
 It is recommended to use dependency-groups instead of making requirement files.
@@ -120,8 +119,10 @@ dev = [
 ```
 
 You can include one dependency group in another. Most tools allow you to install
-groups using `--group`, like `pip` (25.1+), `uv pip`, and the high level `uv` interface. You do not need to install the package, though usually you do (the high
-level `uv` interface does). Nox, Tox, and cibuildwheel all support groups too.
+groups using `--group`, like `pip` (25.1+), `uv pip`, and the high level `uv`
+interface. You do not need to install the package, though usually you do (the
+high level `uv` interface does). Nox, Tox, and cibuildwheel all support groups
+too.
 
 [metadata]: https://packaging.python.org/en/latest/specifications/core-metadata/
 [trove classifiers]: https://pypi.org/classifiers/
