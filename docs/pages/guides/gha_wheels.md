@@ -65,7 +65,7 @@ build-verbosity = 1
 
 The build frontend is set to `build[uv]`, which is faster than the default build
 backend; you just need uv installed, but that's easy to do. The `test-extras`
-will cause the pip install to use the dependency-group(s) specified.. The
+will cause the pip install to use the dependency-group(s) specified. The
 `test-command` will use pytest to run your tests. You can also set the build
 verbosity (`-v` in pip) if you want to.
 
