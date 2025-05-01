@@ -280,8 +280,8 @@ build:
     - asdf install uv latest
     - asdf global uv latest
     - uv sync --group docs
-    - uv run python -m sphinx -T -b html -d docs/_build/doctrees -D
-      language=en docs $READTHEDOCS_OUTPUT/html
+    - uv run python -m sphinx -T -b html -d docs/_build/doctrees -D language=en
+      docs $READTHEDOCS_OUTPUT/html
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
