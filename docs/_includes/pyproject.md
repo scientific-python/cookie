@@ -81,7 +81,7 @@ mpl = [
 ```
 
 Self dependencies can be used by using the name of the package, such as
-`all = ["package[cli,mpl]"]`, but this requires Pip 21.2 or newer.
+`all = ["package[cli,mpl]"]`, (requires Pip 21.2+).
 
 ### Command line
 
@@ -122,7 +122,7 @@ You can include one dependency group in another. Most tools allow you to install
 groups using `--group`, like `pip` (25.1+), `uv pip`, and the high level `uv`
 interface. You do not need to install the package, though usually you do (the
 high level `uv` interface does). Nox, Tox, and cibuildwheel all support groups
-too.
+too. The `dependency-groups` package provides tools to get the dependencies, too.
 
 [metadata]: https://packaging.python.org/en/latest/specifications/core-metadata/
 [trove classifiers]: https://pypi.org/classifiers/
