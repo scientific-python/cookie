@@ -63,18 +63,17 @@ Poetry and Setuptools).
 
 ### Extras
 
-It is recommended to use extras instead of or in addition to making requirement
-files. These extras a) correctly interact with install requires and other
-built-in tools, b) are available directly when installing via PyPI, and c) are
-allowed in `requirements.txt`, `install_requires`, `pyproject.toml`, and most
-other places requirements are passed.
+Sometimes you want to ship a package with optional dependencies. For example,
+you might have extra requirements that are only needed for running a CLI, or for
+plotting. Users must opt-in to get these dependencies by adding them to the
+package or wheel name when installing, like `package[cli,mpl]`.
 
 Here is an example of a simple extras:
 
 ```toml
 [project.optional-dependencies]
-test = [
-  "pytest >=6.0",
+cli = [
+  "click",
 ]
 mpl = [
   "matplotlib >=2.0",
@@ -82,8 +81,7 @@ mpl = [
 ```
 
 Self dependencies can be used by using the name of the package, such as
-`dev = ["package[test,examples]"]`, but this requires Pip 21.2 or newer. We
-recommend providing at least `test` and `docs`.
+`all = ["package[cli,mpl]"]`, (requires Pip 21.2+).
 
 ### Command line
 
@@ -99,6 +97,33 @@ The format is command line app name as the key, and the value is the path to the
 function, followed by a colon, then the function to call. If you use
 `__main__.py` as the file, then `python -m` followed by the module will also
 work to call the app (`__name__` will be `"__main__"` in that case).
+
+### Development dependencies
+
+It is recommended to use dependency-groups instead of making requirement files.
+This allows you to specify dependencies that are only needed for development;
+unlike extras, they are not available when installing via PyPI, but they are
+available for local installation, and the `dev` group is even installed by
+default when using `uv`.
+
+Here is an example:
+
+```toml
+[dependency-groups]
+test = [
+  "pytest >=6.0",
+]
+dev = [
+  { include-group = "test" },
+]
+```
+
+You can include one dependency group in another. Most tools allow you to install
+groups using `--group`, like `pip` (25.1+), `uv pip`, and the high level `uv`
+interface. You do not need to install the package, though usually you do (the
+high level `uv` interface does). Nox, Tox, and cibuildwheel all support groups
+too. The `dependency-groups` package provides tools to get the dependencies,
+too.
 
 [metadata]: https://packaging.python.org/en/latest/specifications/core-metadata/
 [trove classifiers]: https://pypi.org/classifiers/

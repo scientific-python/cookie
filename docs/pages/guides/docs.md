@@ -272,17 +272,16 @@ with code_fence("yaml"):
 version: 2
 
 build:
-  os: ubuntu-22.04
+  os: ubuntu-24.04
   tools:
-    python: "3.12"
+    python: "3.13"
   commands:
     - asdf plugin add uv
     - asdf install uv latest
     - asdf global uv latest
-    - uv venv
-    - uv pip install .[docs]
-    - .venv/bin/python -m sphinx -T -b html -d docs/_build/doctrees -D
-      language=en docs $READTHEDOCS_OUTPUT/html
+    - uv sync --group docs
+    - uv run python -m sphinx -T -b html -d docs/_build/doctrees -D language=en
+      docs $READTHEDOCS_OUTPUT/html
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
@@ -335,12 +334,13 @@ with code_fence("python"):
 ]]] -->
 <!-- prettier-ignore-start -->
 ```python
-@nox.session(reuse_venv=True)
+@nox.session(reuse_venv=True, default=False)
 def docs(session: nox.Session) -> None:
     """
     Build the docs. Pass --non-interactive to avoid serving. First positional argument is the target directory.
     """
 
+    doc_deps = nox.project.dependency_groups(PROJECT, "docs")
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-b", dest="builder", default="html", help="Build target (default: html)"
@@ -349,7 +349,7 @@ def docs(session: nox.Session) -> None:
     args, posargs = parser.parse_known_args(session.posargs)
     serve = args.builder == "html" and session.interactive
 
-    session.install("-e.[docs]", "sphinx-autobuild")
+    session.install("-e.", *doc_deps, "sphinx-autobuild")
 
     shared_args = (
         "-n",  # nitpicky mode
@@ -396,7 +396,7 @@ with code_fence("python"):
 ]]] -->
 <!-- prettier-ignore-start -->
 ```python
-@nox.session
+@nox.session(default=False)
 def build_api_docs(session: nox.Session) -> None:
     """
     Build (regenerate) API docs.

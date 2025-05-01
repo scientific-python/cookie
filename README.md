@@ -27,6 +27,7 @@ templates for Python packages?
   guidelines, with a WebAssembly version integrated with the guide. All checks
   cross-linked.
 - Follows [PyPA][] best practices and regularly updated.
+- Uses uv for high performance CI and task running.
 
 Be sure you have read the [Scientific-Python Development Guide][] first, and
 possibly used them on a project or two. This is _not_ a minimal example or
@@ -126,6 +127,7 @@ backports structure with a small typing example.
 
 - GitHub Actions runs testing for the generation itself
   - Uses nox so cookie development can be checked locally
+  - Uses uv for high performance CI
 - GitHub actions deploy
   - C++ backends include cibuildwheel for wheel builds
   - Uses PyPI trusted publisher deployment
@@ -138,8 +140,9 @@ backports structure with a small typing example.
   - Includes spell checking
 - An pylint nox target can be used to run pylint, which integrated GHA
   annotations
-- A ReadTheDocs-ready Sphinx docs folder and `[docs]` extra
-- A test folder and pytest `[test]` extra
+- A ReadTheDocs-ready Sphinx docs folder and `docs` dependency-group
+- A test folder and pytest `test` dependency-group
+- A dev group for `uv run` integration
 - A noxfile is included with a few common targets
 
 #### For developers:
