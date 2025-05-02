@@ -17,11 +17,11 @@ outlined as well.
 
 There are several popular packaging systems. This guide covers the old
 configuration style for [Setuptools][]. Unless you really need it, you should be
-using the modern style described in
-[Simple Packaging]({% link pages/guides/packaging_simple.md %}). The modern
-style is guided by Python Enhancement Proposals (PEPs), and is more stable than
-the setuptools-specific mechanisms that evolve over the years. This page is
-kept to help users with legacy code (and hopefully upgrade it).
+using the modern style described in [Simple
+Packaging]({% link pages/guides/packaging_simple.md %}). The modern style is
+guided by Python Enhancement Proposals (PEPs), and is more stable than the
+setuptools-specific mechanisms that evolve over the years. This page is kept to
+help users with legacy code (and hopefully upgrade it).
 
 {: .note }
 
