@@ -7,6 +7,8 @@ The metadata is specified in a [standards-based][metadata] format:
 name = "package"
 description = "A great package."
 readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
 authors = [
   { name = "My Name", email = "me@email.com" },
 ]
@@ -21,7 +23,6 @@ dependencies = [
 
 classifiers = [
   "Development Status :: 4 - Beta",
-  "License :: OSI Approved :: BSD License",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
@@ -47,19 +48,28 @@ or [Whey](https://whey.readthedocs.io/en/latest/configuration.html). Note that
 
 ### License
 
-The license can be done one of two ways. The classic convention (shown above)
-uses one or more [Trove Classifiers][] to specify the license. The other way is
-to use the `license` field and an [SPDX identifier expression][spdx]:
+The license can be done one of two ways.
 
-```toml
-license = "BSD-3-Clause"
+The modern way is to use the `license` field and an [SPDX identifier
+expression][spdx]. You can specify a list of files globs in `license-files`.
+Currently, `hatchling>=1.26`, `flit-core>=1.11`, `pdm-backend>=2.4`,
+`setuptools>=77`, and `scikit-build-core>=0.12` support this. Only `maturin`,
+`meson-python`, and `flit-core` do not support this yet.
+
+The classic convention uses one or more [Trove Classifiers][] to specify the
+license. There also was a `license.file` field, required by `meson-python`, but
+other tools often did the wrong thing (such as load the entire file into the
+metadata's free-form one line text field that was intended to describe
+deviations from the classifier license(s)).
+
+```
+classifiers = [
+  "License :: OSI Approved :: BSD License",
+]
 ```
 
-You can also specify files to include with the `license-files` field.
-
 You should not include the `License ::` classifiers if you use the `license`
-field {% rr PP007 %}. Some backends do not support this fully yet (notably
-Poetry and Setuptools).
+field {% rr PP007 %}.
 
 ### Extras
 

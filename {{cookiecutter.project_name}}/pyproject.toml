@@ -1,41 +1,41 @@
 [build-system]
 {%- if cookiecutter.backend == "pdm" %}
-requires = ["pdm-backend"]
+requires = ["pdm-backend>=2.4"]
 build-backend = "pdm.backend"
 {%- elif cookiecutter.backend == "maturin" %}
 requires = ["maturin>=0.15,<2"]
 build-backend = "maturin"
 {%- elif cookiecutter.backend == "hatch" %}
 {%- if cookiecutter.vcs %}
-requires = ["hatchling", "hatch-vcs"]
+requires = ["hatchling>=1.26", "hatch-vcs"]
 {%- else %}
-requires = ["hatchling"]
+requires = ["hatchling>=1.26"]
 {%- endif %}
 build-backend = "hatchling.build"
 {%- elif cookiecutter.backend == "setuptools" %}
 {%- if cookiecutter.vcs %}
-requires = ["setuptools>=61", "setuptools_scm[toml]>=7"]
+requires = ["setuptools>=77", "setuptools_scm[toml]>=7"]
 {%- else %}
-requires = ["setuptools>=61"]
+requires = ["setuptools>=77"]
 {%- endif %}
 build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.backend == "flit" %}
 {%- if cookiecutter.vcs %}
-requires = ["flit_scm"]
+requires = ["flit_scm", "flit_core>=3.11"]
 build-backend = "flit_scm:buildapi"
 {%- else %}
-requires = ["flit_core>=3.4"]
+requires = ["flit_core>=3.11"]
 build-backend = "flit_core.buildapi"
 {%- endif %}
 {%- elif cookiecutter.backend == "pybind11" %}
 {%- if cookiecutter.vcs %}
-requires = ["setuptools>=61", "setuptools_scm[toml]>=7", "pybind11"]
+requires = ["setuptools>=77", "setuptools_scm[toml]>=7", "pybind11"]
 {%- else %}
-requires = ["setuptools>=61", "pybind11"]
+requires = ["setuptools>=77", "pybind11"]
 {%- endif %}
 build-backend = "setuptools.build_meta"
 {%- elif cookiecutter.backend == "skbuild"  %}
-requires = ["pybind11", "scikit-build-core>=0.10"]
+requires = ["pybind11", "scikit-build-core>=0.11"]
 build-backend = "scikit_build_core.build"
 {%- elif cookiecutter.backend == "mesonpy" %}
 requires = ["meson-python", "pybind11"]
@@ -66,7 +66,16 @@ maintainers = [
 {%- endif %}
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
-{%- if cookiecutter.backend in ['flit', 'mesonpy'] %}
+{%- if cookiecutter.backend not in ['poetry', 'mesonpy', 'maturin'] %}
+{%- if cookiecutter.license == "BSD" %}
+license = "BSD-3-Clause"
+{%- elif cookiecutter.license == "Apache" %}
+license = "Apache-2.0"
+{%- elif cookiecutter.license == "MIT" %}
+license = "MIT"
+{%- endif %}
+{%- endif %}
+{%- if cookiecutter.backend in ['mesonpy'] %}
 license.file = "LICENSE"
 {%- endif %}
 requires-python = ">=3.9"
@@ -74,12 +83,14 @@ classifiers = [
   "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
+{%- if cookiecutter.backend in ['poetry', 'mesonpy', 'maturin'] %}
 {%- if cookiecutter.license == "BSD" %}
   "License :: OSI Approved :: BSD License",
 {%- elif cookiecutter.license == "Apache" %}
   "License :: OSI Approved :: Apache Software License",
 {%- elif cookiecutter.license == "MIT" %}
   "License :: OSI Approved :: MIT License",
+{%- endif %}
 {%- endif %}
   "Operating System :: OS Independent",
   "Programming Language :: Python",
