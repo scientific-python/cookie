@@ -115,7 +115,7 @@ tests:
         allow-prereleases: true
 
     - name: Download uv
-      uses: astral/setup-uv@v6
+      uses: astral-sh/setup-uv@v6
 
     - name: Test package
       run: uv run pytest
@@ -277,7 +277,7 @@ And many other useful ones:
   Make a new PR with the current changes (more options than just using `gh`).
   You can even auto-merge PRs with `run: gh pr merge --merge --auto "1"`
   afterwards.
-- [astral-sh/setup-uv](https://github.com/astral/setup-uv): Set up `uv`.
+- [astral-sh/setup-uv](https://github.com/astral-sh/setup-uv): Set up `uv`.
   Ultra-fast alternative to classic Python packaging solutions.
 - [gautamkrishnar/keepalive-workflow](https://github.com/gautamkrishnar/keepalive-workflow):
   Keep GitHub actions alive for more than 60 days. Not usually needed if you've

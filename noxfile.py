@@ -16,6 +16,7 @@ import shutil
 import stat
 import sys
 import tarfile
+import urllib.error
 import urllib.request
 import zipfile
 from collections.abc import Callable
@@ -431,7 +432,12 @@ def get_latest_version_tag(repo: str, old_version: str) -> dict[str, Any] | None
     request.add_header("X-GitHub-Api-Version", "2022-11-28")
     if auth:
         request.add_header("Authorization", f"Bearer: {auth}")
-    response = urllib.request.urlopen(request)
+    try:
+        response = urllib.request.urlopen(request)
+    except urllib.error.HTTPError as err:
+        err.add_note(f"URL: {request.full_url}")
+        raise
+
     results = json.loads(response.read())
     if not results:
         msg = f"No results for {repo}"
