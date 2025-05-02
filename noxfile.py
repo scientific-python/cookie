@@ -282,6 +282,15 @@ def dist(session: nox.Session, backend: str, vcs: bool) -> None:
     # Check for LICENSE in SDist
     with tarfile.open(sdist) as tf:
         names = tf.getnames()
+        if backend not in {"mesonpy", "poetry", "maturin"}:
+            (metadata_path,) = (
+                n for n in names if n.endswith("PKG-INFO") and "egg-info" not in n
+            )
+            with tf.extractfile(metadata_path) as mfile:
+                info = mfile.read().decode("utf-8")
+                if "License-Expression: BSD-3-Clause" not in info:
+                    msg = "License expression not found in METADATA"
+                    session.error(msg)
     if not any(n.endswith("LICENSE") for n in names):
         msg = f"license file missing from {backend} vcs={vcs}'s sdist. Found: {names}"
         session.error(msg)

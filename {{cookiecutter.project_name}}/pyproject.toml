@@ -66,7 +66,16 @@ maintainers = [
 {%- endif %}
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
-{%- if cookiecutter.backend in ['flit', 'mesonpy'] %}
+{%- if cookiecutter.backend not in ['poetry', 'mesonpy', 'maturin'] %}
+{%- if cookiecutter.license == "BSD" %}
+license = "BSD-3-Clause"
+{%- elif cookiecutter.license == "Apache" %}
+license = "Apache-2.0"
+{%- elif cookiecutter.license == "MIT" %}
+license = "MIT"
+{%- endif %}
+{%- endif %}
+{%- if cookiecutter.backend in ['mesonpy'] %}
 license.file = "LICENSE"
 {%- endif %}
 requires-python = ">=3.9"
@@ -74,12 +83,14 @@ classifiers = [
   "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
+{%- if cookiecutter.backend in ['poetry', 'mesonpy', 'maturin'] %}
 {%- if cookiecutter.license == "BSD" %}
   "License :: OSI Approved :: BSD License",
 {%- elif cookiecutter.license == "Apache" %}
   "License :: OSI Approved :: Apache Software License",
 {%- elif cookiecutter.license == "MIT" %}
   "License :: OSI Approved :: MIT License",
+{%- endif %}
 {%- endif %}
   "Operating System :: OS Independent",
   "Programming Language :: Python",
