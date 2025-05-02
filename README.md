@@ -26,7 +26,9 @@ templates for Python packages?
 - Provides [`sp-repo-review`][pypi-link] to evaluate existing repos against the
   guidelines, with a WebAssembly version integrated with the guide. All checks
   cross-linked.
-- Follows [PyPA][] best practices and regularly updated.
+- Follows [PyPA][] best practices and regularly updated. Recent additions:
+    - [PEP 639](https://peps.python.org/pep-0639): SPDX licenses
+    - [PEP 735](https://peps.python.org/pep-0735): Dependency groups
 - Uses uv for high performance CI and task running.
 
 Be sure you have read the [Scientific-Python Development Guide][] first, and
