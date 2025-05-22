@@ -672,8 +672,8 @@ than a list of "valid" words. To use:
 
 You can list allowed spellings in a comma separated string passed to `-L` (or
 `--ignore-words-list` - usually it is better to use long options when you are
-not typing things live). The example below will allow "Big Sur" and "ND".
-Here's an example of `pyproject.toml` configuration:
+not typing things live). The example below will allow "Big Sur" and "ND". Here's
+an example of `pyproject.toml` configuration:
 
 ```ini
 [tool.codespell]
