@@ -70,7 +70,9 @@ repos:
     hooks:
       - id: codespell
         exclude: ^Gemfile\.lock$
-        args: ["-Lnd", "-w"]
+        additional_dependencies:
+          - tomli; python_version<'3.11'
+        args: ["-w"]
 
   - repo: local
     hooks:
