@@ -666,21 +666,23 @@ than a list of "valid" words. To use:
   rev: "v2.4.1"
   hooks:
     - id: codespell
-      args: ["-L", "sur,nd"]
+      additional_dependencies:
+        - tomli; python_version<'3.11'
 ```
 
 You can list allowed spellings in a comma separated string passed to `-L` (or
 `--ignore-words-list` - usually it is better to use long options when you are
-not typing things live). The example above will allow "Big Sur" and "ND". You
-can instead use a comma separated list in `setup.cfg` or `.codespellrc`:
+not typing things live). The example below will allow "Big Sur" and "ND".
+Here's an example of `pyproject.toml` configuration:
 
 ```ini
-[codespell]
-ignore-words-list = sur,nd
+[tool.codespell]
+ignore-words-list = ["sur", "nd"]
 ```
 
-If you add the `toml` extra (or use Python 3.11+), you can instead put a
-`tool.codespell` section in your `pyproject.toml`.
+You can also add the `-w` flag to have it automatically correct errors - this is
+very helpful to quickly make corrections if you have a lot of them when first
+adding the check. `uvx codespell -w` will quickly correct all non-hidden files.
 
 You can also use a local pygrep check to eliminate common capitalization errors,
 such as the one below:
@@ -694,10 +696,6 @@ such as the one below:
       entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
       exclude: .pre-commit-config.yaml
 ```
-
-You can also add the `-w` flag to have it automatically correct errors - this is
-very helpful to quickly make corrections if you have a lot of them when first
-adding the check.
 
 ## PyGrep hooks
 
