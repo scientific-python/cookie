@@ -188,3 +188,8 @@ ignore = [
 
 [tool.repo-review.ignore]
 RTD103 = "Using Ruby instead of Python for docs"
+
+[tool.codespell]
+ignore-words-list = [
+  "nd",
+]
