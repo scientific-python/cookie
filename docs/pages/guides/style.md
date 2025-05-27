@@ -113,7 +113,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: "v0.11.12"
   hooks:
-    #  id: ruff would go here if using both
+    #  id: ruff-check would go here if using both
     - id: ruff-format
 ```
 
@@ -203,12 +203,14 @@ pre-commit hook.
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: "v0.11.12"
   hooks:
-    - id: ruff
+    - id: ruff-check
       args: ["--fix", "--show-fixes"]
 ```
 
-{% rr PC191 %} The `--fix` argument is optional, but recommended, since you can
-inspect and undo changes in git.
+{% rr PC192 %} The hook is named `ruff-check`. {% rr PC191 %} The `--fix`
+argument is optional, but recommended, since you can inspect and undo changes in
+git. `--show-fixes` is highly recommended if `--fix` is present, otherwise it
+won't tell you what or why it fixed things.
 
 {% rr RF001 %} Ruff is configured in your `pyproject.toml`. Here's an example:
 
@@ -240,7 +242,6 @@ extend-select = [
   "YTT",      # flake8-2020
 ]
 ignore = [
-  "ISC001",   # Conflicts with formatter
   "PLR09",    # Too many <...>
   "PLR2004",  # Magic value used in comparison
 ]

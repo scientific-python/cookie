@@ -1,5 +1,11 @@
+import pytest
 import yaml
 from repo_review.testing import compute_check
+
+
+@pytest.fixture(params=["ruff", "ruff-check"])
+def ruff_check(request: pytest.FixtureRequest) -> str:
+    return request.param  # type: ignore[no-any-return]
 
 
 def test_pc100():
@@ -132,18 +138,31 @@ def test_pc180_alt_1():
     assert compute_check("PC180", precommit=precommit).result
 
 
-def test_pc191():
-    precommit = yaml.safe_load("""
+def test_pc191(ruff_check: str):
+    precommit = yaml.safe_load(f"""
         repos:
           - repo: https://github.com/astral-sh/ruff-pre-commit
             hooks:
-              - id: ruff
+              - id: {ruff_check}
                 args: ["--fix", "--show-fixes"]
     """)
     assert compute_check("PC191", precommit=precommit).result
 
 
-def test_pc191_no_show_fixes():
+def test_pc191_no_show_fixes(ruff_check: str):
+    precommit = yaml.safe_load(f"""
+        repos:
+          - repo: https://github.com/astral-sh/ruff-pre-commit
+            hooks:
+              - id: {ruff_check}
+                args: ["--fix"]
+    """)
+    res = compute_check("PC191", precommit=precommit)
+    assert not res.result
+    assert "--show-fixes" in res.err_msg
+
+
+def test_pc192():
     precommit = yaml.safe_load("""
         repos:
           - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -151,9 +170,20 @@ def test_pc191_no_show_fixes():
               - id: ruff
                 args: ["--fix"]
     """)
-    res = compute_check("PC191", precommit=precommit)
+    res = compute_check("PC192", precommit=precommit)
     assert not res.result
-    assert "--show-fixes" in res.err_msg
+    assert "ruff-check" in res.err_msg
+
+
+def test_pc192_not_needed():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/astral-sh/ruff-pre-commit
+            hooks:
+              - id: ruff-format
+    """)
+    res = compute_check("PC192", precommit=precommit)
+    assert res.result is None
 
 
 def test_pc901():
