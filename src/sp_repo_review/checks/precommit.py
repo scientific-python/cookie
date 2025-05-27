@@ -153,13 +153,41 @@ class PC191(PreCommit):
             if "repo" in repo and repo["repo"].lower() in cls.repos:
                 for hook in repo["hooks"]:
                     if (
-                        hook["id"] == "ruff"
+                        hook["id"] in {"ruff", "ruff-check"}
                         and "args" in hook
                         and "--fix" in hook["args"]
                     ):
                         return "--show-fixes" in hook["args"]
                 return None
         return False
+
+
+class PC192(PreCommit):
+    "Ruff uses `ruff-check` instead of `ruff` (legacy)"
+
+    requires = {"PC190"}
+    repos = {"https://github.com/astral-sh/ruff-pre-commit"}
+
+    @classmethod
+    def check(cls, precommit: dict[str, Any]) -> bool | None:
+        """
+        Use `ruff-check` instead of `ruff` (legacy).
+        """
+        for repo in precommit.get("repos", {}):
+            if (
+                "repo" in repo
+                and repo["repo"].lower() in cls.repos
+                and any(hook["id"] == "ruff" for hook in repo["hooks"])
+            ):
+                return False
+        for repo in precommit.get("repos", {}):
+            if (
+                "repo" in repo
+                and repo["repo"].lower() in cls.repos
+                and any(hook["id"] == "ruff-check" for hook in repo["hooks"])
+            ):
+                return True
+        return None
 
 
 class PC901(PreCommit):
