@@ -110,9 +110,14 @@ work to call the app (`__name__` will be `"__main__"` in that case).
 
 ### Development dependencies
 
-The proper way to specify dependencies exclusively used for devlopment tasks (such as `pytest`, `ruff`, packages for generating documentation, etc.) is to use dependency-groups.
-Dependency-groups are recommended over requirement files because they are formally standardized (i.e. they will be more portable going forward) and they are more composable.
-In contrast with extras, dependency-groups are not available when installing your package via PyPI, but they are available for local installation (and can be installed separately from your package); the `dev` group is even installed, by default, when using `uv`.
+The proper way to specify dependencies exclusively used for development tasks
+(such as `pytest`, `ruff`, packages for generating documentation, etc.) is to
+use dependency-groups. Dependency-groups are recommended over requirement files
+because they are formally standardized (i.e. they will be more portable going
+forward) and they are more composable. In contrast with extras,
+dependency-groups are not available when installing your package via PyPI, but
+they are available for local installation (and can be installed separately from
+your package); the `dev` group is even installed, by default, when using `uv`.
 Here is an example:
 
 ```toml
@@ -129,9 +134,9 @@ You can include one dependency group in another. Most tools allow you to install
 groups using `--group`, like `pip` (25.1+), `uv pip`, and the high level `uv`
 interface. It's possible to install a package's dependency group without
 installing the package itself, but usually you'll want to instruct your tool to
-install both (the high level `uv` interface does this automatically).
-Nox, Tox, and cibuildwheel all support groups, too. The `dependency-groups`
-package also provides tools to get the dependencies.
+install both (the high level `uv` interface does this automatically). Nox, Tox,
+and cibuildwheel all support groups, too. The `dependency-groups` package also
+provides tools to get the dependencies.
 
 [metadata]: https://packaging.python.org/en/latest/specifications/core-metadata/
 [trove classifiers]: https://pypi.org/classifiers/
