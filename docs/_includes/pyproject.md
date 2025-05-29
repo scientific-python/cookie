@@ -110,12 +110,14 @@ work to call the app (`__name__` will be `"__main__"` in that case).
 
 ### Development dependencies
 
-It is recommended to use dependency-groups instead of making requirement files.
-This allows you to specify dependencies that are only needed for development;
-unlike extras, they are not available when installing via PyPI, but they are
-available for local installation, and the `dev` group is even installed by
-default when using `uv`.
-
+The proper way to specify dependencies exclusively used for development tasks
+(such as `pytest`, `ruff`, packages for generating documentation, etc.) is to
+use dependency-groups. Dependency-groups are recommended over requirement files
+because they are formally standardized (i.e. they will be more portable going
+forward) and they are more composable. In contrast with extras,
+dependency-groups are not available when installing your package via PyPI, but
+they are available for local installation (and can be installed separately from
+your package); the `dev` group is even installed, by default, when using `uv`.
 Here is an example:
 
 ```toml
@@ -130,10 +132,11 @@ dev = [
 
 You can include one dependency group in another. Most tools allow you to install
 groups using `--group`, like `pip` (25.1+), `uv pip`, and the high level `uv`
-interface. You do not need to install the package, though usually you do (the
-high level `uv` interface does). Nox, Tox, and cibuildwheel all support groups
-too. The `dependency-groups` package provides tools to get the dependencies,
-too.
+interface. It's possible to install a package's dependency group without
+installing the package itself, but usually you'll want to instruct your tool to
+install both (the high level `uv` interface does this automatically). Nox, Tox,
+and cibuildwheel all support groups, too. The `dependency-groups` package also
+provides tools to get the dependencies.
 
 [metadata]: https://packaging.python.org/en/latest/specifications/core-metadata/
 [trove classifiers]: https://pypi.org/classifiers/
