@@ -364,6 +364,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PC180`](https://learn.scientific-python.org/development/guides/style#PC180): Uses a markdown formatter
 - [`PC190`](https://learn.scientific-python.org/development/guides/style#PC190): Uses Ruff
 - [`PC191`](https://learn.scientific-python.org/development/guides/style#PC191): Ruff show fixes if fixes enabled
+- [`PC192`](https://learn.scientific-python.org/development/guides/style#PC192): Ruff uses `ruff-check` instead of `ruff` (legacy)
 - [`PC901`](https://learn.scientific-python.org/development/guides/style#PC901): Custom pre-commit CI message
 
 ### Ruff
