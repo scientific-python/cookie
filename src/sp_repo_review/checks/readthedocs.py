@@ -96,6 +96,8 @@ class RTD103(ReadTheDocs):
         match readthedocs:
             case {"build": {"tools": {"python": object()}}}:
                 return True
+            case {"build": {"commands": object()}}:
+                return True
             case _:
                 return False
 

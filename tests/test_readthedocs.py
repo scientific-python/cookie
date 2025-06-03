@@ -52,6 +52,15 @@ def test_rtd103_true() -> None:
     assert compute_check("RTD103", readthedocs=readthedocs).result
 
 
+def test_rtd103_commands() -> None:
+    readthedocs = yaml.safe_load("""
+        build:
+          commands:
+            - one
+    """)
+    assert compute_check("RTD103", readthedocs=readthedocs).result
+
+
 def test_rtd103_false() -> None:
     readthedocs = yaml.safe_load("""
         build:
