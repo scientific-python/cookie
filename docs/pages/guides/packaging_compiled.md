@@ -353,6 +353,11 @@ necessary to actually pin the oldest NumPy you supported (the
 
 If using pybind11, you don't need NumPy at build-time in the first place.
 
+{: .important }
+
+Python 3.13.4 is broken on Windows for compiling code - it always reports that
+it is free-threaded. 3.13.5 was rushed out to fix it.
+
 <!-- prettier-ignore-start -->
 
 [scikit-build-core]: https://scikit-build-core.readthedocs.io
