@@ -59,6 +59,13 @@ jobs:
         with:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
           allow-prereleases: true
+          {%- if cookiecutter.__type == "compiled" %}
+          {%- raw %}
+          # Python 3.13.4 broken on Windows
+          check-latest: >-
+            ${{ matrix.python-version == '3.13' && runner.os == 'Windows' }}
+          {%- endraw %}
+          {%- endif %}
 
       - uses: astral-sh/setup-uv@v6
 
