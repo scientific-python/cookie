@@ -109,7 +109,13 @@ build_wheels:
   strategy:
     fail-fast: false
     matrix:
-      os: [ubuntu-latest, windows-latest, macos-13, macos-14]
+      os:
+        - ubuntu-latest
+        - ubuntu-24.04-arm
+        - windows-latest
+        - windows-11-arm
+        - macos-13
+        - macos-latest
 
   steps:
     - uses: actions/checkout@v4
@@ -135,13 +141,13 @@ because you followed the suggestions in the previous sections, and your package
 builds nicely into a wheel without strange customizations (if you _really_ need
 them, check out [`CIBW_BEFORE_BUILD`][] and [`CIBW_ENVIRONMENT`][]).
 
-This lists all three OS's; if you do not support Windows, you can remove that
-here. If you would rather make universal2 wheels for macOS, you can remove
-either the Intel (`macos-13`) or Apple Silicon (`macos-14`) job and set
-`CIBW_ARCHS_MACOS` to `"universal2"`. You can also set `CIBW_TEST_SKIP` to
-`"*universal2:arm64"` if building from Intel to acknowledge you understand that
-you can't test Apple Silicon from Intel. You can do this from the
-`pyproject.toml` file instead if you want.
+This lists all three OS's including ARM variants; if you do not support Windows,
+you can remove that here. If you would rather make universal2 wheels for macOS,
+you can remove either the Intel (`macos-13`) or Apple Silicon (`macos-lateset`)
+job and set `CIBW_ARCHS_MACOS` to `"universal"`. You can also set
+`CIBW_TEST_SKIP` to `"*universal:arm64"` if building from Intel to acknowledge
+you understand that you can't test Apple Silicon from Intel. You can do this
+from the `pyproject.toml` file instead if you want.
 
 The build step is controlled almost exclusively through environment variables,
 which makes it easier (usually) to setup in CI. The main variable needed here is
