@@ -13,7 +13,8 @@ concurrency:
 
 env:
   # Many color libraries just need this variable to be set to any value.
-  # Set it to 3 to support 8-bit color graphics (256 colors per channel).
+  # Set it to 3 to support 8-bit color graphics (256 colors per channel)
+  # for libraries that care about the value set.
   FORCE_COLOR: 3
 
 jobs:
