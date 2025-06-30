@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.11.13"
+  rev: "v0.12.1"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.11.13"
+  rev: "v0.12.1"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -391,7 +391,7 @@ the flake8 addition for pre-commit, with the `bugbear` plugin:
 
 ```yaml
 - repo: https://github.com/pycqa/flake8
-  rev: "7.2.0"
+  rev: "7.3.0"
   hooks:
     - id: flake8
       additional_dependencies: [flake8-bugbear]
@@ -534,7 +534,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.16.0"
+  rev: "v1.16.1"
   hooks:
     - id: mypy
       files: src
@@ -744,7 +744,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v20.1.6"
+  rev: "v20.1.7"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -773,7 +773,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.5.3"
+  rev: "v3.6.2"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
@@ -821,7 +821,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.33.0"
+  rev: "0.33.1"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
