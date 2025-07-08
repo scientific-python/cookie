@@ -2,6 +2,9 @@
 {%- if cookiecutter.backend == "pdm" %}
 requires = ["pdm-backend>=2.4"]
 build-backend = "pdm.backend"
+{%- elif cookiecutter.backend == "uv" %}
+requires = ["uv_build~=0.7.19"]
+build-backend = "uv_build"
 {%- elif cookiecutter.backend == "maturin" %}
 requires = ["maturin>=0.15,<2"]
 build-backend = "maturin"
@@ -104,7 +107,7 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
-{%- if cookiecutter.backend not in ['maturin', 'mesonpy'] and cookiecutter.vcs or cookiecutter.backend in ['pdm', 'hatch', 'flit'] %}
+{%- if cookiecutter.backend not in ['maturin', 'mesonpy', 'uv'] and cookiecutter.vcs or cookiecutter.backend in ['pdm', 'hatch', 'flit'] %}
 dynamic = ["version"]
 {%- endif %}
 dependencies = []
