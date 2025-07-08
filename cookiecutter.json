@@ -8,6 +8,7 @@
   "license": ["BSD", "Apache", "MIT"],
   "backend": [
     "hatch",
+    "uv",
     "flit",
     "pdm",
     "poetry",
@@ -34,6 +35,7 @@
     "backend": {
       "__prompt__": "Choose a build backend",
       "hatch": "Hatchling                      - Pure Python (recommended)",
+      "uv": "uv_build                       - Pure Python (fast)",
       "flit": "Flit-core                      - Pure Python (minimal)",
       "pdm": "PDM-backend                    - Pure Python",
       "poetry": "Poetry                         - Pure Python",
@@ -41,7 +43,7 @@
       "pybind11": "Setuptools and pybind11        - Compiled C++",
       "skbuild": "Scikit-build-core              - Compiled C++ (recommended)",
       "mesonpy": "Meson-python                   - Compiled C++ (also good)",
-      "maturin": "Maturin                        - Compiled Rust (recommended)"
+      "maturin": "Maturin                       - Compiled Rust (recommended)"
     },
     "vcs": "Use version control for versioning"
   }

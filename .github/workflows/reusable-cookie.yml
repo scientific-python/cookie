@@ -60,6 +60,9 @@ jobs:
       - name: Test flit
         run: nox -s 'tests(flit, novcs)' -s 'tests(flit, vcs)'
 
+      - name: Test uv
+        run: nox -s 'tests(uv, novcs)'
+
       - name: Test pdm
         run: nox -s 'tests(pdm, novcs)' -s 'tests(pdm, vcs)'
 
