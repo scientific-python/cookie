@@ -71,6 +71,7 @@ backend:
   help: Choose a build backend
   choices:
     "Hatchling                      - Pure Python (recommended)": hatch
+    "uv_build                       - Pure Python (fast)": uv
     "Flit-core                      - Pure Python (minimal)": flit
     "PDM-backend                    - Pure Python": pdm
     "Poetry                         - Pure Python": poetry
