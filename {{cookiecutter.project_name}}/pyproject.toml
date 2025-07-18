@@ -3,7 +3,7 @@
 requires = ["pdm-backend>=2.4"]
 build-backend = "pdm.backend"
 {%- elif cookiecutter.backend == "maturin" %}
-requires = ["maturin>=0.15,<2"]
+requires = ["maturin>=1.9,<2"]
 build-backend = "maturin"
 {%- elif cookiecutter.backend == "hatch" %}
 {%- if cookiecutter.vcs %}
@@ -38,11 +38,11 @@ build-backend = "setuptools.build_meta"
 requires = ["pybind11", "scikit-build-core>=0.11"]
 build-backend = "scikit_build_core.build"
 {%- elif cookiecutter.backend == "mesonpy" %}
-requires = ["meson-python", "pybind11"]
+requires = ["meson-python>=0.18", "pybind11"]
 build-backend = "mesonpy"
 {%- elif cookiecutter.backend == "poetry" %}
 {%- if cookiecutter.vcs %}
-requires = ["poetry-core>=2.0.0", "poetry-dynamic-versioning"]
+requires = ["poetry-core>=2.0", "poetry-dynamic-versioning"]
 build-backend = "poetry_dynamic_versioning.backend"
 {%- else %}
 requires = ["poetry_core>=2.0.0"]
@@ -66,7 +66,7 @@ maintainers = [
 {%- endif %}
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
-{%- if cookiecutter.backend not in ['poetry', 'mesonpy', 'maturin'] %}
+{%- if cookiecutter.backend != 'poetry' %}
 {%- if cookiecutter.license == "BSD" %}
 license = "BSD-3-Clause"
 {%- elif cookiecutter.license == "Apache" %}
@@ -74,16 +74,14 @@ license = "Apache-2.0"
 {%- elif cookiecutter.license == "MIT" %}
 license = "MIT"
 {%- endif %}
-{%- endif %}
-{%- if cookiecutter.backend in ['mesonpy'] %}
-license.file = "LICENSE"
+license-files = ["LICENSE"]
 {%- endif %}
 requires-python = ">=3.9"
 classifiers = [
   "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
-{%- if cookiecutter.backend in ['poetry', 'mesonpy', 'maturin'] %}
+{%- if cookiecutter.backend == ['poetry'] %}
 {%- if cookiecutter.license == "BSD" %}
   "License :: OSI Approved :: BSD License",
 {%- elif cookiecutter.license == "Apache" %}
