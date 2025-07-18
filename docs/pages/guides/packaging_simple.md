@@ -54,11 +54,19 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 ```
 
+{% endtab %} {% tab uv uv_build %}
+
+```toml
+[build-system]
+requires = ["uv_build>=0.7.19"]
+build-backend = "uv_build"
+```
+
 {% endtab %} {% tab flit Flit-core %}
 
 ```toml
 [build-system]
-requires = ["flit_core>=3.3"]
+requires = ["flit_core>=3.12"]
 build-backend = "flit_core.buildapi"
 ```
 
