@@ -283,7 +283,7 @@ def dist(session: nox.Session, backend: str, vcs: bool) -> None:
     # Check for LICENSE in SDist
     with tarfile.open(sdist) as tf:
         names = tf.getnames()
-        if backend not in {"mesonpy", "poetry", "maturin"}:
+        if backend != "poetry":
             (metadata_path,) = (
                 n for n in names if n.endswith("PKG-INFO") and "egg-info" not in n
             )
