@@ -10,6 +10,13 @@ parent: Principles
 
 # Testing recommendations
 
+## Outside-In Tests
+* live outside of source code, in the tests/ directory
+* Describe the various types of outsid-in tests (integration, fuzz, e2e, API)
+* Reference topical guides
+* Provide suggestions for testing categories
+
+
 ## Unit Tests
 
 ### Advantages of unit testing:
@@ -221,24 +228,13 @@ troubleshoot problems.
 ### Guidelines for Diagnostic Tests
 
 - Consider using the stdlib `unittest.TestCase` and other stdlib tools instead
-  of pytest.
-  - Allows running unit tests for diagnostics in production environments,
-    without installing additional packages.
+  of pytest. To allow running unit tests for diagnostics in production environments,
+  without installing additional packages.
 
 - Test files should be named `test_{{file under test}}.py`, so that stdlib
   unittest can find them easily.
 
-### Running Diagnostic Tests:
-
-stdlib's unittest can be used in environments where pytest is not available:
-
-- To use unittest to run tests from an installed package (outside of your source
-  repository), use `python -m unittest discover -s {{module.name}}`
-- To use unittest to run tests in your source folder, from your package root,
-  use
-  `python -m unittest discover --start-folder {{source folder}} --top-level-directory .`
-
-#### Mocking and Patching to Isolate the code under test:
+### Mocking and Patching to Isolate the code under test:
 
 Test Isolation is less necessary in diagnostic tests than unit tests. We often
 want diagnostic tests to execute compiled code, or run a test on GPU hardware.
@@ -257,3 +253,14 @@ def test_myfunction(t, patchme: Mock):
     patchme.assert_called_with("input from myfunction")
     t.assertIs(ret, patchme.return_value)
 ```
+
+### Running Diagnostic Tests:
+
+stdlib's unittest can be used in environments where pytest is not available:
+
+- To use unittest to run tests from an installed package (outside of your source
+  repository), use `python -m unittest discover -s {{module.name}}`
+- To use unittest to run tests in your source folder, from your package root,
+  use
+  `python -m unittest discover --start-folder {{source folder}} --top-level-directory .`
+
