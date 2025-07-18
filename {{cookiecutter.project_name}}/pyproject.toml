@@ -3,7 +3,7 @@
 requires = ["pdm-backend>=2.4"]
 build-backend = "pdm.backend"
 {%- elif cookiecutter.backend == "uv" %}
-requires = ["uv_build~=0.7.19"]
+requires = ["uv_build>=0.7.19"]
 build-backend = "uv_build"
 {%- elif cookiecutter.backend == "maturin" %}
 requires = ["maturin>=1.9,<2"]
