@@ -45,7 +45,7 @@ During generation you can select from the following backends for your package:
 2.  [uv][]: The `uv_build` backend is written in Rust and is integrated into'
     `uv`, meaning it can build without downloading anything extra and can even
     avoid running Python at all when building, making it the fastest backend for
-    simple packages.
+    simple packages. No dynamic metadata support.
 3.  [flit][]: A modern, lightweight [PEP 621][] build system for pure Python
     projects. Replaces setuptools, no MANIFEST.in, setup.py, or setup.cfg. Low
     learning curve. Easy to bootstrap into new distributions. Difficult to get
