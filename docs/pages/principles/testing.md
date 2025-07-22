@@ -10,27 +10,146 @@ parent: Principles
 
 # Testing recommendations
 
-## Outside-In Tests
-* live outside of source code, in the tests/ directory
-* Describe the various types of outsid-in tests (integration, fuzz, e2e, API)
-* Reference topical guides
-* Provide suggestions for testing categories
+In the guide, we will classify two kingdoms of test: external and internal.
+External tests view the module from the perspective of a user of the module, and
+are concerned that the public-facing features behave as expected. Internal tests
+view the module from the perspective of code inside of the module, and ensure
+that the components that make up our package work as expected, and interact with
+each other properly.
 
+### Any test case is better than none
+
+When in doubt, write the test that makes sense at the time.
+
+- Test critical behaviors, features, and logic
+- Write clear, expressive, well documented tests
+  - Tests are documentation of the developer's intentions
+  - Good tests make it clear what they are testing and how
+
+While you are learning, and writing your first test suites, try not to get
+bogged down in the taxonomy of test types. As you write and use your test suite,
+the reason for classifying and sorting some types of tests into different test
+suites will become apparent.
+
+### As long as that test is correct...
+
+It can be surprisingly easy to write a test that passes when it should fail,
+especially when using complicated mocks and fixtures. The best way to avoid this
+is to deliberately break the code you are testing, hard-code a failure, and run
+the test-case to make sure it fails when the code is broken.
+
+- Check that your test fails when it should!
+- Keep It Simple: Excessive use of mocks and fixtures can make it difficult to
+  know if our test is running the code we expect it to.
+- Test one thing at a time: A single test should test a single behavior, and it
+  is better to write many test cases for a single function or class, than one
+  giant case.
+
+## External or outside-in testing
+
+A good place to start writing tests is from the perspective of a user of your
+module or library, as described in the [Test
+Tutorial]({% link pages/tutorials/test.md %}), and [Testing with pytest
+guide]({% link pages/guides/pytest.md %}). These test cases live outside your
+code, and include many styles or types of test that you may have heard of
+(behavioral, fuzz, end-to-end, feature, etc., etc.).
+
+{: .highlight-title }
+
+> A note to new test developers:
+>
+> This is a good place to pause and go write some tests. The rest of these
+> principles apply to more advanced test development. As you gain experience and
+> your test suite(s) grow, taxonomy of test cases, the and the use/need for
+> different kinds of tests will become more clear.
+
+### Taxonomy of outside-in tests
+
+A non-exhaustive discussion of some common types of tests.
+
+^_^ Dont Panic ^_^
+
+Depending on your project, you may not need many, or most of these kinds of
+tests.
+
+- A library project probably does not need to test integration with
+  microservices.
+- A library with no 3rd party dependencies, does not need test them.
+- Fuzz testing is for critical code, that many users rely on.
+
+#### Behavioral, Feature, or Functional Tests:
+
+High-level tests, which ensure a specific feature works. Used for testing things
+like:
+
+- Loading a file works
+- Setting a debug flag results in debug messages being printed
+- A configuration option affects the behavior of the code as expected
+
+#### Fuzz Tests
+
+Fuzz tests attempt to test the full range of possible inputs to a function. They
+are good for finding edge-cases, where what should be valid input causes a
+failure. [Hypothesis](https://hypothesis.readthedocs.io/en/latest/) is an
+excellent tool for this, and a lot of fun to use.
+
+- SLOW TESTS: fuzz tests can take a very long time to run, and should usually be
+  placed in a test suite which is run separately from faster tests.
+  [see: fail fast](https://en.wikipedia.org/wiki/Fail-fast_system)
+- Reserve fuzz testing for the few critical functions, where it really matters.
+
+#### Integration Tests
+
+The word "Integration" is a bit overloaded, and can refer to many levels of
+interaction between your code, its dependencies, and external systems.
+
+- Code level
+  - Test the integration between your software and external / 3rd party
+    dependencies.
+  - Low-level testing of your code-base, where you run the code imported from
+    dependencies without mocking it.
+
+- Environment level
+  - Testing that your software works in the environments you plan to run it in.
+    - Running inside of a docker container
+    - Using GPU's or other specialized hardware
+    - Deploying it to cloud servers
+
+- System level
+  - Testing that it interacts with other software in a larger system.
+    - Interactions with other services, on local or cloud-based platforms
+    - Micro-service, Database, or API connections and interactions
+
+#### End to End Tests
+
+The slowest, and most brittle, of all tests. Here, you set up an entire
+production-like system, and run tests against it.
+
+- Create a Dev / Testing / Staging environment, and run tests against it to make
+  sure everything works together
+- Fake user input, using tools like
+  [Selenium](https://www.selenium.dev/documentation/)
+- Processing data from a pre-loaded test database
+- Manual QA testing
 
 ## Unit Tests
+
+Internal tests, which test that individual units/components of the code behave
+as expected in isolation. Some examples of units are: A single function, an
+attribute of an object, a method or property of a class.
 
 ### Advantages of unit testing:
 
 Unit tests ensure that the code, as written, is correct, and executes properly.
-they communicate the intention of the creator of the code, how the code is
+They communicate the intention of the creator of the code, how the code is
 expected to behave, in its expected use-case.
 
-Unit tests should be simple, isolated, and run very quickly. Which allows us to
+Unit tests should be simple, isolated, and run very quickly. This allows us to
 run them quickly, while we make changes to the code (even automatically, each
 time we save a file for example) to ensure our changes did not break anything...
 or only break what we expected to.
 
-Writing unit tests can reveal weakensses in our implementations, and lead us to
+Writing unit tests can reveal weaknesses in our implementations, and lead us to
 better design decisions:
 
 - If the test requires excessive setup, the unit may be dependent on too many
@@ -46,13 +165,13 @@ better design decisions:
 Unit tests are considered "low level", and used for [Isolation Testing](). Not
 all projects need full unit test coverage, some may not need unit tests at all.
 
-- When your project matures enough to justify the work! higher-level testing is
-  often sufficient for small projects, which are not part of critical
+- When your project matures enough to justify the work! Higher-level testing is
+  often sufficient for small projects which are not part of critical
   infrastructure.
 
-- When you identify a critical part of the code-base, parts that are especially
-  prone to breaking, Use unit tests to ensure that code continues to behave as
-  designed.
+- When you identify a critical part of the code-base, or parts that are
+  especially prone to breaking, use unit tests to ensure that code continues to
+  behave as designed.
 
 - When other projects start to depend heavily on your library, thorough unit
   testing helps ensure the reliability of your code for your users.
@@ -65,34 +184,34 @@ all projects need full unit test coverage, some may not need unit tests at all.
 
 - Unit tests live alongside the code they test, in a /tests folder. They should
   be in a different directory than higher-level tests (integration, e2e,
-  behavioral, etc.) So that they can be run quickly before the full test suite,
-  and to avoid confusing them.
+  behavioral, etc) so that they can be run quickly before the full test suite,
+  and to avoid confusing them with other types of tests.
 
 - Test files should be named `test_{{file under test}}.py`, so that test runners
   can find them easily.
 
 - test\_.py files should match your source files (file-under-test) one-to-one,
-  and contain only tests for code in the file-file-under test. The code in
+  and contain only tests for code in the file-under test. The code in
   `mymodule/source.py` is tested by `mymodule/tests/test_source.py`.
 
 - Keep it simple! If a test-case requires extra setup and external tools, It may
   be more appropriate as an external test, instead of in the unit tests
 
 - Avoid the temptation to test edge-cases! Focus your unit tests on the
-  "happy-path". The UT should describe the expected and officially supported
-  usage of the code under test.
+  "happy-path". The Unit test should describe the expected and officially
+  supported usage of the code under test.
 
-- Isolation: Test single units of code! A single Function, or a single attribute
+- Isolation: Test single units of code! A single function, or a single attribute
   or method on a class. If you have two units (classes, functions, class
   attributes) with deeply coupled behavior, it is better to test them
-  individually, using mocking and patching, instead of testing both in a single
+  individually using mocking and patching, instead of testing both in a single
   test. This makes refactoring easier, helps you understand the interactions
   between units, and will correctly tell you which part is failing if one
   breaks.
 
 #### Importing in test files:
 
-Keep things local! prefer to import only from the file-under-test when possible.
+Keep things local! Prefer to import only from the file-under-test when possible.
 This helps keep the context of the unit tests focused on the file-under-test.
 
 It makes refactoring much smoother; think about factoring a class out of a
@@ -142,17 +261,6 @@ def test_func():
 
 - Importing from other source files is a code smell (for unit tests), It
   indicates that the test is not well isolated.
-
-It is worth cultivating a deep understanding of how python's imports work. The
-interactions between imports and patches can some times be surprising, and cause
-us to write invalid tests... or worse, tests that pass when they should fail.
-These are a few of the cases that I have seen cause the most confusion.
-
-- If you import `SomeThing` from your file-under-test, Then patch
-  `file.under.test.SomeThing`, it does not patch `SomeThing` in your test file.
-  Only in the file-under-test. So, code in your file-under-test which calls
-  `SomeThing()`, will use the Mock. But in your test case. `SomeThing()` will
-  create a new instance, not call the Mock.
 
 - Prefer to import only the object that you actually use, not the entire
   library.
@@ -212,6 +320,48 @@ def test_myfunction(mocker):
   it needs fewer mocks, less setup, and fewer assertions in a single test case.
   This frequently leads us to write more readable and maintainable code.
 
+It is worth cultivating a deep understanding of how python's imports work. The
+interactions between imports and patches can sometimes be surprising, and cause
+us to write invalid tests... or worse, tests that pass when they should fail.
+These are a few of the cases that cause the most confusion.
+
+- When patches and imports are both used in a test case, the patch only applies
+  to the specific context in which it is called, and does not override the
+  import used elsewhere in the test file.
+  - You import `say_hello` from your file-under-test, then patch
+    `src.lib.say_hello`. If your source code calls `say_hello` it will use the
+    Mock provided by the patch. But if your test case calls `say_hello`, it will
+    not use the Mock, and instead will execute the function
+  - The behavior is the same when using stdlib.mock.patch, and pytest-mocker
+
+```python
+# src.lib
+def dangerous_sideffects():
+    raise RuntimeError("BOOM")
+
+
+def say_hello():
+    dangerous_sideffects()
+    return "hello world"
+```
+
+```python
+from src.lib import say_hello, dangerous_sideffects
+
+
+def test_pytest(mocker):
+    # Given this context
+    mock_say_hello = mocker.patch("src.lib.dangerous_sideffects")
+    # When we run the code
+    ret = say_hello()
+    # Then we expect the result
+    assert ret == "hello world"
+    mock_dangerous_sideffects.assert_called_once()
+
+    # But this will still raise an exception!
+    dangerous_sideffects()
+```
+
 ## Diagnostic Tests
 
 Diagnostic tests are used to verify the installation of a package. They should
@@ -228,8 +378,8 @@ troubleshoot problems.
 ### Guidelines for Diagnostic Tests
 
 - Consider using the stdlib `unittest.TestCase` and other stdlib tools instead
-  of pytest. To allow running unit tests for diagnostics in production environments,
-  without installing additional packages.
+  of pytest. To allow running unit tests for diagnostics in production
+  environments, without installing additional packages.
 
 - Test files should be named `test_{{file under test}}.py`, so that stdlib
   unittest can find them easily.
@@ -263,4 +413,3 @@ stdlib's unittest can be used in environments where pytest is not available:
 - To use unittest to run tests in your source folder, from your package root,
   use
   `python -m unittest discover --start-folder {{source folder}} --top-level-directory .`
-
