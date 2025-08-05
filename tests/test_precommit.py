@@ -130,10 +130,38 @@ def test_pc180():
     assert compute_check("PC180", precommit=precommit).result
 
 
-def test_pc180_alt_1():
+def test_pc180_rename():
     precommit = yaml.safe_load("""
         repos:
-          - repo: https://github.com/rbubley/mirrors-prettier
+          - repo: https://github.com/pre-commit/mirrors-prettier
+    """)
+    res = compute_check("PC180", precommit=precommit)
+    assert not res.result
+    assert "https://github.com/rbubley/mirrors-prettier" in res.err_msg
+
+
+def test_pc180_alt_2():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/hukkin/mdformat
+    """)
+    assert compute_check("PC180", precommit=precommit).result
+
+
+def test_pc180_rename_1():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/executablebooks/mdformat
+    """)
+    res = compute_check("PC180", precommit=precommit)
+    assert not res.result
+    assert "https://github.com/hukkin/mdformat" in res.err_msg
+
+
+def test_pc180_alt_3():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/rvben/rumdl-pre-commit
     """)
     assert compute_check("PC180", precommit=precommit).result
 
