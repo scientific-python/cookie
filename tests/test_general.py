@@ -156,6 +156,7 @@ def test_py007(tmp_path: Path, runnerfile: str):
         "[tool.tox]",
         "[tool.pixi.tasks]",
         "[tool.pixi.feature.thing.tasks]",
+        "[tool.poe]",
     ],
 )
 def test_py007_pyproject_sections(tmp_path: Path, section: str):

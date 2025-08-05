@@ -146,6 +146,8 @@ class PY007(General):
                 return True
             case {"tox": object()}:
                 return True
+            case {"poe": object()}:
+                return True
             case {"pixi": {"tasks": {}}}:
                 return True
             case {"pixi": {"feature": feats}} if any(
