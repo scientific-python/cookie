@@ -128,13 +128,14 @@ class PC180(PreCommit):
     "Uses a markdown formatter"
 
     renamed = {
-        "https://github.com/pre-commit/mirrors-prettier": "https://github.com/rbubley/mirrors-prettier"
+        "https://github.com/pre-commit/mirrors-prettier": "https://github.com/rbubley/mirrors-prettier",
+        "https://github.com/executablebooks/mdformat": "https://github.com/hukkin/mdformat",
     }
 
     repos = {
         "https://github.com/rbubley/mirrors-prettier",
-        "https://github.com/executablebooks/mdformat",
         "https://github.com/hukkin/mdformat",
+        "https://github.com/rvben/rumdl-pre-commit",
     }
 
 
