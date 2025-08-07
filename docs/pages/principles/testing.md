@@ -10,36 +10,41 @@ parent: Principles
 
 # Testing recommendations
 
-In this guide, we will provide a roadmap and best-practices for creating test suites for python projects.
+In this guide, we will provide a roadmap and best-practices for creating test
+suites for python projects.
 
-We will describe the most important types of test suites, the purposes they serve
-and differences between them. 
-They will be presented in OutSide -> In order, which is our recommend approach.
-Starting with [Public Interface tests](#user-interface-or-public-api-testing), 
-which test your code from the perspective of your users, 
-focusing on the behavior of the public interface and the Features that your project provides.
-Then we will cover [Package Level Integration tests](#package-level-integration-tests), which test that the various parts of your package
-work together, and work with the other packages it depends on.
-Finally we will cover the venrable [Unit Test](#unit-tests), which test the correctness of your code from a perspective
-internal to your codebase, tests individual units in isolation, and are optimized to run quickly and often.
+We will describe the most important types of test suites, the purposes they
+serve and differences between them. They will be presented in OutSide -> In
+order, which is our recommend approach. Starting with
+[Public Interface tests](#user-interface-or-public-api-testing), which test your
+code from the perspective of your users, focusing on the behavior of the public
+interface and the Features that your project provides. Then we will cover
+[Package Level Integration tests](#package-level-integration-tests), which test
+that the various parts of your package work together, and work with the other
+packages it depends on. Finally we will cover the venrable
+[Unit Test](#unit-tests), which test the correctness of your code from a
+perspective internal to your codebase, tests individual units in isolation, and
+are optimized to run quickly and often.
 
-These 3 test suites  will cover the bulk of your testing needs and help get your project to a reliable
-and maintainable state.  We will also discuss some more specialized and advanced types of test cases
-in our [Taxonomy of Test Cases](#taxonomy-of-test-cases) section.
-
+These 3 test suites will cover the bulk of your testing needs and help get your
+project to a reliable and maintainable state. We will also discuss some more
+specialized and advanced types of test cases in our
+[Taxonomy of Test Cases](#taxonomy-of-test-cases) section.
 
 ## Advantages of Testing
-- Trustworthy code: Well tested code, is code that you can trust to behave as expected.
-- Living Documentation: A good test is a form of documentation, 
-    which tells us how the code is expected to behave, communicates the intent of the author,
-    and is validated every time the test is run.
-- Preventing Failure: Tests provide safety against many ways code can fail, from errors in implementation,
-    to unexpected changes in upstream dependencies.
-- Confidence when making changes: A thorough suite of tests allows developers to add features, fix bugs,
-    and refactor code, with a degree of confidence that their changes do not break existing features, 
-    or cause unexpected side-effects.
 
-    
+- Trustworthy code: Well tested code, is code that you can trust to behave as
+  expected.
+- Living Documentation: A good test is a form of documentation, which tells us
+  how the code is expected to behave, communicates the intent of the author, and
+  is validated every time the test is run.
+- Preventing Failure: Tests provide safety against many ways code can fail, from
+  errors in implementation, to unexpected changes in upstream dependencies.
+- Confidence when making changes: A thorough suite of tests allows developers to
+  add features, fix bugs, and refactor code, with a degree of confidence that
+  their changes do not break existing features, or cause unexpected
+  side-effects.
+
 ## Any test case is better than none
 
 When in doubt, write the test that makes sense at the time.
@@ -77,11 +82,11 @@ guide]({% link pages/guides/pytest.md %}).
 
 - These test cases live outside of your source code.
 - Test the code as you expect your users to interact with it.
-- Keep these tests simple, and easily readable, so that they provide good documentation when
-    a user asks "how should I use this feature"
+- Keep these tests simple, and easily readable, so that they provide good
+  documentation when a user asks "how should I use this feature"
 - Focus on the supported use-case, and avoid extensive edge-case testing
-    (edge-case and exhaustive input testing will be handled in a separate test suite)
-
+  (edge-case and exhaustive input testing will be handled in a separate test
+  suite)
 
 {: .highlight-title }
 
@@ -94,19 +99,23 @@ guide]({% link pages/guides/pytest.md %}).
 
 ## Project Level Integration Testing
 
-The term "Integration Test" is unfortunately overloaded, and used to describe testing that various components
-integrate with each other, at many levels of the system. These tests will loosly follow the "Detroit School" of test design.
+The term "Integration Test" is unfortunately overloaded, and used to describe
+testing that various components integrate with each other, at many levels of the
+system. These tests will loosely follow the "Detroit School" of test design.
 
-- Write tests which view the code from an outside-in perspective, like [Public Interface]() tests
+- Write tests which view the code from an outside-in perspective, like
+  [Public Interface]() tests
 - Avoid Mocks/Fakes/Patches as much as possible
-- Test that the components of your code all work together (inner-package integration)
+- Test that the components of your code all work together (inner-package
+  integration)
 - Test that your code works with its dependencies (dependency integration)
 
-These tests can be a good place for more extensive edge-case, and fuzzy input testing.
+These tests can be a good place for more extensive edge-case, and fuzzy input
+testing.
 
-The intended audience for these tests developers working on the project, or debugging issues they encounter
-as opposed to Public Interface tests, which should be helpful for users of the package.
-
+The intended audience for these tests developers working on the project, or
+debugging issues they encounter as opposed to Public Interface tests, which
+should be helpful for users of the package.
 
 ## Unit Tests
 
@@ -407,25 +416,39 @@ production-like system, and run tests against it.
 - Processing data from a pre-loaded test database
 - Manual QA testing
 
-
 ### Other Kinds of Internal Tests
-The thing that distinguishes Internal tests is their perspective on the code, 
-where External tests focus on the way users will interact with the package (or the public API)
-and "avoid testing implementation details". 
-Internal tests exist to test that those critical implementation details work correctly.
+
+The thing that distinguishes Internal tests is their perspective on the code,
+where External tests focus on the way users will interact with the package (or
+the public API) and "avoid testing implementation details". Internal tests exist
+to test that those critical implementation details work correctly.
 
 #### Testing Edgecases
-While writing unit tests, you may be tempted to test edgecases. You may have a critical private function or algorithm, which is not part of the public API, so not a good candidate for External tesing, and you are concerned about many edgecases that you want to defend against using tests.
 
-It is perfectly valid to write extensive edgecase testing for private code, but these tests should be kept separate from the unit test suite.  Extensive edgecase testing makes tests long, and difficult to read (tests are documentation). They can slow down execution, we want unit tests to run first, fast, and often.
-* Place them in separate files from unit tests, to improve readability
-* [mark them](https://docs.pytest.org/en/stable/how-to/mark.html) so that they can be run as a separate test suite, after your unit test pass
+While writing unit tests, you may be tempted to test edgecases. You may have a
+critical private function or algorithm, which is not part of the public API, so
+not a good candidate for External tesing, and you are concerned about many
+edgecases that you want to defend against using tests.
+
+It is perfectly valid to write extensive edgecase testing for private code, but
+these tests should be kept separate from the unit test suite. Extensive edgecase
+testing makes tests long, and difficult to read (tests are documentation). They
+can slow down execution, we want unit tests to run first, fast, and often.
+
+- Place them in separate files from unit tests, to improve readability
+- [mark them](https://docs.pytest.org/en/stable/how-to/mark.html) so that they
+  can be run as a separate test suite, after your unit test pass
 
 #### Fuzz Tests and other slow tests
-Testing random input, using tools like Hypothesis, is similar to testing edge cases, but running these tests can take a very long time, and they can often be much more complex and difficult to read for new developers.
-* Place them in their own test files
-* [mark them](https://docs.pytest.org/en/stable/how-to/mark.html) so that they can be run as a separate test suite, once all of the faster test suites have succeeded.
 
+Testing random input, using tools like Hypothesis, is similar to testing edge
+cases, but running these tests can take a very long time, and they can often be
+much more complex and difficult to read for new developers.
+
+- Place them in their own test files
+- [mark them](https://docs.pytest.org/en/stable/how-to/mark.html) so that they
+  can be run as a separate test suite, once all of the faster test suites have
+  succeeded.
 
 ## Diagnostic Tests
 
@@ -433,14 +456,18 @@ Diagnostic tests are used to verify the installation of a package. They should
 be runable on production systems, like when we need to ssh into a live server to
 troubleshoot problems.
 
-A diagnostic test suite may contain any combination of tests you deem pertinent. You could include all the unit tests, or a specific subset of them. You may want to include some integration tests, and feature tests.
-Consider them Smoke Tests, a select sub-set of tests, meant to catch critical errors quickly, not perform a full system check of the package.
+A diagnostic test suite may contain any combination of tests you deem pertinent.
+You could include all the unit tests, or a specific subset of them. You may want
+to include some integration tests, and feature tests. Consider them Smoke Tests,
+a select sub-set of tests, meant to catch critical errors quickly, not perform a
+full system check of the package.
 
-* Respect the user's environment! 
-  * Diagnostic tests should not require additional dependencies beyond what the package requires.
-  * Do not create files, alter a database, or change the state of the system
-* Run quickly, select tests that can be run in a few moments
-* provide meaningful feedback 
+- Respect the user's environment!
+  - Diagnostic tests should not require additional dependencies beyond what the
+    package requires.
+  - Do not create files, alter a database, or change the state of the system
+- Run quickly, select tests that can be run in a few moments
+- provide meaningful feedback
 
 ### Advantages of Diagnostic Tests
 
