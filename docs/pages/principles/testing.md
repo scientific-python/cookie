@@ -10,14 +10,37 @@ parent: Principles
 
 # Testing recommendations
 
-In the guide, we will classify two kingdoms of test: external and internal.
-External tests view the module from the perspective of a user of the module, and
-are concerned that the public-facing features behave as expected. Internal tests
-view the module from the perspective of code inside of the module, and ensure
-that the components that make up our package work as expected, and interact with
-each other properly.
+In this guide, we will provide a roadmap and best-practices for creating test suites for python projects.
 
-### Any test case is better than none
+We will describe the most important types of test suites, the purposes they serve
+and differences between them. 
+They will be presented in OutSide -> In order, which is our recommend approach.
+Starting with [Public Interface tests](#user-interface-or-public-api-testing), 
+which test your code from the perspective of your users, 
+focusing on the behavior of the public interface and the Features that your project provides.
+Then we will cover [Package Level Integration tests](#package-level-integration-tests), which test that the various parts of your package
+work together, and work with the other packages it depends on.
+Finally we will cover the venrable [Unit Test](#unit-tests), which test the correctness of your code from a perspective
+internal to your codebase, tests individual units in isolation, and are optimized to run quickly and often.
+
+These 3 test suites  will cover the bulk of your testing needs and help get your project to a reliable
+and maintainable state.  We will also discuss some more specialized and advanced types of test cases
+in our [Taxonomy of Test Cases](#taxonomy-of-test-cases) section.
+
+
+## Advantages of Testing
+- Trustworthy code: Well tested code, is code that you can trust to behave as expected.
+- Living Documentation: A good test is a form of documentation, 
+    which tells us how the code is expected to behave, communicates the intent of the author,
+    and is validated every time the test is run.
+- Preventing Failure: Tests provide safety against many ways code can fail, from errors in implementation,
+    to unexpected changes in upstream dependencies.
+- Confidence when making changes: A thorough suite of tests allows developers to add features, fix bugs,
+    and refactor code, with a degree of confidence that their changes do not break existing features, 
+    or cause unexpected side-effects.
+
+    
+## Any test case is better than none
 
 When in doubt, write the test that makes sense at the time.
 
@@ -31,7 +54,7 @@ bogged down in the taxonomy of test types. As you write and use your test suite,
 the reason for classifying and sorting some types of tests into different test
 suites will become apparent.
 
-### As long as that test is correct...
+## As long as that test is correct...
 
 It can be surprisingly easy to write a test that passes when it should fail,
 especially when using complicated mocks and fixtures. The best way to avoid this
@@ -45,14 +68,20 @@ the test-case to make sure it fails when the code is broken.
   is better to write many test cases for a single function or class, than one
   giant case.
 
-## External or outside-in testing
+## User Interface and Public API testing
 
 A good place to start writing tests is from the perspective of a user of your
 module or library, as described in the [Test
 Tutorial]({% link pages/tutorials/test.md %}), and [Testing with pytest
-guide]({% link pages/guides/pytest.md %}). These test cases live outside your
-code, and include many styles or types of test that you may have heard of
-(behavioral, fuzz, end-to-end, feature, etc., etc.).
+guide]({% link pages/guides/pytest.md %}).
+
+- These test cases live outside of your source code.
+- Test the code as you expect your users to interact with it.
+- Keep these tests simple, and easily readable, so that they provide good documentation when
+    a user asks "how should I use this feature"
+- Focus on the supported use-case, and avoid extensive edge-case testing
+    (edge-case and exhaustive input testing will be handled in a separate test suite)
+
 
 {: .highlight-title }
 
@@ -63,74 +92,21 @@ code, and include many styles or types of test that you may have heard of
 > your test suite(s) grow, taxonomy of test cases, the and the use/need for
 > different kinds of tests will become more clear.
 
-### Taxonomy of outside-in tests
+## Project Level Integration Testing
 
-A non-exhaustive discussion of some common types of tests.
+The term "Integration Test" is unfortunately overloaded, and used to describe testing that various components
+integrate with each other, at many levels of the system. These tests will loosly follow the "Detroit School" of test design.
 
-^_^ Dont Panic ^_^
+- Write tests which view the code from an outside-in perspective, like [Public Interface]() tests
+- Avoid Mocks/Fakes/Patches as much as possible
+- Test that the components of your code all work together (inner-package integration)
+- Test that your code works with its dependencies (dependency integration)
 
-Depending on your project, you may not need many, or most of these kinds of
-tests.
+These tests can be a good place for more extensive edge-case, and fuzzy input testing.
 
-- A library project probably does not need to test integration with
-  microservices.
-- A library with no 3rd party dependencies, does not need test them.
-- Fuzz testing is for critical code, that many users rely on.
+The intended audience for these tests developers working on the project, or debugging issues they encounter
+as opposed to Public Interface tests, which should be helpful for users of the package.
 
-#### Behavioral, Feature, or Functional Tests:
-
-High-level tests, which ensure a specific feature works. Used for testing things
-like:
-
-- Loading a file works
-- Setting a debug flag results in debug messages being printed
-- A configuration option affects the behavior of the code as expected
-
-#### Fuzz Tests
-
-Fuzz tests attempt to test the full range of possible inputs to a function. They
-are good for finding edge-cases, where what should be valid input causes a
-failure. [Hypothesis](https://hypothesis.readthedocs.io/en/latest/) is an
-excellent tool for this, and a lot of fun to use.
-
-- SLOW TESTS: fuzz tests can take a very long time to run, and should usually be
-  placed in a test suite which is run separately from faster tests.
-  [see: fail fast](https://en.wikipedia.org/wiki/Fail-fast_system)
-- Reserve fuzz testing for the few critical functions, where it really matters.
-
-#### Integration Tests
-
-The word "Integration" is a bit overloaded, and can refer to many levels of
-interaction between your code, its dependencies, and external systems.
-
-- Code level
-  - Test the integration between your software and external / 3rd party
-    dependencies.
-  - Low-level testing of your code-base, where you run the code imported from
-    dependencies without mocking it.
-
-- Environment level
-  - Testing that your software works in the environments you plan to run it in.
-    - Running inside of a docker container
-    - Using GPU's or other specialized hardware
-    - Deploying it to cloud servers
-
-- System level
-  - Testing that it interacts with other software in a larger system.
-    - Interactions with other services, on local or cloud-based platforms
-    - Micro-service, Database, or API connections and interactions
-
-#### End to End Tests
-
-The slowest, and most brittle, of all tests. Here, you set up an entire
-production-like system, and run tests against it.
-
-- Create a Dev / Testing / Staging environment, and run tests against it to make
-  sure everything works together
-- Fake user input, using tools like
-  [Selenium](https://www.selenium.dev/documentation/)
-- Processing data from a pre-loaded test database
-- Manual QA testing
 
 ## Unit Tests
 
@@ -362,11 +338,109 @@ def test_pytest(mocker):
     dangerous_sideffects()
 ```
 
+### A Brief Taxonomy Test Suites
+
+A non-exhaustive discussion of some common types of tests.
+
+^_^ Dont Panic ^_^
+
+Depending on your project, you may not need many, or most of these kinds of
+tests.
+
+- A library project probably does not need to test integration with
+  microservices.
+- A library with no 3rd party dependencies, does not need test them.
+- Fuzz testing is for critical code, that many users rely on.
+
+#### Behavioral, Feature, or Functional Tests:
+
+High-level tests, which ensure a specific feature works. Used for testing things
+like:
+
+- Loading a file works
+- Setting a debug flag results in debug messages being printed
+- A configuration option affects the behavior of the code as expected
+
+#### Fuzz Tests
+
+Fuzz tests attempt to test the full range of possible inputs to a function. They
+are good for finding edge-cases, where what should be valid input causes a
+failure. [Hypothesis](https://hypothesis.readthedocs.io/en/latest/) is an
+excellent tool for this, and a lot of fun to use.
+
+- SLOW TESTS: fuzz tests can take a very long time to run, and should usually be
+  placed in a test suite which is run separately from faster tests.
+  [see: fail fast](https://en.wikipedia.org/wiki/Fail-fast_system)
+- Reserve fuzz testing for the few critical functions, where it really matters.
+
+#### Integration Tests
+
+The word "Integration" is a bit overloaded, and can refer to many levels of
+interaction between your code, its dependencies, and external systems.
+
+- Code level
+  - Test the integration between your software and external / 3rd party
+    dependencies.
+  - Low-level testing of your code-base, where you run the code imported from
+    dependencies without mocking it.
+
+- Environment level
+  - Testing that your software works in the environments you plan to run it in.
+    - Running inside of a docker container
+    - Using GPU's or other specialized hardware
+    - Deploying it to cloud servers
+
+- System level
+  - Testing that it interacts with other software in a larger system.
+    - Interactions with other services, on local or cloud-based platforms
+    - Micro-service, Database, or API connections and interactions
+
+#### End to End Tests
+
+The slowest, and most brittle, of all tests. Here, you set up an entire
+production-like system, and run tests against it.
+
+- Create a Dev / Testing / Staging environment, and run tests against it to make
+  sure everything works together
+- Fake user input, using tools like
+  [Selenium](https://www.selenium.dev/documentation/)
+- Processing data from a pre-loaded test database
+- Manual QA testing
+
+
+### Other Kinds of Internal Tests
+The thing that distinguishes Internal tests is their perspective on the code, 
+where External tests focus on the way users will interact with the package (or the public API)
+and "avoid testing implementation details". 
+Internal tests exist to test that those critical implementation details work correctly.
+
+#### Testing Edgecases
+While writing unit tests, you may be tempted to test edgecases. You may have a critical private function or algorithm, which is not part of the public API, so not a good candidate for External tesing, and you are concerned about many edgecases that you want to defend against using tests.
+
+It is perfectly valid to write extensive edgecase testing for private code, but these tests should be kept separate from the unit test suite.  Extensive edgecase testing makes tests long, and difficult to read (tests are documentation). They can slow down execution, we want unit tests to run first, fast, and often.
+* Place them in separate files from unit tests, to improve readability
+* [mark them](https://docs.pytest.org/en/stable/how-to/mark.html) so that they can be run as a separate test suite, after your unit test pass
+
+#### Fuzz Tests and other slow tests
+Testing random input, using tools like Hypothesis, is similar to testing edge cases, but running these tests can take a very long time, and they can often be much more complex and difficult to read for new developers.
+* Place them in their own test files
+* [mark them](https://docs.pytest.org/en/stable/how-to/mark.html) so that they can be run as a separate test suite, once all of the faster test suites have succeeded.
+
+
 ## Diagnostic Tests
 
 Diagnostic tests are used to verify the installation of a package. They should
 be runable on production systems, like when we need to ssh into a live server to
 troubleshoot problems.
+
+A diagnostic test suite may contain any combination of tests you deem pertinent. You could include all the unit tests, or a specific subset of them. You may want to include some integration tests, and feature tests.
+Consider them Smoke Tests, a select sub-set of tests, meant to catch critical errors quickly, not perform a full system check of the package.
+
+* Respect the user's environment! 
+  * Diagnostic tests should not require additional dependencies beyond what the package requires.
+  * Do not create files, alter a database, or change the state of the system
+* Run quickly, select tests that can be run in a few moments
+* provide meaningful feedback 
 
 ### Advantages of Diagnostic Tests
 
