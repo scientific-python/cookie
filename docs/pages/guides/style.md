@@ -31,7 +31,7 @@ options:
 ```yaml
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v5.0.0"
+    rev: "v6.0.0"
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.12.7"
+  rev: "v0.12.8"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.12.7"
+  rev: "v0.12.8"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -761,7 +761,7 @@ If you have shell scripts, you can protect against common mistakes using
 
 ```yaml
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: "v0.10.0.1"
+  rev: "v0.11.0.1"
   hooks:
     - id: shellcheck
 ```
