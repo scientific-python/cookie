@@ -29,7 +29,7 @@ are optimized to run quickly and often.
 These 3 test suites will cover the bulk of your testing needs and help get your
 project to a reliable and maintainable state. We will also discuss some more
 specialized and advanced types of test cases in our
-[Taxonomy of Test Cases](#taxonomy-of-test-cases) section.
+[Taxonomy of Test Cases](#a-brief-taxonomy-of-test-suites) section.
 
 ## Advantages of Testing
 
@@ -127,7 +127,7 @@ to test aspects of the codebase which are "private" not directly exposed to
 users, but which still need to be tested. Some examples of units are: A single
 function, an attribute of an object, a method or property of a class.
 
-### Advantages of unit testing:
+### Advantages of unit testing
 
 Unit tests ensure that the code, as written, is correct, and executes properly.
 They communicate the intention of the creator of the code, how the code is
@@ -149,7 +149,7 @@ better design decisions:
   understand and maintain. Refactoring code to make it easier to test often
   leads us to write better code overall.
 
-### When to write unit tests:
+### When to write unit tests
 
 Unit tests are considered "low level", and used for [Isolation Testing](). Not
 all projects need full unit test coverage, some may not need unit tests at all.
@@ -169,7 +169,7 @@ all projects need full unit test coverage, some may not need unit tests at all.
   higher-level 'integration' or 'outside-in' test cases, before writing the code
   to make the tests pass.
 
-### Guidelines for unit testing:
+### Guidelines for unit testing
 
 - Unit tests live alongside the code they test, in a /tests folder. They should
   be in a different directory than higher-level tests (integration, e2e,
@@ -198,7 +198,7 @@ all projects need full unit test coverage, some may not need unit tests at all.
   between units, and will correctly tell you which part is failing if one
   breaks.
 
-#### Importing in test files:
+#### Importing in test files
 
 Keep things local! Prefer to import only from the file-under-test when possible.
 This helps keep the context of the unit tests focused on the file-under-test.
@@ -268,7 +268,7 @@ consider the benefits of refactoring your imports like so:
 from numpy import sum as numeric_sum, Array as NumericArray
 ```
 
-#### Running unit tests:
+#### Running unit tests
 
 - Pytest is great for running tests in your development environments!
 - to run unit tests in your source folder, from your package root, use
@@ -276,7 +276,7 @@ from numpy import sum as numeric_sum, Array as NumericArray
 - To run tests from an installed package (outside of your source repository),
   use `pytest --pyargs {package name}}`
 
-#### Mocking and Patching to Isolate the code under test:
+#### Mocking and Patching to Isolate the code under test
 
 When the unit you are testing touches any external unit (usually something you
 imported, or another unit that has its own tests), the external unit should be
@@ -351,7 +351,7 @@ def test_pytest(mocker):
     dangerous_sideffects()
 ```
 
-### A Brief Taxonomy Test Suites
+## A Brief Taxonomy of Test Suites
 
 A non-exhaustive discussion of some common types of tests.
 
@@ -365,7 +365,7 @@ tests.
 - A library with no 3rd party dependencies, does not need test them.
 - Fuzz testing is for critical code, that many users rely on.
 
-#### Behavioral, Feature, or Functional Tests:
+### Behavioral, Feature, or Functional Tests
 
 High-level tests, which ensure a specific feature works. Used for testing things
 like:
@@ -374,7 +374,7 @@ like:
 - Setting a debug flag results in debug messages being printed
 - A configuration option affects the behavior of the code as expected
 
-#### Fuzz Tests
+### Fuzz Tests
 
 Fuzz tests attempt to test the full range of possible inputs to a function. They
 are good for finding edge-cases, where what should be valid input causes a
@@ -386,7 +386,7 @@ excellent tool for this, and a lot of fun to use.
   [see: fail fast](https://en.wikipedia.org/wiki/Fail-fast_system)
 - Reserve fuzz testing for the few critical functions, where it really matters.
 
-#### Integration Tests
+### Integration Tests
 
 The word "Integration" is a bit overloaded, and can refer to many levels of
 interaction between your code, its dependencies, and external systems.
@@ -408,7 +408,7 @@ interaction between your code, its dependencies, and external systems.
     - Interactions with other services, on local or cloud-based platforms
     - Micro-service, Database, or API connections and interactions
 
-#### End to End Tests
+### End to End Tests
 
 The slowest, and most brittle, of all tests. Here, you set up an entire
 production-like system, and run tests against it.
@@ -420,14 +420,8 @@ production-like system, and run tests against it.
 - Processing data from a pre-loaded test database
 - Manual QA testing
 
-### Other Kinds of Internal Tests
 
-The thing that distinguishes Internal tests is their perspective on the code,
-where External tests focus on the way users will interact with the package (or
-the public API) and "avoid testing implementation details". Internal tests exist
-to test that those critical implementation details work correctly.
-
-#### Testing Edgecases
+## Testing Edgecases
 
 While writing unit tests, you may be tempted to test edgecases. You may have a
 critical private function or algorithm, which is not part of the public API, so
@@ -443,7 +437,7 @@ can slow down execution, we want unit tests to run first, fast, and often.
 - [mark them](https://docs.pytest.org/en/stable/how-to/mark.html) so that they
   can be run as a separate test suite, after your unit test pass
 
-#### Fuzz Tests and other slow tests
+### Fuzz Tests and other slow tests
 
 Testing random input, using tools like Hypothesis, is similar to testing edge
 cases, but running these tests can take a very long time, and they can often be
@@ -489,7 +483,7 @@ full system check of the package.
 - Test files should be named `test_{{file under test}}.py`, so that stdlib
   unittest can find them easily.
 
-### Mocking and Patching to Isolate the code under test:
+### Mocking and Patching to Isolate the code under test
 
 Test Isolation is less necessary in diagnostic tests than unit tests. We often
 want diagnostic tests to execute compiled code, or run a test on GPU hardware.
@@ -509,7 +503,7 @@ def test_myfunction(t, patchme: Mock):
     t.assertIs(ret, patchme.return_value)
 ```
 
-### Running Diagnostic Tests:
+### Running Diagnostic Tests
 
 stdlib's unittest can be used in environments where pytest is not available:
 
