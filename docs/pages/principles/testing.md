@@ -420,7 +420,6 @@ production-like system, and run tests against it.
 - Processing data from a pre-loaded test database
 - Manual QA testing
 
-
 ## Testing Edgecases
 
 While writing unit tests, you may be tempted to test edgecases. You may have a
