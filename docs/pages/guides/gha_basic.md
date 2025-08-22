@@ -733,8 +733,8 @@ with code_fence("yaml"):
 changelog:
   exclude:
     authors:
-      - "dependabot[bot]"
-      - "pre-commit-ci[bot]"
+      - dependabot
+      - pre-commit-ci
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
