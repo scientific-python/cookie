@@ -739,5 +739,8 @@ changelog:
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
-[gh-changelog]:
-  https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
+<!-- prettier-ignore-start -->
+
+[gh-changelog]: https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
+
+<!-- prettier-ignore-end -->
