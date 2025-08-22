@@ -1,7 +1,7 @@
 changelog:
   exclude:
     authors:
-      - dependabot
-      - github-actions
-      - pre-commit-ci
-      - scientific-python-pr-tokenbot
+      - dependabot[bot]
+      - github-actions[bot]
+      - pre-commit-ci[bot]
+      - scientific-python-pr-tokenbot[bot]

@@ -733,11 +733,14 @@ with code_fence("yaml"):
 changelog:
   exclude:
     authors:
-      - dependabot
-      - pre-commit-ci
+      - dependabot[bot]
+      - pre-commit-ci[bot]
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
-[gh-changelog]:
-  https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
+<!-- prettier-ignore-start -->
+
+[gh-changelog]: https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
+
+<!-- prettier-ignore-end -->
