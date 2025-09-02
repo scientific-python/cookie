@@ -482,21 +482,70 @@ def test_pytest(mocker):
     dangerous_sideffects()
 ```
 
-## Testing Edgecases
+## Extensive Input Testing
 
-While writing unit tests, you may be tempted to test edgecases. You may have a
-critical private function or algorithm, which is not part of the public API (so
-not a good candidate for External testing) and you are concerned about many
-edgecases that you want to defend against using tests.
+The range of inputs that test cases validate is an important decision.
 
-It is perfectly valid to write extensive edgecase testing for private code, but
-these tests should be kept separate from the unit test suite. Extensive edgecase
-testing makes tests long, and difficult to read (tests are documentation). They
-can slow down execution, we want unit tests to run first, fast, and often.
+When the need for extensive testing starts to conflict with the readability of
+test cases and their usefulness as documentation for users and other developers,
+the tests should be re-organized into public-facing (concise, expressive, easily
+readable), and technical (complex, extensive) test files.
 
-- Place them in separate files from unit tests, to improve readability
-- [mark them](https://docs.pytest.org/en/stable/how-to/mark.html) so that they
-  can be run as a separate test suite, after your unit test pass
+- To maintain readability:
+  - tests may need to include fewer inputs
+  - extensive edgecase testing may be moved into different sections or files
+  - the code itself may need to be refactored
+- Avoid testing invalid input; the range of invalid input is infinite, and is
+  the programming equivalent of trying to prove a negative.
+- Focus on inputs relevant to the code under test, and avoid testing the code in
+  dependencies. Some integration testing of specific behaviors your code relies
+  on is justifiable.
+- [Fuzz Tests](#fuzz-tests) are the best place to handle extensive and
+  exhaustive input testing.
+
+### In Public Interface Tests
+
+These are the most appropriate place to test certain invalid inputs and
+dependencies. Public Interface tests act like a contract with users; each
+behavior that is tested is like a promise that users can rely on, and expect
+that it will not change without warning (and probably a major version bump). So
+any input/output and side-effects included in these tests should be considered
+_officially supported behavior_ and given careful consideration.
+
+### In project level integration tests
+
+These are a good place to handle more extensive input testing. Integration tests
+already tend to be more verbose, with a lot of setup and teardown, and much more
+behavior to cover than other kinds of tests. These are the kinds of tests that
+should focus on edgecases.
+
+### In Unit Tests
+
+Unit Tests should focus on the "happy-path" of execution. In most cases one
+representative example of the _expected_ input is sufficient. The test case
+should illustrate how the unit is expected to be used.
+
+Invalid input should only be tested when the unit itself includes logic to
+handle that invalid input.
+
+for example, this code:
+
+```python
+def foo(x: int):
+    return x + 1
+```
+
+should not test its behavior when passed a string (the type annotation already
+covers that).
+
+This code should be tested with a string, to cover the exception path.
+
+```python
+def bar(x):
+    if type(x) is str:
+        raise RuntimeError("invalid input")
+    return x + 1
+```
 
 ## Additional Types of Test Suites
 
