@@ -94,8 +94,9 @@ make_sdist:
         path: dist/*.tar.gz
 ```
 
-Instead of using `uv`, you can also run `pipx run build --sdist`, or install build via pip and use `python -m build --sdist`. You can
-also pin the version with `pipx run build==<version>`.
+Instead of using `uv`, you can also run `pipx run build --sdist`, or install
+build via pip and use `python -m build --sdist`. You can also pin the version
+with `pipx run build==<version>`.
 
 ## The core job (3 main OS's)
 
