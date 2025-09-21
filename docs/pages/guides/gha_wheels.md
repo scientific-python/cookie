@@ -83,9 +83,10 @@ make_sdist:
       with:
         fetch-depth: 0 # Optional, use if you use setuptools_scm
         submodules: true # Optional, use if you have submodules
+    - uses: astral-sh/setup-uv@v6
 
     - name: Build SDist
-      run: pipx run build --sdist
+      run: uv build --sdist
 
     - uses: actions/upload-artifact@v4
       with:
@@ -93,7 +94,7 @@ make_sdist:
         path: dist/*.tar.gz
 ```
 
-You can instead install build via pip and use `python -m build --sdist`. You can
+Instead of using `uv`, you can also run `pipx run build --sdist`, or install build via pip and use `python -m build --sdist`. You can
 also pin the version with `pipx run build==<version>`.
 
 ## The core job (3 main OS's)
