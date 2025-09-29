@@ -47,3 +47,11 @@ callouts:
     title: Important
   highlight:
     color: blue
+
+# Workaround for dep warnings
+sass:
+  quiet_deps: true
+  silence_deprecations:
+    - import
+    - color-functions
+    - global-builtin

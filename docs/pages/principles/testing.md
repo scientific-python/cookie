@@ -655,7 +655,7 @@ a full system check of the package. Good diagnostic tests:
   of pytest. To allow running unit tests for diagnostics in production
   environments, without installing additional packages.
 
-- Test files should be named `test_{{file under test}}.py`, so that stdlib
+- Test files should be named `test_<file under test>.py`, so that stdlib
   unittest can find them easily.
 
 ### Mocking and Patching to Isolate the code under test
@@ -683,7 +683,7 @@ def test_myfunction(t, patchme: Mock):
 stdlib's unittest can be used in environments where pytest is not available:
 
 - To use unittest to run tests from an installed package (outside of your source
-  repository), use `python -m unittest discover -s {{module.name}}`
+  repository), use `python -m unittest discover -s <module.name>`
 - To use unittest to run tests in your source folder, from your package root,
   use
-  `python -m unittest discover --start-folder {{source folder}} --top-level-directory .`
+  `python -m unittest discover --start-folder <source folder> --top-level-directory .`
