@@ -16,10 +16,10 @@ suites for python projects.
 We will describe the most important types of test suites, the purposes they
 serve and differences between them. They will be presented in OutSide -> In
 order, which is our recommend approach. Starting with
-[Public Interface tests](#user-interface-or-public-api-testing), which test your
-code from the perspective of your users, focusing on the behavior of the public
-interface and the Features that your project provides. Then we will cover
-[Package Level Integration tests](#package-level-integration-tests), which test
+[Public Interface tests](#public-interface-tests), which test your code from the
+perspective of your users, focusing on the behavior of the public interface and
+the Features that your project provides. Then we will cover
+[Project Level Integration tests](#project-level-integration-tests), which test
 that the various parts of your package work together, and work with the other
 packages it depends on. Finally we will cover the venrable
 [Unit Test](#unit-tests), which test the correctness of your code from a
@@ -29,7 +29,7 @@ are optimized to run quickly and often.
 These 3 test suites will cover the bulk of your testing needs and help get your
 project to a reliable and maintainable state. We will also discuss some more
 specialized and advanced types of test cases in our
-[Taxonomy of Test Cases](#a-brief-taxonomy-of-test-suites) section.
+[Taxonomy of Test Cases](#additional-types-of-test-suitess) section.
 
 ## Advantages of Testing
 
@@ -399,7 +399,7 @@ run unit tests in your source folder, from your package root, use
 your source repository), use `pytest --pyargs {package name}`.
 
 You can set the default test path in `pyproject.toml`, see: [Configuring
-pytest]({% link pages/tutorials/test.md %}#configuring-pytest)
+pytest]({% link pages/guides/pytest.md %}#configuring-pytest)
 
 We recommend configuring pytest to run ONLY your fastest, least demanding test
 suite by default.
