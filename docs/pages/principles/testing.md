@@ -29,7 +29,7 @@ are optimized to run quickly and often.
 These 3 test suites will cover the bulk of your testing needs and help get your
 project to a reliable and maintainable state. We will also discuss some more
 specialized and advanced types of test cases in our
-[Taxonomy of Test Cases](#additional-types-of-test-suitess) section.
+[Taxonomy of Test Cases](#additional-types-of-test-suites) section.
 
 ## Advantages of Testing
 
