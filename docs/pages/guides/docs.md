@@ -234,10 +234,10 @@ You can add the standard indices and tables at the end.
 
 ### pyproject.toml additions
 
-Setting a `docs` extra looks like this:
+Setting a `docs` dependency group looks like this:
 
 ```toml
-[project.optional-dependencies]
+[dependency-groups]
 docs = [
   "furo",
   "myst_parser >=0.13",
@@ -247,18 +247,13 @@ docs = [
 ]
 ```
 
-While there are other ways to specify docs, and you don't have to make the docs
-requirements an extra, this is a good idea as it forces docs building to always
-install the project, rather than being tempted to install only Sphinx and
-plugins and try to build against an uninstalled version of your project.
+You should use `--group=docs` when using uv or pip to install.
 
 ### .readthedocs.yaml
 
 In order to use <https://readthedocs.org> to build, host, and preview your
 documentation, you must have a `.readthedocs.yaml` file {% rr RTD100 %} like
 this:
-
-{% tabs %} {% tab uv-sphinx uv + Sphinx %}
 
 <!-- [[[cog
 with code_fence("yaml"):
@@ -285,31 +280,6 @@ build:
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
-
-{% endtab %} {% tab pip-sphinx pip + Sphinx %}
-
-```yaml
-# Read the Docs configuration file
-# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
-
-version: 2
-
-build:
-  os: ubuntu-22.04
-  tools:
-    python: "3.12"
-sphinx:
-  configuration: docs/conf.py
-
-python:
-  install:
-    - method: pip
-      path: .
-      extra_requirements:
-        - docs
-```
-
-{% endtab %} {% endtabs %}
 
 This sets the Read the Docs config version (2 is required) {% rr RTD101 %}.
 
