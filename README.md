@@ -125,7 +125,7 @@ Check the key setup files, `pyproject.toml`, and possibly `setup.cfg` and
 `setup.py` (pybind11 example). Update `README.md`. Also update and add docs to
 `docs/`.
 
-There are a few example dependencies and a minimum Python version of 3.9, feel
+There are a few example dependencies and a minimum Python version of 3.10, feel
 free to change it to whatever you actually need/want. There is also a basic
 backports structure with a small typing example.
 

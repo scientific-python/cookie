@@ -15,7 +15,7 @@ authors = [
 maintainers = [
   { name = "My Organization", email = "myemail@email.com" },
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 dependencies = [
   "typing_extensions",
@@ -24,11 +24,11 @@ dependencies = [
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Scientific/Engineering :: Physics",
 ]
 
