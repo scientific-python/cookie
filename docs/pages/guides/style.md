@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.13.2"
+  rev: "v0.14.0"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.13.2"
+  rev: "v0.14.0"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -464,7 +464,7 @@ pre-commit config will work:
 
 ```yaml
 - repo: https://github.com/PyCQA/isort
-  rev: "6.0.1"
+  rev: "6.1.0"
   hooks:
     - id: isort
 ```

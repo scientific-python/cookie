@@ -83,7 +83,7 @@ make_sdist:
       with:
         fetch-depth: 0 # Optional, use if you use setuptools_scm
         submodules: true # Optional, use if you have submodules
-    - uses: astral-sh/setup-uv@v6
+    - uses: astral-sh/setup-uv@v7
 
     - name: Build SDist
       run: uv build --sdist
@@ -125,7 +125,7 @@ build_wheels:
         fetch-depth: 0
         submodules: true
 
-    - uses: astral-sh/setup-uv@v6
+    - uses: astral-sh/setup-uv@v7
 
     - uses: pypa/cibuildwheel@v3.2
 
