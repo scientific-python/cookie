@@ -288,11 +288,11 @@ classifiers =
     Programming Language :: C++
     Programming Language :: Python
     Programming Language :: Python :: 3 :: Only
-    Programming Language :: Python :: 3.9
     Programming Language :: Python :: 3.10
     Programming Language :: Python :: 3.11
     Programming Language :: Python :: 3.12
     Programming Language :: Python :: 3.13
+    Programming Language :: Python :: 3.14
     Topic :: Scientific/Engineering
     Topic :: Scientific/Engineering :: Information Analysis
     Topic :: Scientific/Engineering :: Mathematics
@@ -310,7 +310,7 @@ project_urls =
 packages = find:
 install_requires =
     numpy>=1.19.3
-python_requires = >=3.9
+python_requires = >=3.10
 include_package_data = True
 package_dir =
     =src
