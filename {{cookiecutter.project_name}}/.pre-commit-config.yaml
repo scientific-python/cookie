@@ -103,7 +103,7 @@ repos:
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.34.0"
+    rev: "0.34.1"
     hooks:
 {%- if cookiecutter.__ci == "github" %}
       - id: check-dependabot

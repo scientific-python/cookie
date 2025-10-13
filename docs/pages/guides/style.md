@@ -464,7 +464,7 @@ pre-commit config will work:
 
 ```yaml
 - repo: https://github.com/PyCQA/isort
-  rev: "6.1.0"
+  rev: "7.0.0"
   hooks:
     - id: isort
 ```
@@ -489,7 +489,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.20.0"
+  rev: "v3.21.0"
   hooks:
     - id: pyupgrade
       args: ["--py39-plus"]
@@ -645,7 +645,7 @@ important parts (like Python classifiers) are in sync. This tool,
 
 ```yaml
 - repo: https://github.com/asottile/setup-cfg-fmt
-  rev: "v2.8.0"
+  rev: "v3.1.0"
   hooks:
     - id: setup-cfg-fmt
       args: [--include-version-classifiers, --max-py-version=3.12]
@@ -821,7 +821,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.34.0"
+  rev: "0.34.1"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
