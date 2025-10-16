@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.0"
+  rev: "v0.14.1"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.0"
+  rev: "v0.14.1"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -611,7 +611,7 @@ Add the following to your pre-commit config:
 
 ```yaml
 - repo: https://github.com/mgedmin/check-manifest
-  rev: "0.50"
+  rev: "0.51"
   hooks:
     - id: check-manifest
 ```
