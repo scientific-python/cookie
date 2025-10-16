@@ -41,7 +41,7 @@ class RTD101(ReadTheDocs):
         """
 
         match readthedocs:
-            case {"version": int(x)} if x >= 2:
+            case {"version": x} if x >= 2:
                 return True
         return False
 
