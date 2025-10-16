@@ -124,9 +124,9 @@ class RF1xx(Ruff):
 
         match ruff:
             case (
-                {"lint": {"select": list(x)} | {"extend-select": list(x)}}
-                | {"select": list(x)}
-                | {"extend-select": list(x)}
+                {"lint": {"select": x} | {"extend-select": x}}
+                | {"select": x}
+                | {"extend-select": x}
             ):
                 return cls.code in x or "ALL" in x
             case _:
