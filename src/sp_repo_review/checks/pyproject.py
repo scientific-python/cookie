@@ -47,7 +47,7 @@ class PP003(PyProject):
         """
 
         match pyproject:
-            case {"build-system": {"requires": list(req)}}:
+            case {"build-system": {"requires": req}}:
                 return all(not r.startswith("wheel") for r in req)
             case _:
                 return False
@@ -73,9 +73,7 @@ class PP004(PyProject):
             case {
                 "tool": {
                     "poetry": {
-                        "dependencies": {
-                            "python": str(requires) | {"version": str(requires)}
-                        }
+                        "dependencies": {"python": requires} | {"version": requires}
                     }
                 }
             }:

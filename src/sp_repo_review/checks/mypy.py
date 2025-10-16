@@ -122,7 +122,7 @@ class MY104(MyPy):
         """
 
         match pyproject:
-            case {"tool": {"mypy": {"enable_error_code": list(codes)}}}:
+            case {"tool": {"mypy": {"enable_error_code": codes}}}:
                 return "ignore-without-code" in codes
             case _:
                 return False
@@ -147,7 +147,7 @@ class MY105(MyPy):
         """
 
         match pyproject:
-            case {"tool": {"mypy": {"enable_error_code": list(codes)}}}:
+            case {"tool": {"mypy": {"enable_error_code": codes}}}:
                 return "redundant-expr" in codes
             case _:
                 return False
@@ -172,7 +172,7 @@ class MY106(MyPy):
         """
 
         match pyproject:
-            case {"tool": {"mypy": {"enable_error_code": list(codes)}}}:
+            case {"tool": {"mypy": {"enable_error_code": codes}}}:
                 return "truthy-bool" in codes
             case _:
                 return False
