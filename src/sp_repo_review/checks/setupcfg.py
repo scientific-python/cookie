@@ -49,5 +49,9 @@ class SCFG001(SCFG):
         return ""
 
 
-def repo_review_checks() -> dict[str, SCFG]:
+def repo_review_checks(
+    list_all: bool = True, setupcfg: configparser.ConfigParser | None = None
+) -> dict[str, SCFG]:
+    if not list_all and setupcfg is None:
+        return {}
     return {p.__name__: p() for p in SCFG.__subclasses__()}
