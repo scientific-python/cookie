@@ -1,3 +1,9 @@
+#!/usr/bin/env -S uv run --script
+
+# /// script
+# dependencies = ["nox>=2025.2.9"]
+# ///
+
 """
 Nox runner for cookie & sp-repo-review.
 
@@ -26,7 +32,6 @@ from typing import Any
 import nox
 
 nox.needs_version = ">=2025.2.9"
-nox.options.sessions = ["rr_lint", "rr_tests", "rr_pylint", "readme"]
 nox.options.default_venv_backend = "uv|virtualenv"
 
 
@@ -58,7 +63,7 @@ def get_expected_version(backend: str, vcs: bool) -> str:
     return "0.2.3" if vcs and backend not in {"maturin", "mesonpy", "uv"} else "0.1.0"
 
 
-def make_copier(session: nox.Session, backend: str, vcs: bool) -> None:
+def make_copier(session: nox.Session, backend: str, vcs: bool) -> Path:
     package_dir = Path(f"copy-{backend}")
     if package_dir.exists():
         rmtree_ro(package_dir)
@@ -85,7 +90,7 @@ def make_copier(session: nox.Session, backend: str, vcs: bool) -> None:
     return package_dir
 
 
-def make_cookie(session: nox.Session, backend: str, vcs: bool) -> None:
+def make_cookie(session: nox.Session, backend: str, vcs: bool) -> Path:
     package_dir = Path(f"cookie-{backend}")
     if package_dir.exists():
         rmtree_ro(package_dir)
@@ -106,7 +111,7 @@ def make_cookie(session: nox.Session, backend: str, vcs: bool) -> None:
     return package_dir
 
 
-def make_cruft(session: nox.Session, backend: str, vcs: bool) -> None:
+def make_cruft(session: nox.Session, backend: str, vcs: bool) -> Path:
     package_dir = Path(f"cruft-{backend}")
     if package_dir.exists():
         rmtree_ro(package_dir)
@@ -156,7 +161,7 @@ def init_git(session: nox.Session, package_dir: Path) -> None:
 IGNORE_FILES = {"__pycache__", ".git", ".copier-answers.yml", ".cruft.json"}
 
 
-def valid_path(path: Path):
+def valid_path(path: Path) -> bool:
     return path.is_file() and not IGNORE_FILES & set(path.parts)
 
 
@@ -548,3 +553,7 @@ def rr_build(session: nox.Session) -> None:
 
     session.install("build")
     session.run("python", "-m", "build")
+
+
+if __name__ == "__main__":
+    nox.main()
