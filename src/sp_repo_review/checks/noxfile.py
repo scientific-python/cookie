@@ -65,7 +65,7 @@ def _load_script_block(content: str, /) -> dict[str, Any]:
 
 def noxfile(root: Traversable) -> NoxfileInfo | None:
     """
-    Returns the shabang line (or empty string if missing), the noxfile script block, and the AST of the noxfile.py.
+    Returns the shebang line (or empty string if missing), the noxfile script block, and the AST of the noxfile.py.
     Returns None if noxfile.py is not present.
     """
 
@@ -114,7 +114,7 @@ class NOX102(Noxfile):
     "Sets venv backend"
 
     @staticmethod
-    def check(noxfile: NoxfileInfo | None | None) -> bool | None:
+    def check(noxfile: NoxfileInfo | None) -> bool | None:
         """
         The default venv backend should be set, ideally to `uv|virtualenv`:
 
@@ -194,7 +194,7 @@ class NOX202(Noxfile):
     @staticmethod
     def check(noxfile: NoxfileInfo | None) -> bool | None:
         """
-        You should have a shabang line at the top of your noxfile.py, for example:
+        You should have a shebang line at the top of your noxfile.py, for example:
 
         ```python
         #!/usr/bin/env -S uv run --script
@@ -235,7 +235,7 @@ class NOX203(Noxfile):
 
 
 def repo_review_checks(
-    list_all: bool = True, noxfile: tuple[str, dict[str, Any], ast.Module] | None = None
+    list_all: bool = True, noxfile: NoxfileInfo | None = None
 ) -> dict[str, Noxfile]:
     if not list_all and noxfile is None:
         return {}
