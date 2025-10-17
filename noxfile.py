@@ -13,7 +13,8 @@ sp-repo-review checks start with "rr-".
 from __future__ import annotations
 
 import difflib
-import email.message
+import email.parser
+import email.policy
 import functools
 import json
 import os
@@ -238,7 +239,9 @@ def tests(session: nox.Session, backend: str, vcs: bool) -> None:
         "-c",
         f'import importlib.metadata as m; print(m.version("{name}"))',
         silent=True,
-    ).strip()
+    )
+    assert version
+    version = version.strip()
     expected_version = get_expected_version(backend, vcs)
     assert version == expected_version, f"{version=} != {expected_version=}"
 
@@ -292,7 +295,9 @@ def dist(session: nox.Session, backend: str, vcs: bool) -> None:
             (metadata_path,) = (
                 n for n in names if n.endswith("PKG-INFO") and "egg-info" not in n
             )
-            with tf.extractfile(metadata_path) as mfile:
+            efile = tf.extractfile(metadata_path)
+            assert efile
+            with efile as mfile:
                 info = mfile.read().decode("utf-8")
                 if "License-Expression: BSD-3-Clause" not in info:
                     msg = "License expression not found in METADATA"
@@ -307,7 +312,11 @@ def dist(session: nox.Session, backend: str, vcs: bool) -> None:
         metadata_path = next(iter(n for n in names if n.endswith("METADATA")))
         with zf.open(metadata_path) as mfile:
             txt = mfile.read()
-    license_fields = email.message.EmailMessage(txt).get_all("License", [])
+    license_fields = (
+        email.parser.BytesParser(policy=email.policy.default)
+        .parsebytes(txt)
+        .get_all("License", [])
+    )
     if license_fields:
         msg = f"Should not have anything in the License slot, got {license_fields}"
         session.error(msg)
@@ -408,14 +417,16 @@ def pc_bump(session: nox.Session) -> None:
 
         for proj, (old_version, space) in old_versions.items():
             if proj not in versions:
-                versions[proj] = session.run(
+                versions_proj = session.run(
                     "lastversion",
                     "--at=github",
                     "--format=tag",
                     "--exclude=~alpha|beta|rc",
                     proj,
                     silent=True,
-                ).strip()
+                )
+                assert versions_proj
+                versions[proj] = versions_proj.strip()
             new_version = versions[proj]
 
             after = PC_REPL_LINE.format(proj, new_version, space, '"')
@@ -454,7 +465,7 @@ def get_latest_version_tag(repo: str, old_version: str) -> dict[str, Any] | None
         and x["name"].startswith("v") == old_version.startswith("v")
     ]
     if tags:
-        return tags[0]
+        return tags[0]  # type: ignore[no-any-return]
     return None
 
 
