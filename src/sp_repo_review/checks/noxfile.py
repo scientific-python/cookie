@@ -1,5 +1,6 @@
-# NOX: Noxfile checks
-## NOXxxx: noxfile checks
+# NOX: Nox checks
+## NOX1xx: Contents of noxfile
+## NOX2xx: Script mode for noxfile
 
 from __future__ import annotations
 
@@ -18,7 +19,7 @@ REGEX = re.compile(
 
 
 @dataclasses.dataclass(frozen=True, kw_only=True, slots=True, eq=False)
-class NoxfileInfo:
+class Noxfile:
     module: ast.Module
     shebang: str
     script: dict[str, Any]
@@ -26,7 +27,7 @@ class NoxfileInfo:
     __hash__ = None  # type: ignore[assignment]
 
     @classmethod
-    def from_str(cls, content: str) -> NoxfileInfo:
+    def from_str(cls, content: str) -> Noxfile:
         module = ast.parse(content, filename="noxfile.py")
         shebang_match = re.match(r"^#!.*\n", content)
         shebang = shebang_match.group(0).strip() if shebang_match else ""
@@ -34,7 +35,7 @@ class NoxfileInfo:
         return cls(module=module, shebang=shebang, script=script)
 
     def __eq__(self, other: object) -> bool:
-        if not isinstance(other, NoxfileInfo):
+        if not isinstance(other, Noxfile):
             return NotImplemented
 
         ast_equal = ast.dump(self.module, include_attributes=True) == ast.dump(
@@ -63,7 +64,7 @@ def _load_script_block(content: str, /) -> dict[str, Any]:
     return tomllib.loads(content)
 
 
-def noxfile(root: Traversable) -> NoxfileInfo | None:
+def noxfile(root: Traversable) -> Noxfile | None:
     """
     Returns the shebang line (or empty string if missing), the noxfile script block, and the AST of the noxfile.py.
     Returns None if noxfile.py is not present.
@@ -74,20 +75,20 @@ def noxfile(root: Traversable) -> NoxfileInfo | None:
         return None
 
     with noxfile_path.open("r", encoding="utf-8") as f:
-        return NoxfileInfo.from_str(f.read())
+        return Noxfile.from_str(f.read())
 
 
-class Noxfile:
+class Nox:
     family = "noxfile"
     requires = {"PY007"}
     url = mk_url("tasks")
 
 
-class NOX101(Noxfile):
+class NOX101(Nox):
     "Sets minimum nox version"
 
     @staticmethod
-    def check(noxfile: NoxfileInfo | None) -> bool | None:
+    def check(noxfile: Noxfile | None) -> bool | None:
         """Set a minimum nox version:
 
         ```python
@@ -110,11 +111,11 @@ class NOX101(Noxfile):
         return False
 
 
-class NOX102(Noxfile):
+class NOX102(Nox):
     "Sets venv backend"
 
     @staticmethod
-    def check(noxfile: NoxfileInfo | None) -> bool | None:
+    def check(noxfile: Noxfile | None) -> bool | None:
         """
         The default venv backend should be set, ideally to `uv|virtualenv`:
 
@@ -140,11 +141,11 @@ class NOX102(Noxfile):
         return False
 
 
-class NOX103(Noxfile):
+class NOX103(Nox):
     "Set default per session instead of session list"
 
     @staticmethod
-    def check(noxfile: NoxfileInfo | None) -> bool | None:
+    def check(noxfile: Noxfile | None) -> bool | None:
         """
         You should use `default=` in each session instead of setting a global list.
         """
@@ -166,11 +167,11 @@ class NOX103(Noxfile):
         return True
 
 
-class NOX201(Noxfile):
+class NOX201(Nox):
     "Set a script block with dependencies in your noxfile"
 
     @staticmethod
-    def check(noxfile: NoxfileInfo | None) -> bool | None:
+    def check(noxfile: Noxfile | None) -> bool | None:
         """
         You should have a script block with nox in it, for example:
 
@@ -188,11 +189,11 @@ class NOX201(Noxfile):
         return False
 
 
-class NOX202(Noxfile):
+class NOX202(Nox):
     "Has a shebang line"
 
     @staticmethod
-    def check(noxfile: NoxfileInfo | None) -> bool | None:
+    def check(noxfile: Noxfile | None) -> bool | None:
         """
         You should have a shebang line at the top of your noxfile.py, for example:
 
@@ -205,11 +206,11 @@ class NOX202(Noxfile):
         return bool(noxfile.shebang)
 
 
-class NOX203(Noxfile):
+class NOX203(Nox):
     "Provide a main block to run nox"
 
     @staticmethod
-    def check(noxfile: NoxfileInfo | None) -> bool | None:
+    def check(noxfile: Noxfile | None) -> bool | None:
         """
         You should have a main block at the bottom of your noxfile.py, for example:
 
@@ -235,8 +236,8 @@ class NOX203(Noxfile):
 
 
 def repo_review_checks(
-    list_all: bool = True, noxfile: NoxfileInfo | None = None
-) -> dict[str, Noxfile]:
+    list_all: bool = True, noxfile: Noxfile | None = None
+) -> dict[str, Nox]:
     if not list_all and noxfile is None:
         return {}
-    return {p.__name__: p() for p in Noxfile.__subclasses__()}
+    return {p.__name__: p() for p in Nox.__subclasses__()}
