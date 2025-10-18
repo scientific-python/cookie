@@ -46,12 +46,13 @@ repos:
     rev: "v1.18.2"
     hooks:
       - id: mypy
-        files: "(src|tests)"
+        files: "(src|tests|noxfile.py)"
         args: []
         additional_dependencies:
           - click
           - markdown-it-py
           - pytest
+          - nox
           - orjson
           - repo-review>=0.10.6
           - rich

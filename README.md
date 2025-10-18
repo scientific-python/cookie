@@ -358,6 +358,14 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`MY105`](https://learn.scientific-python.org/development/guides/style#MY105): MyPy enables redundant-expr
 - [`MY106`](https://learn.scientific-python.org/development/guides/style#MY106): MyPy enables truthy-bool
 
+### Nox
+- [`NOX101`](https://learn.scientific-python.org/development/guides/tasks#NOX101): Sets minimum nox version
+- [`NOX102`](https://learn.scientific-python.org/development/guides/tasks#NOX102): Sets venv backend
+- [`NOX103`](https://learn.scientific-python.org/development/guides/tasks#NOX103): Set default per session instead of session list
+- [`NOX201`](https://learn.scientific-python.org/development/guides/tasks#NOX201): Set a script block with dependencies in your noxfile
+- [`NOX202`](https://learn.scientific-python.org/development/guides/tasks#NOX202): Has a shebang line
+- [`NOX203`](https://learn.scientific-python.org/development/guides/tasks#NOX203): Provide a main block to run nox
+
 ### Pre-commit
 - [`PC100`](https://learn.scientific-python.org/development/guides/style#PC100): Has pre-commit-hooks
 - [`PC110`](https://learn.scientific-python.org/development/guides/style#PC110): Uses black or ruff-format
