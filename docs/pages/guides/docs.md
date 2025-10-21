@@ -12,20 +12,23 @@ parent: Topical Guides
 
 Documentation used to require learning reStructuredText (sometimes referred to
 as reST / rST), but today we have great choices for documentation in markdown,
-the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx,
+the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx and Mkdocs,
 and uses the modern MyST plugin to get Markdown support.
 
 {: .note-title }
 
-> Other frameworks
+> Popular frameworks
 >
 > There are other frameworks as well; these often are simpler, but are not as
 > commonly used, and have somewhat fewer examples and plugins. They are:
 >
+> - [Sphinx](https://www.sphinx-doc.org/en/master/): A popular documentation
+>   framework for scientific libraries with a history of close usage with scientific
+>   tools like LaTeX.
 > - [JupyterBook](https://jupyterbook.org): A powerful system for rendering a
 >   collection of notebooks using Sphinx internally. Can also be used for docs,
 >   though, see [echopype](https://echopype.readthedocs.io).
-> - [MkDocs](https://www.mkdocs.org): a from-scratch new documentation system
+> - [MkDocs](https://www.mkdocs.org): A from-scratch new documentation system
 >   based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
 >   since it doesn't use docutils. Has over
 >   [200 plugins](https://github.com/mkdocs/catalog) - they are much easier to
@@ -66,8 +69,13 @@ with render_cookie() as package:
 
 ## Hand-written docs
 
-Create `docs/` directory within your project (i.e. next to `src/`). There is a
-sphinx-quickstart tool, but it creates unnecessary files (make/bat, we recommend
+Create `docs/` directory within your project (i.e. next to `src/`). From here, 
+Sphinx and MkDocs diverge.
+
+{% tabs %} {% tab sphinx Sphinx %}
+
+
+There is a sphinx-quickstart tool, but it creates unnecessary files (make/bat, we recommend
 a cross-platform noxfile instead), and uses rST instead of Markdown. Instead,
 this is our recommended starting point for `conf.py`:
 
@@ -246,14 +254,189 @@ docs = [
   "sphinx-autodoc-typehints",
 ]
 ```
-
 You should use `--group=docs` when using uv or pip to install.
+
+{% endtab %} 
+{% tab mkdocs MkDocs %}
+
+While the cookie cutter creates a basic structure for your MkDocs (a top level `mkdocs.yml` file and the `docs` directory), you can also follow the official [Getting started](https://squidfunk.github.io/mkdocs-material/getting-started/) guide instead. Note, however, instead of the `pip` install, it is better practise install your documentation dependencies via `pyproject.toml` and then when you run your `uv sync` to install dependencies, you can explicitly ask for the `docs` group to be installed via `uv sync --group=docs` or `uv sync --all-groups`.
+
+If you selected the `mkdocs` option when using the template cookie-cutter repository, you will already have this group. Otherwise, add to your `pyproject.toml`:
+
+```toml
+[dependency-groups]
+docs = docs = [
+    "Markdown>=3.9",
+    "mkdocs>=1.1.2,<2",
+    "mkdocs-material>=9.1.19,<10",
+    "pyyaml>=6.0.1",
+    "mdx-include>=1.4.2",
+    "mkdocstrings-python>=1.18.2",
+    "mkdocs-gallery>=0.10.4",
+]
+```
+
+These dependencies include several common plugins---such as generating reference API documentation from docstrings---to make life easier.
+
+Similar to Sphinx, MkDocs puts your written documentation into the `/docs` directory, but also has a top-level `mkdocs.yml` configuration file. You can see the [minimal configuration for the file here](https://squidfunk.github.io/mkdocs-material/creating-your-site/#minimal-configuration), which is only four lines. However, the `mkdocs.yml` file bundled with the template repository have many options pre-configured. Let's run through an example configuration now.
+
+Here's the whole file for completeness. We'll break it into sections underneath.
+
+```yaml
+site_name: some_project
+site_url: https://some_project.readthedocs.io/
+site_author: "Bruce Wayne"
+repo_name: "wayne_industries/some_project"
+repo_url: "https://github.com/wayne_industries/some_project"
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - search.suggest
+    - search.highlight
+    - navigation.expand
+    - navigation.tracking
+    - toc.follow
+  palette:
+    # See options to customise your colour scheme here: 
+    # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+plugins:
+  autorefs: {}
+  mkdocstrings:
+    handlers:
+      python:
+        paths: [.]
+        import:
+          - https://docs.python.org/3/objects.inv
+          - https://docs.pydantic.dev/latest/objects.inv
+        options:
+          members_order: source
+          separate_signature: true
+          filters: ["!^_"]
+          show_root_heading: true
+          show_if_no_docstring: true
+          show_signature_annotations: true
+  gallery:
+    examples_dirs: docs/examples          # path to your example scripts
+    gallery_dirs: docs/generated/gallery  # where to save generated gallery
+    image_srcset: ['2x']
+    within_subsection_order: FileNameSortKey
+  search: {}
+
+
+nav:
+  - Home: index.md
+  - Python API: api.md
+  - Examples: generated/gallery
+```
+
+First, the basic site metadata contains authors, repository details, URLs, etc:
+
+```yaml
+site_name: some_project
+site_url: https://some_project.readthedocs.io/
+site_author: "Bruce Wayne"
+repo_name: "wayne_industries/some_project"
+repo_url: "https://github.com/wayne_industries/some_project"
+```
+
+After that, we can configure the visual theming for the the site. The repo icon is what appears in the top-right of the site next to the link to your GitHub/GitLab/etc, and you can peruse [other FontAwesome icons here](https://fontawesome.com/icons) if the default GitHub or GitLab brand is unwanted.
+
+Extra search features are documented [here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-search/), and the three enabled are autocomplete for search suggestions (`search.suggest`) and highlighting search terms after a user clicks on a search result (`search.highlight`).
+
+For navigation plugins (documented [here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/)), we request the side navigation to be expanded by default (`naviation.expand`) and that the URL autoupdate to the latest anchor as a user scrolls through the page (`naviation.tracking`). Finally, we request that the current user section is always shown and highlight in the sidebar via `toc.follow`.
+
+In the palette section (documented [here](https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/)) you can easily modify the scheme, icons, primary colours, and accents for both light and dark themes.
+
+```yaml
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - search.suggest
+    - search.highlight
+    - navigation.expand
+    - navigation.tracking
+    - toc.follow
+  palette:
+    # See options to customise your colour scheme here: 
+    # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+```
+
+Onto the best part of MkDocs: it's many plugins!
+
+* `search` enabled search functionality.
+* [`autorefs`](https://mkdocstrings.github.io/autorefs/) allows easier linking across pages and anchors.
+* [`mkdocstrings`](https://mkdocstrings.github.io/) lets you generate reference API documentation from your docstring.
+* [`gallery`](https://smarie.github.io/mkdocs-gallery/) turns an `example` directory inside your `docs` folder into accessible documentation, capturing output (such as print statements or generated `matplotlib` figures).
+
+```yaml
+plugins:
+  autorefs: {}
+  mkdocstrings:
+    handlers:
+      python:
+        paths: [.]
+        import:
+          - https://docs.python.org/3/objects.inv
+          - https://docs.pydantic.dev/latest/objects.inv
+        options:
+          members_order: source
+          separate_signature: true
+          filters: ["!^_"]
+          show_root_heading: true
+          show_if_no_docstring: true
+          show_signature_annotations: true
+  gallery:
+    examples_dirs: docs/examples          # path to your example scripts
+    gallery_dirs: docs/generated/gallery  # where to save generated gallery
+    image_srcset: ['2x']
+    within_subsection_order: FileNameSortKey
+  search: {}
+```
+
+Finally, we have to define the actual structure of our site by providing the primary navigation sidebar layout. Here we have three top-level links, one for the home page, one where all the generated API documentation from `mkdocstrings` will live, and a final entry for any examples showing how to use the package.
+
+```yaml
+nav:
+  - Home: index.md
+  - Python API: api.md
+  - Examples: generated/gallery
+```
+
+{% endtab %} {% endtabs %}
 
 ### .readthedocs.yaml
 
 In order to use <https://readthedocs.org> to build, host, and preview your
 documentation, you must have a `.readthedocs.yaml` file {% rr RTD100 %} like
 this:
+
+{% tabs %} {% tab sphinx Sphinx %}
 
 <!-- [[[cog
 with code_fence("yaml"):
@@ -280,6 +463,37 @@ build:
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
+
+{% endtab %}
+{% tab mkdocs MkDocs %}
+
+<!-- [[[cog
+with code_fence("yaml"):
+    print(readthedocs_yaml)
+]]] -->
+<!-- prettier-ignore-start -->
+```yaml
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+version: 2
+
+build:
+  os: ubuntu-24.04
+  tools:
+    python: "3.13"
+  commands:
+    - asdf plugin add uv
+    - asdf install uv latest
+    - asdf global uv latest
+    - uv sync --group docs
+    - uv run mkdocs build --site-dir $READTHEDOCS_OUTPUT/html
+```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
+
+
+{% endtab %} {% endtabs %}
 
 This sets the Read the Docs config version (2 is required) {% rr RTD101 %}.
 
