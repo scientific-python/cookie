@@ -44,7 +44,7 @@ def tests(session: nox.Session) -> None:
     session.install("{% if cookiecutter.backend != "mesonpy" %}-e{% endif %}.", *test_deps)
     session.run("pytest", *session.posargs)
 
-
+{%- if cookiecutter.docs == 'sphinx' %}
 @nox.session(reuse_venv=True, default=False)
 def docs(session: nox.Session) -> None:
     """
@@ -76,7 +76,6 @@ def docs(session: nox.Session) -> None:
     else:
         session.run("sphinx-build", "--keep-going", *shared_args)
 
-
 @nox.session(default=False)
 def build_api_docs(session: nox.Session) -> None:
     """
@@ -93,6 +92,19 @@ def build_api_docs(session: nox.Session) -> None:
         "--force",
         "src/{{ cookiecutter.__project_slug }}",
     )
+{%- elif cookiecutter.docs == 'mkdocs' %}
+@nox.session(reuse_venv=True, default=False)
+def docs(session: nox.Session) -> None:
+    """
+    Serve the docs
+    """
+
+    doc_deps = nox.project.dependency_groups(PROJECT, "docs")
+    session.install("{% if cookiecutter.backend != "mesonpy" %}-e{% endif %}.", *doc_deps)
+    session.run("mkdocs", "serve", "--clean")
+{%- endif %}
+
+
 
 
 @nox.session(default=False)

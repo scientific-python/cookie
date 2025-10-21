@@ -1,0 +1,58 @@
+site_name: {{ cookiecutter.project_name }}
+site_url: https://{{cookiecutter.project_name}}.readthedocs.io/
+site_author: "{{ cookiecutter.full_name }}"
+
+repo_name: "{{ cookiecutter.org }}/{{ cookiecutter.__project_slug }}"
+repo_url: "{{ cookiecutter.url }}"
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - search.suggest
+    - search.highlight
+    - navigation.expand
+    - navigation.tracking
+    - toc.follow
+  palette:
+    # See options to customise your colour scheme here: 
+    # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+plugins:
+  autorefs: {}
+  mkdocstrings:
+    handlers:
+      python:
+        paths: [.]
+        import:
+          - https://docs.python.org/3/objects.inv
+          - https://docs.pydantic.dev/latest/objects.inv
+        options:
+          members_order: source
+          separate_signature: true
+          filters: ["!^_"]
+          show_root_heading: true
+          show_if_no_docstring: true
+          show_signature_annotations: true
+  gallery:
+    examples_dirs: docs/examples          # path to your example scripts
+    gallery_dirs: docs/generated/gallery  # where to save generated gallery
+    image_srcset: ['2x']
+    within_subsection_order: FileNameSortKey
+  search: {}
+
+nav:
+  - Home: index.md
+  - Python API: api.md
+  - Examples: generated/gallery

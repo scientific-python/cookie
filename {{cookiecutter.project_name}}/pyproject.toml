@@ -125,6 +125,7 @@ test = [
 dev = [
   { include-group = "test" },
 ]
+{%- if cookiecutter.docs == 'sphinx' %}
 docs = [
   "sphinx>=7.0",
   "myst_parser>=0.13",
@@ -132,6 +133,15 @@ docs = [
   "sphinx_autodoc_typehints",
   "furo>=2023.08.17",
 ]
+{%- elif cookiecutter.docs == "mkdocs" %}
+docs = [
+    "Markdown>=3.9",
+    "mkdocs>=1.1.2,<2",
+    "mkdocs-material>=9.1.19,<10",
+    "pyyaml>=6.0.1",
+    "mkdocstrings-python>=1.18.2",
+    "mkdocs-gallery>=0.10.4",
+]{%- endif %}
 
 
 {%- if cookiecutter.backend == "skbuild" %}
@@ -312,6 +322,9 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
 "noxfile.py" = ["T20"]
+{%- if cookiecutter.docs == 'mkdocs' %}
+"docs/examples/**" = ["T20"]
+{%- endif %}
 
 
 [tool.pylint]
