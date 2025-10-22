@@ -498,19 +498,18 @@ build:
 This sets the Read the Docs config version (2 is required) {% rr RTD101 %}.
 
 The `build` table is the modern way to specify a runner. You need an `os` (a
-modern Ubuntu should be fine) {% rr RTD102 %}, a `tools` table (we'll use Python
+modern Ubuntu should be fine) {% rr RTD102 %} and a `tools` table (we'll use Python
 {% rr RTD103 %}, several languages are supported here).
 
-Adding a `sphinx` table tells Read the Docs to enable Sphinx integration. MkDocs
-is supported too. You must include one of these unless you use build commands
-{% rr RTD104 %}.
-
-Finally, we have a `python` table with an `install` key to describe how to
-install our project. This will enable our "docs" extra.
+Finally, we have a `commands` table which describes how to install our dependencies and 
+build the documentation into the ReadTheDocs output directory.
 
 ### noxfile.py additions
 
 Add a session to your `noxfile.py` to generate docs:
+
+{% tabs %} {% tab sphinx Sphinx %}
+
 
 <!-- [[[cog
 with code_fence("python"):
@@ -552,6 +551,7 @@ def docs(session: nox.Session) -> None:
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
+
 This is a more complex Nox job just because it's taking some options (the
 ability to build and serve instead of just build). The first portion is just
 setting up argument parsing so we can serve if building `html`. Then it does
@@ -565,7 +565,37 @@ and run either the autobuild (for `--serve`) or regular build. We could have
 just added `python -m http.server` pointing at the built documentation, but
 autobuild will rebuild if you change a file while serving.
 
+{% endtab %}
+{% tab mkdocs MkDocs %}
+
+
+<!-- [[[cog
+with code_fence("python"):
+    print(noxfile.get_source("docs"))
+]]] -->
+<!-- prettier-ignore-start -->
+```python
+@nox.session(reuse_venv=True, default=False)
+def docs(session: nox.Session) -> None:
+    """
+    Serve the docs
+    """
+
+    doc_deps = nox.project.dependency_groups(PROJECT, "docs")
+    session.install("{% if cookiecutter.backend != "mesonpy" %}-e{% endif %}.", *doc_deps)
+    session.run("mkdocs", "serve", "--clean")
+```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
+
+This Nox job will invoke MkDocs to serve a live copy of your documentation under a local endpoint, such as `http://localhost:8080` (the link will be in the job output). By requesting a `serve` instead of a `build`, any time documentation or the source code is changed, the documentation will automatically update. For documentation on how to configure what directories are watched for changes, [consult the MkDocs configuration page](https://www.mkdocs.org/user-guide/configuration/#live-reloading).
+
+{% endtab %} {% endtabs %}
+
+
 ## API docs
+
+{% tabs %} {% tab sphinx Sphinx %}
 
 To build API docs, you need to add the following Nox job. It will rerun
 `sphinx-apidoc` to generate the sphinx autodoc pages for each of your public
@@ -614,7 +644,28 @@ api/<package-name-here>
 
 Note that your docstrings are still parsed as reStructuredText.
 
+{% endtab %}
+{% tab mkdocs MkDocs %}
+
+API documentation can be built from your docstring using the `mkdocstrings` plugin, as referenced previously. Unlike with Sphinx, which requires a direct invocation of `sphinx-apidoc`, MkDocs plugins are integrated into the MkDocs build.
+
+All `mkdocstrings` requires is your markdown files to specify what package, module, or class you would like documented in said file. See the [`mkdocstring` Usage page](https://mkdocstrings.github.io/usage/) for more details, but for a minimal example, if you add an `api.md` file and set its contents to:
+
+```markdown
+# Documentation for `my_package.MyClass`
+
+::: my_package.MyClass
+```
+
+Where the triple colon syntax is used to specify what documentation you would like built. In this case, we are asking for the class `MyClass` which is located in `my_package`, and a user would be able to import this class via `from my_package` import `MyClass`. If the class is not exposed in the package `__init__.py` and is only importable from a module (such that a user would have to write `from my_package.my_module import MyClass`) then you would update the identifier to `my_package.my_module.MyClass`.
+
+{% endtab %}
+{% endtabs %}
+
 ## Notebooks in docs
+
+{% tabs %} {% tab sphinx Sphinx %}
+
 
 You can combine notebooks into your docs. The tool for this is `nbsphinx`. If
 you want to use it, add `nbsphinx` and `ipykernel` to your documentation
@@ -642,6 +693,26 @@ for this to work. CI services like readthedocs usually have it installed.
 
 If you want to use Markdown instead of notebooks, you can use jupytext (see
 [here](https://nbsphinx.readthedocs.io/en/0.9.2/a-markdown-file.html)).
+
+{% endtab %}
+{% tab mkdocs MkDocs %}
+
+You can combine notebooks into your docs. The plugin for this is `mkdocs-jupyter`, and configuration is detailed [here](https://github.com/danielfrg/mkdocs-jupyter) and you can find examples [here](https://mkdocs-jupyter.danielfrg.com/).
+
+Once you have a notebook (which has been run and populated with results, as the plugin will not execute your notebooks for you), you simply need to add a link to the notebook in your `mkdocs.yml` navigation.
+
+```yaml
+nav:
+    - Home: index.md
+    - Notebook page: notebook.ipynb
+    - Python file: python_script.py
+plugins:
+    - mkdocs-jupyter
+```
+
+Note that the `mkdocs-jupyter` plugin allows you to include both python scripts and notebooks. If you have a directory of example python files to run, consider [`mkdocs-gallery`](https://smarie.github.io/mkdocs-gallery/) as an alternative.
+
+{% endtab %} {% endtabs %}
 
 <!-- prettier-ignore-start -->
 [diátaxis]: https://diataxis.fr/
