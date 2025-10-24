@@ -11,7 +11,7 @@ scientists and research software engineers. The repository contains:
 ## Contributing to the documentation
 
 To build locally, install rbenv (remember to run `rbenv init` after installing,
-and `rbenv install 3.1.2`). Then:
+and `rbenv install 3.4.1`). Then:
 
 ```bash
 bundle install
