@@ -1,0 +1,1 @@
+# ::: {{cookiecutter.__project_slug}}.example

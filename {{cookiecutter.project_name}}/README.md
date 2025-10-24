@@ -11,7 +11,6 @@
 {%- if cookiecutter.org | lower == "scikit-hep" %}
 [![Scikit-HEP][sk-badge]](https://scikit-hep.org/) {%- endif %}
 
-<!-- SPHINX-START -->
 
 <!-- prettier-ignore-start -->
 [actions-badge]:            {{cookiecutter.url}}/workflows/CI/badge.svg
