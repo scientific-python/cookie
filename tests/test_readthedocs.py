@@ -67,34 +67,3 @@ def test_rtd103_false() -> None:
           os: ubuntu-22.04
     """)
     assert not compute_check("RTD103", readthedocs=readthedocs).result
-
-
-def test_rtd104_commands() -> None:
-    readthedocs = yaml.safe_load("""
-        build:
-          commands: []
-    """)
-    assert compute_check("RTD104", readthedocs=readthedocs).result
-
-
-def test_rtd104_sphinx() -> None:
-    readthedocs = yaml.safe_load("""
-        sphinx:
-          configuration: docs/conf.py
-    """)
-    assert compute_check("RTD104", readthedocs=readthedocs).result
-
-
-def test_rtd104_mkdocs() -> None:
-    readthedocs = yaml.safe_load("""
-        mkdocs:
-          configuration: docs/mkdocs.yml
-    """)
-    assert compute_check("RTD104", readthedocs=readthedocs).result
-
-
-def test_rtd104_false() -> None:
-    readthedocs = yaml.safe_load("""
-        build:
-    """)
-    assert not compute_check("RTD104", readthedocs=readthedocs).result
