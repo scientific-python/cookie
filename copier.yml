@@ -83,7 +83,7 @@ backend:
   # [[[end]]]
 
 # [[[cog print(cc.docs.yaml()) ]]]
-backend:
+docs:
   help: Choose your documentation tool
   choices:
     "Sphinx": sphinx
