@@ -12,8 +12,8 @@ parent: Topical Guides
 
 Documentation used to require learning reStructuredText (sometimes referred to
 as reST / rST), but today we have great choices for documentation in markdown,
-the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx and Mkdocs,
-and uses the modern MyST plugin to get Markdown support.
+the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx
+and Mkdocs, and uses the modern MyST plugin to get Markdown support.
 
 {: .note-title }
 
@@ -23,9 +23,10 @@ and uses the modern MyST plugin to get Markdown support.
 > commonly used, and have somewhat fewer examples and plugins. They are:
 >
 > - [Sphinx](https://www.sphinx-doc.org/en/master/): A popular documentation
->   framework for scientific libraries with a history of close usage with scientific
->   tools like LaTeX. Examples include [astropy](https://docs.astropy.org/en/stable/index_user_docs.html)
->   and [corner](https://docs.astropy.org/en/stable/index_user_docs.html).
+>   framework for scientific libraries with a history of close usage with
+>   scientific tools like LaTeX. Examples include
+>   [astropy](https://docs.astropy.org/en/stable/index_user_docs.html) and
+>   [corner](https://docs.astropy.org/en/stable/index_user_docs.html).
 > - [MkDocs](https://www.mkdocs.org): A from-scratch new documentation system
 >   based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
 >   since it doesn't use docutils. Has over
@@ -33,9 +34,11 @@ and uses the modern MyST plugin to get Markdown support.
 >   write than Sphinx. Example sites include [hatch](https://hatch.pypa.io),
 >   [PDM](https://pdm.fming.dev),
 >   [cibuildwheel](https://cibuildwheel.readthedocs.io),
->   [Textual](https://textual.textualize.io), 
->   [pipx](https://pypa.github.io/pipx/), [Pydantic](https://docs.pydantic.dev/latest/), 
->   [Polars](https://docs.pola.rs/), and [FastAPI](https://fastapi.tiangolo.com/)
+>   [Textual](https://textual.textualize.io),
+>   [pipx](https://pypa.github.io/pipx/),
+>   [Pydantic](https://docs.pydantic.dev/latest/),
+>   [Polars](https://docs.pola.rs/), and
+>   [FastAPI](https://fastapi.tiangolo.com/)
 > - [JupyterBook](https://jupyterbook.org): A powerful system for rendering a
 >   collection of notebooks using Sphinx internally. Can also be used for docs,
 >   though, see [echopype](https://echopype.readthedocs.io).
@@ -71,15 +74,14 @@ with render_cookie() as package:
 
 ## Hand-written docs
 
-Create `docs/` directory within your project (next to `src/`). From here, 
-Sphinx and MkDocs diverge.
+Create `docs/` directory within your project (next to `src/`). From here, Sphinx
+and MkDocs diverge.
 
 {% tabs %}{% tab sphinx Sphinx %}
 
-There is a sphinx-quickstart tool, but it creates unnecessary files (make/bat, we recommend
-a cross-platform noxfile instead), and uses rST instead of Markdown. Instead,
-this is our recommended starting point for `conf.py`:
-
+There is a sphinx-quickstart tool, but it creates unnecessary files (make/bat,
+we recommend a cross-platform noxfile instead), and uses rST instead of
+Markdown. Instead, this is our recommended starting point for `conf.py`:
 
 ### conf.py
 
@@ -256,14 +258,23 @@ docs = [
   "sphinx-autodoc-typehints",
 ]
 ```
+
 You should use `--group=docs` when using uv or pip to install.
 
-{% endtab %} 
-{% tab mkdocs MkDocs %}
+{% endtab %} {% tab mkdocs MkDocs %}
 
-While the cookie cutter creates a basic structure for your MkDocs (a top level `mkdocs.yml` file and the `docs` directory), you can also follow the official [Getting started](https://squidfunk.github.io/mkdocs-material/getting-started/) guide instead. Note, however, instead of the `pip` install, it is better practise install your documentation dependencies via `pyproject.toml` and then when you run your `uv sync` to install dependencies, you can explicitly ask for the `docs` group to be installed via `uv sync --group=docs` or `uv sync --all-groups`.
+While the cookie cutter creates a basic structure for your MkDocs (a top level
+`mkdocs.yml` file and the `docs` directory), you can also follow the official
+[Getting started](https://squidfunk.github.io/mkdocs-material/getting-started/)
+guide instead. Note, however, instead of the `pip` install, it is better
+practise install your documentation dependencies via `pyproject.toml` and then
+when you run your `uv sync` to install dependencies, you can explicitly ask for
+the `docs` group to be installed via `uv sync --group=docs` or
+`uv sync --all-groups`.
 
-If you selected the `mkdocs` option when using the template cookie-cutter repository, you will already have this group. Otherwise, add to your `pyproject.toml`:
+If you selected the `mkdocs` option when using the template cookie-cutter
+repository, you will already have this group. Otherwise, add to your
+`pyproject.toml`:
 
 ```toml
 [dependency-groups]
@@ -277,9 +288,16 @@ docs = [
 ]
 ```
 
-These dependencies include several common plugins---such as generating reference API documentation from docstrings---to make life easier.
+These dependencies include several common plugins---such as generating reference
+API documentation from docstrings---to make life easier.
 
-Similar to Sphinx, MkDocs puts your written documentation into the `/docs` directory, but also has a top-level `mkdocs.yml` configuration file. You can see the [minimal configuration for the file here](https://squidfunk.github.io/mkdocs-material/creating-your-site/#minimal-configuration), which is only four lines. However, the `mkdocs.yml` file bundled with the template repository have many options pre-configured. Let's run through an example configuration now.
+Similar to Sphinx, MkDocs puts your written documentation into the `/docs`
+directory, but also has a top-level `mkdocs.yml` configuration file. You can see
+the
+[minimal configuration for the file here](https://squidfunk.github.io/mkdocs-material/creating-your-site/#minimal-configuration),
+which is only four lines. However, the `mkdocs.yml` file bundled with the
+template repository have many options pre-configured. Let's run through an
+example configuration now.
 
 Here's the whole file for completeness. We'll break it into sections underneath.
 
@@ -301,7 +319,7 @@ theme:
     - navigation.tracking
     - toc.follow
   palette:
-    # See options to customise your colour scheme here: 
+    # See options to customise your colour scheme here:
     # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -331,7 +349,6 @@ plugins:
           show_if_no_docstring: true
           show_signature_annotations: true
   search: {}
-
 
 nav:
   - Home: index.md
@@ -348,13 +365,29 @@ repo_name: "wayne_industries/some_project"
 repo_url: "https://github.com/wayne_industries/some_project"
 ```
 
-After that, we can configure the visual theming for the the site. The repo icon is what appears in the top-right of the site next to the link to your GitHub/GitLab/etc, and you can peruse [other FontAwesome icons here](https://fontawesome.com/icons) if the default GitHub or GitLab brand is unwanted.
+After that, we can configure the visual theming for the the site. The repo icon
+is what appears in the top-right of the site next to the link to your
+GitHub/GitLab/etc, and you can peruse
+[other FontAwesome icons here](https://fontawesome.com/icons) if the default
+GitHub or GitLab brand is unwanted.
 
-Extra search features are documented [here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-search/), and the three enabled are autocomplete for search suggestions (`search.suggest`) and highlighting search terms after a user clicks on a search result (`search.highlight`).
+Extra search features are documented
+[here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-search/),
+and the three enabled are autocomplete for search suggestions (`search.suggest`)
+and highlighting search terms after a user clicks on a search result
+(`search.highlight`).
 
-For navigation plugins (documented [here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/)), we request the side navigation to be expanded by default (`naviation.expand`) and that the URL autoupdate to the latest anchor as a user scrolls through the page (`naviation.tracking`). Finally, we request that the current user section is always shown and highlight in the sidebar via `toc.follow`.
+For navigation plugins (documented
+[here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/)),
+we request the side navigation to be expanded by default (`naviation.expand`)
+and that the URL autoupdate to the latest anchor as a user scrolls through the
+page (`naviation.tracking`). Finally, we request that the current user section
+is always shown and highlight in the sidebar via `toc.follow`.
 
-In the palette section (documented [here](https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/)) you can easily modify the scheme, icons, primary colours, and accents for both light and dark themes.
+In the palette section (documented
+[here](https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/))
+you can easily modify the scheme, icons, primary colours, and accents for both
+light and dark themes.
 
 ```yaml
 theme:
@@ -368,7 +401,7 @@ theme:
     - navigation.tracking
     - toc.follow
   palette:
-    # See options to customise your colour scheme here: 
+    # See options to customise your colour scheme here:
     # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -384,10 +417,11 @@ theme:
 
 Onto the best part of MkDocs: it's many plugins!
 
-* `search` enabled search functionality.
-* [`autorefs`](https://mkdocstrings.github.io/autorefs/) allows easier linking across pages and anchors.
-* [`mkdocstrings`](https://mkdocstrings.github.io/) lets you generate reference API documentation from your docstring.
-
+- `search` enabled search functionality.
+- [`autorefs`](https://mkdocstrings.github.io/autorefs/) allows easier linking
+  across pages and anchors.
+- [`mkdocstrings`](https://mkdocstrings.github.io/) lets you generate reference
+  API documentation from your docstring.
 
 ```yaml
 plugins:
@@ -409,7 +443,10 @@ plugins:
   search: {}
 ```
 
-Finally, we have to define the actual structure of our site by providing the primary navigation sidebar layout. Here we have three top-level links, one for the home page and one where all the generated API documentation from `mkdocstrings` will live.
+Finally, we have to define the actual structure of our site by providing the
+primary navigation sidebar layout. Here we have three top-level links, one for
+the home page and one where all the generated API documentation from
+`mkdocstrings` will live.
 
 ```yaml
 nav:
@@ -453,8 +490,7 @@ build:
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
-{% endtab %}
-{% tab mkdocs MkDocs %}
+{% endtab %} {% tab mkdocs MkDocs %}
 
 <!-- [[[cog
 with code_fence("yaml"):
@@ -481,24 +517,22 @@ build:
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
-
 {% endtab %} {% endtabs %}
 
 This sets the Read the Docs config version (2 is required) {% rr RTD101 %}.
 
 The `build` table is the modern way to specify a runner. You need an `os` (a
-modern Ubuntu should be fine) {% rr RTD102 %} and a `tools` table (we'll use Python
-{% rr RTD103 %}, several languages are supported here).
+modern Ubuntu should be fine) {% rr RTD102 %} and a `tools` table (we'll use
+Python {% rr RTD103 %}, several languages are supported here).
 
-Finally, we have a `commands` table which describes how to install our dependencies and 
-build the documentation into the ReadTheDocs output directory.
+Finally, we have a `commands` table which describes how to install our
+dependencies and build the documentation into the ReadTheDocs output directory.
 
 ### noxfile.py additions
 
 Add a session to your `noxfile.py` to generate docs:
 
 {% tabs %} {% tab sphinx Sphinx %}
-
 
 <!-- [[[cog
 with code_fence("python"):
@@ -540,7 +574,6 @@ def docs(session: nox.Session) -> None:
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
-
 This is a more complex Nox job just because it's taking some options (the
 ability to build and serve instead of just build). The first portion is just
 setting up argument parsing so we can serve if building `html`. Then it does
@@ -554,9 +587,7 @@ and run either the autobuild (for `--serve`) or regular build. We could have
 just added `python -m http.server` pointing at the built documentation, but
 autobuild will rebuild if you change a file while serving.
 
-{% endtab %}
-{% tab mkdocs MkDocs %}
-
+{% endtab %} {% tab mkdocs MkDocs %}
 
 <!-- [[[cog
 with code_fence("python"):
@@ -577,10 +608,14 @@ def docs(session: nox.Session) -> None:
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
-This Nox job will invoke MkDocs to serve a live copy of your documentation under a local endpoint, such as `http://localhost:8080` (the link will be in the job output). By requesting a `serve` instead of a `build`, any time documentation or the source code is changed, the documentation will automatically update. For documentation on how to configure what directories are watched for changes, [consult the MkDocs configuration page](https://www.mkdocs.org/user-guide/configuration/#live-reloading).
+This Nox job will invoke MkDocs to serve a live copy of your documentation under
+a local endpoint, such as `http://localhost:8080` (the link will be in the job
+output). By requesting a `serve` instead of a `build`, any time documentation or
+the source code is changed, the documentation will automatically update. For
+documentation on how to configure what directories are watched for changes,
+[consult the MkDocs configuration page](https://www.mkdocs.org/user-guide/configuration/#live-reloading).
 
 {% endtab %} {% endtabs %}
-
 
 ## API docs
 
@@ -633,12 +668,18 @@ api/<package-name-here>
 
 Note that your docstrings are still parsed as reStructuredText.
 
-{% endtab %}
-{% tab mkdocs MkDocs %}
+{% endtab %} {% tab mkdocs MkDocs %}
 
-API documentation can be built from your docstring using the `mkdocstrings` plugin, as referenced previously. Unlike with Sphinx, which requires a direct invocation of `sphinx-apidoc`, MkDocs plugins are integrated into the MkDocs build.
+API documentation can be built from your docstring using the `mkdocstrings`
+plugin, as referenced previously. Unlike with Sphinx, which requires a direct
+invocation of `sphinx-apidoc`, MkDocs plugins are integrated into the MkDocs
+build.
 
-All `mkdocstrings` requires is your markdown files to specify what module, class, or function you would like documented in said file. See the [`mkdocstring` Usage page](https://mkdocstrings.github.io/usage/) for more details, but for a minimal example, if you add an `api.md` file and set its contents to:
+All `mkdocstrings` requires is your markdown files to specify what module,
+class, or function you would like documented in said file. See the
+[`mkdocstring` Usage page](https://mkdocstrings.github.io/usage/) for more
+details, but for a minimal example, if you add an `api.md` file and set its
+contents to:
 
 ```markdown
 # Documentation for `my_package.my_module`
@@ -646,15 +687,17 @@ All `mkdocstrings` requires is your markdown files to specify what module, class
 ::: my_package.my_module
 ```
 
-Where the triple colon syntax is used to specify what documentation you would like built. In this case, we are asking to document the entire module `my_class` (and all classes and functions within it) which is located in `my_package`. You could instead ask for only a single component inside your module by being more specific, like `::: my_package.my_module.MyClass`.
+Where the triple colon syntax is used to specify what documentation you would
+like built. In this case, we are asking to document the entire module `my_class`
+(and all classes and functions within it) which is located in `my_package`. You
+could instead ask for only a single component inside your module by being more
+specific, like `::: my_package.my_module.MyClass`.
 
-{% endtab %}
-{% endtabs %}
+{% endtab %} {% endtabs %}
 
 ## Notebooks in docs
 
 {% tabs %} {% tab sphinx Sphinx %}
-
 
 You can combine notebooks into your docs. The tool for this is `nbsphinx`. If
 you want to use it, add `nbsphinx` and `ipykernel` to your documentation
@@ -683,23 +726,32 @@ for this to work. CI services like readthedocs usually have it installed.
 If you want to use Markdown instead of notebooks, you can use jupytext (see
 [here](https://nbsphinx.readthedocs.io/en/0.9.2/a-markdown-file.html)).
 
-{% endtab %}
-{% tab mkdocs MkDocs %}
+{% endtab %} {% tab mkdocs MkDocs %}
 
-You can combine notebooks into your docs. The plugin for this is `mkdocs-jupyter`, and configuration is detailed [here](https://github.com/danielfrg/mkdocs-jupyter) and you can find examples [here](https://mkdocs-jupyter.danielfrg.com/).
+You can combine notebooks into your docs. The plugin for this is
+`mkdocs-jupyter`, and configuration is detailed
+[here](https://github.com/danielfrg/mkdocs-jupyter) and you can find examples
+[here](https://mkdocs-jupyter.danielfrg.com/).
 
-Once you have a notebook (which has been run and populated with results, as the plugin will not execute your notebooks for you), you simply need to add a link to the notebook in your `mkdocs.yml` navigation.
+Once you have a notebook (which has been run and populated with results, as the
+plugin will not execute your notebooks for you), you simply need to add a link
+to the notebook in your `mkdocs.yml` navigation.
 
 ```yaml
 nav:
-    - Home: index.md
-    - Notebook page: notebook.ipynb
-    - Python file: python_script.py
+  - Home: index.md
+  - Notebook page: notebook.ipynb
+  - Python file: python_script.py
 plugins:
-    - mkdocs-jupyter
+  - mkdocs-jupyter
 ```
 
-Note that the `mkdocs-jupyter` plugin allows you to include both python scripts and notebooks. If you have a directory of example python files to run, consider [`mkdocs-gallery`](https://smarie.github.io/mkdocs-gallery/) as an alternative. For an external example, the [ChainConsumer docs](https://samreay.github.io/ChainConsumer/generated/gallery/) show `mkdocs-gallery` in action.
+Note that the `mkdocs-jupyter` plugin allows you to include both python scripts
+and notebooks. If you have a directory of example python files to run, consider
+[`mkdocs-gallery`](https://smarie.github.io/mkdocs-gallery/) as an alternative.
+For an external example, the
+[ChainConsumer docs](https://samreay.github.io/ChainConsumer/generated/gallery/)
+show `mkdocs-gallery` in action.
 
 {% endtab %} {% endtabs %}
 
