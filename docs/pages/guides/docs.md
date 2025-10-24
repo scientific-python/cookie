@@ -274,7 +274,6 @@ docs = [
     "pyyaml>=6.0.1",
     "mdx-include>=1.4.2",
     "mkdocstrings-python>=1.18.2",
-    "mkdocs-gallery>=0.10.4",
 ]
 ```
 
@@ -321,7 +320,7 @@ plugins:
     handlers:
       python:
         paths: [.]
-        import:
+        inventories:
           - https://docs.python.org/3/objects.inv
           - https://docs.pydantic.dev/latest/objects.inv
         options:
@@ -331,18 +330,12 @@ plugins:
           show_root_heading: true
           show_if_no_docstring: true
           show_signature_annotations: true
-  gallery:
-    examples_dirs: docs/examples          # path to your example scripts
-    gallery_dirs: docs/generated/gallery  # where to save generated gallery
-    image_srcset: ['2x']
-    within_subsection_order: FileNameSortKey
   search: {}
 
 
 nav:
   - Home: index.md
   - Python API: api.md
-  - Examples: generated/gallery
 ```
 
 First, the basic site metadata contains authors, repository details, URLs, etc:
@@ -394,7 +387,7 @@ Onto the best part of MkDocs: it's many plugins!
 * `search` enabled search functionality.
 * [`autorefs`](https://mkdocstrings.github.io/autorefs/) allows easier linking across pages and anchors.
 * [`mkdocstrings`](https://mkdocstrings.github.io/) lets you generate reference API documentation from your docstring.
-* [`gallery`](https://smarie.github.io/mkdocs-gallery/) turns an `example` directory inside your `docs` folder into accessible documentation, capturing output (such as print statements or generated `matplotlib` figures).
+
 
 ```yaml
 plugins:
@@ -403,7 +396,7 @@ plugins:
     handlers:
       python:
         paths: [.]
-        import:
+        inventories:
           - https://docs.python.org/3/objects.inv
           - https://docs.pydantic.dev/latest/objects.inv
         options:
@@ -413,21 +406,15 @@ plugins:
           show_root_heading: true
           show_if_no_docstring: true
           show_signature_annotations: true
-  gallery:
-    examples_dirs: docs/examples          # path to your example scripts
-    gallery_dirs: docs/generated/gallery  # where to save generated gallery
-    image_srcset: ['2x']
-    within_subsection_order: FileNameSortKey
   search: {}
 ```
 
-Finally, we have to define the actual structure of our site by providing the primary navigation sidebar layout. Here we have three top-level links, one for the home page, one where all the generated API documentation from `mkdocstrings` will live, and a final entry for any examples showing how to use the package.
+Finally, we have to define the actual structure of our site by providing the primary navigation sidebar layout. Here we have three top-level links, one for the home page and one where all the generated API documentation from `mkdocstrings` will live.
 
 ```yaml
 nav:
   - Home: index.md
   - Python API: api.md
-  - Examples: generated/gallery
 ```
 
 {% endtab %} {% endtabs %}
@@ -651,15 +638,15 @@ Note that your docstrings are still parsed as reStructuredText.
 
 API documentation can be built from your docstring using the `mkdocstrings` plugin, as referenced previously. Unlike with Sphinx, which requires a direct invocation of `sphinx-apidoc`, MkDocs plugins are integrated into the MkDocs build.
 
-All `mkdocstrings` requires is your markdown files to specify what package, module, or class you would like documented in said file. See the [`mkdocstring` Usage page](https://mkdocstrings.github.io/usage/) for more details, but for a minimal example, if you add an `api.md` file and set its contents to:
+All `mkdocstrings` requires is your markdown files to specify what module, class, or function you would like documented in said file. See the [`mkdocstring` Usage page](https://mkdocstrings.github.io/usage/) for more details, but for a minimal example, if you add an `api.md` file and set its contents to:
 
 ```markdown
-# Documentation for `my_package.MyClass`
+# Documentation for `my_package.my_module`
 
-::: my_package.MyClass
+::: my_package.my_module
 ```
 
-Where the triple colon syntax is used to specify what documentation you would like built. In this case, we are asking for the class `MyClass` which is located in `my_package`, and a user would be able to import this class via `from my_package` import `MyClass`. If the class is not exposed in the package `__init__.py` and is only importable from a module (such that a user would have to write `from my_package.my_module import MyClass`) then you would update the identifier to `my_package.my_module.MyClass`.
+Where the triple colon syntax is used to specify what documentation you would like built. In this case, we are asking to document the entire module `my_class` (and all classes and functions within it) which is located in `my_package`. You could instead ask for only a single component inside your module by being more specific, like `::: my_package.my_module.MyClass`.
 
 {% endtab %}
 {% endtabs %}
@@ -712,7 +699,7 @@ plugins:
     - mkdocs-jupyter
 ```
 
-Note that the `mkdocs-jupyter` plugin allows you to include both python scripts and notebooks. If you have a directory of example python files to run, consider [`mkdocs-gallery`](https://smarie.github.io/mkdocs-gallery/) as an alternative.
+Note that the `mkdocs-jupyter` plugin allows you to include both python scripts and notebooks. If you have a directory of example python files to run, consider [`mkdocs-gallery`](https://smarie.github.io/mkdocs-gallery/) as an alternative. For an external example, the [ChainConsumer docs](https://samreay.github.io/ChainConsumer/generated/gallery/) show `mkdocs-gallery` in action.
 
 {% endtab %} {% endtabs %}
 

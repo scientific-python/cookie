@@ -35,7 +35,7 @@ plugins:
     handlers:
       python:
         paths: [.]
-        import:
+        inventories:
           - https://docs.python.org/3/objects.inv
           - https://docs.pydantic.dev/latest/objects.inv
         options:
@@ -45,14 +45,8 @@ plugins:
           show_root_heading: true
           show_if_no_docstring: true
           show_signature_annotations: true
-  gallery:
-    examples_dirs: docs/examples          # path to your example scripts
-    gallery_dirs: docs/generated/gallery  # where to save generated gallery
-    image_srcset: ['2x']
-    within_subsection_order: FileNameSortKey
   search: {}
 
 nav:
   - Home: index.md
   - Python API: api.md
-  - Examples: generated/gallery
