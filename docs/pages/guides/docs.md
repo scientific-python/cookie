@@ -24,10 +24,8 @@ and uses the modern MyST plugin to get Markdown support.
 >
 > - [Sphinx](https://www.sphinx-doc.org/en/master/): A popular documentation
 >   framework for scientific libraries with a history of close usage with scientific
->   tools like LaTeX.
-> - [JupyterBook](https://jupyterbook.org): A powerful system for rendering a
->   collection of notebooks using Sphinx internally. Can also be used for docs,
->   though, see [echopype](https://echopype.readthedocs.io).
+>   tools like LaTeX. Examples include [astropy](https://docs.astropy.org/en/stable/index_user_docs.html)
+>   and [corner](https://docs.astropy.org/en/stable/index_user_docs.html).
 > - [MkDocs](https://www.mkdocs.org): A from-scratch new documentation system
 >   based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
 >   since it doesn't use docutils. Has over
@@ -35,8 +33,12 @@ and uses the modern MyST plugin to get Markdown support.
 >   write than Sphinx. Example sites include [hatch](https://hatch.pypa.io),
 >   [PDM](https://pdm.fming.dev),
 >   [cibuildwheel](https://cibuildwheel.readthedocs.io),
->   [Textual](https://textual.textualize.io), and
->   [pipx](https://pypa.github.io/pipx/).
+>   [Textual](https://textual.textualize.io), 
+>   [pipx](https://pypa.github.io/pipx/), [Pydantic](https://docs.pydantic.dev/latest/), 
+>   [Polars](https://docs.pola.rs/), and [FastAPI](https://fastapi.tiangolo.com/)
+> - [JupyterBook](https://jupyterbook.org): A powerful system for rendering a
+>   collection of notebooks using Sphinx internally. Can also be used for docs,
+>   though, see [echopype](https://echopype.readthedocs.io).
 
 ## What to include
 
@@ -69,15 +71,15 @@ with render_cookie() as package:
 
 ## Hand-written docs
 
-Create `docs/` directory within your project (i.e. next to `src/`). From here, 
+Create `docs/` directory within your project (next to `src/`). From here, 
 Sphinx and MkDocs diverge.
 
-{% tabs %} {% tab sphinx Sphinx %}
-
+{% tabs %}{% tab sphinx Sphinx %}
 
 There is a sphinx-quickstart tool, but it creates unnecessary files (make/bat, we recommend
 a cross-platform noxfile instead), and uses rST instead of Markdown. Instead,
 this is our recommended starting point for `conf.py`:
+
 
 ### conf.py
 
@@ -265,7 +267,7 @@ If you selected the `mkdocs` option when using the template cookie-cutter reposi
 
 ```toml
 [dependency-groups]
-docs = docs = [
+docs = [
     "Markdown>=3.9",
     "mkdocs>=1.1.2,<2",
     "mkdocs-material>=9.1.19,<10",
