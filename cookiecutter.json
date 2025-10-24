@@ -49,7 +49,7 @@
     "docs": {
       "__prompt__": "Chose your documentation tool",
       "sphinx": "Sphinx",
-      "mkdocs": "mkdocs-material"
+      "mkdocs": "MkDocs"
     },
     "vcs": "Use version control for versioning"
   }
