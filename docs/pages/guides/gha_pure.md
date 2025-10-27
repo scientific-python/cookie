@@ -77,7 +77,7 @@ dist:
     - name: Build SDist and wheel
       run: pipx run build
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v5
       with:
         name: Packages
         path: dist/*
@@ -148,7 +148,7 @@ publish:
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
-    - uses: actions/download-artifact@v5
+    - uses: actions/download-artifact@v6
       with:
         name: Packages
         path: dist
@@ -182,7 +182,7 @@ publish:
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
-    - uses: actions/download-artifact@v5
+    - uses: actions/download-artifact@v6
       with:
         name: Packages
         path: dist
@@ -246,7 +246,7 @@ jobs:
     if: github.event_name == 'release' && github.event.action == 'published'
 
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with:
           name: Packages
           path: dist
@@ -294,7 +294,7 @@ jobs:
     if: github.event_name == 'release' && github.event.action == 'published'
 
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with:
           name: Packages
           path: dist
