@@ -2,6 +2,7 @@
   name: sp-repo-review
   description: Check for configuration best practices
   entry: repo-review .
+  args: [--show=err]
   language: python
   types_or: [text]
   pass_filenames: false
