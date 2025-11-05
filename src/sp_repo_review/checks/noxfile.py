@@ -7,11 +7,13 @@ from __future__ import annotations
 import ast
 import dataclasses
 import re
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from .._compat import tomllib
-from .._compat.importlib.resources.abc import Traversable
 from . import mk_url
+
+if TYPE_CHECKING:
+    from .._compat.importlib.resources.abc import Traversable
 
 REGEX = re.compile(
     r"(?m)^# /// (?P<type>[a-zA-Z0-9-]+)$\s(?P<content>(^#(| .*)$\s)+)^# ///$"

@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Generator
-from typing import Any, ClassVar, Protocol
+from typing import TYPE_CHECKING, Any, ClassVar, Protocol
 
 from .._compat import tomllib
-from .._compat.importlib.resources.abc import Traversable
 from . import mk_url
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
+
+    from .._compat.importlib.resources.abc import Traversable
 
 ## R0xx: Ruff general
 ## R1xx: Ruff checks

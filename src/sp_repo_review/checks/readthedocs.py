@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import yaml
 
-from .._compat.importlib.resources.abc import Traversable
 from . import mk_url
+
+if TYPE_CHECKING:
+    from .._compat.importlib.resources.abc import Traversable
 
 
 class ReadTheDocs:

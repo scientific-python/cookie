@@ -26,11 +26,13 @@ import tarfile
 import urllib.error
 import urllib.request
 import zipfile
-from collections.abc import Callable
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import nox
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 nox.needs_version = ">=2025.2.9"
 nox.options.default_venv_backend = "uv|virtualenv"

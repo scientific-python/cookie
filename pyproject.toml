@@ -153,11 +153,12 @@ messages_control.disable = [
 
 [tool.ruff.lint]
 extend-select = [
-  "B",           # flake8-bugbear
-  "I",           # isort
   "ARG",         # flake8-unused-arguments
+  "B",           # flake8-bugbear
   "C4",          # flake8-comprehensions
   "EM",          # flake8-errmsg
+  "FA",          # flake8-future-annotations
+  "I",           # isort
   "ICN",         # flake8-import-conventions
   "PGH",         # pygrep-hooks
   "PIE",         # flake8-pie
@@ -167,8 +168,9 @@ extend-select = [
   "RET",         # flake8-return
   "RUF",         # Ruff-specific
   "SIM",         # flake8-simplify
-  "TID251",      # flake8-tidy-imports.banned-api
   "T20",         # flake8-print
+  "TC",          # flake8-type-check
+  "TID251",      # flake8-tidy-imports.banned-api
   "UP",          # pyupgrade
   "YTT",         # flake8-2020
 ]
