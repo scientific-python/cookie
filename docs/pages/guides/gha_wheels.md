@@ -88,7 +88,7 @@ make_sdist:
     - name: Build SDist
       run: uv build --sdist
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v5
       with:
         name: cibw-sdist
         path: dist/*.tar.gz
@@ -130,7 +130,7 @@ build_wheels:
     - uses: pypa/cibuildwheel@v3.2
 
     - name: Upload wheels
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: cibw-wheels-${{ matrix.os }}
         path: wheelhouse/*.whl
@@ -184,7 +184,7 @@ upload_all:
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
-    - uses: actions/download-artifact@v5
+    - uses: actions/download-artifact@v6
       with:
         pattern: cibw-*
         path: dist
@@ -219,7 +219,7 @@ upload_all:
   runs-on: ubuntu-latest
   if: github.event_name == 'release' && github.event.action == 'published'
   steps:
-    - uses: actions/download-artifact@v5
+    - uses: actions/download-artifact@v6
       with:
         pattern: cibw-*
         path: dist
