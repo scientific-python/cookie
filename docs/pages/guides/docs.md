@@ -391,9 +391,9 @@ and highlighting search terms after a user clicks on a search result
 
 For navigation plugins (documented
 [here](https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/)),
-we request the side navigation to be expanded by default (`naviation.expand`)
+we request the side navigation to be expanded by default (`navigation.expand`)
 and that the URL autoupdate to the latest anchor as a user scrolls through the
-page (`naviation.tracking`). Finally, we request that the current user section
+page (`navigation.tracking`). Finally, we request that the current user section
 is always shown and highlight in the sidebar via `toc.follow`.
 
 In the palette section (documented
@@ -700,7 +700,7 @@ contents to:
 ```
 
 Where the triple colon syntax is used to specify what documentation you would
-like built. In this case, we are asking to document the entire module `my_class`
+like built. In this case, we are asking to document the entire module `my_module`
 (and all classes and functions within it) which is located in `my_package`. You
 could instead ask for only a single component inside your module by being more
 specific, like `::: my_package.my_module.MyClass`.

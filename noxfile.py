@@ -132,7 +132,7 @@ def make_cruft(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> Pat
 
     session.cd(tmp_dir)
     Path("input.yml").write_text(
-        JOB_FILE.format(backend=backend, pkg=package_dir, vcs=vcs, docs=docs),
+        JOB_FILE.format(backend=backend, pkg=package_dir, vcs=vcs, docs=docs.value),
         encoding="utf-8",
     )
     session.run(
