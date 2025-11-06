@@ -154,7 +154,7 @@ def test_ruff_root_level_select():
 
 def test_ruff_empty_config():
     """Test with empty ruff config."""
-    ruff = {}
+    ruff: dict[str, object] = {}
     families = get_families({}, ruff)
     assert families["ruff"].get("description") == ""
 
