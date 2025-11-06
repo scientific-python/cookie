@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-{%- if cookiecutter.docs == 'sphinx' %}
-
+{% if cookiecutter.docs == 'sphinx' -%}
 import argparse
-
-{%- endif %}
-
+{% endif -%}
 import shutil
 from pathlib import Path
 
@@ -109,12 +106,16 @@ def build_api_docs(session: nox.Session) -> None:
 @nox.session(reuse_venv=True, default=False)
 def docs(session: nox.Session) -> None:
     """
-    Serve the docs
+    Make or serve the docs. Pass --non-interactive to avoid serving.
     """
 
     doc_deps = nox.project.dependency_groups(PROJECT, "docs")
     session.install("{% if cookiecutter.backend != "mesonpy" %}-e{% endif %}.", *doc_deps)
-    session.run("mkdocs", "serve", "--clean")
+
+    if session.interactive:
+        session.run("mkdocs", "serve", "--clean", *session.posargs)
+    else:
+        session.run("mkdocs", "build", "--clean", *session.posargs)
 
 
 {%- endif %}

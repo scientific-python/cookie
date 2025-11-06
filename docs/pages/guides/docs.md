@@ -610,12 +610,16 @@ with code_fence("python"):
 @nox.session(reuse_venv=True, default=False)
 def docs(session: nox.Session) -> None:
     """
-    Serve the docs
+    Make or serve the docs. Pass --non-interactive to avoid serving.
     """
 
     doc_deps = nox.project.dependency_groups(PROJECT, "docs")
     session.install("-e.", *doc_deps)
-    session.run("mkdocs", "serve", "--clean")
+
+    if session.interactive:
+        session.run("mkdocs", "serve", "--clean", *session.posargs)
+    else:
+        session.run("mkdocs", "build", "--clean", *session.posargs)
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
