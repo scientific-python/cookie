@@ -166,6 +166,14 @@ def test_pc180_alt_3():
     assert compute_check("PC180", precommit=precommit).result
 
 
+def test_pc180_alt_4():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/DavidAnson/markdownlint-cli2
+    """)
+    assert compute_check("PC180", precommit=precommit).result
+
+
 def test_pc191(ruff_check: str):
     precommit = yaml.safe_load(f"""
         repos:

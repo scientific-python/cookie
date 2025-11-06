@@ -138,6 +138,7 @@ class PC180(PreCommit):
         "https://github.com/rbubley/mirrors-prettier",
         "https://github.com/hukkin/mdformat",
         "https://github.com/rvben/rumdl-pre-commit",
+        "https://github.com/davidanson/markdownlint-cli2",
     }
 
 
