@@ -271,7 +271,7 @@ While the cookie cutter creates a basic structure for your MkDocs (a top level
 `mkdocs.yml` file and the `docs` directory), you can also follow the official
 [Getting started](https://squidfunk.github.io/mkdocs-material/getting-started/)
 guide instead. Note, however, instead of the `pip` install, it is better
-practise install your documentation dependencies via `pyproject.toml` and then
+practice install your documentation dependencies via `pyproject.toml` and then
 when you run your `uv sync` to install dependencies, you can explicitly ask for
 the `docs` group to be installed via `uv sync --group=docs` or
 `uv sync --all-groups`.
@@ -283,12 +283,12 @@ repository, you will already have this group. Otherwise, add to your
 ```toml
 [dependency-groups]
 docs = [
-    "Markdown>=3.9",
-    "mkdocs>=1.1.2,<2",
-    "mkdocs-material>=9.1.19,<10",
-    "pyyaml>=6.0.1",
+    "markdown>=3.9",
     "mdx-include>=1.4.2",
+    "mkdocs-material>=9.1.19",
+    "mkdocs>=1.1.2,",
     "mkdocstrings-python>=1.18.2",
+    "pyyaml>=6.0.1",
 ]
 ```
 
