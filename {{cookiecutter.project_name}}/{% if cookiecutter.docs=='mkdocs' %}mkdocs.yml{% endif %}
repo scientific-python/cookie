@@ -16,7 +16,7 @@ theme:
     - navigation.tracking
     - toc.follow
   palette:
-    # See options to customise your colour scheme here:
+    # See options to customise your color scheme here:
     # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
     - media: "(prefers-color-scheme: light)"
       scheme: default

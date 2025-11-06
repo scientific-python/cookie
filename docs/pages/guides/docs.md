@@ -329,7 +329,7 @@ theme:
     - navigation.tracking
     - toc.follow
   palette:
-    # See options to customise your colour scheme here:
+    # See options to customise your color scheme here:
     # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -398,7 +398,7 @@ is always shown and highlight in the sidebar via `toc.follow`.
 
 In the palette section (documented
 [here](https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/))
-you can easily modify the scheme, icons, primary colours, and accents for both
+you can easily modify the scheme, icons, primary colors, and accents for both
 light and dark themes.
 
 ```yaml
@@ -413,7 +413,7 @@ theme:
     - navigation.tracking
     - toc.follow
   palette:
-    # See options to customise your colour scheme here:
+    # See options to customise your color scheme here:
     # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
     - media: "(prefers-color-scheme: light)"
       scheme: default
