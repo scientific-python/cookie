@@ -8,7 +8,7 @@ def test_backend():
             "build-backend": "setuptools.build_meta",
         },
     }
-    families = get_families(pyproject)
+    families = get_families(pyproject, {})
     assert families["general"].get("description") == (
         "- Detected build backend: `setuptools.build_meta`"
     )
@@ -24,7 +24,7 @@ def test_spdx_license():
             ],
         },
     }
-    families = get_families(pyproject)
+    families = get_families(pyproject, {})
     assert families["general"].get("description") == (
         "- Detected build backend: `MISSING`\n- SPDX license expression: `MIT`"
     )
@@ -40,7 +40,7 @@ def test_classic_license():
             ],
         },
     }
-    families = get_families(pyproject)
+    families = get_families(pyproject, {})
     assert families["general"].get("description") == (
         "- Detected build backend: `MISSING`\n"
         "- Detected license(s): MIT License, BSD License"
