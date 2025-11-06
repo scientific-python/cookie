@@ -220,14 +220,17 @@ extend-select = [
   "ARG",      # flake8-unused-arguments
   "B",        # flake8-bugbear
   "C4",       # flake8-comprehensions
+  "DTZ",      # flake8-datetimez
   "EM",       # flake8-errmsg
   "EXE",      # flake8-executable
+  "FA",       # flake8-future-annotations
   "FURB",     # refurb
   "G",        # flake8-logging-format
   "I",        # isort
   "ICN",      # flake8-import-conventions
   "NPY",      # NumPy specific rules
   "PD",       # pandas-vet
+  "PERF",     # perflint
   "PGH",      # pygrep-hooks
   "PIE",      # flake8-pie
   "PL",       # pylint
@@ -237,7 +240,9 @@ extend-select = [
   "RET",      # flake8-return
   "RUF",      # Ruff-specific
   "SIM",      # flake8-simplify
+  "SLOT",     # flake8-slots
   "T20",      # flake8-print
+  "TC",       # flake8-type-checking
   "UP",       # pyupgrade
   "YTT",      # flake8-2020
 ]
@@ -246,7 +251,6 @@ ignore = [
   "PLR2004",  # Magic value used in comparison
 ]
 typing-modules = ["mypackage._compat.typing"]
-isort.required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]

@@ -1,9 +1,11 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from .._compat.importlib.resources.abc import Traversable
 from . import mk_url
+
+if TYPE_CHECKING:
+    from .._compat.importlib.resources.abc import Traversable
 
 # PY: Python Project
 ## 0xx: File existence

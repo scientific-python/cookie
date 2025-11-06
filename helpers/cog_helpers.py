@@ -4,11 +4,11 @@ import ast
 import contextlib
 import tempfile
 import typing
-from collections.abc import Generator
 from pathlib import Path
 from types import SimpleNamespace
 
 if typing.TYPE_CHECKING:
+    from collections.abc import Generator
     from typing import Self
 
 from cookiecutter.main import cookiecutter
