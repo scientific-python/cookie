@@ -12,6 +12,7 @@
 [![Scikit-HEP][sk-badge]](https://scikit-hep.org/) {%- endif %}
 
 {%- if cookiecutter.docs == "sphinx" %}
+
 <!-- SPHINX-START -->
 {%- endif %}
 
