@@ -217,34 +217,42 @@ won't tell you what or why it fixed things.
 ```toml
 [tool.ruff.lint]
 extend-select = [
-  "ARG",      # flake8-unused-arguments
-  "B",        # flake8-bugbear
-  "C4",       # flake8-comprehensions
-  "DTZ",      # flake8-datetimez
-  "EM",       # flake8-errmsg
-  "EXE",      # flake8-executable
-  "FA",       # flake8-future-annotations
-  "FURB",     # refurb
-  "G",        # flake8-logging-format
-  "I",        # isort
-  "ICN",      # flake8-import-conventions
-  "NPY",      # NumPy specific rules
-  "PD",       # pandas-vet
-  "PERF",     # perflint
-  "PGH",      # pygrep-hooks
-  "PIE",      # flake8-pie
-  "PL",       # pylint
-  "PT",       # flake8-pytest-style
-  "PTH",      # flake8-use-pathlib
-  "PYI",      # flake8-pyi
-  "RET",      # flake8-return
-  "RUF",      # Ruff-specific
-  "SIM",      # flake8-simplify
-  "SLOT",     # flake8-slots
-  "T20",      # flake8-print
-  "TC",       # flake8-type-checking
-  "UP",       # pyupgrade
-  "YTT",      # flake8-2020
+  "ARG",    # flake8-unused-arguments
+  "B",      # flake8-bugbear
+  "BLE",    # flake8-blind-except
+  "C4",     # flake8-comprehensions
+  "DTZ",    # flake8-datetimez
+  "EM",     # flake8-errmsg
+  "EXE",    # flake8-executable
+  "FA",     # flake8-future-annotations
+  "FLY",    # flynt
+  "FURB",   # refurb
+  "G",      # flake8-logging-format
+  "I",      # isort
+  "ICN",    # flake8-import-conventions
+  "ISC",    # flake8-implicit-str-concat
+  "LOG",    # flake8-logging
+  "NPY",    # NumPy specific rules
+  "PD",     # pandas-vet
+  "PERF",   # perflint
+  "PGH",    # pygrep-hooks
+  "PIE",    # flake8-pie
+  "PL",     # pylint
+  "PT",     # flake8-pytest-style
+  "PTH",    # flake8-use-pathlib
+  "PYI",    # flake8-pyi
+  "Q",      # flake8-quotes
+  "RET",    # flake8-return
+  "RSE",    # flake8-raise
+  "RUF",    # Ruff-specific
+  "SIM",    # flake8-simplify
+  "SLOT",   # flake8-slots
+  "T10",    # flake8-debugger
+  "T20",    # flake8-print
+  "TC",     # flake8-type-checking
+  "TRY",    # tryceratops
+  "UP",     # pyupgrade
+  "YTT",    # flake8-2020
 ]
 ignore = [
   "PLR09",    # Too many <...>
