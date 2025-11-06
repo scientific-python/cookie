@@ -77,6 +77,7 @@ def docs(session: nox.Session) -> None:
     else:
         session.run("sphinx-build", "--keep-going", *shared_args)
 
+
 @nox.session(default=False)
 def build_api_docs(session: nox.Session) -> None:
     """
