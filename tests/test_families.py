@@ -45,3 +45,122 @@ def test_classic_license():
         "- Detected build backend: `MISSING`\n"
         "- Detected license(s): MIT License, BSD License"
     )
+
+
+def test_ruff_all_rules_selected():
+    """Test when all recommended rules are selected."""
+    ruff = {
+        "lint": {
+            "select": [
+                "ARG",
+                "B",
+                "C4",
+                "DTZ",
+                "EM",
+                "EXE",
+                "FA",
+                "FURB",
+                "G",
+                "I",
+                "ICN",
+                "NPY",
+                "PD",
+                "PERF",
+                "PGH",
+                "PIE",
+                "PL",
+                "PT",
+                "PTH",
+                "PYI",
+                "RET",
+                "RUF",
+                "SIM",
+                "SLOT",
+                "T20",
+                "TC",
+                "UP",
+                "YTT",
+            ]
+        }
+    }
+    families = get_families({}, ruff)
+    assert families["ruff"].get("description") == "All mentioned rules selected"
+
+
+def test_ruff_all_keyword():
+    """Test when 'ALL' keyword is used."""
+    ruff = {"lint": {"select": ["ALL"]}}
+    families = get_families({}, ruff)
+    assert families["ruff"].get("description") == "All mentioned rules selected"
+
+
+def test_ruff_missing_rules():
+    """Test when some recommended rules are missing."""
+    ruff = {"lint": {"select": ["B", "I", "UP"]}}
+    families = get_families({}, ruff)
+    description = families["ruff"].get("description", "")
+    assert description.startswith("Rules mentioned in guide but not here:")
+    # Check that some missing rules are mentioned
+    assert "ARG" in description or "C4" in description or "DTZ" in description
+
+
+def test_ruff_extend_select():
+    """Test with extend-select instead of select."""
+    ruff = {"lint": {"extend-select": ["B", "I", "UP", "RUF"]}}
+    families = get_families({}, ruff)
+    description = families["ruff"].get("description", "")
+    assert description.startswith("Rules mentioned in guide but not here:")
+    # Verify that some rules are listed as missing
+    assert "ARG" in description or "C4" in description
+
+
+def test_ruff_root_level_select():
+    """Test with select at root level (not under lint)."""
+    ruff = {
+        "select": [
+            "ARG",
+            "B",
+            "C4",
+            "DTZ",
+            "EM",
+            "EXE",
+            "FA",
+            "FURB",
+            "G",
+            "I",
+            "ICN",
+            "NPY",
+            "PD",
+            "PERF",
+            "PGH",
+            "PIE",
+            "PL",
+            "PT",
+            "PTH",
+            "PYI",
+            "RET",
+            "RUF",
+            "SIM",
+            "SLOT",
+            "T20",
+            "TC",
+            "UP",
+            "YTT",
+        ]
+    }
+    families = get_families({}, ruff)
+    assert families["ruff"].get("description") == "All mentioned rules selected"
+
+
+def test_ruff_empty_config():
+    """Test with empty ruff config."""
+    ruff = {}
+    families = get_families({}, ruff)
+    assert families["ruff"].get("description") == ""
+
+
+def test_ruff_no_select():
+    """Test ruff config without select or extend-select."""
+    ruff = {"lint": {"ignore": ["E501"]}}
+    families = get_families({}, ruff)
+    assert families["ruff"].get("description") == ""
