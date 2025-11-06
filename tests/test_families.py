@@ -47,42 +47,51 @@ def test_classic_license():
     )
 
 
+def test_python_requires():
+    pyproject = {
+        "project": {"requires-python": ">=3.13"},
+    }
+    families = get_families(pyproject, {})
+    assert families["general"].get("description") == (
+        "- Detected build backend: `MISSING`\n- Python requires: `>=3.13`"
+    )
+
+
+ALL_RULES = [
+    "ARG",
+    "B",
+    "C4",
+    "DTZ",
+    "EM",
+    "EXE",
+    "FA",
+    "FURB",
+    "G",
+    "I",
+    "ICN",
+    "NPY",
+    "PD",
+    "PERF",
+    "PGH",
+    "PIE",
+    "PL",
+    "PT",
+    "PTH",
+    "PYI",
+    "RET",
+    "RUF",
+    "SIM",
+    "SLOT",
+    "T20",
+    "TC",
+    "UP",
+    "YTT",
+]
+
+
 def test_ruff_all_rules_selected():
     """Test when all recommended rules are selected."""
-    ruff = {
-        "lint": {
-            "select": [
-                "ARG",
-                "B",
-                "C4",
-                "DTZ",
-                "EM",
-                "EXE",
-                "FA",
-                "FURB",
-                "G",
-                "I",
-                "ICN",
-                "NPY",
-                "PD",
-                "PERF",
-                "PGH",
-                "PIE",
-                "PL",
-                "PT",
-                "PTH",
-                "PYI",
-                "RET",
-                "RUF",
-                "SIM",
-                "SLOT",
-                "T20",
-                "TC",
-                "UP",
-                "YTT",
-            ]
-        }
-    }
+    ruff = {"lint": {"select": ALL_RULES}}
     families = get_families({}, ruff)
     assert families["ruff"].get("description") == "All mentioned rules selected"
 
@@ -116,38 +125,7 @@ def test_ruff_extend_select():
 
 def test_ruff_root_level_select():
     """Test with select at root level (not under lint)."""
-    ruff = {
-        "select": [
-            "ARG",
-            "B",
-            "C4",
-            "DTZ",
-            "EM",
-            "EXE",
-            "FA",
-            "FURB",
-            "G",
-            "I",
-            "ICN",
-            "NPY",
-            "PD",
-            "PERF",
-            "PGH",
-            "PIE",
-            "PL",
-            "PT",
-            "PTH",
-            "PYI",
-            "RET",
-            "RUF",
-            "SIM",
-            "SLOT",
-            "T20",
-            "TC",
-            "UP",
-            "YTT",
-        ]
-    }
+    ruff = {"select": ALL_RULES}
     families = get_families({}, ruff)
     assert families["ruff"].get("description") == "All mentioned rules selected"
 

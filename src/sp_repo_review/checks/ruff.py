@@ -15,6 +15,18 @@ if TYPE_CHECKING:
 ## R2xx: Ruff deprecations
 
 
+def get_rule_selection(ruff: dict[str, Any]) -> frozenset[str]:
+    match ruff:
+        case (
+            {"lint": {"select": x} | {"extend-select": x}}
+            | {"select": x}
+            | {"extend-select": x}
+        ):
+            return frozenset(x)
+        case _:
+            return frozenset()
+
+
 def merge(start: dict[str, Any], add: dict[str, Any]) -> dict[str, Any]:
     merged = start.copy()
     for key, value in add.items():
@@ -124,16 +136,8 @@ class RF1xx(Ruff):
         ]
         ```
         """
-
-        match ruff:
-            case (
-                {"lint": {"select": x} | {"extend-select": x}}
-                | {"select": x}
-                | {"extend-select": x}
-            ):
-                return cls.code in x or "ALL" in x
-            case _:
-                return False
+        selected_rules = get_rule_selection(ruff)
+        return cls.code in selected_rules or "ALL" in selected_rules
 
 
 class RF101(RF1xx):
