@@ -64,11 +64,14 @@ Ideally, software documentation should include:
 
 <!-- [[[cog
 from cog_helpers import code_fence, render_cookie, Matcher
-with render_cookie() as package:
+with render_cookie(backend="hatch", docs="sphinx") as package:
     docs_conf_py = package.joinpath("docs/conf.py").read_text(encoding="utf-8").strip()
     docs_index_md = package.joinpath("docs/index.md").read_text(encoding="utf-8").strip()
     readthedocs_yaml = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
     noxfile = Matcher.from_file(package / "noxfile.py")
+with render_cookie(backend="hatch", docs="sphinx") as package:
+    noxfile_mkdocs = Matcher.from_file(package / "noxfile.py")
+    readthedocs_yaml_mkdocs = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
 ]]] -->
 <!-- [[[end]]] -->
 
@@ -494,7 +497,7 @@ build:
 
 <!-- [[[cog
 with code_fence("yaml"):
-    print(readthedocs_yaml)
+    print(readthedocs_yaml_mkdocs)
 ]]] -->
 <!-- prettier-ignore-start -->
 ```yaml
@@ -591,7 +594,7 @@ autobuild will rebuild if you change a file while serving.
 
 <!-- [[[cog
 with code_fence("python"):
-    print(noxfile.get_source("docs"))
+    print(noxfile_mkdocs.get_source("docs"))
 ]]] -->
 <!-- prettier-ignore-start -->
 ```python
