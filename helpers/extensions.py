@@ -39,7 +39,7 @@ class CookiecutterContext(SmartDict):
 
 @CookiecutterContext.register
 def __year(_):
-    return str(datetime.datetime.today().year)
+    return str(datetime.datetime.now(tz=datetime.timezone.utc).year)
 
 
 @CookiecutterContext.register
