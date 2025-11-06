@@ -700,10 +700,10 @@ contents to:
 ```
 
 Where the triple colon syntax is used to specify what documentation you would
-like built. In this case, we are asking to document the entire module `my_module`
-(and all classes and functions within it) which is located in `my_package`. You
-could instead ask for only a single component inside your module by being more
-specific, like `::: my_package.my_module.MyClass`.
+like built. In this case, we are asking to document the entire module
+`my_module` (and all classes and functions within it) which is located in
+`my_package`. You could instead ask for only a single component inside your
+module by being more specific, like `::: my_package.my_module.MyClass`.
 
 {% endtab %} {% endtabs %}
 
