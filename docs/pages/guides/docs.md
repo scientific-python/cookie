@@ -69,7 +69,8 @@ with render_cookie(backend="hatch", docs="sphinx") as package:
     docs_index_md = package.joinpath("docs/index.md").read_text(encoding="utf-8").strip()
     readthedocs_yaml = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
     noxfile = Matcher.from_file(package / "noxfile.py")
-with render_cookie(backend="hatch", docs="sphinx") as package:
+with render_cookie(backend="hatch", docs="mkdocs") as package:
+    mkdocs_conf_yaml = package.joinpath("mkdocs.yml").read_text(encoding="utf-8").strip()
     noxfile_mkdocs = Matcher.from_file(package / "noxfile.py")
     readthedocs_yaml_mkdocs = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
 ]]] -->
@@ -304,12 +305,18 @@ example configuration now.
 
 Here's the whole file for completeness. We'll break it into sections underneath.
 
+<!-- [[[cog
+with code_fence("yaml"):
+    print(mkdocs_conf_yaml)
+]]] -->
+<!-- prettier-ignore-start -->
 ```yaml
-site_name: some_project
-site_url: https://some_project.readthedocs.io/
-site_author: "Bruce Wayne"
-repo_name: "wayne_industries/some_project"
-repo_url: "https://github.com/wayne_industries/some_project"
+site_name: package
+site_url: https://package.readthedocs.io/
+site_author: "My Name"
+
+repo_name: "org/package"
+repo_url: "https://github.com/org/package"
 
 theme:
   name: material
@@ -357,6 +364,8 @@ nav:
   - Home: index.md
   - Python API: api.md
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 First, the basic site metadata contains authors, repository details, URLs, etc:
 
@@ -605,7 +614,7 @@ def docs(session: nox.Session) -> None:
     """
 
     doc_deps = nox.project.dependency_groups(PROJECT, "docs")
-    session.install("{% if cookiecutter.backend != "mesonpy" %}-e{% endif %}.", *doc_deps)
+    session.install("-e.", *doc_deps)
     session.run("mkdocs", "serve", "--clean")
 ```
 <!-- prettier-ignore-end -->

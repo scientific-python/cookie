@@ -83,12 +83,17 @@ scikit-hep = "sp_repo_review.families:get_families"
 [dependency-groups]
 dev = [
   { include-group = "test" },
+  { include-group = "cog" },
   "repo-review[cli]",
   "validate-pyproject-schema-store[all]",
 ]
 test = [
   "pytest >=7",
   "repo-review >=0.10.6",
+]
+cog = [
+  "cogapp",
+  "cookiecutter",
 ]
 
 [tool.hatch]

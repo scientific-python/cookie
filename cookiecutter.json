@@ -47,7 +47,7 @@
       "maturin": "Maturin                       - Compiled Rust (recommended)"
     },
     "docs": {
-      "__prompt__": "Chose your documentation tool",
+      "__prompt__": "Choose your documentation tool",
       "sphinx": "Sphinx",
       "mkdocs": "MkDocs"
     },
