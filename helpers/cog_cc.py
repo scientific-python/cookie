@@ -26,12 +26,12 @@ class Option:
         result.append(f"  help: {self.prompt}")
         if self.choices:
             result.append("  choices:")
-            for choice in self.choices:
-                result.append(
-                    f'    "{choice.description}": {choice.name}'
-                    if choice.description
-                    else f"    - {choice.name}"
-                )
+            result.extend(
+                f'    "{choice.description}": {choice.name}'
+                if choice.description
+                else f"    - {choice.name}"
+                for choice in self.choices
+            )
         return "\n".join(result)
 
 
