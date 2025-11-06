@@ -756,7 +756,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v21.1.2"
+  rev: "v21.1.5"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
