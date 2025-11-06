@@ -79,7 +79,7 @@ make_sdist:
   name: Make SDist
   runs-on: ubuntu-latest
   steps:
-    - uses: actions/checkout@v6-beta
+    - uses: actions/checkout@v5
       with:
         fetch-depth: 0 # Optional, use if you use setuptools_scm
         submodules: true # Optional, use if you have submodules
@@ -120,7 +120,7 @@ build_wheels:
         - macos-latest
 
   steps:
-    - uses: actions/checkout@v6-beta
+    - uses: actions/checkout@v5
       with:
         fetch-depth: 0
         submodules: true
