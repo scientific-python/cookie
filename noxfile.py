@@ -379,7 +379,7 @@ def compare_copier(session):
                 if diff_files(cookie, copier):
                     session.log(f"{backend} {vcs=} passed")
                 else:
-                    session.error(f"{backend} {vcs=} files are not the same!")
+                    session.error(f"{backend} {vcs=} {docs=} files are not the same!")
 
 
 @nox.session(default=False)
@@ -398,7 +398,7 @@ def compare_cruft(session):
                 if diff_files(cookie, cruft):
                     session.log(f"{backend} {vcs=} passed")
                 else:
-                    session.error(f"{backend} {vcs=} files are not the same!")
+                    session.error(f"{backend} {vcs=} {docs=} files are not the same!")
 
 
 PC_VERS = re.compile(
