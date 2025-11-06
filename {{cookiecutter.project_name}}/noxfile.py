@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+{%- if cookiecutter.docs == 'sphinx' %}
 import argparse
+{%- endif %}
 import shutil
 from pathlib import Path
 
@@ -46,6 +48,8 @@ def tests(session: nox.Session) -> None:
 
 
 {%- if cookiecutter.docs == 'sphinx' %}
+
+
 @nox.session(reuse_venv=True, default=False)
 def docs(session: nox.Session) -> None:
     """
@@ -97,6 +101,8 @@ def build_api_docs(session: nox.Session) -> None:
 
 
 {%- elif cookiecutter.docs == 'mkdocs' %}
+
+
 @nox.session(reuse_venv=True, default=False)
 def docs(session: nox.Session) -> None:
     """
@@ -109,6 +115,8 @@ def docs(session: nox.Session) -> None:
 
 
 {%- endif %}
+
+
 @nox.session(default=False)
 def build(session: nox.Session) -> None:
     """
