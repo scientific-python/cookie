@@ -148,7 +148,6 @@ messages_control.disable = [
   "invalid-name",
   "redefined-outer-name",
   "no-member",  # better handled by mypy, etc.
-  "duplicate-code",  # Triggers on long match statements
 ]
 
 

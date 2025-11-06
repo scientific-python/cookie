@@ -5,7 +5,10 @@ from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from collections.abc import Generator
+    from configparser import ConfigParser
 
+from .checks.pyproject import get_requires_python
+from .checks.ruff import get_rule_selection
 
 __all__ = ["Family", "get_families"]
 
@@ -20,7 +23,9 @@ class Family(typing.TypedDict, total=False):
     description: str  # Defaults to empty
 
 
-def general_description(pyproject: dict[str, Any]) -> Generator[str, None, None]:
+def general_description(
+    pyproject: dict[str, Any], setupcfg: ConfigParser | None
+) -> Generator[str, None, None]:
     yield f"- Detected build backend: `{pyproject.get('build-system', {}).get('build-backend', 'MISSING')}`"
     match pyproject:
         case {"project": {"license": str() as license}}:
@@ -33,6 +38,10 @@ def general_description(pyproject: dict[str, Any]) -> Generator[str, None, None]
             ]
             if licenses:
                 yield f"- Detected license(s): {', '.join(licenses)}"
+
+    requires = get_requires_python(pyproject, setupcfg)
+    if requires is not None:
+        yield f"- Python requires: `{requires}`"
 
 
 def ruff_description(ruff: dict[str, Any]) -> str:
@@ -66,28 +75,26 @@ def ruff_description(ruff: dict[str, Any]) -> str:
         "UP",
         "YTT",
     }
-
-    match ruff:
-        case (
-            {"lint": {"select": x} | {"extend-select": x}}
-            | {"select": x}
-            | {"extend-select": x}
-        ):
-            selected = set(x)
-            known = common - selected
-            if not known or "ALL" in selected:
-                return "All mentioned rules selected"
-            rulelist = ", ".join(f'"{r}"' for r in known)
-            return f"Rules mentioned in guide but not here: `{rulelist}`"
+    selected = get_rule_selection(ruff)
+    if selected:
+        known = common - selected
+        if not known or "ALL" in selected:
+            return "All mentioned rules selected"
+        rulelist = ", ".join(f'"{r}"' for r in known)
+        return f"Rules mentioned in guide but not here: `{rulelist}`"
     return ""
 
 
-def get_families(pyproject: dict[str, Any], ruff: dict[str, Any]) -> dict[str, Family]:
+def get_families(
+    pyproject: dict[str, Any],
+    ruff: dict[str, Any],
+    setupcfg: ConfigParser | None = None,
+) -> dict[str, Family]:
     return {
         "general": Family(
             name="General",
             order=-3,
-            description="\n".join(general_description(pyproject)),
+            description="\n".join(general_description(pyproject, setupcfg)),
         ),
         "pyproject": Family(
             name="PyProject",

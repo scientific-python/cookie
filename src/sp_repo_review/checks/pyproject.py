@@ -8,6 +8,29 @@ if TYPE_CHECKING:
     from configparser import ConfigParser
 
 
+def get_requires_python(
+    pyproject: dict[str, Any], setupcfg: ConfigParser | None
+) -> str | None:
+    match pyproject:
+        case {"project": {"requires-python": str() as requires}}:
+            return requires
+        case {
+            "tool": {
+                "poetry": {
+                    "dependencies": {"python": str() as requires}
+                    | {"version": str() as requires}
+                }
+            }
+        }:
+            return requires
+
+    if setupcfg and (
+        requires := setupcfg.get("options", "python_requires", fallback="")
+    ):
+        return requires
+    return None
+
+
 class PyProject:
     family = "pyproject"
 
@@ -67,24 +90,9 @@ class PP004(PyProject):
         you want to add a custom error message, add a build-type and/or runtime assert.
         """
 
-        match pyproject:
-            case {"project": {"requires-python": requires}}:
-                return "~=" not in requires and "<" not in requires
-            case {
-                "tool": {
-                    "poetry": {
-                        "dependencies": {"python": requires} | {"version": requires}
-                    }
-                }
-            }:
-                return (
-                    "^" not in requires and "~=" not in requires and "<" not in requires
-                )
-
-        if setupcfg and (
-            requires := setupcfg.get("options", "python_requires", fallback=None)
-        ):
-            return "~=" not in requires and "<" not in requires
+        requires = get_requires_python(pyproject, setupcfg)
+        if requires is not None:
+            return "^" not in requires and "~=" not in requires and "<" not in requires
 
         return None
 
