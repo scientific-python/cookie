@@ -3,7 +3,9 @@ from __future__ import annotations
 {%- if cookiecutter.docs == 'sphinx' %}
 
 import argparse
+
 {%- endif %}
+
 import shutil
 from pathlib import Path
 
