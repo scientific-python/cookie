@@ -18,6 +18,7 @@
     "mesonpy",
     "maturin"
   ],
+  "docs": ["sphinx", "mkdocs"],
   "vcs": true,
   "__year": "{% now 'utc', '%Y' %}",
   "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
@@ -44,6 +45,11 @@
       "skbuild": "Scikit-build-core              - Compiled C++ (recommended)",
       "mesonpy": "Meson-python                   - Compiled C++ (also good)",
       "maturin": "Maturin                       - Compiled Rust (recommended)"
+    },
+    "docs": {
+      "__prompt__": "Choose your documentation tool",
+      "sphinx": "Sphinx",
+      "mkdocs": "MkDocs"
     },
     "vcs": "Use version control for versioning"
   }

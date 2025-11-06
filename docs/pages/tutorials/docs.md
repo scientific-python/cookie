@@ -34,11 +34,19 @@ Some **bold** or _italicized_ text!
 This documentation "source code" is then _built_ into a formats like HTML or PDF
 to be displayed to the user.
 
-There are a variety of tools that can do this. In this guide we will present an
-approach that is mainstream in the scientific Python community: the [Sphinx][]
-documentation generator with the [MyST][] plugin. Refer to the MyST
-documentation for more information on the Markdown syntax in general and MyST's
-flavor of Markdown in particular.
+There are a variety of tools that can do this. In this guide we will present two
+approaches that are mainstream in the scientific Python community: the
+[Sphinx][] documentation generator with the [MyST][] plugin, and the [MkDocs][]
+generator via [mkdocs-material][].
+
+For more details, examples to help you pick between Sphinx and MkDocs (and
+instructions for the latter), see the [documentation guide][]. For this simple
+introduction, we will use Sphinx as it is still more popular with scientific
+libraries, even though MkDocs is simpler to set up and more popular in general
+with Python documentation.
+
+Please refer to the MyST documentation for more information on the Markdown
+syntax in general and MyST's flavor of Markdown in particular.
 
 We'll start with a very basic template. Start by create a `docs/` directory
 within your project (i.e. next to `src/`).
@@ -202,4 +210,7 @@ integrate this into a package, and setup for nox.
 [myst]: https://myst-parser.readthedocs.io/
 [organizing content]: https://myst-parser.readthedocs.io/en/latest/syntax/organising_content.html
 [sphinx-autodoc2]: https://sphinx-autodoc2.readthedocs.io/
+[mkdocs]: https://www.mkdocs.org/
+[mkdocs-material]: https://squidfunk.github.io/mkdocs-material/
+[documentation guide]: {% link pages/guides/docs.md %}
 <!-- prettier-ignore-end -->

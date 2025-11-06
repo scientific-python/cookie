@@ -82,6 +82,14 @@ backend:
     "Maturin                        - Compiled Rust (recommended)": maturin
   # [[[end]]]
 
+# [[[cog print(cc.docs.yaml()) ]]]
+docs:
+  help: Choose your documentation tool
+  choices:
+    "Sphinx": sphinx
+    "MkDocs": mkdocs
+  # [[[end]]]
+
 # [[[cog print(cc.vcs.yaml()) ]]]
 vcs:
   type: bool
