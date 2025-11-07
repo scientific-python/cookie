@@ -1,0 +1,266 @@
+[
+  {
+    "prefix": "AIR",
+    "name": "Airflow"
+  },
+  {
+    "prefix": "ERA",
+    "name": "eradicate"
+  },
+  {
+    "prefix": "FAST",
+    "name": "FastAPI"
+  },
+  {
+    "prefix": "YTT",
+    "name": "flake8-2020"
+  },
+  {
+    "prefix": "ANN",
+    "name": "flake8-annotations"
+  },
+  {
+    "prefix": "ASYNC",
+    "name": "flake8-async"
+  },
+  {
+    "prefix": "S",
+    "name": "flake8-bandit"
+  },
+  {
+    "prefix": "BLE",
+    "name": "flake8-blind-except"
+  },
+  {
+    "prefix": "FBT",
+    "name": "flake8-boolean-trap"
+  },
+  {
+    "prefix": "B",
+    "name": "flake8-bugbear"
+  },
+  {
+    "prefix": "A",
+    "name": "flake8-builtins"
+  },
+  {
+    "prefix": "COM",
+    "name": "flake8-commas"
+  },
+  {
+    "prefix": "C4",
+    "name": "flake8-comprehensions"
+  },
+  {
+    "prefix": "CPY",
+    "name": "flake8-copyright"
+  },
+  {
+    "prefix": "DTZ",
+    "name": "flake8-datetimez"
+  },
+  {
+    "prefix": "T10",
+    "name": "flake8-debugger"
+  },
+  {
+    "prefix": "DJ",
+    "name": "flake8-django"
+  },
+  {
+    "prefix": "EM",
+    "name": "flake8-errmsg"
+  },
+  {
+    "prefix": "EXE",
+    "name": "flake8-executable"
+  },
+  {
+    "prefix": "FIX",
+    "name": "flake8-fixme"
+  },
+  {
+    "prefix": "FA",
+    "name": "flake8-future-annotations"
+  },
+  {
+    "prefix": "INT",
+    "name": "flake8-gettext"
+  },
+  {
+    "prefix": "ISC",
+    "name": "flake8-implicit-str-concat"
+  },
+  {
+    "prefix": "ICN",
+    "name": "flake8-import-conventions"
+  },
+  {
+    "prefix": "LOG",
+    "name": "flake8-logging"
+  },
+  {
+    "prefix": "G",
+    "name": "flake8-logging-format"
+  },
+  {
+    "prefix": "INP",
+    "name": "flake8-no-pep420"
+  },
+  {
+    "prefix": "PIE",
+    "name": "flake8-pie"
+  },
+  {
+    "prefix": "T20",
+    "name": "flake8-print"
+  },
+  {
+    "prefix": "PYI",
+    "name": "flake8-pyi"
+  },
+  {
+    "prefix": "PT",
+    "name": "flake8-pytest-style"
+  },
+  {
+    "prefix": "Q",
+    "name": "flake8-quotes"
+  },
+  {
+    "prefix": "RSE",
+    "name": "flake8-raise"
+  },
+  {
+    "prefix": "RET",
+    "name": "flake8-return"
+  },
+  {
+    "prefix": "SLF",
+    "name": "flake8-self"
+  },
+  {
+    "prefix": "SIM",
+    "name": "flake8-simplify"
+  },
+  {
+    "prefix": "SLOT",
+    "name": "flake8-slots"
+  },
+  {
+    "prefix": "TID",
+    "name": "flake8-tidy-imports"
+  },
+  {
+    "prefix": "TD",
+    "name": "flake8-todos"
+  },
+  {
+    "prefix": "TC",
+    "name": "flake8-type-checking"
+  },
+  {
+    "prefix": "ARG",
+    "name": "flake8-unused-arguments"
+  },
+  {
+    "prefix": "PTH",
+    "name": "flake8-use-pathlib"
+  },
+  {
+    "prefix": "FLY",
+    "name": "flynt"
+  },
+  {
+    "prefix": "I",
+    "name": "isort"
+  },
+  {
+    "prefix": "C90",
+    "name": "mccabe"
+  },
+  {
+    "prefix": "NPY",
+    "name": "NumPy-specific rules"
+  },
+  {
+    "prefix": "PD",
+    "name": "pandas-vet"
+  },
+  {
+    "prefix": "N",
+    "name": "pep8-naming"
+  },
+  {
+    "prefix": "PERF",
+    "name": "Perflint"
+  },
+  {
+    "prefix": "",
+    "name": "pycodestyle",
+    "categories": [
+      {
+        "prefix": "E",
+        "name": "Error"
+      },
+      {
+        "prefix": "W",
+        "name": "Warning"
+      }
+    ]
+  },
+  {
+    "prefix": "DOC",
+    "name": "pydoclint"
+  },
+  {
+    "prefix": "D",
+    "name": "pydocstyle"
+  },
+  {
+    "prefix": "F",
+    "name": "Pyflakes"
+  },
+  {
+    "prefix": "PGH",
+    "name": "pygrep-hooks"
+  },
+  {
+    "prefix": "PL",
+    "name": "Pylint",
+    "categories": [
+      {
+        "prefix": "C",
+        "name": "Convention"
+      },
+      {
+        "prefix": "E",
+        "name": "Error"
+      },
+      {
+        "prefix": "R",
+        "name": "Refactor"
+      },
+      {
+        "prefix": "W",
+        "name": "Warning"
+      }
+    ]
+  },
+  {
+    "prefix": "UP",
+    "name": "pyupgrade"
+  },
+  {
+    "prefix": "FURB",
+    "name": "refurb"
+  },
+  {
+    "prefix": "RUF",
+    "name": "Ruff-specific rules"
+  },
+  {
+    "prefix": "TRY",
+    "name": "tryceratops"
+  }
+]

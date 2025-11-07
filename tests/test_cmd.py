@@ -19,3 +19,7 @@ def test_cmd_html():
 
 def test_cmd_json():
     subprocess.run(["repo-review", ".", "--format", "json"], check=True)
+
+
+def test_ruff_checks():
+    subprocess.run(["sp-repo-review.ruff-checks"], check=True)
