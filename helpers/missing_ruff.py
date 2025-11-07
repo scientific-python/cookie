@@ -8,6 +8,7 @@
 import argparse
 import json
 import subprocess
+import sys
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -43,9 +44,14 @@ def process_dir(path: Path) -> None:
         pyproject = tomllib.load(f)
 
     match pyproject:
-        case {"tool": {"ruff": {"lint": {"extend-select": selection}}}}:
+        case {
+            "tool": {
+                "ruff": {"lint": {"extend-select": selection} | {"select": selection}}
+            }
+        }:
             selected = frozenset(selection)
         case _:
+            print("[red]Rules not found", file=sys.stderr)
             raise SystemExit(1)
 
     linter_txt = subprocess.run(
