@@ -264,6 +264,12 @@ Python.
 - `pyproject`: Include validate pyproject with schema store.
 - `all`: All extras
 
+## Helper utility
+
+There's also a script, accessible as `sp-ruff-checks`, that will compare your
+ruff checks to the known values. It's a little more elegant on the command line
+than the Ruff family description, which will only print out a basic list.
+
 ## Other ways to use
 
 You can also use GitHub Actions:

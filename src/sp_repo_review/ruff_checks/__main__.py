@@ -1,22 +1,16 @@
-#!/usr/bin/env -S uv run --script
-
-# /// script
-# dependencies = ["ruff", "rich"]
-# ///
-
-
 import argparse
+import importlib.resources
 import json
-import subprocess
 import sys
 from collections.abc import Iterator
 from pathlib import Path
 
-import tomllib
 from rich import print
 from rich.columns import Columns
 from rich.panel import Panel
-from ruff.__main__ import find_ruff_bin
+
+from .._compat import tomllib
+from ..checks.ruff import get_rule_selection, ruff
 
 libs = {"AIR", "ASYNC", "DJ", "FAST", "INT", "NPY", "PD"}
 specialty = {
@@ -40,31 +34,40 @@ specialty = {
 
 
 def process_dir(path: Path) -> None:
-    with path.joinpath("pyproject.toml").open("rb") as f:
-        pyproject = tomllib.load(f)
+    try:
+        with path.joinpath("pyproject.toml").open("rb") as f:
+            pyproject = tomllib.load(f)
+    except FileNotFoundError:
+        pyproject = {}
 
-    match pyproject:
-        case {
-            "tool": {
-                "ruff": {"lint": {"extend-select": selection} | {"select": selection}}
-            }
-        }:
-            selected = frozenset(selection)
-        case _:
-            print("[red]Rules not found", file=sys.stderr)
-            raise SystemExit(1)
+    ruff_config = ruff(pyproject=pyproject, root=path)
+    if ruff_config is None:
+        print(
+            "[red]Could not find a ruff config [dim](.ruff.toml, ruff.toml, or pyproject.toml)",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
+    selected = get_rule_selection(ruff_config)
+    if not selected:
+        print(
+            "[red]No rules selected",
+            file=sys.stderr,
+        )
+        raise SystemExit(2)
 
-    linter_txt = subprocess.run(
-        [find_ruff_bin(), "linter", "--output-format=json"],
-        check=True,
-        capture_output=True,
-        text=True,
-        cwd=path,
-    ).stdout
-    linter = json.loads(linter_txt)
+    # Create using ruff linter --output-format=json > src/sp_repo_review/ruff/linter.json
+    with (
+        importlib.resources.files("sp_repo_review.ruff_checks")
+        .joinpath("linter.json")
+        .open(encoding="utf-8") as ff
+    ):
+        linter = json.load(ff)
 
     lint_info = {r["prefix"]: r["name"] for r in linter if r["prefix"] not in {"", "F"}}
     lint_info = dict(sorted(lint_info.items()))
+
+    if "ALL" in selected:
+        selected = frozenset(lint_info.keys())
 
     selected_items = {k: v for k, v in lint_info.items() if k in selected}
     all_uns_items = {k: v for k, v in lint_info.items() if k not in selected}
