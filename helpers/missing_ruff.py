@@ -58,6 +58,7 @@ def process_dir(path: Path) -> None:
     linter = json.loads(linter_txt)
 
     lint_info = {r["prefix"]: r["name"] for r in linter if r["prefix"] not in {"", "F"}}
+    lint_info = dict(sorted(lint_info.items()))
 
     selected_items = {k: v for k, v in lint_info.items() if k in selected}
     all_uns_items = {k: v for k, v in lint_info.items() if k not in selected}
@@ -85,8 +86,8 @@ def process_dir(path: Path) -> None:
     )
     uns = "\n".join(print_each(unselected_items))
 
+    print(Columns([panel_sel, panel_lib, panel_spec]))
     if uns:
-        print(Columns([panel_sel, panel_lib, panel_spec]))
         print("[red]Unselected [dim](copy and paste ready)")
         print(uns)
 
