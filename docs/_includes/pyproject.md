@@ -118,7 +118,8 @@ forward) and they are more composable. In contrast with extras,
 dependency-groups are not available when installing your package via PyPI, but
 they are available for local installation (and can be installed separately from
 your package); the `dev` group is even installed, by default, when using `uv`'s
-high level commands like `uv run` and `uv sync`. Here is an example:
+high level commands like `uv run` and `uv sync`. {% rr PP0086 %} Here is an
+example:
 
 ```toml
 [dependency-groups]

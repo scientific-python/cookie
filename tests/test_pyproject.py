@@ -182,6 +182,25 @@ def test_PP005_both():
     assert not compute_check("PP005", pyproject=toml).result
 
 
+def test_PP006_present():
+    toml = toml_loads("""
+        [dependency-groups]
+        dev = [ { include-group = "test" } ]
+        test = [ "pytest" ]
+        """)
+
+    assert compute_check("PP006", pyproject=toml).result
+
+
+def test_PP006_missing():
+    toml = toml_loads("""
+        [dependency-groups]
+        test = [ "pytest" ]
+        """)
+
+    assert not compute_check("PP006", pyproject=toml).result
+
+
 def test_PP302_okay_intstr():
     toml = toml_loads("""
         [tool.pytest.ini_options]
