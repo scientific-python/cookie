@@ -56,7 +56,7 @@ Source = "https://github.com/scientific-python/cookie"
 
 [project.scripts]
 sp-repo-review = "repo_review.__main__:main"
-"sp-repo-review.ruff-checks" = "sp_repo_review.ruff_checks.__main__:main"
+"sp-ruff-checks" = "sp_repo_review.ruff_checks.__main__:main"
 
 [project.entry-points."repo_review.checks"]
 general = "sp_repo_review.checks.general:repo_review_checks"

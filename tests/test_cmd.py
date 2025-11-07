@@ -22,4 +22,4 @@ def test_cmd_json():
 
 
 def test_ruff_checks():
-    subprocess.run(["sp-repo-review.ruff-checks"], check=True)
+    subprocess.run(["sp-ruff-checks"], check=True)
