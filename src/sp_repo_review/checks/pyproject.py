@@ -120,6 +120,32 @@ class PP005(PyProject):
                 return None
 
 
+class PP006(PyProject):
+    "The dev dependency group should be defined"
+
+    requires = {"PY001"}
+    url = mk_url("packaging-simple")
+
+    @staticmethod
+    def check(pyproject: dict[str, Any]) -> bool:
+        """
+        The `dev` dependency group should be defined so tools like uv will work.
+        These are better than the old `extras` system for tests, docs, and other
+        dependencies that are not needed for PyPI installs.
+
+        ```toml
+        [dependency-groups]
+        dev = [ {{ include-group = "test" }} ]
+        test = [ "pytest" ]
+        ```
+        """
+        match pyproject:
+            case {"dependency-groups": {"dev": list()}}:
+                return True
+            case _:
+                return False
+
+
 class PP301(PyProject):
     "Has pytest in pyproject"
 
