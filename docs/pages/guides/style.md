@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.3"
+  rev: "v0.14.4"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.3"
+  rev: "v0.14.4"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -756,7 +756,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v21.1.2"
+  rev: "v21.1.5"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]

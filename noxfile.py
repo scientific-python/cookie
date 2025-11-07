@@ -481,6 +481,7 @@ def get_latest_version_tag(repo: str, old_version: str) -> dict[str, Any] | None
         for x in results
         if x["name"].count(".") == old_version.count(".")
         and x["name"].startswith("v") == old_version.startswith("v")
+        and "beta" not in x["name"]
     ]
     if tags:
         return tags[0]  # type: ignore[no-any-return]
