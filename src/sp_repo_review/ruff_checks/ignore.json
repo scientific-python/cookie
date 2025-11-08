@@ -1,0 +1,38 @@
+[
+  { "rule": "ANN401", "family": "ANN", "reason": "Disallow Any" },
+  {
+    "rule": "PLC0415",
+    "family": "PLC",
+    "reason": "Import should be at top of file"
+  },
+  { "rule": "PLR09", "family": "PLR", "reason": "Too many ..." },
+  {
+    "rule": "PLR2004",
+    "family": "PLR",
+    "reason": "Magic value used in comparison"
+  },
+  {
+    "rule": "PT013",
+    "family": "PT",
+    "reason": "It's correct to import classes for typing!"
+  },
+  {
+    "rule": "RUF009",
+    "reason": "Too easy to get a false positive (function call in dataclass defaults)"
+  },
+  { "family": "S", "reason": "Some subset is okay" },
+  { "family": "D", "reason": "Too many doc requests" },
+  { "family": "TD", "reason": "Todo format" },
+  { "family": "FIX", "reason": "Hacks and todos" },
+  { "rule": "TID252", "family": "TID", "reason": "Relative imports are fine" },
+  { "family": "COM", "reason": "Trailing commas teach the formatter" },
+  { "family": "A", "reason": "Okay to shadow builtins" },
+  { "rule": "E501", "family": "E", "reason": "Line too long" },
+  { "family": "C90", "reason": "Complexity" },
+  {
+    "rule": "SLF001",
+    "family": "SLF",
+    "reason": "Private members are okay to access"
+  },
+  { "family": "ERA", "reason": "Commented out code" }
+]

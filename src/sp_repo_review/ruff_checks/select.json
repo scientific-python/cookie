@@ -1,0 +1,21 @@
+{
+  "libs": ["AIR", "ASYNC", "DJ", "FAST", "INT", "NPY", "PD"],
+  "specialty": [
+    { "name": "CPY", "reason": "preview only" },
+    { "name": "A", "reason": "Naming related" },
+    { "name": "N", "reason": "Naming related" },
+    { "name": "ANN", "reason": "Not all rules good" },
+    { "name": "TID", "reason": "Not all rules good" },
+    { "name": "C90", "reason": "Complexity" },
+    { "name": "COM", "reason": "Trailing commas inform the formatter" },
+    { "name": "D", "reason": "Requires everything documented" },
+    { "name": "DOC", "reason": "Style-specific" },
+    { "name": "ERA", "reason": "Check for commented code" },
+    { "name": "FBT", "reason": "Can't be applied to old code very well" },
+    { "name": "FIX", "reason": "TODO's are okay" },
+    { "name": "TD", "reason": "Picky on todo rules" },
+    { "name": "INP", "reason": "Namespace packages are correct sometimes" },
+    { "name": "S", "reason": "Security (can be picky)" },
+    { "name": "SLF", "reason": "Very picky" }
+  ]
+}
