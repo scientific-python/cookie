@@ -12,25 +12,27 @@ from rich.panel import Panel
 from .._compat import tomllib
 from ..checks.ruff import get_rule_selection, ruff
 
-libs = {"AIR", "ASYNC", "DJ", "FAST", "INT", "NPY", "PD"}
-specialty = {
-    "CPY",  # preview only
-    "A",  # Naming related
-    "N",  # Naming related
-    "ANN",  # Not all rules good
-    "TID",  # Not all rules good
-    "C90",  # Complexity
-    "COM",  # Trailing commas inform the formatter
-    "D",  # Requires everything documented
-    "DOC",  # Style-specific
-    "ERA",  # Check for commented code
-    "FBT",  # Can't be applied to old code very well
-    "FIX",  # TODO's are okay
-    "TD",  # Picky on todo rules
-    "INP",  # Namespace packages are correct sometimes
-    "S",  # Security (can be picky)
-    "SLF",  # Very picky
-}
+# Create using ruff linter --output-format=json > src/sp_repo_review/ruff/linter.json
+RESOURCE_DIR = importlib.resources.files("sp_repo_review.ruff_checks")
+with RESOURCE_DIR.joinpath("linter.json").open(encoding="utf-8") as f:
+    linter = json.load(f)
+
+LINT_INFO = {r["prefix"]: r["name"] for r in linter if r["prefix"] not in {"", "F"}}
+LINT_INFO = dict(sorted(LINT_INFO.items()))
+
+with RESOURCE_DIR.joinpath("select.json").open(encoding="utf-8") as f:
+    select_info = json.load(f)
+LIBS = frozenset(select_info["libs"])
+SPECIALTY = frozenset(r["name"] for r in select_info["specialty"])
+
+with RESOURCE_DIR.joinpath("ignore.json").open(encoding="utf-8") as f:
+    IGNORE_INFO = json.load(f)
+
+
+def print_each(items: dict[str, str]) -> Iterator[str]:
+    for k, v in items.items():
+        kk = f'[green]"{k}"[/green],'
+        yield f"  {kk:23} [dim]# {v}[/dim]"
 
 
 def process_dir(path: Path) -> None:
@@ -55,32 +57,32 @@ def process_dir(path: Path) -> None:
         )
         raise SystemExit(2)
 
-    # Create using ruff linter --output-format=json > src/sp_repo_review/ruff/linter.json
-    with (
-        importlib.resources.files("sp_repo_review.ruff_checks")
-        .joinpath("linter.json")
-        .open(encoding="utf-8") as ff
-    ):
-        linter = json.load(ff)
-
-    lint_info = {r["prefix"]: r["name"] for r in linter if r["prefix"] not in {"", "F"}}
-    lint_info = dict(sorted(lint_info.items()))
-
     if "ALL" in selected:
-        selected = frozenset(lint_info.keys())
+        ignored = get_rule_selection(ruff_config, "ignore")
+        missed = [
+            r
+            for r in IGNORE_INFO
+            if not any(
+                x.startswith((r.get("rule", "."), r.get("family", ".")))
+                for x in ignored
+            )
+        ]
 
-    selected_items = {k: v for k, v in lint_info.items() if k in selected}
-    all_uns_items = {k: v for k, v in lint_info.items() if k not in selected}
+        print('[green]"ALL"[/green] selected.')
+        ignores = {v.get("rule", v.get("family", "")): v["reason"] for v in missed}
+        if ignores:
+            print("Some things that sometimes need ignoring:")
+            for item in print_each(ignores):
+                print(item)
+        return
+
+    selected_items = {k: v for k, v in LINT_INFO.items() if k in selected}
+    all_uns_items = {k: v for k, v in LINT_INFO.items() if k not in selected}
     unselected_items = {
-        k: v for k, v in all_uns_items.items() if k not in libs | specialty
+        k: v for k, v in all_uns_items.items() if k not in LIBS | SPECIALTY
     }
-    libs_items = {k: v for k, v in all_uns_items.items() if k in libs}
-    spec_items = {k: v for k, v in all_uns_items.items() if k in specialty}
-
-    def print_each(items: dict[str, str]) -> Iterator[str]:
-        for k, v in items.items():
-            kk = f'[green]"{k}"[/green],'
-            yield f"  {kk:23} [dim]# {v}[/dim]"
+    libs_items = {k: v for k, v in all_uns_items.items() if k in LIBS}
+    spec_items = {k: v for k, v in all_uns_items.items() if k in SPECIALTY}
 
     panel_sel = Panel(
         "\n".join(print_each(selected_items)), title="Selected", border_style="green"

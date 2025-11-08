@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, ClassVar, Protocol
+from typing import TYPE_CHECKING, Any, ClassVar, Literal, Protocol
 
 from .._compat import tomllib
 from . import mk_url
@@ -15,12 +15,20 @@ if TYPE_CHECKING:
 ## R2xx: Ruff deprecations
 
 
-def get_rule_selection(ruff: dict[str, Any]) -> frozenset[str]:
-    match ruff:
-        case (
+def get_rule_selection(
+    ruff: dict[str, Any], key: Literal["select", "ignore"] = "select"
+) -> frozenset[str]:
+    match key, ruff:
+        case "select", (
             {"lint": {"select": x} | {"extend-select": x}}
             | {"select": x}
             | {"extend-select": x}
+        ):
+            return frozenset(x)
+        case "ignore", (
+            {"lint": {"ignore": x} | {"extend-ignore": x}}
+            | {"ignore": x}
+            | {"extend-ignore": x}
         ):
             return frozenset(x)
         case _:
