@@ -392,3 +392,5 @@ redirects to the standard library [unittest.mock][].
 [pytest]: https://docs.pytest.org
 [pytest-mock]: https://pypi.org/project/pytest-mock/
 [unittest.mock]: https://docs.python.org/3/library/unittest.mock.html
+
+<script src="{% link assets/js/tabs.js %}"></script>
