@@ -329,10 +329,10 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PP005`](https://learn.scientific-python.org/development/guides/packaging-simple#PP005): Using SPDX project.license should not use deprecated trove classifiers
 - [`PP006`](https://learn.scientific-python.org/development/guides/packaging-simple#PP006): The dev dependency group should be defined
 - [`PP301`](https://learn.scientific-python.org/development/guides/pytest#PP301): Has pytest in pyproject
-- [`PP302`](https://learn.scientific-python.org/development/guides/pytest#PP302): Sets a minimum pytest to at least 6
+- [`PP302`](https://learn.scientific-python.org/development/guides/pytest#PP302): Sets a minimum pytest to at least 6 or 9
 - [`PP303`](https://learn.scientific-python.org/development/guides/pytest#PP303): Sets the test paths
 - [`PP304`](https://learn.scientific-python.org/development/guides/pytest#PP304): Sets the log level in pytest
-- [`PP305`](https://learn.scientific-python.org/development/guides/pytest#PP305): Specifies xfail_strict
+- [`PP305`](https://learn.scientific-python.org/development/guides/pytest#PP305): Specifies strict xfail
 - [`PP306`](https://learn.scientific-python.org/development/guides/pytest#PP306): Specifies strict config
 - [`PP307`](https://learn.scientific-python.org/development/guides/pytest#PP307): Specifies strict markers
 - [`PP308`](https://learn.scientific-python.org/development/guides/pytest#PP308): Specifies useful pytest summary

@@ -1,11 +1,45 @@
 from __future__ import annotations
 
+import enum
 from typing import TYPE_CHECKING, Any
 
+from .._compat import tomllib
 from . import mk_url
 
 if TYPE_CHECKING:
     from configparser import ConfigParser
+
+    from .._compat.importlib.resources.abc import Traversable
+
+
+class PytestFile(enum.Enum):
+    PYTEST_TOML = enum.auto()
+    MODERN_PYPROJECT = enum.auto()
+    LEGACY_PYPROJECT = enum.auto()
+    NONE = enum.auto()
+
+
+def pytest(
+    pyproject: dict[str, Any], root: Traversable
+) -> tuple[PytestFile, dict[str, Any]]:
+    """
+    Returns the pytest configuration, or None if the configuration doesn't exist.
+    Respects toml configurations only.
+    """
+    paths = [root.joinpath("pytest.toml"), root.joinpath(".pytest.toml")]
+    for path in paths:
+        if path.is_file():
+            with path.open("rb") as f:
+                contents = tomllib.load(f)
+            return (PytestFile.PYTEST_TOML, contents.get("pytest", {}))
+
+    match pyproject:
+        case {"tool": {"pytest": {"ini_options": config}}}:
+            return (PytestFile.LEGACY_PYPROJECT, config)
+        case {"tool": {"pytest": config}}:
+            return (PytestFile.MODERN_PYPROJECT, config)
+        case _:
+            return (PytestFile.NONE, {})
 
 
 def get_requires_python(
@@ -149,45 +183,45 @@ class PP006(PyProject):
 class PP301(PyProject):
     "Has pytest in pyproject"
 
-    requires = {"PY001"}
+    requires = set[str]()
     url = mk_url("pytest")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pytest: tuple[PytestFile, dict[str, Any]]) -> bool:
         """
-        Must have a `[tool.pytest.ini_options]` configuration section in
-        pyproject.toml. If you must have it somewhere else (such as to support
-        `pytest<6`), ignore this check.
+        Must have a `[tool.pytest]` (pytest 9+) or `[tool.pytest.ini_options]`
+        (pytest 6+) configuration section in pyproject.toml. If you must have it
+        in ini format, ignore this check.  pytest.toml and .pytest.toml files
+        (pytest 9+) are also supported.
         """
 
-        match pyproject:
-            case {"tool": {"pytest": {"ini_options": {}}}}:
-                return True
-            case _:
-                return False
+        loc, _ = pytest
+        return loc is not PytestFile.NONE
 
 
 class PP302(PyProject):
-    "Sets a minimum pytest to at least 6"
+    "Sets a minimum pytest to at least 6 or 9"
 
     requires = {"PP301"}
     url = mk_url("pytest")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pytest: tuple[PytestFile, dict[str, Any]]) -> bool:
         """
         Must have a `minversion=`, and must be at least 6 (first version to
-        support `pyproject.toml` configuration).
+        support `pyproject.toml` ini configuration) or 9 (first version to
+        support native configuration and toml config files).
 
         ```toml
         [tool.pytest.ini_options]
-        minversion = "7"
+        minversion = "9"
         ```
         """
-        options = pyproject["tool"]["pytest"]["ini_options"]
+        loc, options = pytest
+        minversion = 6 if loc is PytestFile.LEGACY_PYPROJECT else 9
         return (
             "minversion" in options
-            and int(str(options["minversion"]).split(".", maxsplit=1)[0]) >= 6
+            and int(str(options["minversion"]).split(".", maxsplit=1)[0]) >= minversion
         )
 
 
@@ -198,7 +232,7 @@ class PP303(PyProject):
     url = mk_url("pytest")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pytest: tuple[PytestFile, dict[str, Any]]) -> bool:
         """
         The `testpaths` setting should be set to a reasonable default.
 
@@ -207,7 +241,7 @@ class PP303(PyProject):
         testpaths = ["tests"]
         ```
         """
-        options = pyproject["tool"]["pytest"]["ini_options"]
+        _, options = pytest
         return "testpaths" in options
 
 
@@ -218,7 +252,7 @@ class PP304(PyProject):
     url = mk_url("pytest")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pytest: tuple[PytestFile, dict[str, Any]]) -> bool:
         """
         `log_level` should be set. This will allow logs to be displayed on
         failures.
@@ -228,29 +262,34 @@ class PP304(PyProject):
         log_level = "INFO"
         ```
         """
-        options = pyproject["tool"]["pytest"]["ini_options"]
+        _, options = pytest
         return "log_cli_level" in options or "log_level" in options
 
 
 class PP305(PyProject):
-    "Specifies xfail_strict"
+    "Specifies strict xfail"
 
     requires = {"PP301"}
     url = mk_url("pytest")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pytest: tuple[PytestFile, dict[str, Any]]) -> bool:
         """
-        `xfail_strict` should be set. You can manually specify if a check
-        should be strict when setting each xfail.
+        `xfail_strict`, or if using pytest 9+, `strict_xfail` or `strict` should
+        be set. You can manually specify if a check should be strict when
+        setting each xfail.
 
         ```toml
         [tool.pytest.ini_options]
         xfail_strict = true
         ```
         """
-        options = pyproject["tool"]["pytest"]["ini_options"]
-        return "xfail_strict" in options
+        _, options = pytest
+        return (
+            "xfail_strict" in options
+            or "strict_xfail" in options
+            or "strict" in options
+        )
 
 
 class PP306(PyProject):
@@ -260,18 +299,23 @@ class PP306(PyProject):
     url = mk_url("pytest")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pytest: tuple[PytestFile, dict[str, Any]]) -> bool:
         """
-        `--strict-config` should be in `addopts = [...]`. This forces an error
-        if a config setting is misspelled.
+        `--strict-config` should be in `addopts = [...]` or (pytest 9+)
+        `strict_config` or `strict` should be set. This forces an error if a
+        config setting is misspelled.
 
         ```toml
         [tool.pytest.ini_options]
         addopts = ["-ra", "--strict-config", "--strict-markers"]
         ```
         """
-        options = pyproject["tool"]["pytest"]["ini_options"]
-        return "--strict-config" in options.get("addopts", [])
+        _, options = pytest
+        return (
+            "strict" in options
+            or "strict_config" in options
+            or "--strict-config" in options.get("addopts", [])
+        )
 
 
 class PP307(PyProject):
@@ -281,18 +325,23 @@ class PP307(PyProject):
     url = mk_url("pytest")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pytest: tuple[PytestFile, dict[str, Any]]) -> bool:
         """
-        `--strict-markers` should be in `addopts = [...]`. This forces all
-        markers to be specified in config, avoiding misspellings.
+        `--strict-markers` should be in `addopts = [...]` or (pytest 9+)
+        `strict_markers` or `strict` should be set. This forces test markers to
+        be specified in config, avoiding misspellings.
 
         ```toml
         [tool.pytest.ini_options]
         addopts = ["-ra", "--strict-config", "--strict-markers"]
         ```
         """
-        options = pyproject["tool"]["pytest"]["ini_options"]
-        return "--strict-markers" in options.get("addopts", [])
+        _, options = pytest
+        return (
+            "strict" in options
+            or "strict_markers" in options
+            or "--strict-markers" in options.get("addopts", [])
+        )
 
 
 class PP308(PyProject):
@@ -302,7 +351,7 @@ class PP308(PyProject):
     url = mk_url("pytest")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pytest: tuple[PytestFile, dict[str, Any]]) -> bool:
         """
         An explicit summary flag like `-ra` should be in `addopts = [...]`
         (print summary of all fails/errors).
@@ -312,9 +361,9 @@ class PP308(PyProject):
         addopts = ["-ra", "--strict-config", "--strict-markers"]
         ```
         """
-        options = pyproject["tool"]["pytest"]["ini_options"]
+        loc, options = pytest
         addopts = options.get("addopts", [])
-        if isinstance(addopts, str):
+        if loc is PytestFile.LEGACY_PYPROJECT and isinstance(addopts, str):
             addopts = addopts.split()
         return any(opt.startswith("-r") for opt in addopts)
 
@@ -326,7 +375,7 @@ class PP309(PyProject):
     url = mk_url("pytest")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pytest: tuple[PytestFile, dict[str, Any]]) -> bool:
         """
         `filterwarnings` must be set (probably to at least `["error"]`). Python
         will hide important warnings otherwise, like deprecations.
@@ -336,7 +385,7 @@ class PP309(PyProject):
         filterwarnings = ["error"]
         ```
         """
-        options = pyproject["tool"]["pytest"]["ini_options"]
+        _, options = pytest
         return "filterwarnings" in options
 
 

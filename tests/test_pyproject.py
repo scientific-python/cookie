@@ -1,7 +1,12 @@
 import configparser
 import inspect
+from pathlib import Path
 
+import pytest
 from repo_review.testing import compute_check, toml_loads
+
+from sp_repo_review.checks.pyproject import PytestFile
+from sp_repo_review.checks.pyproject import pytest as pytest_fixture
 
 
 def test_PP002_okay():
@@ -203,79 +208,233 @@ def test_PP006_missing():
 
 def test_PP302_okay_intstr():
     toml = toml_loads("""
-        [tool.pytest.ini_options]
         minversion = "7"
         """)
-    assert compute_check("PP302", pyproject=toml).result
+
+    assert compute_check("PP302", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP302_okay_modern():
+    toml = toml_loads("""
+        minversion = "9"
+        """)
+    assert compute_check("PP302", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
 
 
 def test_PP302_okay_verstr():
     toml = toml_loads("""
-        [tool.pytest.ini_options]
         minversion = "7.0.2"
         """)
-    assert compute_check("PP302", pyproject=toml).result
+    assert compute_check("PP302", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
 
 
 def test_PP302_okay_rawint():
     toml = toml_loads("""
-        [tool.pytest.ini_options]
         minversion = 7
         """)
-    assert compute_check("PP302", pyproject=toml).result
+    assert compute_check("PP302", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
 
 
 def test_PP302_okay_rawfloat():
     toml = toml_loads("""
-        [tool.pytest.ini_options]
         minversion = 7.0
         """)
-    assert compute_check("PP302", pyproject=toml).result
+    assert compute_check("PP302", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
 
 
 def test_PP302_missing():
-    toml = toml_loads("""
-        [tool.pytest]
-        ini_options = {}
-        """)
-    assert not compute_check("PP302", pyproject=toml).result
+    assert not compute_check("PP302", pytest=(PytestFile.NONE, {})).result
 
 
 def test_PP302_too_low():
     toml = toml_loads("""
-        [tool.pytest.ini_options]
         minversion = "5"
         """)
-    assert not compute_check("PP302", pyproject=toml).result
+    assert not compute_check("PP302", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP302_too_modern():
+    toml = toml_loads("""
+        minversion = "8"
+        """)
+    assert not compute_check("PP302", pytest=(PytestFile.MODERN_PYPROJECT, toml)).result
+
+
+def test_PP303_okay():
+    toml = toml_loads("""
+        testpaths = ["tests"]
+        """)
+    assert compute_check("PP303", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP303_missing():
+    assert not compute_check("PP303", pytest=(PytestFile.LEGACY_PYPROJECT, {})).result
+
+
+def test_PP304_okay():
+    toml = toml_loads("""
+        log_level = "INFO"
+        """)
+    assert compute_check("PP304", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP304_alt_okay():
+    toml = toml_loads("""
+        log_cli_level = "INFO"
+        """)
+    assert compute_check("PP304", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP304_missing():
+    assert not compute_check("PP304", pytest=(PytestFile.LEGACY_PYPROJECT, {})).result
+
+
+def test_PP305_legacy_okay():
+    toml = toml_loads("""
+        xfail_strict = true
+        """)
+    assert compute_check("PP305", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP305_new_okay():
+    toml = toml_loads("""
+        strict_xfail = true
+        """)
+    assert compute_check("PP305", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP305_missing():
+    assert not compute_check("PP305", pytest=(PytestFile.LEGACY_PYPROJECT, {})).result
+
+
+def test_PP306_legacy_okay():
+    toml = toml_loads("""
+        addopts = ["--strict-config"]
+        """)
+    assert compute_check("PP306", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP306_new_okay():
+    toml = toml_loads("""
+        strict_config = true
+        """)
+    assert compute_check("PP306", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP306_missing():
+    assert not compute_check("PP306", pytest=(PytestFile.LEGACY_PYPROJECT, {})).result
+
+
+def test_PP307_legacy_okay():
+    toml = toml_loads("""
+        addopts = ["--strict-markers"]
+        """)
+    assert compute_check("PP307", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP307_new_okay():
+    toml = toml_loads("""
+        strict_markers = true
+        """)
+    assert compute_check("PP307", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP307_missing():
+    assert not compute_check("PP307", pytest=(PytestFile.LEGACY_PYPROJECT, {})).result
 
 
 def test_PP308_list_okay():
     toml = toml_loads("""
-        [tool.pytest.ini_options]
         addopts = ["-ra"]
         """)
-    assert compute_check("PP308", pyproject=toml).result
+    assert compute_check("PP308", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
 
 
 def test_PP308_list_missing():
     toml = toml_loads("""
-        [tool.pytest.ini_options]
         addopts = ["-otther"]
         """)
-    assert not compute_check("PP308", pyproject=toml).result
+    assert not compute_check("PP308", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
 
 
 def test_PP308_string_okay():
     toml = toml_loads("""
-        [tool.pytest.ini_options]
         addopts = "--stuff -ra --morestuff"
         """)
-    assert compute_check("PP308", pyproject=toml).result
+    assert compute_check("PP308", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP308_string_not_okay():
+    toml = toml_loads("""
+        addopts = "--stuff -ra --morestuff"
+        """)
+    assert not compute_check("PP308", pytest=(PytestFile.MODERN_PYPROJECT, toml)).result
 
 
 def test_PP308_string_missing():
     toml = toml_loads("""
-        [tool.pytest.ini_options]
         addopts = "--stuff --morestuff"
         """)
-    assert not compute_check("PP308", pyproject=toml).result
+    assert not compute_check("PP308", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+@pytest.mark.parametrize(
+    "loc",
+    [PytestFile.LEGACY_PYPROJECT, PytestFile.MODERN_PYPROJECT, PytestFile.PYTEST_TOML],
+)
+def test_PP30x_strict_okay(loc: PytestFile):
+    toml = toml_loads("""
+        strict = true
+        """)
+    assert compute_check("PP305", pytest=(loc, toml)).result
+    assert compute_check("PP306", pytest=(loc, toml)).result
+    assert compute_check("PP307", pytest=(loc, toml)).result
+
+
+def test_pytest_fixture_legacy(tmp_path: Path):
+    toml = toml_loads("""
+        [tool.pytest.ini_options]
+        addopts = ["-ra", "--strict-config", "--strict-markers"]
+        """)
+    result = pytest_fixture(pyproject=toml, root=tmp_path)
+    assert result == (
+        PytestFile.LEGACY_PYPROJECT,
+        {"addopts": ["-ra", "--strict-config", "--strict-markers"]},
+    )
+
+
+def test_pytest_fixture_modern(tmp_path: Path):
+    toml = toml_loads("""
+        [tool.pytest]
+        addopts = ["-ra", "--strict-config", "--strict-markers"]
+        """)
+    result = pytest_fixture(pyproject=toml, root=tmp_path)
+    assert result == (
+        PytestFile.MODERN_PYPROJECT,
+        {"addopts": ["-ra", "--strict-config", "--strict-markers"]},
+    )
+
+
+def test_pytest_fixture_none(tmp_path: Path):
+    toml = toml_loads("""
+        [tool.other]
+        something = true
+        """)
+    result = pytest_fixture(pyproject=toml, root=tmp_path)
+    assert result == (PytestFile.NONE, {})
+
+
+@pytest.mark.parametrize("filename", ["pytest.toml", ".pytest.toml"])
+def test_pytest_fixture_pytest_toml(tmp_path: Path, filename: str):
+    (tmp_path / filename).write_text(
+        inspect.cleandoc("""
+        [pytest]
+        addopts = ["-ra", "--strict-config", "--strict-markers"]
+        """),
+        encoding="utf-8",
+    )
+    result = pytest_fixture(pyproject={}, root=tmp_path)
+    assert result == (
+        PytestFile.PYTEST_TOML,
+        {"addopts": ["-ra", "--strict-config", "--strict-markers"]},
+    )
