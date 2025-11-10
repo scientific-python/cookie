@@ -23,7 +23,8 @@ def pytest(
     pyproject: dict[str, Any], root: Traversable
 ) -> tuple[PytestFile, dict[str, Any]]:
     """
-    Returns the pytest configuration, or None if the configuration doesn't exist.
+    Returns a tuple containing the pytest configuration file type and the configuration dictionary.
+    Returns (PytestFile.NONE, {}) if the configuration doesn't exist.
     Respects toml configurations only.
     """
     paths = [root.joinpath("pytest.toml"), root.joinpath(".pytest.toml")]

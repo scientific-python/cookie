@@ -218,7 +218,7 @@ def test_PP302_okay_modern():
     toml = toml_loads("""
         minversion = "9"
         """)
-    assert compute_check("PP302", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+    assert compute_check("PP302", pytest=(PytestFile.MODERN_PYPROJECT, toml)).result
 
 
 def test_PP302_okay_verstr():
