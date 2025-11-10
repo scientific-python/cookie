@@ -220,16 +220,16 @@ class PP304(PyProject):
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
         """
-        `log_cli_level` should be set. This will allow logs to be displayed on
+        `log_level` should be set. This will allow logs to be displayed on
         failures.
 
         ```toml
         [tool.pytest.ini_options]
-        log_cli_level = "INFO"
+        log_level = "INFO"
         ```
         """
         options = pyproject["tool"]["pytest"]["ini_options"]
-        return "log_cli_level" in options
+        return "log_cli_level" in options or "log_level" in options
 
 
 class PP305(PyProject):

@@ -76,7 +76,7 @@ minversion = "6.0"
 addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
 xfail_strict = true
 filterwarnings = ["error"]
-log_cli_level = "info"
+log_level = "INFO"
 testpaths = [
   "tests",
 ]
@@ -95,7 +95,7 @@ config. {% rr PP305 %} `xfail_strict` will change the default for `xfail` to
 fail the tests if it doesn't fail - you can still override locally in a specific
 xfail for a flaky failure. {% rr PP309 %} `filter_warnings` will cause all
 warnings to be errors (you can add allowed warnings here too, see below).
-{% rr PP304 %} `log_cli_level` will report `INFO` and above log messages on a
+{% rr PP304 %} `log_level` will report `INFO` and above log messages on a
 failure. {% rr PP303 %} Finally, `testpaths` will limit `pytest` to just looking
 in the folders given - useful if it tries to pick up things that are not tests
 from other directories.
