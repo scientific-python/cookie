@@ -214,6 +214,20 @@ won't tell you what or why it fixed things.
 
 {% rr RF001 %} Ruff is configured in your `pyproject.toml`. Here's an example:
 
+{% tabs %} {% tab ruff-simple Simple config %}
+
+```toml
+[tool.ruff.lint]
+extend-select = [
+  "B",      # flake8-bugbear
+  "I",      # isort
+  "RUF",    # Ruff-specific
+  "UP",     # pyupgrade
+]
+```
+
+{% endtab %} {% tab ruff-full Full config %}
+
 ```toml
 [tool.ruff.lint]
 extend-select = [
@@ -263,6 +277,38 @@ typing-modules = ["mypackage._compat.typing"]
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
 ```
+
+{% endtab %} {% tab ruff-ignore Ignore-based config %}
+
+```toml
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "ANN401", # Disallow Any
+  "PLC0415", # Import should be at top of file
+  "PLR09", # Too many ...
+  "PLR2004", # Magic value used in comparison
+  "PT013", # It's correct to import classes for typing!
+  "RUF009", # Too easy to get a false positive (function call in dataclass defaults)
+  "S",     # Some subset is okay
+  "D",     # Too many doc requests
+  "TD",    # Todo format
+  "FIX",   # Hacks and todos
+  "TID252", # Relative imports are fine
+  "COM",   # Trailing commas teach the formatter
+  "A",     # Okay to shadow builtins
+  "E501",  # Line too long
+  "C90",   # Complexity
+  "SLF001", # Private members are okay to access
+  "ERA",   # Commented out code
+]
+typing-modules = ["mypackage._compat.typing"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["T20"]
+```
+
+{% endtab %} {% endtabs %}
 
 Ruff [provides dozens of rule sets](https://beta.ruff.rs/docs/rules/); you can
 select what you want from these. Like Flake8, plugins match by whole letter
