@@ -70,13 +70,14 @@ setupcfg = "sp_repo_review.checks.setupcfg:repo_review_checks"
 noxfile = "sp_repo_review.checks.noxfile:repo_review_checks"
 
 [project.entry-points."repo_review.fixtures"]
-workflows = "sp_repo_review.checks.github:workflows"
 dependabot = "sp_repo_review.checks.github:dependabot"
+noxfile = "sp_repo_review.checks.noxfile:noxfile"
 precommit = "sp_repo_review.checks.precommit:precommit"
+pytest = "sp_repo_review.checks.pyproject:pytest"
 readthedocs = "sp_repo_review.checks.readthedocs:readthedocs"
 ruff = "sp_repo_review.checks.ruff:ruff"
 setupcfg = "sp_repo_review.checks.setupcfg:setupcfg"
-noxfile = "sp_repo_review.checks.noxfile:noxfile"
+workflows = "sp_repo_review.checks.github:workflows"
 
 [project.entry-points."repo_review.families"]
 scikit-hep = "sp_repo_review.families:get_families"
