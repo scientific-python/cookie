@@ -71,7 +71,7 @@ pytest supports configuration in `pytest.ini`, `setup.cfg`, or, since version 6,
 always require 6+ (or 9+) and use `pyproject.toml` or the pytest TOML ones. This
 is an example configuration:
 
-{% tabs %} {% tab classic "Pytest 6+" %}
+{% tabs %} {% tab conf-classic Pytest 6+ %}
 
 ```toml
 [tool.pytest.ini_options]
@@ -85,7 +85,7 @@ testpaths = [
 ]
 ```
 
-{% endtab %} {% tab modern "Pytest 9+" %}
+{% endtab %} {% tab conf-modern Pytest 9+ %}
 
 ```toml
 [tool.pytest]
