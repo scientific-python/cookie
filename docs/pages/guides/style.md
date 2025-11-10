@@ -141,7 +141,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "25.9.0"
+  rev: "25.11.0"
   hooks:
     - id: black
 ```
@@ -547,7 +547,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.21.0"
+  rev: "v3.21.1"
   hooks:
     - id: pyupgrade
       args: ["--py39-plus"]
