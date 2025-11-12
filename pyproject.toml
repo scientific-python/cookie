@@ -155,6 +155,7 @@ messages_control.disable = [
   "invalid-name",
   "redefined-outer-name",
   "no-member",  # better handled by mypy, etc.
+  "arguments-differ",  # better handled by mypy, etc.
 ]
 
 
