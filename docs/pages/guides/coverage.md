@@ -117,9 +117,9 @@ report.show_missing = true
 ```
 
 Setting `run.core` to `sysmon` will make coverage much faster on 3.12+ without
-branch coverage, or 3.14+ if you are using branch coverage (see below). To
-avoid a warning on older Pythons without `sysmon`, you need to add the
-`no-sysmon` code to `run.disable_warnings`. If you want relative paths reported,
+branch coverage, or 3.14+ if you are using branch coverage (see below). To avoid
+a warning on older Pythons without `sysmon`, you need to add the `no-sysmon`
+code to `run.disable_warnings`. If you want relative paths reported,
 `relative_files=true` does that. And `source_pkgs` is one way to tell coverage
 which packages are to be monitored for coverage. You can also set
 `run.source_dirs`. You can use `report.show_missing` to show the missing line
