@@ -193,7 +193,6 @@ def tests(session: nox.Session) -> None:
 
 {% endtab %} {% endtabs %}
 
-
 #### Merging and reporting
 
 If you are running in multiple jobs, you should use upload/download artifacts so
@@ -213,7 +212,6 @@ def coverage(session: nox.Session) -> None:
     session.run("coverage", "report")
     session.run("coverage", "erase")
 ```
-
 
 #### Configuring Codecov and uploading coverage reports
 
@@ -276,7 +274,6 @@ uncovered line could cause a "failure" report on the PR). If you have 100%
 coverage, then you can remove the coverage failure settings, as you want any
 loss of coverage to fail. See the
 [docs](https://docs.codecov.com/docs/codecov-yaml) for all the options.
-
 
 <!-- ### Coverage for projects written in Python and C++
 
