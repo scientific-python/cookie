@@ -43,16 +43,15 @@ and Mkdocs, and uses the modern MyST plugin to get Markdown support.
 >   collection of notebooks using Sphinx internally. Can also be used for docs,
 >   though, see [echopype](https://echopype.readthedocs.io).
 
-
 {: .warning-title }
 
 > The Future of MkDocs
 >
-> The creators of `mkdocs-material` and `mkdocstrings` have come together
-> to create a new documentation package called [Zensical](https://zensical.org/about/).
-> The framework is still in alpha development, but aims to simplify the
-> documentation process, be blazing fast, and move away from the limitations
-> of MkDocs.
+> The creators of `mkdocs-material` and `mkdocstrings` have come together to
+> create a new documentation package called
+> [Zensical](https://zensical.org/about/). The framework is still in alpha
+> development, but aims to simplify the documentation process, be blazing fast,
+> and move away from the limitations of MkDocs.
 
 ## What to include
 
@@ -109,9 +108,8 @@ docs = [
 ]
 ```
 
-You should include the docs group via `--group=docs` when using uv or pip to install,
-or install all groups, such as by running `uv sync --all-groups`.
-
+You should include the docs group via `--group=docs` when using uv or pip to
+install, or install all groups, such as by running `uv sync --all-groups`.
 
 There is a sphinx-quickstart tool, but it creates unnecessary files (make/bat,
 we recommend a cross-platform noxfile instead), and uses rST instead of
@@ -278,13 +276,12 @@ to mark where you want the docs portion to start.
 
 You can add the standard indices and tables at the end.
 
-
 {% endtab %} {% tab mkdocs MkDocs %}
 
 While the cookie cutter creates a basic structure for your MkDocs (a top level
 `mkdocs.yml` file and the `docs` directory), you can also follow the official
 [Getting started](https://squidfunk.github.io/mkdocs-material/getting-started/)
-guide instead. 
+guide instead.
 
 If you selected the `mkdocs` option when using the template cookie-cutter
 repository, you will already have this group. Otherwise, add to your
@@ -302,9 +299,8 @@ docs = [
 ]
 ```
 
-You should include the docs group via `--group=docs` when using uv or pip to install,
-or install all groups, such as by running `uv sync --all-groups`.
-
+You should include the docs group via `--group=docs` when using uv or pip to
+install, or install all groups, such as by running `uv sync --all-groups`.
 
 These dependencies include several common plugins---such as generating reference
 API documentation from docstrings---to make life easier.
