@@ -163,7 +163,7 @@ Here's an example nox job:
 ```python
 @nox.session(python=ALL_PYTHONS)
 def tests(session: nox.Session) -> None:
-    env = {"COVERAGE_FILE": coverage_file}
+    coverage_file = f".coverage.{sys.platform}.{session.python}"
     session.install("-e.", "--group=cov")
     session.run(
         "coverage",
@@ -171,7 +171,7 @@ def tests(session: nox.Session) -> None:
         "-m",
         "pytest",
         *session.posargs,
-        env=env,
+        env={"COVERAGE_FILE": coverage_file},
     )
 ```
 
@@ -180,14 +180,14 @@ def tests(session: nox.Session) -> None:
 ```python
 @nox.session(python=ALL_PYTHONS)
 def tests(session: nox.Session) -> None:
-    env = {"COVERAGE_FILE": coverage_file}
+    coverage_file = f".coverage.{sys.platform}.{session.python}"
     session.install("-e.", "--group=cov")
     session.run(
         "pytest",
         "--cov=<package_name>",
         "--cov-config=pyproject.toml",
         *session.posargs,
-        env=env,
+        env={"COVERAGE_FILE": coverage_file},
     )
 ```
 
