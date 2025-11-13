@@ -117,7 +117,7 @@ report.show_missing = true
 ```
 
 Setting `run.core` to `sysmon` will make coverage much faster on 3.12+ without
-branch coverage, or 3.14+ if yyou are using branch coverage (see below). To
+branch coverage, or 3.14+ if you are using branch coverage (see below). To
 avoid a warning on older Pythons without `sysmon`, you need to add the
 `no-sysmon` code to `run.disable_warnings`. If you want relative paths reported,
 `relative_files=true` does that. And `source_pkgs` is one way to tell coverage
@@ -184,7 +184,7 @@ def tests(session: nox.Session) -> None:
     session.install("-e.", "--group=cov")
     session.run(
         "pytest",
-        "--cov",
+        "--cov=<package_name>",
         "--cov-config=pyproject.toml",
         *session.posargs,
         env=env,
