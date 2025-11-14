@@ -43,6 +43,18 @@ and Mkdocs, and uses the modern MyST plugin to get Markdown support.
 >   collection of notebooks using Sphinx internally. Can also be used for docs,
 >   though, see [echopype](https://echopype.readthedocs.io).
 
+{: .warning-title }
+
+> The Future of MkDocs
+>
+> The creators of `mkdocs-material` and `mkdocstrings` have come together to
+> create a new documentation package called
+> [Zensical](https://zensical.org/about/). The framework is still in alpha
+> development, but aims to simplify the documentation process, be blazing fast,
+> and move away from the limitations of MkDocs. This also means MkDocs's future
+> is uncertain, and mkdocs-material will be minimally maintained until
+> late 2026.
+
 ## What to include
 
 Ideally, software documentation should include:
@@ -82,6 +94,24 @@ Create `docs/` directory within your project (next to `src/`). From here, Sphinx
 and MkDocs diverge.
 
 {% tabs %}{% tab sphinx Sphinx %}
+
+### pyproject.toml additions
+
+Setting a `docs` dependency group looks like this:
+
+```toml
+[dependency-groups]
+docs = [
+  "furo",
+  "myst_parser >=0.13",
+  "sphinx >=4.0",
+  "sphinx-copybutton",
+  "sphinx-autodoc-typehints",
+]
+```
+
+You should include the docs group via `--group=docs` when using uv or pip to
+install, or install all groups, such as by running `uv sync --all-groups`.
 
 There is a sphinx-quickstart tool, but it creates unnecessary files (make/bat,
 we recommend a cross-platform noxfile instead), and uses rST instead of
@@ -248,33 +278,12 @@ to mark where you want the docs portion to start.
 
 You can add the standard indices and tables at the end.
 
-### pyproject.toml additions
-
-Setting a `docs` dependency group looks like this:
-
-```toml
-[dependency-groups]
-docs = [
-  "furo",
-  "myst_parser >=0.13",
-  "sphinx >=4.0",
-  "sphinx-copybutton",
-  "sphinx-autodoc-typehints",
-]
-```
-
-You should use `--group=docs` when using uv or pip to install.
-
 {% endtab %} {% tab mkdocs MkDocs %}
 
 While the cookie cutter creates a basic structure for your MkDocs (a top level
 `mkdocs.yml` file and the `docs` directory), you can also follow the official
 [Getting started](https://squidfunk.github.io/mkdocs-material/getting-started/)
-guide instead. Note, however, instead of the `pip` install, it is better
-practice install your documentation dependencies via `pyproject.toml` and then
-when you run your `uv sync` to install dependencies, you can explicitly ask for
-the `docs` group to be installed via `uv sync --group=docs` or
-`uv sync --all-groups`.
+guide instead.
 
 If you selected the `mkdocs` option when using the template cookie-cutter
 repository, you will already have this group. Otherwise, add to your
@@ -291,6 +300,9 @@ docs = [
     "pyyaml>=6.0.1",
 ]
 ```
+
+You should include the docs group via `--group=docs` when using uv or pip to
+install, or install all groups, such as by running `uv sync --all-groups`.
 
 These dependencies include several common plugins---such as generating reference
 API documentation from docstrings---to make life easier.

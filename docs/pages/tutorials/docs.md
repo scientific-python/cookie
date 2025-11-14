@@ -42,8 +42,7 @@ generator via [mkdocs-material][].
 For more details, examples to help you pick between Sphinx and MkDocs (and
 instructions for the latter), see the [documentation guide][]. For this simple
 introduction, we will use Sphinx as it is still more popular with scientific
-libraries, even though MkDocs is simpler to set up and more popular in general
-with Python documentation.
+libraries.
 
 Please refer to the MyST documentation for more information on the Markdown
 syntax in general and MyST's flavor of Markdown in particular.
