@@ -51,7 +51,9 @@ and Mkdocs, and uses the modern MyST plugin to get Markdown support.
 > create a new documentation package called
 > [Zensical](https://zensical.org/about/). The framework is still in alpha
 > development, but aims to simplify the documentation process, be blazing fast,
-> and move away from the limitations of MkDocs.
+> and move away from the limitations of MkDocs. This also means MkDocs's
+> future is uncertain, and mkdocs-material will be minimally maintained
+> until late 2026.
 
 ## What to include
 
