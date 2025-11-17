@@ -127,7 +127,7 @@ build_wheels:
 
     - uses: astral-sh/setup-uv@v7
 
-    - uses: pypa/cibuildwheel@v3.2
+    - uses: pypa/cibuildwheel@v3.3
 
     - name: Upload wheels
       uses: actions/upload-artifact@v5

@@ -111,7 +111,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.4"
+  rev: "v0.14.5"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -201,7 +201,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.4"
+  rev: "v0.14.5"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -879,7 +879,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.34.1"
+  rev: "0.35.0"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
@@ -950,7 +950,7 @@ You also might like the following hook, which cleans Jupyter outputs:
 
 ```yaml
 - repo: https://github.com/kynan/nbstripout
-  rev: "0.8.1"
+  rev: "0.8.2"
   hooks:
     - id: nbstripout
 ```
