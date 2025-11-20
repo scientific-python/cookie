@@ -100,6 +100,8 @@ class RTD103(ReadTheDocs):
                 return True
             case {"build": {"commands": object()}}:
                 return True
+            case {"build": {"jobs": object()}}:
+                return True
             case _:
                 return False
 
@@ -112,8 +114,10 @@ class RTD104(ReadTheDocs):
     @staticmethod
     def check(readthedocs: dict[str, Any]) -> bool:
         """
-        You must set `sphinx: configuration:`, `mkdocs: configuration:` or
-        `build: commands:`. Skipping it is no longer allowed. Example:
+        You must set `sphinx: configuration:`, `mkdocs: configuration:`,
+        `build: commands:`, or `build: jobs:`. Skipping it is no longer allowed.
+        Note: `build: jobs:` is preferred over `build: commands:`.
+        Example:
 
         ```yaml
         sphinx:
@@ -123,6 +127,8 @@ class RTD104(ReadTheDocs):
 
         match readthedocs:
             case {"build": {"commands": list()}}:
+                return True
+            case {"build": {"jobs": dict()}}:
                 return True
             case {"sphinx": {"configuration": str()}}:
                 return True

@@ -61,9 +61,62 @@ def test_rtd103_commands() -> None:
     assert compute_check("RTD103", readthedocs=readthedocs).result
 
 
+def test_rtd103_jobs() -> None:
+    readthedocs = yaml.safe_load("""
+        build:
+          jobs:
+            pre_build:
+              - echo "pre build"
+    """)
+    assert compute_check("RTD103", readthedocs=readthedocs).result
+
+
 def test_rtd103_false() -> None:
     readthedocs = yaml.safe_load("""
         build:
           os: ubuntu-22.04
     """)
     assert not compute_check("RTD103", readthedocs=readthedocs).result
+
+
+def test_rtd104_sphinx() -> None:
+    readthedocs = yaml.safe_load("""
+        sphinx:
+          configuration: docs/conf.py
+    """)
+    assert compute_check("RTD104", readthedocs=readthedocs).result
+
+
+def test_rtd104_mkdocs() -> None:
+    readthedocs = yaml.safe_load("""
+        mkdocs:
+          configuration: mkdocs.yml
+    """)
+    assert compute_check("RTD104", readthedocs=readthedocs).result
+
+
+def test_rtd104_commands() -> None:
+    readthedocs = yaml.safe_load("""
+        build:
+          commands:
+            - echo "build"
+    """)
+    assert compute_check("RTD104", readthedocs=readthedocs).result
+
+
+def test_rtd104_jobs() -> None:
+    readthedocs = yaml.safe_load("""
+        build:
+          jobs:
+            pre_build:
+              - echo "pre build"
+    """)
+    assert compute_check("RTD104", readthedocs=readthedocs).result
+
+
+def test_rtd104_false() -> None:
+    readthedocs = yaml.safe_load("""
+        build:
+          os: ubuntu-22.04
+    """)
+    assert not compute_check("RTD104", readthedocs=readthedocs).result
