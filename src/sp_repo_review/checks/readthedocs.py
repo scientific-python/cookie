@@ -98,9 +98,9 @@ class RTD103(ReadTheDocs):
         match readthedocs:
             case {"build": {"tools": {"python": object()}}}:
                 return True
-            case {"build": {"commands": object()}}:
-                return True
             case {"build": {"jobs": object()}}:
+                return True
+            case {"build": {"commands": object()}}:
                 return True
             case _:
                 return False
@@ -126,9 +126,9 @@ class RTD104(ReadTheDocs):
         """
 
         match readthedocs:
-            case {"build": {"commands": list()}}:
-                return True
             case {"build": {"jobs": dict()}}:
+                return True
+            case {"build": {"commands": list()}}:
                 return True
             case {"sphinx": {"configuration": str()}}:
                 return True
