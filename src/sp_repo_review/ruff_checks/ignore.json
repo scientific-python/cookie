@@ -20,14 +20,30 @@
     "rule": "RUF009",
     "reason": "Too easy to get a false positive (function call in dataclass defaults)"
   },
-  { "rule": "S101", "family": "S", "reason": "Assert is used by mypy and pytest" },
+  {
+    "rule": "S101",
+    "family": "S",
+    "reason": "Assert is used by mypy and pytest"
+  },
   { "family": "D", "reason": "Too many doc requests" },
   { "family": "TD", "reason": "Todo format" },
   { "family": "FIX", "reason": "Hacks and todos" },
   { "rule": "TID252", "family": "TID", "reason": "Relative imports are fine" },
-  { "rule": "COM812", "family": "COM", "reason": "Trailing commas teach the formatter" },
-  { "rule": "A002", "family": "A", "reason": "Okay for arguments to shadow builtins" },
-  { "rule": "A003", "family": "A", "reason": "Okay for attributes to shadow builtins" },
+  {
+    "rule": "COM812",
+    "family": "COM",
+    "reason": "Trailing commas teach the formatter"
+  },
+  {
+    "rule": "A002",
+    "family": "A",
+    "reason": "Okay for arguments to shadow builtins"
+  },
+  {
+    "rule": "A003",
+    "family": "A",
+    "reason": "Okay for attributes to shadow builtins"
+  },
   { "rule": "E501", "family": "E", "reason": "Line too long" },
   { "family": "C90", "reason": "Complexity" },
   {
