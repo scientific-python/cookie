@@ -159,6 +159,10 @@ messages_control.disable = [
 ]
 
 
+[tool.ruff]
+show-fixes = true
+extend-exclude = ["\\{\\{cookiecutter.project_name\\}\\}"]
+
 [tool.ruff.lint]
 extend-select = [
   "ARG",    # flake8-unused-arguments

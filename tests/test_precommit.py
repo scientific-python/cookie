@@ -1,6 +1,10 @@
+from pathlib import Path
+
 import pytest
 import yaml
 from repo_review.testing import compute_check
+
+from sp_repo_review.checks.precommit import repo_review_checks
 
 
 @pytest.fixture(params=["ruff", "ruff-check"])
@@ -283,3 +287,17 @@ def test_pc903_no_msg():
     res = compute_check("PC903", precommit=precommit)
     assert not res.result
     assert "autoupdate_schedule" in res.err_msg
+
+
+def test_repo_review_checks_skips_with_lefthook_only(tmp_path: Path) -> None:
+    """PreCommit checks should be omitted if only lefthook.yml is present.
+
+    When a repository uses `lefthook.yml` and does not have a
+    `.pre-commit-config.yaml`, `repo_review_checks` should return an empty
+    mapping when `list_all=False` indicating the pre-commit family is skipped.
+    """
+    # Create only a lefthook configuration
+    (tmp_path / "lefthook.yml").write_text("hooks:\n", encoding="utf-8")
+
+    checks = repo_review_checks(list_all=False, root=tmp_path)
+    assert checks == {}
