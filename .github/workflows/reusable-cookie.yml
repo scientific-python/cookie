@@ -91,9 +91,11 @@ jobs:
         run: nox -s 'tests(mesonpy, novcs, sphinx)'
 
       - name: Compare copier template generation
+        if: runner.os == 'Linux' # No need to check this on each (slow on Windows)
         run: nox -s compare_copier
 
       - name: Compare cruft template generation
+        if: runner.os == 'Linux' # No need to check this on each (slow on Windows)
         run: nox -s compare_cruft
 
   nox:
