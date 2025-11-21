@@ -30,7 +30,7 @@ def render_cookie(**context: str) -> Generator[Path, None, None]:
 
 
 class Matcher:
-    def __init__(self, txt: str):
+    def __init__(self, txt: str) -> None:
         self.ast = ast.parse(txt)
         self.lines = txt.splitlines()
 

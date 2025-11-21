@@ -364,7 +364,7 @@ def nox_session(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> No
 
 
 @nox.session(default=False)
-def compare_copier(session):
+def compare_copier(session: nox.Session) -> None:
     session.install("cookiecutter", "copier", "copier-templates-extensions")
 
     tmp_dir = session.create_tmp()
@@ -383,7 +383,7 @@ def compare_copier(session):
 
 
 @nox.session(default=False)
-def compare_cruft(session):
+def compare_cruft(session: nox.Session) -> None:
     session.install("cookiecutter", "cruft")
 
     tmp_dir = session.create_tmp()
