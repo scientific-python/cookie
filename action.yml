@@ -1,8 +1,19 @@
 name: sp-repo-review
 description: "Runs sp-repo-review"
+branding:
+  icon: package
+  color: blue
 inputs:
   package-dir:
     description: "Path to Python package, if different from repo root"
+    required: false
+    default: ""
+  select:
+    description: "Checks to select, overrides pyproject.toml"
+    required: false
+    default: ""
+  ignore:
+    description: "Checks to ignore, overrides pyproject.toml"
     required: false
     default: ""
 
@@ -12,7 +23,7 @@ runs:
     - uses: actions/setup-python@v6
       id: python
       with:
-        python-version: "3.12"
+        python-version: "3.13"
         update-environment: false
 
     # prettier-ignore
@@ -23,7 +34,8 @@ runs:
         --python '${{ steps.python.outputs.python-path }}'
         --spec '${{ github.action_path }}[cli]'
         repo-review .
-        --stderr html
+        --format html
+        --stderr rich
         --select "${{ inputs.select }}"
         --ignore "${{ inputs.ignore }}"
         --package-dir "${{ inputs.package-dir }}"
