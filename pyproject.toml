@@ -209,11 +209,6 @@ ignore = [
 ]
 
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
-"typing.Callable".msg = "Use collections.abc.Callable instead."
-"typing.Iterator".msg = "Use collections.abc.Iterator instead."
-"typing.Mapping".msg = "Use collections.abc.Mapping instead."
-"typing.Sequence".msg = "Use collections.abc.Sequence instead."
-"typing.Set".msg = "Use collections.abc.Set instead."
 "importlib.abc".msg = "Use sp_repo_review._compat.importlib.resources.abc instead."
 "importlib.resources.abc".msg = "Use sp_repo_review._compat.importlib.resources.abc instead."
 
