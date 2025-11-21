@@ -35,8 +35,8 @@ uv sync
 
 # Pre-commit
 
-You should prepare pre-commit, which will help you by checking that commits pass
-required checks:
+You should prepare pre-commit or prek, which will help you by checking that
+commits pass required checks:
 
 ```bash
 uv tool install pre-commit # or brew install pre-commit on macOS
