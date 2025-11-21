@@ -13,15 +13,39 @@ custom_title: Style and static checks
 
 ## Pre-commit
 
-{% rr PY006 %} Scientific Python projects often use [pre-commit][] to check code
-style. It can be installed through `brew` (macOS) or `pip` (anywhere). There are
-two modes to use it locally; you can check manually with `pre-commit run`
-(changes only) or `pre-commit run --all-files` (all). You can also run
+{% rr PY006 %} Scientific Python projects often use [pre-commit][] (or [prek][])
+to check code style. The original, `pre-commit`, has support for more languages,
+but `prek` is a faster Rust rewrite that supports most real world usage.
+
+{% tabs runner %} {% tab pre-commit Pre-commit %}
+
+Pre-commit can be installed through `brew` (macOS) or `pipx/uv` (anywhere).
+There are two modes to use it locally; you can check manually with
+`pre-commit run` (changes only) or `pre-commit run -a` (all). You can also run
 `pre-commit install` to add checks as a git pre-commit hook (which is where it
-gets its name). It's worth trying, even if you've tried and failed to set up a
-custom pre-commit hook before; it's quite elegant and does not add or commit the
-changes, it just makes the changes and allows you to check and add them. You can
-always override the hook with `-n`.
+gets its name).
+
+Pre-commit's setup is much slower than prek, but you can install `pre-commit-uv`
+with pre-commit to speed up the setup time quite a bit.
+
+{% endtab %} {% tab prek Prek %}
+
+Prek can be installed through `brew` (macOS) or `pipx/uv` (anywhere). There are
+two modes to use it locally; you can check manually with `prek run` (hanges
+only) or `prek run -a` (all). You can omit the `run`, as well; such as
+`prek -a`. You can also run `prek install` to add checks as a git pre-commit
+hook.
+
+{% endtab %} {% endtabs %}
+
+Local runs (with `-a`) are the standard way to use it. That will run all the
+checks in optimized, isolated environments. After the first run, it's quite fast
+(either pre-commit or prek).
+
+It's worth trying the install command, even if you've tried and failed to set up
+a custom pre-commit hook before; it's quite elegant and does not add or commit
+the changes, it just makes the changes and allows you to check and add them. You
+can always override the hook with `-n`.
 
 [pre-commit]: https://pre-commit.com
 
