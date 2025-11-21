@@ -2,7 +2,7 @@ import argparse
 import importlib.resources
 import json
 import sys
-from collections.abc import Iterator
+from collections.abc import Iterator, Mapping
 from pathlib import Path
 
 from rich import print
@@ -29,10 +29,11 @@ with RESOURCE_DIR.joinpath("ignore.json").open(encoding="utf-8") as f:
     IGNORE_INFO = json.load(f)
 
 
-def print_each(items: dict[str, str]) -> Iterator[str]:
+def print_each(items: Mapping[str, str]) -> Iterator[str]:
+    size = max(len(k) for k in items) if items else 0
     for k, v in items.items():
         kk = f'[green]"{k}"[/green],'
-        yield f"  {kk:23} [dim]# {v}[/dim]"
+        yield f"  {kk:{size + 18}} [dim]# {v}[/dim]"
 
 
 def process_dir(path: Path) -> None:
