@@ -102,7 +102,7 @@ There are a _few_ options, mostly to enable/disable certain files, remove string
 normalization, and to change the line length, and those go in your
 `pyproject.toml` file.
 
-{% tabs %} {% tab ruff Ruff-format %}
+{% tabs formatters %} {% tab ruff Ruff-format %}
 
 Ruff, the powerful Rust-based linter, has a formatter that is designed with the
 help of some of the Black authors to look 99.9% like Black, but run 30x faster.
@@ -214,7 +214,7 @@ won't tell you what or why it fixed things.
 
 {% rr RF001 %} Ruff is configured in your `pyproject.toml`. Here's an example:
 
-{% tabs %} {% tab ruff-simple Simple config %}
+{% tabs ruff-config %} {% tab ruff-simple Simple config %}
 
 ```toml
 [tool.ruff.lint]
