@@ -278,11 +278,11 @@ def test_PP304_okay():
     assert compute_check("PP304", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
 
 
-def test_PP304_alt_okay():
+def test_PP304_alt_not_okay():
     toml = toml_loads("""
         log_cli_level = "INFO"
         """)
-    assert compute_check("PP304", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+    assert not compute_check("PP304", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
 
 
 def test_PP304_missing():

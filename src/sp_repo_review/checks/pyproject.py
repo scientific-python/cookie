@@ -264,7 +264,7 @@ class PP304(PyProject):
         ```
         """
         _, options = pytest
-        return "log_cli_level" in options or "log_level" in options
+        return "log_level" in options
 
 
 class PP305(PyProject):
