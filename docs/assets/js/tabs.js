@@ -1,9 +1,13 @@
-function openTab(tabName, groupName = 'default') {
+function openTab(tabName, groupName = "default") {
   var tab = document.getElementsByClassName("skhep-tab");
   for (const t of tab) {
     if (t.classList.contains(`${groupName}-${tabName}-tab`)) {
       t.style.display = "block";
-    } else if (Array.from(t.classList).some(c => c.startsWith(`${groupName}-`) && c.endsWith('-tab'))) {
+    } else if (
+      Array.from(t.classList).some(
+        (c) => c.startsWith(`${groupName}-`) && c.endsWith("-tab"),
+      )
+    ) {
       t.style.display = "none";
     }
   }
@@ -11,7 +15,11 @@ function openTab(tabName, groupName = 'default') {
   for (const b of btn) {
     if (b.classList.contains(`${groupName}-${tabName}-btn`)) {
       b.classList.add("btn-purple");
-    } else if (Array.from(b.classList).some(c => c.startsWith(`${groupName}-`) && c.endsWith('-btn'))) {
+    } else if (
+      Array.from(b.classList).some(
+        (c) => c.startsWith(`${groupName}-`) && c.endsWith("-btn"),
+      )
+    ) {
       b.classList.remove("btn-purple");
     }
   }
