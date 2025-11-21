@@ -51,6 +51,7 @@ jobs:
           filter: |
             .github/workflows/ci.yml
             .github/workflows/reusable-rr-tests.yml
+            action.yml
             README.md
             noxfile.py
             pyproject.toml
