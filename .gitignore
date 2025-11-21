@@ -161,3 +161,7 @@ _readthedocs
 
 # UV output
 /uv.lock
+
+# Jekyll build artifacts
+vendor/
+.bundle/
