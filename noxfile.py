@@ -202,7 +202,7 @@ def diff_files(p1: Path, p2: Path) -> bool:
 @nox.parametrize("vcs", [False, True], ids=["novcs", "vcs"])
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def lint(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> None:
-    session.install("cookiecutter", "pre-commit")
+    session.install("cookiecutter", "prek")
 
     tmp_dir = session.create_tmp()
     session.cd(tmp_dir)
@@ -210,7 +210,7 @@ def lint(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> None:
     session.chdir(cookie)
 
     session.run(
-        "pre-commit",
+        "prek",
         "run",
         "--all-files",
         "--hook-stage=manual",
@@ -221,14 +221,14 @@ def lint(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> None:
 @nox.session(default=False)
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def autoupdate(session: nox.Session, backend: str) -> None:
-    session.install("cookiecutter", "pre-commit")
+    session.install("cookiecutter", "prek")
 
     tmp_dir = session.create_tmp()
     session.cd(tmp_dir)
     cookie = make_cookie(session, backend, True, Docs.Sphinx)
     session.chdir(cookie)
 
-    session.run("pre-commit", "autoupdate")
+    session.run("prek", "autoupdate")
     session.run("git", "diff", "--exit-code", external=True)
 
 
@@ -419,14 +419,14 @@ GHA_VERS = re.compile(r"[\s\-]+uses: (.*?)@([^\s]+)")
 @nox.session(reuse_venv=True, default=False)
 def pc_bump(session: nox.Session) -> None:
     """
-    Bump the pre-commit versions.
+    Bump the prek versions.
     """
     session.install("lastversion>=3.4")
     versions = {}
     pages = [
         Path("docs/pages/guides/style.md"),
-        Path("{{cookiecutter.project_name}}/.pre-commit-config.yaml"),
-        Path(".pre-commit-config.yaml"),
+        Path("{{cookiecutter.project_name}}/.prek-config.yaml"),
+        Path(".prek-config.yaml"),
     ]
 
     for page in pages:
@@ -548,8 +548,8 @@ def rr_lint(session: nox.Session) -> None:
     """
     Run the linter.
     """
-    session.install("pre-commit")
-    session.run("pre-commit", "run", "--all-files", *session.posargs)
+    session.install("prek")
+    session.run("prek", "run", "--all-files", *session.posargs)
 
 
 @nox.session
@@ -558,7 +558,7 @@ def rr_pylint(session: nox.Session) -> None:
     Run Pylint.
     """
     # This needs to be installed into the package environment, and is slower
-    # than a pre-commit check
+    # than a prek check
     session.install("-e.[cli]", "pylint")
     session.run("pylint", "src", *session.posargs)
 

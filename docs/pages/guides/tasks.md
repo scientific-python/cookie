@@ -170,8 +170,8 @@ will likely look similar across different projects:
 
 #### Lint
 
-Ideally, all developers should be using pre-commit directly, but this helps new
-users.
+Ideally, all developers should be using pre-commit or prek directly, but this
+helps new users.
 
 <!-- [[[cog
 with code_fence("python"):
@@ -184,9 +184,9 @@ def lint(session: nox.Session) -> None:
     """
     Run the linter.
     """
-    session.install("pre-commit")
+    session.install("prek")
     session.run(
-        "pre-commit", "run", "--all-files", "--show-diff-on-failure", *session.posargs
+        "prek", "run", "--all-files", "--show-diff-on-failure", *session.posargs
     )
 ```
 <!-- prettier-ignore-end -->
