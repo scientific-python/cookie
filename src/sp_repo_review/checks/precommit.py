@@ -245,5 +245,14 @@ class PC903(PreCommit):
         return "autoupdate_schedule" in precommit.get("ci", {})
 
 
-def repo_review_checks() -> dict[str, PreCommit]:
+def repo_review_checks(
+    list_all: bool = True,
+    root: Traversable | None = None,
+) -> dict[str, PreCommit]:
+    if root and not list_all:
+        precommit_path = root.joinpath(".pre-commit-config.yaml")
+        lefthook_path = root.joinpath("lefthook.yml")
+        if not precommit_path.is_file() and lefthook_path.is_file():
+            return {}
+
     return {p.__name__: p() for p in PreCommit.__subclasses__()}
