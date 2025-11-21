@@ -148,7 +148,9 @@ def readthedocs(root: Traversable) -> dict[str, Any]:
     return {}
 
 
-def repo_review_checks(list_all: bool = True, readthedocs: dict[str, Any] | None = None) -> dict[str, ReadTheDocs]:
+def repo_review_checks(
+    list_all: bool = True, readthedocs: dict[str, Any] | None = None
+) -> dict[str, ReadTheDocs]:
     if not list_all and not readthedocs:
         return {}
     return {p.__name__: p() for p in ReadTheDocs.__subclasses__()}
