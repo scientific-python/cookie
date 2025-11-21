@@ -384,7 +384,9 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PC190`](https://learn.scientific-python.org/development/guides/style#PC190): Uses Ruff
 - [`PC191`](https://learn.scientific-python.org/development/guides/style#PC191): Ruff show fixes if fixes enabled
 - [`PC192`](https://learn.scientific-python.org/development/guides/style#PC192): Ruff uses `ruff-check` instead of `ruff` (legacy)
-- [`PC901`](https://learn.scientific-python.org/development/guides/style#PC901): Custom pre-commit CI message
+- [`PC901`](https://learn.scientific-python.org/development/guides/style#PC901): Custom pre-commit CI update message
+- [`PC902`](https://learn.scientific-python.org/development/guides/style#PC902): Custom pre-commit CI autofix message
+- [`PC903`](https://learn.scientific-python.org/development/guides/style#PC903): Specified pre-commit CI schedule
 
 ### Ruff
 - [`RF001`](https://learn.scientific-python.org/development/guides/style#RF001): Has Ruff config

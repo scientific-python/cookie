@@ -248,3 +248,38 @@ def test_pc901_no_msg():
     res = compute_check("PC901", precommit=precommit)
     assert not res.result
     assert "autoupdate_commit_msg" in res.err_msg
+
+
+def test_pc902():
+    precommit = yaml.safe_load("""
+        ci:
+          autofix_commit_msg: 'style: pre-commit fixes'
+    """)
+    assert compute_check("PC902", precommit=precommit).result
+
+
+def test_pc902_no_msg():
+    precommit = yaml.safe_load("""
+    repos:
+    """)
+    res = compute_check("PC902", precommit=precommit)
+    assert not res.result
+    assert "autofix_commit_msg" in res.err_msg
+
+
+def test_pc903():
+    precommit = yaml.safe_load("""
+        ci:
+          autoupdate_schedule: "monthly"
+
+    """)
+    assert compute_check("PC903", precommit=precommit).result
+
+
+def test_pc903_no_msg():
+    precommit = yaml.safe_load("""
+    repos:
+    """)
+    res = compute_check("PC903", precommit=precommit)
+    assert not res.result
+    assert "autoupdate_schedule" in res.err_msg

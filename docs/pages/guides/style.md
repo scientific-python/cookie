@@ -72,12 +72,17 @@ docker), you cannot enable a `--manual` flag, so extra checks will not run, and
 jobs should not download packages (use `additional-dependencies:` to add what
 you need).
 
-{% rr PC901 %} You can customize the pre-commit message with:
+{% rr PC901 %} {% rr PC902 %} {% rr PC903 %} You can customize the pre-commit
+message with:
 
 ```yaml
 ci:
-  autoupdate_commit_msg: "chore: update pre-commit hooks"
+  autoupdate_commit_msg: "chore(deps): update pre-commit hooks"
+  autofix_commit_msg: "style: pre-commit fixes"
+  autoupdate_schedule: "monthly"
 ```
+
+The frequencies can be "weekly" (the default), "monthly", and "quarterly".
 
 ## Format
 

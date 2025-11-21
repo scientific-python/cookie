@@ -195,7 +195,7 @@ class PC192(PreCommit):
 
 
 class PC901(PreCommit):
-    "Custom pre-commit CI message"
+    "Custom pre-commit CI update message"
 
     @staticmethod
     def check(precommit: dict[str, Any]) -> bool:
@@ -204,11 +204,45 @@ class PC901(PreCommit):
 
         ```yaml
         ci:
-          autoupdate_commit_msg: 'chore: update pre-commit hooks'
+          autoupdate_commit_msg: 'chore(deps): update pre-commit hooks'
         ```
         """
 
         return "autoupdate_commit_msg" in precommit.get("ci", {})
+
+
+class PC902(PreCommit):
+    "Custom pre-commit CI autofix message"
+
+    @staticmethod
+    def check(precommit: dict[str, Any]) -> bool:
+        """
+        Should have something like this in `.pre-commit-config.yaml`:
+
+        ```yaml
+        ci:
+          autofix_commit_msg: "style: pre-commit fixes"
+        ```
+        """
+
+        return "autofix_commit_msg" in precommit.get("ci", {})
+
+
+class PC903(PreCommit):
+    "Specified pre-commit CI schedule"
+
+    @staticmethod
+    def check(precommit: dict[str, Any]) -> bool:
+        """
+        Should set some schedule: `weekly` (default), `monthly`, or `quarterly`.
+
+        ```yaml
+        ci:
+          autoupdate_schedule: "monthly"
+        ```
+        """
+
+        return "autoupdate_schedule" in precommit.get("ci", {})
 
 
 def repo_review_checks() -> dict[str, PreCommit]:
