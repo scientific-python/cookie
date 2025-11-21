@@ -36,7 +36,7 @@ class Option:
 
 
 class CC:
-    def __init__(self, filename: str):
+    def __init__(self, filename: str) -> None:
         with Path(filename).open(encoding="utf-8") as f:
             data = json.load(f)
 

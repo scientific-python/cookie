@@ -164,48 +164,20 @@ show-fixes = true
 extend-exclude = ["\\{\\{cookiecutter.project_name\\}\\}"]
 
 [tool.ruff.lint]
-extend-select = [
-  "ARG",    # flake8-unused-arguments
-  "B",      # flake8-bugbear
-  "BLE",    # flake8-blind-except
-  "C4",     # flake8-comprehensions
-  "DTZ",    # flake8-datetimez
-  "EM",     # flake8-errmsg
-  "EXE",    # flake8-executable
-  "FA",     # flake8-future-annotations
-  "FLY",    # flynt
-  "FURB",   # refurb
-  "G",      # flake8-logging-format
-  "I",      # isort
-  "ICN",    # flake8-import-conventions
-  "ISC",    # flake8-implicit-str-concat
-  "LOG",    # flake8-logging
-  "NPY",    # NumPy specific rules
-  "PD",     # pandas-vet
-  "PERF",   # perflint
-  "PGH",    # pygrep-hooks
-  "PIE",    # flake8-pie
-  "PL",     # pylint
-  "PT",     # flake8-pytest-style
-  "PTH",    # flake8-use-pathlib
-  "PYI",    # flake8-pyi
-  "Q",      # flake8-quotes
-  "RET",    # flake8-return
-  "RSE",    # flake8-raise
-  "RUF",    # Ruff-specific
-  "SIM",    # flake8-simplify
-  "SLOT",   # flake8-slots
-  "T10",    # flake8-debugger
-  "T20",    # flake8-print
-  "TC",     # flake8-type-checking
-  "TID251", # flake8-tidy-imports.banned-api
-  "TRY",    # tryceratops
-  "UP",     # pyupgrade
-  "YTT",    # flake8-2020
-]
+select = ["ALL"]
 ignore = [
+  "A002",   # Okay for arguments to shadow builtins
+  "A004",   # Okay for imports to shadow builtins (like print)
+  "COM812", # Trailing commas teach the formatter
+  "D",      # Docstrings
+  "E501",   # Line too long
+  "FBT",    # Boolean args fine
+  "N",      # Naming
   "PLR",    # Design related pylint codes
   "RUF012", # Would require a lot of ClassVar's
+  "S101",   # Assert is used by mypy and pytest
+  "S310",   # Okay to open URL
+  "TID252", # Relative imports are fine
 ]
 
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
@@ -214,6 +186,10 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "src/sp_repo_review/_compat/**.py" = ["TID251"]
+"src/sp_repo_review/checks/*.py" = ["ERA001"]
+"tests/**" = ["ANN", "INP001", "S607"]
+"helpers/**" = ["INP001", "FIX004"]
+"helpers/extensions.py" = ["ANN"]
 
 [tool.repo-review.ignore]
 RTD103 = "Using Ruby instead of Python for docs"
