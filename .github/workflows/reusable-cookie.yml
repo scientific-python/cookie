@@ -90,12 +90,13 @@ jobs:
       - name: Test meson-python
         run: nox -s 'tests(mesonpy, novcs, sphinx)'
 
+      # No need to check this on each (slow on Windows)
       - name: Compare copier template generation
-        if: runner.os == 'Linux' # No need to check this on each (slow on Windows)
+        if: runner.os == 'Linux' && !startsWith(matrix.python-version, 'pypy')
         run: nox -s compare_copier
 
       - name: Compare cruft template generation
-        if: runner.os == 'Linux' # No need to check this on each (slow on Windows)
+        if: runner.os == 'Linux' && !startsWith(matrix.python-version, 'pypy')
         run: nox -s compare_cruft
 
   nox:
