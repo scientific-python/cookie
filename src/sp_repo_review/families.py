@@ -125,7 +125,7 @@ def get_families(
         ),
         "rtd": Family(
             name="ReadTheDocs",
-            readme_note="Will not show up if no `.readthedocs.yml` file is present.",
+            readme_note="Will not show up if no `.readthedocs.yml`/`.readthedocs.yaml` file is present.",
         ),
         "setupcfg": Family(
             name="Setuptools Config",

@@ -395,7 +395,7 @@ Will not show up if using lefthook instead of pre-commit/prek.
 
 ### ReadTheDocs
 
-Will not show up if no `.readthedocs.yml` file is present.
+Will not show up if no `.readthedocs.yml`/`.readthedocs.yaml` file is present.
 
 - [`RTD100`](https://learn.scientific-python.org/development/guides/docs#RTD100): Uses ReadTheDocs (pyproject config)
 - [`RTD101`](https://learn.scientific-python.org/development/guides/docs#RTD101): You have to set the RTD version number to 2
