@@ -121,8 +121,8 @@ def get_families(
             name="Ruff",
             description=ruff_description(ruff),
         ),
-        "docs": Family(
-            name="Documentation",
+        "rtd": Family(
+            name="ReadTheDocs",
         ),
         "setupcfg": Family(
             name="Setuptools Config",

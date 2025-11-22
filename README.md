@@ -338,13 +338,6 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PP308`](https://learn.scientific-python.org/development/guides/pytest#PP308): Specifies useful pytest summary
 - [`PP309`](https://learn.scientific-python.org/development/guides/pytest#PP309): Filter warnings specified
 
-### Documentation
-- [`RTD100`](https://learn.scientific-python.org/development/guides/docs#RTD100): Uses ReadTheDocs (pyproject config)
-- [`RTD101`](https://learn.scientific-python.org/development/guides/docs#RTD101): You have to set the RTD version number to 2
-- [`RTD102`](https://learn.scientific-python.org/development/guides/docs#RTD102): You have to set the RTD build image
-- [`RTD103`](https://learn.scientific-python.org/development/guides/docs#RTD103): You have to set the RTD python version
-- [`RTD104`](https://learn.scientific-python.org/development/guides/docs#RTD104): You have to specify a build configuration now for readthedocs.
-
 ### GitHub Actions
 - [`GH100`](https://learn.scientific-python.org/development/guides/gha-basic#GH100): Has GitHub Actions config
 - [`GH101`](https://learn.scientific-python.org/development/guides/gha-basic#GH101): Has nice names
@@ -387,6 +380,13 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PC901`](https://learn.scientific-python.org/development/guides/style#PC901): Custom pre-commit CI update message
 - [`PC902`](https://learn.scientific-python.org/development/guides/style#PC902): Custom pre-commit CI autofix message
 - [`PC903`](https://learn.scientific-python.org/development/guides/style#PC903): Specified pre-commit CI schedule
+
+### ReadTheDocs
+- [`RTD100`](https://learn.scientific-python.org/development/guides/docs#RTD100): Uses ReadTheDocs (pyproject config)
+- [`RTD101`](https://learn.scientific-python.org/development/guides/docs#RTD101): You have to set the RTD version number to 2
+- [`RTD102`](https://learn.scientific-python.org/development/guides/docs#RTD102): You have to set the RTD build image
+- [`RTD103`](https://learn.scientific-python.org/development/guides/docs#RTD103): You have to set the RTD python version
+- [`RTD104`](https://learn.scientific-python.org/development/guides/docs#RTD104): You have to specify a build configuration now for readthedocs.
 
 ### Ruff
 - [`RF001`](https://learn.scientific-python.org/development/guides/style#RF001): Has Ruff config
