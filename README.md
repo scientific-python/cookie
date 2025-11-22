@@ -305,7 +305,9 @@ from repo_review.families import get_family_name
 collected = collect_all()
 print()
 for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1].family):
-    print(f'### {get_family_name(collected.families, family)}')
+    print(f'### {get_family_name(collected.families, family)}\n')
+    if note := collected.families.get(family, {}).get("readme_note"):
+        print(note, end="\n\n")
     for code, check in grp:
         url = get_check_url(code, check)
         link = f"[`{code}`]({url})" if url else f"`{code}`"
@@ -314,6 +316,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 ]]] -->
 
 ### General
+
 - [`PY001`](https://learn.scientific-python.org/development/guides/packaging-simple#PY001): Has a pyproject.toml
 - [`PY002`](https://learn.scientific-python.org/development/guides/packaging-simple#PY002): Has a README.(md|rst) file
 - [`PY003`](https://learn.scientific-python.org/development/guides/packaging-simple#PY003): Has a LICENSE* file
@@ -323,6 +326,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PY007`](https://learn.scientific-python.org/development/guides/tasks#PY007): Supports an easy task runner (nox, tox, pixi, etc.)
 
 ### PyProject
+
 - [`PP002`](https://learn.scientific-python.org/development/guides/packaging-simple#PP002): Has a proper build-system table
 - [`PP003`](https://learn.scientific-python.org/development/guides/packaging-classic#PP003): Does not list wheel as a build-dep
 - [`PP004`](https://learn.scientific-python.org/development/guides/packaging-simple#PP004): Does not upper cap Python requires
@@ -338,14 +342,8 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PP308`](https://learn.scientific-python.org/development/guides/pytest#PP308): Specifies useful pytest summary
 - [`PP309`](https://learn.scientific-python.org/development/guides/pytest#PP309): Filter warnings specified
 
-### Documentation
-- [`RTD100`](https://learn.scientific-python.org/development/guides/docs#RTD100): Uses ReadTheDocs (pyproject config)
-- [`RTD101`](https://learn.scientific-python.org/development/guides/docs#RTD101): You have to set the RTD version number to 2
-- [`RTD102`](https://learn.scientific-python.org/development/guides/docs#RTD102): You have to set the RTD build image
-- [`RTD103`](https://learn.scientific-python.org/development/guides/docs#RTD103): You have to set the RTD python version
-- [`RTD104`](https://learn.scientific-python.org/development/guides/docs#RTD104): You have to specify a build configuration now for readthedocs.
-
 ### GitHub Actions
+
 - [`GH100`](https://learn.scientific-python.org/development/guides/gha-basic#GH100): Has GitHub Actions config
 - [`GH101`](https://learn.scientific-python.org/development/guides/gha-basic#GH101): Has nice names
 - [`GH102`](https://learn.scientific-python.org/development/guides/gha-basic#GH102): Auto-cancel on repeated PRs
@@ -357,6 +355,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`GH212`](https://learn.scientific-python.org/development/guides/gha-basic#GH212): Require GHA update grouping
 
 ### MyPy
+
 - [`MY100`](https://learn.scientific-python.org/development/guides/style#MY100): Uses MyPy (pyproject config)
 - [`MY101`](https://learn.scientific-python.org/development/guides/style#MY101): MyPy strict mode
 - `MY102`: MyPy show_error_codes deprecated
@@ -366,6 +365,9 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`MY106`](https://learn.scientific-python.org/development/guides/style#MY106): MyPy enables truthy-bool
 
 ### Nox
+
+Will not show up if no `noxfile.py` file is present.
+
 - [`NOX101`](https://learn.scientific-python.org/development/guides/tasks#NOX101): Sets minimum nox version
 - [`NOX102`](https://learn.scientific-python.org/development/guides/tasks#NOX102): Sets venv backend
 - [`NOX103`](https://learn.scientific-python.org/development/guides/tasks#NOX103): Set default per session instead of session list
@@ -374,6 +376,9 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`NOX203`](https://learn.scientific-python.org/development/guides/tasks#NOX203): Provide a main block to run nox
 
 ### Pre-commit
+
+Will not show up if using lefthook instead of pre-commit/prek.
+
 - [`PC100`](https://learn.scientific-python.org/development/guides/style#PC100): Has pre-commit-hooks
 - [`PC110`](https://learn.scientific-python.org/development/guides/style#PC110): Uses black or ruff-format
 - [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Uses blacken-docs
@@ -388,7 +393,18 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PC902`](https://learn.scientific-python.org/development/guides/style#PC902): Custom pre-commit CI autofix message
 - [`PC903`](https://learn.scientific-python.org/development/guides/style#PC903): Specified pre-commit CI schedule
 
+### ReadTheDocs
+
+Will not show up if no `.readthedocs.yml`/`.readthedocs.yaml` file is present.
+
+- [`RTD100`](https://learn.scientific-python.org/development/guides/docs#RTD100): Uses ReadTheDocs (pyproject config)
+- [`RTD101`](https://learn.scientific-python.org/development/guides/docs#RTD101): You have to set the RTD version number to 2
+- [`RTD102`](https://learn.scientific-python.org/development/guides/docs#RTD102): You have to set the RTD build image
+- [`RTD103`](https://learn.scientific-python.org/development/guides/docs#RTD103): You have to set the RTD python version
+- [`RTD104`](https://learn.scientific-python.org/development/guides/docs#RTD104): You have to specify a build configuration now for readthedocs.
+
 ### Ruff
+
 - [`RF001`](https://learn.scientific-python.org/development/guides/style#RF001): Has Ruff config
 - [`RF002`](https://learn.scientific-python.org/development/guides/style#RF002): Target version must be set
 - [`RF003`](https://learn.scientific-python.org/development/guides/style#RF003): src directory doesn't need to be specified anymore (0.6+)
@@ -399,6 +415,9 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - `RF202`: Use (new) lint config section
 
 ### Setuptools Config
+
+Will not show up if no `setup.cfg` file is present.
+
 - [`SCFG001`](https://learn.scientific-python.org/development/guides/packaging-classic#SCFG001): Avoid deprecated setup.cfg names
 
 <!-- [[[end]]] -->

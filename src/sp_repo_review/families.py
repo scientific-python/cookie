@@ -21,6 +21,7 @@ class Family(typing.TypedDict, total=False):
     name: str  # defaults to key
     order: int  # defaults to 0
     description: str  # Defaults to empty
+    readme_note: str  # Not used repo-review
 
 
 def general_description(
@@ -113,6 +114,7 @@ def get_families(
         ),
         "pre-commit": Family(
             name="Pre-commit",
+            readme_note="Will not show up if using lefthook instead of pre-commit/prek.",
         ),
         "mypy": Family(
             name="MyPy",
@@ -121,13 +123,16 @@ def get_families(
             name="Ruff",
             description=ruff_description(ruff),
         ),
-        "docs": Family(
-            name="Documentation",
+        "rtd": Family(
+            name="ReadTheDocs",
+            readme_note="Will not show up if no `.readthedocs.yml`/`.readthedocs.yaml` file is present.",
         ),
         "setupcfg": Family(
             name="Setuptools Config",
+            readme_note="Will not show up if no `setup.cfg` file is present.",
         ),
         "noxfile": Family(
             name="Nox",
+            readme_note="Will not show up if no `noxfile.py` file is present.",
         ),
     }

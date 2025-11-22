@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class ReadTheDocs:
-    family = "docs"
+    family = "rtd"
     url = mk_url("docs")
 
 
