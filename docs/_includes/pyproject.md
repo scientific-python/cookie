@@ -5,6 +5,7 @@ The metadata is specified in a [standards-based][metadata] format:
 ```toml
 [project]
 name = "package"
+version = "0.1.0"
 description = "A great package."
 readme = "README.md"
 license = "BSD-3-Clause"
@@ -51,10 +52,10 @@ or [Whey](https://whey.readthedocs.io/en/latest/configuration.html). Note that
 The license can be done one of two ways.
 
 The modern way is to use the `license` field and an [SPDX identifier
-expression][spdx]. You can specify a list of files globs in `license-files`.
-Currently, `hatchling>=1.26`, `flit-core>=1.11`, `pdm-backend>=2.4`,
-`setuptools>=77`, and `scikit-build-core>=0.12` support this. Only `maturin`,
-`meson-python`, and `flit-core` do not support this yet.
+expression][spdx]. You can specify a list of files globs in `license-files`. You
+need `hatchling>=1.26`, `flit-core>=1.11` (1.12 for complex license statements),
+`pdm-backend>=2.4`, `setuptools>=77`, `meson-python>=0.18`, `maturin>=1.9.2`,
+`poetry-core>=2.2`, or `scikit-build-core>=0.12` to support this.
 
 The classic convention uses one or more [Trove Classifiers][] to specify the
 license. There also was a `license.file` field, required by `meson-python`, but

@@ -37,11 +37,13 @@ There are also classic setuptools plugins:
 
 {: .important }
 
-If you have a really complex build, the newer native build backends might not
-support your use case yet, but if that's the case, ask - development is driven
-by community needs. The older, more fragile setuptools based plugins are still a
-bit more flexible if you really need that flexibility for a feature not yet
-implemented in the native backends.
+Selecting a backend: If you are using Rust, use maturin. If you are using CUDA,
+use scikit-build-core. If you are using a classic language (C, C++, Fortran),
+then you can use either scikit-build-core or meson-python, depending on whether
+you prefer writing CMake or Meson. Meson is a lot more opinionated; it requires
+you use version control, it requires a README.md and LICENSE file. It requires
+your compiler be properly set up. Etc. While CMake can be as elegant as Meson,
+there are a lot of historical examples of poorly written CMake.
 
 ## pyproject.toml: build-system
 
@@ -120,6 +122,10 @@ install(TARGETS _core DESTINATION ${SKBUILD_PROJECT_NAME})
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
+Scikit-build-core will use your `.gitignore` to help it avoid adding ignored
+files to your distributions; it also has a default ignore for common cache
+files, so you can get started without one, but it's recommended.
+
 {% endtab %} {% tab meson Meson-python %}
 
 Example `meson.build` file (using pybind11, so include `pybind11` in
@@ -156,6 +162,11 @@ install_subdir('src/package', install_dir: py.get_install_dir() / 'package', str
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
+
+Meson also requires that `LICENSE` and `README.md` exist, and that your source
+be tracked by version control. In a real project, you will likely be doing this,
+but when trying out a build backend you might not think to add these even though
+they are required.
 
 {% endtab %} {% tab maturin Maturin %}
 
@@ -276,6 +287,8 @@ PYBIND11_MODULE(_core, m) {
 <!-- [[[end]]] -->
 
 {% endtab %} {% tab maturin Maturin %}
+
+Example `src/lib.rs` file:
 
 <!-- [[[cog
 with code_fence("rs"):
