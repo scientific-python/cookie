@@ -39,7 +39,7 @@ There are also classic setuptools plugins:
 
 Selecting a backend: If you are using Rust, use maturin. If you are using CUDA,
 use scikit-build-core. If you are using a classic language (C, C++, Fortran),
-then you can use either scikit-build-core or meson-python, depending if you
+then you can use either scikit-build-core or meson-python, depending on whether you
 prefer writing CMake or Meson. Meson is a lot more opinionated; it requires you
 use version control, it requires a README.md and LICENSE file. It requires your
 compiler be properly set up. Etc. While CMake can be as elegant as Meson, there
@@ -165,8 +165,7 @@ install_subdir('src/package', install_dir: py.get_install_dir() / 'package', str
 
 Meson also requires that `LICENSE` and `README.md` exist, and that your source
 be tracked by version control. In a real project, you will likely be doing this,
-but when trying out a build backend you might not think to add these, but you
-need them.
+but when trying out a build backend you might not think to add these even though they are required.
 
 {% endtab %} {% tab maturin Maturin %}
 
