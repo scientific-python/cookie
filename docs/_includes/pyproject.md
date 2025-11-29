@@ -52,11 +52,10 @@ or [Whey](https://whey.readthedocs.io/en/latest/configuration.html). Note that
 The license can be done one of two ways.
 
 The modern way is to use the `license` field and an [SPDX identifier
-expression][spdx]. You can specify a list of files globs in `license-files`.
-You need `hatchling>=1.26`, `flit-core>=1.11` (1.12 for complex license
-statements), `pdm-backend>=2.4`, `setuptools>=77`, `meson-python>=0.18`,
-`maturin>=1.9.2`, `poetry-core>=2.2`, or `scikit-build-core>=0.12` to support
-this.
+expression][spdx]. You can specify a list of files globs in `license-files`. You
+need `hatchling>=1.26`, `flit-core>=1.11` (1.12 for complex license statements),
+`pdm-backend>=2.4`, `setuptools>=77`, `meson-python>=0.18`, `maturin>=1.9.2`,
+`poetry-core>=2.2`, or `scikit-build-core>=0.12` to support this.
 
 The classic convention uses one or more [Trove Classifiers][] to specify the
 license. There also was a `license.file` field, required by `meson-python`, but

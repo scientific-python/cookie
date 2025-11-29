@@ -164,9 +164,9 @@ install_subdir('src/package', install_dir: py.get_install_dir() / 'package', str
 <!-- [[[end]]] -->
 
 Meson also requires that `LICENSE` and `README.md` exist, and that your source
-be tracked by version control. In a real project, you will likely be doing
-this, but when trying out a build backend you might not think to add these, but
-you need them.
+be tracked by version control. In a real project, you will likely be doing this,
+but when trying out a build backend you might not think to add these, but you
+need them.
 
 {% endtab %} {% tab maturin Maturin %}
 
