@@ -140,7 +140,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.6"
+  rev: "v0.14.7"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -230,7 +230,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.6"
+  rev: "v0.14.7"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -621,7 +621,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.18.2"
+  rev: "v1.19.0"
   hooks:
     - id: mypy
       files: src
@@ -860,7 +860,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.6.2"
+  rev: "v3.7.3"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
