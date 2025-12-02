@@ -1,51 +1,67 @@
 ## pyproject.toml: project table
 
+<!-- [[[cog
+from cog_helpers import code_fence, render_cookie, TOMLMatcher
+with render_cookie(backend="uv") as package:
+    pyproject = TOMLMatcher.from_file(package / "pyproject.toml")
+]]] -->
+<!-- [[[end]]] -->
+
 The metadata is specified in a [standards-based][metadata] format:
 
+<!-- [[[cog
+with code_fence("toml"):
+    print(pyproject.get_source("project"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```toml
 [project]
 name = "package"
 version = "0.1.0"
+authors = [
+  { name = "My Name", email = "me@email.com" },
+]
 description = "A great package."
 readme = "README.md"
 license = "BSD-3-Clause"
 license-files = ["LICENSE"]
-authors = [
-  { name = "My Name", email = "me@email.com" },
-]
-maintainers = [
-  { name = "My Organization", email = "myemail@email.com" },
-]
 requires-python = ">=3.10"
-
-dependencies = [
-  "typing_extensions",
-]
-
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 1 - Planning",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
-  "Topic :: Scientific/Engineering :: Physics",
+  "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
 ]
+dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/organization/package"
-Documentation = "https://package.readthedocs.io/"
-"Bug Tracker" = "https://github.com/organization/package/issues"
-Discussions = "https://github.com/organization/package/discussions"
-Changelog = "https://package.readthedocs.io/en/latest/changelog.html"
+Homepage = "https://github.com/org/package"
+"Bug Tracker" = "https://github.com/org/package/issues"
+Discussions = "https://github.com/org/package/discussions"
+Changelog = "https://github.com/org/package/releases"
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 You can read more about each field, and all allowed fields, in
 [packaging.python.org][metadata],
 [Flit](https://flit.readthedocs.io/en/latest/pyproject_toml.html#new-style-metadata)
-or [Whey](https://whey.readthedocs.io/en/latest/configuration.html). Note that
-"Homepage" is special, and replaces the old url setting.
+or [Whey](https://whey.readthedocs.io/en/latest/configuration.html). Only the
+`name` and `version` fields are strictly required. Note that "Homepage" is
+special, and replaces the old url setting.
+
+If you use the above configuration, you need `README.md` and `LICENSE` files,
+since they are explicitly specified.
 
 ### License
 
@@ -55,7 +71,9 @@ The modern way is to use the `license` field and an [SPDX identifier
 expression][spdx]. You can specify a list of files globs in `license-files`. You
 need `hatchling>=1.26`, `flit-core>=1.11` (1.12 for complex license statements),
 `pdm-backend>=2.4`, `setuptools>=77`, `meson-python>=0.18`, `maturin>=1.9.2`,
-`poetry-core>=2.2`, or `scikit-build-core>=0.12` to support this.
+`poetry-core>=2.2`, or `scikit-build-core>=0.12` to support this. You can also
+specify `license-files` as a list with globs for license files. If you don't,
+most backends will discover common license file names by default.
 
 The classic convention uses one or more [Trove Classifiers][] to specify the
 license. There also was a `license.file` field, required by `meson-python`, but
@@ -63,7 +81,7 @@ other tools often did the wrong thing (such as load the entire file into the
 metadata's free-form one line text field that was intended to describe
 deviations from the classifier license(s)).
 
-```
+```toml
 classifiers = [
   "License :: OSI Approved :: BSD License",
 ]
@@ -122,15 +140,30 @@ your package); the `dev` group is even installed, by default, when using `uv`'s
 high level commands like `uv run` and `uv sync`. {% rr PP0086 %} Here is an
 example:
 
+<!-- [[[cog
+with code_fence("toml"):
+    print(pyproject.get_source("dependency-groups"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```toml
 [dependency-groups]
 test = [
-  "pytest >=6.0",
+  "pytest >=6",
+  "pytest-cov >=3",
 ]
 dev = [
   { include-group = "test" },
 ]
+docs = [
+  "sphinx>=7.0",
+  "myst_parser>=0.13",
+  "sphinx_copybutton",
+  "sphinx_autodoc_typehints",
+  "furo>=2023.08.17",
+]
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 You can include one dependency group in another. Most tools allow you to install
 groups using `--group`, like `pip` (25.1+), `uv pip`, and the high level `uv`

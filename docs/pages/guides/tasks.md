@@ -11,9 +11,9 @@ parent: Topical Guides
 # Task runners
 
 <!-- [[[cog
-from cog_helpers import  code_fence, render_cookie, Matcher
+from cog_helpers import  code_fence, render_cookie, PyMatcher
 with render_cookie() as package:
-    noxfile = Matcher.from_file(package / "noxfile.py")
+    noxfile = PyMatcher.from_file(package / "noxfile.py")
 ]]] -->
 <!-- [[[end]]] -->
 
