@@ -1,7 +1,7 @@
 ## pyproject.toml: project table
 
 <!-- [[[cog
-from cog_helpers import  code_fence, render_cookie, TOMLMatcher
+from cog_helpers import code_fence, render_cookie, TOMLMatcher
 with render_cookie(backend="uv") as package:
     pyproject = TOMLMatcher.from_file(package / "pyproject.toml")
 ]]] -->
