@@ -68,7 +68,9 @@ class TOMLMatcher:
     def get_source(self, dotted_name: str, /) -> str:
         names = dotted_name.split(".")
         toml_inner = functools.reduce(lambda d, k: d[k], names, self.toml)
-        toml = functools.reduce(lambda d, k: tomlkit.table().add(k, d), reversed(names), toml_inner)
+        toml = functools.reduce(
+            lambda d, k: tomlkit.table().add(k, d), reversed(names), toml_inner
+        )
         return tomlkit.dumps(toml).strip()
 
 
