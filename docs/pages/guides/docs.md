@@ -75,15 +75,15 @@ Ideally, software documentation should include:
 > it if you are interested.
 
 <!-- [[[cog
-from cog_helpers import code_fence, render_cookie, Matcher
+from cog_helpers import code_fence, render_cookie, PyMatcher
 with render_cookie(backend="hatch", docs="sphinx") as package:
     docs_conf_py = package.joinpath("docs/conf.py").read_text(encoding="utf-8").strip()
     docs_index_md = package.joinpath("docs/index.md").read_text(encoding="utf-8").strip()
     readthedocs_yaml = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
-    noxfile = Matcher.from_file(package / "noxfile.py")
+    noxfile = PyMatcher.from_file(package / "noxfile.py")
 with render_cookie(backend="hatch", docs="mkdocs") as package:
     mkdocs_conf_yaml = package.joinpath("mkdocs.yml").read_text(encoding="utf-8").strip()
-    noxfile_mkdocs = Matcher.from_file(package / "noxfile.py")
+    noxfile_mkdocs = PyMatcher.from_file(package / "noxfile.py")
     readthedocs_yaml_mkdocs = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
 ]]] -->
 <!-- [[[end]]] -->

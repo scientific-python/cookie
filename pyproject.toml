@@ -96,6 +96,7 @@ test = [
 cog = [
   "cogapp",
   "cookiecutter",
+  "tomlkit",
 ]
 
 [tool.hatch]

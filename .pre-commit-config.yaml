@@ -96,4 +96,4 @@ repos:
         language: python
         entry: cog -P -r -I ./helpers
         files: "^docs/pages/guides/(packaging_compiled|docs|tasks|gha_basic).md|^copier.yml"
-        additional_dependencies: [cogapp, cookiecutter]
+        additional_dependencies: [cogapp, cookiecutter, tomlkit]
