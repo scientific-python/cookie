@@ -73,6 +73,14 @@ class TOMLMatcher:
         )
         return tomlkit.dumps(toml).strip()
 
+    def __contains__(self, dotted_name: str, /) -> bool:
+        names = dotted_name.split(".")
+        try:
+            functools.reduce(lambda d, k: d[k], names, self.toml)
+        except KeyError:
+            return False
+        return True
+
 
 @contextlib.contextmanager
 def code_fence(lang: str, /, *, width: int = 3) -> Generator[None, None, None]:

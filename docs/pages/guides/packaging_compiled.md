@@ -8,6 +8,24 @@ parent: Topical Guides
 
 {% include toc.html %}
 
+<!-- [[[cog
+from cog_helpers import code_fence, render_cookie, TOMLMatcher
+with render_cookie(backend="skbuild", vcs=False) as skbuild:
+    skbuild_cmakelists_txt = skbuild.joinpath("CMakeLists.txt").read_text(encoding="utf-8").strip()
+    skbuild_src_main_cpp = skbuild.joinpath("src/main.cpp").read_text(encoding="utf-8").strip()
+    skbuild_pyproject = TOMLMatcher.from_file(skbuild / "pyproject.toml")
+with render_cookie(backend="mesonpy", vcs=False) as mesonpy:
+    mesonpy_meson_build = mesonpy.joinpath("meson.build").read_text(encoding="utf-8").strip()
+    mesonpy_src_main_cpp = mesonpy.joinpath("src/main.cpp").read_text(encoding="utf-8").strip()
+    mesonpy_pyproject = TOMLMatcher.from_file(mesonpy / "pyproject.toml")
+    assert "tool.meson-python" not in mesonpy_pyproject
+with render_cookie(backend="maturin", vcs=False) as maturin:
+    maturin_cargo_toml = maturin.joinpath("Cargo.toml").read_text(encoding="utf-8").strip()
+    maturin_src_lib_rs = maturin.joinpath("src/lib.rs").read_text(encoding="utf-8").strip()
+    maturin_pyproject = TOMLMatcher.from_file(maturin / "pyproject.toml")
+]]] -->
+<!-- [[[end]]] -->
+
 # Packaging Compiled Projects
 
 There are a variety of ways to package compiled projects. In the past, the only
@@ -52,27 +70,48 @@ selects the backend:
 
 {% tabs %} {% tab skbc Scikit-build-core %}
 
+<!-- [[[cog
+with code_fence("toml"):
+    print(skbuild_pyproject.get_source("build-system"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```toml
 [build-system]
-requires = ["scikit-build-core"]
+requires = ["pybind11", "scikit-build-core>=0.11"]
 build-backend = "scikit_build_core.build"
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 {% endtab %} {% tab meson Meson-python %}
 
+<!-- [[[cog
+with code_fence("toml"):
+    print(mesonpy_pyproject.get_source("build-system"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```toml
 [build-system]
-requires = ["meson-python"]
+requires = ["meson-python>=0.18", "pybind11"]
 build-backend = "mesonpy"
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 {% endtab %} {% tab maturin Maturin %}
 
+<!-- [[[cog
+with code_fence("toml"):
+    print(maturin_pyproject.get_source("build-system"))
+]]] -->
+<!-- prettier-ignore-start -->
 ```toml
 [build-system]
-requires = ["maturin"]
+requires = ["maturin>=1.9,<2"]
 build-backend = "maturin"
 ```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
 
 {% endtab %} {% endtabs %}
 
@@ -83,19 +122,48 @@ build-backend = "maturin"
 These tools all read the project table. They also have extra configuration
 options in `tool.*` settings.
 
+{% tabs %} {% tab skbc Scikit-build-core %}
+
 <!-- [[[cog
-from cog_helpers import code_fence, render_cookie
-with render_cookie(backend="skbuild") as skbuild:
-    skbuild_cmakelists_txt = skbuild.joinpath("CMakeLists.txt").read_text(encoding="utf-8").strip()
-    skbuild_src_main_cpp = skbuild.joinpath("src/main.cpp").read_text(encoding="utf-8").strip()
-with render_cookie(backend="mesonpy") as mesonpy:
-    mesonpy_meson_build = mesonpy.joinpath("meson.build").read_text(encoding="utf-8").strip()
-    mesonpy_src_main_cpp = mesonpy.joinpath("src/main.cpp").read_text(encoding="utf-8").strip()
-with render_cookie(backend="maturin") as maturin:
-    maturin_cargo_toml = maturin.joinpath("Cargo.toml").read_text(encoding="utf-8").strip()
-    maturin_src_lib_rs = maturin.joinpath("src/lib.rs").read_text(encoding="utf-8").strip()
+with code_fence("toml"):
+    print(skbuild_pyproject.get_source("tool.scikit-build"))
 ]]] -->
+<!-- prettier-ignore-start -->
+```toml
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+build-dir = "build/{wheel_tag}"
+```
+<!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
+
+These options are not required, but can improve your experience.
+
+{% endtab %} {% tab meson Meson-python %}
+
+No `tool.meson-python` configuration required for this example.
+
+{% endtab %} {% tab maturin Maturin %}
+
+<!-- [[[cog
+with code_fence("toml"):
+    print(maturin_pyproject.get_source("tool.maturin"))
+]]] -->
+<!-- prettier-ignore-start -->
+```toml
+[tool.maturin]
+module-name = "package._core"
+python-packages = ["package"]
+python-source = "src"
+sdist-generator = "git"  # default is cargo
+```
+<!-- prettier-ignore-end -->
+<!-- [[[end]]] -->
+
+Maturin assumes you follow Rust's package structure, so we need a little bit of
+configuration here to follow the convention of the other tools here.
+
+{% endtab %} {% endtabs %}
 
 ## Backend specific files
 
@@ -180,7 +248,7 @@ with code_fence("toml"):
 [package]
 name = "package"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 
 [lib]
 name = "_core"
@@ -188,10 +256,10 @@ name = "_core"
 crate-type = ["cdylib"]
 
 [dependencies]
-rand = "0.8.3"
+rand = "0.9.2"
 
 [dependencies.pyo3]
-version = "0.19.1"
+version = "0.27.2"
 # "extension-module" tells pyo3 we want to build an extension module (skips linking against libpython.so)
 # "abi3-py310" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.10
 features = ["extension-module", "abi3-py310"]
@@ -302,26 +370,29 @@ with code_fence("rs"):
 ```rs
 use pyo3::prelude::*;
 
-#[pyfunction]
-fn add(x: i64, y: i64) -> i64 {
-    x + y
-}
-
-#[pyfunction]
-fn subtract(x: i64, y: i64) -> i64 {
-    x - y
-}
-
 /// A Python module implemented in Rust. The name of this function must match
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
 #[pymodule]
-fn _core(_py: Python, m: &PyModule) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(add, m)?)?;
-    m.add_function(wrap_pyfunction!(subtract, m)?)?;
-    m.add("__version__", env!("CARGO_PKG_VERSION"))?;
+mod _core {
+    use super::*;
 
-    Ok(())
+    #[pyfunction]
+    fn add(x: i64, y: i64) -> i64 {
+        x + y
+    }
+
+    #[pyfunction]
+    fn subtract(x: i64, y: i64) -> i64 {
+        x - y
+    }
+
+
+    #[pymodule_init]
+    fn pymodule_init(m: &Bound<'_, PyModule>) -> PyResult<()> {
+        m.add("__version__", env!("CARGO_PKG_VERSION"))?;
+        Ok(())
+    }
 }
 ```
 <!-- prettier-ignore-end -->
@@ -332,7 +403,8 @@ fn _core(_py: Python, m: &PyModule) -> PyResult<()> {
 ## Package structure
 
 The recommendation (followed above) is to have source code in `/src`, and the
-Python package files in `/src/<package>`.
+Python package files in `/src/<package>`. The compiled files also can go in
+`/src`.
 
 ## Versioning
 
@@ -348,25 +420,26 @@ though the defaults are reasonable.
 
 Unlike pure Python, you'll need to build redistributable wheels for each
 platform and supported Python version if you want to avoid compilation on the
-user's system. See [the CI page on wheels][gha_wheels] for a suggested workflow.
+user's system using cibuildwheel. See [the CI page on wheels][gha_wheels] for a
+suggested workflow.
 
 ## Special considerations
 
 ### NumPy
 
 Modern versions of NumPy (1.25+) allow you to target older versions when
-building, which is _highly_ recommended, and this will become required in NumPy
-2.0. Now you add:
+building, which is _highly_ recommended, and this became required in NumPy 2.0.
+Now you add:
 
 ```cpp
 #define NPY_TARGET_VERSION NPY_1_22_API_VERSION
 ```
 
 (Where that number is whatever version you support as a minimum) then make sure
-you build with NumPy 1.25+ (or 2.0+ when it comes out). Before 1.25, it was
-necessary to actually pin the oldest NumPy you supported (the
-`oldest-supported-numpy` package is the easiest method). If you support Python <
-3.9, you'll have to use the old method for those versions.
+you build with NumPy 1.25+ (or 2.0+). Before 1.25, it was necessary to actually
+pin the oldest NumPy you supported (the `oldest-supported-numpy` package is the
+easiest method). If you support Python < 3.9, you'll have to use the old method
+for those versions.
 
 If using pybind11, you don't need NumPy at build-time in the first place.
 
