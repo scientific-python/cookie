@@ -153,7 +153,6 @@ with code_fence("toml"):
 ```toml
 [tool.maturin]
 module-name = "package._core"
-python-packages = ["package"]
 python-source = "src"
 sdist-generator = "git"  # default is cargo
 ```
