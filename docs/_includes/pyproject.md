@@ -53,7 +53,8 @@ Changelog = "https://github.com/org/package/releases"
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
 
-You can read more about each field, and all allowed fields, in
+In this example, `"package"` is the name of the thing you are working on. You
+can read more about each field, and all allowed fields, in
 [packaging.python.org][metadata],
 [Flit](https://flit.readthedocs.io/en/latest/pyproject_toml.html#new-style-metadata)
 or [Whey](https://whey.readthedocs.io/en/latest/configuration.html). Only the

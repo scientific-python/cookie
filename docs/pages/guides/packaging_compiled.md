@@ -203,6 +203,11 @@ features = ["extension-module", "abi3-py310"]
 
 ## Example compiled file
 
+This example will make a `_core` extension inside your package; this pattern
+allows you to easily provide both Python files and compiled extensions, and
+keeping the details of your compiled extension private. You can select whatever
+name you wish, though, or even make your compiled extension a top level module.
+
 {% tabs %} {% tab skbc Scikit-build-core %}
 
 Example `src/main.cpp` file:
