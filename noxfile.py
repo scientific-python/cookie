@@ -272,7 +272,7 @@ def native(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> None:
     session.chdir(cookie)
 
     if backend == "hatch":
-        session.run(backend, "run", "test")
+        session.run(backend, "test")
     elif backend == "poetry":
         session.run(backend, "sync", env={"VIRTUAL_ENV": None})
         session.run(backend, "run", "pytest", env={"VIRTUAL_ENV": None})
