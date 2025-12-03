@@ -162,7 +162,6 @@ sdist.include = ["src/{{ cookiecutter.__project_slug }}/_version.py"]
 
 [tool.maturin]
 module-name = "{{ cookiecutter.__project_slug }}._core"
-python-packages = ["{{ cookiecutter.__project_slug }}"]
 python-source = "src"
 sdist-generator = "git"  # default is cargo
 
