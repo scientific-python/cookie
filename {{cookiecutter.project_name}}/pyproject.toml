@@ -177,10 +177,11 @@ build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.p
 {%- endif %}
 
 [tool.hatch.envs.default]
-# duplicate for now since hatch doesn't support groups yet
-dependencies = []
-scripts.test = "pytest {args}"
+dependency-groups = ["dev"]
 
+[tool.hatch.envs.hatch-test]
+dependency-groups = ["test"]
+env-vars.PYTHONWARNDEFAULTENCODING = "1"
 
 {%- elif cookiecutter.backend == "pdm" %}
 {%- if cookiecutter.vcs %}
