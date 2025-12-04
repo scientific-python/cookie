@@ -15,8 +15,9 @@ templates for Python packages?
 
 - Lives with the [Scientific-Python Development Guide][]: Every decision is
   clearly documented and every tool described, and everything is kept in sync.
-- Nine different backends to choose from for building packages.
+- Ten different backends to choose from for building packages.
 - Optional VCS versioning for most backends.
+- Selection for your preferred documentation engine (Sphinx or MkDocs).
 - Template generation tested in GitHub Actions using nox.
 - Supports generation with [copier][], [cookiecutter][], and [cruft][].
 - Supports GitHub Actions if targeting a `github.com` url (the default), and
@@ -24,8 +25,8 @@ templates for Python packages?
 - Includes several compiled backends using [pybind11][], with wheels produced
   for all platforms using [cibuildwheel][].
 - Provides [`sp-repo-review`][pypi-link] to evaluate existing repos against the
-  guidelines, with a WebAssembly version integrated with the guide. All checks
-  cross-linked.
+  guidelines, with a WebAssembly version integrated with the guide. Checks are
+  hyperlinked back to the guide.
 - Follows [PyPA][] best practices and regularly updated. Recent additions:
   - [PEP 639](https://peps.python.org/pep-0639): SPDX licenses
   - [PEP 735](https://peps.python.org/pep-0735): Dependency groups
@@ -134,22 +135,28 @@ backports structure with a small typing example.
 - GitHub Actions runs testing for the generation itself
   - Uses nox so cookie development can be checked locally
   - Uses uv for high performance CI
-- GitHub actions deploy
+- GitHub actions deployment
   - C++ backends include cibuildwheel for wheel builds
   - Uses PyPI trusted publisher deployment
+- A GitHub release configuration that skips common bot commits when
+  auto-generating release notes
 - Dependabot keeps actions up to date periodically, through useful pull requests
-- Formatting handled by pre-commit
+- A contributing guide
+- Formatting handled by pre-commit or prek
   - No reason not to be strict on a new project; remove what you don't want.
   - Includes MyPy - static typing
   - Includes Ruff - standard formatting, linting and autofixes
     - Replaces Flake8, isort, pyupgrade, yesqa, pycln, and dozens of plugins
   - Includes spell checking
+- One of several popular licenses
 - An pylint nox target can be used to run pylint, which integrated GHA
   annotations
-- A ReadTheDocs-ready Sphinx docs folder and `docs` dependency-group
-- A test folder and pytest `test` dependency-group
+- A ReadTheDocs-ready Sphinx or MkDocs `docs/` folder and `docs`
+  dependency-group
+- A `tests/` folder and pytest `test` dependency-group
 - A dev group for `uv run` integration
 - A noxfile is included with a few common targets
+- A README
 
 #### For developers:
 

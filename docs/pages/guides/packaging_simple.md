@@ -8,6 +8,14 @@ parent: Topical Guides
 
 {% include toc.html %}
 
+{: .highlight-title }
+
+> Quick start
+>
+> Once you've done this at least once, feel free to use
+> [our cookiecutter/copier template](https://github.com/scientific-python/cookie),
+> or `uv init` to get started quickly on new packages!
+
 # Simple packaging
 
 Python packages can now use a modern build system instead of the classic but
@@ -32,7 +40,7 @@ tutorial][].
 > `pipx run hatch new --init` or with
 > [ini2toml](https://ini2toml.readthedocs.io/en/latest/).
 
-{: .highlight-title }
+{: .important-title }
 
 > Selecting a backend
 >
@@ -113,9 +121,8 @@ If you don't match your package name and import name (which you should except
 for very special cases), you will likely need extra configuration here.
 
 You should have a `README` {% rr PY002 %} and a `LICENSE` {% rr PY003 %} file.
-You should have a `docs/` folder {%
-rr PY004 %}. You should have a `/tests` folder {%
-rr PY005 %} (recommended) and/or a `src/<package>/tests` folder.
+You should have a `docs/` folder {% rr PY004 %}. You should have a `/tests`
+folder {% rr PY005 %} (recommended) and/or a `src/<package>/tests` folder.
 
 ## Versioning
 

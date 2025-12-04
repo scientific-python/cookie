@@ -26,6 +26,14 @@ with render_cookie(backend="maturin", vcs=False) as maturin:
 ]]] -->
 <!-- [[[end]]] -->
 
+{: .highlight-title }
+
+> Quick start
+>
+> Once you've done this at least once, feel free to use
+> [our cookiecutter/copier template](https://github.com/scientific-python/cookie),
+> or `uv init` to get started quickly on new packages!
+
 # Packaging Compiled Projects
 
 There are a variety of ways to package compiled projects. In the past, the only
@@ -53,15 +61,18 @@ There are also classic setuptools plugins:
 - [scikit-build][]: Builds C/C++/Fortran using CMake.
 - [setuptools-rust][]: Builds Rust using Cargo.
 
-{: .important }
+{: .highlight-title }
 
-Selecting a backend: If you are using Rust, use maturin. If you are using CUDA,
-use scikit-build-core. If you are using a classic language (C, C++, Fortran),
-then you can use either scikit-build-core or meson-python, depending on whether
-you prefer writing CMake or Meson. Meson is a lot more opinionated; it requires
-you use version control, it requires a README.md and LICENSE file. It requires
-your compiler be properly set up. Etc. While CMake can be as elegant as Meson,
-there are a lot of historical examples of poorly written CMake.
+> Selecting a backend
+>
+> Selecting a backend: If you are using Rust, use maturin. If you are using
+> CUDA, use scikit-build-core. If you are using a classic language (C, C++,
+> Fortran), then you can use either scikit-build-core or meson-python, depending
+> on whether you prefer writing CMake or Meson. Meson is a lot more opinionated;
+> it requires you use version control, it requires a README.md and LICENSE file.
+> It requires your compiler be properly set up. Etc. While CMake can be as
+> elegant as Meson, there are a lot of historical examples of poorly written
+> CMake.
 
 ## pyproject.toml: build-system
 
