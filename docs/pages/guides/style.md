@@ -140,7 +140,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.7"
+  rev: "v0.14.8"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -170,7 +170,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "25.11.0"
+  rev: "25.12.0"
   hooks:
     - id: black
 ```
@@ -230,7 +230,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.7"
+  rev: "v0.14.8"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -831,7 +831,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v21.1.6"
+  rev: "v21.1.7"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -860,7 +860,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.7.3"
+  rev: "v3.7.4"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
