@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+
+# /// script
+# dependencies = ["nox>=2025.2.9"]
+# ///
+
+"""Nox runner."""
+
 from __future__ import annotations
 
 {% if cookiecutter.docs == 'sphinx' -%}
@@ -133,3 +141,7 @@ def build(session: nox.Session) -> None:
 
     session.install("build")
     session.run("python", "-m", "build")
+
+
+if __name__ == "__main__":
+    nox.main()
