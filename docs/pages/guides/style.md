@@ -785,11 +785,11 @@ pre-commit, gh-install, brew, cargo, or conda/pixi. It also has LSP (VSCode)
 integration.
 
 ```yaml
-  - repo: https://github.com/crate-ci/typos
-    rev: "v1.40.0"
-    hooks:
-      - id: typos
-        args: []
+- repo: https://github.com/crate-ci/typos
+  rev: "v1.40.0"
+  hooks:
+    - id: typos
+      args: []
 ```
 
 To configure it, you can use this section in `pyproject.toml`:
@@ -804,7 +804,6 @@ It has quite a few supported configuration options, like adding your own
 corrections, feel free to check the [full reference][typos-ref]. If you want it
 to write changes, you can remove the `args: []` in the pre-commit hook, or add
 `-w` when running it locally.
-
 
 {% endtab %} {% endtabs %}
 
