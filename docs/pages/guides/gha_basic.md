@@ -206,7 +206,7 @@ actions have outputs, and bash actions can manually write to output:
 You can now refer to this step in a later step with
 `${{ steps.someid.something }}`. You also can get it from another job by using
 `${{ needs.<jobname>.outputs.something }}`. The `toJson()` function is useful
-for inputing JSON - you can even generate matrices dynamically this way!
+for inputting JSON - you can even generate matrices dynamically this way!
 
 {% endraw %}
 

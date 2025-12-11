@@ -745,9 +745,13 @@ Make sure you list the highest version of Python you are testing with here.
 ## Spelling
 
 {% rr PC160 %} You can and should check for spelling errors in your code too. If
-you want to add this, you can use [codespell][] for common spelling mistakes.
-Unlike most spell checkers, this has a list of mistakes it looks for, rather
-than a list of "valid" words. To use:
+you want to add this, you can use a code-ready spell checker for common spelling
+mistakes. Unlike most spell checkers, these have a list of mistakes they look
+for, rather than a list of "valid" words. To use:
+
+{% tabs spell %} {% tab codespell codespell %}
+
+If you want a Python based tool, [codespell] is the classic tool used.
 
 ```yaml
 - repo: https://github.com/codespell-project/codespell
@@ -771,6 +775,37 @@ ignore-words-list = ["sur", "nd"]
 You can also add the `-w` flag to have it automatically correct errors - this is
 very helpful to quickly make corrections if you have a lot of them when first
 adding the check. `uvx codespell -w` will quickly correct all non-hidden files.
+
+{% endtab %} {% tab typos typos %}
+
+A rust rewrite of [codespell][], [typos][] has a defining feature: It can find
+typos in CamelCase or snake_case variable names. It also is probably faster,
+though codespell is very fast too. This one is not available on PyPI, use
+pre-commit, gh-install, brew, cargo, or conda/pixi. It also has LSP (VSCode)
+integration.
+
+```yaml
+- repo: https://github.com/crate-ci/typos
+  rev: "v1.40.0"
+  hooks:
+    - id: typos
+      args: []
+```
+
+To configure it, you can use this section in `pyproject.toml`:
+
+```toml
+[tool.typos.default.extend-words]
+nd = "nd"
+sur = "sur"
+```
+
+It has quite a few supported configuration options, like adding your own
+corrections, feel free to check the [full reference][typos-ref]. If you want it
+to write changes, you can remove the `args: []` in the pre-commit hook, or add
+`-w` when running it locally.
+
+{% endtab %} {% endtabs %}
 
 You can also use a local pygrep check to eliminate common capitalization errors,
 such as the one below:
@@ -992,6 +1027,8 @@ You also might like the following hook, which cleans Jupyter outputs:
 [check-jsonschema]: https://check-jsonschema.readthedocs.io/en/latest/
 [cjs-common]: https://check-jsonschema.readthedocs.io/en/latest/precommit_usage.html#supported-hooks
 [schemastore]: https://schemastore.org
+[typos]: https://github.com/crate-ci/typos
+[typos-ref]: https://github.com/crate-ci/typos/blob/master/docs/reference.md
 
 <!-- prettier-ignore-end -->
 
