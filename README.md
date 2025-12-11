@@ -149,7 +149,7 @@ backports structure with a small typing example.
     - Replaces Flake8, isort, pyupgrade, yesqa, pycln, and dozens of plugins
   - Includes spell checking
 - One of several popular licenses
-- An pylint nox target can be used to run pylint, which integrated GHA
+- A pylint nox target can be used to run pylint, which integrated GHA
   annotations
 - A ReadTheDocs-ready Sphinx or MkDocs `docs/` folder and `docs`
   dependency-group
@@ -157,6 +157,7 @@ backports structure with a small typing example.
 - A dev group for `uv run` integration
 - A noxfile is included with a few common targets
 - A README
+- Code coverage reporting with automatic uploads to Codecov after tests run
 
 #### For developers:
 
