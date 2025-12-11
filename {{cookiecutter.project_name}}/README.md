@@ -33,7 +33,7 @@
 {%- if cookiecutter.org | lower == "scikit-hep" %}
 [sk-badge]:                 https://scikit-hep.org/assets/images/Scikit--HEP-Project-blue.svg
 {%- endif %}
-[coverage-badge]:           https://codecov.io/gh/{{cookiecutter.org}}/{{cookiecutter.project_name}}/branch/main/graph/badge.svg
-[coverage-link]:            https://codecov.io/gh/{{cookiecutter.org}}/{{cookiecutter.project_name}}
+[coverage-badge]:           https://codecov.io/{{cookiecutter.__ci}}/{{cookiecutter.org}}/{{cookiecutter.project_name}}/branch/main/graph/badge.svg
+[coverage-link]:            https://codecov.io/{{cookiecutter.__ci}}/{{cookiecutter.org}}/{{cookiecutter.project_name}}
 
 <!-- prettier-ignore-end -->
