@@ -153,7 +153,7 @@ conceptually part of a larger suite, and skip them when needed.
 First, define a new marker in `pyproject.toml`:
 
 ```toml
-[tool.pytest.ini_options]
+[tool.pytest]
 markers = [
     "unit: marks unit tests",
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",

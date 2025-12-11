@@ -90,7 +90,7 @@ dev = [
   "validate-pyproject-schema-store[all]",
 ]
 test = [
-  "pytest >=7",
+  "pytest >=9",
   "repo-review >=0.10.6",
 ]
 cog = [
@@ -110,10 +110,10 @@ content-type = "text/markdown"
 path = "README.md"
 start-after = "<!-- sp-repo-review -->"
 
-[tool.pytest.ini_options]
-minversion = "7.0"
-addopts = ["-ra", "--strict-markers", "--strict-config"]
-xfail_strict = true
+[tool.pytest]
+minversion = "9.0"
+addopts = ["-ra"]
+strict = true
 log_level = "INFO"
 filterwarnings = [
   'error',

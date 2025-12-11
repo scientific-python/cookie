@@ -119,8 +119,8 @@ Changelog = "{{ cookiecutter.url }}/releases"
 
 [dependency-groups]
 test = [
-  "pytest >=6",
-  "pytest-cov >=3",
+  "pytest >=9",
+  "pytest-cov >=7",
 ]
 dev = [
   { include-group = "test" },
@@ -218,8 +218,8 @@ substitution.files = ["src/{{ cookiecutter.__project_slug }}/__init__.py"]
 {%- endif %}
 
 [tool.poetry.group.test.dependencies]
-pytest = ">= 6"
-pytest-cov = ">= 3"
+pytest = ">= 9"
+pytest-cov = ">= 7"
 {%- endif %}
 
 
@@ -241,10 +241,10 @@ test-extras = ["test"]
 {%- endif %}
 
 
-[tool.pytest.ini_options]
-minversion = "6.0"
-addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
-xfail_strict = true
+[tool.pytest]
+minversion = "9.0"
+addopts = ["-ra", "--showlocals"]
+strict = true
 filterwarnings = [
   "error",
 ]
