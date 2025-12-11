@@ -71,13 +71,13 @@ pytest supports configuration in `pytest.ini`, `setup.cfg`, or, since version 6,
 always require 6+ (or 9+) and use `pyproject.toml` or the pytest TOML ones. This
 is an example configuration:
 
-{% tabs %} {% tab conf-classic Pytest 6+ %}
+{% tabs %} {% tab conf-modern Pytest 9+ %}
 
 ```toml
-[tool.pytest.ini_options]
-minversion = "6.0"
-addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
-xfail_strict = true
+[tool.pytest]
+minversion = "9.0"
+addopts = ["-ra", "--showlocals"]
+strict = true
 filterwarnings = ["error"]
 log_level = "INFO"
 testpaths = [
@@ -85,13 +85,13 @@ testpaths = [
 ]
 ```
 
-{% endtab %} {% tab conf-modern Pytest 9+ %}
+{% endtab %} {% tab conf-classic Pytest 6+ %}
 
 ```toml
-[tool.pytest]
-minversion = "9.0"
-addopts = ["-ra", "--showlocals"]
-strict = true
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+xfail_strict = true
 filterwarnings = ["error"]
 log_level = "INFO"
 testpaths = [

@@ -149,8 +149,8 @@ with code_fence("toml"):
 ```toml
 [dependency-groups]
 test = [
-  "pytest >=6",
-  "pytest-cov >=3",
+  "pytest >=9",
+  "pytest-cov >=7",
 ]
 dev = [
   { include-group = "test" },
