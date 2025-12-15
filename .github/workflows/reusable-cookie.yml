@@ -179,7 +179,7 @@ jobs:
       - name: Show results
         run: ls -l dist
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: Packages
           path: dist
