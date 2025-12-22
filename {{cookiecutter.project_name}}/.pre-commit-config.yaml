@@ -43,7 +43,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.14.8"
+    rev: "v0.14.10"
     hooks:
       - id: ruff-check
         args: ["--fix", "--show-fixes"]
@@ -52,7 +52,7 @@ repos:
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: "v21.1.7"
+    rev: "v21.1.8"
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]
@@ -60,7 +60,7 @@ repos:
 {%- endif %}
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.19.0"
+    rev: "v1.19.1"
     hooks:
       - id: mypy
         files: src|tests|noxfile.py
@@ -105,7 +105,7 @@ repos:
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.35.0"
+    rev: "0.36.0"
     hooks:
 {%- if cookiecutter.__ci == "github" %}
       - id: check-dependabot
