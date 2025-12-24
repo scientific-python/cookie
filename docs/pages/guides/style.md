@@ -140,7 +140,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.8"
+  rev: "v0.14.10"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -230,7 +230,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.8"
+  rev: "v0.14.10"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -621,7 +621,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.19.0"
+  rev: "v1.19.1"
   hooks:
     - id: mypy
       files: src
@@ -732,7 +732,7 @@ important parts (like Python classifiers) are in sync. This tool,
 
 ```yaml
 - repo: https://github.com/asottile/setup-cfg-fmt
-  rev: "v3.1.0"
+  rev: "v3.2.0"
   hooks:
     - id: setup-cfg-fmt
       args: [--include-version-classifiers, --max-py-version=3.12]
@@ -831,7 +831,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v21.1.7"
+  rev: "v21.1.8"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -908,7 +908,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.35.0"
+  rev: "0.36.0"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
