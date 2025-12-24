@@ -168,7 +168,7 @@ import pytest
 
 
 @pytest.mark.slow
-def test_somthing_slow(): ...
+def test_something_slow(): ...
 ```
 
 To mark every test in a directory, add the following to the `conftest.py` in the
@@ -626,8 +626,8 @@ much more complex and difficult to read for new developers.
 ## Diagnostic Tests
 
 Diagnostic tests are used to verify the installation of a package. They should
-be runable on production systems, like when we need to ssh into a live server to
-troubleshoot problems.
+be runnable on production systems, like when we need to ssh into a live server
+to troubleshoot problems.
 
 A diagnostic test suite may contain any combination of tests you deem pertinent.
 You could include all the unit tests, or a specific subset of them. You may want

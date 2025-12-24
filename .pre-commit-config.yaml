@@ -66,14 +66,11 @@ repos:
         types_or: [yaml, markdown, html, css, scss, javascript, json]
         args: [--prose-wrap=always]
 
-  - repo: https://github.com/codespell-project/codespell
-    rev: "v2.4.1"
+  - repo: https://github.com/crate-ci/typos
+    rev: "v1.40.0"
     hooks:
-      - id: codespell
+      - id: typos
         exclude: ^Gemfile\.lock$
-        additional_dependencies:
-          - tomli; python_version<'3.11'
-        args: ["-w"]
 
   - repo: local
     hooks:
