@@ -134,6 +134,22 @@ The formula here for installing should be identical for all users; and using
 builds, you are even guaranteed a consistent wheel will be produced just as if
 you were building a final package.
 
+There are a variety of
+[images to pick from](https://docs.github.com/en/actions/reference/runners/github-hosted-runners#single-cpu-runners),
+such as:
+
+| Image name | Description | |==================|=============| |
+`ubuntu-latest` | Standard Linux runner (specific versions available) | |
+`windows-latest` | Standard Windows runner (specific versions available) | |
+`macos-latest` | Standard MacOS runner (specific versions available) | |
+`ubuntu-24.04-arm` | Linux ARM runner (no `latest` tag) | | `windows-11-arm` |
+Windows ARM runner (no specific versions) | | `macos-15-intel` | MacOS Intel
+runner (final version) | | `ubuntu-slim` | Fast startup single-core container |
+
+Note that while versioned images are available, like `ubuntu-24.04`, these are
+all rolling images; selecting a specific image will not make your CI completely
+static. And old versioned images are decommissioned.
+
 ## Updating
 
 {% rr GH200 %} {% rr GH210 %} If you use non-default actions in your repository
@@ -348,7 +364,7 @@ As an example, if you had `lint` and `checks` jobs, use this:
 pass:
   if: always()
   needs: [lint, checks]
-  runs-on: ubuntu-latest
+  runs-on: ubuntu-slim
   steps:
     - uses: re-actors/alls-green@release/v1
       with:
