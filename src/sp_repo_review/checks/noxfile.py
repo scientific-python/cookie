@@ -179,7 +179,7 @@ class NOX201(Nox):
 
         ```toml
         # /// script
-        dependencies = ["nox"]
+        # dependencies = ["nox"]
         # ///
         ```
         """
