@@ -264,7 +264,7 @@ def tests(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> None:
 @nox.parametrize("vcs", [False, True], ids=["novcs", "vcs"])
 @nox.parametrize("backend", ("poetry", "pdm", "hatch"), ids=("poetry", "pdm", "hatch"))
 def native(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> None:
-    session.install("cookiecutter", backend)
+    session.install("cookiecutter", "pdm!=2.26.3" if backend == "pdm" else backend)
 
     tmp_dir = session.create_tmp()
     session.cd(tmp_dir)
@@ -277,7 +277,7 @@ def native(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> None:
         session.run(backend, "sync", env={"VIRTUAL_ENV": None})
         session.run(backend, "run", "pytest", env={"VIRTUAL_ENV": None})
     else:
-        session.run(backend, "install")
+        session.run(backend, "install", env={"PDM_IGNORE_ACTIVE_VENV": "1"})
         session.run(backend, "run", "pytest")
 
 
