@@ -67,7 +67,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/crate-ci/typos
-    rev: "v1"
+    rev: "v1.41.0"
     hooks:
       - id: typos
         exclude: ^Gemfile\.lock$
