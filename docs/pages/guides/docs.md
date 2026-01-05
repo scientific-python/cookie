@@ -131,7 +131,7 @@ import importlib.metadata
 from typing import Any
 
 project = "package"
-copyright = "2025, My Name"
+copyright = "2026, My Name"
 author = "My Name"
 version = release = importlib.metadata.version("package")
 
