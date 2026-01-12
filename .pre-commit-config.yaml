@@ -29,7 +29,7 @@ repos:
         additional_dependencies: [black==24.*]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.14.10"
+    rev: "v0.14.11"
     hooks:
       - id: ruff-check
         args: ["--fix", "--show-fixes"]
@@ -67,7 +67,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/crate-ci/typos
-    rev: "v1.41.0"
+    rev: "v1.42.0"
     hooks:
       - id: typos
         exclude: ^Gemfile\.lock$
