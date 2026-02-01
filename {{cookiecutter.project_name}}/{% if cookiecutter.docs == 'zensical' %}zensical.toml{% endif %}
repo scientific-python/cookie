@@ -17,7 +17,7 @@ site_name = "{{ cookiecutter.project_name }}"
 # meaningful description of the site content for use by search engines.
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_description
-site_description = "A new project generated from the default template project."
+site_description = "{{ cookiecutter.project_short_description }}"
 
 # The site_author attribute. This is used in the HTML head element.
 #
