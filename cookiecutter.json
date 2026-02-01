@@ -49,6 +49,7 @@
     "docs": {
       "__prompt__": "Choose your documentation tool",
       "sphinx": "Sphinx",
+      "zensical": "Zensical (alpha)",
       "mkdocs": "MkDocs"
     },
     "vcs": "Use version control for versioning"
