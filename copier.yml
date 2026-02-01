@@ -87,8 +87,8 @@ docs:
   help: Choose your documentation tool
   choices:
     "Sphinx": sphinx
-    "Zensical (alpha)": zensical
     "MkDocs": mkdocs
+    "Zensical (alpha)": zensical
   # [[[end]]]
 
 # [[[cog print(cc.vcs.yaml()) ]]]
