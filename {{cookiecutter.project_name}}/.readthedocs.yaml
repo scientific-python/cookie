@@ -20,8 +20,8 @@ build:
     {%- elif cookiecutter.docs == 'zensical' %}
     - uv run zensical build
     {%- endif %}
-  {%- if cookiecutter.docs == 'zensical' %}
-  post_build:
-    - mkdir -p $READTHEDOCS_OUTPUT/html/
-    - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
-  {%- endif %}
+{%- if cookiecutter.docs == 'zensical' %}
+post_build:
+  - mkdir -p $READTHEDOCS_OUTPUT/html/
+  - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
+{%- endif %}
