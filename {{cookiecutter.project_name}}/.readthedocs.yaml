@@ -19,9 +19,6 @@ build:
     - uv run mkdocs build --site-dir $READTHEDOCS_OUTPUT/html
     {%- elif cookiecutter.docs == 'zensical' %}
     - uv run zensical build
+    - mkdir -p $READTHEDOCS_OUTPUT/html/
+    - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
     {%- endif %}
-{%- if cookiecutter.docs == 'zensical' %}
-post_build:
-  - mkdir -p $READTHEDOCS_OUTPUT/html/
-  - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
-{%- endif %}
