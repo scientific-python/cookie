@@ -18,7 +18,7 @@
     "mesonpy",
     "maturin"
   ],
-  "docs": ["sphinx", "mkdocs"],
+  "docs": ["sphinx", "mkdocs", "zensical"],
   "vcs": true,
   "__year": "{% now 'utc', '%Y' %}",
   "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
