@@ -17,7 +17,8 @@ templates for Python packages?
   clearly documented and every tool described, and everything is kept in sync.
 - Ten different backends to choose from for building packages.
 - Optional VCS versioning for most backends.
-- Selection for your preferred documentation engine (Sphinx or MkDocs).
+- Selection for your preferred documentation engine (Sphinx, MkDocs, or
+  Zensical).
 - Template generation tested in GitHub Actions using nox.
 - Supports generation with [copier][], [cookiecutter][], and [cruft][].
 - Supports GitHub Actions if targeting a `github.com` url (the default), and
@@ -151,8 +152,7 @@ backports structure with a small typing example.
 - One of several popular licenses
 - A pylint nox target can be used to run pylint, which integrated GHA
   annotations
-- A ReadTheDocs-ready Sphinx or MkDocs `docs/` folder and `docs`
-  dependency-group
+- A ReadTheDocs-ready `docs/` folder and `docs` dependency-group
 - A `tests/` folder and pytest `test` dependency-group
 - A dev group for `uv run` integration
 - A noxfile is included with a few common targets

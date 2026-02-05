@@ -18,7 +18,7 @@
     "mesonpy",
     "maturin"
   ],
-  "docs": ["sphinx", "mkdocs"],
+  "docs": ["sphinx", "mkdocs", "zensical"],
   "vcs": true,
   "__year": "{% now 'utc', '%Y' %}",
   "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
@@ -49,7 +49,8 @@
     "docs": {
       "__prompt__": "Choose your documentation tool",
       "sphinx": "Sphinx",
-      "mkdocs": "MkDocs"
+      "mkdocs": "MkDocs",
+      "zensical": "Zensical (alpha)"
     },
     "vcs": "Use version control for versioning"
   }

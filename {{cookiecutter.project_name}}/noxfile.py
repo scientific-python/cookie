@@ -126,6 +126,23 @@ def docs(session: nox.Session) -> None:
         session.run("mkdocs", "build", "--clean", *session.posargs)
 
 
+{%- elif cookiecutter.docs == 'zensical' %}
+
+
+@nox.session(reuse_venv=True, default=False)
+def docs(session: nox.Session) -> None:
+    """
+    Make or serve the docs. Pass --non-interactive to avoid serving.
+    """
+
+    doc_deps = nox.project.dependency_groups(PROJECT, "docs")
+    session.install("{% if cookiecutter.backend != "mesonpy" %}-e{% endif %}.", *doc_deps)
+
+    if session.interactive:
+        session.run("zensical", "serve", *session.posargs)
+    else:
+        session.run("zensical", "build", "--clean", *session.posargs)
+
 {%- endif %}
 
 

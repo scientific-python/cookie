@@ -142,6 +142,10 @@ docs = [
     "mkdocstrings-python>=1.18.2",
     "pyyaml>=6.0.1",
 ]
+{%- elif cookiecutter.docs == "zensical" %}
+docs = [
+    "zensical>=0.0.20",
+]
 {%- endif %}
 
 

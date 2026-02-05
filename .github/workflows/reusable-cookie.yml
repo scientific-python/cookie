@@ -48,17 +48,17 @@ jobs:
       - name: Test pybind11
         run: nox -s 'tests(pybind11, novcs)' -s 'tests(pybind11, vcs, sphinx)'
 
-      - name: Test scikit-build
-        run: nox -s 'tests(skbuild, novcs)' -s 'tests(skbuild, vcs, sphinx)'
+      - name: Test scikit-build (zensical)
+        run: nox -s 'tests(skbuild, novcs)' -s 'tests(skbuild, vcs, zensical)'
 
       - name: Test poetry
         run: nox -s 'tests(poetry, novcs)' -s 'tests(poetry, vcs, sphinx)'
 
-      - name: Test flit
+      - name: Test flit (mkdocs)
         run: nox -s 'tests(flit, novcs)' -s 'tests(flit, vcs, mkdocs)'
 
-      - name: Test uv
-        run: nox -s 'tests(uv, novcs, sphinx)'
+      - name: Test uv (zensical)
+        run: nox -s 'tests(uv, novcs, zensical)'
 
       - name: Test pdm
         run: nox -s 'tests(pdm, novcs)' -s 'tests(pdm, vcs, sphinx)'
@@ -130,11 +130,11 @@ jobs:
       - name: Test poetry
         run: |
           nox -s 'nox(poetry, novcs, sphinx)'
-          nox -s 'nox(poetry, novcs, mkdocs)' -- docs
+          nox -s 'nox(poetry, novcs, zensical)' -- docs
 
       - name: Test flit
         run: |
-          nox -s 'nox(flit, novcs, mkdocs)'
+          nox -s 'nox(flit, novcs, zensical)'
           nox -s 'nox(flit, novcs, mkdocs)' -- docs
 
       - name: Test pdm
@@ -144,8 +144,8 @@ jobs:
 
       - name: Test maturin
         run: |
-          nox -s 'nox(maturin, novcs, sphinx)'
-          nox -s 'nox(maturin, novcs, sphinx)' -- docs
+          nox -s 'nox(maturin, novcs, zensical)'
+          nox -s 'nox(maturin, novcs, zensical)' -- docs
 
       - name: Test hatch
         run: |

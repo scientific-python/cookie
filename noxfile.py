@@ -42,6 +42,7 @@ nox.options.default_venv_backend = "uv|virtualenv"
 class Docs(enum.Enum):
     Sphinx = "sphinx"
     MkDocs = "mkdocs"
+    Zensical = "zensical"
 
 
 DIR = Path(__file__).parent.resolve()
