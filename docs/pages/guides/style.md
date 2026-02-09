@@ -140,7 +140,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.11"
+  rev: "v0.15.0"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -170,7 +170,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "25.12.0"
+  rev: "26.1.0"
   hooks:
     - id: black
 ```
@@ -230,7 +230,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.14.11"
+  rev: "v0.15.0"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -786,7 +786,7 @@ integration.
 
 ```yaml
 - repo: https://github.com/crate-ci/typos
-  rev: "v1.42.0"
+  rev: "v1.43.3"
   hooks:
     - id: typos
       args: []
@@ -895,7 +895,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.7.4"
+  rev: "v3.8.1"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
@@ -929,7 +929,7 @@ can even get all [SchemaStore][]'s plugins with the
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
-  rev: "v0.24.1"
+  rev: "v0.25"
   hooks:
     - id: validate-pyproject
       additional_dependencies: ["validate-pyproject-schema-store[all]"]
@@ -943,7 +943,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.36.0"
+  rev: "0.36.1"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
@@ -1014,7 +1014,7 @@ You also might like the following hook, which cleans Jupyter outputs:
 
 ```yaml
 - repo: https://github.com/kynan/nbstripout
-  rev: "0.8.2"
+  rev: "0.9.0"
   hooks:
     - id: nbstripout
 ```
