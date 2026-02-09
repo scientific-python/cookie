@@ -4,6 +4,7 @@ import pytest
 from repo_review.testing import compute_check
 
 from sp_repo_review._compat import tomllib
+from sp_repo_review.checks.general import PY007_VALID_RUNNER_CONFS
 
 
 def test_py001(tmp_path: Path):
@@ -140,7 +141,7 @@ def test_py006_missing(tmp_path: Path):
     assert not compute_check("PY006", root=simple).result
 
 
-@pytest.mark.parametrize("runnerfile", ["noxfile.py", "tox.ini", "pixi.toml"])
+@pytest.mark.parametrize("runnerfile", PY007_VALID_RUNNER_CONFS)
 def test_py007(tmp_path: Path, runnerfile: str):
     simple = tmp_path / "simple"
     simple.mkdir()
