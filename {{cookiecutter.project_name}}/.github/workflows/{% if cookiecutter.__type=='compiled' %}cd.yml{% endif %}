@@ -35,6 +35,51 @@ jobs:
           name: cibw-sdist
           path: dist/*.tar.gz
 
+  test_sdist:
+    name: Test SDist with python ${{ matrix.python }}
+    needs: [make_sdist]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.8", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        name: Install Python ${{ matrix.python }}
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dependencies
+        run: |
+          pip install pytest pytest-cov
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: cibw-sdist
+          path: dist
+
+      - name: Install SDist
+        run: |
+          pip -V
+          pip install dist/*.tar.gz
+          rm -rf dist
+
+      - name: Test installed SDist
+        run: pytest ./tests
+
+  check_dist:
+    name: Check dist
+    needs: [build_wheels, make_sdist, test_sdist]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: all
+
+      - run: pipx run twine check --strict all/*/*
+
   build_wheels:
     name: {% raw %}Wheel on ${{ matrix.os }}{% endraw %}
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
@@ -65,7 +110,7 @@ jobs:
           path: wheelhouse/*.whl
 
   upload_all:
-    needs: [build_wheels, make_sdist]
+    needs: [check_dist]
     environment: pypi
     permissions:
       id-token: write
