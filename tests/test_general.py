@@ -141,7 +141,7 @@ def test_py006_missing(tmp_path: Path):
     assert not compute_check("PY006", root=simple).result
 
 
-@pytest.mark.parametrize("runnerfile", PY007_VALID_RUNNER_CONFS)
+@pytest.mark.parametrize("runnerfile", sorted(PY007_VALID_RUNNER_CONFS))
 def test_py007(tmp_path: Path, runnerfile: str):
     simple = tmp_path / "simple"
     simple.mkdir()

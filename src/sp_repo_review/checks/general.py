@@ -138,7 +138,7 @@ class PY007(General):
         `tool.hatch.envs`/`tool.spin`/`tool.tox` in `pyproject.toml` to encourage new
         contributors.
         """
-        if any(root.joinpath(fn).is_file for fn in PY007_VALID_RUNNER_CONFS):
+        if any(root.joinpath(fn).is_file() for fn in PY007_VALID_RUNNER_CONFS):
             return True
         match pyproject.get("tool", {}):
             case {"hatch": {"envs": object()}}:
