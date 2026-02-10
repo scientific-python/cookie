@@ -198,3 +198,4 @@ RTD103 = "Using Ruby instead of Python for docs"
 [tool.typos.default.extend-words]
 nd = "nd"
 sur = "sur"
+CPY = "CPY"
