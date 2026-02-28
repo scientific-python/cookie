@@ -213,6 +213,19 @@ def test_pc191_no_show_fixes(ruff_check: str):
     assert "--show-fixes" in res.err_msg
 
 
+def test_pc191_no_show_fixes_no_ruffconfig(ruff_check: str):
+    precommit = yaml.safe_load(f"""
+        repos:
+          - repo: https://github.com/astral-sh/ruff-pre-commit
+            hooks:
+              - id: {ruff_check}
+                args: ["--fix"]
+    """)
+    res = compute_check("PC191", precommit=precommit, ruff=None)
+    assert not res.result
+    assert "--show-fixes" in res.err_msg
+
+
 def test_pc192():
     precommit = yaml.safe_load("""
         repos:
