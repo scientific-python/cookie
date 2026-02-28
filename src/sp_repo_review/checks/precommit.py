@@ -149,7 +149,11 @@ class PC191(PreCommit):
     repos = {"https://github.com/astral-sh/ruff-pre-commit"}
 
     @classmethod
-    def check(cls, precommit: dict[str, Any], ruff: dict[str, Any]) -> bool | None:  # type: ignore[override]
+    def check(  # type: ignore[override]
+        cls,
+        precommit: dict[str, Any],
+        ruff: dict[str, Any] | None,
+    ) -> bool | None:
         """
         If `--fix` is present, `--show-fixes` must be too.
         """
@@ -161,7 +165,9 @@ class PC191(PreCommit):
                         and "args" in hook
                         and "--fix" in hook["args"]
                     ):
-                        return "--show-fixes" in hook["args"] or "show-fixes" in ruff
+                        return "--show-fixes" in hook["args"] or (
+                            ruff is not None and "show-fixes" in ruff
+                        )
                 return None
         return False
 
