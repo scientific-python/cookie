@@ -200,7 +200,8 @@ def test_pc191_ruffconfig(ruff_check: str):
     assert compute_check("PC191", precommit=precommit, ruff={"show-fixes": True}).result
 
 
-def test_pc191_no_show_fixes(ruff_check: str):
+@pytest.mark.parametrize("ruffconfig", [{}, None])
+def test_pc191_no_show_fixes(ruff_check: str, ruffconfig):
     precommit = yaml.safe_load(f"""
         repos:
           - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -208,7 +209,7 @@ def test_pc191_no_show_fixes(ruff_check: str):
               - id: {ruff_check}
                 args: ["--fix"]
     """)
-    res = compute_check("PC191", precommit=precommit, ruff={})
+    res = compute_check("PC191", precommit=precommit, ruff=ruffconfig)
     assert not res.result
     assert "--show-fixes" in res.err_msg
 
