@@ -214,7 +214,12 @@ class PP302(PyProject):
         support native configuration and toml config files).
 
         ```toml
+        # Old pytest
         [tool.pytest.ini_options]
+        minversion = "6"
+
+        # pytest 9
+        [tool.pytest]
         minversion = "9"
         ```
         """
@@ -238,7 +243,12 @@ class PP303(PyProject):
         The `testpaths` setting should be set to a reasonable default.
 
         ```toml
+        # Old pytest
         [tool.pytest.ini_options]
+        testpaths = ["tests"]
+
+        # pytest 9+
+        [tool.pytest]
         testpaths = ["tests"]
         ```
         """
@@ -259,7 +269,12 @@ class PP304(PyProject):
         failures.
 
         ```toml
+        # Old pytest
         [tool.pytest.ini_options]
+        log_level = "INFO"
+
+        # pytest 9+
+        [tool.pytest]
         log_level = "INFO"
         ```
         """
@@ -283,6 +298,9 @@ class PP305(PyProject):
         ```toml
         [tool.pytest.ini_options]
         xfail_strict = true
+
+        [tool.pytest]
+        strict = true
         ```
         """
         _, options = pytest
@@ -307,8 +325,13 @@ class PP306(PyProject):
         config setting is misspelled.
 
         ```toml
+        # Old pytest
         [tool.pytest.ini_options]
         addopts = ["-ra", "--strict-config", "--strict-markers"]
+
+        # pytest 9+
+        [tool.pytest]
+        strict = true
         ```
         """
         _, options = pytest
@@ -333,8 +356,13 @@ class PP307(PyProject):
         be specified in config, avoiding misspellings.
 
         ```toml
+        # Old pytest
         [tool.pytest.ini_options]
         addopts = ["-ra", "--strict-config", "--strict-markers"]
+
+        # pytest 9+
+        [tool.pytest]
+        strict = true
         ```
         """
         _, options = pytest
@@ -358,8 +386,13 @@ class PP308(PyProject):
         (print summary of all fails/errors).
 
         ```toml
+        # Old pytest
         [tool.pytest.ini_options]
         addopts = ["-ra", "--strict-config", "--strict-markers"]
+
+        # pytest 9+
+        [tool.pytest]
+        addopts = ["-ra"]
         ```
         """
         loc, options = pytest
@@ -382,7 +415,12 @@ class PP309(PyProject):
         will hide important warnings otherwise, like deprecations.
 
         ```toml
+        # Old pytest
         [tool.pytest.ini_options]
+        filterwarnings = ["error"]
+
+        # pytest 9+
+        [tool.pytest]
         filterwarnings = ["error"]
         ```
         """
