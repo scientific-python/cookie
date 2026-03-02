@@ -298,6 +298,9 @@ class PP305(PyProject):
         ```toml
         [tool.pytest.ini_options]
         xfail_strict = true
+
+        [tool.pytest]
+        strict = true 
         ```
         """
         _, options = pytest
