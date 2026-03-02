@@ -300,7 +300,7 @@ class PP305(PyProject):
         xfail_strict = true
 
         [tool.pytest]
-        strict = true 
+        strict = true
         ```
         """
         _, options = pytest
