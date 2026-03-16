@@ -140,7 +140,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.4"
+  rev: "v0.15.6"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -170,7 +170,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "26.1.0"
+  rev: "26.3.1"
   hooks:
     - id: black
 ```
@@ -230,7 +230,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.4"
+  rev: "v0.15.6"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -755,7 +755,7 @@ If you want a Python based tool, [codespell] is the classic tool used.
 
 ```yaml
 - repo: https://github.com/codespell-project/codespell
-  rev: "v2.4.1"
+  rev: "v2.4.2"
   hooks:
     - id: codespell
       additional_dependencies:
@@ -866,7 +866,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v22.1.0"
+  rev: "v22.1.1"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
