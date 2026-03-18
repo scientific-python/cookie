@@ -7,14 +7,17 @@ class Example:
     def add(self, a: int, b: int) -> int:
         """Add two integers.
 
-        Notes:
+        Notes
+        -----
             Docstring can be useful. I promise.
 
-        Parameters:
+        Parameters
+        ----------
             a: First integer to add.
             b: Second integer to add.
 
-        Returns:
+        Returns
+        -------
             The sum of the two integers.
         """
         return a + b
@@ -22,11 +25,13 @@ class Example:
     def subtract(self, a: int, b: int) -> int:
         """Subtract two integers.
 
-        Parameters:
+        Parameters
+        ----------
             a: Integer to subtract from.
             b: Integer to subtract.
 
-        Returns:
+        Returns
+        -------
             The difference of the two integers.
         """
         return a - b
