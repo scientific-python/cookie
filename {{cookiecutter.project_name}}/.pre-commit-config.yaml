@@ -43,7 +43,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.15.4"
+    rev: "v0.15.6"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -52,7 +52,7 @@ repos:
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: "v22.1.0"
+    rev: "v22.1.1"
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]
@@ -70,7 +70,7 @@ repos:
           - pytest
 
   - repo: https://github.com/codespell-project/codespell
-    rev: "v2.4.1"
+    rev: "v2.4.2"
     hooks:
       - id: codespell
         additional_dependencies:
