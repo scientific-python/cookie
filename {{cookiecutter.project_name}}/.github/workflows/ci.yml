@@ -42,7 +42,7 @@ jobs:
   checks:
     name: {% raw %}Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}{% endraw %}
     runs-on: {% raw %}${{ matrix.runs-on }}{% endraw %}
-    {%- if cookiecutter._compiled %}
+    {%- if cookiecutter.__type == "compiled" %}
     needs: [lint]
     {%- endif %}
     strategy:
