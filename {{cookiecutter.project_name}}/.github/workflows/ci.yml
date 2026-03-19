@@ -18,29 +18,33 @@ env:
   FORCE_COLOR: 3
 
 jobs:
-  pre-commit:
+  lint:
     name: Format
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      {%- if cookiecutter.vcs %}
         with:
           fetch-depth: 0
+      {%- endif %}
+
       - uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
       - uses: astral-sh/setup-uv@v7
 
-      - uses: pre-commit/action@v3.0.1
-        with:
-          extra_args: --hook-stage manual --all-files
+      - uses: j178/prek-action@v2
+
       - name: Run Pylint
         run: uvx nox -s pylint -- --output-format=github
 
   checks:
     name: {% raw %}Check Python ${{ matrix.python-version }} on ${{ matrix.runs-on }}{% endraw %}
     runs-on: {% raw %}${{ matrix.runs-on }}{% endraw %}
-    needs: [pre-commit]
+    {%- if cookiecutter._compiled %}
+    needs: [lint]
+    {%- endif %}
     strategy:
       fail-fast: false
       matrix:
@@ -53,8 +57,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+      {%- if cookiecutter.vcs %}
         with:
           fetch-depth: 0
+      {%- endif %}
 
       - uses: actions/setup-python@v6
         with:
@@ -83,3 +89,14 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: {% raw %}${{ secrets.CODECOV_TOKEN }}{% endraw %}
+
+  pass:
+    if: always()
+    needs: [lint, checks]
+    runs-on: ubuntu-slim
+    timeout-minutes: 2
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}

@@ -48,7 +48,6 @@ coverage.xml
 *.cover
 *.py,cover
 .hypothesis/
-.pytest_cache/
 cover/
 
 # Translations
@@ -124,7 +123,6 @@ venv.bak/
 /site
 
 # mypy
-.mypy_cache/
 .dmypy.json
 dmypy.json
 
@@ -165,3 +163,22 @@ _readthedocs
 # Jekyll build artifacts
 vendor/
 .bundle/
+
+# General
+.DS_Store
+
+# Caches
+.*_cache/
+
+# OS specific stuff
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Common editor files
+*~
+*.swp

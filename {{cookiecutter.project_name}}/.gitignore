@@ -48,7 +48,6 @@ coverage.xml
 *.cover
 *.py,cover
 .hypothesis/
-.pytest_cache/
 cover/
 
 # Translations
@@ -147,7 +146,6 @@ venv.bak/
 /site
 
 # mypy
-.mypy_cache/
 .dmypy.json
 dmypy.json
 
@@ -171,8 +169,8 @@ cython_debug/
 src/*/_version.py
 
 
-# ruff
-.ruff_cache/
+# Caches
+.*_cache/
 
 # OS specific stuff
 .DS_Store
