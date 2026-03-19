@@ -19,7 +19,7 @@
 {%- endif %}
 
 <!-- prettier-ignore-start -->
-[actions-badge]:            {{cookiecutter.url}}/workflows/CI/badge.svg
+[actions-badge]:            {{cookiecutter.url}}/actions/workflows/ci.yml/badge.svg
 [actions-link]:             {{cookiecutter.url}}/actions
 [conda-badge]:              https://img.shields.io/conda/vn/conda-forge/{{cookiecutter.project_name}}
 [conda-link]:               https://github.com/conda-forge/{{cookiecutter.project_name}}-feedstock

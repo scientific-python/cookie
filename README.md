@@ -197,7 +197,7 @@ A lot of the guide, cookiecutter, and repo-review started out as part of
 
 <!-- prettier-ignore-start -->
 
-[actions-badge]: https://github.com/scientific-python/cookie/workflows/CI/badge.svg
+[actions-badge]: https://github.com/scientific-python/actions/cookie/workflows/ci.yml/badge.svg
 [actions-link]: https://github.com/scientific-python/cookie/actions
 [cibuildwheel]: https://cibuildwheel.readthedocs.io
 [cookiecutter]: https://cookiecutter.readthedocs.io
