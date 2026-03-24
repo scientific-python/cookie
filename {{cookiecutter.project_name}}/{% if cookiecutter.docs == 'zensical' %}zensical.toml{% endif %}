@@ -4,14 +4,16 @@
 site_name = "{{ cookiecutter.project_name }}"
 site_description = "{{ cookiecutter.project_short_description }}"
 site_author = "{{ cookiecutter.full_name }}"
-copyright = """
-Copyright &copy; {{ cookiecutter.__year }} The authors
-"""
+copyright = "&copy; {{ cookiecutter.__year }} {{ cookiecutter.full_name }"
+repo_url = "{{ cookiecutter.url }}"
+docs_dir = "docs"
 
 [project.theme]
 language = "en"
 features = [
     "announce.dismiss",
+    "content.action.edit",
+    "content.action.view",
     "content.code.annotate",
     "content.code.copy",
     "content.code.select",
@@ -28,17 +30,32 @@ features = [
     "navigation.tracking",
     "search.highlight",
 ]
+{%- if cookiecutter.__ci == "github" %}
+icon.repo = "fontawesome/brands/github"
+{%- endif %}
 
+# Palette toggle for automatic mode
 [[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+# Palette toggle for light mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
 scheme = "default"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
+# Palette toggle for dark mode
 [[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
 scheme = "slate"
 toggle.icon = "lucide/moon"
-toggle.name = "Switch to light mode"
+toggle.name = "Switch to system preference"
 
+{%- if cookiecutter.__ci == "github" %}
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
 link = "{{ cookiecutter.url }}"
+{%- endif %}
