@@ -4,7 +4,7 @@
 site_name = "{{ cookiecutter.project_name }}"
 site_description = "{{ cookiecutter.project_short_description }}"
 site_author = "{{ cookiecutter.full_name }}"
-copyright = "&copy; {{ cookiecutter.__year }} {{ cookiecutter.full_name }"
+copyright = "&copy; {{ cookiecutter.__year }} {{ cookiecutter.full_name }}"
 repo_url = "{{ cookiecutter.url }}"
 docs_dir = "docs"
 
