@@ -394,7 +394,7 @@ Will not show up if using lefthook instead of pre-commit/prek.
 - [`PC160`](https://learn.scientific-python.org/development/guides/style#PC160): Uses a spell checker
 - [`PC170`](https://learn.scientific-python.org/development/guides/style#PC170): Uses PyGrep hooks (only needed if rST present)
 - [`PC180`](https://learn.scientific-python.org/development/guides/style#PC180): Uses a markdown formatter
-- [`PC190`](https://learn.scientific-python.org/development/guides/style#PC190): Uses Ruff
+- [`PC190`](https://learn.scientific-python.org/development/guides/style#PC190): Uses a linter (Ruff/Flake8)
 - [`PC191`](https://learn.scientific-python.org/development/guides/style#PC191): Ruff show fixes if fixes enabled
 - [`PC192`](https://learn.scientific-python.org/development/guides/style#PC192): Ruff uses `ruff-check` instead of `ruff` (legacy)
 - [`PC901`](https://learn.scientific-python.org/development/guides/style#PC901): Custom pre-commit CI update message
