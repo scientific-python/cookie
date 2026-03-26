@@ -173,8 +173,7 @@ class PC191(PreCommit):
                         return "--show-fixes" in hook["args"] or (
                             ruff is not None and "show-fixes" in ruff
                         )
-                return None
-        return False
+        return None
 
 
 class PC192(PreCommit):

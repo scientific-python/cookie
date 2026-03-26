@@ -246,6 +246,15 @@ def test_pc191_no_show_fixes(ruff_check: str, ruffconfig):
     assert "--show-fixes" in res.err_msg
 
 
+def test_pc191_no_ruff():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/pycqa/flake8
+    """)
+    res = compute_check("PC191", precommit=precommit, ruff={})
+    assert res.result is None
+
+
 def test_pc192():
     precommit = yaml.safe_load("""
         repos:
