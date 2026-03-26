@@ -243,14 +243,22 @@ def test_pc901():
         ci:
           autoupdate_commit_msg: 'chore: update pre-commit hooks'
     """)
-    assert compute_check("PC901", precommit=precommit).result
+    assert compute_check("PC901", precommit=precommit, dependabot={}).result
+
+
+def test_pc901_not_needed():
+    dependabot = yaml.safe_load("""
+        updates:
+          - package-ecosystem: "github-actions"
+    """)
+    assert compute_check("PC901", precommit={}, dependabot=dependabot).result is None
 
 
 def test_pc901_no_msg():
     precommit = yaml.safe_load("""
     repos:
     """)
-    res = compute_check("PC901", precommit=precommit)
+    res = compute_check("PC901", precommit=precommit, dependabot={})
     assert not res.result
     assert "autoupdate_commit_msg" in res.err_msg
 
@@ -260,16 +268,24 @@ def test_pc902():
         ci:
           autofix_commit_msg: 'style: pre-commit fixes'
     """)
-    assert compute_check("PC902", precommit=precommit).result
+    assert compute_check("PC902", precommit=precommit, dependabot={}).result
 
 
 def test_pc902_no_msg():
     precommit = yaml.safe_load("""
     repos:
     """)
-    res = compute_check("PC902", precommit=precommit)
+    res = compute_check("PC902", precommit=precommit, dependabot={})
     assert not res.result
     assert "autofix_commit_msg" in res.err_msg
+
+
+def test_pc902_not_needed():
+    dependabot = yaml.safe_load("""
+        updates:
+          - package-ecosystem: "github-actions"
+    """)
+    assert compute_check("PC902", precommit={}, dependabot=dependabot).result is None
 
 
 def test_pc903():
@@ -278,16 +294,24 @@ def test_pc903():
           autoupdate_schedule: "monthly"
 
     """)
-    assert compute_check("PC903", precommit=precommit).result
+    assert compute_check("PC903", precommit=precommit, dependabot={}).result
 
 
 def test_pc903_no_msg():
     precommit = yaml.safe_load("""
     repos:
     """)
-    res = compute_check("PC903", precommit=precommit)
+    res = compute_check("PC903", precommit=precommit, dependabot={})
     assert not res.result
     assert "autoupdate_schedule" in res.err_msg
+
+
+def test_pc903_not_needed():
+    dependabot = yaml.safe_load("""
+        updates:
+          - package-ecosystem: "github-actions"
+    """)
+    assert compute_check("PC903", precommit={}, dependabot=dependabot).result is None
 
 
 def test_repo_review_checks_skips_with_lefthook_only(tmp_path: Path) -> None:

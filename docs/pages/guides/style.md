@@ -108,6 +108,24 @@ ci:
 
 The frequencies can be "weekly" (the default), "monthly", and "quarterly".
 
+If you prefer, you can use Dependabot, which will also auto-update, though it
+doesn't run the checks. The config looks like this:
+
+```yaml
+version: 2
+updates:
+  - package-ecosystem: "pre-commit"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      pre-commit:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
+```
+
 ## Format
 
 {% rr PC110 %} [Black](https://black.readthedocs.io/en/latest/) is a popular
