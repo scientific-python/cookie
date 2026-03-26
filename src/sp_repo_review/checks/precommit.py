@@ -204,7 +204,7 @@ class PC901(PreCommit):
     "Custom pre-commit CI update message"
 
     @staticmethod
-    def check(precommit: dict[str, Any]) -> bool:
+    def check(precommit: dict[str, Any], dependabot: dict[str, Any]) -> bool | None:  # type: ignore[override]
         """
         Should have something like this in `.pre-commit-config.yaml`:
 
@@ -213,6 +213,11 @@ class PC901(PreCommit):
           autoupdate_commit_msg: 'chore(deps): update pre-commit hooks'
         ```
         """
+        if any(
+            ecosystem.get("package-ecosystem", "") == "github-actions"
+            for ecosystem in dependabot.get("updates", [])
+        ):
+            return None
 
         return "autoupdate_commit_msg" in precommit.get("ci", {})
 
@@ -221,7 +226,7 @@ class PC902(PreCommit):
     "Custom pre-commit CI autofix message"
 
     @staticmethod
-    def check(precommit: dict[str, Any]) -> bool:
+    def check(precommit: dict[str, Any], dependabot: dict[str, Any]) -> bool | None:  # type: ignore[override]
         """
         Should have something like this in `.pre-commit-config.yaml`:
 
@@ -230,6 +235,11 @@ class PC902(PreCommit):
           autofix_commit_msg: "style: pre-commit fixes"
         ```
         """
+        if any(
+            ecosystem.get("package-ecosystem", "") == "github-actions"
+            for ecosystem in dependabot.get("updates", [])
+        ):
+            return None
 
         return "autofix_commit_msg" in precommit.get("ci", {})
 
@@ -238,7 +248,7 @@ class PC903(PreCommit):
     "Specified pre-commit CI schedule"
 
     @staticmethod
-    def check(precommit: dict[str, Any]) -> bool:
+    def check(precommit: dict[str, Any], dependabot: dict[str, Any]) -> bool | None:  # type: ignore[override]
         """
         Should set some schedule: `weekly` (default), `monthly`, or `quarterly`.
 
@@ -247,6 +257,11 @@ class PC903(PreCommit):
           autoupdate_schedule: "monthly"
         ```
         """
+        if any(
+            ecosystem.get("package-ecosystem", "") == "github-actions"
+            for ecosystem in dependabot.get("updates", [])
+        ):
+            return None
 
         return "autoupdate_schedule" in precommit.get("ci", {})
 
