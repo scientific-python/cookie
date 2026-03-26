@@ -76,22 +76,54 @@ def test_pc111_rename():
     assert "adamchainz" in res.err_msg
 
 
-def test_pc190():
+def test_pc190_ruff_check():
     precommit = yaml.safe_load("""
         repos:
           - repo: https://github.com/astral-sh/ruff-pre-commit
+            hooks:
+              - id: ruff-check
     """)
     assert compute_check("PC190", precommit=precommit).result
 
 
-def test_pc190_rename():
+def test_pc190_ruff():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/astral-sh/ruff-pre-commit
+            hooks:
+              - id: ruff
+    """)
+    assert compute_check("PC190", precommit=precommit).result
+
+
+def test_pc190_flake8():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/pycqa/flake8
+    """)
+    assert compute_check("PC190", precommit=precommit).result
+
+
+def test_pc190_rename_ruff():
     precommit = yaml.safe_load("""
         repos:
           - repo: https://github.com/charliermarsh/ruff-pre-commit
+            hooks:
+              - id: ruff-check
     """)
     res = compute_check("PC190", precommit=precommit)
     assert not res.result
     assert "astral-sh" in res.err_msg
+
+
+def test_pc190_rename_flake8():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://gitlab.com/pycqa/flake8
+    """)
+    res = compute_check("PC190", precommit=precommit)
+    assert not res.result
+    assert "github" in res.err_msg
 
 
 def test_pc140():
@@ -212,6 +244,15 @@ def test_pc191_no_show_fixes(ruff_check: str, ruffconfig):
     res = compute_check("PC191", precommit=precommit, ruff=ruffconfig)
     assert not res.result
     assert "--show-fixes" in res.err_msg
+
+
+def test_pc191_no_ruff():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/pycqa/flake8
+    """)
+    res = compute_check("PC191", precommit=precommit, ruff={})
+    assert res.result is None
 
 
 def test_pc192():

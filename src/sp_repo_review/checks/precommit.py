@@ -28,7 +28,7 @@ class PreCommit:
     url = mk_url("style")
     renamed: ClassVar[dict[str, str]] = {}
     repos: ClassVar[set[str]] = set()
-    ids: ClassVar[dict[str, str]] = {}
+    ids: ClassVar[dict[str, set[str]]] = {}
 
     @property
     def describe(self) -> str:
@@ -53,7 +53,7 @@ class PreCommit:
             if repo in cls.repos:
                 if cls.ids and repo in cls.ids:
                     if any(
-                        hook.get("id", "") == cls.ids[repo]
+                        hook.get("id", "") in cls.ids[repo]
                         for hook in repo_item.get("hooks", {})
                     ):
                         return True
@@ -83,7 +83,7 @@ class PC110(PreCommit):
     renamed = {
         "https://github.com/psf/black": "https://github.com/psf/black-pre-commit-mirror"
     }
-    ids = {"https://github.com/astral-sh/ruff-pre-commit": "ruff-format"}
+    ids = {"https://github.com/astral-sh/ruff-pre-commit": {"ruff-format"}}
 
 
 class PC111(PreCommit):
@@ -97,12 +97,17 @@ class PC111(PreCommit):
 
 
 class PC190(PreCommit):
-    "Uses Ruff"
+    "Uses a linter (Ruff/Flake8)"
 
-    repos = {"https://github.com/astral-sh/ruff-pre-commit"}
-    renamed = {
-        "https://github.com/charliermarsh/ruff-pre-commit": "https://github.com/astral-sh/ruff-pre-commit"
+    repos = {
+        "https://github.com/astral-sh/ruff-pre-commit",
+        "https://github.com/pycqa/flake8",
     }
+    renamed = {
+        "https://github.com/charliermarsh/ruff-pre-commit": "https://github.com/astral-sh/ruff-pre-commit",
+        "https://gitlab.com/pycqa/flake8 ": "https://github.com/pycqa/flake8",
+    }
+    ids = {"https://github.com/astral-sh/ruff-pre-commit": {"ruff-check", "ruff"}}
 
 
 class PC140(PreCommit):
@@ -168,8 +173,7 @@ class PC191(PreCommit):
                         return "--show-fixes" in hook["args"] or (
                             ruff is not None and "show-fixes" in ruff
                         )
-                return None
-        return False
+        return None
 
 
 class PC192(PreCommit):
