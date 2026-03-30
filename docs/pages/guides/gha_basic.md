@@ -678,7 +678,7 @@ configure Pages.
 ```yaml
 - name: Setup Pages
   id: pages
-  uses: actions/configure-pages@v5
+  uses: actions/configure-pages@v6
 ```
 
 {% raw %}
@@ -715,7 +715,7 @@ deploy:
   steps:
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v5
 ```
 
 {% endraw %}
