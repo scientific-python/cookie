@@ -9,6 +9,14 @@ from sp_repo_review.checks.pyproject import PytestFile
 from sp_repo_review.checks.pyproject import pytest as pytest_fixture
 
 
+def test_PP301_present():
+    assert compute_check("PP301", pytest=(PytestFile.LEGACY_PYPROJECT, {})).result
+
+
+def test_PP301_missing():
+    assert not compute_check("PP301", pytest=(PytestFile.NONE, {})).result
+
+
 def test_PP002_okay():
     toml = toml_loads("""
         [build-system]
@@ -376,6 +384,17 @@ def test_PP308_string_missing():
         addopts = "--stuff --morestuff"
         """)
     assert not compute_check("PP308", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP309_present():
+    toml = toml_loads("""
+        filterwarnings = ["error"]
+        """)
+    assert compute_check("PP309", pytest=(PytestFile.LEGACY_PYPROJECT, toml)).result
+
+
+def test_PP309_missing():
+    assert not compute_check("PP309", pytest=(PytestFile.LEGACY_PYPROJECT, {})).result
 
 
 @pytest.mark.parametrize(
