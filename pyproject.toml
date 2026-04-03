@@ -44,8 +44,11 @@ cli = [
 pyproject = [
   "validate-pyproject-schema-store[all]",
 ]
+async = [
+  "repo-review[async]",
+]
 all = [
-  "sp-repo-review[cli,pyproject]",
+  "sp-repo-review[cli,pyproject,async]",
 ]
 
 [project.urls]
