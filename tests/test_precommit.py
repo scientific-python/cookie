@@ -290,7 +290,7 @@ def test_pc901():
 def test_pc901_not_needed():
     dependabot = yaml.safe_load("""
         updates:
-          - package-ecosystem: "github-actions"
+          - package-ecosystem: "pre-commit"
     """)
     assert compute_check("PC901", precommit={}, dependabot=dependabot).result is None
 
@@ -324,7 +324,7 @@ def test_pc902_no_msg():
 def test_pc902_not_needed():
     dependabot = yaml.safe_load("""
         updates:
-          - package-ecosystem: "github-actions"
+          - package-ecosystem: "pre-commit"
     """)
     assert compute_check("PC902", precommit={}, dependabot=dependabot).result is None
 
@@ -350,13 +350,13 @@ def test_pc903_no_msg():
 def test_pc903_not_needed():
     dependabot = yaml.safe_load("""
         updates:
-          - package-ecosystem: "github-actions"
+          - package-ecosystem: "pre-commit"
     """)
     assert compute_check("PC903", precommit={}, dependabot=dependabot).result is None
 
 
 def test_repo_review_checks_skips_with_lefthook_only(tmp_path: Path) -> None:
-    """PreCommit checks should be omitted if only lefthook.yml is present.
+    """Precommit checks should be omitted if only lefthook.yml is present.
 
     When a repository uses `lefthook.yml` and does not have a
     `.pre-commit-config.yaml`, `repo_review_checks` should return an empty
