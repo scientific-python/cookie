@@ -1,3 +1,17 @@
+__lazy_modules__ = [
+    "argparse",
+    "collections",
+    "collections.abc",
+    "pathlib",
+    "rich",
+    "rich.columns",
+    "rich.panel",
+    "sp_repo_review._compat",
+    "sp_repo_review.checks",
+    "sp_repo_review.checks.ruff",
+    "sys",
+]
+
 import argparse
 import importlib.resources
 import json
@@ -9,8 +23,8 @@ from rich import print
 from rich.columns import Columns
 from rich.panel import Panel
 
-from .._compat import tomllib
-from ..checks.ruff import get_rule_selection, ruff
+from sp_repo_review._compat import tomllib
+from sp_repo_review.checks.ruff import get_rule_selection, ruff
 
 # Create using ruff linter --output-format=json > src/sp_repo_review/ruff/linter.json
 RESOURCE_DIR = importlib.resources.files("sp_repo_review.ruff_checks")

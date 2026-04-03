@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+__lazy_modules__ = [f"{__spec__.parent.rsplit('.', 1)[0]}._compat"]  # type: ignore[union-attr]
+
 import enum
 from typing import TYPE_CHECKING, Any
 

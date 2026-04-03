@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+__lazy_modules__ = [f"{__spec__.parent}.checks"]
+
 import typing
 from typing import TYPE_CHECKING, Any
 

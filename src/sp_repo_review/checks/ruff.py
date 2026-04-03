@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+__lazy_modules__ = [f"{__spec__.parent.rsplit('.', 1)[0]}._compat"]  # type: ignore[union-attr]
+
 from typing import TYPE_CHECKING, Any, ClassVar, Literal, Protocol
 
 from .._compat import tomllib

@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+__lazy_modules__ = ["yaml"]
+
 from typing import TYPE_CHECKING, Any, ClassVar
 
 import yaml
