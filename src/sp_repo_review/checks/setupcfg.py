@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+__lazy_modules__ = ["configparser"]
+
 import configparser
 from typing import TYPE_CHECKING
 

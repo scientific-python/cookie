@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+__lazy_modules__ = ["ast", f"{__spec__.parent.rsplit('.', 1)[0]}._compat"]  # type: ignore[union-attr]
+
 import ast
 import dataclasses
 import re
