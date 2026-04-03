@@ -218,7 +218,7 @@ class PC901(PreCommit):
         ```
         """
         if any(
-            ecosystem.get("package-ecosystem", "") == "github-actions"
+            ecosystem.get("package-ecosystem", "") == "pre-commit"
             for ecosystem in dependabot.get("updates", [])
         ):
             return None
@@ -240,7 +240,7 @@ class PC902(PreCommit):
         ```
         """
         if any(
-            ecosystem.get("package-ecosystem", "") == "github-actions"
+            ecosystem.get("package-ecosystem", "") == "pre-commit"
             for ecosystem in dependabot.get("updates", [])
         ):
             return None
@@ -262,7 +262,7 @@ class PC903(PreCommit):
         ```
         """
         if any(
-            ecosystem.get("package-ecosystem", "") == "github-actions"
+            ecosystem.get("package-ecosystem", "") == "pre-commit"
             for ecosystem in dependabot.get("updates", [])
         ):
             return None
