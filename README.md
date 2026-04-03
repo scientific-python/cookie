@@ -357,6 +357,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`GH102`](https://learn.scientific-python.org/development/guides/gha-basic#GH102): Auto-cancel on repeated PRs
 - [`GH103`](https://learn.scientific-python.org/development/guides/gha-basic#GH103): At least one workflow with manual dispatch trigger
 - [`GH104`](https://learn.scientific-python.org/development/guides/gha-wheels#GH104): Use unique names for upload-artifact
+- [`GH105`](https://learn.scientific-python.org/development/guides/gha-basic#GH105): Use Trusted Publishing instead of token-based publishing on PyPI
 - [`GH200`](https://learn.scientific-python.org/development/guides/gha-basic#GH200): Maintained by Dependabot
 - [`GH210`](https://learn.scientific-python.org/development/guides/gha-basic#GH210): Maintains the GitHub action versions with Dependabot
 - [`GH211`](https://learn.scientific-python.org/development/guides/gha-basic#GH211): Do not pin core actions as major versions
