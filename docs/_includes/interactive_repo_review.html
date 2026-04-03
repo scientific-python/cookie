@@ -1,6 +1,4 @@
-<div id="interactive-repo-review-root">
-  Loading (requires javascript and WebAssembly)...
-</div>
+<div id="root">Loading (requires javascript and WebAssembly)...</div>
 <style>
   .main-content ul > li::before {
     position: inherit;
@@ -12,19 +10,16 @@
     padding-left: none;
   }
 </style>
-<script type="text/babel">
-  const root = ReactDOM.createRoot(
-    document.getElementById("interactive-repo-review-root"),
-  );
-  root.render(
-    <App
-      header={false}
-      deps={[
-        "repo-review~=0.12.1",
-        "sp-repo-review==2025.11.21",
-        "validate-pyproject-schema-store==2025.11.21",
-        "validate-pyproject[all]~=0.24.0",
-      ]}
-    />,
-  );
+<script type="module">
+  import { mountApp } from "{% link assets/js/repo-review-app.min.js %}";
+
+  mountApp({
+    header: false,
+    deps: [
+      "repo-review~=1.0.0rc3",
+      "sp-repo-review==2026.04.03",
+      "validate-pyproject-schema-store==2026.03.29",
+      "validate-pyproject[all]~=0.25.0",
+    ],
+  });
 </script>

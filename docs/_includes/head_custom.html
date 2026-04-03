@@ -3,26 +3,7 @@
 {%- if page.interactive_repo_review %}
 
 <script
-  src="https://cdn.jsdelivr.net/pyodide/v0.27.3/full/pyodide.js"
-  crossorigin
-></script>
-
-<script
-  src="https://unpkg.com/react@18/umd/react.production.min.js"
-  crossorigin
-></script>
-<script
-  src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
-  crossorigin
-></script>
-<script
-  src="https://unpkg.com/@mui/material@v5.13.3/umd/material-ui.production.min.js"
-  crossorigin
-></script>
-
-<!-- pre-processor -->
-<script
-  src="https://unpkg.com/babel-standalone/babel.min.js"
+  src="https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js"
   crossorigin
 ></script>
 <!-- Fonts to support Material Design -->
@@ -35,10 +16,5 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
 />
-
-<script
-  type="text/babel"
-  src="{% link assets/js/webapp.js %}"
-  data-presets="react"
-></script>
+<link rel="modulepreload" href="{% link assets/js/repo-review-app.min.js %}" />
 {%- endif %}
