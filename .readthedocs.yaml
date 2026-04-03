@@ -7,10 +7,10 @@ version: 2
 
 # Set the version of Python and other tools you might need
 build:
-  os: ubuntu-22.04
+  os: ubuntu-24.04
 
   tools:
-    ruby: "3.3"
+    ruby: "3.4"
 
   commands:
     - bundle install
