@@ -14,6 +14,7 @@ To build locally, install rbenv (remember to run `rbenv init` after installing,
 and `rbenv install 3.4.1`). Then:
 
 ```bash
+./helpers/fetch_repo_review_app.sh
 bundle install
 bundle exec jekyll serve --livereload
 ```

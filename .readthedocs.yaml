@@ -13,6 +13,7 @@ build:
     ruby: "3.4"
 
   commands:
+    - ./helpers/fetch_repo_review_app.sh
     - bundle install
     - >
       JEKYLL_ENV=production bundle exec jekyll build --destination

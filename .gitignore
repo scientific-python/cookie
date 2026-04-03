@@ -142,6 +142,8 @@ src/*/_version.py
 .jekyll-cache/
 .jekyll-metadata
 _site/
+docs/assets/js/repo-review-app.min.js
+docs/assets/js/repo-review-app.min.js.map
 
 # NodeJS stuff, just in case (developer tooling)
 node_modules/
