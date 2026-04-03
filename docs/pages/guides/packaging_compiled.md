@@ -88,7 +88,7 @@ with code_fence("toml"):
 <!-- prettier-ignore-start -->
 ```toml
 [build-system]
-requires = ["pybind11", "scikit-build-core>=0.11"]
+requires = ["pybind11", "scikit-build-core>=0.12"]
 build-backend = "scikit_build_core.build"
 ```
 <!-- prettier-ignore-end -->
