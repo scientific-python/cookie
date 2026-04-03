@@ -306,7 +306,8 @@ like the official actions and most other actions, but instead have `release/vX`
 branches that you can use.
 
 - [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish):
-  Publish Python packages to PyPI. Supports trusted publisher deployment.
+  Publish Python packages to PyPI. Prefer Trusted Publishing over token-based
+  uploads.
 - [re-actors/alls-green](https://github.com/re-actors/alls-green): Tooling to
   check to see if all jobs passed (supports allowed failures, too).
 

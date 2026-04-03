@@ -131,9 +131,10 @@ later in the upload action for the release job, as well).
 > The artifact it produces is named `Packages`, so that's what you need to use
 > later to publish. This will be used instead of the manual steps below.
 
-And then, you need a release job:
+And then, you need a release job. Trusted Publishing is more secure and
+recommended {% rr GH105 %}:
 
-{% tabs %} {% tab oidc Trusted Publishing %}
+{% tabs %} {% tab oidc Trusted Publishing (recommended) %}
 
 {% raw %}
 
@@ -194,10 +195,10 @@ publish:
 
 {% endraw %}
 
-When you make a GitHub release in the web UI, we publish to PyPI. You'll need to
-go to PyPI, generate a token for your user, and put it into `pypi_password` on
-your repo's secrets page. Once you have a project, you should delete your
-user-scoped token and generate a new project-scoped token.
+If you cannot use Trusted Publishing, this publishes to PyPI with a token.
+You'll need to go to PyPI, generate a token for your user, and put it into
+`pypi_password` on your repo's secrets page. Once you have a project, you should
+delete your user-scoped token and generate a new project-scoped token.
 
 {% endtab %} {% endtabs %}
 
@@ -208,7 +209,7 @@ This can be used on almost any package with a standard
 exactly how to build your package, hence all packages build exactly via the same
 interface:
 
-{% tabbodies %} {% tab oidc Trusted Publishing %}
+{% tabbodies %} {% tab oidc Trusted Publishing (recommended) %}
 
 {% raw %}
 
@@ -305,6 +306,11 @@ jobs:
 ```
 
 {% endraw %}
+
+If you cannot use Trusted Publishing, this publishes to PyPI with a token.
+You'll need to go to PyPI, generate a token for your user, and put it into
+`pypi_password` on your repo's secrets page. Once you have a project, you should
+delete your user-scoped token and generate a new project-scoped token.
 
 {% endtab %} {% endtabbodies %}
 

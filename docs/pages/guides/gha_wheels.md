@@ -168,7 +168,9 @@ You can skip specifying the `build[uv]` build-frontend option and pre-installing
 
 ## Publishing
 
-{% tabs %} {% tab oidc Trusted Publishing %}
+Trusted Publishing is more secure and recommended {% rr GH105 %}:
+
+{% tabs %} {% tab oidc Trusted Publishing (recommended) %}
 
 {% raw %}
 
@@ -232,10 +234,10 @@ upload_all:
 
 {% endraw %}
 
-When you make a GitHub release in the web UI, we publish to PyPI. You'll need to
-go to PyPI, generate a token for your user, and put it into `pypi_password` on
-your repo's secrets page. Once you have a project, you should delete your
-user-scoped token and generate a new project-scoped token.
+If you cannot use Trusted Publishing, this publishes to PyPI with a token.
+You'll need to go to PyPI, generate a token for your user, and put it into
+`pypi_password` on your repo's secrets page. Once you have a project, you should
+delete your user-scoped token and generate a new project-scoped token.
 
 {% endtab %} {% endtabs %}
 

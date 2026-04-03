@@ -165,6 +165,31 @@ class GH104(GitHub):
         return ""
 
 
+class GH105(GitHub):
+    "Use Trusted Publishing instead of token-based publishing on PyPI"
+
+    requires = {"GH100"}
+    url = mk_url("gha-basic")
+
+    @staticmethod
+    def check(workflows: dict[str, Any]) -> str:
+        errors = []
+        for wname, workflow in workflows.items():
+            for jname, job in workflow.get("jobs", {}).items():
+                for step in job.get("steps", []):
+                    uses = step.get("uses", "")
+                    publish_with = step.get("with", {})
+                    if (
+                        uses.startswith("pypa/gh-action-pypi-publish")
+                        and "password" in publish_with
+                    ):
+                        errors.append(
+                            f"* Token-based publishing detected in `{wname}.yml:{jname}`. Trusted Publishing is recommended."
+                        )
+                        continue
+        return "\n".join(errors)
+
+
 class GH200(GitHub):
     "Maintained by Dependabot"
 
