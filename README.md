@@ -7,6 +7,7 @@
 [![Live ReadTheDocs][rtd-badge]][rtd-link]
 
 [![PyPI version][pypi-version]][pypi-link]
+[![Conda-Forge][conda-badge]][conda-link]
 [![PyPI platforms][pypi-platforms]][pypi-link]
 
 A [copier][]/[cookiecutter][] template for new Python projects based on the
@@ -197,7 +198,7 @@ A lot of the guide, cookiecutter, and repo-review started out as part of
 
 <!-- prettier-ignore-start -->
 
-[actions-badge]: https://github.com/scientific-python/actions/cookie/workflows/ci.yml/badge.svg
+[actions-badge]: https://github.com/scientific-python/cookie/actions/workflows/ci.yml/badge.svg
 [actions-link]: https://github.com/scientific-python/cookie/actions
 [cibuildwheel]: https://cibuildwheel.readthedocs.io
 [cookiecutter]: https://cookiecutter.readthedocs.io
@@ -436,5 +437,7 @@ Will not show up if no `setup.cfg` file is present.
 [scientific-python development guide]: https://learn.scientific-python.org/development
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 [scikit-hep]: https://scikit-hep.org
+[conda-badge]: https://img.shields.io/conda/vn/conda-forge/sp-repo-review
+[conda-link]: https://github.com/conda-forge/sp-repo-review-feedstock
 
 <!-- prettier-ignore-end -->
