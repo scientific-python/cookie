@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-version="${1:-v1.0.2}"
+version="${1:-v1.0.3}"
 archive_url="https://github.com/scientific-python/repo-review/releases/download/${version}/repo-review-app.zip"
 dest_dir="docs/assets/js"
 tmp_zip="$(mktemp)"
