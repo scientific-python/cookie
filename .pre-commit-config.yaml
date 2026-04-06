@@ -29,7 +29,7 @@ repos:
         additional_dependencies: [black==24.*]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.15.8"
+    rev: "v0.15.9"
     hooks:
       - id: ruff-check
         args: ["--fix", "--show-fixes"]
@@ -43,7 +43,7 @@ repos:
       - id: rst-inline-touching-normal
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.19.1"
+    rev: "v1.20.0"
     hooks:
       - id: mypy
         files: "(src|tests|noxfile.py)"
@@ -67,7 +67,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/crate-ci/typos
-    rev: "v1.44.0"
+    rev: "v1"
     hooks:
       - id: typos
         exclude: ^Gemfile\.lock$
