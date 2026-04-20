@@ -158,7 +158,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.9"
+  rev: "v0.15.11"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -248,7 +248,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.9"
+  rev: "v0.15.11"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -639,7 +639,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.20.0"
+  rev: "v1.20.1"
   hooks:
     - id: mypy
       files: src
@@ -804,7 +804,7 @@ integration.
 
 ```yaml
 - repo: https://github.com/crate-ci/typos
-  rev: "v1.45.0"
+  rev: "v1.45.1"
   hooks:
     - id: typos
       args: []
@@ -884,7 +884,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v22.1.2"
+  rev: "v22.1.3"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -913,7 +913,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.8.1"
+  rev: "v3.8.3"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]

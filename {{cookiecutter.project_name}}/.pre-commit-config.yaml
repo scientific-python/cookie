@@ -36,14 +36,14 @@ repos:
       - id: rst-inline-touching-normal
 
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: "v3.8.1"
+    rev: "v3.8.3"
     hooks:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json]
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.15.9"
+    rev: "v0.15.11"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -52,7 +52,7 @@ repos:
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: "v22.1.2"
+    rev: "v22.1.3"
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]
@@ -60,7 +60,7 @@ repos:
 {%- endif %}
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.20.0"
+    rev: "v1.20.1"
     hooks:
       - id: mypy
         files: src|tests|noxfile.py
