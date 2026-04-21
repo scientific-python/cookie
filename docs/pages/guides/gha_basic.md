@@ -138,13 +138,15 @@ There are a variety of
 [images to pick from](https://docs.github.com/en/actions/reference/runners/github-hosted-runners#single-cpu-runners),
 such as:
 
-| Image name | Description | |==================|=============| |
-`ubuntu-latest` | Standard Linux runner (specific versions available) | |
-`windows-latest` | Standard Windows runner (specific versions available) | |
-`macos-latest` | Standard MacOS runner (specific versions available) | |
-`ubuntu-24.04-arm` | Linux ARM runner (no `latest` tag) | | `windows-11-arm` |
-Windows ARM runner (no specific versions) | | `macos-15-intel` | MacOS Intel
-runner (final version) | | `ubuntu-slim` | Fast startup single-core container |
+| Image name         | Description                                           |
+| ------------------ | ----------------------------------------------------- |
+| `ubuntu-latest`    | Standard Linux runner (specific versions available)   |
+| `windows-latest`   | Standard Windows runner (specific versions available) |
+| `macos-latest`     | Standard MacOS runner (specific versions available)   |
+| `ubuntu-24.04-arm` | Linux ARM runner (no `latest` tag)                    |
+| `windows-11-arm`   | Windows ARM runner (no specific versions)             |
+| `macos-15-intel`   | MacOS Intel runner (final version)                    |
+| `ubuntu-slim`      | Fast startup single-core container                    |
 
 Note that while versioned images are available, like `ubuntu-24.04`, these are
 all rolling images; selecting a specific image will not make your CI completely
