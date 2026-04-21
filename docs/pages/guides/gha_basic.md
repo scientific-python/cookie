@@ -142,10 +142,10 @@ such as:
 | ------------------ | ----------------------------------------------------- |
 | `ubuntu-latest`    | Standard Linux runner (specific versions available)   |
 | `windows-latest`   | Standard Windows runner (specific versions available) |
-| `macos-latest`     | Standard MacOS runner (specific versions available)   |
+| `macos-latest`     | Standard macOS runner (specific versions available)   |
 | `ubuntu-24.04-arm` | Linux ARM runner (no `latest` tag)                    |
 | `windows-11-arm`   | Windows ARM runner (no specific versions)             |
-| `macos-15-intel`   | MacOS Intel runner (final version)                    |
+| `macos-15-intel`   | macOS Intel runner (final version)                    |
 | `ubuntu-slim`      | Fast startup single-core container                    |
 
 Note that while versioned images are available, like `ubuntu-24.04`, these are
