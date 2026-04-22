@@ -297,9 +297,6 @@ And many other useful ones:
   afterwards.
 - [astral-sh/setup-uv](https://github.com/astral-sh/setup-uv): Set up `uv`.
   Ultra-fast alternative to classic Python packaging solutions.
-- [gautamkrishnar/keepalive-workflow](https://github.com/gautamkrishnar/keepalive-workflow):
-  Keep GitHub actions alive for more than 60 days. Not usually needed if you've
-  set up the other suggestions here, like dependabot and pre-commit.
 - [sigstore/gh-action-sigstore-python](https://github.com/sigstore/gh-action-sigstore-python):
   Signing files in GitHub Actions with sigstore.
 
