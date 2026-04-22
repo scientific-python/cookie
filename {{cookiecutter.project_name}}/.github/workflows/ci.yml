@@ -32,7 +32,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - uses: astral-sh/setup-uv@v8.0.0
+      - uses: astral-sh/setup-uv@v8.1.0
 
       - uses: j178/prek-action@v2
 
@@ -67,7 +67,7 @@ jobs:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
           allow-prereleases: true
 
-      - uses: astral-sh/setup-uv@v8.0.0
+      - uses: astral-sh/setup-uv@v8.1.0
 
       {%- if cookiecutter.backend == "mesonpy" %}
 

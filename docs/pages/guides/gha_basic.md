@@ -115,7 +115,7 @@ tests:
         allow-prereleases: true
 
     - name: Download uv
-      uses: astral-sh/setup-uv@v8.0.0
+      uses: astral-sh/setup-uv@v8.1.0
 
     - name: Test package
       run: uv run pytest
@@ -693,7 +693,7 @@ this action later; specifically, may want to use
 
 ```yaml
 - name: Upload artifact
-  uses: actions/upload-pages-artifact@v4
+  uses: actions/upload-pages-artifact@v5
 ```
 
 This actions defaults to uploading `_site`, but you can give any `with: path:`
