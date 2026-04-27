@@ -158,7 +158,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.11"
+  rev: "v0.15.12"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -248,7 +248,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.11"
+  rev: "v0.15.12"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -639,7 +639,7 @@ The MyPy addition for pre-commit:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.20.1"
+  rev: "v1.20.2"
   hooks:
     - id: mypy
       files: src
@@ -884,7 +884,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v22.1.3"
+  rev: "v22.1.4"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
