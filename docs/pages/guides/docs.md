@@ -499,8 +499,6 @@ with code_fence("yaml"):
 
 version: 2
 
-
-
 build:
   os: ubuntu-24.04
   tools:
@@ -531,8 +529,6 @@ with code_fence("yaml"):
 # See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
 
 version: 2
-
-
 
 build:
   os: ubuntu-24.04
