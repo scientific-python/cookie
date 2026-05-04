@@ -499,17 +499,22 @@ with code_fence("yaml"):
 
 version: 2
 
+
+
 build:
   os: ubuntu-24.04
   tools:
-    python: "3.13"
-  commands:
-    - asdf plugin add uv
-    - asdf install uv latest
-    - asdf global uv latest
-    - uv sync --group docs
-    - uv run python -m sphinx -T -b html -d docs/_build/doctrees -D language=en
-      docs $READTHEDOCS_OUTPUT/html
+    python: "3.14"
+
+sphinx:
+  configuration: docs/conf.py
+
+python:
+  install:
+    - method: uv
+      command: sync
+      groups:
+        - docs
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
@@ -527,10 +532,13 @@ with code_fence("yaml"):
 
 version: 2
 
+
+
 build:
   os: ubuntu-24.04
   tools:
-    python: "3.13"
+    python: "3.14"
+
   commands:
     - asdf plugin add uv
     - asdf install uv latest

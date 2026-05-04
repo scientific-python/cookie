@@ -3,22 +3,38 @@
 
 version: 2
 
+
+
 build:
   os: ubuntu-24.04
   tools:
-    python: "3.13"
+    python: "3.14"
+
+{%- if cookiecutter.docs == 'sphinx' %}
+
+sphinx:
+  configuration: docs/conf.py
+
+python:
+  install:
+    - method: uv
+      command: sync
+      groups:
+        - docs
+
+{%- else %}
+
   commands:
     - asdf plugin add uv
     - asdf install uv latest
     - asdf global uv latest
     - uv sync --group docs 
-    {%- if cookiecutter.docs == 'sphinx' %}
-    - uv run python -m sphinx -T -b html -d docs/_build/doctrees -D language=en
-      docs $READTHEDOCS_OUTPUT/html
-    {%- elif cookiecutter.docs == 'mkdocs' %}
+    {%- if cookiecutter.docs == 'mkdocs' %}
     - uv run mkdocs build --site-dir $READTHEDOCS_OUTPUT/html
     {%- elif cookiecutter.docs == 'zensical' %}
     - uv run zensical build
     - mkdir -p $READTHEDOCS_OUTPUT/html/
     - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
     {%- endif %}
+
+{%- endif %}
