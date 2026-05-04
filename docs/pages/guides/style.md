@@ -804,7 +804,7 @@ integration.
 
 ```yaml
 - repo: https://github.com/crate-ci/typos
-  rev: "v1.45.1"
+  rev: "v1.46.0"
   hooks:
     - id: typos
       args: []
@@ -961,7 +961,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.37.1"
+  rev: "0.37.2"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
