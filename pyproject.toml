@@ -165,6 +165,7 @@ messages_control.disable = [
   "redefined-outer-name",
   "no-member",  # better handled by mypy, etc.
   "arguments-differ",  # better handled by mypy, etc.
+  "import-outside-toplevel",  # in Ruff
 ]
 
 
@@ -196,6 +197,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "src/sp_repo_review/_compat/**.py" = ["TID251"]
 "src/sp_repo_review/checks/*.py" = ["ERA001"]
+"src/sp_repo_review/ruff_checks/__main__.py" = ["PLC0415", "T20"]
 "tests/**" = ["ANN", "INP001", "S607"]
 "helpers/**" = ["INP001", "FIX004"]
 "helpers/extensions.py" = ["ANN"]
