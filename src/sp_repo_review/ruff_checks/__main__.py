@@ -40,27 +40,24 @@ SPECIALTY = frozenset(r["name"] for r in select_info["specialty"])
 with RESOURCE_DIR.joinpath("ignore.json").open(encoding="utf-8") as f:
     IGNORE_INFO = json.load(f)
 
+# Tool-specific agent variables
+# Based on https://github.com/agentsmd/agents.md/issues/136
+_AGENT_VARS = [
+    "AGENT",  # Pi, Goose, Amp
+    "CLAUDECODE",
+    "CURSOR_AGENT",
+    "CLINE_ACTIVE",
+    "GEMINI_CLI",
+    "CODEX_SANDBOX",
+    "AUGMENT_AGENT",
+    "TRAE_AI_SHELL_ID",
+    "OPENCODE_CLIENT",
+]
+
 
 def _is_agent_environment() -> bool:
-    """Check if running from an AI coding agent.
-
-    Uses environment variables from https://github.com/agentsmd/agents.md/issues/136
-    """
-
-    # Tool-specific agent variables
-    agent_vars = [
-        "AGENT",  # Pi, Goose, Amp
-        "CLAUDECODE",
-        "CURSOR_AGENT",
-        "CLINE_ACTIVE",
-        "GEMINI_CLI",
-        "CODEX_SANDBOX",
-        "AUGMENT_AGENT",
-        "TRAE_AI_SHELL_ID",
-        "OPENCODE_CLIENT",
-    ]
-
-    return any(os.environ.get(var) for var in agent_vars)
+    """Check if running from an AI coding agent using env vars."""
+    return any(os.environ.get(var) for var in _AGENT_VARS)
 
 
 def _resolve_format(format_arg: str) -> str:
@@ -82,7 +79,7 @@ def _print_each_plain(items: Mapping[str, str], indent: int = 2) -> Iterator[str
     """Generate plain text formatted rule lines."""
     size = max(len(k) for k in items) if items else 0
     for k, v in items.items():
-        yield f"{' ' * indent}\"{k}\",{' ' * (size - len(k))} # {v}"
+        yield f'{" " * indent}"{k}",{" " * (size - len(k))} # {v}'
 
 
 def _print_each_rich(items: Mapping[str, str]) -> Iterator[str]:
