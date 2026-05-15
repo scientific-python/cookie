@@ -134,6 +134,14 @@ def test_pc140():
     assert compute_check("PC140", precommit=precommit).result
 
 
+def test_pc140_pyrefly():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/facebook/pyrefly-pre-commit
+    """)
+    assert compute_check("PC140", precommit=precommit).result
+
+
 def test_pc160_codespell():
     precommit = yaml.safe_load("""
         repos:
