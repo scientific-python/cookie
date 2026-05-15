@@ -115,7 +115,10 @@ class PC190(PreCommit):
 class PC140(PreCommit):
     "Uses a type checker"
 
-    repos = {"https://github.com/pre-commit/mirrors-mypy"}
+    repos = {
+        "https://github.com/pre-commit/mirrors-mypy",
+        "https://github.com/facebook/pyrefly-pre-commit",
+    }
 
 
 class PC160(PreCommit):
