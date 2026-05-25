@@ -158,7 +158,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.13"
+  rev: "v0.15.14"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -188,7 +188,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "26.5.0"
+  rev: "26.5.1"
   hooks:
     - id: black
 ```
@@ -248,7 +248,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.13"
+  rev: "v0.15.14"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -804,7 +804,7 @@ integration.
 
 ```yaml
 - repo: https://github.com/crate-ci/typos
-  rev: "v1.46.2"
+  rev: "v1.46.3"
   hooks:
     - id: typos
       args: []
