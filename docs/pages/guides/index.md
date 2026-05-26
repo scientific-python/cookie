@@ -1,9 +1,5 @@
 ---
-layout: page
 title: Topical Guides
-permalink: /guides/
-nav_order: 2
-has_children: true
 ---
 
 # Topical Guides
@@ -28,40 +24,36 @@ and one for [compiled extensions][gha_wheels]. You can read about setting up
 good tests on the [pytest page][pytest], with [coverage][]. There's also a page
 on setting up [docs][], as well.
 
-{: .highlight-title }
+:::{tip} New project template
+Once you have completed the guidelines, there is a
+[copier][]/[cookiecutter][]/[cruft][] project, [scientific-python/cookie][],
+that implements these guidelines and lets you setup a new package from a
+template in less than 60 seconds! Nine build backends including compiled
+backends, generation tested in Nox, and kept in-sync with the guide.
+:::
 
-> New project template
->
-> Once you have completed the guidelines, there is a
-> [copier][]/[cookiecutter][]/[cruft][] project, [scientific-python/cookie][],
-> that implements these guidelines and lets you setup a new package from a
-> template in less than 60 seconds! Nine build backends including compiled
-> backends, generation tested in Nox, and kept in-sync with the guide.
-
-{: .important-title }
-
-> Checking an existing project
->
-> We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
-> your repository with the guidelines, runnable [right in the guide][] via
-> WebAssembly! All checks point to a linked badge in the guide.
+:::{important} Checking an existing project
+We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
+your repository with the guidelines, runnable [right in the guide][] via
+WebAssembly! All checks point to a linked badge in the guide.
+:::
 
 <!-- prettier-ignore-start -->
 
-[tutorials]:          {% link pages/tutorials/index.md %}
-[style]:              {% link pages/guides/style.md %}
-[mypy]:               {% link pages/guides/mypy.md %}
-[docs]:               {% link pages/guides/docs.md %}
-[simple packaging]:   {% link pages/guides/packaging_simple.md %}
-[compiled packaging]: {% link pages/guides/packaging_compiled.md %}
-[classic packaging]:  {% link pages/guides/packaging_classic.md %}
-[coverage]:           {% link pages/guides/coverage.md %}
-[gha_basic]:          {% link pages/guides/gha_basic.md %}
-[gha_pure]:           {% link pages/guides/gha_pure.md %}
-[gha_wheels]:         {% link pages/guides/gha_wheels.md %}
-[pytest]:             {% link pages/guides/pytest.md %}
-[task runners]:       {% link pages/guides/tasks.md  %}
-[right in the guide]: {% link pages/guides/repo_review.md %}
+[tutorials]:          pages/tutorials/index
+[style]:              pages/guides/style
+[mypy]:               pages/guides/mypy
+[docs]:               pages/guides/docs
+[simple packaging]:   pages/guides/packaging_simple
+[compiled packaging]: pages/guides/packaging_compiled
+[classic packaging]:  pages/guides/packaging_classic
+[coverage]:           pages/guides/coverage
+[gha_basic]:          pages/guides/gha_basic
+[gha_pure]:           pages/guides/gha_pure
+[gha_wheels]:         pages/guides/gha_wheels
+[pytest]:             pages/guides/pytest
+[task runners]:       pages/guides/tasks
+[right in the guide]: pages/guides/repo_review
 
 [cookiecutter]:             https://cookiecutter.readthedocs.io
 [copier]:                   https://copier.readthedocs.io

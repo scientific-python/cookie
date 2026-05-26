@@ -1,0 +1,9 @@
+version: 1
+
+site:
+  template: book-theme
+  options:
+    hide_toc: false
+    hide_footer_links: true
+    folders: true
+    hide_myst_branding: true

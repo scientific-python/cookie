@@ -1,17 +1,11 @@
 ---
-layout: page
 title: "GHA: GitHub Actions intro"
-permalink: /guides/gha-basic/
-nav_order: 10
-parent: Topical Guides
-custom_title: GitHub Actions introduction
+short_title: GitHub Actions introduction
 ---
-
-{% include toc.html %}
 
 # GitHub Actions: Intro
 
-{% rr GH100 %} The recommended CI for scientific Python projects is GitHub
+{rr}`GH100` The recommended CI for scientific Python projects is GitHub
 Actions (GHA), although its predecessor Azure is also in heavy usage, and other
 popular services (Travis, Appveyor, and Circle CI) may be found in a few
 packages. GHA is preferred due to the flexible, extensible design and the tight
@@ -47,7 +41,7 @@ on:
 jobs:
 ```
 
-This gives the workflow a nice name {% rr GH101 %}, and defines the conditions
+This gives the workflow a nice name {rr}`GH101`, and defines the conditions
 under which it runs. This will run on all pull requests, or pushes to main. If
 you use a develop branch, you probably will want to include that. You can also
 specify specific branches for pull requests instead of running on all PRs (will
@@ -59,8 +53,8 @@ If you use [prek][] or [pre-commit][] in CI, you can run it directly in GitHub
 Actions. Prek is a faster Rust rewrite of pre-commit that supports most real
 world usage and supports the same configuration and hooks.
 
-{% tabs runner %} {% tab prek Prek %}
-
+::::{tab-set}
+:::{tab-item} Prek
 Prek can run using the official action:
 
 ```yaml
@@ -71,9 +65,8 @@ lint:
     - uses: actions/checkout@v6
     - uses: j178/prek-action@v2
 ```
-
-{% endtab %} {% tab pre-commit Pre-commit %}
-
+:::
+:::{tab-item} Pre-commit
 Pre-commit can run using the official action:
 
 ```yaml
@@ -87,8 +80,8 @@ lint:
         python-version: "3.x"
     - uses: pre-commit/action@v3.0.1
 ```
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 If you do use [pre-commit.ci](https://pre-commit.ci), but you need this job to
 run a manual check, like check-manifest, then you can keep it but just use
@@ -169,7 +162,7 @@ static. And old versioned images are decommissioned.
 
 ## Updating
 
-{% rr GH200 %} {% rr GH210 %} If you use non-default actions in your repository
+{rr}`GH200` {rr}`GH210` If you use non-default actions in your repository
 (you will see some in the following pages), then it's a good idea to keep them
 up to date. GitHub provided a way to do this with dependabot. Just add the
 following file as `.github/dependabot.yml`:
@@ -192,8 +185,8 @@ This will check to see if there are updates to the action weekly, and will make
 a PR if there are updates, including the changelog and commit summary in the PR.
 If you select a name like `v1`, this should only look for updates of the same
 form (since April 2022) - there is no need to restrict updates for "moving tag"
-updates anymore {% rr GH211 %}. You can also use SHA's and dependabot will
-respect that too. And `groups` will combine actions updates {% rr GH212 %},
+updates anymore {rr}`GH211`. You can also use SHA's and dependabot will
+respect that too. And `groups` will combine actions updates {rr}`GH212`,
 which is both cleaner and sometimes required for dependent actions, like
 `upload-artifact`/`download-artifact`.
 
@@ -344,7 +337,7 @@ These are some things you might need.
 
 ### Cancel existing runs
 
-{% rr GH102 %} If you add the following, you can ensure only one run per
+{rr}`GH102` If you add the following, you can ensure only one run per
 PR/branch happens at a time, cancelling the old run when a new one starts:
 
 {% raw %}
@@ -468,15 +461,15 @@ You use the `python-path` output from `setup-python` to get the Python you
 activated. You use `github.action_path` to get the path to the checked-out
 action.
 
-{: .highlight }
+:::{tip}
+Examples of custom composite actions include:
 
-> Examples of custom composite actions include:
->
-> - [pypa/cibuildwheel](https://github.com/pypa/cibuildwheel/blob/main/action.yml)
-> - [wntrblm/nox](https://github.com/wntrblm/nox/blob/main/action.yml)
-> - [scientific-python/repo-review](https://github.com/scientific-python/repo-review/blob/main/action.yml)
-> - [scientific-python/cookie](https://github.com/scientific-python/cookie/blob/main/action.yml)
->   (This repo)
+- [pypa/cibuildwheel](https://github.com/pypa/cibuildwheel/blob/main/action.yml)
+- [wntrblm/nox](https://github.com/wntrblm/nox/blob/main/action.yml)
+- [scientific-python/repo-review](https://github.com/scientific-python/repo-review/blob/main/action.yml)
+- [scientific-python/cookie](https://github.com/scientific-python/cookie/blob/main/action.yml)
+  (This repo)
+:::
 
 ### Reusable workflows
 
@@ -588,13 +581,12 @@ Everything else in the job is about getting the output from the step
 `changed-tests-files` to `tests-changes`, then from there into the reusable
 workflow output as `run-tests`.
 
-{: .note }
-
+:::{note}
 Someone probably could write an action (maybe even an composite action using
 either `gh` or `shell: python`) that could directly report changes true/false
 instead of a file list, saving the two step process and greatly simplifying
 this.
-
+:::
 If you have more situations, you just repeat these two steps with different
 `id`s and inputs.
 
@@ -650,13 +642,13 @@ if the "tests" job is being skipped into `allowed-skips`.
 
 {% endraw %}
 
-{: .highlight }
+:::{tip}
+Some examples of repos using this method are:
 
-> Some examples of repos using this method are:
->
-> - [pypa/build](https://github.com/pypa/build/tree/main/.github/workflows)
-> - [scientific-python/cookie](https://github.com/scientific-python/cookie/tree/main/.github/workflows)
->   (this repo)
+- [pypa/build](https://github.com/pypa/build/tree/main/.github/workflows)
+- [scientific-python/cookie](https://github.com/scientific-python/cookie/tree/main/.github/workflows)
+  (this repo)
+:::
 
 ### GitHub pages
 
@@ -679,7 +671,7 @@ permissions:
   id-token: write
 ```
 
-{% rr GH103 %} You probably only want one deployment at a time, so you can use:
+{rr}`GH103` You probably only want one deployment at a time, so you can use:
 
 ```yaml
 concurrency:
@@ -739,14 +731,14 @@ The deploy-pages job gives a `page_url`, which is the same as `base_url` on the
 configure step, and can be set in the `environment`. If you want to do
 everything in one job, you only need one of these.
 
-{: .highlight }
+:::{tip}
+See the
+[official starter workflows](https://github.com/actions/starter-workflows/tree/main/pages)
+for examples. Some other examples include:
 
-> See the
-> [official starter workflows](https://github.com/actions/starter-workflows/tree/main/pages)
-> for examples. Some other examples include:
->
-> - [CLIUtils.github.io/CLI11](https://github.com/CLIUtils/CLI11/blob/main/.github/workflows/docs.yml)
-> - [iris-hep.org](https://github.com/iris-hep/iris-hep.github.io/blob/master/.github/workflows/deploy.yml)
+- [CLIUtils.github.io/CLI11](https://github.com/CLIUtils/CLI11/blob/main/.github/workflows/docs.yml)
+- [iris-hep.org](https://github.com/iris-hep/iris-hep.github.io/blob/master/.github/workflows/deploy.yml)
+:::
 
 ### Changelog generation
 
@@ -777,5 +769,3 @@ changelog:
 [gh-changelog]: https://docs.github.com/en/repositories/releasing-projects
 
 <!-- prettier-ignore-end -->
-
-<script src="{% link assets/js/tabs.js %}"></script>

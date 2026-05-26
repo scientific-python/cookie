@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Writing documentation
-permalink: /guides/docs/
-nav_order: 4
-parent: Topical Guides
 ---
-
-{% include toc.html %}
 
 # Writing documentation
 
@@ -15,45 +9,41 @@ as reST / rST), but today we have great choices for documentation in markdown,
 the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx
 and Mkdocs, and uses the modern MyST plugin to get Markdown support.
 
-{: .note-title }
+:::{note} Popular frameworks
+There are other frameworks as well; these often are simpler, but are not as
+commonly used, and have somewhat fewer examples and plugins. They are:
 
-> Popular frameworks
->
-> There are other frameworks as well; these often are simpler, but are not as
-> commonly used, and have somewhat fewer examples and plugins. They are:
->
-> - [Sphinx](https://www.sphinx-doc.org/en/master/): A popular documentation
->   framework for scientific libraries with a history of close usage with
->   scientific tools like LaTeX. Examples include
->   [astropy](https://docs.astropy.org/en/stable/index_user_docs.html) and
->   [corner](https://docs.astropy.org/en/stable/index_user_docs.html).
-> - [MkDocs](https://www.mkdocs.org): A from-scratch new documentation system
->   based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
->   since it doesn't use docutils. Has over
->   [200 plugins](https://github.com/mkdocs/catalog) - they are much easier to
->   write than Sphinx. Example sites include [hatch](https://hatch.pypa.io),
->   [PDM](https://pdm.fming.dev),
->   [cibuildwheel](https://cibuildwheel.readthedocs.io),
->   [Textual](https://textual.textualize.io),
->   [pipx](https://pypa.github.io/pipx/),
->   [Pydantic](https://docs.pydantic.dev/latest/),
->   [Polars](https://docs.pola.rs/), and
->   [FastAPI](https://fastapi.tiangolo.com/)
-> - [JupyterBook](https://jupyterbook.org): A powerful system for rendering a
->   collection of notebooks using Sphinx internally. Can also be used for docs,
->   though, see [echopype](https://echopype.readthedocs.io).
+- [Sphinx](https://www.sphinx-doc.org/en/master/): A popular documentation
+  framework for scientific libraries with a history of close usage with
+  scientific tools like LaTeX. Examples include
+  [astropy](https://docs.astropy.org/en/stable/index_user_docs.html) and
+  [corner](https://docs.astropy.org/en/stable/index_user_docs.html).
+- [MkDocs](https://www.mkdocs.org): A from-scratch new documentation system
+  based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
+  since it doesn't use docutils. Has over
+  [200 plugins](https://github.com/mkdocs/catalog) - they are much easier to
+  write than Sphinx. Example sites include [hatch](https://hatch.pypa.io),
+  [PDM](https://pdm.fming.dev),
+  [cibuildwheel](https://cibuildwheel.readthedocs.io),
+  [Textual](https://textual.textualize.io),
+  [pipx](https://pypa.github.io/pipx/),
+  [Pydantic](https://docs.pydantic.dev/latest/),
+  [Polars](https://docs.pola.rs/), and
+  [FastAPI](https://fastapi.tiangolo.com/)
+- [JupyterBook](https://jupyterbook.org): A powerful system for rendering a
+  collection of notebooks using Sphinx internally. Can also be used for docs,
+  though, see [echopype](https://echopype.readthedocs.io).
+:::
 
-{: .warning-title }
-
-> The Future of MkDocs
->
-> The creators of `mkdocs-material` and `mkdocstrings` have come together to
-> create a new documentation package called
-> [Zensical](https://zensical.org/about/). The framework is still in alpha
-> development, but aims to simplify the documentation process, be blazing fast,
-> and move away from the limitations of MkDocs. This also means MkDocs's future
-> is uncertain, and mkdocs-material will be minimally maintained until
-> late 2026.
+:::{warning} The Future of MkDocs
+The creators of `mkdocs-material` and `mkdocstrings` have come together to
+create a new documentation package called
+[Zensical](https://zensical.org/about/). The framework is still in alpha
+development, but aims to simplify the documentation process, be blazing fast,
+and move away from the limitations of MkDocs. This also means MkDocs's future
+is uncertain, and mkdocs-material will be minimally maintained until
+late 2026.
+:::
 
 ## What to include
 
@@ -67,12 +57,10 @@ Ideally, software documentation should include:
 - **Explanations** to convey deeper understanding of why and how the software
   operates the way it does.
 
-{: .note-title }
-
-> The Diátaxis framework
->
-> This overall framework has a name, [Diátaxis][], and you can read more about
-> it if you are interested.
+:::{note} The Diátaxis framework
+This overall framework has a name, [Diátaxis][], and you can read more about
+it if you are interested.
+:::
 
 <!-- [[[cog
 from cog_helpers import code_fence, render_cookie, PyMatcher
@@ -93,8 +81,8 @@ with render_cookie(backend="hatch", docs="mkdocs") as package:
 Create `docs/` directory within your project (next to `src/`). From here, Sphinx
 and MkDocs diverge.
 
-{% tabs %}{% tab sphinx Sphinx %}
-
+::::{tab-set}
+:::{tab-item} Sphinx
 ### pyproject.toml additions
 
 Setting a `docs` dependency group looks like this:
@@ -277,9 +265,8 @@ docs, so you can add a expression to your README (`<!-- SPHINX-START -->` above)
 to mark where you want the docs portion to start.
 
 You can add the standard indices and tables at the end.
-
-{% endtab %} {% tab mkdocs MkDocs %}
-
+:::
+:::{tab-item} MkDocs
 While the cookie cutter creates a basic structure for your MkDocs (a top level
 `mkdocs.yml` file and the `docs` directory), you can also follow the official
 [Getting started](https://squidfunk.github.io/mkdocs-material/getting-started/)
@@ -477,17 +464,17 @@ nav:
   - Home: index.md
   - Python API: api.md
 ```
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 ### .readthedocs.yaml
 
 In order to use <https://readthedocs.org> to build, host, and preview your
-documentation, you must have a `.readthedocs.yaml` file {% rr RTD100 %} like
+documentation, you must have a `.readthedocs.yaml` file {rr}`RTD100` like
 this:
 
-{% tabs %} {% tab sphinx Sphinx %}
-
+::::{tab-set}
+:::{tab-item} Sphinx
 <!-- [[[cog
 with code_fence("yaml"):
     print(readthedocs_yaml)
@@ -516,9 +503,8 @@ python:
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
-
-{% endtab %} {% tab mkdocs MkDocs %}
-
+:::
+:::{tab-item} MkDocs
 <!-- [[[cog
 with code_fence("yaml"):
     print(readthedocs_yaml_mkdocs)
@@ -544,14 +530,14 @@ build:
 ```
 <!-- prettier-ignore-end -->
 <!-- [[[end]]] -->
+:::
+::::
 
-{% endtab %} {% endtabs %}
-
-This sets the Read the Docs config version (2 is required) {% rr RTD101 %}.
+This sets the Read the Docs config version (2 is required) {rr}`RTD101`.
 
 The `build` table is the modern way to specify a runner. You need an `os` (a
-modern Ubuntu should be fine) {% rr RTD102 %} and a `tools` table (we'll use
-Python {% rr RTD103 %}, several languages are supported here).
+modern Ubuntu should be fine) {rr}`RTD102` and a `tools` table (we'll use
+Python {rr}`RTD103`, several languages are supported here).
 
 Finally, we have a `commands` table which describes how to install our
 dependencies and build the documentation into the ReadTheDocs output directory.
@@ -560,8 +546,8 @@ dependencies and build the documentation into the ReadTheDocs output directory.
 
 Add a session to your `noxfile.py` to generate docs:
 
-{% tabs %} {% tab sphinx Sphinx %}
-
+::::{tab-set}
+:::{tab-item} Sphinx
 <!-- [[[cog
 with code_fence("python"):
     print(noxfile.get_source("docs"))
@@ -614,9 +600,8 @@ links, and doesn't really produce output. Finally, we collect some useful args,
 and run either the autobuild (for `--serve`) or regular build. We could have
 just added `python -m http.server` pointing at the built documentation, but
 autobuild will rebuild if you change a file while serving.
-
-{% endtab %} {% tab mkdocs MkDocs %}
-
+:::
+:::{tab-item} MkDocs
 <!-- [[[cog
 with code_fence("python"):
     print(noxfile_mkdocs.get_source("docs"))
@@ -646,13 +631,13 @@ output). By requesting a `serve` instead of a `build`, any time documentation or
 the source code is changed, the documentation will automatically update. For
 documentation on how to configure what directories are watched for changes,
 [consult the MkDocs configuration page](https://www.mkdocs.org/user-guide/configuration/#live-reloading).
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 ## API docs
 
-{% tabs %} {% tab sphinx Sphinx %}
-
+::::{tab-set}
+:::{tab-item} Sphinx
 To build API docs, you need to add the following Nox job. It will rerun
 `sphinx-apidoc` to generate the sphinx autodoc pages for each of your public
 modules.
@@ -699,9 +684,8 @@ api/<package-name-here>
 ````
 
 Note that your docstrings are still parsed as reStructuredText.
-
-{% endtab %} {% tab mkdocs MkDocs %}
-
+:::
+:::{tab-item} MkDocs
 API documentation can be built from your docstring using the `mkdocstrings`
 plugin, as referenced previously. Unlike with Sphinx, which requires a direct
 invocation of `sphinx-apidoc`, MkDocs plugins are integrated into the MkDocs
@@ -724,13 +708,13 @@ like built. In this case, we are asking to document the entire module
 `my_module` (and all classes and functions within it) which is located in
 `my_package`. You could instead ask for only a single component inside your
 module by being more specific, like `::: my_package.my_module.MyClass`.
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 ## Notebooks in docs
 
-{% tabs %} {% tab sphinx Sphinx %}
-
+::::{tab-set}
+:::{tab-item} Sphinx
 You can combine notebooks into your docs. The tool for this is `nbsphinx`. If
 you want to use it, add `nbsphinx` and `ipykernel` to your documentation
 requirements, add `"nbsphinx"` to your `conf.py`'s `extensions =` list, and add
@@ -757,9 +741,8 @@ for this to work. CI services like readthedocs usually have it installed.
 
 If you want to use Markdown instead of notebooks, you can use jupytext (see
 [here](https://nbsphinx.readthedocs.io/en/0.9.2/a-markdown-file.html)).
-
-{% endtab %} {% tab mkdocs MkDocs %}
-
+:::
+:::{tab-item} MkDocs
 You can combine notebooks into your docs. The plugin for this is
 `mkdocs-jupyter`, and configuration is detailed
 [here](https://github.com/danielfrg/mkdocs-jupyter) and you can find examples
@@ -784,8 +767,8 @@ and notebooks. If you have a directory of example python files to run, consider
 For an external example, the
 [ChainConsumer docs](https://samreay.github.io/ChainConsumer/generated/gallery/)
 show `mkdocs-gallery` in action.
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 <!-- prettier-ignore-start -->
 [diátaxis]: https://diataxis.fr/
@@ -795,5 +778,3 @@ show `mkdocs-gallery` in action.
 [sphinx-autodoc2]: https://sphinx-autodoc2.readthedocs.io/
 [`sphinx.ext.napoleon`]: https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
 <!-- prettier-ignore-end -->
-
-<script src="{% link assets/js/tabs.js %}"></script>

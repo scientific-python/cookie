@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Backports
-permalink: /patterns/backports/
-nav_order: 2
-parent: Patterns
 ---
-
-{% include toc.html %}
 
 # Backports
 

@@ -1,12 +1,6 @@
 ---
-layout: page
 title: "Code coverage"
-permalink: /guides/coverage/
-nav_order: 3
-parent: Topical Guides
 ---
-
-{% include toc.html %}
 
 # Code Coverage
 
@@ -27,20 +21,16 @@ Tools and libraries used to calculate, read, and visualize coverage reports:
 - `GitHub Actions`: allows users to automatically upload coverage reports to
   `Codecov`
 
-{: .note-title }
+:::{note} Are there any alternatives?
+Coveralls is an alternative coverage platform, but we recommend using Codecov
+because of its ease of use and integration with GitHub Actions.
+:::
 
-> Are there any alternatives?
->
-> Coveralls is an alternative coverage platform, but we recommend using Codecov
-> because of its ease of use and integration with GitHub Actions.
-
-{: .highlight-title }
-
-> Should increasing the coverage value be my top priority?
->
-> A low coverage percentage will definitely motivate you to add more tests, but
-> adding weak tests just for coverage's sake is not a good idea. The tests
-> should test your codebase thoroughly and should not be unreliable.
+:::{tip} Should increasing the coverage value be my top priority?
+A low coverage percentage will definitely motivate you to add more tests, but
+adding weak tests just for coverage's sake is not a good idea. The tests
+should test your codebase thoroughly and should not be unreliable.
+:::
 
 ### Running your tests with coverage
 
@@ -53,8 +43,8 @@ directly is hidden away from normal use, so we recommend that, but will show
 both methods below. If you are not running `pytest`, but instead are running an
 example or a script, you have to use `coverage` directly.
 
-{% tabs %} {% tab cov coverage %}
-
+::::{tab-set}
+:::{tab-item} coverage
 Make sure you install `coverage[toml]`.
 
 `coverage` has several commands; the most important one is `coverage run`. This
@@ -75,9 +65,8 @@ coverage report
 
 This looks for a `.coverage` file and displays the result. There are many output
 formats for reports.
-
-{% endtab %} {% tab pycov pytest-cov %}
-
+:::
+:::{tab-item} pytest-cov
 Make sure you install `pytest-cov`.
 
 `pytest` allows users to pass the `--cov` option to automatically invoke
@@ -98,8 +87,8 @@ See the [docs](https://pytest-cov.readthedocs.io/en/latest/) for more options.
 Coverage pytest arguments can be placed in your pytest configuration file or in
 your task runner. It also will (mostly) respect the coverage configuration,
 shown below.
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 ### Configuring coverage
 
@@ -158,8 +147,8 @@ manually produce multiple files from task runner jobs.
 
 Here's an example nox job:
 
-{% tabs %} {% tab cov coverage %}
-
+::::{tab-set}
+:::{tab-item} coverage
 ```python
 @nox.session(python=ALL_PYTHONS)
 def tests(session: nox.Session) -> None:
@@ -174,9 +163,8 @@ def tests(session: nox.Session) -> None:
         env={"COVERAGE_FILE": coverage_file},
     )
 ```
-
-{% endtab %} {% tab pycov pytest-cov %}
-
+:::
+:::{tab-item} pytest-cov
 ```python
 @nox.session(python=ALL_PYTHONS)
 def tests(session: nox.Session) -> None:
@@ -190,8 +178,8 @@ def tests(session: nox.Session) -> None:
         env={"COVERAGE_FILE": coverage_file},
     )
 ```
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 #### Merging and reporting
 
@@ -280,5 +268,3 @@ loss of coverage to fail. See the
 TODO -->
 
 [codecov/codecov-action]: https://github.com/codecov/codecov-action
-
-<script src="{% link assets/js/tabs.js %}"></script>

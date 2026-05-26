@@ -1,9 +1,5 @@
 ---
-layout: page
 title: Tutorials
-permalink: /tutorials/
-nav_order: 1
-has_children: true
 ---
 
 # Tutorials
@@ -20,6 +16,6 @@ start off on the right foot.
 Keeping in mind that too much software infrastructure can be overwhelming to
 those who haven't yet encountered the need for it, we introduce only the core
 essentials in this opinionated tutorial. From there, we recommend looking
-through the section on [principles]({% link pages/principles/index.md %}). As
+through the section on [principles](pages/principles/index). As
 your project grows you may find some good use for the more specific and advanced
-topics covered in the [guides]({% link pages/guides/index.md %}).
+topics covered in the [guides](pages/guides/index).

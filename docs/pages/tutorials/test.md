@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Test
-permalink: /tutorials/test/
-nav_order: 4
-parent: Tutorials
 ---
-
-{% include toc.html %}
 
 # Test
 
@@ -152,6 +146,6 @@ suggestions, see our [pytest guide][].
 <!-- prettier-ignore-start -->
 
 [pytest documentation]: https://docs.pytest.org/en/latest/
-[pytest guide]: {% link pages/guides/pytest.md %}
+[pytest guide]: pages/guides/pytest
 
 <!-- prettier-ignore-end -->

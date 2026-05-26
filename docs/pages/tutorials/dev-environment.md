@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Intro to development
-permalink: /tutorials/dev-environment/
-nav_order: 1
-parent: Tutorials
 ---
-
-{% include toc.html %}
 
 # Intro to development
 
@@ -49,19 +43,18 @@ environment.
 
 To activate the virtual environment, type:
 
-{% tabs %} {% tab unix Linux/macOS %}
-
+::::{tab-set}
+:::{tab-item} Linux/macOS
 ```bash
 . .venv/bin/activate
 ```
-
-{% endtab %} {% tab windows Windows %}
-
+:::
+:::{tab-item} Windows
 ```bat
 .venv\bin\Activate.bat
 ```
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 You need to do this step every time you open a new shell (i.e. Terminal, Command
 Prompt) to work on your project. The `.` is short for `source`, which runs the
@@ -72,33 +65,27 @@ of text to your prompt so you don't forget that you are in an environment.
 The activation script installs a function `deactivate`; type that at any time to
 leave the environment (or just close your shell).
 
-{: .note-title }
+:::{note} Optional Alternative
+Alternatively, you can use the `virtualenv` package, which has the same syntax
+as `venv` and is a little faster. Unlike `venv`, it is not built in to Python;
+it has to be installed as `pip install virtualenv`.
+:::
 
-> Optional Alternative
->
-> Alternatively, you can use the `virtualenv` package, which has the same syntax
-> as `venv` and is a little faster. Unlike `venv`, it is not built in to Python;
-> it has to be installed as `pip install virtualenv`.
+:::{tip} For Advanced Users Using Custom Shells
+If you like a different shell, like fish, there are several `activate`
+scripts; the default one expects a bash-like shell.
+:::
 
-{: .highlight-title }
+:::{note} Fast alternative
+You can also consider the [uv][] package, which is much, much faster version
+of pip and venv implemented in Rust. Just put `uv` in front of the commands
+you'd normally use; as long as you use venvs, it should be nearly the same.
+You can use `--system` to mimic pip, otherwise it uses the active virtualenv
+or a `.venv` folder. `uv venv` will default to a `.venv` folder.
 
-> For Advanced Users Using Custom Shells
->
-> If you like a different shell, like fish, there are several `activate`
-> scripts; the default one expects a bash-like shell.
-
-{: .note-title }
-
-> Fast alternative
->
-> You can also consider the [uv][] package, which is much, much faster version
-> of pip and venv implemented in Rust. Just put `uv` in front of the commands
-> you'd normally use; as long as you use venvs, it should be nearly the same.
-> You can use `--system` to mimic pip, otherwise it uses the active virtualenv
-> or a `.venv` folder. `uv venv` will default to a `.venv` folder.
->
-> This also supports `--exclude-newer DATE`, which allows you to resolve as if
-> you were at some past point in time.
+This also supports `--exclude-newer DATE`, which allows you to resolve as if
+you were at some past point in time.
+:::
 
 [uv]: https://github.com/astral-sh/uv
 
@@ -156,5 +143,3 @@ setup time quite quickly when developing.
 [visual studio code]: https://code.visualstudio.com/
 [`vim`]: https://www.vim.org/
 [`emacs`]: https://www.gnu.org/software/emacs/
-
-<script src="{% link assets/js/tabs.js %}"></script>

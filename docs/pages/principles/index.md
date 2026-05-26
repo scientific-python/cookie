@@ -1,9 +1,5 @@
 ---
-layout: page
 title: Principles
-permalink: /principles/
-nav_order: 3
-has_children: true
 ---
 
 # Principles
@@ -15,8 +11,8 @@ read and maintain code.
 
 <!-- prettier-ignore-start -->
 
-[Process recommendations]: {% link pages/principles/process.md %}
-[Design recommendations]: {% link pages/principles/design.md %}
+[Process recommendations]: pages/principles/process
+[Design recommendations]: pages/principles/design
 
 
 <!-- prettier-ignore-end -->

@@ -1,13 +1,7 @@
 ---
-layout: page
 title: "GHA: Binary wheels"
-permalink: /guides/gha-wheels/
-nav_order: 12
-parent: Topical Guides
-custom_title: GitHub Actions for Binary Wheels
+short_title: GitHub Actions for Binary Wheels
 ---
-
-{% include toc.html %}
 
 # GitHub Actions: Binary wheels
 
@@ -47,7 +41,6 @@ Finally, if you change the workflow itself in a PR, then rebuild the wheels too.
 [workflow_dispatch]: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
 
 ### Useful suggestion:
-{: .no_toc }
 <!-- prettier-ignore-end -->
 
 Since these variables will be used by all jobs, you could make them available in
@@ -168,10 +161,10 @@ You can skip specifying the `build[uv]` build-frontend option and pre-installing
 
 ## Publishing
 
-Trusted Publishing is more secure and recommended {% rr GH105 %}:
+Trusted Publishing is more secure and recommended {rr}`GH105`:
 
-{% tabs %} {% tab oidc Trusted Publishing (recommended) %}
-
+::::{tab-set}
+:::{tab-item} Trusted Publishing (recommended)
 {% raw %}
 
 ```yaml
@@ -210,9 +203,8 @@ accept your initial package publish.
 
 We are also generating artifact attestations, which can allow users to verify
 that the artifacts were built on your actions.
-
-{% endtab %} {% tab token Token %}
-
+:::
+:::{tab-item} Token
 {% raw %}
 
 ```yaml
@@ -238,8 +230,8 @@ If you cannot use Trusted Publishing, this publishes to PyPI with a token.
 You'll need to go to PyPI, generate a token for your user, and put it into
 `pypi_password` on your repo's secrets page. Once you have a project, you should
 delete your user-scoped token and generate a new project-scoped token.
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 If you have multiple jobs, you will want to collect your artifacts from above.
 If you only have one job, you can combine this into a single job like we did for
@@ -248,16 +240,14 @@ multiple places, you can set `skip_existing` (but generally it's better to not
 try to upload the same file from two places - you can trick Travis into avoiding
 the sdist, for example).
 
-{: .note-title }
-
-> Other architectures
->
-> GitHub Actions supports ARM on Linux and Windows as well. On Travis,
-> `cibuildwheel` even has the ability to create rarer architectures like PowerPC
-> builds natively. IBM Z builds are also available but in beta. However, due to
-> Travis CI's recent dramatic reduction on open source support, emulating these
-> architectures on GHA or Azure is probably better. Maybe look into Cirrus CI,
-> which has some harder-to-find architectures.
+:::{note} Other architectures
+GitHub Actions supports ARM on Linux and Windows as well. On Travis,
+`cibuildwheel` even has the ability to create rarer architectures like PowerPC
+builds natively. IBM Z builds are also available but in beta. However, due to
+Travis CI's recent dramatic reduction on open source support, emulating these
+architectures on GHA or Azure is probably better. Maybe look into Cirrus CI,
+which has some harder-to-find architectures.
+:::
 
 <!-- prettier-ignore-start -->
 
@@ -268,5 +258,3 @@ the sdist, for example).
 [pypi trusted publisher docs]: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
 
 <!-- prettier-ignore-end -->
-
-<script src="{% link assets/js/tabs.js %}"></script>

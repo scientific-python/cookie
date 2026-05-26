@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Task runners
-permalink: /guides/tasks/
-nav_order: 30
-parent: Topical Guides
 ---
-
-{% include toc.html %}
 
 # Task runners
 
@@ -45,7 +39,7 @@ temporary environment each time. And, if you pass `-R` when rerunning it, you
 can skip the setup and install steps, making it nearly as fast as directly
 running the commands!
 
-{% rr PY007 %} You _should_ use a task runner to make it easy and simple for new
+{rr}`PY007` You _should_ use a task runner to make it easy and simple for new
 contributors to run things. You _should_ use a task runner to make specialized
 developer tasks easy. You _should_ use a task runner to avoid making single-use
 virtual environments for docs and other rarely run tasks. Nox is recommended,
@@ -261,7 +255,7 @@ $ nox -s docs -- --serve
 ```
 
 Notice that we set `default=False` so that docs are not built every time nox is
-run without arguments. {% rr NOX103 %}
+run without arguments. {rr}`NOX103`
 
 #### Build (pure Python)
 
@@ -308,7 +302,7 @@ def build(session: nox.Session) -> None:
 The [uv](https://github.com/astral-sh/uv) project is a Rust reimplementation of
 pip, pip-tools, and venv that is very, very fast. You can tell nox to use `uv`
 if it is on your system by adding the following to your `noxfile.py`
-{% rr NOX102 %}:
+{rr}`NOX102`:
 
 ```python
 nox.needs_version = ">=2024.3.2"
@@ -326,7 +320,7 @@ Check your jobs with `uv`; most things do not need to change. The main
 difference is `uv` doesn't install `pip` unless you ask it to. If you want to
 interact with uv, nox might be getting uv from it's environment instead of the
 system environment, so you can install `uv` if `shutil.which("uv")` returns
-`None`. You should also set a minimum version of nox. {% rr NOX101 %}
+`None`. You should also set a minimum version of nox. {rr}`NOX101`
 
 ### Running without nox or requiring dependencies
 
@@ -350,14 +344,14 @@ if __name__ == "__main__":
     nox.main()
 ```
 
-The script block then specifies that nox is required {% rr NOX201 %}. If you
+The script block then specifies that nox is required {rr}`NOX201`. If you
 want other dependencies here, those will also be installed before the file is
 run. Older versions of nox still need the `nox.needs_version` line to keep nice
 error messages.
 
-The first line is a shebang line {% rr NOX202 %}, which allows this file to be
+The first line is a shebang line {rr}`NOX202`, which allows this file to be
 run directly if it is made executable. You can put any runner here; uv is shown.
-You also need a main block {% rr NOX203 %} to allow nox to be run when this file
+You also need a main block {rr}`NOX203` to allow nox to be run when this file
 is executed directly.
 
 ### Examples

@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Packaging
-permalink: /tutorials/packaging/
-nav_order: 3
-parent: Tutorials
 ---
-
-{% include toc.html %}
 
 # Packaging
 
@@ -137,6 +131,6 @@ For more about packaging, also see our [packaging guide][].
 <!-- prettier-ignore-start -->
 
 [version control with git]: https://swcarpentry.github.io/git-novice/
-[packaging guide]: {% link pages/guides/packaging_simple.md %}
+[packaging guide]: pages/guides/packaging_simple
 
 <!-- prettier-ignore-end -->

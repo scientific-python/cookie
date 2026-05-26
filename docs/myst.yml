@@ -1,0 +1,61 @@
+version: 1
+extends: config/scientific-python.yml
+
+project:
+  title: Scientific Python Development Guide
+  github: https://github.com/scientific-python/cookie
+  plugins:
+    - rr-role.mjs
+
+  toc:
+    - file: pages/index
+    - title: Tutorials
+      children:
+        - file: pages/tutorials/index
+        - file: pages/tutorials/dev-environment
+        - file: pages/tutorials/module
+        - file: pages/tutorials/packaging
+        - file: pages/tutorials/test
+        - file: pages/tutorials/docs
+    - title: Topical Guides
+      children:
+        - file: pages/guides/index
+        - file: pages/guides/pytest
+        - file: pages/guides/coverage
+        - file: pages/guides/docs
+        - file: pages/guides/packaging_simple
+        - file: pages/guides/packaging_compiled
+        - file: pages/guides/packaging_classic
+        - file: pages/guides/style
+        - file: pages/guides/mypy
+        - file: pages/guides/gha_basic
+        - file: pages/guides/gha_pure
+        - file: pages/guides/gha_wheels
+        - file: pages/guides/tasks
+        - file: pages/guides/repo_review
+    - title: Principles
+      children:
+        - file: pages/principles/index
+        - file: pages/principles/process
+        - file: pages/principles/design
+        - file: pages/principles/testing
+    - title: Patterns
+      children:
+        - file: pages/patterns/index
+        - file: pages/patterns/exports
+        - file: pages/patterns/backports
+        - file: pages/patterns/data_files
+
+site:
+  nav:
+    - title: Scientific Python
+      url: https://scientific-python.org
+    - title: Learn
+      url: https://learn.scientific-python.org
+    - title: Cookie
+      url: https://github.com/scientific-python/cookie
+  options:
+    favicon: assets/favicon.ico
+    logo: assets/images/logo.svg
+    logo_text: Scientific Python Development Guide
+    style: assets/css/site.css

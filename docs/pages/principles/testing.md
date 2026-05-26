@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Testing recommendations
-permalink: /principles/testing/
-nav_order: 2
-parent: Principles
 ---
-
-{% include toc.html %}
 
 # Testing recommendations
 
@@ -77,8 +71,8 @@ the test-case to make sure it fails when the code is broken.
 
 A good place to start writing tests is from the perspective of a user of your
 module or library, as described in the [Test
-Tutorial]({% link pages/tutorials/test.md %}), and [Testing with pytest
-guide]({% link pages/guides/pytest.md %}). These tests follow the "Detroit
+Tutorial](pages/tutorials/test), and [Testing with pytest
+guide](pages/guides/pytest). These tests follow the "Detroit
 School", focusing on behavior, avoiding testing of private attributes,
 minimizing the use of mocks/patches/test-doubles.
 
@@ -90,14 +84,12 @@ minimizing the use of mocks/patches/test-doubles.
   (edge-case and exhaustive input testing will be handled in a separate test
   suite)
 
-{: .highlight-title }
-
-> A note to new test developers:
->
-> This is a good place to pause and go write some tests. The rest of these
-> principles apply to more advanced test development. As you gain experience and
-> your test suite(s) grow, taxonomy of test cases, the and the use/need for
-> different kinds of tests will become more clear.
+:::{tip} A note to new test developers:
+This is a good place to pause and go write some tests. The rest of these
+principles apply to more advanced test development. As you gain experience and
+your test suite(s) grow, taxonomy of test cases, the and the use/need for
+different kinds of tests will become more clear.
+:::
 
 ## Test Suites
 
@@ -399,7 +391,7 @@ run unit tests in your source folder, from your package root, use
 your source repository), use `pytest --pyargs {package name}`.
 
 You can set the default test path in `pyproject.toml`, see: [Configuring
-pytest]({% link pages/guides/pytest.md %}#configuring-pytest)
+pytest](pages/guides/pytest#configuring-pytest)
 
 We recommend configuring pytest to run ONLY your fastest, least demanding test
 suite by default.

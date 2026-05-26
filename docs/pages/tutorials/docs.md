@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Writing documentation
-permalink: /tutorials/docs/
-nav_order: 5
-parent: Tutorials
 ---
-
-{% include toc.html %}
 
 # Writing documentation
 
@@ -200,7 +194,7 @@ Or you can generate a table that links out to documentation for each object.
 ```
 ````
 
-See the [guide]({% link pages/guides/docs.md %}) for more information on how to
+See the [guide](pages/guides/docs) for more information on how to
 integrate this into a package, and setup for nox.
 
 <!-- prettier-ignore-start -->
@@ -211,5 +205,5 @@ integrate this into a package, and setup for nox.
 [sphinx-autodoc2]: https://sphinx-autodoc2.readthedocs.io/
 [mkdocs]: https://www.mkdocs.org/
 [mkdocs-material]: https://squidfunk.github.io/mkdocs-material/
-[documentation guide]: {% link pages/guides/docs.md %}
+[documentation guide]: pages/guides/docs
 <!-- prettier-ignore-end -->

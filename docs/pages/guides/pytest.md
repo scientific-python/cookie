@@ -1,12 +1,6 @@
 ---
-layout: page
 title: "Testing with pytest"
-permalink: /guides/pytest/
-nav_order: 2
-parent: Topical Guides
 ---
-
-{% include toc.html %}
 
 # Testing with pytest
 
@@ -29,17 +23,15 @@ in using pytest. The goals of writing good tests are:
 - Reporting: when things break, you should get good information about what
   broke.
 
-{: .note-title }
-
-> What about other choices?
->
-> The alternative library, `nose`, has been abandoned in favor of `pytest`,
-> which can run nose-style tests. The standard library has a test suite as well,
-> but it's extremely verbose and complex; and since "developers" run tests, your
-> test requirements don't affect users. And `pytest` can run stdlib style
-> testing too. So just use `pytest`. All major packages use it too, including
-> `NumPy`. Most other choices, like [Hypothesis][], are related to `pytest` and
-> just extend it.
+:::{note} What about other choices?
+The alternative library, `nose`, has been abandoned in favor of `pytest`,
+which can run nose-style tests. The standard library has a test suite as well,
+but it's extremely verbose and complex; and since "developers" run tests, your
+test requirements don't affect users. And `pytest` can run stdlib style
+testing too. So just use `pytest`. All major packages use it too, including
+`NumPy`. Most other choices, like [Hypothesis][], are related to `pytest` and
+just extend it.
+:::
 
 ### Basic test structure
 
@@ -66,13 +58,13 @@ This looks simple, but it is doing several things:
 ### Configuring pytest
 
 pytest supports configuration in `pytest.ini`, `setup.cfg`, or, since version 6,
-`pyproject.toml` {% rr PP301 %}, or, since version 9, `pytest.toml` or
+`pyproject.toml` {rr}`PP301`, or, since version 9, `pytest.toml` or
 `.pytest.toml`. Remember, pytest is a developer requirement, not a user one, so
 always require 6+ (or 9+) and use `pyproject.toml` or the pytest TOML ones. This
 is an example configuration:
 
-{% tabs %} {% tab conf-modern Pytest 9+ %}
-
+::::{tab-set}
+:::{tab-item} Pytest 9+
 ```toml
 [tool.pytest]
 minversion = "9.0"
@@ -84,9 +76,8 @@ testpaths = [
   "tests",
 ]
 ```
-
-{% endtab %} {% tab conf-classic Pytest 6+ %}
-
+:::
+:::{tab-item} Pytest 6+
 ```toml
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -98,25 +89,25 @@ testpaths = [
   "tests",
 ]
 ```
+:::
+::::
 
-{% endtab %} {% endtabs %}
-
-{% rr PP302 %} The `minversion` will print a nicer error if your `pytest` is too
+{rr}`PP302` The `minversion` will print a nicer error if your `pytest` is too
 old (though, ironically, it won't read this if the version is too old, so
 setting "6" or less in `pyproject.toml` is rather pointless, similarly for 9 if
 using the new config location). The `addopts` setting will add whatever you put
-there to the command line when you run; {% rr PP308 %} `-ra` will print a
+there to the command line when you run; {rr}`PP308` `-ra` will print a
 summary "r"eport of "a"ll results, which gives you a quick way to review what
 tests failed and were skipped, and why. `--showlocals` will print locals in
 tracebacks - depending on your tests, you might or might not like this one.
-{% rr PP307 %} `--strict-markers` will make sure you don't try to use an
-unspecified fixture. {% rr PP306 %} And `--strict-config` will error if you make
-a mistake in your config. {% rr PP305 %} `xfail_strict` will change the default
+{rr}`PP307` `--strict-markers` will make sure you don't try to use an
+unspecified fixture. {rr}`PP306` And `--strict-config` will error if you make
+a mistake in your config. {rr}`PP305` `xfail_strict` will change the default
 for `xfail` to fail the tests if it doesn't fail - you can still override
-locally in a specific xfail for a flaky failure. {% rr PP309 %}
+locally in a specific xfail for a flaky failure. {rr}`PP309`
 `filter_warnings` will cause all warnings to be errors (you can add allowed
-warnings here too, see below). {% rr PP304 %} `log_level` will report `INFO` and
-above log messages on a failure. {% rr PP303 %} Finally, `testpaths` will limit
+warnings here too, see below). {rr}`PP304` `log_level` will report `INFO` and
+above log messages on a failure. {rr}`PP303` Finally, `testpaths` will limit
 `pytest` to just looking in the folders given - useful if it tries to pick up
 things that are not tests from other directories.
 [See the docs](https://docs.pytest.org/en/stable/customize.html) for more
@@ -392,5 +383,3 @@ redirects to the standard library [unittest.mock][].
 [pytest]: https://docs.pytest.org
 [pytest-mock]: https://pypi.org/project/pytest-mock/
 [unittest.mock]: https://docs.python.org/3/library/unittest.mock.html
-
-<script src="{% link assets/js/tabs.js %}"></script>

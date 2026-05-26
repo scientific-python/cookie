@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Classic packaging
-permalink: /guides/packaging-classic/
-nav_order: 7
-parent: Topical Guides
 ---
-
-{% include toc.html %}
 
 # Classic packaging
 
@@ -18,29 +12,29 @@ outlined as well.
 There are several popular packaging systems. This guide covers the old
 configuration style for [Setuptools][]. Unless you really need it, you should be
 using the modern style described in [Simple
-Packaging]({% link pages/guides/packaging_simple.md %}). The modern style is
+Packaging](pages/guides/packaging_simple). The modern style is
 guided by Python Enhancement Proposals (PEPs), and is more stable than the
 setuptools-specific mechanisms that evolve over the years. This page is kept to
 help users with legacy code (and hopefully upgrade it).
 
-{: .note }
+:::{note}
+Raw source lives in git and has a `pyproject.toml` and/or a `setup.py`. You
+_can_ install directly from git via pip, but normally users install from
+distributions hosted on PyPI. There are three options: **A)** A source
+package, called an SDist and has a name that ends in `.tar.gz`. This is a copy
+of the GitHub repository, stripped of a few specifics like CI files, and
+possibly with submodules included (if there are any). **B)** A pure python
+wheel, which ends in `.whl`; this is only possible if there are no compiled
+extensions in the library. This does _not_ contain a setup.py, but rather a
+`PKG_INFO` file that is rendered from setup.py (or from another build system).
+**C)** If not pure Python, a collection of wheels for every binary platform,
+generally one per supported Python version and OS as well.
 
-> Raw source lives in git and has a `pyproject.toml` and/or a `setup.py`. You
-> _can_ install directly from git via pip, but normally users install from
-> distributions hosted on PyPI. There are three options: **A)** A source
-> package, called an SDist and has a name that ends in `.tar.gz`. This is a copy
-> of the GitHub repository, stripped of a few specifics like CI files, and
-> possibly with submodules included (if there are any). **B)** A pure python
-> wheel, which ends in `.whl`; this is only possible if there are no compiled
-> extensions in the library. This does _not_ contain a setup.py, but rather a
-> `PKG_INFO` file that is rendered from setup.py (or from another build system).
-> **C)** If not pure Python, a collection of wheels for every binary platform,
-> generally one per supported Python version and OS as well.
->
-> Developer requirements (users of A or git) are generally higher than the
-> requirements to use B or C. Poetry and optionally flit create SDists that
-> include a `setup.py`, and all alternate packing systems produce "normal"
-> wheels.
+Developer requirements (users of A or git) are generally higher than the
+requirements to use B or C. Poetry and optionally flit create SDists that
+include a `setup.py`, and all alternate packing systems produce "normal"
+wheels.
+:::
 
 ## Package structure (medium priority)
 
@@ -85,7 +79,7 @@ these "[hypermodern][]" packaging tools is growing in scientific Python
 packages. All tools build the same wheels (and they often build setuptools
 compliant SDists, as well).
 
-{% rr PP003 %} Note that `"wheel"` is never required; it was injected
+{rr}`PP003` Note that `"wheel"` is never required; it was injected
 automatically by setuptools in older versions, and is no longer used at all.
 
 ### Special additions: NumPy
@@ -108,18 +102,18 @@ developers that tracks the
 Otherwise, you would have to list the earliest version of NumPy that had support
 for each Python version here.
 
-{: .note }
+:::{note}
+Modern versions of NumPy (1.25+) allow you to target older versions when
+building, which is _highly_ recommended, and this will become required in
+NumPy 2.0. Now you add:
 
-> Modern versions of NumPy (1.25+) allow you to target older versions when
-> building, which is _highly_ recommended, and this will become required in
-> NumPy 2.0. Now you add:
->
-> ```cpp
-> #define NPY_TARGET_VERSION NPY_1_22_API_VERSION
-> ```
->
-> (Where that number is whatever version you support as a minimum) then make
-> sure you build with NumPy 1.25+ (or 2.0+ when it comes out).
+```cpp
+#define NPY_TARGET_VERSION NPY_1_22_API_VERSION
+```
+
+(Where that number is whatever version you support as a minimum) then make
+sure you build with NumPy 1.25+ (or 2.0+ when it comes out).
+:::
 
 ## Versioning (medium/high priority)
 
@@ -206,11 +200,11 @@ env:
 If you fill in the override version setting when triggering a manual workflow
 run, that version will be forced, otherwise, it works as normal.
 
-{: .note }
-
-> Make sure you have a good gitignore, probably starting from
-> [GitHub's Python one](https://github.com/github/gitignore/blob/main/Python.gitignore)
-> or using a [generator site](https://www.toptal.com/developers/gitignore).
+:::{note}
+Make sure you have a good gitignore, probably starting from
+[GitHub's Python one](https://github.com/github/gitignore/blob/main/Python.gitignore)
+or using a [generator site](https://www.toptal.com/developers/gitignore).
+:::
 
 You should also add these two files:
 
@@ -324,7 +318,7 @@ where = src
 #     extern
 ```
 
-{% rr SCFG001 %} Note that all keys use underscores; using a dash will cause
+{rr}`SCFG001` Note that all keys use underscores; using a dash will cause
 warnings and eventually failures.
 
 And, a possible `setup.py`; though in recent versions of pip, there no longer is

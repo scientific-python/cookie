@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Design recommendations
-permalink: /principles/design/
-nav_order: 2
-parent: Principles
 ---
-
-{% include toc.html %}
 
 # Design recommendations
 
@@ -44,13 +38,13 @@ follow the same principles as other code, like modularity, and be well tested.
 If you can get away with writing functions processing existing datatypes like a
 DataFrame, do so.
 
-{: .highlight }
+:::{tip}
+It is better to have 100 functions operate on one data structure than 10
+functions on 10 data structures.
 
-> It is better to have 100 functions operate on one data structure than 10
-> functions on 10 data structures.
->
-> -- From ACM's SIGPLAN publication, (September, 1982), Article "Epigrams in
-> Programming", by Alan J. Perlis of Yale University.
+-- From ACM's SIGPLAN publication, (September, 1982), Article "Epigrams in
+Programming", by Alan J. Perlis of Yale University.
+:::
 
 A popular talk, ["Stop Writing Classes"][], illustrates how some situations that
 _seem_ to lend themselves to object-oriented programming are much more simply
