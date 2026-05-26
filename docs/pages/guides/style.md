@@ -17,7 +17,15 @@ custom_title: Style and static checks
 to check code style. The original, `pre-commit`, has support for more languages,
 but `prek` is a faster Rust rewrite that supports most real world usage.
 
-{% tabs runner %} {% tab pre-commit Pre-commit %}
+{% tabs runner %} {% tab prek Prek %}
+
+Prek can be installed through `brew` (macOS) or `pipx/uv` (anywhere). There are
+two modes to use it locally; you can check manually with `prek run` (changes
+only) or `prek run -a` (all). You can omit the `run`, as well; such as
+`prek -a`. You can also run `prek install` to add checks as a git pre-commit
+hook.
+
+{% endtab %} {% tab pre-commit Pre-commit %}
 
 Pre-commit can be installed through `brew` (macOS) or `pipx/uv` (anywhere).
 There are two modes to use it locally; you can check manually with
@@ -27,14 +35,6 @@ gets its name).
 
 Pre-commit's setup is much slower than prek, but you can install `pre-commit-uv`
 with pre-commit to speed up the setup time quite a bit.
-
-{% endtab %} {% tab prek Prek %}
-
-Prek can be installed through `brew` (macOS) or `pipx/uv` (anywhere). There are
-two modes to use it locally; you can check manually with `prek run` (hanges
-only) or `prek run -a` (all). You can omit the `run`, as well; such as
-`prek -a`. You can also run `prek install` to add checks as a git pre-commit
-hook.
 
 {% endtab %} {% endtabs %}
 
@@ -46,8 +46,6 @@ It's worth trying the install command, even if you've tried and failed to set up
 a custom pre-commit hook before; it's quite elegant and does not add or commit
 the changes, it just makes the changes and allows you to check and add them. You
 can always override the hook with `-n`.
-
-[pre-commit]: https://pre-commit.com
 
 {% rr PC100 %} Here is a minimal `.pre-commit-config.yaml` file with some handy
 options:
@@ -1047,6 +1045,8 @@ You also might like the following hook, which cleans Jupyter outputs:
 [schemastore]: https://schemastore.org
 [typos]: https://github.com/crate-ci/typos
 [typos-ref]: https://github.com/crate-ci/typos/blob/master/docs/reference.md
+[pre-commit]: https://pre-commit.com
+[prek]: https://prek.j178.dev
 
 <!-- prettier-ignore-end -->
 
