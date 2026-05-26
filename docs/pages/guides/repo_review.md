@@ -1,8 +1,5 @@
 ---
 title: Repo-Review
-html_head_extra: |
-  <script src="https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js" crossorigin></script>
-  <link rel="modulepreload" href="/assets/js/repo-review-app.min.js" />
 ---
 
 # Repo-Review
@@ -24,32 +21,6 @@ pipx run 'sp-repo-review[cli]' <path to repo>
 
 ---
 
-```{raw} html
-<div id="root">Loading (requires javascript and WebAssembly)...</div>
-<style>
-  .main-content ul > li::before {
-    position: inherit;
-    margin-left: none;
-    color: none;
-    content: none;
-  }
-  .main-content ul {
-    padding-left: none;
-  }
-</style>
-<script type="module">
-  import { mountApp } from "/assets/js/repo-review-app.min.js";
-
-  mountApp({
-    header: false,
-    deps: [
-      "repo-review~=1.0.0",
-      "sp-repo-review==2026.04.04",
-      "validate-pyproject-schema-store==2026.04.03",
-      "validate-pyproject[all]~=0.25.0",
-    ],
-  });
-</script>
-```
-
-[Open in new page](https://scientific-python.github.io/repo-review/).
+:::{iframe} https://scientific-python.github.io/repo-review/
+:width: 100%
+:::

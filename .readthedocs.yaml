@@ -12,6 +12,5 @@ build:
     nodejs: "22"
 
   commands:
-    - ./helpers/fetch_repo_review_app.sh
     - npm install -g mystmd
     - cd docs && myst build --html --output _readthedocs/html
