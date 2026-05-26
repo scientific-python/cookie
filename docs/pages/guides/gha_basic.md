@@ -57,7 +57,7 @@ run on PRs targeting those branches only).
 
 If you use [prek][] or [pre-commit][] in CI, you can run it directly in GitHub
 Actions. Prek is a faster Rust rewrite of pre-commit that supports most real
-world usage and supports the same configuraiton and hooks.
+world usage and supports the same configuration and hooks.
 
 {% tabs runner %} {% tab prek Prek %}
 
