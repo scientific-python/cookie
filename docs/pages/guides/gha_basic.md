@@ -55,7 +55,7 @@ run on PRs targeting those branches only).
 
 ## Pre-commit
 
-{% rr PY006 %} If you use [pre-commit][] (or [prek][]) in CI, you can run it
+If you use [pre-commit][] (or [prek][]) in CI, you can run it
 directly in GitHub Actions. Prek is a faster Rust rewrite of pre-commit that
 supports most real world usage.
 
