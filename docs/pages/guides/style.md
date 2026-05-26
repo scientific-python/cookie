@@ -47,8 +47,6 @@ a custom pre-commit hook before; it's quite elegant and does not add or commit
 the changes, it just makes the changes and allows you to check and add them. You
 can always override the hook with `-n`.
 
-[pre-commit]: https://pre-commit.com
-
 {% rr PC100 %} Here is a minimal `.pre-commit-config.yaml` file with some handy
 options:
 
@@ -1047,6 +1045,8 @@ You also might like the following hook, which cleans Jupyter outputs:
 [schemastore]: https://schemastore.org
 [typos]: https://github.com/crate-ci/typos
 [typos-ref]: https://github.com/crate-ci/typos/blob/master/docs/reference.md
+[pre-commit]: https://pre-commit.com
+[prek]: https://prek.j178.dev
 
 <!-- prettier-ignore-end -->
 

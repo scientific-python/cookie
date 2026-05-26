@@ -53,13 +53,15 @@ you use a develop branch, you probably will want to include that. You can also
 specify specific branches for pull requests instead of running on all PRs (will
 run on PRs targeting those branches only).
 
-## Pre-commit
+## Prek / Pre-commit
 
-If you use [pre-commit][] (or [prek][]) in CI, you can run it directly in GitHub
+If you use [prek][] or [pre-commit][] in CI, you can run it directly in GitHub
 Actions. Prek is a faster Rust rewrite of pre-commit that supports most real
-world usage.
+world usage and supports the same configuraiton and hooks.
 
 {% tabs runner %} {% tab prek Prek %}
+
+Prek can run using the official action:
 
 ```yaml
 lint:
