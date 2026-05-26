@@ -55,11 +55,24 @@ run on PRs targeting those branches only).
 
 ## Pre-commit
 
-If you use [pre-commit](https://pre-commit.com) (and you should), and you don't
-want to / can't use [pre-commit.ci](https://pre-commit.ci) yet, then this is a
-job that will check pre-commit for you:
+{% rr PY006 %} If you use [pre-commit][] (or [prek][]) in CI, you can run it
+directly in GitHub Actions. Prek is a faster Rust rewrite of pre-commit that
+supports most real world usage.
 
-{% raw %}
+{% tabs runner %} {% tab prek Prek %}
+
+```yaml
+lint:
+  name: Lint
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v6
+    - uses: j178/prek-action@v2
+```
+
+{% endtab %} {% tab pre-commit Pre-commit %}
+
+Pre-commit can run using the official action:
 
 ```yaml
 lint:
@@ -73,7 +86,7 @@ lint:
     - uses: pre-commit/action@v3.0.1
 ```
 
-{% endraw %}
+{% endtab %} {% endtabs %}
 
 If you do use [pre-commit.ci](https://pre-commit.ci), but you need this job to
 run a manual check, like check-manifest, then you can keep it but just use
@@ -757,6 +770,10 @@ changelog:
 
 <!-- prettier-ignore-start -->
 
-[gh-changelog]: https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
+[pre-commit]: https://pre-commit.com
+[prek]: https://github.com/j178/prek
+[gh-changelog]: https://docs.github.com/en/repositories/releasing-projects
 
 <!-- prettier-ignore-end -->
+
+<script src="{% link assets/js/tabs.js %}"></script>

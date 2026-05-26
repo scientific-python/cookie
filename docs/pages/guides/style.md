@@ -17,7 +17,15 @@ custom_title: Style and static checks
 to check code style. The original, `pre-commit`, has support for more languages,
 but `prek` is a faster Rust rewrite that supports most real world usage.
 
-{% tabs runner %} {% tab pre-commit Pre-commit %}
+{% tabs runner %} {% tab prek Prek %}
+
+Prek can be installed through `brew` (macOS) or `pipx/uv` (anywhere). There are
+two modes to use it locally; you can check manually with `prek run` (changes
+only) or `prek run -a` (all). You can omit the `run`, as well; such as
+`prek -a`. You can also run `prek install` to add checks as a git pre-commit
+hook.
+
+{% endtab %} {% tab pre-commit Pre-commit %}
 
 Pre-commit can be installed through `brew` (macOS) or `pipx/uv` (anywhere).
 There are two modes to use it locally; you can check manually with
@@ -27,14 +35,6 @@ gets its name).
 
 Pre-commit's setup is much slower than prek, but you can install `pre-commit-uv`
 with pre-commit to speed up the setup time quite a bit.
-
-{% endtab %} {% tab prek Prek %}
-
-Prek can be installed through `brew` (macOS) or `pipx/uv` (anywhere). There are
-two modes to use it locally; you can check manually with `prek run` (hanges
-only) or `prek run -a` (all). You can omit the `run`, as well; such as
-`prek -a`. You can also run `prek install` to add checks as a git pre-commit
-hook.
 
 {% endtab %} {% endtabs %}
 
