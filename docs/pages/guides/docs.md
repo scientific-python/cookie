@@ -83,6 +83,7 @@ and MkDocs diverge.
 
 ::::{tab-set}
 :::{tab-item} Sphinx
+:sync: docs-framework
 ### pyproject.toml additions
 
 Setting a `docs` dependency group looks like this:
@@ -267,6 +268,7 @@ to mark where you want the docs portion to start.
 You can add the standard indices and tables at the end.
 :::
 :::{tab-item} MkDocs
+:sync: docs-framework
 While the cookie cutter creates a basic structure for your MkDocs (a top level
 `mkdocs.yml` file and the `docs` directory), you can also follow the official
 [Getting started](https://squidfunk.github.io/mkdocs-material/getting-started/)
@@ -475,6 +477,7 @@ this:
 
 ::::{tab-set}
 :::{tab-item} Sphinx
+:sync: docs-framework
 <!-- [[[cog
 with code_fence("yaml"):
     print(readthedocs_yaml)
@@ -505,6 +508,7 @@ python:
 <!-- [[[end]]] -->
 :::
 :::{tab-item} MkDocs
+:sync: docs-framework
 <!-- [[[cog
 with code_fence("yaml"):
     print(readthedocs_yaml_mkdocs)
@@ -548,6 +552,7 @@ Add a session to your `noxfile.py` to generate docs:
 
 ::::{tab-set}
 :::{tab-item} Sphinx
+:sync: docs-framework
 <!-- [[[cog
 with code_fence("python"):
     print(noxfile.get_source("docs"))
@@ -602,6 +607,7 @@ just added `python -m http.server` pointing at the built documentation, but
 autobuild will rebuild if you change a file while serving.
 :::
 :::{tab-item} MkDocs
+:sync: docs-framework
 <!-- [[[cog
 with code_fence("python"):
     print(noxfile_mkdocs.get_source("docs"))
@@ -638,6 +644,7 @@ documentation on how to configure what directories are watched for changes,
 
 ::::{tab-set}
 :::{tab-item} Sphinx
+:sync: docs-framework
 To build API docs, you need to add the following Nox job. It will rerun
 `sphinx-apidoc` to generate the sphinx autodoc pages for each of your public
 modules.
@@ -686,6 +693,7 @@ api/<package-name-here>
 Note that your docstrings are still parsed as reStructuredText.
 :::
 :::{tab-item} MkDocs
+:sync: docs-framework
 API documentation can be built from your docstring using the `mkdocstrings`
 plugin, as referenced previously. Unlike with Sphinx, which requires a direct
 invocation of `sphinx-apidoc`, MkDocs plugins are integrated into the MkDocs
@@ -715,6 +723,7 @@ module by being more specific, like `::: my_package.my_module.MyClass`.
 
 ::::{tab-set}
 :::{tab-item} Sphinx
+:sync: docs-framework
 You can combine notebooks into your docs. The tool for this is `nbsphinx`. If
 you want to use it, add `nbsphinx` and `ipykernel` to your documentation
 requirements, add `"nbsphinx"` to your `conf.py`'s `extensions =` list, and add
@@ -743,6 +752,7 @@ If you want to use Markdown instead of notebooks, you can use jupytext (see
 [here](https://nbsphinx.readthedocs.io/en/0.9.2/a-markdown-file.html)).
 :::
 :::{tab-item} MkDocs
+:sync: docs-framework
 You can combine notebooks into your docs. The plugin for this is
 `mkdocs-jupyter`, and configuration is detailed
 [here](https://github.com/danielfrg/mkdocs-jupyter) and you can find examples

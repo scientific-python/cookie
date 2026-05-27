@@ -18,7 +18,7 @@ const rrRole = {
     return [
       {
         type: "html",
-        value: `<span class="rr-btn" id="${code}">${code}</span>`,
+        value: `<span class="rr-btn">${code}</span>`,
       },
     ];
   },

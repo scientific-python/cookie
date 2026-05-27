@@ -19,3 +19,6 @@ If you are wondering about public API, see [Exports][].
 [backports]: pages/patterns/backports
 [exports]: pages/patterns/exports
 <!-- prettier-ignore-end -->
+
+```{tableofcontents}
+```

@@ -63,3 +63,6 @@ WebAssembly! All checks point to a linked badge in the guide.
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 
 <!-- prettier-ignore-end -->
+
+```{tableofcontents}
+```

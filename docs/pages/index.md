@@ -1,5 +1,7 @@
 ---
 title: Home
+site:
+  hide_outline: true
 ---
 
 # Scientific Python Library Development Guide

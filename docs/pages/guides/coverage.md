@@ -45,6 +45,7 @@ example or a script, you have to use `coverage` directly.
 
 ::::{tab-set}
 :::{tab-item} coverage
+:sync: coverage-tool
 Make sure you install `coverage[toml]`.
 
 `coverage` has several commands; the most important one is `coverage run`. This
@@ -67,6 +68,7 @@ This looks for a `.coverage` file and displays the result. There are many output
 formats for reports.
 :::
 :::{tab-item} pytest-cov
+:sync: coverage-tool
 Make sure you install `pytest-cov`.
 
 `pytest` allows users to pass the `--cov` option to automatically invoke
@@ -149,11 +151,8 @@ Here's an example nox job:
 
 ::::{tab-set}
 :::{tab-item} coverage
+:sync: coverage-tool
 ```python
-@nox.session(python=ALL_PYTHONS)
-def tests(session: nox.Session) -> None:
-    coverage_file = f".coverage.{sys.platform}.{session.python}"
-    session.install("-e.", "--group=cov")
     session.run(
         "coverage",
         "run",
@@ -165,13 +164,8 @@ def tests(session: nox.Session) -> None:
 ```
 :::
 :::{tab-item} pytest-cov
+:sync: coverage-tool
 ```python
-@nox.session(python=ALL_PYTHONS)
-def tests(session: nox.Session) -> None:
-    coverage_file = f".coverage.{sys.platform}.{session.python}"
-    session.install("-e.", "--group=cov")
-    session.run(
-        "pytest",
         "--cov=<package_name>",
         "--cov-config=pyproject.toml",
         *session.posargs,
@@ -213,7 +207,6 @@ uploading coverage reports easy for users. A minimal working example for
 uploading coverage reports through your workflow, which should be more than
 enough for a simple testing suite, can be written as follows:
 
-{% raw %}
 
 ```yaml
 - name: Upload coverage report
@@ -221,8 +214,6 @@ enough for a simple testing suite, can be written as follows:
   with:
     token: ${{ secrets.CODECOV_TOKEN }}
 ```
-
-{% endraw %}
 
 The lines above should be added after the step that runs your tests with the
 `--cov` option. See the [docs](https://github.com/codecov/codecov-action#usage)

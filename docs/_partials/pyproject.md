@@ -89,7 +89,7 @@ classifiers = [
 ```
 
 You should not include the `License ::` classifiers if you use the `license`
-field {% rr PP007 %}.
+field {rr}`PP007`.
 
 ### Extras
 

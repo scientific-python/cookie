@@ -190,7 +190,8 @@ unzip -l dist/*.whl
 ```
 :::
 
-:::{note} Flit _requires_ `license.file` to be set in your `[project]` section to ensure
+:::{note}
+Flit _requires_ `license.file` to be set in your `[project]` section to ensure
 it finds the license file.
 :::
 

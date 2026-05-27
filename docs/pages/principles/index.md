@@ -16,3 +16,6 @@ read and maintain code.
 
 
 <!-- prettier-ignore-end -->
+
+```{tableofcontents}
+```
