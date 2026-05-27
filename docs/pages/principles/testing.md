@@ -146,7 +146,7 @@ conceptually part of a larger suite, and skip them when needed.
 
 First, define a new marker in `pyproject.toml`:
 
-```toml
+```ini
 [tool.pytest]
 markers = [
     "unit: marks unit tests",

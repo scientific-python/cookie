@@ -251,7 +251,7 @@ won't tell you what or why it fixed things.
 ::::{tab-set}
 :::{tab-item} Simple config
 
-```toml
+```ini
 [tool.ruff.lint]
 extend-select = [
   "B",      # flake8-bugbear
@@ -264,7 +264,7 @@ extend-select = [
 :::
 :::{tab-item} Full config
 
-```toml
+```ini
 [tool.ruff.lint]
 extend-select = [
   "ARG",    # flake8-unused-arguments
@@ -317,7 +317,7 @@ typing-modules = ["mypackage._compat.typing"]
 :::
 :::{tab-item} Ignore-based config
 
-```toml
+```ini
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
@@ -372,7 +372,7 @@ needed if just set to `["src"]` in Ruff 0.6+. {rr}`RF003`
 If you don't use a `[project]` table (older setuptools or Poetry), then you
 should also set:
 
-```toml
+```ini
 target-version = "py39"
 ```
 
@@ -691,7 +691,7 @@ it from PyPI. Run it on your repository and see what it says. If you want to
 ignore files (like test folders, example folders, docs, etc) you can add these
 into your `pyproject.toml` file:
 
-```toml
+```ini
 [tool.check-manifest]
 ignore = [
     ".travis.yml",
@@ -795,7 +795,7 @@ integration.
 
 To configure it, you can use this section in `pyproject.toml`:
 
-```toml
+```ini
 [tool.typos.default.extend-words]
 nd = "nd"
 sur = "sur"
@@ -962,7 +962,7 @@ pre-commit, since it needs to have your package installed - it is less static of
 check than Ruff or Flake8. Here is a suggested `pyproject.toml` entry to get you
 started:
 
-```toml
+```ini
 [tool.pylint]
 py-version = "3.10"
 jobs = "0"

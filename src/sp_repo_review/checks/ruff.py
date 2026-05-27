@@ -139,7 +139,7 @@ class RF1xx(Ruff):
         """
         Must select the {self.name} `{self.code}` checks. Recommended:
 
-        ```toml
+        ```ini
         [tool.ruff.lint]
         extend-select = [
           "{self.code}",  # {self.name}

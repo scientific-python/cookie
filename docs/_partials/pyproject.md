@@ -14,7 +14,7 @@ with code_fence("toml"):
     print(pyproject.get_source("project"))
 ]]] -->
 <!-- rumdl-disable MD013 -->
-```toml
+```ini
 [project]
 name = "package"
 version = "0.1.0"
@@ -82,7 +82,7 @@ other tools often did the wrong thing (such as load the entire file into the
 metadata's free-form one line text field that was intended to describe
 deviations from the classifier license(s)).
 
-```toml
+```ini
 classifiers = [
   "License :: OSI Approved :: BSD License",
 ]
@@ -100,7 +100,7 @@ package or wheel name when installing, like `package[cli,mpl]`.
 
 Here is an example of a simple extras:
 
-```toml
+```ini
 [project.optional-dependencies]
 cli = [
   "click",
@@ -118,7 +118,7 @@ Self dependencies can be used by using the name of the package, such as
 If you want to ship an "app" that a user can run from the command line, you need
 to add a `script` entry point. The form is:
 
-```toml
+```ini
 [project.scripts]
 cliapp = "package.__main__:main"
 ```
@@ -146,7 +146,7 @@ with code_fence("toml"):
     print(pyproject.get_source("dependency-groups"))
 ]]] -->
 <!-- rumdl-disable MD013 -->
-```toml
+```ini
 [dependency-groups]
 test = [
   "pytest >=9",

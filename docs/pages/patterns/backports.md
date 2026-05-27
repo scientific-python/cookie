@@ -22,7 +22,7 @@ The rules for using a backport are as follows:
 
 Add it conditionally to your requirements. This looks something like this:
 
-```toml
+```ini
 [project]
 dependencies = [
     "importlib_metadata>=4.6; python_version<'3.10'",

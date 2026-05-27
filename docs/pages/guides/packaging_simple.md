@@ -45,7 +45,7 @@ selects the backend:
 ::::{tab-set}
 :::{tab-item} Hatchling
 
-```toml
+```ini
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -54,7 +54,7 @@ build-backend = "hatchling.build"
 :::
 :::{tab-item} uv_build
 
-```toml
+```ini
 [build-system]
 requires = ["uv_build>=0.7.19"]
 build-backend = "uv_build"
@@ -63,7 +63,7 @@ build-backend = "uv_build"
 :::
 :::{tab-item} Flit-core
 
-```toml
+```ini
 [build-system]
 requires = ["flit_core>=3.12"]
 build-backend = "flit_core.buildapi"
@@ -72,7 +72,7 @@ build-backend = "flit_core.buildapi"
 :::
 :::{tab-item} PDM-backend
 
-```toml
+```ini
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
@@ -81,7 +81,7 @@ build-backend = "pdm.backend"
 :::
 :::{tab-item} Setuptools
 
-```toml
+```ini
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
@@ -129,7 +129,7 @@ in a file or use git.
 You will always need to specify that the version will be supplied dynamically
 with:
 
-```toml
+```ini
 dynamic = ["version"]
 ```
 
@@ -139,7 +139,7 @@ Then you'll configure your backend to compute the version.
 You can tell hatchling to get the version from VCS. Add `hatch-vcs` to your
 `build-backend.requires`, then add the following configuration:
 
-```toml
+```ini
 [tool.hatch]
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/<package>/version.py"
@@ -147,7 +147,7 @@ build.hooks.vcs.version-file = "src/<package>/version.py"
 
 Or you can tell it to look for it in a file (see docs for arbitrary regex's):
 
-```toml
+```ini
 [tool.hatch]
 version.path = "src/<package>/__init__.py"
 ```

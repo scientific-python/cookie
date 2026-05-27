@@ -85,3 +85,4 @@ The noxfile generates temporary projects for **all 9 backends** × **vcs on/off*
 - Tab-sets use `:sync: <tab-name>` for cross-page tab synchronization, where the
   sync key is the tab label itself (e.g., `sphinx`, `mkdocs`,
   `trusted-publishing`, `scikit-build-core`).
+- TOML code bloacks use "ini" to get syntax highlighting for now.

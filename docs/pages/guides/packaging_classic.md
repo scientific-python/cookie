@@ -50,7 +50,7 @@ library or if you access package metadata.
 
 Packages should provide a `pyproject.toml` file that _at least_ looks like this:
 
-```toml
+```ini
 [build-system]
 requires = ["setuptools>=42"]
 build-backend = "setuptools.build_meta"
@@ -88,7 +88,7 @@ You may want to build against NumPy (mostly for Cython packages, pybind11 does
 not need to access the NumPy headers). This is the recommendation for scientific
 Python packages supporting older versions of NumPy:
 
-```toml
+```ini
 requires = [
     "oldest-supported-numpy",
 ```
@@ -124,7 +124,7 @@ Scientific Python packages should use one of the following systems:
 
 One more section is very useful in your `pyproject.toml` file:
 
-```toml
+```ini
 requires = [
     "setuptools>=42",
     "setuptools_scm[toml]>=3.4",
@@ -348,7 +348,7 @@ SDist structure that shows up in another place in the package, then replace
 With the exception of flake8, all package configuration should be possible via
 `pyproject.toml`, such as pytest (6+):
 
-```toml
+```ini
 [tool.pytest]
 junit_family = "xunit2"
 testpaths = ["tests"]

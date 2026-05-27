@@ -45,7 +45,7 @@ Since these variables will be used by all jobs, you could make them available in
 your `pyproject.toml` file, so they can be used everywhere (even locally for
 Linux and Windows):
 
-```toml
+```ini
 [tool.cibuildwheel]
 test-groups = ["test"]
 test-command = "pytest {project}/tests"

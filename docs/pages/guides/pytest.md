@@ -66,7 +66,7 @@ is an example configuration:
 ::::{tab-set}
 :::{tab-item} Pytest 9+
 
-```toml
+```ini
 [tool.pytest]
 minversion = "9.0"
 addopts = ["-ra", "--showlocals"]
@@ -81,7 +81,7 @@ testpaths = [
 :::
 :::{tab-item} Pytest 6+
 
-```toml
+```ini
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]

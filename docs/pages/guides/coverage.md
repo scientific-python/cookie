@@ -98,7 +98,7 @@ There is a configuration section in `pyproject.toml` for coverage. Here are some
 common options
 [(see the docs for more)](https://coverage.readthedocs.io/en/latest/config.html):
 
-```toml
+```ini
 [tool.coverage]
 run.core = "sysmon"
 run.disable_warnings = ["no-sysmon"]

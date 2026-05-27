@@ -76,7 +76,7 @@ with code_fence("toml"):
     print(skbuild_pyproject.get_source("build-system"))
 ]]] -->
 <!-- rumdl-disable MD013 -->
-```toml
+```ini
 [build-system]
 requires = ["pybind11", "scikit-build-core>=0.12"]
 build-backend = "scikit_build_core.build"
@@ -91,7 +91,7 @@ with code_fence("toml"):
     print(mesonpy_pyproject.get_source("build-system"))
 ]]] -->
 <!-- rumdl-disable MD013 -->
-```toml
+```ini
 [build-system]
 requires = ["meson-python>=0.18", "pybind11"]
 build-backend = "mesonpy"
@@ -106,7 +106,7 @@ with code_fence("toml"):
     print(maturin_pyproject.get_source("build-system"))
 ]]] -->
 <!-- rumdl-disable MD013 -->
-```toml
+```ini
 [build-system]
 requires = ["maturin>=1.9,<2"]
 build-backend = "maturin"
@@ -132,7 +132,7 @@ with code_fence("toml"):
     print(skbuild_pyproject.get_source("tool.scikit-build"))
 ]]] -->
 <!-- rumdl-disable MD013 -->
-```toml
+```ini
 [tool.scikit-build]
 minimum-version = "build-system.requires"
 build-dir = "build/{wheel_tag}"
@@ -153,7 +153,7 @@ with code_fence("toml"):
     print(maturin_pyproject.get_source("tool.maturin"))
 ]]] -->
 <!-- rumdl-disable MD013 -->
-```toml
+```ini
 [tool.maturin]
 module-name = "package._core"
 python-source = "src"
@@ -247,7 +247,7 @@ with code_fence("toml"):
     print(maturin_cargo_toml)
 ]]] -->
 <!-- rumdl-disable MD013 -->
-```toml
+```ini
 [package]
 name = "package"
 version = "0.1.0"

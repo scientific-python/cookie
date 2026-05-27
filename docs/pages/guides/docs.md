@@ -89,7 +89,7 @@ and MkDocs diverge.
 
 Setting a `docs` dependency group looks like this:
 
-```toml
+```ini
 [dependency-groups]
 docs = [
   "furo",
@@ -279,7 +279,7 @@ If you selected the `mkdocs` option when using the template cookie-cutter
 repository, you will already have this group. Otherwise, add to your
 `pyproject.toml`:
 
-```toml
+```ini
 [dependency-groups]
 docs = [
     "markdown>=3.9",
