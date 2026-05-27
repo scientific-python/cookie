@@ -71,8 +71,8 @@ The noxfile generates temporary projects for **all 9 backends** × **vcs on/off*
 
 - Migrated from Jekyll to [MyST](https://mystmd.org) (JupyterBook 2.0) using the
   `scientific-python-myst-theme`.
-- Node/Bun-based; from `docs/`, run `bun install` then `bun run build` to build
-  the site.
+- Node/Bun-based; from the repo root, run `bun install` then `bun run build` to
+  build the site.
 - Config: `docs/myst.yml` (TOC, project settings),
   `docs/config/scientific-python.yml` (theme options).
 - Custom plugin: `docs/rr-role.mjs` — provides `{rr}` inline role for

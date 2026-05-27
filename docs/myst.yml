@@ -30,7 +30,6 @@ project:
         - file: pages/guides/gha_pure.md
         - file: pages/guides/gha_wheels.md
         - file: pages/guides/tasks.md
-        - file: pages/guides/repo_review.md
     - file: pages/principles/index.md
       children:
         - file: pages/principles/process.md
@@ -41,6 +40,7 @@ project:
         - file: pages/patterns/exports.md
         - file: pages/patterns/backports.md
         - file: pages/patterns/data_files.md
+    - file: pages/guides/repo_review.md
 
 site:
   nav:

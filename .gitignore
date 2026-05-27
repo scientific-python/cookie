@@ -148,7 +148,6 @@ docs/assets/js/repo-review-app.min.js.map
 # NodeJS stuff, just in case (developer tooling)
 node_modules/
 package-lock.json
-package.json
 
 # readthedocs
 _readthedocs

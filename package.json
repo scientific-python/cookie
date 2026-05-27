@@ -1,0 +1,13 @@
+{
+  "name": "scientific-python-cookie-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "cd docs && myst build --html",
+    "serve": "cd docs && myst start",
+    "clean": "rm -rf docs/_build"
+  },
+  "dependencies": {
+    "mystmd": "^1.0"
+  }
+}
