@@ -50,8 +50,13 @@ The noxfile generates temporary projects for **all 9 backends** × **vcs on/off*
 - rr-tests matrix runs on Python 3.10, 3.12, 3.14 across ubuntu/macos/windows.
 - Cookie tests reuse the same `reusable-cookie.yml` workflow.
 
-## Docs site (Jekyll)
+## Docs site (MyST)
 
-- Ruby-based; uses `rbenv` + `bundle install` + `bundle exec jekyll serve --livereload`.
-- There is a helper script `helpers/fetch_repo_review_app.sh`.
-- Docs pages in `docs/pages/` contain inline cog blocks that auto-generate config examples from the template.
+- Migrated from Jekyll to [MyST](https://mystmd.org) (JupyterBook 2.0) using the `scientific-python-myst-theme`.
+- Node/Bun-based; from `docs/`, run `bun install` then `bun run build` to build the site.
+- Config: `docs/myst.yml` (TOC, project settings), `docs/config/scientific-python.yml` (theme options).
+- Custom plugin: `docs/rr-role.mjs` — provides `{rr}` inline role for repo-review badge spans.
+- Custom CSS: `docs/assets/css/site.css` — only `.rr-btn` badge styling remains.
+- Docs pages in `docs/pages/` contain cog blocks that auto-generate config examples from the template.
+- The repo-review interactive page uses an `{iframe}` pointing to the WASM app at `https://scientific-python.github.io/repo-review/`.
+- Tab-sets use `:sync:` for cross-page tab synchronization: `coverage-tool`, `docs-framework`, `publish-method`, `compiled-backend`.

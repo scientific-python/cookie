@@ -67,6 +67,7 @@ the test-case to make sure it fails when the code is broken.
   is better to write many test cases for a single function or class, than one
   giant case.
 
+(public-interface-tests)=
 ## Public Interface Tests
 
 A good place to start writing tests is from the perspective of a user of your
@@ -176,6 +177,7 @@ def pytest_collection_modifyitems(session, config, items):
         item.add_marker(pytest.mark.unit)
 ```
 
+(project-level-integration-tests)=
 ## Project Level Integration Tests
 
 The term "Integration Test" is unfortunately overloaded, and used to describe
@@ -196,6 +198,7 @@ more extensive validation.
 
 The intended audience for these tests is developers working on the project.
 
+(unit-tests)=
 ## Unit Tests
 
 Unit tests loosely follow the "London School" of testing, where the smallest
@@ -539,6 +542,7 @@ def bar(x):
     return x + 1
 ```
 
+(additional-types-of-test-suites)=
 ## Additional Types of Test Suites
 
 A non-exhaustive discussion of some common types of tests.
@@ -557,6 +561,7 @@ location like 'project_root/tests/behavioral/'. Used for testing things like:
 - Setting a debug flag results in debug messages being printed
 - A configuration option affects the behavior of the code as expected
 
+(fuzz-tests)=
 ### Fuzz Tests
 
 Fuzz tests attempt to test the full range of possible inputs to a function. They
@@ -590,6 +595,7 @@ interaction between your code, its dependencies, and external systems.
     - Interactions with other services, on local or cloud-based platforms
     - Micro-service, Database, or API connections and interactions
 
+(end-to-end-tests)=
 ### End to End Tests
 
 The slowest, and most brittle, of all tests. Here, you set up an entire

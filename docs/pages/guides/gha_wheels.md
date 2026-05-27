@@ -165,6 +165,7 @@ Trusted Publishing is more secure and recommended {rr}`GH105`:
 
 ::::{tab-set}
 :::{tab-item} Trusted Publishing (recommended)
+:sync: publish-method
 {% raw %}
 
 ```yaml
@@ -205,6 +206,7 @@ We are also generating artifact attestations, which can allow users to verify
 that the artifacts were built on your actions.
 :::
 :::{tab-item} Token
+:sync: publish-method
 {% raw %}
 
 ```yaml

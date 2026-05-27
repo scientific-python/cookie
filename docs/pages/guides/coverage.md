@@ -45,7 +45,7 @@ example or a script, you have to use `coverage` directly.
 
 ::::{tab-set}
 :::{tab-item} coverage
-:sync: coverage-tool
+:sync: coverage
 Make sure you install `coverage[toml]`.
 
 `coverage` has several commands; the most important one is `coverage run`. This
@@ -68,7 +68,7 @@ This looks for a `.coverage` file and displays the result. There are many output
 formats for reports.
 :::
 :::{tab-item} pytest-cov
-:sync: coverage-tool
+:sync: pytest-cov
 Make sure you install `pytest-cov`.
 
 `pytest` allows users to pass the `--cov` option to automatically invoke
@@ -151,7 +151,7 @@ Here's an example nox job:
 
 ::::{tab-set}
 :::{tab-item} coverage
-:sync: coverage-tool
+:sync: coverage
 ```python
     session.run(
         "coverage",
@@ -164,7 +164,7 @@ Here's an example nox job:
 ```
 :::
 :::{tab-item} pytest-cov
-:sync: coverage-tool
+:sync: pytest-cov
 ```python
         "--cov=<package_name>",
         "--cov-config=pyproject.toml",
