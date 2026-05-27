@@ -1,5 +1,4 @@
-# .readthedocs.yaml
-# Read the Docs configuration file
+# Read the Docs configuration file for myst
 # See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
 
 # Required
@@ -7,10 +6,15 @@ version: 2
 
 build:
   os: ubuntu-24.04
-
   tools:
-    nodejs: "22"
-
+    nodejs: "24"
   commands:
+    # Install myst
     - npm install -g mystmd
-    - cd docs && myst build --html --output _readthedocs/html
+    # Build the site
+    - cd docs && myst build --html
+    # Copy the output to Read the Docs expected location
+    - mkdir -p $READTHEDOCS_OUTPUT/html/
+    - cp -r docs/_build/html/. "$READTHEDOCS_OUTPUT/html"
+    # Clean up build artifacts
+    - rm -rf docs/_build
