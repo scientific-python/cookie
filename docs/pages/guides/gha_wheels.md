@@ -93,8 +93,6 @@ with `pipx run build==<version>`.
 
 The core of the work is down here:
 
-{% raw %}
-
 ```yaml
 build_wheels:
   name: Wheel on ${{ matrix.os }}
@@ -126,8 +124,6 @@ build_wheels:
         name: cibw-wheels-${{ matrix.os }}
         path: wheelhouse/*.whl
 ```
-
-{% endraw %}
 
 There are several things to note here. First, one of the reasons this works is
 because you followed the suggestions in the previous sections, and your package
@@ -164,7 +160,6 @@ Trusted Publishing is more secure and recommended {rr}`GH105`:
 ::::{tab-set}
 :::{tab-item} Trusted Publishing (recommended)
 :sync: trusted-publishing
-{% raw %}
 
 ```yaml
 upload_all:
@@ -192,8 +187,6 @@ upload_all:
     - uses: pypa/gh-action-pypi-publish@release/v1
 ```
 
-{% endraw %}
-
 When you make a GitHub release in the web UI, we publish to PyPI. You'll just
 need to tell PyPI which org, repo, workflow, and set the `pypi` environment to
 allow pushes from GitHub. If it's the first time you've published a package, go
@@ -205,7 +198,6 @@ that the artifacts were built on your actions.
 :::
 :::{tab-item} Token
 :sync: token
-{% raw %}
 
 ```yaml
 upload_all:
@@ -223,8 +215,6 @@ upload_all:
       with:
         password: ${{ secrets.pypi_password }}
 ```
-
-{% endraw %}
 
 If you cannot use Trusted Publishing, this publishes to PyPI with a token.
 You'll need to go to PyPI, generate a token for your user, and put it into

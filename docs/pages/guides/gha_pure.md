@@ -58,8 +58,6 @@ the name "CI/CD", you can just combine the two `on` dicts.
 
 ### Distribution: Pure Python wheels
 
-{% raw %}
-
 ```yaml
 dist:
   runs-on: ubuntu-latest
@@ -79,8 +77,6 @@ dist:
     - name: Check metadata
       run: pipx run twine check dist/*
 ```
-
-{% endraw %}
 
 We use [PyPA-Build](https://pypa-build.readthedocs.io/en/latest/), a new build
 tool designed to make building wheels and SDists easy. It run a [PEP 517][]
@@ -129,7 +125,6 @@ recommended {rr}`GH105`:
 ::::{tab-set}
 :::{tab-item} Trusted Publishing (recommended)
 :sync: trusted-publishing
-{% raw %}
 
 ```yaml
 publish:
@@ -155,8 +150,6 @@ publish:
     - uses: pypa/gh-action-pypi-publish@release/v1
 ```
 
-{% endraw %}
-
 When you make a GitHub release in the web UI, we publish to PyPI. You'll just
 need to tell PyPI which org, repo, workflow, and set the `pypi` environment to
 allow pushes from GitHub. If it's the first time you've published a package, go
@@ -168,7 +161,6 @@ that the artifacts were built on your actions.
 :::
 :::{tab-item} Token
 :sync: token
-{% raw %}
 
 ```yaml
 publish:
@@ -186,8 +178,6 @@ publish:
         password: ${{ secrets.pypi_password }}
 ```
 
-{% endraw %}
-
 If you cannot use Trusted Publishing, this publishes to PyPI with a token.
 You'll need to go to PyPI, generate a token for your user, and put it into
 `pypi_password` on your repo's secrets page. Once you have a project, you should
@@ -204,7 +194,6 @@ interface:
 ::::{tab-set}
 :::{tab-item} Trusted Publishing (recommended)
 :sync: trusted-publishing
-{% raw %}
 
 ```yaml
 name: CD
@@ -253,11 +242,9 @@ jobs:
       - uses: pypa/gh-action-pypi-publish@release/v1
 ```
 
-{% endraw %}
 :::
 :::{tab-item} Token
 :sync: token
-{% raw %}
 
 ```yaml
 name: CD
@@ -297,8 +284,6 @@ jobs:
         with:
           password: ${{ secrets.pypi_password }}
 ```
-
-{% endraw %}
 
 If you cannot use Trusted Publishing, this publishes to PyPI with a token.
 You'll need to go to PyPI, generate a token for your user, and put it into

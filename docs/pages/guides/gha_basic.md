@@ -100,8 +100,6 @@ adjust the Python versions to suit your taste; you can also test on different
 OS's if you'd like by adding them to the matrix and inputting them into
 `runs-on`.
 
-{% raw %}
-
 ```yaml
 tests:
   runs-on: ubuntu-latest
@@ -130,8 +128,6 @@ tests:
     - name: Test package
       run: uv run pytest
 ```
-
-{% endraw %}
 
 A few things to note from above:
 
@@ -229,14 +225,10 @@ actions have outputs, and bash actions can manually write to output:
   run: echo "something=true" >> $GITHUB_OUTPUT
 ```
 
-{% raw %}
-
 You can now refer to this step in a later step with
 `${{ steps.someid.something }}`. You also can get it from another job by using
 `${{ needs.<jobname>.outputs.something }}`. The `toJson()` function is useful
 for inputting JSON - you can even generate matrices dynamically this way!
-
-{% endraw %}
 
 #### Pretty output
 
@@ -342,15 +334,11 @@ These are some things you might need.
 {rr}`GH102` If you add the following, you can ensure only one run per
 PR/branch happens at a time, cancelling the old run when a new one starts:
 
-{% raw %}
-
 ```yaml
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 ```
-
-{% endraw %}
 
 Anything with a matching group name will count in the same group - the ref is
 the "from" name for the PR. If you want, you can replace `github.ref` with
@@ -368,8 +356,6 @@ pass).
 
 As an example, if you had `lint` and `checks` jobs, use this:
 
-{% raw %}
-
 ```yaml
 pass:
   if: always()
@@ -380,8 +366,6 @@ pass:
       with:
         jobs: ${{ toJSON(needs) }}
 ```
-
-{% endraw %}
 
 We want the job to always run, so we set `if: always()`. Otherwise, it might be
 skipped if any job it depends on is skipped, and skipped jobs count as "passing"
@@ -441,8 +425,6 @@ ideally shouldn't change the user's environment; suddenly changing the active
 Python version might come as a surprise. You can do that, though, using
 `update-environment: false` with `setup-python` and `pipx`:
 
-{% raw %}
-
 ```yaml
 - uses: actions/setup-python@v6
   id: python
@@ -456,8 +438,6 @@ Python version might come as a surprise. You can do that, though, using
     pipx run --python '${{ steps.python.outputs.python-path }}' '${{
     github.action_path }}' ${{ inputs.some-input }}
 ```
-
-{% endraw %}
 
 You use the `python-path` output from `setup-python` to get the Python you
 activated. You use `github.action_path` to get the path to the checked-out
@@ -510,8 +490,6 @@ on:
 Otherwise, they look like normal workflows. Then you need another reusable
 workflow file to decide when to run a specific situation.
 
-{% raw %}
-
 ```yaml
 # reusable-change-detection.yml
 on:
@@ -522,16 +500,12 @@ on:
       # More here if you have more situations to detect
 ```
 
-{% endraw %}
-
 You start by specifying outputs when running this. You'll want one output per
 situation you want to detect. The value will be output from our
 `change-detection` job below, and defaults to "false" if we don't output
 anything.
 
 Now, we need our job:
-
-{% raw %}
 
 ```yaml
 jobs:
@@ -566,8 +540,6 @@ jobs:
       # Add 2 more steps per situation you have to detect
 ```
 
-{% endraw %}
-
 This has a bit of boilerplate (mostly around passing variables around), but what
 it's doing is fairly simple. Instead of stepping through it, let's look at what
 it's trying to do. First, you need to find a list of all changed files in the
@@ -594,8 +566,6 @@ If you have more situations, you just repeat these two steps with different
 
 Finally, you write the overarching CI workflow that combines the reusable
 workflows, something like `ci.yml`:
-
-{% raw %}
 
 ```yaml
 on:
@@ -641,8 +611,6 @@ jobs:
 If you have more situations, add another `${{ ... }}` above, after the first
 one, and add them to the needs list. This is really just injecting "tests" only
 if the "tests" job is being skipped into `allowed-skips`.
-
-{% endraw %}
 
 :::{tip}
 Some examples of repos using this method are:
@@ -690,15 +658,11 @@ configure Pages.
   uses: actions/configure-pages@v6
 ```
 
-{% raw %}
-
 Notice this action sets an `id:`; this will allow you to use the outputs from
 this action later; specifically, may want to use
 `${{ steps.pages.outputs.base_path }}` when building (you can also get `origin`,
 `base_url`, or `host` - see the action
 [config](https://github.com/actions/configure-pages/blob/main/action.yml)).
-
-{% endraw %}
 
 ```yaml
 - name: Upload artifact
@@ -712,8 +676,6 @@ Finally, you'll need to deploy the artifact (named `github-pages`) to Pages. You
 can make this a custom job with `needs:` pointing at your previous job (in this
 example, the previous job is called `build`):
 
-{% raw %}
-
 ```yaml
 deploy:
   environment:
@@ -726,8 +688,6 @@ deploy:
       id: deployment
       uses: actions/deploy-pages@v5
 ```
-
-{% endraw %}
 
 The deploy-pages job gives a `page_url`, which is the same as `base_url` on the
 configure step, and can be set in the `environment`. If you want to do
