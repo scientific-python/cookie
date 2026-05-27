@@ -59,4 +59,4 @@ The noxfile generates temporary projects for **all 9 backends** × **vcs on/off*
 - Custom CSS: `docs/assets/css/site.css` — only `.rr-btn` badge styling remains.
 - Docs pages in `docs/pages/` contain cog blocks that auto-generate config examples from the template.
 - The repo-review interactive page uses an `{iframe}` pointing to the WASM app at `https://scientific-python.github.io/repo-review/`.
-- Tab-sets use `:sync:` for cross-page tab synchronization: `coverage-tool`, `docs-framework`, `publish-method`, `compiled-backend`.
+- Tab-sets use `:sync: <tab-name>` for cross-page tab synchronization, where the sync key is the tab label itself (e.g., `sphinx`, `mkdocs`, `trusted-publishing`, `scikit-build-core`).

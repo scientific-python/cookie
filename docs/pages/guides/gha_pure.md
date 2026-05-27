@@ -128,7 +128,7 @@ recommended {rr}`GH105`:
 
 ::::{tab-set}
 :::{tab-item} Trusted Publishing (recommended)
-:sync: publish-method
+:sync: trusted-publishing
 {% raw %}
 
 ```yaml
@@ -167,7 +167,7 @@ We are also generating artifact attestations, which can allow users to verify
 that the artifacts were built on your actions.
 :::
 :::{tab-item} Token
-:sync: publish-method
+:sync: token
 {% raw %}
 
 ```yaml
@@ -203,7 +203,7 @@ interface:
 
 ::::{tab-set}
 :::{tab-item} Trusted Publishing (recommended)
-:sync: publish-method
+:sync: trusted-publishing
 {% raw %}
 
 ```yaml
@@ -256,7 +256,7 @@ jobs:
 {% endraw %}
 :::
 :::{tab-item} Token
-:sync: publish-method
+:sync: token
 {% raw %}
 
 ```yaml

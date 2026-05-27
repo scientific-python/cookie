@@ -70,7 +70,7 @@ selects the backend:
 
 ::::{tab-set}
 :::{tab-item} Scikit-build-core
-:sync: compiled-backend
+:sync: scikit-build-core
 <!-- [[[cog
 with code_fence("toml"):
     print(skbuild_pyproject.get_source("build-system"))
@@ -85,7 +85,7 @@ build-backend = "scikit_build_core.build"
 <!-- [[[end]]] -->
 :::
 :::{tab-item} Meson-python
-:sync: compiled-backend
+:sync: meson-python
 <!-- [[[cog
 with code_fence("toml"):
     print(mesonpy_pyproject.get_source("build-system"))
@@ -100,7 +100,7 @@ build-backend = "mesonpy"
 <!-- [[[end]]] -->
 :::
 :::{tab-item} Maturin
-:sync: compiled-backend
+:sync: maturin
 <!-- [[[cog
 with code_fence("toml"):
     print(maturin_pyproject.get_source("build-system"))
@@ -126,7 +126,7 @@ options in `tool.*` settings.
 
 ::::{tab-set}
 :::{tab-item} Scikit-build-core
-:sync: compiled-backend
+:sync: scikit-build-core
 <!-- [[[cog
 with code_fence("toml"):
     print(skbuild_pyproject.get_source("tool.scikit-build"))
@@ -143,11 +143,11 @@ build-dir = "build/{wheel_tag}"
 These options are not required, but can improve your experience.
 :::
 :::{tab-item} Meson-python
-:sync: compiled-backend
+:sync: meson-python
 No `tool.meson-python` configuration required for this example.
 :::
 :::{tab-item} Maturin
-:sync: compiled-backend
+:sync: maturin
 <!-- [[[cog
 with code_fence("toml"):
     print(maturin_pyproject.get_source("tool.maturin"))
@@ -171,7 +171,7 @@ configuration here to follow the convention of the other tools here.
 
 ::::{tab-set}
 :::{tab-item} Scikit-build-core
-:sync: compiled-backend
+:sync: scikit-build-core
 Example `CMakeLists.txt` file (using pybind11, so include `pybind11` in
 `build-system.requires` too):
 
@@ -198,7 +198,7 @@ files to your distributions; it also has a default ignore for common cache
 files, so you can get started without one, but it's recommended.
 :::
 :::{tab-item} Meson-python
-:sync: compiled-backend
+:sync: meson-python
 Example `meson.build` file (using pybind11, so include `pybind11` in
 `build-system.requires` too):
 
@@ -239,7 +239,7 @@ project, you will likely be doing this, but when trying out a build backend you
 might not think to set up a git repo to build it.
 :::
 :::{tab-item} Maturin
-:sync: compiled-backend
+:sync: maturin
 Example `Cargo.toml` file:
 
 <!-- [[[cog
@@ -281,7 +281,7 @@ name you wish, though, or even make your compiled extension a top level module.
 
 ::::{tab-set}
 :::{tab-item} Scikit-build-core
-:sync: compiled-backend
+:sync: scikit-build-core
 Example `src/main.cpp` file:
 
 <!-- [[[cog
@@ -322,7 +322,7 @@ PYBIND11_MODULE(_core, m) {
 <!-- [[[end]]] -->
 :::
 :::{tab-item} Meson-python
-:sync: compiled-backend
+:sync: meson-python
 Example `src/main.cpp` file:
 
 <!-- [[[cog
@@ -363,7 +363,7 @@ PYBIND11_MODULE(_core, m) {
 <!-- [[[end]]] -->
 :::
 :::{tab-item} Maturin
-:sync: compiled-backend
+:sync: maturin
 Example `src/lib.rs` file:
 
 <!-- [[[cog
