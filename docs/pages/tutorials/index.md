@@ -2,7 +2,7 @@
 title: Tutorials
 ---
 
-# Tutorials
+## Tutorials
 
 Do you have a pile of scientific Python scripts or Jupyter notebooks that are
 becoming unwieldy? Are changes to some parts of your code accidentally breaking
@@ -20,5 +20,5 @@ through the section on [principles](pages/principles/index). As
 your project grows you may find some good use for the more specific and advanced
 topics covered in the [guides](pages/guides/index).
 
-```{tableofcontents}
+```text {tableofcontents}
 ```

@@ -26,7 +26,6 @@ runs:
         python-version: "3.13"
         update-environment: false
 
-    # prettier-ignore
     - name: Run repo-review
       shell: bash
       run: >

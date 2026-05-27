@@ -2,9 +2,9 @@
 title: "Static type checking"
 ---
 
-# Static type checking
+## Static type checking
 
-## Basics
+### Basics
 
 The most exciting thing happening right now in Python development is static
 typing. Since Python 3.0, we've had function annotations, and since 3.6,
@@ -36,7 +36,7 @@ Your tests cannot test every possible branch, every line of code. MyPy can
 runs rarely, that requires remote resources, that is slow, etc. All those can be
 checked by MyPy. It also keeps you (too?) truthful in your types.
 
-### Adding types
+#### Adding types
 
 There are three ways to add types.
 
@@ -60,7 +60,7 @@ it for parameters and returns from functions. When running MyPy, you can use
 print statement but at type-checking time, or `reveal_locals()` to see all local
 types.
 
-### Configuration
+#### Configuration
 
 By default, MyPy does as little as possible, so that you can add it iteratively
 to a code base. By default:
@@ -84,9 +84,9 @@ type hints for (mostly) the standard library.
 Third party libraries that are typed sometimes forget this last step, by the
 way!
 
-## Features
+### Features
 
-### Type narrowing
+#### Type narrowing
 
 One of the key features of type checking is type narrowing. The type checker
 monitors the types of a variable, and "narrows" it when something restricts it.
@@ -116,7 +116,7 @@ reveal_type(x)
 This will print `A` because you removed B via the type narrowing using the
 `assert`.
 
-### Protocols
+#### Protocols
 
 One of the best features of MyPy is support for structural subtyping via
 Protocols - formalized duck-typing, basically. This allows cross library
@@ -168,7 +168,7 @@ There are lots of built-in Protocols, most of which pre-date typing and are
 available in an Abstract Base Class form. Most of them check for one or more
 special methods, like `Iterable`, `Iterator`, etc.
 
-### Other features
+#### Other features
 
 Static typing has some great features worth checking out:
 
@@ -180,9 +180,9 @@ Static typing has some great features worth checking out:
 - MyPy validates with the Python version you ask for, regardless of what version
   you are actually running.
 
-## Complete example
+### Complete example
 
-### Runtime compatible types
+#### Runtime compatible types
 
 Here's the classic syntax, which you need to use if you want to access the type
 annotations at runtime and you need to support Python < 3.10:
@@ -207,7 +207,7 @@ def g(x: Union[str, int]) -> None:
     # Calling x.lower() is invalid here!
 ```
 
-### Types as strings
+#### Types as strings
 
 If you don't access the types at runtime, or if you use Python 3.10+ only, then
 you can use a much nicer syntax. The `annotations` future feature causes the
@@ -237,11 +237,11 @@ annotations at runtime.
 You can use the above in earlier Python versions if you use strings manually,
 with the same caveats.
 
-## Tips for good types
+### Tips for good types
 
 These are some guidelines to help you in writing good type hints.
 
-### Loose vs. specific types
+#### Loose vs. specific types
 
 When you have a function, you should take as generic a type as possible, and
 return as specific a type as possible. For example:
@@ -289,7 +289,7 @@ Also note that the best place to get these in modern Python is
 `collections.abc`, but if you need to subscript them at runtime, you'll need
 Python 3.9+ or the versions in `typing`.
 
-## Final words
+### Final words
 
 When run alongside a good linter like flake8, this can catch a huge number of
 issues before tests or they are discovered in the wild! It also prompts _better

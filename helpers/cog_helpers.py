@@ -85,8 +85,8 @@ class TOMLMatcher:
 @contextlib.contextmanager
 def code_fence(lang: str, /, *, width: int = 3) -> Generator[None, None, None]:
     tics = "`" * width
-    print("<!-- prettier-ignore-start -->")  # noqa: T201
+    print("<!-- rumdl-disable MD013 -->")  # noqa: T201
     print(f"{tics}{lang}")  # noqa: T201
     yield
     print(tics)  # noqa: T201
-    print("<!-- prettier-ignore-end -->")  # noqa: T201
+    print("<!-- rumdl-enable MD013 -->")  # noqa: T201

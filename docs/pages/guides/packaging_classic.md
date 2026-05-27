@@ -2,7 +2,7 @@
 title: Classic packaging
 ---
 
-# Classic packaging
+## Classic packaging
 
 The libraries in the scientific Python ecosytem have a variety of different
 packaging styles, but this document is intended to outline a recommended style
@@ -36,7 +36,7 @@ include a `setup.py`, and all alternate packing systems produce "normal"
 wheels.
 :::
 
-## Package structure (medium priority)
+### Package structure (medium priority)
 
 All packages _should_ have a `src` folder, with the package code residing inside
 it, such as `src/<package>/`. This may seem like extra hassle; after all, you
@@ -46,7 +46,7 @@ common bugs, such as running `pytest` and getting the local version instead of
 the installed version - this obviously tends to break if you build parts of the
 library or if you access package metadata.
 
-## PEP 517/518 support (high priority)
+### PEP 517/518 support (high priority)
 
 Packages should provide a `pyproject.toml` file that _at least_ looks like this:
 
@@ -82,7 +82,7 @@ compliant SDists, as well).
 {rr}`PP003` Note that `"wheel"` is never required; it was injected
 automatically by setuptools in older versions, and is no longer used at all.
 
-### Special additions: NumPy
+#### Special additions: NumPy
 
 You may want to build against NumPy (mostly for Cython packages, pybind11 does
 not need to access the NumPy headers). This is the recommendation for scientific
@@ -98,7 +98,8 @@ package. Whether you build the wheel locally or on CI, you can transfer it to
 someone else and it will work on any supported NumPy. The
 `oldest-supported-numpy` package is a SciPy metapackage from the NumPy
 developers that tracks the
-[correct version of NumPy to build wheels against for each version of Python and for each OS/implementation](https://github.com/scipy/oldest-supported-numpy/blob/master/setup.cfg).
+[correct version of NumPy to build wheels against for each version of Python
+and for each OS/implementation][oldest-supported-numpy].
 Otherwise, you would have to list the earliest version of NumPy that had support
 for each Python version here.
 
@@ -115,11 +116,11 @@ NumPy 2.0. Now you add:
 sure you build with NumPy 1.25+ (or 2.0+ when it comes out).
 :::
 
-## Versioning (medium/high priority)
+### Versioning (medium/high priority)
 
 Scientific Python packages should use one of the following systems:
 
-### Git tags: official PyPA method
+#### Git tags: official PyPA method
 
 One more section is very useful in your `pyproject.toml` file:
 
@@ -226,7 +227,7 @@ This will allow git archives (including the ones generated from GitHub) to also
 support versioning. This will only work with `setuptools_scm>=7` (though adding
 the files won't hurt older versions).
 
-### Classic in-source versioning
+#### Classic in-source versioning
 
 Recent versions of `setuptools` have improved in-source versioning. If you have
 a simple file that includes a line with a simple PEP 440 style version, like
@@ -247,7 +248,7 @@ requirements only, this will fail.
 Flit will always look for `package.__version__`, and so will always import your
 package; you just have to deal with that if you use Flit.
 
-## Setup configuration (medium priority)
+### Setup configuration (medium priority)
 
 You should put as much as possible in your `setup.cfg`, and leave `setup.py` for
 _only_ parts that need custom logic or binary building. This keeps your
@@ -357,7 +358,7 @@ junit_family = "xunit2"
 testpaths = ["tests"]
 ```
 
-## Extras (low/medium priority)
+### Extras (low/medium priority)
 
 It is recommended to use extras instead of or in addition to making requirement
 files. These extras a) correctly interact with install requires and other
@@ -401,7 +402,7 @@ Self dependencies can be placed in `setup.cfg` using the name of the package,
 such as `dev = package[test,examples]`, but this requires Pip 21.2 or newer. We
 recommend providing at least `test`, `docs`, and `dev`.
 
-## Including/excluding files in the SDist
+### Including/excluding files in the SDist
 
 Python packaging goes through a 3-stage procedure if you have the above
 recommended `pyproject.toml` file. If you type `pip install .`, then
@@ -429,7 +430,7 @@ be all of git][setuptools_scm file]; if you do not, the default is a few common
 files, like any `.py` files and standard tooling. Here is a useful default,
 though be sure to update it to include any files that need to be included:
 
-```
+```text
 graft src
 graft tests
 
@@ -437,7 +438,7 @@ include LICENSE README.md pyproject.toml setup.py setup.cfg
 global-exclude __pycache__ *.py[cod] .venv
 ```
 
-## Command line
+### Command line
 
 If you want to ship an "app" that a user can run from the command line, you need
 to add a `console_scripts` entry point. The form is:
@@ -464,15 +465,11 @@ the app.
     default behavior is changing, though, as there's much less reason today to
     have a legacy `setup.py`.
 
-<!-- prettier-ignore-start -->
-
 [flit]: https://flit.readthedocs.io
 [poetry]: https://python-poetry.org
-[hatch]: https://hatch.pypa.io
 [hypermodern]: https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
 [setuptools_scm file]: https://setuptools-scm.readthedocs.io/en/latest/usage/#file-finders-hook-makes-most-of-manifestin-unnecessary
 [manifest.in]: https://packaging.python.org/guides/using-manifest-in/
 [setuptools]: https://setuptools.readthedocs.io/en/latest/userguide/index.html
 [setuptools cfg]: https://setuptools.readthedocs.io/en/latest/userguide/declarative_config.html
-
-<!-- prettier-ignore-end -->
+[oldest-supported-numpy]: https://github.com/scipy/oldest-supported-numpy/blob/master/setup.cfg

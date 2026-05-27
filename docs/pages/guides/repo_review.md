@@ -2,7 +2,7 @@
 title: Repo-Review
 ---
 
-# Repo-Review
+## Repo-Review
 
 You can check the style of a GitHub repository below. Enter any repository, such
 as `scikit-hep/hist`, and the branch you want to check, such as `main` (it must
@@ -21,6 +21,6 @@ pipx run 'sp-repo-review[cli]' <path to repo>
 
 ---
 
-:::{iframe} https://scientific-python.github.io/repo-review/
+:::{iframe} <https://scientific-python.github.io/repo-review/>
 :width: 100%
 :::

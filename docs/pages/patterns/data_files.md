@@ -2,7 +2,7 @@
 title: Including data files
 ---
 
-# Including data files
+## Including data files
 
 In this section you will:
 
@@ -10,7 +10,7 @@ In this section you will:
 - Learn some alternative approaches.
 - Learn how to include small data files in your package.
 
-## Consider Alternatives
+### Consider Alternatives
 
 **Never include large binary files in your Python package or git repository.**
 Once committed, the file lives in git history forever. Git will become sluggish,
@@ -42,7 +42,7 @@ If the file in question is a text file and not very large (\< 100 kB) than it's
 reasonable to just bundle it with the package. If not, see the recommendation at
 the end.
 
-## How to Package Data Files
+### How to Package Data Files
 
 What's the problem we are solving here? If your Python program needs to access a
 data file, the naïve solution is just to hard-code the path to that file.
@@ -118,6 +118,7 @@ But then you'll need to _also_ make sure the files are in the SDist, too:
 # MANIFEST.in
 include src/package/peak_spacings/*.txt
 ```
+
 :::
 
 Finally, wherever we actually use the files in our scientific code, we can
@@ -141,7 +142,7 @@ with resources.as_file(ref) as path:
         spacings_txt = f.read()
 ```
 
-### Using the init
+#### Using the init
 
 Instead of having an empty init, you can instead move the `files(...)` into the
 `__init__.py`. That would look like this:
@@ -157,7 +158,7 @@ LaB6 = files / "LaB6.txt"
 Now, a user can simply import and use `package.peakspacing.LaB6` and such
 directly.
 
-## Downloading larger files on demand
+### Downloading larger files on demand
 
 A common use case is that a project may have example notebooks or demo scripts
 which require data not distributed with the project itself. One approach in
@@ -194,11 +195,8 @@ file_path = pooch.retrieve(
 On repeated runs of this command, the locally cached filename would be used
 instead of downloading the data again.
 
-<!-- prettier-ignore-start -->
-[importlib_resources]: https://importlib-resources.readthedocs.io/en/latest/
 [osf.io]: https://osf.io/
 [pooch]: https://www.fatiando.org/pooch/latest/
 [zenodo]: https://zenodo.org/
 [copier]: https://copier.readthedocs.io
 [cookiecutter]: https://cookiecutter.readthedocs.io
-<!-- prettier-ignore-end -->

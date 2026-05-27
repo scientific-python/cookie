@@ -8,7 +8,7 @@ Once you've done this at least once, feel free to use
 or `uv init` to get started quickly on new packages!
 :::
 
-# Simple packaging
+## Simple packaging
 
 Python packages can now use a modern build system instead of the classic but
 verbose setuptools and `setup.py`. The one you select doesn't really matter that
@@ -37,46 +37,56 @@ from VCS. If you don't have an existing preference, hatchling is an excellent
 choice, balancing speed, configurability, and extendability.
 :::
 
-## pyproject.toml: build-system
+### pyproject.toml: build-system
 
 {rr}`PY001` Packages must have a `pyproject.toml` file {rr}`PP001` that
 selects the backend:
 
 ::::{tab-set}
 :::{tab-item} Hatchling
+
 ```toml
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 ```
+
 :::
 :::{tab-item} uv_build
+
 ```toml
 [build-system]
 requires = ["uv_build>=0.7.19"]
 build-backend = "uv_build"
 ```
+
 :::
 :::{tab-item} Flit-core
+
 ```toml
 [build-system]
 requires = ["flit_core>=3.12"]
 build-backend = "flit_core.buildapi"
 ```
+
 :::
 :::{tab-item} PDM-backend
+
 ```toml
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 ```
+
 :::
 :::{tab-item} Setuptools
+
 ```toml
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 ```
+
 :::
 ::::
 
@@ -88,7 +98,7 @@ should not put an upper cap on it {rr}`PY004`, as this field is used to
 back-solve for old package versions that pass this check, allowing you to safely
 drop Python versions.
 
-## Package structure
+### Package structure
 
 All packages _should_ have a `src` folder, with the package code residing inside
 it, such as `src/<package>/`. This may seem like extra hassle; after all, you
@@ -109,7 +119,7 @@ You should have a `README` {rr}`PY002` and a `LICENSE` {rr}`PY003` file.
 You should have a `docs/` folder {rr}`PY004`. You should have a `/tests`
 folder {rr}`PY005` (recommended) and/or a `src/<package>/tests` folder.
 
-## Versioning
+### Versioning
 
 You can specify the version manually (as shown in the example), but the backends
 usually provide some automatic features to help you avoid this. Flit will pull
@@ -164,7 +174,7 @@ This will allow git archives (including the ones generated from GitHub) to also
 support versioning.
 :::
 
-## Including/excluding files in the SDist
+### Including/excluding files in the SDist
 
 This is tool specific.
 
@@ -188,14 +198,13 @@ tar -tvf dist/*.tar.gz
 # Show wheel contents
 unzip -l dist/*.whl
 ```
+
 :::
 
 :::{note}
 Flit _requires_ `license.file` to be set in your `[project]` section to ensure
 it finds the license file.
 :::
-
-<!-- prettier-ignore-start -->
 
 [flit]: https://flit.readthedocs.io
 [poetry]: https://python-poetry.org
@@ -207,5 +216,4 @@ it finds the license file.
 [meson-python]: https://meson-python.readthedocs.io
 [python packaging guide]: https://packaging.python.org
 [python packaging tutorial]: https://packaging.python.org/tutorials/packaging-projects/
-
-<!-- prettier-ignore-end -->
+[metadata]: https://packaging.python.org/en/latest/specifications/core-metadata/

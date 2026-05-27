@@ -4,7 +4,7 @@ site:
   hide_outline: true
 ---
 
-# Scientific Python Library Development Guide
+## Scientific Python Library Development Guide
 
 This guide is maintained by the scientific Python community for the benefit of
 fellow scientists and research software engineers.
@@ -15,8 +15,9 @@ code accidentally breaking other parts of your code? Do you want to more
 maintainable, reusable, and shareable form? Start at the
 [tutorial](pages/tutorials/index).
 
-**Learn recommended tools and best practices.** [Topical guides](pages/guides/index) provide task-based instruction on topics that
-scientists and research software engineers may encounter as their projects
+**Learn recommended tools and best practices.**
+[Topical guides](pages/guides/index) provide task-based instruction on topics
+that scientists and research software engineers may encounter as their projects
 evolve and grow. This covers modern packaging ([simple][] or [compiled][]),
 [style checking][], [testing][], [documentation][], [static typing][], [CI][],
 and much more!
@@ -43,7 +44,7 @@ to use successfully and easier to maintain over time.
 tasks and can be tricky to get exactly right, such as including data files with
 Python packages.
 
-## Related Resources
+### Related Resources
 
 This guide does _not_ cover the basics of Python itself or the scientific Python
 libraries; it focuses on making or maintaining a package. We recommend the
@@ -74,7 +75,6 @@ with many updates. Improved support for compiled components supported in part
 by NSF grant [OAC-2209877][].
 :::
 
-<!-- prettier-ignore-start -->
 [simple]:                   pages/guides/packaging_simple
 [compiled]:                 pages/guides/packaging_compiled
 [style checking]:           pages/guides/style
@@ -94,4 +94,3 @@ by NSF grant [OAC-2209877][].
 [OAC-2209877]:              https://www.nsf.gov/awardsearch/showAward?AWD_ID=2209877
 [nsls-ii]:                  https://nsls-ii.github.io
 [sp-repo-review]:           https://pypi.org/project/sp-repo-review
-<!-- prettier-ignore-end -->

@@ -1,4 +1,4 @@
-## pyproject.toml: project table
+# pyproject.toml: project table
 
 <!-- [[[cog
 from cog_helpers import code_fence, render_cookie, TOMLMatcher
@@ -13,7 +13,7 @@ The metadata is specified in a [standards-based][metadata] format:
 with code_fence("toml"):
     print(pyproject.get_source("project"))
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```toml
 [project]
 name = "package"
@@ -50,7 +50,7 @@ Homepage = "https://github.com/org/package"
 Discussions = "https://github.com/org/package/discussions"
 Changelog = "https://github.com/org/package/releases"
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 In this example, `"package"` is the name of the thing you are working on. You
@@ -64,7 +64,7 @@ special, and replaces the old url setting.
 If you use the above configuration, you need `README.md` and `LICENSE` files,
 since they are explicitly specified.
 
-### License
+## License
 
 The license can be done one of two ways.
 
@@ -145,7 +145,7 @@ example:
 with code_fence("toml"):
     print(pyproject.get_source("dependency-groups"))
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```toml
 [dependency-groups]
 test = [
@@ -163,7 +163,7 @@ docs = [
   "furo>=2023.08.17",
 ]
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 You can include one dependency group in another. Most tools allow you to install

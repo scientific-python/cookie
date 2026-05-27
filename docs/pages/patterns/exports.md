@@ -2,7 +2,7 @@
 title: Exports
 ---
 
-# Exports
+## Exports
 
 What objects in a module can you use? One common convention is that starting a
 name with a single underscore makes it "private" (though really "hidden" might
@@ -25,7 +25,7 @@ can cause surprising problems in some cases, though, due to Python's late
 binding. It's also easy to forget to delete something like an import, due to the
 fact the `del` statements are at the end of the module, far away from the usage.
 
-## Setting all
+### Setting all
 
 The solution to this is the `__all__` attribute. This is a public declaration of
 your exported API. It looks like this:

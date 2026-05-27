@@ -2,7 +2,7 @@
 title: Packaging
 ---
 
-# Packaging
+## Packaging
 
 In the section you will:
 
@@ -12,7 +12,7 @@ In the section you will:
 
 For more about packaging, see our [packaging guide][].
 
-## Create a minimal installable Python package
+### Create a minimal installable Python package
 
 Let’s create a Python package that contains this function.
 
@@ -90,13 +90,13 @@ At this point, your package's file structure will look like
 │       └── refraction.py
 ```
 
-## Install and use your package
+### Install and use your package
 
 Now that your package has the necessary elements, you can install it into your
 virtual environment (which should already be active). From the top level of your
 project’s directory, enter
 
-```
+```bash
 pip install -e .
 ```
 
@@ -128,9 +128,5 @@ In [1]: snell?
 
 For more about packaging, also see our [packaging guide][].
 
-<!-- prettier-ignore-start -->
-
 [version control with git]: https://swcarpentry.github.io/git-novice/
 [packaging guide]: pages/guides/packaging_simple
-
-<!-- prettier-ignore-end -->

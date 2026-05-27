@@ -2,7 +2,7 @@
 title: Backports
 ---
 
-# Backports
+## Backports
 
 A lot of additions to Python come with backports for older Pythons. Here are a
 few tips for using backports:
@@ -18,7 +18,7 @@ few tips for using backports:
 
 The rules for using a backport are as follows:
 
-## Conditional requirement
+### Conditional requirement
 
 Add it conditionally to your requirements. This looks something like this:
 
@@ -31,7 +31,7 @@ dependencies = [
 ]
 ```
 
-## Conditional usage
+### Conditional usage
 
 Always use the backport conditionally, with the following idiom:
 
@@ -61,7 +61,7 @@ advantages:
   important fixes landed in 3.10.
 - It matches your conditional requirements.
 
-## Placement in a file
+### Placement in a file
 
 Placing all conditional backports in a common location is a nice practice.
 Here's a suggestion: Place all imports inside `src/<package>/_compat`, in the
@@ -97,7 +97,7 @@ Ruff needs to know if you are re-exporting `typing`/`typing_extensions`, so make
 sure you add `typing-modules = ["<package>._compat.typing"]` to Ruff's config in
 `pyproject.toml`.
 
-## Typing dependencies
+### Typing dependencies
 
 While it's not usually necessary, you can avoid the `typing_extensions` backport
 at runtime by protecting the imports with `typing.TYPE_CHECKING`.
@@ -106,7 +106,7 @@ there's a good chance one of your dependencies is already pulling it. But if you
 really, really want to keep dependencies minimal, you can do this in your typing
 backport re-export file.
 
-## Common backport packages
+### Common backport packages
 
 - `typing_extensions`: New features in `typing` are added here first.
 - `importlib_metadata`: Added as `importlib.metadata` in 3.8, important updates

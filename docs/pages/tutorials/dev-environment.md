@@ -2,14 +2,14 @@
 title: Intro to development
 ---
 
-# Intro to development
+## Intro to development
 
 In this section you will:
 
 - Create an isolated software area ("virtual environment") to work in.
 - Open a code editor.
 
-## Development environment
+### Development environment
 
 If you want to work on Python software, you should _always_ have a virtual
 environment, an area to install the software that is isolated from other
@@ -27,7 +27,7 @@ There are many (arguably _too_ many) ways to do this in Python. Any modern tool
 should be fine, but here we recommend two options popular in the scientific
 Python community. If you already use a different way, that's fine, use that.
 
-### Option 1: Using pip
+#### Option 1: Using pip
 
 The most basic option is to use `venv`, which comes by default with Python.
 
@@ -45,14 +45,18 @@ To activate the virtual environment, type:
 
 ::::{tab-set}
 :::{tab-item} Linux/macOS
+
 ```bash
 . .venv/bin/activate
 ```
+
 :::
 :::{tab-item} Windows
+
 ```bat
 .venv\bin\Activate.bat
 ```
+
 :::
 ::::
 
@@ -89,7 +93,7 @@ you were at some past point in time.
 
 [uv]: https://github.com/astral-sh/uv
 
-### Option 2: Using conda
+#### Option 2: Using conda
 
 You can also develop in conda. This is an especially good option if:
 
@@ -125,7 +129,7 @@ To deactivate, use `conda deactivate`, or leave your shell.
 
 [pixi]: https://pixi.sh
 
-## Choosing an Editor
+### Choosing an Editor
 
 Any plain text editor will serve our purposes for this guide. Bare bones editors
 like Notepad or `nano` will do the job. More feature-rich Integrated Development

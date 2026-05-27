@@ -2,9 +2,9 @@
 title: Writing documentation
 ---
 
-# Writing documentation
+## Writing documentation
 
-## Build the documentation
+### Build the documentation
 
 Scientific Python software documentation can be written in the Markdown syntax,
 which looks like this:
@@ -95,7 +95,7 @@ You should see some log message ending in `build succeeded.` This created the
 directory `docs/build`. Open `docs/build/index.html` in your web browser to view
 the documentation.
 
-## Essential Features of MyST Markdown
+### Essential Features of MyST Markdown
 
 We refer you to the [MyST][] documentation for topics including:
 
@@ -106,7 +106,7 @@ We refer you to the [MyST][] documentation for topics including:
 - Math and equations
 - Including content from other files
 
-## Structure
+### Structure
 
 We began with this structure, having a single documentation page.
 
@@ -136,7 +136,7 @@ We can link them from the front page by using the MyST Markdown `{toctree}`
 directive.
 
 ````markdown
-```{toctree}
+```text {toctree}
 tutorials/installation.md
 tutorials/first-steps.md
 tutorials/real-application.md
@@ -145,7 +145,7 @@ tutorials/real-application.md
 
 For more details see the MyST documentation page on [organizing content][].
 
-## Automatically generate reference documentation
+### Automatically generate reference documentation
 
 Reference documentation provides comprehensive documentation of the API: all the
 inputs and outputs of every public object in the codebase. This should not be
@@ -175,7 +175,7 @@ install.)
 You can document a single object (e.g. function), shown inline on the page
 
 ````markdown
-```{eval-rst}
+```text {eval-rst}
 .. autofunction:: example.refraction.snell
     :noindex:
     :toctree: generated
@@ -185,7 +185,7 @@ You can document a single object (e.g. function), shown inline on the page
 Or you can generate a table that links out to documentation for each object.
 
 ````markdown
-```{eval-rst}
+```text {eval-rst}
 .. autosummary::
     :nosignatures:
     :toctree: generated
@@ -197,8 +197,6 @@ Or you can generate a table that links out to documentation for each object.
 See the [guide](pages/guides/docs) for more information on how to
 integrate this into a package, and setup for nox.
 
-<!-- prettier-ignore-start -->
-[diátaxis]: https://diataxis.fr/
 [sphinx]: https://www.sphinx-doc.org/
 [myst]: https://myst-parser.readthedocs.io/
 [organizing content]: https://myst-parser.readthedocs.io/en/latest/syntax/organising_content.html
@@ -206,4 +204,3 @@ integrate this into a package, and setup for nox.
 [mkdocs]: https://www.mkdocs.org/
 [mkdocs-material]: https://squidfunk.github.io/mkdocs-material/
 [documentation guide]: pages/guides/docs
-<!-- prettier-ignore-end -->

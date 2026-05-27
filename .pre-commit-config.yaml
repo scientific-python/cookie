@@ -32,7 +32,7 @@ repos:
     rev: "v0.15.14"
     hooks:
       - id: ruff-check
-        args: ["--fix", "--show-fixes"]
+        args: ["--fix"]
       - id: ruff-format
 
   - repo: https://github.com/pre-commit/pygrep-hooks
@@ -63,8 +63,13 @@ repos:
     rev: "v3.8.3"
     hooks:
       - id: prettier
-        types_or: [yaml, markdown, html, css, scss, javascript, json]
-        args: [--prose-wrap=always]
+        types_or: [yaml, html, css, scss, javascript, json]
+
+  - repo: https://github.com/rvben/rumdl-pre-commit
+    rev: v0.2.0
+    hooks:
+      - id: rumdl
+        args: [--no-exclude] # Disable all exclude patterns
 
   - repo: https://github.com/crate-ci/typos
     rev: "v1.46.3"

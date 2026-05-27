@@ -2,7 +2,7 @@
 title: Topical Guides
 ---
 
-# Topical Guides
+## Topical Guides
 
 The pages here are intended for developers who are making or maintaining a
 package and want to follow modern best practices in Python.
@@ -38,8 +38,6 @@ your repository with the guidelines, runnable [right in the guide][] via
 WebAssembly! All checks point to a linked badge in the guide.
 :::
 
-<!-- prettier-ignore-start -->
-
 [tutorials]:          pages/tutorials/index
 [style]:              pages/guides/style
 [mypy]:               pages/guides/mypy
@@ -52,7 +50,6 @@ WebAssembly! All checks point to a linked badge in the guide.
 [gha_pure]:           pages/guides/gha_pure
 [gha_wheels]:         pages/guides/gha_wheels
 [pytest]:             pages/guides/pytest
-[task runners]:       pages/guides/tasks
 [right in the guide]: pages/guides/repo_review
 
 [cookiecutter]:             https://cookiecutter.readthedocs.io
@@ -62,7 +59,6 @@ WebAssembly! All checks point to a linked badge in the guide.
 [sp-repo-review]:           https://pypi.org/project/sp-repo-review
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 
-<!-- prettier-ignore-end -->
 
-```{tableofcontents}
+```text {tableofcontents}
 ```
