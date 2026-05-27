@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cd docs && myst build --html",
+    "build": "cd docs && myst build --html && cd .. && bash helpers/copy-assets.sh",
     "serve": "cd docs && myst start",
     "clean": "rm -rf docs/_build"
   },

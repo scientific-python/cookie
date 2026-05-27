@@ -43,12 +43,14 @@ project:
     - file: pages/guides/repo_review.md
 
 site:
+  template: book-theme
   nav:
     - title: Scientific Python
       url: https://scientific-python.org
     - title: Learn
       url: https://learn.scientific-python.org
-    - title: Cookie
+  actions:
+    - title: src
       url: https://github.com/scientific-python/cookie
   options:
     favicon: assets/favicon.ico

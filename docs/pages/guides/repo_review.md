@@ -21,6 +21,5 @@ pipx run 'sp-repo-review[cli]' <path to repo>
 
 ---
 
-:::{iframe} <https://scientific-python.github.io/repo-review/>
-:width: 100%
+:::{anywidget} /assets/js/repo-review-widget.mjs
 :::
