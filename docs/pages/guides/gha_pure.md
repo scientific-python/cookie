@@ -185,7 +185,7 @@ delete your user-scoped token and generate a new project-scoped token.
 :::
 ::::
 
-:::{dropdown} Complete recipe
+:::::{dropdown} Complete recipe
 This can be used on almost any package with a standard
 `.github/workflows/cd.yml` recipe. This works because `pyproject.toml` describes
 exactly how to build your package, hence all packages build exactly via the same
@@ -291,7 +291,7 @@ You'll need to go to PyPI, generate a token for your user, and put it into
 delete your user-scoped token and generate a new project-scoped token.
 :::
 ::::
-:::
+:::::
 
 [pep 517]: https://www.python.org/dev/peps/pep-0517/
 [pep 518]: https://www.python.org/dev/peps/pep-0518/

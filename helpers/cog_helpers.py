@@ -84,6 +84,9 @@ class TOMLMatcher:
 
 @contextlib.contextmanager
 def code_fence(lang: str, /, *, width: int = 3) -> Generator[None, None, None]:
+    # Fixed in https://github.com/jupyter-book/myst-theme/pull/883
+    if lang == "toml":
+        lang = "ini"
     tics = "`" * width
     print("<!-- rumdl-disable MD013 -->")  # noqa: T201
     print(f"{tics}{lang}")  # noqa: T201

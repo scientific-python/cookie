@@ -140,8 +140,8 @@ There are a _few_ options, mostly to enable/disable certain files, remove string
 normalization, and to change the line length, and those go in your
 `pyproject.toml` file.
 
-::::{tab-set}
-:::{tab-item} Ruff-format
+:::::{tab-set}
+::::{tab-item} Ruff-format
 Ruff, the powerful Rust-based linter, has a formatter that is designed with the
 help of some of the Black authors to look 99.9% like Black, but run 30x faster.
 Here is the snippet to add the formatter to your `.pre-commit-config.yml`
@@ -171,8 +171,8 @@ recommended as well.
 ```
 
 :::
-:::
-:::{tab-item} Black
+::::
+::::{tab-item} Black
 Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
@@ -195,8 +195,8 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 ```
 
 :::
-:::
 ::::
+:::::
 
 In _very_ specific situations, like when making a 2D array, you may want to
 retain special formatting. After carefully deciding that it is a special use
@@ -435,7 +435,7 @@ release.
 
 :::
 
-:::{dropdown} Separate tools that Ruff replaces
+::::{dropdown} Separate tools that Ruff replaces
 
 #### PyCln
 
@@ -600,7 +600,7 @@ args: ["-a", "from __future__ import annotations"]
 Also make sure isort comes before pyupgrade. Now when you run pre-commit, it
 will clean up your annotations to 3.7+ style, too!
 :::
-:::
+::::
 
 ### Type checking
 
@@ -681,7 +681,7 @@ errors in your typing.
 
 If you use setuptools, these checks are useful:
 
-:::{dropdown} Setuptools-only checks
+::::{dropdown} Setuptools-only checks
 
 #### Check-Manifest (setuptools only)
 
@@ -742,7 +742,7 @@ important parts (like Python classifiers) are in sync. This tool,
 ```
 
 Make sure you list the highest version of Python you are testing with here.
-:::
+::::
 
 ### Spelling
 

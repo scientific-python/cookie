@@ -19,7 +19,8 @@ export async function render({ model, el }) {
   // Determine the correct path to the app
   // The widget will be in /build/ and the app is in /assets/js/
   const baseUrl = new URL(import.meta.url);
-  const appUrl = new URL("../../assets/js/repo-review-app.min.js", baseUrl).href;
+  const appUrl = new URL("../../assets/js/repo-review-app.min.js", baseUrl)
+    .href;
 
   // Load the app via dynamic import
   try {
@@ -38,7 +39,7 @@ export async function render({ model, el }) {
       });
     } else {
       console.warn(
-        "repo-review-app.min.js does not export mountApp, attempting alternative load"
+        "repo-review-app.min.js does not export mountApp, attempting alternative load",
       );
       // Try loading as a script tag instead
       loadAppAsScript(appUrl);

@@ -16,7 +16,7 @@ the Features that your project provides. Then we will cover
 [Project Level Integration tests](#project-level-integration-tests), which test
 that the various parts of your package work together, and work with the other
 packages it depends on. Finally we will cover the venrable
-[Unit Test](#unit-tests), which test the correctness of your code from a
+{ref}`Unit Test <unit-tests>`, which test the correctness of your code from a
 perspective internal to your codebase, tests individual units in isolation, and
 are optimized to run quickly and often.
 
@@ -101,11 +101,11 @@ Tests should be divided up into different Suites, which can be run independently
 of one another.
 
 Tests which "Fail Fast" save both developer and compute time. Some tests are by
-necessity very slow. [Unit Tests](#unit-tests) should run extremely quickly in
-just a few seconds at most, while [end-to-end](#end-to-end-tests) require time
-to set up and may depend on slow and unreliable external services. By organizing
-tests into suites based on execution time, you can run fast suites first and
-stop if an error is encountered before running slower suites.
+necessity very slow. {ref}`Unit Tests <unit-tests>` should run extremely quickly
+in just a few seconds at most, while [end-to-end](#end-to-end-tests) require
+time to set up and may depend on slow and unreliable external services. By
+organizing tests into suites based on execution time, you can run fast suites
+first and stop if an error is encountered before running slower suites.
 
 #### Advantages of Test Suites
 

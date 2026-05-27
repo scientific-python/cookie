@@ -57,3 +57,4 @@ site:
     logo: assets/images/logo.svg
     logo_text: Scientific Python Development Guide
     style: assets/css/site.css
+    hide_footer_links: false
