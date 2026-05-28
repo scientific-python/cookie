@@ -20,5 +20,5 @@ through the section on [principles](pages/principles/index). As
 your project grows you may find some good use for the more specific and advanced
 topics covered in the [guides](pages/guides/index).
 
-```text {tableofcontents}
+```{tableofcontents}
 ```

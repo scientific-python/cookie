@@ -13,5 +13,5 @@ read and maintain code.
 [Design recommendations]: pages/principles/design
 
 
-```text {tableofcontents}
+```{tableofcontents}
 ```

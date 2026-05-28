@@ -174,18 +174,22 @@ install.)
 
 You can document a single object (e.g. function), shown inline on the page
 
+<!-- rumdl bug https://github.com/rvben/rumdl/issues/643 -->
+<!-- rumdl-disable -->
 ````markdown
-```text {eval-rst}
+```{eval-rst}
 .. autofunction:: example.refraction.snell
     :noindex:
     :toctree: generated
 ```
 ````
+<!-- rumdl-enable -->
 
 Or you can generate a table that links out to documentation for each object.
 
+<!-- rumdl-disable -->
 ````markdown
-```text {eval-rst}
+```{eval-rst}
 .. autosummary::
     :nosignatures:
     :toctree: generated
@@ -193,6 +197,7 @@ Or you can generate a table that links out to documentation for each object.
     example.refraction.snell
 ```
 ````
+<!-- rumdl-enable -->
 
 See the [guide](pages/guides/docs) for more information on how to
 integrate this into a package, and setup for nox.

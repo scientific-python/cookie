@@ -683,7 +683,7 @@ def build_api_docs(session: nox.Session) -> None:
 And you'll need this added to your `docs/index.md`:
 
 ````md
-```text {toctree}
+```{toctree}
 :maxdepth: 2
 :hidden:
 :caption: API
