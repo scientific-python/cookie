@@ -149,6 +149,9 @@ class PC180(PreCommit):
         "https://github.com/hukkin/mdformat",
         "https://github.com/rvben/rumdl-pre-commit",
         "https://github.com/davidanson/markdownlint-cli2",
+        "https://github.com/jolars/panache-pre-commit",
+        "https://github.com/akiomik/mado",
+        "https://github.com/markdownlint/markdownlint",
     }
 
 
