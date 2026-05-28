@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cd docs && NODE_OPTIONS='--localstorage-file=_build/.node-localstorage --no-deprecation' myst build --html && cd .. && bash helpers/copy-assets.sh",
+    "build": "cd docs && NODE_OPTIONS='--localstorage-file=_build/.node-localstorage --no-deprecation' myst build --html",
     "serve": "cd docs && NODE_OPTIONS='--localstorage-file=_build/.node-localstorage --no-deprecation' myst start",
     "clean": "rm -rf docs/_build"
   },
