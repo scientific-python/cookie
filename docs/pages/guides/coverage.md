@@ -158,6 +158,7 @@ import sys
 
 import nox
 
+
 @nox.session
 def tests(session: nox.Session) -> None:
     coverage_file = f".coverage.{sys.platform}.{session.python}"
@@ -180,6 +181,7 @@ def tests(session: nox.Session) -> None:
 import sys
 
 import nox
+
 
 @nox.session
 def tests(session: nox.Session) -> None:

@@ -3,6 +3,7 @@
 This repo has three distinct concerns: a **cookiecutter/copier template** for
 new Python projects (`{{cookiecutter.project_name}}/`), a **repo-review plugin**
 (`src/sp_repo_review/`), and a **MyST/MystMD-based developer guide** (`docs/`).
+
 ## Key commands
 
 ### sp-repo-review (the package)
