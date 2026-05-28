@@ -154,14 +154,22 @@ Here's an example nox job:
 :sync: coverage
 
 ```python
-session.run(
-    "coverage",
-    "run",
-    "-m",
-    "pytest",
-    *session.posargs,
-    env={"COVERAGE_FILE": coverage_file},
-)
+import sys
+
+import nox
+
+@nox.session
+def tests(session: nox.Session) -> None:
+    coverage_file = f".coverage.{sys.platform}.{session.python}"
+    session.install("-e.", "--group=cov")
+    session.run(
+        "coverage",
+        "run",
+        "-m",
+        "pytest",
+        *session.posargs,
+        env={"COVERAGE_FILE": coverage_file},
+    )
 ```
 
 :::
@@ -169,13 +177,21 @@ session.run(
 :sync: pytest-cov
 
 ```python
-session.run(
-    "pytest",
-    "--cov=<package_name>",
-    "--cov-config=pyproject.toml",
-    *session.posargs,
-    env={"COVERAGE_FILE": coverage_file},
-)
+import sys
+
+import nox
+
+@nox.session
+def tests(session: nox.Session) -> None:
+    coverage_file = f".coverage.{sys.platform}.{session.python}"
+    session.install("-e.", "--group=cov")
+    session.run(
+        "pytest",
+        "--cov=<package_name>",
+        "--cov-config=pyproject.toml",
+        *session.posargs,
+        env={"COVERAGE_FILE": coverage_file},
+    )
 ```
 
 :::

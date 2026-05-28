@@ -2,8 +2,7 @@
 
 This repo has three distinct concerns: a **cookiecutter/copier template** for
 new Python projects (`{{cookiecutter.project_name}}/`), a **repo-review plugin**
-(`src/sp_repo_review/`), and a **Jekyll-based developer guide** (`docs/`).
-
+(`src/sp_repo_review/`), and a **MyST/MystMD-based developer guide** (`docs/`).
 ## Key commands
 
 ### sp-repo-review (the package)
@@ -80,9 +79,9 @@ The noxfile generates temporary projects for **all 9 backends** × **vcs on/off*
 - Custom CSS: `docs/assets/css/site.css` — only `.rr-btn` badge styling remains.
 - Docs pages in `docs/pages/` contain cog blocks that auto-generate config
   examples from the template.
-- The repo-review interactive page uses an `{iframe}` pointing to the WASM app
-  at `https://scientific-python.github.io/repo-review/`.
+- The repo-review interactive page is embedded using an `{anywidget}` directive
+  (see `docs/pages/guides/repo_review.md`).
 - Tab-sets use `:sync: <tab-name>` for cross-page tab synchronization, where the
   sync key is the tab label itself (e.g., `sphinx`, `mkdocs`,
   `trusted-publishing`, `scikit-build-core`).
-- TOML code bloacks use "ini" to get syntax highlighting for now.
+- TOML code blocks use "ini" to get syntax highlighting for now.

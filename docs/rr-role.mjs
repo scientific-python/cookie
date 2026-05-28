@@ -7,6 +7,14 @@
  * The .rr-btn CSS is in assets/css/site.css.
  */
 
+const escapeHtml = (value) =>
+  String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
 const rrRole = {
   name: "rr",
   body: {
@@ -14,11 +22,13 @@ const rrRole = {
     required: true,
   },
   run(data) {
-    const code = data.body;
+    const code = String(data.body).trim();
+    const safeId = code.replace(/[^A-Za-z0-9_-]/g, "_");
+
     return [
       {
         type: "html",
-        value: `<span class="rr-btn">${code}</span>`,
+        value: `<span class="rr-btn" id="${safeId}">${escapeHtml(code)}</span>`,
       },
     ];
   },

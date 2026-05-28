@@ -21,42 +21,40 @@ main {
   flex-shrink: 0;
   background: #013243;
   color: white;
-  padding-left: 2rem;
-  padding-right: 2rem;
   padding-left: 3.5rem;
   padding-right: 3.5rem;
+}
 
-  & .outer-grid {
-    grid-template-columns: 3fr 3fr 4fr;
-    align-items: center;
-    margin-bottom: 0rem;
+.footer .outer-grid {
+  grid-template-columns: 3fr 3fr 4fr;
+  align-items: center;
+  margin-bottom: 0rem;
+}
 
-    & li {
-      list-style: none;
-    }
+.footer .outer-grid li {
+  list-style: none;
+}
+
+@media (max-width: 640px) {
+  .footer .outer-grid {
+    grid-template-columns: 1fr;
+    justify-items: start;
   }
+}
 
-  @media (max-width: 640px) {
-    & .outer-grid {
-      grid-template-columns: 1fr;
-      justify-items: start;
-    }
-  }
+.footer a,
+.footer h1,
+.footer h2,
+.footer h3,
+.footer h4,
+.footer h5,
+.footer h6 {
+  color: white;
+}
 
-  & a,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: white;
-  }
-
-  & h1 {
-    font-size: 1.25rem;
-    font-weight: bold;
-  }
+.footer h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 .myst-fm-downloads-button {
