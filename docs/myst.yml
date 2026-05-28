@@ -4,6 +4,7 @@ extends: config/scientific-python.yml
 project:
   title: Scientific Python Development Guide
   github: https://github.com/scientific-python/cookie
+  jupyter: false
   plugins:
     - rr-role.mjs
 
