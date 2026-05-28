@@ -21,7 +21,8 @@ pipx run 'sp-repo-review[cli]' <path to repo>
 
 ---
 
-:::{anywidget} <https://cdn.jsdelivr.net/npm/repo-review-webapp@1.1.2/dist/repo-review-anywidget.mjs>
+<!-- rumdl-disable-next-line MD034 -->
+:::{anywidget} https://cdn.jsdelivr.net/npm/repo-review-webapp@1.1.3/dist/repo-review-anywidget.mjs
 {
   "url_sync": true,
   "deps": [

@@ -18,6 +18,7 @@
 <!-- SPHINX-START -->
 {%- endif %}
 
+<!-- prettier-ignore-start -->
 [actions-badge]:            {{cookiecutter.url}}/actions/workflows/ci.yml/badge.svg
 [actions-link]:             {{cookiecutter.url}}/actions
 [conda-badge]:              https://img.shields.io/conda/vn/conda-forge/{{cookiecutter.project_name}}
@@ -35,3 +36,4 @@
 [coverage-badge]:           https://codecov.io/{{cookiecutter.__ci}}/{{cookiecutter.org}}/{{cookiecutter.project_name}}/branch/main/graph/badge.svg
 [coverage-link]:            https://codecov.io/{{cookiecutter.__ci}}/{{cookiecutter.org}}/{{cookiecutter.project_name}}
 
+<!-- prettier-ignore-end -->
