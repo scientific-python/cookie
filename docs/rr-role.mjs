@@ -23,12 +23,11 @@ const rrRole = {
   },
   run(data) {
     const code = String(data.body).trim();
-    const safeId = code.replace(/[^A-Za-z0-9_-]/g, "_");
 
     return [
       {
         type: "html",
-        value: `<span class="rr-btn" id="${safeId}">${escapeHtml(code)}</span>`,
+        value: `<span class="rr-btn">${escapeHtml(code)}</span>`,
       },
     ];
   },

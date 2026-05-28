@@ -44,7 +44,6 @@ project:
 
 site:
   template: book-theme
-  html_head: '<meta name="readthedocs-project-slug" content="scientific-python-cookie">'
   nav:
     - title: Scientific Python
       url: https://scientific-python.org
@@ -54,6 +53,7 @@ site:
     - title: src
       url: https://github.com/scientific-python/cookie
   options:
+    html_head: '<meta name="readthedocs-project-slug" content="scientific-python-cookie">'
     favicon: assets/favicon.ico
     logo: assets/images/logo.svg
     logo_text: Scientific Python Development Guide
