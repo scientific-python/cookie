@@ -45,7 +45,7 @@ class MY101(MyPy):
         your settings already, ignore this check or set `strict = false`
         explicitly.
 
-        ```ini
+        ```toml
         [tool.mypy]
         strict = true
         ```
@@ -91,7 +91,7 @@ class MY103(MyPy):
         static checks), so it's okay to set it to false if you need to. But try
         it first - it can catch real bugs too.
 
-        ```ini
+        ```toml
         [tool.mypy]
         warn_unreachable = true
         ```
@@ -117,7 +117,7 @@ class MY104(MyPy):
         will force all skips in your project to include the error code, which
         makes them more readable, and avoids skipping something unintended.
 
-        ```ini
+        ```toml
         [tool.mypy]
         enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
         ```
@@ -142,7 +142,7 @@ class MY105(MyPy):
         Must have `"redundant-expr"` in `enable_error_code = [...]`. This helps
         catch useless lines of code, like checking the same condition twice.
 
-        ```ini
+        ```toml
         [tool.mypy]
         enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
         ```
@@ -167,7 +167,7 @@ class MY106(MyPy):
         Must have `"truthy-bool"` in `enable_error_code = []`. This catches
         mistakes in using a value as truthy if it cannot be falsy.
 
-        ```ini
+        ```toml
         [tool.mypy]
         enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
         ```

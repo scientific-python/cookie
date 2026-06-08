@@ -179,7 +179,7 @@ class NOX201(Nox):
         """
         You should have a script block with nox in it, for example:
 
-        ```ini
+        ```toml
         # /// script
         # dependencies = ["nox"]
         # ///

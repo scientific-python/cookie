@@ -25,12 +25,18 @@ jobs:
     if: fromJSON(needs.change-detection.outputs.run-rr)
     uses: ./.github/workflows/reusable-rr-tests.yml
 
+  docs:
+    needs: change-detection
+    if: fromJSON(needs.change-detection.outputs.run-docs)
+    uses: ./.github/workflows/reusable-docs.yml
+
   pass:
     if: always()
     needs:
       - change-detection
       - cookie
       - rr-tests
+      - docs
     runs-on: ubuntu-latest
 
     steps:
@@ -49,6 +55,12 @@ jobs:
               && ''
               || '
               rr-tests,
+              '
+            }} ${{
+              fromJSON(needs.change-detection.outputs.run-docs)
+              && ''
+              || '
+              docs,
               '
             }}
           jobs: ${{ toJSON(needs) }}

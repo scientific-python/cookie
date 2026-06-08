@@ -170,7 +170,7 @@ class PP006(PyProject):
         These are better than the old `extras` system for tests, docs, and other
         dependencies that are not needed for PyPI installs.
 
-        ```ini
+        ```toml
         [dependency-groups]
         dev = [ {{ include-group = "test" }} ]
         test = [ "pytest" ]
@@ -215,7 +215,7 @@ class PP302(PyProject):
         support `pyproject.toml` ini configuration) or 9 (first version to
         support native configuration and toml config files).
 
-        ```ini
+        ```toml
         # Old pytest
         [tool.pytest.ini_options]
         minversion = "6"
@@ -244,7 +244,7 @@ class PP303(PyProject):
         """
         The `testpaths` setting should be set to a reasonable default.
 
-        ```ini
+        ```toml
         # Old pytest
         [tool.pytest.ini_options]
         testpaths = ["tests"]
@@ -270,7 +270,7 @@ class PP304(PyProject):
         `log_level` should be set. This will allow logs to be displayed on
         failures.
 
-        ```ini
+        ```toml
         # Old pytest
         [tool.pytest.ini_options]
         log_level = "INFO"
@@ -297,7 +297,7 @@ class PP305(PyProject):
         be set. You can manually specify if a check should be strict when
         setting each xfail.
 
-        ```ini
+        ```toml
         [tool.pytest.ini_options]
         xfail_strict = true
 
@@ -326,7 +326,7 @@ class PP306(PyProject):
         `strict_config` or `strict` should be set. This forces an error if a
         config setting is misspelled.
 
-        ```ini
+        ```toml
         # Old pytest
         [tool.pytest.ini_options]
         addopts = ["-ra", "--strict-config", "--strict-markers"]
@@ -357,7 +357,7 @@ class PP307(PyProject):
         `strict_markers` or `strict` should be set. This forces test markers to
         be specified in config, avoiding misspellings.
 
-        ```ini
+        ```toml
         # Old pytest
         [tool.pytest.ini_options]
         addopts = ["-ra", "--strict-config", "--strict-markers"]
@@ -387,7 +387,7 @@ class PP308(PyProject):
         An explicit summary flag like `-ra` should be in `addopts = [...]`
         (print summary of all fails/errors).
 
-        ```ini
+        ```toml
         # Old pytest
         [tool.pytest.ini_options]
         addopts = ["-ra", "--strict-config", "--strict-markers"]
@@ -416,7 +416,7 @@ class PP309(PyProject):
         `filterwarnings` must be set (probably to at least `["error"]`). Python
         will hide important warnings otherwise, like deprecations.
 
-        ```ini
+        ```toml
         # Old pytest
         [tool.pytest.ini_options]
         filterwarnings = ["error"]

@@ -85,4 +85,8 @@ The noxfile generates temporary projects for **all 9 backends** × **vcs on/off*
 - Tab-sets use `:sync: <tab-name>` for cross-page tab synchronization, where the
   sync key is the tab label itself (e.g., `sphinx`, `mkdocs`,
   `trusted-publishing`, `scikit-build-core`).
-- TOML code blocks use "ini" to get syntax highlighting for now.
+- TOML code blocks in the docs use "ini" to get syntax highlighting for now.
+  This is applied only at the docs layer (the `code_fence` cog helper in
+  `helpers/cog_helpers.py` rewrites `toml`→`ini`); do **not** change the `toml`
+  fences in the `src/sp_repo_review/checks/*.py` docstrings, which are rendered
+  by repo-review itself, not this site.
