@@ -32,7 +32,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - uses: astral-sh/setup-uv@v8.1.0
+      - uses: astral-sh/setup-uv@v8.2.0
 
       - uses: j178/prek-action@v2
 
@@ -67,7 +67,7 @@ jobs:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
           allow-prereleases: true
 
-      - uses: astral-sh/setup-uv@v8.1.0
+      - uses: astral-sh/setup-uv@v8.2.0
 
       {%- if cookiecutter.backend == "mesonpy" %}
 
@@ -86,7 +86,7 @@ jobs:
           --durations=20
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         with:
           token: {% raw %}${{ secrets.CODECOV_TOKEN }}{% endraw %}
 

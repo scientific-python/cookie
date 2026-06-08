@@ -229,7 +229,7 @@ enough for a simple testing suite, can be written as follows:
 
 ```yaml
 - name: Upload coverage report
-  uses: codecov/codecov-action@v6
+  uses: codecov/codecov-action@v7
   with:
     token: ${{ secrets.CODECOV_TOKEN }}
 ```
