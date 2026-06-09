@@ -14,7 +14,7 @@ If you would like to use backport packages, see [Backports][].
 
 If you are wondering about public API, see [Exports][].
 
-[including data files]: pages/patterns/data_files
+[including data files]: pages/patterns/data-files
 [backports]: pages/patterns/backports
 [exports]: pages/patterns/exports
 

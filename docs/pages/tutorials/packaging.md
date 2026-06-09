@@ -129,4 +129,4 @@ In [1]: snell?
 For more about packaging, also see our [packaging guide][].
 
 [version control with git]: https://swcarpentry.github.io/git-novice/
-[packaging guide]: pages/guides/packaging_simple
+[packaging guide]: pages/guides/packaging-simple

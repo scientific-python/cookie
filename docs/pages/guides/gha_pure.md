@@ -27,7 +27,7 @@ reasons that a wheel is better than only providing an sdist:
   is going to go
 :::
 
-[on the next page]: pages/guides/gha_wheels
+[on the next page]: pages/guides/gha-wheels
 
 ### Job setup
 
