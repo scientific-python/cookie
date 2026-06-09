@@ -1,0 +1,108 @@
+/* Scientific Python theme base
+ * Adapted from https://github.com/scientific-python/scientific-python-myst-theme
+ */
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  min-height: 0;
+  flex: 1 0 auto;
+}
+
+.article.content {
+  min-height: 0;
+}
+
+.footer {
+  flex-shrink: 0;
+  background: #013243;
+  color: white;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
+.footer .outer-grid {
+  grid-template-columns: 3fr 3fr 4fr;
+  align-items: center;
+  margin-bottom: 0rem;
+}
+
+.footer .outer-grid li {
+  list-style: none;
+}
+
+@media (max-width: 640px) {
+  .footer .outer-grid {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+}
+
+.footer a,
+.footer h1,
+.footer h2,
+.footer h3,
+.footer h4,
+.footer h5,
+.footer h6 {
+  color: white;
+}
+
+.footer h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.myst-fm-downloads-button {
+  display: none;
+}
+
+.myst-home-link {
+  font-weight: bold;
+}
+
+.bd-main .bd-content .bd-article-container {
+  max-width: 900px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.01em;
+}
+
+.bd-header {
+  box-shadow: none;
+}
+
+.bd-sidebar-primary {
+  border-right: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* rr-btn: inline repo-review check badge, rendered by {rr} MyST role  */
+/* ------------------------------------------------------------------ */
+
+.rr-btn {
+  border-radius: 4px;
+  background-color: #808080;
+  color: white;
+  padding: 1px 4px;
+  font-size: 9pt;
+  font-family: sans-serif;
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+}
+
+.rr-btn::before {
+  content: "sp-repo-review";
+  font-size: 5pt;
+  display: block;
+  text-align: center;
+}

@@ -1,14 +1,8 @@
 ---
-layout: page
 title: Classic packaging
-permalink: /guides/packaging-classic/
-nav_order: 7
-parent: Topical Guides
 ---
 
-{% include toc.html %}
-
-# Classic packaging
+## Classic packaging
 
 The libraries in the scientific Python ecosytem have a variety of different
 packaging styles, but this document is intended to outline a recommended style
@@ -18,31 +12,31 @@ outlined as well.
 There are several popular packaging systems. This guide covers the old
 configuration style for [Setuptools][]. Unless you really need it, you should be
 using the modern style described in [Simple
-Packaging]({% link pages/guides/packaging_simple.md %}). The modern style is
+Packaging](pages/guides/packaging_simple). The modern style is
 guided by Python Enhancement Proposals (PEPs), and is more stable than the
 setuptools-specific mechanisms that evolve over the years. This page is kept to
 help users with legacy code (and hopefully upgrade it).
 
-{: .note }
+:::{note}
+Raw source lives in git and has a `pyproject.toml` and/or a `setup.py`. You
+_can_ install directly from git via pip, but normally users install from
+distributions hosted on PyPI. There are three options: **A)** A source
+package, called an SDist and has a name that ends in `.tar.gz`. This is a copy
+of the GitHub repository, stripped of a few specifics like CI files, and
+possibly with submodules included (if there are any). **B)** A pure python
+wheel, which ends in `.whl`; this is only possible if there are no compiled
+extensions in the library. This does _not_ contain a setup.py, but rather a
+`PKG_INFO` file that is rendered from setup.py (or from another build system).
+**C)** If not pure Python, a collection of wheels for every binary platform,
+generally one per supported Python version and OS as well.
 
-> Raw source lives in git and has a `pyproject.toml` and/or a `setup.py`. You
-> _can_ install directly from git via pip, but normally users install from
-> distributions hosted on PyPI. There are three options: **A)** A source
-> package, called an SDist and has a name that ends in `.tar.gz`. This is a copy
-> of the GitHub repository, stripped of a few specifics like CI files, and
-> possibly with submodules included (if there are any). **B)** A pure python
-> wheel, which ends in `.whl`; this is only possible if there are no compiled
-> extensions in the library. This does _not_ contain a setup.py, but rather a
-> `PKG_INFO` file that is rendered from setup.py (or from another build system).
-> **C)** If not pure Python, a collection of wheels for every binary platform,
-> generally one per supported Python version and OS as well.
->
-> Developer requirements (users of A or git) are generally higher than the
-> requirements to use B or C. Poetry and optionally flit create SDists that
-> include a `setup.py`, and all alternate packing systems produce "normal"
-> wheels.
+Developer requirements (users of A or git) are generally higher than the
+requirements to use B or C. Poetry and optionally flit create SDists that
+include a `setup.py`, and all alternate packing systems produce "normal"
+wheels.
+:::
 
-## Package structure (medium priority)
+### Package structure (medium priority)
 
 All packages _should_ have a `src` folder, with the package code residing inside
 it, such as `src/<package>/`. This may seem like extra hassle; after all, you
@@ -52,11 +46,11 @@ common bugs, such as running `pytest` and getting the local version instead of
 the installed version - this obviously tends to break if you build parts of the
 library or if you access package metadata.
 
-## PEP 517/518 support (high priority)
+### PEP 517/518 support (high priority)
 
 Packages should provide a `pyproject.toml` file that _at least_ looks like this:
 
-```toml
+```ini
 [build-system]
 requires = ["setuptools>=42"]
 build-backend = "setuptools.build_meta"
@@ -85,16 +79,16 @@ these "[hypermodern][]" packaging tools is growing in scientific Python
 packages. All tools build the same wheels (and they often build setuptools
 compliant SDists, as well).
 
-{% rr PP003 %} Note that `"wheel"` is never required; it was injected
+{rr}`PP003` Note that `"wheel"` is never required; it was injected
 automatically by setuptools in older versions, and is no longer used at all.
 
-### Special additions: NumPy
+#### Special additions: NumPy
 
 You may want to build against NumPy (mostly for Cython packages, pybind11 does
 not need to access the NumPy headers). This is the recommendation for scientific
 Python packages supporting older versions of NumPy:
 
-```toml
+```ini
 requires = [
     "oldest-supported-numpy",
 ```
@@ -104,32 +98,33 @@ package. Whether you build the wheel locally or on CI, you can transfer it to
 someone else and it will work on any supported NumPy. The
 `oldest-supported-numpy` package is a SciPy metapackage from the NumPy
 developers that tracks the
-[correct version of NumPy to build wheels against for each version of Python and for each OS/implementation](https://github.com/scipy/oldest-supported-numpy/blob/master/setup.cfg).
+[correct version of NumPy to build wheels against for each version of Python
+and for each OS/implementation][oldest-supported-numpy].
 Otherwise, you would have to list the earliest version of NumPy that had support
 for each Python version here.
 
-{: .note }
+:::{note}
+Modern versions of NumPy (1.25+) allow you to target older versions when
+building, which is _highly_ recommended, and this will become required in
+NumPy 2.0. Now you add:
 
-> Modern versions of NumPy (1.25+) allow you to target older versions when
-> building, which is _highly_ recommended, and this will become required in
-> NumPy 2.0. Now you add:
->
-> ```cpp
-> #define NPY_TARGET_VERSION NPY_1_22_API_VERSION
-> ```
->
-> (Where that number is whatever version you support as a minimum) then make
-> sure you build with NumPy 1.25+ (or 2.0+ when it comes out).
+```cpp
+#define NPY_TARGET_VERSION NPY_1_22_API_VERSION
+```
 
-## Versioning (medium/high priority)
+(Where that number is whatever version you support as a minimum) then make
+sure you build with NumPy 1.25+ (or 2.0+ when it comes out).
+:::
+
+### Versioning (medium/high priority)
 
 Scientific Python packages should use one of the following systems:
 
-### Git tags: official PyPA method
+#### Git tags: official PyPA method
 
 One more section is very useful in your `pyproject.toml` file:
 
-```toml
+```ini
 requires = [
     "setuptools>=42",
     "setuptools_scm[toml]>=3.4",
@@ -189,8 +184,6 @@ computed correctly from a checkout that is too shallow. For GitHub Actions, use
 For GitHub actions, you can add a few lines that will enable you to manually
 trigger builds with custom versions:
 
-{% raw %}
-
 ```yaml
 on:
   workflow_dispatch:
@@ -201,16 +194,14 @@ env:
   SETUPTOOLS_SCM_PRETEND_VERSION: ${{ github.event.inputs.overrideVersion }}
 ```
 
-{% endraw %}
-
 If you fill in the override version setting when triggering a manual workflow
 run, that version will be forced, otherwise, it works as normal.
 
-{: .note }
-
-> Make sure you have a good gitignore, probably starting from
-> [GitHub's Python one](https://github.com/github/gitignore/blob/main/Python.gitignore)
-> or using a [generator site](https://www.toptal.com/developers/gitignore).
+:::{note}
+Make sure you have a good gitignore, probably starting from
+[GitHub's Python one](https://github.com/github/gitignore/blob/main/Python.gitignore)
+or using a [generator site](https://www.toptal.com/developers/gitignore).
+:::
 
 You should also add these two files:
 
@@ -232,7 +223,7 @@ This will allow git archives (including the ones generated from GitHub) to also
 support versioning. This will only work with `setuptools_scm>=7` (though adding
 the files won't hurt older versions).
 
-### Classic in-source versioning
+#### Classic in-source versioning
 
 Recent versions of `setuptools` have improved in-source versioning. If you have
 a simple file that includes a line with a simple PEP 440 style version, like
@@ -253,7 +244,7 @@ requirements only, this will fail.
 Flit will always look for `package.__version__`, and so will always import your
 package; you just have to deal with that if you use Flit.
 
-## Setup configuration (medium priority)
+### Setup configuration (medium priority)
 
 You should put as much as possible in your `setup.cfg`, and leave `setup.py` for
 _only_ parts that need custom logic or binary building. This keeps your
@@ -324,7 +315,7 @@ where = src
 #     extern
 ```
 
-{% rr SCFG001 %} Note that all keys use underscores; using a dash will cause
+{rr}`SCFG001` Note that all keys use underscores; using a dash will cause
 warnings and eventually failures.
 
 And, a possible `setup.py`; though in recent versions of pip, there no longer is
@@ -357,13 +348,13 @@ SDist structure that shows up in another place in the package, then replace
 With the exception of flake8, all package configuration should be possible via
 `pyproject.toml`, such as pytest (6+):
 
-```toml
+```ini
 [tool.pytest]
 junit_family = "xunit2"
 testpaths = ["tests"]
 ```
 
-## Extras (low/medium priority)
+### Extras (low/medium priority)
 
 It is recommended to use extras instead of or in addition to making requirement
 files. These extras a) correctly interact with install requires and other
@@ -407,7 +398,7 @@ Self dependencies can be placed in `setup.cfg` using the name of the package,
 such as `dev = package[test,examples]`, but this requires Pip 21.2 or newer. We
 recommend providing at least `test`, `docs`, and `dev`.
 
-## Including/excluding files in the SDist
+### Including/excluding files in the SDist
 
 Python packaging goes through a 3-stage procedure if you have the above
 recommended `pyproject.toml` file. If you type `pip install .`, then
@@ -435,7 +426,7 @@ be all of git][setuptools_scm file]; if you do not, the default is a few common
 files, like any `.py` files and standard tooling. Here is a useful default,
 though be sure to update it to include any files that need to be included:
 
-```
+```text
 graft src
 graft tests
 
@@ -443,7 +434,7 @@ include LICENSE README.md pyproject.toml setup.py setup.cfg
 global-exclude __pycache__ *.py[cod] .venv
 ```
 
-## Command line
+### Command line
 
 If you want to ship an "app" that a user can run from the command line, you need
 to add a `console_scripts` entry point. The form is:
@@ -470,15 +461,11 @@ the app.
     default behavior is changing, though, as there's much less reason today to
     have a legacy `setup.py`.
 
-<!-- prettier-ignore-start -->
-
 [flit]: https://flit.readthedocs.io
 [poetry]: https://python-poetry.org
-[hatch]: https://hatch.pypa.io
 [hypermodern]: https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
 [setuptools_scm file]: https://setuptools-scm.readthedocs.io/en/latest/usage/#file-finders-hook-makes-most-of-manifestin-unnecessary
 [manifest.in]: https://packaging.python.org/guides/using-manifest-in/
 [setuptools]: https://setuptools.readthedocs.io/en/latest/userguide/index.html
 [setuptools cfg]: https://setuptools.readthedocs.io/en/latest/userguide/declarative_config.html
-
-<!-- prettier-ignore-end -->
+[oldest-supported-numpy]: https://github.com/scipy/oldest-supported-numpy/blob/master/setup.cfg

@@ -209,3 +209,14 @@ RTD103 = "Using Ruby instead of Python for docs"
 nd = "nd"
 sur = "sur"
 CPY = "CPY"
+
+[tool.rumdl]
+global.flavor = "myst"
+global.disable = [
+  "MD031",  # No blank line after fenced code block
+  "MD057",  # Relative links are MyST references, not file paths
+  "MD059",  # Link text should be descriptive
+]
+MD013.reflow = true
+MD013.code-blocks = false
+MD013.tables = false

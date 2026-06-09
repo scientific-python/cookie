@@ -1,12 +1,8 @@
 ---
-layout: page
 title: Patterns
-permalink: /patterns/
-nav_order: 4
-has_children: true
 ---
 
-# Patterns
+## Patterns
 
 Patterns is a collection of common patterns in scientific software that are
 worth learning. These try to highlight best practices for specific situations,
@@ -18,8 +14,9 @@ If you would like to use backport packages, see [Backports][].
 
 If you are wondering about public API, see [Exports][].
 
-<!-- prettier-ignore-start -->
-[including data files]: {% link pages/patterns/data_files.md %}
-[backports]: {% link pages/patterns/backports.md %}
-[exports]: {% link pages/patterns/exports.md %}
-<!-- prettier-ignore-end -->
+[including data files]: pages/patterns/data_files
+[backports]: pages/patterns/backports
+[exports]: pages/patterns/exports
+
+```{tableofcontents}
+```

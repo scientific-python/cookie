@@ -1,11 +1,10 @@
 ---
-layout: home
 title: Home
-permalink: /
-nav_order: 0
+site:
+  hide_outline: true
 ---
 
-# Scientific Python Library Development Guide
+## Scientific Python Library Development Guide
 
 This guide is maintained by the scientific Python community for the benefit of
 fellow scientists and research software engineers.
@@ -14,42 +13,38 @@ fellow scientists and research software engineers.
 Jupyter notebooks that are becoming unwieldy? Are changes to some parts of your
 code accidentally breaking other parts of your code? Do you want to more
 maintainable, reusable, and shareable form? Start at the
-[tutorial]({% link pages/tutorials/index.md %}).
+[tutorial](pages/tutorials/index).
 
-**Learn recommended tools and best practices.** [Topical guides]({% link
-pages/guides/index.md %}) provide task-based instruction on topics that
-scientists and research software engineers may encounter as their projects
+**Learn recommended tools and best practices.**
+[Topical guides](pages/guides/index) provide task-based instruction on topics
+that scientists and research software engineers may encounter as their projects
 evolve and grow. This covers modern packaging ([simple][] or [compiled][]),
 [style checking][], [testing][], [documentation][], [static typing][], [CI][],
 and much more!
 
-{: .highlight-title }
+:::{tip} New project template
+This guide comes with a [copier][]/[cookiecutter][]/[cruft][] template for
+making new repos, [scientific-python/cookie][]. Nine build backends including
+compiled backends, generation tested in Nox, and kept in-sync with the guide.
+:::
 
-> New project template
->
-> This guide comes with a [copier][]/[cookiecutter][]/[cruft][] template for
-> making new repos, [scientific-python/cookie][]. Nine build backends including
-> compiled backends, generation tested in Nox, and kept in-sync with the guide.
-
-{: .important-title }
-
-> Checking an existing project
->
-> We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
-> your repository with the guidelines, runnable [right in the guide][] via
-> WebAssembly! All checks point to a linked badge in the guide.
+:::{important} Checking an existing project
+We provide [sp-repo-review][], a set of [repo-review][] checks for comparing
+your repository with the guidelines, runnable [right in the guide][] via
+WebAssembly! All checks point to a linked badge in the guide.
+:::
 
 **Learn to write better research code.** A high-level document on
-[principles]({% link pages/principles/index.md %}) provides advice based on the
+[principles](pages/principles/index) provides advice based on the
 community's collective experience building code that is easier for researchers
 to use successfully and easier to maintain over time.
 
 **Use our solutions for common tasks.** A growing collection of
-[patterns]({% link pages/patterns/index.md %}) provides tested approaches for
+[patterns](pages/patterns/index) provides tested approaches for
 tasks and can be tricky to get exactly right, such as including data files with
 Python packages.
 
-## Related Resources
+### Related Resources
 
 This guide does _not_ cover the basics of Python itself or the scientific Python
 libraries; it focuses on making or maintaining a package. We recommend the
@@ -72,25 +67,22 @@ Other similar resources that cover Python packaging include:
 - [Intersect training: Packaging](https://intersect-training.org/packaging): A
   tutorial introducing Python packaging.
 
-{: .note-title }
+:::{note} History
+This guide (along with cookie & repo-review) started in [Scikit-HEP][]
+in 2020. It was merged with the [NSLS-II][] guidelines and moved to Scientific
+Python at the [2023 Scientific Python Developer Summit][2023 spdev], along
+with many updates. Improved support for compiled components supported in part
+by NSF grant [OAC-2209877][].
+:::
 
-> History
->
-> This guide (along with cookie & repo-review) started in [Scikit-HEP][]
-> in 2020. It was merged with the [NSLS-II][] guidelines and moved to Scientific
-> Python at the [2023 Scientific Python Developer Summit][2023 spdev], along
-> with many updates. Improved support for compiled components supported in part
-> by NSF grant [OAC-2209877][].
-
-<!-- prettier-ignore-start -->
-[simple]:                   {% link pages/guides/packaging_simple.md %}
-[compiled]:                 {% link pages/guides/packaging_compiled.md %}
-[style checking]:           {% link pages/guides/style.md %}
-[testing]:                  {% link pages/guides/pytest.md %}
-[documentation]:            {% link pages/guides/docs.md %}
-[static typing]:            {% link pages/guides/mypy.md %}
-[ci]:                       {% link pages/guides/gha_pure.md %}
-[right in the guide]:       {% link pages/guides/repo_review.md %}
+[simple]:                   pages/guides/packaging_simple
+[compiled]:                 pages/guides/packaging_compiled
+[style checking]:           pages/guides/style
+[testing]:                  pages/guides/pytest
+[documentation]:            pages/guides/docs
+[static typing]:            pages/guides/mypy
+[ci]:                       pages/guides/gha_pure
+[right in the guide]:       pages/guides/repo_review
 
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 [repo-review]:              https://repo-review.readthedocs.io
@@ -102,4 +94,3 @@ Other similar resources that cover Python packaging include:
 [OAC-2209877]:              https://www.nsf.gov/awardsearch/showAward?AWD_ID=2209877
 [nsls-ii]:                  https://nsls-ii.github.io
 [sp-repo-review]:           https://pypi.org/project/sp-repo-review
-<!-- prettier-ignore-end -->

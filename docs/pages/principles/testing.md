@@ -1,14 +1,8 @@
 ---
-layout: page
 title: Testing recommendations
-permalink: /principles/testing/
-nav_order: 2
-parent: Principles
 ---
 
-{% include toc.html %}
-
-# Testing recommendations
+## Testing recommendations
 
 In this guide, we will provide a roadmap and best-practices for creating test
 suites for python projects.
@@ -22,7 +16,7 @@ the Features that your project provides. Then we will cover
 [Project Level Integration tests](#project-level-integration-tests), which test
 that the various parts of your package work together, and work with the other
 packages it depends on. Finally we will cover the venrable
-[Unit Test](#unit-tests), which test the correctness of your code from a
+{ref}`Unit Test <unit-tests>`, which test the correctness of your code from a
 perspective internal to your codebase, tests individual units in isolation, and
 are optimized to run quickly and often.
 
@@ -31,7 +25,7 @@ project to a reliable and maintainable state. We will also discuss some more
 specialized and advanced types of test cases in our
 [Taxonomy of Test Cases](#additional-types-of-test-suites) section.
 
-## Advantages of Testing
+### Advantages of Testing
 
 - Trustworthy code: Well tested code, is code that you can trust to behave as
   expected.
@@ -45,7 +39,7 @@ specialized and advanced types of test cases in our
   their changes do not break existing features, or cause unexpected
   side-effects.
 
-## Any test case is better than none
+### Any test case is better than none
 
 When in doubt, write the test that makes sense at the time.
 
@@ -59,7 +53,7 @@ bogged down in the taxonomy of test types. As you write and use your test suite,
 the reason for classifying and sorting some types of tests into different test
 suites will become apparent.
 
-## As long as that test is correct...
+### As long as that test is correct
 
 It can be surprisingly easy to write a test that passes when it should fail,
 especially when using complicated mocks and fixtures. The best way to avoid this
@@ -73,12 +67,14 @@ the test-case to make sure it fails when the code is broken.
   is better to write many test cases for a single function or class, than one
   giant case.
 
-## Public Interface Tests
+(public-interface-tests)=
+
+### Public Interface Tests
 
 A good place to start writing tests is from the perspective of a user of your
 module or library, as described in the [Test
-Tutorial]({% link pages/tutorials/test.md %}), and [Testing with pytest
-guide]({% link pages/guides/pytest.md %}). These tests follow the "Detroit
+Tutorial](pages/tutorials/test), and [Testing with pytest
+guide](pages/guides/pytest). These tests follow the "Detroit
 School", focusing on behavior, avoiding testing of private attributes,
 minimizing the use of mocks/patches/test-doubles.
 
@@ -90,16 +86,14 @@ minimizing the use of mocks/patches/test-doubles.
   (edge-case and exhaustive input testing will be handled in a separate test
   suite)
 
-{: .highlight-title }
+:::{tip} A note to new test developers:
+This is a good place to pause and go write some tests. The rest of these
+principles apply to more advanced test development. As you gain experience and
+your test suite(s) grow, taxonomy of test cases, the and the use/need for
+different kinds of tests will become more clear.
+:::
 
-> A note to new test developers:
->
-> This is a good place to pause and go write some tests. The rest of these
-> principles apply to more advanced test development. As you gain experience and
-> your test suite(s) grow, taxonomy of test cases, the and the use/need for
-> different kinds of tests will become more clear.
-
-## Test Suites
+### Test Suites
 
 Not all test cases are the same. In the following sections we will discuss many
 kinds of tests, which serve different purposes and provide different benefits.
@@ -107,13 +101,13 @@ Tests should be divided up into different Suites, which can be run independently
 of one another.
 
 Tests which "Fail Fast" save both developer and compute time. Some tests are by
-necessity very slow. [Unit Tests](#unit-tests) should run extremely quickly in
-just a few seconds at most, while [end-to-end](#end-to-end-tests) require time
-to set up and may depend on slow and unreliable external services. By organizing
-tests into suites based on execution time, you can run fast suites first and
-stop if an error is encountered before running slower suites.
+necessity very slow. {ref}`Unit Tests <unit-tests>` should run extremely quickly
+in just a few seconds at most, while [end-to-end](#end-to-end-tests) require
+time to set up and may depend on slow and unreliable external services. By
+organizing tests into suites based on execution time, you can run fast suites
+first and stop if an error is encountered before running slower suites.
 
-### Advantages of Test Suites
+#### Advantages of Test Suites
 
 - Developers can run relevant tests quickly and frequently.
 - Tests can 'Fail Fast', while still reporting all failures within that suite.
@@ -122,7 +116,7 @@ stop if an error is encountered before running slower suites.
 - We can avoid false positives, by not running tests we expect to fail due to
   external factors.
 
-### Guidelines for Test Suites
+#### Guidelines for Test Suites
 
 - Organize test cases into suites based on the type of test and execution time.
 - Set up test-runners (Make, shell scripts, CI/CD) to run fast suites first, and
@@ -130,12 +124,12 @@ stop if an error is encountered before running slower suites.
 - Use markers to enable developers to run the sub-sets of test which are most
   relevant to their work, with minimal time spent waiting.
 
-### Creating Test Suites
+#### Creating Test Suites
 
 The simplest way to start, is separating tests into directories inside of the
 `tests/` directory:
 
-```
+```text
 tests/
     |- unit/
     |- integration/
@@ -152,7 +146,7 @@ conceptually part of a larger suite, and skip them when needed.
 
 First, define a new marker in `pyproject.toml`:
 
-```toml
+```ini
 [tool.pytest]
 markers = [
     "unit: marks unit tests",
@@ -184,7 +178,9 @@ def pytest_collection_modifyitems(session, config, items):
         item.add_marker(pytest.mark.unit)
 ```
 
-## Project Level Integration Tests
+(project-level-integration-tests)=
+
+### Project Level Integration Tests
 
 The term "Integration Test" is unfortunately overloaded, and used to describe
 testing that various components integrate with each other, at many levels of the
@@ -204,7 +200,9 @@ more extensive validation.
 
 The intended audience for these tests is developers working on the project.
 
-## Unit Tests
+(unit-tests)=
+
+### Unit Tests
 
 Unit tests loosely follow the "London School" of testing, where the smallest
 unit of code is tested in isolation.
@@ -217,7 +215,7 @@ function, an attribute of an object, a method or property of a class.
 They test only the code in the project, not code imported from other projects
 (or even other modules within the same project).
 
-### Advantages of unit testing
+#### Advantages of unit testing
 
 Unit tests ensure that the code, as written, is correct, and executes properly.
 They communicate the intention of the creator of the code, how the code is
@@ -239,7 +237,7 @@ better design decisions:
   understand and maintain. Refactoring code to make it easier to test often
   leads us to write better code overall.
 
-### When to write unit tests
+#### When to write unit tests
 
 - When your project matures enough to justify the work! Higher-level testing is
   often sufficient for small projects which are not part of critical
@@ -259,7 +257,7 @@ better design decisions:
 Not all projects need full unit test coverage, some may not need unit tests at
 all.
 
-### Guidelines for unit testing
+#### Guidelines for unit testing
 
 - Unit tests live alongside the code they test, in a /tests folder. They should
   be in a different directory than higher-level tests (integration, e2e,
@@ -288,7 +286,7 @@ all.
   between units, and will correctly tell you which part is failing if one
   breaks.
 
-#### Importing in test files
+##### Importing in test files
 
 Keep things local! Prefer to import only from the file-under-test when possible.
 This helps keep the context of the unit tests focused on the file-under-test.
@@ -391,7 +389,7 @@ from bettermath import superfast_numeric_sum as numeric_sum
 total = numeric_sum(some_numeric_values)
 ```
 
-#### Running unit tests
+##### Running unit tests
 
 We recommend using Pytest for running tests in your development environments. To
 run unit tests in your source folder, from your package root, use
@@ -399,12 +397,12 @@ run unit tests in your source folder, from your package root, use
 your source repository), use `pytest --pyargs {package name}`.
 
 You can set the default test path in `pyproject.toml`, see: [Configuring
-pytest]({% link pages/guides/pytest.md %}#configuring-pytest)
+pytest](pages/guides/pytest#configuring-pytest)
 
 We recommend configuring pytest to run ONLY your fastest, least demanding test
 suite by default.
 
-#### Mocking and Patching to Isolate the code under test
+##### Mocking and Patching to Isolate the code under test
 
 When the unit you are testing touches any external unit (usually something you
 imported, or another unit that has its own tests), the external unit should be
@@ -482,7 +480,7 @@ def test_pytest(mocker):
     dangerous_sideffects()
 ```
 
-## Extensive Input Testing
+### Extensive Input Testing
 
 The range of inputs that test cases validate is an important decision.
 
@@ -503,7 +501,7 @@ readable), and technical (complex, extensive) test files.
 - [Fuzz Tests](#fuzz-tests) are the best place to handle extensive and
   exhaustive input testing.
 
-### In Public Interface Tests
+#### In Public Interface Tests
 
 These are the most appropriate place to test certain invalid inputs and
 dependencies. Public Interface tests act like a contract with users; each
@@ -512,14 +510,14 @@ that it will not change without warning (and probably a major version bump). So
 any input/output and side-effects included in these tests should be considered
 _officially supported behavior_ and given careful consideration.
 
-### In project level integration tests
+#### In project level integration tests
 
 These are a good place to handle more extensive input testing. Integration tests
 already tend to be more verbose, with a lot of setup and teardown, and much more
 behavior to cover than other kinds of tests. These are the kinds of tests that
 should focus on edgecases.
 
-### In Unit Tests
+#### In Unit Tests
 
 Unit Tests should focus on the "happy-path" of execution. In most cases one
 representative example of the _expected_ input is sufficient. The test case
@@ -547,7 +545,9 @@ def bar(x):
     return x + 1
 ```
 
-## Additional Types of Test Suites
+(additional-types-of-test-suites)=
+
+### Additional Types of Test Suites
 
 A non-exhaustive discussion of some common types of tests.
 
@@ -556,7 +556,7 @@ Dont Panic!
 Depending on your project, you may not need many, or most of these kinds of
 tests.
 
-### Behavioral, Feature, or Functional Tests
+#### Behavioral, Feature, or Functional Tests
 
 High-level tests, which ensure a specific feature works. These are placed in a
 location like 'project_root/tests/behavioral/'. Used for testing things like:
@@ -565,7 +565,9 @@ location like 'project_root/tests/behavioral/'. Used for testing things like:
 - Setting a debug flag results in debug messages being printed
 - A configuration option affects the behavior of the code as expected
 
-### Fuzz Tests
+(fuzz-tests)=
+
+#### Fuzz Tests
 
 Fuzz tests attempt to test the full range of possible inputs to a function. They
 are good for finding edge-cases, where what should be valid input causes a
@@ -577,7 +579,7 @@ excellent tool for this, and a lot of fun to use.
   [see: fail fast](https://en.wikipedia.org/wiki/Fail-fast_system)
 - Reserve fuzz testing for the few critical functions, where it really matters.
 
-### Integration Tests
+#### Integration Tests
 
 The word "Integration" is a bit overloaded, and can refer to many levels of
 interaction between your code, its dependencies, and external systems.
@@ -598,7 +600,9 @@ interaction between your code, its dependencies, and external systems.
     - Interactions with other services, on local or cloud-based platforms
     - Micro-service, Database, or API connections and interactions
 
-### End to End Tests
+(end-to-end-tests)=
+
+#### End to End Tests
 
 The slowest, and most brittle, of all tests. Here, you set up an entire
 production-like system, and run tests against it. Some examples are:
@@ -610,7 +614,7 @@ production-like system, and run tests against it. Some examples are:
 - Processing data from a pre-loaded test database
 - Manual QA testing
 
-### Fuzz Tests and other slow tests
+#### Fuzz Tests and other slow tests
 
 Testing random input, using tools like Hypothesis, is similar to testing edge
 cases, but running these tests can take a very long time, and they can often be
@@ -623,7 +627,7 @@ much more complex and difficult to read for new developers.
 - These can take an arbitrarily long time to run, and you will need to set
   reasonable limits for your project.
 
-## Diagnostic Tests
+### Diagnostic Tests
 
 Diagnostic tests are used to verify the installation of a package. They should
 be runnable on production systems, like when we need to ssh into a live server
@@ -642,14 +646,14 @@ a full system check of the package. Good diagnostic tests:
 - Run quickly: select tests that can be run in a few moments
 - Provide meaningful feedback
 
-### Advantages of Diagnostic Tests
+#### Advantages of Diagnostic Tests
 
 - Diagnostic tests allow us to verify an installation of a package.
 - They can be used to verify system-level dependencies like:
   - Compiled binary dependencies
   - Access to specific hardware, like GPUs
 
-### Guidelines for Diagnostic Tests
+#### Guidelines for Diagnostic Tests
 
 - Consider using the stdlib `unittest.TestCase` and other stdlib tools instead
   of pytest. To allow running unit tests for diagnostics in production
@@ -658,7 +662,7 @@ a full system check of the package. Good diagnostic tests:
 - Test files should be named `test_<file under test>.py`, so that stdlib
   unittest can find them easily.
 
-### Mocking and Patching to Isolate the code under test
+#### Mocking and Patching to Isolate the code under test
 
 Test Isolation is less necessary in diagnostic tests than unit tests. We often
 want diagnostic tests to execute compiled code, or run a test on GPU hardware.
@@ -678,7 +682,7 @@ def test_myfunction(t, patchme: Mock):
     t.assertIs(ret, patchme.return_value)
 ```
 
-### Running Diagnostic Tests
+#### Running Diagnostic Tests
 
 stdlib's unittest can be used in environments where pytest is not available:
 
@@ -686,4 +690,5 @@ stdlib's unittest can be used in environments where pytest is not available:
   repository), use `python -m unittest discover -s <module.name>`
 - To use unittest to run tests in your source folder, from your package root,
   use
-  `python -m unittest discover --start-folder <source folder> --top-level-directory .`
+  `python -m unittest discover --start-folder <source folder> \
+  --top-level-directory .`

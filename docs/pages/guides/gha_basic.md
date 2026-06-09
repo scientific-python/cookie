@@ -1,17 +1,11 @@
 ---
-layout: page
 title: "GHA: GitHub Actions intro"
-permalink: /guides/gha-basic/
-nav_order: 10
-parent: Topical Guides
-custom_title: GitHub Actions introduction
+short_title: GitHub Actions introduction
 ---
 
-{% include toc.html %}
+## GitHub Actions: Intro
 
-# GitHub Actions: Intro
-
-{% rr GH100 %} The recommended CI for scientific Python projects is GitHub
+{rr}`GH100` The recommended CI for scientific Python projects is GitHub
 Actions (GHA), although its predecessor Azure is also in heavy usage, and other
 popular services (Travis, Appveyor, and Circle CI) may be found in a few
 packages. GHA is preferred due to the flexible, extensible design and the tight
@@ -31,7 +25,7 @@ with render_cookie() as package:
 ]]] -->
 <!-- [[[end]]] -->
 
-## Header
+### Header
 
 Your main CI workflow file should begin something like this:
 
@@ -47,20 +41,20 @@ on:
 jobs:
 ```
 
-This gives the workflow a nice name {% rr GH101 %}, and defines the conditions
+This gives the workflow a nice name {rr}`GH101`, and defines the conditions
 under which it runs. This will run on all pull requests, or pushes to main. If
 you use a develop branch, you probably will want to include that. You can also
 specify specific branches for pull requests instead of running on all PRs (will
 run on PRs targeting those branches only).
 
-## Prek / Pre-commit
+### Prek / Pre-commit
 
 If you use [prek][] or [pre-commit][] in CI, you can run it directly in GitHub
 Actions. Prek is a faster Rust rewrite of pre-commit that supports most real
 world usage and supports the same configuration and hooks.
 
-{% tabs runner %} {% tab prek Prek %}
-
+::::{tab-set}
+:::{tab-item} Prek
 Prek can run using the official action:
 
 ```yaml
@@ -72,8 +66,8 @@ lint:
     - uses: j178/prek-action@v2
 ```
 
-{% endtab %} {% tab pre-commit Pre-commit %}
-
+:::
+:::{tab-item} Pre-commit
 Pre-commit can run using the official action:
 
 ```yaml
@@ -88,7 +82,8 @@ lint:
     - uses: pre-commit/action@v3.0.1
 ```
 
-{% endtab %} {% endtabs %}
+:::
+::::
 
 If you do use [pre-commit.ci](https://pre-commit.ci), but you need this job to
 run a manual check, like check-manifest, then you can keep it but just use
@@ -96,7 +91,7 @@ run a manual check, like check-manifest, then you can keep it but just use
 this one check. You can also use `needs: lint` in your other jobs to keep them
 from running if the lint check does not pass.
 
-## Unit tests
+### Unit tests
 
 Implementing unit tests is also easy. Since you should be following best
 practices listed in the previous sections, this becomes an almost directly
@@ -104,8 +99,6 @@ copy-and-paste formula, regardless of the package details. You might need to
 adjust the Python versions to suit your taste; you can also test on different
 OS's if you'd like by adding them to the matrix and inputting them into
 `runs-on`.
-
-{% raw %}
 
 ```yaml
 tests:
@@ -136,8 +129,6 @@ tests:
       run: uv run pytest
 ```
 
-{% endraw %}
-
 A few things to note from above:
 
 The matrix should contain the versions you are interested in. You can also test
@@ -167,9 +158,9 @@ Note that while versioned images are available, like `ubuntu-24.04`, these are
 all rolling images; selecting a specific image will not make your CI completely
 static. And old versioned images are decommissioned.
 
-## Updating
+### Updating
 
-{% rr GH200 %} {% rr GH210 %} If you use non-default actions in your repository
+{rr}`GH200` {rr}`GH210` If you use non-default actions in your repository
 (you will see some in the following pages), then it's a good idea to keep them
 up to date. GitHub provided a way to do this with dependabot. Just add the
 following file as `.github/dependabot.yml`:
@@ -192,16 +183,16 @@ This will check to see if there are updates to the action weekly, and will make
 a PR if there are updates, including the changelog and commit summary in the PR.
 If you select a name like `v1`, this should only look for updates of the same
 form (since April 2022) - there is no need to restrict updates for "moving tag"
-updates anymore {% rr GH211 %}. You can also use SHA's and dependabot will
-respect that too. And `groups` will combine actions updates {% rr GH212 %},
+updates anymore {rr}`GH211`. You can also use SHA's and dependabot will
+respect that too. And `groups` will combine actions updates {rr}`GH212`,
 which is both cleaner and sometimes required for dependent actions, like
 `upload-artifact`/`download-artifact`.
 
 You can use this for other ecosystems too, including Python.
 
-## Common needs
+### Common needs
 
-### Single OS steps
+#### Single OS steps
 
 If you need to have a step run only on a specific OS, use an if on that step
 with `runner.os`:
@@ -213,7 +204,7 @@ if: runner.os != 'Windows' # also 'macOS' and 'Linux'
 Using `runner.os` is better than `matrix.<something>`. You also have an
 environment variable `$RUNNER_OS` as well. Single quotes are required here.
 
-### Changing the environment in a step
+#### Changing the environment in a step
 
 If you need to change environment variables for later steps, such combining with
 an if condition for only for one OS, then you add it to a special file:
@@ -224,7 +215,7 @@ an if condition for only for one OS, then you add it to a special file:
 
 Later steps will see this environment variable.
 
-### Communicating between steps
+#### Communicating between steps
 
 You can also directly communicate between steps, by setting `id:`'s. Some
 actions have outputs, and bash actions can manually write to output:
@@ -234,16 +225,12 @@ actions have outputs, and bash actions can manually write to output:
   run: echo "something=true" >> $GITHUB_OUTPUT
 ```
 
-{% raw %}
-
 You can now refer to this step in a later step with
 `${{ steps.someid.something }}`. You also can get it from another job by using
 `${{ needs.<jobname>.outputs.something }}`. The `toJson()` function is useful
 for inputting JSON - you can even generate matrices dynamically this way!
 
-{% endraw %}
-
-### Pretty output
+#### Pretty output
 
 You can write GitHub flavored markdown to `$GITHUB_STEP_SUMMARY`, and it will be
 shown on the summary page.
@@ -260,7 +247,7 @@ You can also do this
 which tell GitHub to look for certain patterns. Do keep in mind you can only see
 up to 10 matches per type per step, and a total of 50 matchers.
 
-### Common useful actions
+#### Common useful actions
 
 There are a variety of useful actions. There are GitHub supplied ones:
 
@@ -338,16 +325,14 @@ You can also run GitHub Actions locally:
 - [act](https://github.com/nektos/act): Run GitHub Actions in a docker image
   locally.
 
-## Advanced usage
+### Advanced usage
 
 These are some things you might need.
 
-### Cancel existing runs
+#### Cancel existing runs
 
-{% rr GH102 %} If you add the following, you can ensure only one run per
+{rr}`GH102` If you add the following, you can ensure only one run per
 PR/branch happens at a time, cancelling the old run when a new one starts:
-
-{% raw %}
 
 ```yaml
 concurrency:
@@ -355,14 +340,12 @@ concurrency:
   cancel-in-progress: true
 ```
 
-{% endraw %}
-
 Anything with a matching group name will count in the same group - the ref is
 the "from" name for the PR. If you want, you can replace `github.ref` with
 `github.event.pull_request.number || github.sha`; this will still cancel on PR
 pushes but will build each commit on `main`.
 
-### Pass job
+#### Pass job
 
 If you want support GitHub's "merge when pass" feature, you should set up a pass
 job instead of listing every job you wand to require. Besides making it much
@@ -372,8 +355,6 @@ orange "pending" symbol (since there are new requirements that they didn't
 pass).
 
 As an example, if you had `lint` and `checks` jobs, use this:
-
-{% raw %}
 
 ```yaml
 pass:
@@ -385,8 +366,6 @@ pass:
       with:
         jobs: ${{ toJSON(needs) }}
 ```
-
-{% endraw %}
 
 We want the job to always run, so we set `if: always()`. Otherwise, it might be
 skipped if any job it depends on is skipped, and skipped jobs count as "passing"
@@ -403,7 +382,7 @@ allowed to be skipped (`allowed-skips:`) too.
 Just set this `pass` job in your required checks for your main branch. Then
 you'll be able to use GitHub's auto merge functionality.
 
-### Custom actions
+#### Custom actions
 
 You can
 [write your own actions](https://docs.github.com/en/actions/creating-actions)
@@ -446,8 +425,6 @@ ideally shouldn't change the user's environment; suddenly changing the active
 Python version might come as a surprise. You can do that, though, using
 `update-environment: false` with `setup-python` and `pipx`:
 
-{% raw %}
-
 ```yaml
 - uses: actions/setup-python@v6
   id: python
@@ -462,23 +439,21 @@ Python version might come as a surprise. You can do that, though, using
     github.action_path }}' ${{ inputs.some-input }}
 ```
 
-{% endraw %}
-
 You use the `python-path` output from `setup-python` to get the Python you
 activated. You use `github.action_path` to get the path to the checked-out
 action.
 
-{: .highlight }
+:::{tip}
+Examples of custom composite actions include:
 
-> Examples of custom composite actions include:
->
-> - [pypa/cibuildwheel](https://github.com/pypa/cibuildwheel/blob/main/action.yml)
-> - [wntrblm/nox](https://github.com/wntrblm/nox/blob/main/action.yml)
-> - [scientific-python/repo-review](https://github.com/scientific-python/repo-review/blob/main/action.yml)
-> - [scientific-python/cookie](https://github.com/scientific-python/cookie/blob/main/action.yml)
->   (This repo)
+- [pypa/cibuildwheel](https://github.com/pypa/cibuildwheel/blob/main/action.yml)
+- [wntrblm/nox](https://github.com/wntrblm/nox/blob/main/action.yml)
+- [scientific-python/repo-review](https://github.com/scientific-python/repo-review/blob/main/action.yml)
+- [scientific-python/cookie](https://github.com/scientific-python/cookie/blob/main/action.yml)
+  (This repo)
+:::
 
-### Reusable workflows
+#### Reusable workflows
 
 You can also make reusable workflows. One reason to do this is it allows you to
 use `needs` or communicate values between workflows. It's an easy way to make
@@ -495,7 +470,7 @@ If you add a `outputs:` table to the workflow call table, you can specify
 outputs for other workflows to read. See other options
 [in the docs](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
 
-### Conditional workflows
+#### Conditional workflows
 
 Sometimes you have jobs that depend on certain files in our repository. Maybe
 you only want to run tests if code or tests files are changed, docs if
@@ -515,8 +490,6 @@ on:
 Otherwise, they look like normal workflows. Then you need another reusable
 workflow file to decide when to run a specific situation.
 
-{% raw %}
-
 ```yaml
 # reusable-change-detection.yml
 on:
@@ -527,16 +500,12 @@ on:
       # More here if you have more situations to detect
 ```
 
-{% endraw %}
-
 You start by specifying outputs when running this. You'll want one output per
 situation you want to detect. The value will be output from our
 `change-detection` job below, and defaults to "false" if we don't output
 anything.
 
 Now, we need our job:
-
-{% raw %}
 
 ```yaml
 jobs:
@@ -571,8 +540,6 @@ jobs:
       # Add 2 more steps per situation you have to detect
 ```
 
-{% endraw %}
-
 This has a bit of boilerplate (mostly around passing variables around), but what
 it's doing is fairly simple. Instead of stepping through it, let's look at what
 it's trying to do. First, you need to find a list of all changed files in the
@@ -588,20 +555,17 @@ Everything else in the job is about getting the output from the step
 `changed-tests-files` to `tests-changes`, then from there into the reusable
 workflow output as `run-tests`.
 
-{: .note }
-
+:::{note}
 Someone probably could write an action (maybe even an composite action using
 either `gh` or `shell: python`) that could directly report changes true/false
 instead of a file list, saving the two step process and greatly simplifying
 this.
-
+:::
 If you have more situations, you just repeat these two steps with different
 `id`s and inputs.
 
 Finally, you write the overarching CI workflow that combines the reusable
 workflows, something like `ci.yml`:
-
-{% raw %}
 
 ```yaml
 on:
@@ -648,17 +612,15 @@ If you have more situations, add another `${{ ... }}` above, after the first
 one, and add them to the needs list. This is really just injecting "tests" only
 if the "tests" job is being skipped into `allowed-skips`.
 
-{% endraw %}
+:::{tip}
+Some examples of repos using this method are:
 
-{: .highlight }
+- [pypa/build](https://github.com/pypa/build/tree/main/.github/workflows)
+- [scientific-python/cookie](https://github.com/scientific-python/cookie/tree/main/.github/workflows)
+  (this repo)
+:::
 
-> Some examples of repos using this method are:
->
-> - [pypa/build](https://github.com/pypa/build/tree/main/.github/workflows)
-> - [scientific-python/cookie](https://github.com/scientific-python/cookie/tree/main/.github/workflows)
->   (this repo)
-
-### GitHub pages
+#### GitHub pages
 
 GitHub has finished moving their pages build infrastructure to Actions, and they
 [now provide](https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/)
@@ -679,7 +641,7 @@ permissions:
   id-token: write
 ```
 
-{% rr GH103 %} You probably only want one deployment at a time, so you can use:
+{rr}`GH103` You probably only want one deployment at a time, so you can use:
 
 ```yaml
 concurrency:
@@ -696,15 +658,11 @@ configure Pages.
   uses: actions/configure-pages@v6
 ```
 
-{% raw %}
-
 Notice this action sets an `id:`; this will allow you to use the outputs from
 this action later; specifically, may want to use
 `${{ steps.pages.outputs.base_path }}` when building (you can also get `origin`,
 `base_url`, or `host` - see the action
 [config](https://github.com/actions/configure-pages/blob/main/action.yml)).
-
-{% endraw %}
 
 ```yaml
 - name: Upload artifact
@@ -717,8 +675,6 @@ if you want, including `"."` which is the whole repository.
 Finally, you'll need to deploy the artifact (named `github-pages`) to Pages. You
 can make this a custom job with `needs:` pointing at your previous job (in this
 example, the previous job is called `build`):
-
-{% raw %}
 
 ```yaml
 deploy:
@@ -733,22 +689,20 @@ deploy:
       uses: actions/deploy-pages@v5
 ```
 
-{% endraw %}
-
 The deploy-pages job gives a `page_url`, which is the same as `base_url` on the
 configure step, and can be set in the `environment`. If you want to do
 everything in one job, you only need one of these.
 
-{: .highlight }
+:::{tip}
+See the
+[official starter workflows](https://github.com/actions/starter-workflows/tree/main/pages)
+for examples. Some other examples include:
 
-> See the
-> [official starter workflows](https://github.com/actions/starter-workflows/tree/main/pages)
-> for examples. Some other examples include:
->
-> - [CLIUtils.github.io/CLI11](https://github.com/CLIUtils/CLI11/blob/main/.github/workflows/docs.yml)
-> - [iris-hep.org](https://github.com/iris-hep/iris-hep.github.io/blob/master/.github/workflows/deploy.yml)
+- [CLIUtils.github.io/CLI11](https://github.com/CLIUtils/CLI11/blob/main/.github/workflows/docs.yml)
+- [iris-hep.org](https://github.com/iris-hep/iris-hep.github.io/blob/master/.github/workflows/deploy.yml)
+:::
 
-### Changelog generation
+#### Changelog generation
 
 Not directly part of Actions, but also in `.github` is `.github/release.yml`,
 which lets you [configure the changelog generation][gh-changelog] button when
@@ -759,7 +713,7 @@ pre-commit-ci PRs for you:
 with code_fence("yaml"):
     print(github_release_yaml)
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```yaml
 changelog:
   exclude:
@@ -767,15 +721,9 @@ changelog:
       - dependabot[bot]
       - pre-commit-ci[bot]
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
-
-<!-- prettier-ignore-start -->
 
 [pre-commit]: https://pre-commit.com
 [prek]: https://github.com/j178/prek
 [gh-changelog]: https://docs.github.com/en/repositories/releasing-projects
-
-<!-- prettier-ignore-end -->
-
-<script src="{% link assets/js/tabs.js %}"></script>

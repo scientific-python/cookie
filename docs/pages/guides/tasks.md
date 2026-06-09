@@ -1,14 +1,8 @@
 ---
-layout: page
 title: Task runners
-permalink: /guides/tasks/
-nav_order: 30
-parent: Topical Guides
 ---
 
-{% include toc.html %}
-
-# Task runners
+## Task runners
 
 <!-- [[[cog
 from cog_helpers import  code_fence, render_cookie, PyMatcher
@@ -45,7 +39,7 @@ temporary environment each time. And, if you pass `-R` when rerunning it, you
 can skip the setup and install steps, making it nearly as fast as directly
 running the commands!
 
-{% rr PY007 %} You _should_ use a task runner to make it easy and simple for new
+{rr}`PY007` You _should_ use a task runner to make it easy and simple for new
 contributors to run things. You _should_ use a task runner to make specialized
 developer tasks easy. You _should_ use a task runner to avoid making single-use
 virtual environments for docs and other rarely run tasks. Nox is recommended,
@@ -61,9 +55,9 @@ be best left to just specialized tasks.
 [rake]: https://ruby.github.io/rake/
 [make]: https://www.gnu.org/software/make/
 
-## Nox
+### Nox
 
-### Installing
+#### Installing
 
 Installing nox should be handled like any other Python _application_. You should
 either use a good package manager, like brew on macOS, or you should use pipx;
@@ -89,7 +83,7 @@ customize the versions of Python prepared for you, then use input like this:
     python-versions: "3.10, 3.11, 3.12, 3.13, 3.13t, 3.14, 3.14t, pypy-3.11"
 ```
 
-### Introduction
+#### Introduction
 
 Nox is a tool for running tasks, called "sessions", inside temporary virtual
 environments. It is configured through Python and is designed to resemble
@@ -122,16 +116,16 @@ as well.
 You can run this using:
 
 ```console
-$ nox -s tests
+nox -s tests
 ```
 
 You can see all defined sessions (along with the docstrings) using:
 
 ```console
-$ nox -l
+nox -l
 ```
 
-### Parametrizing
+#### Parametrizing
 
 You can parametrize sessions. either on Python or on any other item.
 
@@ -155,20 +149,20 @@ skipped. You can use a Docker container to run in an environment where all
 Python's (3.6+) are available:
 
 ```console
-$ docker run --rm -itv $PWD:/src -w /src quay.io/pypa/manylinux_2_28_x86_64:latest pipx run nox
+docker run --rm -itv $PWD:/src -w /src quay.io/pypa/manylinux_2_28_x86_64:latest pipx run nox
 ```
 
 Another container you can use is `thekevjames/nox:latest`; this has nox
 pre-installed (no pipx) and Python 2.7 and 3.5 as well.
 
-### Useful sessions
+#### Useful sessions
 
 Things like bumping the versions can be made sessions - since nox handles the
 environment for you, you can use any Python dependencies you like, and not have
 to worry about installing anything. Here are some commonly useful sessions that
 will likely look similar across different projects:
 
-#### Lint
+##### Lint
 
 Ideally, all developers should be using pre-commit or prek directly, but this
 helps new users.
@@ -177,7 +171,7 @@ helps new users.
 with code_fence("python"):
     print(noxfile.get_source("lint"))
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```python
 @nox.session
 def lint(session: nox.Session) -> None:
@@ -189,16 +183,16 @@ def lint(session: nox.Session) -> None:
         "prek", "run", "--all-files", "--show-diff-on-failure", *session.posargs
     )
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
-#### Tests
+##### Tests
 
 <!-- [[[cog
 with code_fence("python"):
     print(noxfile.get_source("tests"))
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```python
 @nox.session
 def tests(session: nox.Session) -> None:
@@ -209,16 +203,16 @@ def tests(session: nox.Session) -> None:
     session.install("-e.", *test_deps)
     session.run("pytest", *session.posargs)
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
-#### Docs
+##### Docs
 
 <!-- [[[cog
 with code_fence("python"):
     print(noxfile.get_source("docs"))
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```python
 @nox.session(reuse_venv=True, default=False)
 def docs(session: nox.Session) -> None:
@@ -251,19 +245,19 @@ def docs(session: nox.Session) -> None:
     else:
         session.run("sphinx-build", "--keep-going", *shared_args)
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 This supports setting up a quick server as well, run like this:
 
 ```console
-$ nox -s docs -- --serve
+nox -s docs -- --serve
 ```
 
 Notice that we set `default=False` so that docs are not built every time nox is
-run without arguments. {% rr NOX103 %}
+run without arguments. {rr}`NOX103`
 
-#### Build (pure Python)
+##### Build (pure Python)
 
 For pure Python packages, this could be useful:
 
@@ -277,7 +271,7 @@ with code_fence("python"):
     print()
     print(noxfile.get_source("build"))
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```python
 import shutil
 from pathlib import Path
@@ -298,17 +292,17 @@ def build(session: nox.Session) -> None:
     session.install("build")
     session.run("python", "-m", "build")
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 (Removing the build directory is helpful for setuptools)
 
-### Faster with uv
+#### Faster with uv
 
 The [uv](https://github.com/astral-sh/uv) project is a Rust reimplementation of
 pip, pip-tools, and venv that is very, very fast. You can tell nox to use `uv`
 if it is on your system by adding the following to your `noxfile.py`
-{% rr NOX102 %}:
+{rr}`NOX102`:
 
 ```python
 nox.needs_version = ">=2024.3.2"
@@ -326,9 +320,9 @@ Check your jobs with `uv`; most things do not need to change. The main
 difference is `uv` doesn't install `pip` unless you ask it to. If you want to
 interact with uv, nox might be getting uv from it's environment instead of the
 system environment, so you can install `uv` if `shutil.which("uv")` returns
-`None`. You should also set a minimum version of nox. {% rr NOX101 %}
+`None`. You should also set a minimum version of nox. {rr}`NOX101`
 
-### Running without nox or requiring dependencies
+#### Running without nox or requiring dependencies
 
 Nox also allows you to use the script block, both for running with runners (like
 `uv run` and `pipx run`), and for specifying dependencies to install or a
@@ -350,17 +344,17 @@ if __name__ == "__main__":
     nox.main()
 ```
 
-The script block then specifies that nox is required {% rr NOX201 %}. If you
+The script block then specifies that nox is required {rr}`NOX201`. If you
 want other dependencies here, those will also be installed before the file is
 run. Older versions of nox still need the `nox.needs_version` line to keep nice
 error messages.
 
-The first line is a shebang line {% rr NOX202 %}, which allows this file to be
+The first line is a shebang line {rr}`NOX202`, which allows this file to be
 run directly if it is made executable. You can put any runner here; uv is shown.
-You also need a main block {% rr NOX203 %} to allow nox to be run when this file
+You also need a main block {rr}`NOX203` to allow nox to be run when this file
 is executed directly.
 
-### Examples
+#### Examples
 
 A standard
 [powered by nox](https://github.com/scikit-hep/hist/blob/main/noxfile.py)

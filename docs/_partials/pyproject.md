@@ -1,4 +1,4 @@
-## pyproject.toml: project table
+# pyproject.toml: project table
 
 <!-- [[[cog
 from cog_helpers import code_fence, render_cookie, TOMLMatcher
@@ -13,8 +13,8 @@ The metadata is specified in a [standards-based][metadata] format:
 with code_fence("toml"):
     print(pyproject.get_source("project"))
 ]]] -->
-<!-- prettier-ignore-start -->
-```toml
+<!-- rumdl-disable MD013 -->
+```ini
 [project]
 name = "package"
 version = "0.1.0"
@@ -50,7 +50,7 @@ Homepage = "https://github.com/org/package"
 Discussions = "https://github.com/org/package/discussions"
 Changelog = "https://github.com/org/package/releases"
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 In this example, `"package"` is the name of the thing you are working on. You
@@ -64,7 +64,7 @@ special, and replaces the old url setting.
 If you use the above configuration, you need `README.md` and `LICENSE` files,
 since they are explicitly specified.
 
-### License
+## License
 
 The license can be done one of two ways.
 
@@ -82,14 +82,14 @@ other tools often did the wrong thing (such as load the entire file into the
 metadata's free-form one line text field that was intended to describe
 deviations from the classifier license(s)).
 
-```toml
+```ini
 classifiers = [
   "License :: OSI Approved :: BSD License",
 ]
 ```
 
 You should not include the `License ::` classifiers if you use the `license`
-field {% rr PP007 %}.
+field {rr}`PP007`.
 
 ### Extras
 
@@ -100,7 +100,7 @@ package or wheel name when installing, like `package[cli,mpl]`.
 
 Here is an example of a simple extras:
 
-```toml
+```ini
 [project.optional-dependencies]
 cli = [
   "click",
@@ -118,7 +118,7 @@ Self dependencies can be used by using the name of the package, such as
 If you want to ship an "app" that a user can run from the command line, you need
 to add a `script` entry point. The form is:
 
-```toml
+```ini
 [project.scripts]
 cliapp = "package.__main__:main"
 ```
@@ -138,15 +138,15 @@ forward) and they are more composable. In contrast with extras,
 dependency-groups are not available when installing your package via PyPI, but
 they are available for local installation (and can be installed separately from
 your package); the `dev` group is even installed, by default, when using `uv`'s
-high level commands like `uv run` and `uv sync`. {% rr PP0086 %} Here is an
+high level commands like `uv run` and `uv sync`. {rr}`PP006` Here is an
 example:
 
 <!-- [[[cog
 with code_fence("toml"):
     print(pyproject.get_source("dependency-groups"))
 ]]] -->
-<!-- prettier-ignore-start -->
-```toml
+<!-- rumdl-disable MD013 -->
+```ini
 [dependency-groups]
 test = [
   "pytest >=9",
@@ -163,7 +163,7 @@ docs = [
   "furo>=2023.08.17",
 ]
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 You can include one dependency group in another. Most tools allow you to install

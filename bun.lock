@@ -1,0 +1,15 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "scientific-python-development-guide",
+      "dependencies": {
+        "mystmd": "^1.0",
+      },
+    },
+  },
+  "packages": {
+    "mystmd": ["mystmd@1.9.1", "", { "bin": { "myst": "dist/myst.cjs" } }, "sha512-ya8u48V7Hn2EtE6DJTEtrWCZEnpIboiN5Ed6lDlvMikiSk8NHUxpocR2okf3BF8vNlC7Auj5s3T/Ulj3taN6bQ=="],
+  }
+}

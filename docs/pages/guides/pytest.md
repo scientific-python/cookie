@@ -1,14 +1,8 @@
 ---
-layout: page
 title: "Testing with pytest"
-permalink: /guides/pytest/
-nav_order: 2
-parent: Topical Guides
 ---
 
-{% include toc.html %}
-
-# Testing with pytest
+## Testing with pytest
 
 Tests are crucial to writing reliable software. A good test suite allows you to:
 
@@ -29,17 +23,15 @@ in using pytest. The goals of writing good tests are:
 - Reporting: when things break, you should get good information about what
   broke.
 
-{: .note-title }
-
-> What about other choices?
->
-> The alternative library, `nose`, has been abandoned in favor of `pytest`,
-> which can run nose-style tests. The standard library has a test suite as well,
-> but it's extremely verbose and complex; and since "developers" run tests, your
-> test requirements don't affect users. And `pytest` can run stdlib style
-> testing too. So just use `pytest`. All major packages use it too, including
-> `NumPy`. Most other choices, like [Hypothesis][], are related to `pytest` and
-> just extend it.
+:::{note} What about other choices?
+The alternative library, `nose`, has been abandoned in favor of `pytest`,
+which can run nose-style tests. The standard library has a test suite as well,
+but it's extremely verbose and complex; and since "developers" run tests, your
+test requirements don't affect users. And `pytest` can run stdlib style
+testing too. So just use `pytest`. All major packages use it too, including
+`NumPy`. Most other choices, like [Hypothesis][], are related to `pytest` and
+just extend it.
+:::
 
 ### Basic test structure
 
@@ -63,17 +55,18 @@ This looks simple, but it is doing several things:
   happens. If it fails, you will get a clear, detailed report on what each value
   was.
 
-### Configuring pytest
+#### Configuring pytest
 
 pytest supports configuration in `pytest.ini`, `setup.cfg`, or, since version 6,
-`pyproject.toml` {% rr PP301 %}, or, since version 9, `pytest.toml` or
+`pyproject.toml` {rr}`PP301`, or, since version 9, `pytest.toml` or
 `.pytest.toml`. Remember, pytest is a developer requirement, not a user one, so
 always require 6+ (or 9+) and use `pyproject.toml` or the pytest TOML ones. This
 is an example configuration:
 
-{% tabs %} {% tab conf-modern Pytest 9+ %}
+::::{tab-set}
+:::{tab-item} Pytest 9+
 
-```toml
+```ini
 [tool.pytest]
 minversion = "9.0"
 addopts = ["-ra", "--showlocals"]
@@ -85,9 +78,10 @@ testpaths = [
 ]
 ```
 
-{% endtab %} {% tab conf-classic Pytest 6+ %}
+:::
+:::{tab-item} Pytest 6+
 
-```toml
+```ini
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
@@ -99,24 +93,25 @@ testpaths = [
 ]
 ```
 
-{% endtab %} {% endtabs %}
+:::
+::::
 
-{% rr PP302 %} The `minversion` will print a nicer error if your `pytest` is too
+{rr}`PP302` The `minversion` will print a nicer error if your `pytest` is too
 old (though, ironically, it won't read this if the version is too old, so
 setting "6" or less in `pyproject.toml` is rather pointless, similarly for 9 if
 using the new config location). The `addopts` setting will add whatever you put
-there to the command line when you run; {% rr PP308 %} `-ra` will print a
+there to the command line when you run; {rr}`PP308` `-ra` will print a
 summary "r"eport of "a"ll results, which gives you a quick way to review what
 tests failed and were skipped, and why. `--showlocals` will print locals in
 tracebacks - depending on your tests, you might or might not like this one.
-{% rr PP307 %} `--strict-markers` will make sure you don't try to use an
-unspecified fixture. {% rr PP306 %} And `--strict-config` will error if you make
-a mistake in your config. {% rr PP305 %} `xfail_strict` will change the default
+{rr}`PP307` `--strict-markers` will make sure you don't try to use an
+unspecified fixture. {rr}`PP306` And `--strict-config` will error if you make
+a mistake in your config. {rr}`PP305` `xfail_strict` will change the default
 for `xfail` to fail the tests if it doesn't fail - you can still override
-locally in a specific xfail for a flaky failure. {% rr PP309 %}
+locally in a specific xfail for a flaky failure. {rr}`PP309`
 `filter_warnings` will cause all warnings to be errors (you can add allowed
-warnings here too, see below). {% rr PP304 %} `log_level` will report `INFO` and
-above log messages on a failure. {% rr PP303 %} Finally, `testpaths` will limit
+warnings here too, see below). {rr}`PP304` `log_level` will report `INFO` and
+above log messages on a failure. {rr}`PP303` Finally, `testpaths` will limit
 `pytest` to just looking in the folders given - useful if it tries to pick up
 things that are not tests from other directories.
 [See the docs](https://docs.pytest.org/en/stable/customize.html) for more
@@ -144,7 +139,7 @@ becoming errors using the syntax
 tends to be `default` (show the first time) or `ignore` (never show). The regex
 matches at the beginning of the error unless you prefix it with `.*`.
 
-### Running pytest
+#### Running pytest
 
 You can run pytest directly with `pytest` or `python -m pytest`. You can
 optionally give a directory or file to run on. You can also select just some
@@ -161,13 +156,13 @@ start out in your debugger at the beginning of the last failed test with
 `--trace --lf`. [See the docs](https://docs.pytest.org/en/stable/usage.html) for
 more running tips.
 
-## Guidelines for writing good tests
+### Guidelines for writing good tests
 
 Time spent learning all the powerful tools pytest has to offer will be well
 spent! You can make your tests more granular, mock things that aren't available
 (or are slow to run), parametrize, and much more.
 
-### Tests should be easy
+#### Tests should be easy
 
 Always use pytest. The built-in unittest is _very_ verbose; the simpler the
 writing of tests, the more tests you will write!
@@ -210,7 +205,7 @@ This natively works with NumPy arrays, too! Always prefer
 `array1 == approx(array2)` over the functions in the `numpy.testing` module if
 you can, it is simpler and the reporting is better.
 
-### Tests should test for failures too
+#### Tests should test for failures too
 
 You should make sure that expected errors are thrown:
 
@@ -226,7 +221,7 @@ def test_raises():
 You can check for warnings as well, with `pytest.warns` or
 `pytest.deprecated_call`.
 
-### Tests should stay easy when scaling out
+#### Tests should stay easy when scaling out
 
 pytest [uses fixtures](https://docs.pytest.org/en/stable/fixture.html) to
 represent complex ideas, like setup/teardown, temporary resources, or
@@ -289,7 +284,7 @@ conftest) will run three times, and each time will identify as a different
 `platform.system()`! Leave `autouse` off, and it becomes opt-in; adding
 `platform_system` to the list of arguments will opt in.
 
-### Tests should be organized
+#### Tests should be organized
 
 You can use `pytest.mark.*` to
 [mark](https://docs.pytest.org/en/stable/mark.html) tests, so you can easily
@@ -321,7 +316,7 @@ Many pytest plugins support new marks too, like `pytest-parametrize`. You can
 also use custom marks to enable/disable groups of tests, or to pass data into
 fixtures.
 
-### Tests should test the installed version, not the local version
+#### Tests should test the installed version, not the local version
 
 Your tests should run against an _installed_ version of your code. Testing
 against the _local_ version might work while the installed version does not (due
@@ -332,7 +327,7 @@ directories and `pytest` does not. Also, there may come a time when someone
 a build system, and if you are unable to test against an installed version, you
 won't be able to run your tests! (It happens more than you might think).
 
-### Mock expensive or tricky calls
+#### Mock expensive or tricky calls
 
 If you have to call something that is expensive or hard to call, it is often
 better to mock it. To isolate parts of your own code for "unit" testing, mocking
@@ -392,5 +387,3 @@ redirects to the standard library [unittest.mock][].
 [pytest]: https://docs.pytest.org
 [pytest-mock]: https://pypi.org/project/pytest-mock/
 [unittest.mock]: https://docs.python.org/3/library/unittest.mock.html
-
-<script src="{% link assets/js/tabs.js %}"></script>

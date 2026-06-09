@@ -1,14 +1,8 @@
 ---
-layout: page
 title: Test
-permalink: /tutorials/test/
-nav_order: 4
-parent: Tutorials
 ---
 
-{% include toc.html %}
-
-# Test
+## Test
 
 In this section you will:
 
@@ -22,7 +16,7 @@ unintended changes or breakage with not go unnoticed. Writing tests also tends
 to encouraging you to write modular, reusable code, because it is easier to
 test.
 
-## Write some tests
+### Write some tests
 
 Make a directory for tests. We recommend putting it next to the `src` directory.
 
@@ -101,7 +95,7 @@ Things to notice:
   be using below.) This allows you to also write helper functions that are not
   tests.
 
-## Run the tests
+### Run the tests
 
 Scientific Python packages generally use a program called `pytest` to run their
 tests and report successes and failures. Install `pytest`.
@@ -149,9 +143,5 @@ include:
 Consult the [pytest documentation][] for more. For more advanced pytest
 suggestions, see our [pytest guide][].
 
-<!-- prettier-ignore-start -->
-
 [pytest documentation]: https://docs.pytest.org/en/latest/
-[pytest guide]: {% link pages/guides/pytest.md %}
-
-<!-- prettier-ignore-end -->
+[pytest guide]: pages/guides/pytest

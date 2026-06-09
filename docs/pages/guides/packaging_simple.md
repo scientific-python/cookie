@@ -1,22 +1,14 @@
 ---
-layout: page
 title: Simple packaging
-permalink: /guides/packaging-simple/
-nav_order: 5
-parent: Topical Guides
 ---
 
-{% include toc.html %}
+:::{tip} Quick start
+Once you've done this at least once, feel free to use
+[our cookiecutter/copier template](https://github.com/scientific-python/cookie),
+or `uv init` to get started quickly on new packages!
+:::
 
-{: .highlight-title }
-
-> Quick start
->
-> Once you've done this at least once, feel free to use
-> [our cookiecutter/copier template](https://github.com/scientific-python/cookie),
-> or `uv init` to get started quickly on new packages!
-
-# Simple packaging
+## Simple packaging
 
 Python packages can now use a modern build system instead of the classic but
 verbose setuptools and `setup.py`. The one you select doesn't really matter that
@@ -30,80 +22,83 @@ and compiled backends (see the next page).
 Also see the [Python packaging guide][], especially the [Python packaging
 tutorial][].
 
-{: .note-title }
+:::{note} Classic files
+These systems do not use or require `setup.py`, `setup.cfg`, or `MANIFEST.in`.
+Those are for setuptools. Unless you are using setuptools, of course, which
+still uses `MANIFEST.in`. You can convert the old files using
+`pipx run hatch new --init` or with
+[ini2toml](https://ini2toml.readthedocs.io/en/latest/).
+:::
 
-> Classic files
->
-> These systems do not use or require `setup.py`, `setup.cfg`, or `MANIFEST.in`.
-> Those are for setuptools. Unless you are using setuptools, of course, which
-> still uses `MANIFEST.in`. You can convert the old files using
-> `pipx run hatch new --init` or with
-> [ini2toml](https://ini2toml.readthedocs.io/en/latest/).
+:::{important} Selecting a backend
+Backends handle metadata the same way, so the choice comes down to how you
+specify what files go into an SDist and extra features, like getting a version
+from VCS. If you don't have an existing preference, hatchling is an excellent
+choice, balancing speed, configurability, and extendability.
+:::
 
-{: .important-title }
+### pyproject.toml: build-system
 
-> Selecting a backend
->
-> Backends handle metadata the same way, so the choice comes down to how you
-> specify what files go into an SDist and extra features, like getting a version
-> from VCS. If you don't have an existing preference, hatchling is an excellent
-> choice, balancing speed, configurability, and extendability.
-
-## pyproject.toml: build-system
-
-{% rr PY001 %} Packages must have a `pyproject.toml` file {% rr PP001 %} that
+{rr}`PY001` Packages must have a `pyproject.toml` file {rr}`PP001` that
 selects the backend:
 
-{% tabs %} {% tab hatch Hatchling %}
+::::{tab-set}
+:::{tab-item} Hatchling
 
-```toml
+```ini
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 ```
 
-{% endtab %} {% tab uv uv_build %}
+:::
+:::{tab-item} uv_build
 
-```toml
+```ini
 [build-system]
 requires = ["uv_build>=0.7.19"]
 build-backend = "uv_build"
 ```
 
-{% endtab %} {% tab flit Flit-core %}
+:::
+:::{tab-item} Flit-core
 
-```toml
+```ini
 [build-system]
 requires = ["flit_core>=3.12"]
 build-backend = "flit_core.buildapi"
 ```
 
-{% endtab %} {% tab pdm PDM-backend %}
+:::
+:::{tab-item} PDM-backend
 
-```toml
+```ini
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 ```
 
-{% endtab %} {% tab setuptools Setuptools %}
+:::
+:::{tab-item} Setuptools
 
-```toml
+```ini
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 ```
 
-{% endtab %} {% endtabs %}
+:::
+::::
 
-{% include pyproject.md %}
+```{include} ../../_partials/pyproject.md
+```
 
 For `requires-python`, you should specify the minimum you require, and you
-should not put an upper cap on it {% rr PY004 %}, as this field is used to
+should not put an upper cap on it {rr}`PY004`, as this field is used to
 back-solve for old package versions that pass this check, allowing you to safely
 drop Python versions.
 
-## Package structure
+### Package structure
 
 All packages _should_ have a `src` folder, with the package code residing inside
 it, such as `src/<package>/`. This may seem like extra hassle; after all, you
@@ -120,11 +115,11 @@ detection.
 If you don't match your package name and import name (which you should except
 for very special cases), you will likely need extra configuration here.
 
-You should have a `README` {% rr PY002 %} and a `LICENSE` {% rr PY003 %} file.
-You should have a `docs/` folder {% rr PY004 %}. You should have a `/tests`
-folder {% rr PY005 %} (recommended) and/or a `src/<package>/tests` folder.
+You should have a `README` {rr}`PY002` and a `LICENSE` {rr}`PY003` file.
+You should have a `docs/` folder {rr}`PY004`. You should have a `/tests`
+folder {rr}`PY005` (recommended) and/or a `src/<package>/tests` folder.
 
-## Versioning
+### Versioning
 
 You can specify the version manually (as shown in the example), but the backends
 usually provide some automatic features to help you avoid this. Flit will pull
@@ -134,18 +129,17 @@ in a file or use git.
 You will always need to specify that the version will be supplied dynamically
 with:
 
-```toml
+```ini
 dynamic = ["version"]
 ```
 
 Then you'll configure your backend to compute the version.
 
-{% details Hatchling dynamic versioning %}
-
+:::{dropdown} Hatchling dynamic versioning
 You can tell hatchling to get the version from VCS. Add `hatch-vcs` to your
 `build-backend.requires`, then add the following configuration:
 
-```toml
+```ini
 [tool.hatch]
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/<package>/version.py"
@@ -153,7 +147,7 @@ build.hooks.vcs.version-file = "src/<package>/version.py"
 
 Or you can tell it to look for it in a file (see docs for arbitrary regex's):
 
-```toml
+```ini
 [tool.hatch]
 version.path = "src/<package>/__init__.py"
 ```
@@ -178,10 +172,9 @@ And `.gitattributes` (or add this line if you are already using this file):
 
 This will allow git archives (including the ones generated from GitHub) to also
 support versioning.
+:::
 
-{% enddetails %}
-
-## Including/excluding files in the SDist
+### Including/excluding files in the SDist
 
 This is tool specific.
 
@@ -194,25 +187,24 @@ This is tool specific.
 - [PDM info here](https://pdm-backend.fming.dev/build_config/#include-or-exclude-files).
 - Setuptools still uses `MANIFEST.in`.
 
-{: .warning }
+:::{warning}
+Flit will not use VCS (like git) to populate the SDist if you use standard
+tooling, even if it can do that using its own tooling. So make sure you list
+explicit include/exclude rules, and test the contents:
 
-> Flit will not use VCS (like git) to populate the SDist if you use standard
-> tooling, even if it can do that using its own tooling. So make sure you list
-> explicit include/exclude rules, and test the contents:
->
-> ```bash
-> # Show SDist contents
-> tar -tvf dist/*.tar.gz
-> # Show wheel contents
-> unzip -l dist/*.whl
-> ```
+```bash
+# Show SDist contents
+tar -tvf dist/*.tar.gz
+# Show wheel contents
+unzip -l dist/*.whl
+```
 
-{: .note-title }
+:::
 
-> Flit _requires_ `license.file` to be set in your `[project]` section to ensure
-> it finds the license file.
-
-<!-- prettier-ignore-start -->
+:::{note}
+Flit _requires_ `license.file` to be set in your `[project]` section to ensure
+it finds the license file.
+:::
 
 [flit]: https://flit.readthedocs.io
 [poetry]: https://python-poetry.org
@@ -224,7 +216,4 @@ This is tool specific.
 [meson-python]: https://meson-python.readthedocs.io
 [python packaging guide]: https://packaging.python.org
 [python packaging tutorial]: https://packaging.python.org/tutorials/packaging-projects/
-
-<!-- prettier-ignore-end -->
-
-<script src="{% link assets/js/tabs.js %}"></script>
+[metadata]: https://packaging.python.org/en/latest/specifications/core-metadata/

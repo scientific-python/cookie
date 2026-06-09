@@ -1,14 +1,8 @@
 ---
-layout: page
 title: "Code coverage"
-permalink: /guides/coverage/
-nav_order: 3
-parent: Topical Guides
 ---
 
-{% include toc.html %}
-
-# Code Coverage
+## Code Coverage
 
 The "Code coverage" value of a codebase indicates how much of the
 production/development code is covered by the running unit tests. Maintainers
@@ -27,20 +21,16 @@ Tools and libraries used to calculate, read, and visualize coverage reports:
 - `GitHub Actions`: allows users to automatically upload coverage reports to
   `Codecov`
 
-{: .note-title }
+:::{note} Are there any alternatives?
+Coveralls is an alternative coverage platform, but we recommend using Codecov
+because of its ease of use and integration with GitHub Actions.
+:::
 
-> Are there any alternatives?
->
-> Coveralls is an alternative coverage platform, but we recommend using Codecov
-> because of its ease of use and integration with GitHub Actions.
-
-{: .highlight-title }
-
-> Should increasing the coverage value be my top priority?
->
-> A low coverage percentage will definitely motivate you to add more tests, but
-> adding weak tests just for coverage's sake is not a good idea. The tests
-> should test your codebase thoroughly and should not be unreliable.
+:::{tip} Should increasing the coverage value be my top priority?
+A low coverage percentage will definitely motivate you to add more tests, but
+adding weak tests just for coverage's sake is not a good idea. The tests
+should test your codebase thoroughly and should not be unreliable.
+:::
 
 ### Running your tests with coverage
 
@@ -53,8 +43,9 @@ directly is hidden away from normal use, so we recommend that, but will show
 both methods below. If you are not running `pytest`, but instead are running an
 example or a script, you have to use `coverage` directly.
 
-{% tabs %} {% tab cov coverage %}
-
+::::{tab-set}
+:::{tab-item} coverage
+:sync: coverage
 Make sure you install `coverage[toml]`.
 
 `coverage` has several commands; the most important one is `coverage run`. This
@@ -75,9 +66,9 @@ coverage report
 
 This looks for a `.coverage` file and displays the result. There are many output
 formats for reports.
-
-{% endtab %} {% tab pycov pytest-cov %}
-
+:::
+:::{tab-item} pytest-cov
+:sync: pytest-cov
 Make sure you install `pytest-cov`.
 
 `pytest` allows users to pass the `--cov` option to automatically invoke
@@ -98,16 +89,16 @@ See the [docs](https://pytest-cov.readthedocs.io/en/latest/) for more options.
 Coverage pytest arguments can be placed in your pytest configuration file or in
 your task runner. It also will (mostly) respect the coverage configuration,
 shown below.
+:::
+::::
 
-{% endtab %} {% endtabs %}
-
-### Configuring coverage
+#### Configuring coverage
 
 There is a configuration section in `pyproject.toml` for coverage. Here are some
 common options
 [(see the docs for more)](https://coverage.readthedocs.io/en/latest/config.html):
 
-```toml
+```ini
 [tool.coverage]
 run.core = "sysmon"
 run.disable_warnings = ["no-sysmon"]
@@ -135,7 +126,7 @@ There are also useful reporting options. `report.exclude_lines = [...]` allows
 you to exclude lines from coverage. `report.fail_under` can trigger a failure if
 coverage is below a percent (like 100).
 
-### Calculating code coverage in your workflows
+#### Calculating code coverage in your workflows
 
 Your workflows should produce a `.coverage` file as outlined above. This file
 can be uploaded to `Codecov` using the [codecov/codecov-action][] action.
@@ -144,7 +135,7 @@ If you would rather do it yourself, you should collect coverage files from all
 your jobs and combine them into one `.coverage` file before running
 `coverage report`, so that you get a combined score.
 
-#### Manually combining coverage
+##### Manually combining coverage
 
 If you are running in parallel, either with `pytest-xdist`, you can set
 `run.parallel` to `true`, which will add a unique suffix to the coverage file(s)
@@ -158,10 +149,17 @@ manually produce multiple files from task runner jobs.
 
 Here's an example nox job:
 
-{% tabs %} {% tab cov coverage %}
+::::{tab-set}
+:::{tab-item} coverage
+:sync: coverage
 
 ```python
-@nox.session(python=ALL_PYTHONS)
+import sys
+
+import nox
+
+
+@nox.session
 def tests(session: nox.Session) -> None:
     coverage_file = f".coverage.{sys.platform}.{session.python}"
     session.install("-e.", "--group=cov")
@@ -175,10 +173,17 @@ def tests(session: nox.Session) -> None:
     )
 ```
 
-{% endtab %} {% tab pycov pytest-cov %}
+:::
+:::{tab-item} pytest-cov
+:sync: pytest-cov
 
 ```python
-@nox.session(python=ALL_PYTHONS)
+import sys
+
+import nox
+
+
+@nox.session
 def tests(session: nox.Session) -> None:
     coverage_file = f".coverage.{sys.platform}.{session.python}"
     session.install("-e.", "--group=cov")
@@ -191,9 +196,10 @@ def tests(session: nox.Session) -> None:
     )
 ```
 
-{% endtab %} {% endtabs %}
+:::
+::::
 
-#### Merging and reporting
+##### Merging and reporting
 
 If you are running in multiple jobs, you should use upload/download artifacts so
 they are all available in a single combine job at the end. Each one should have
@@ -213,7 +219,7 @@ def coverage(session: nox.Session) -> None:
     session.run("coverage", "erase")
 ```
 
-#### Configuring Codecov and uploading coverage reports
+##### Configuring Codecov and uploading coverage reports
 
 Interestingly, `Codecov` does not require any initial configurations for your
 project, given that you have already signed up for the same using your GitHub
@@ -225,8 +231,6 @@ uploading coverage reports easy for users. A minimal working example for
 uploading coverage reports through your workflow, which should be more than
 enough for a simple testing suite, can be written as follows:
 
-{% raw %}
-
 ```yaml
 - name: Upload coverage report
   uses: codecov/codecov-action@v6
@@ -234,14 +238,12 @@ enough for a simple testing suite, can be written as follows:
     token: ${{ secrets.CODECOV_TOKEN }}
 ```
 
-{% endraw %}
-
 The lines above should be added after the step that runs your tests with the
 `--cov` option. See the [docs](https://github.com/codecov/codecov-action#usage)
 for all the optional options. You'll need to specify a `CODECOV_TOKEN` secret,
 as well.
 
-#### Using codecov.yml
+##### Using codecov.yml
 
 One can also configure `Codecov` and coverage reports passed to `Codecov` using
 `codecov.yml`. `codecov.yml` should be placed inside the `.github` folder, along
@@ -280,5 +282,3 @@ loss of coverage to fail. See the
 TODO -->
 
 [codecov/codecov-action]: https://github.com/codecov/codecov-action
-
-<script src="{% link assets/js/tabs.js %}"></script>

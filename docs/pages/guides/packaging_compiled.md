@@ -1,12 +1,6 @@
 ---
-layout: page
 title: Compiled packaging
-permalink: /guides/packaging-compiled/
-nav_order: 6
-parent: Topical Guides
 ---
-
-{% include toc.html %}
 
 <!-- [[[cog
 from cog_helpers import code_fence, render_cookie, TOMLMatcher
@@ -26,15 +20,13 @@ with render_cookie(backend="maturin", vcs=False) as maturin:
 ]]] -->
 <!-- [[[end]]] -->
 
-{: .highlight-title }
+:::{tip} Quick start
+Once you've done this at least once, feel free to use
+[our cookiecutter/copier template](https://github.com/scientific-python/cookie),
+or `uv init` to get started quickly on new packages!
+:::
 
-> Quick start
->
-> Once you've done this at least once, feel free to use
-> [our cookiecutter/copier template](https://github.com/scientific-python/cookie),
-> or `uv init` to get started quickly on new packages!
-
-# Packaging Compiled Projects
+## Packaging Compiled Projects
 
 There are a variety of ways to package compiled projects. In the past, the only
 way to do it was to use setuptools/distutils, which required using lots of
@@ -50,135 +42,136 @@ The most exciting developments have been new native build backends:
 - [enscons][]: Builds C/C++ using SCONs. (Aging now, but this was the first
   native backend!)
 
-{: .note }
-
+:::{note}
 You should be familiar with [packing a pure Python
-project]({% link pages/guides/packaging_compiled.md %}) - the metadata
+project](pages/guides/packaging_compiled) - the metadata
 configuration is the same.
-
+:::
 There are also classic setuptools plugins:
 
 - [scikit-build][]: Builds C/C++/Fortran using CMake.
 - [setuptools-rust][]: Builds Rust using Cargo.
 
-{: .highlight-title }
+:::{tip} Selecting a backend
+Selecting a backend: If you are using Rust, use maturin. If you are using
+CUDA, use scikit-build-core. If you are using a classic language (C, C++,
+Fortran), then you can use either scikit-build-core or meson-python, depending
+on whether you prefer writing CMake or Meson. Meson is a lot more opinionated;
+it requires you use version control, it requires a README.md and LICENSE file.
+It requires your compiler be properly set up. Etc. While CMake can be as
+elegant as Meson, there are a lot of historical examples of poorly written
+CMake.
+:::
 
-> Selecting a backend
->
-> Selecting a backend: If you are using Rust, use maturin. If you are using
-> CUDA, use scikit-build-core. If you are using a classic language (C, C++,
-> Fortran), then you can use either scikit-build-core or meson-python, depending
-> on whether you prefer writing CMake or Meson. Meson is a lot more opinionated;
-> it requires you use version control, it requires a README.md and LICENSE file.
-> It requires your compiler be properly set up. Etc. While CMake can be as
-> elegant as Meson, there are a lot of historical examples of poorly written
-> CMake.
+### pyproject.toml: build-system
 
-## pyproject.toml: build-system
-
-{% rr PY001 %} Packages must have a `pyproject.toml` file {% rr PP001 %} that
+{rr}`PY001` Packages must have a `pyproject.toml` file {rr}`PP001` that
 selects the backend:
 
-{% tabs %} {% tab skbc Scikit-build-core %}
-
+::::{tab-set}
+:::{tab-item} Scikit-build-core
+:sync: scikit-build-core
 <!-- [[[cog
 with code_fence("toml"):
     print(skbuild_pyproject.get_source("build-system"))
 ]]] -->
-<!-- prettier-ignore-start -->
-```toml
+<!-- rumdl-disable MD013 -->
+```ini
 [build-system]
 requires = ["pybind11", "scikit-build-core>=0.12"]
 build-backend = "scikit_build_core.build"
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
-
-{% endtab %} {% tab meson Meson-python %}
-
+:::
+:::{tab-item} Meson-python
+:sync: meson-python
 <!-- [[[cog
 with code_fence("toml"):
     print(mesonpy_pyproject.get_source("build-system"))
 ]]] -->
-<!-- prettier-ignore-start -->
-```toml
+<!-- rumdl-disable MD013 -->
+```ini
 [build-system]
 requires = ["meson-python>=0.18", "pybind11"]
 build-backend = "mesonpy"
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
-
-{% endtab %} {% tab maturin Maturin %}
-
+:::
+:::{tab-item} Maturin
+:sync: maturin
 <!-- [[[cog
 with code_fence("toml"):
     print(maturin_pyproject.get_source("build-system"))
 ]]] -->
-<!-- prettier-ignore-start -->
-```toml
+<!-- rumdl-disable MD013 -->
+```ini
 [build-system]
 requires = ["maturin>=1.9,<2"]
 build-backend = "maturin"
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
+:::
+::::
 
-{% endtab %} {% endtabs %}
+```{include} ../../_partials/pyproject.md
+```
 
-{% include pyproject.md %}
-
-## Tool section in pyproject.toml
+### Tool section in pyproject.toml
 
 These tools all read the project table. They also have extra configuration
 options in `tool.*` settings.
 
-{% tabs %} {% tab skbc Scikit-build-core %}
-
+::::{tab-set}
+:::{tab-item} Scikit-build-core
+:sync: scikit-build-core
 <!-- [[[cog
 with code_fence("toml"):
     print(skbuild_pyproject.get_source("tool.scikit-build"))
 ]]] -->
-<!-- prettier-ignore-start -->
-```toml
+<!-- rumdl-disable MD013 -->
+```ini
 [tool.scikit-build]
 minimum-version = "build-system.requires"
 build-dir = "build/{wheel_tag}"
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 These options are not required, but can improve your experience.
-
-{% endtab %} {% tab meson Meson-python %}
-
+:::
+:::{tab-item} Meson-python
+:sync: meson-python
 No `tool.meson-python` configuration required for this example.
-
-{% endtab %} {% tab maturin Maturin %}
-
+:::
+:::{tab-item} Maturin
+:sync: maturin
 <!-- [[[cog
 with code_fence("toml"):
     print(maturin_pyproject.get_source("tool.maturin"))
 ]]] -->
-<!-- prettier-ignore-start -->
-```toml
+<!-- rumdl-disable MD013 -->
+```ini
 [tool.maturin]
 module-name = "package._core"
 python-source = "src"
 sdist-generator = "git"  # default is cargo
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 Maturin assumes you follow Rust's package structure, so we need a little bit of
 configuration here to follow the convention of the other tools here.
+:::
+::::
 
-{% endtab %} {% endtabs %}
+### Backend specific files
 
-## Backend specific files
-
-{% tabs %} {% tab skbc Scikit-build-core %}
-
+::::{tab-set}
+:::{tab-item} Scikit-build-core
+:sync: scikit-build-core
 Example `CMakeLists.txt` file (using pybind11, so include `pybind11` in
 `build-system.requires` too):
 
@@ -186,7 +179,7 @@ Example `CMakeLists.txt` file (using pybind11, so include `pybind11` in
 with code_fence("cmake"):
     print(skbuild_cmakelists_txt)
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```cmake
 cmake_minimum_required(VERSION 3.15...3.26)
 project(${SKBUILD_PROJECT_NAME} LANGUAGES CXX)
@@ -197,15 +190,15 @@ find_package(pybind11 CONFIG REQUIRED)
 pybind11_add_module(_core MODULE src/main.cpp)
 install(TARGETS _core DESTINATION ${SKBUILD_PROJECT_NAME})
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 Scikit-build-core will use your `.gitignore` to help it avoid adding ignored
 files to your distributions; it also has a default ignore for common cache
 files, so you can get started without one, but it's recommended.
-
-{% endtab %} {% tab meson Meson-python %}
-
+:::
+:::{tab-item} Meson-python
+:sync: meson-python
 Example `meson.build` file (using pybind11, so include `pybind11` in
 `build-system.requires` too):
 
@@ -213,7 +206,7 @@ Example `meson.build` file (using pybind11, so include `pybind11` in
 with code_fence("meson"):
     print(mesonpy_meson_build)
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```meson
 project(
     'package',
@@ -238,23 +231,23 @@ py.extension_module('_core',
 
 install_subdir('src/package', install_dir: py.get_install_dir() / 'package', strip_directory: true)
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
 Meson requires that your source be tracked by version control. In a real
 project, you will likely be doing this, but when trying out a build backend you
 might not think to set up a git repo to build it.
-
-{% endtab %} {% tab maturin Maturin %}
-
+:::
+:::{tab-item} Maturin
+:sync: maturin
 Example `Cargo.toml` file:
 
 <!-- [[[cog
 with code_fence("toml"):
     print(maturin_cargo_toml)
 ]]] -->
-<!-- prettier-ignore-start -->
-```toml
+<!-- rumdl-disable MD013 -->
+```ini
 [package]
 name = "package"
 version = "0.1.0"
@@ -274,27 +267,28 @@ version = "0.27.2"
 # "abi3-py310" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.10
 features = ["extension-module", "abi3-py310"]
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
+:::
+::::
 
-{% endtab %} {% endtabs %}
-
-## Example compiled file
+### Example compiled file
 
 This example will make a `_core` extension inside your package; this pattern
 allows you to easily provide both Python files and compiled extensions, and
 keeping the details of your compiled extension private. You can select whatever
 name you wish, though, or even make your compiled extension a top level module.
 
-{% tabs %} {% tab skbc Scikit-build-core %}
-
+::::{tab-set}
+:::{tab-item} Scikit-build-core
+:sync: scikit-build-core
 Example `src/main.cpp` file:
 
 <!-- [[[cog
 with code_fence("cpp"):
     print(skbuild_src_main_cpp)
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```cpp
 #include <pybind11/pybind11.h>
 
@@ -324,18 +318,18 @@ PYBIND11_MODULE(_core, m) {
   )pbdoc");
 }
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
-
-{% endtab %} {% tab meson Meson-python %}
-
+:::
+:::{tab-item} Meson-python
+:sync: meson-python
 Example `src/main.cpp` file:
 
 <!-- [[[cog
 with code_fence("cpp"):
     print(mesonpy_src_main_cpp)
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```cpp
 #include <pybind11/pybind11.h>
 
@@ -365,18 +359,18 @@ PYBIND11_MODULE(_core, m) {
   )pbdoc");
 }
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
-
-{% endtab %} {% tab maturin Maturin %}
-
+:::
+:::{tab-item} Maturin
+:sync: maturin
 Example `src/lib.rs` file:
 
 <!-- [[[cog
 with code_fence("rs"):
     print(maturin_src_lib_rs)
 ]]] -->
-<!-- prettier-ignore-start -->
+<!-- rumdl-disable MD013 -->
 ```rs
 use pyo3::prelude::*;
 
@@ -405,37 +399,37 @@ mod _core {
     }
 }
 ```
-<!-- prettier-ignore-end -->
+<!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
+:::
+::::
 
-{% endtab %} {% endtabs %}
-
-## Package structure
+### Package structure
 
 The recommendation (followed above) is to have source code in `/src`, and the
 Python package files in `/src/<package>`. The compiled files also can go in
 `/src`.
 
-## Versioning
+### Versioning
 
 Check the documentation for the tools above to see what forms of dynamic
 versioning the tool supports.
 
-## Including/excluding files in the SDist
+### Including/excluding files in the SDist
 
 Each tool uses a different mechanism to include or remove files from the SDist,
 though the defaults are reasonable.
 
-## Distributing
+### Distributing
 
 Unlike pure Python, you'll need to build redistributable wheels for each
 platform and supported Python version if you want to avoid compilation on the
 user's system using cibuildwheel. See [the CI page on wheels][gha_wheels] for a
 suggested workflow.
 
-## Special considerations
+### Special considerations
 
-### NumPy
+#### NumPy
 
 Modern versions of NumPy (1.25+) allow you to target older versions when
 building, which is _highly_ recommended, and this became required in NumPy 2.0.
@@ -453,24 +447,14 @@ for those versions.
 
 If using pybind11, you don't need NumPy at build-time in the first place.
 
-{: .important }
-
+:::{important}
 Python 3.13.4 is broken on Windows for compiling code - it always reports that
 it is free-threaded. 3.13.5 was rushed out to fix it.
-
-<!-- prettier-ignore-start -->
+:::
 
 [scikit-build-core]: https://scikit-build-core.readthedocs.io
 [scikit-build]: https://scikit-build.readthedocs.io
 [meson-python]: https://meson-python.readthedocs.io
-[cmake]: https://cmake.org
-[meson]: https://mesonbuild.com
-[enscons]: https://pypi.org/project/enscons
-[scons]: https://scons.org/
 [setuptools-rust]: https://setuptools-rust.readthedocs.io/en/latest/
 [maturin]: https://www.maturin.rs
-[gha_wheels]: {% link pages/guides/gha_wheels.md %}
-
-<!-- prettier-ignore-end -->
-
-<script src="{% link assets/js/tabs.js %}"></script>
+[gha_wheels]: pages/guides/gha_wheels

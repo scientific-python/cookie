@@ -1,0 +1,13 @@
+{
+  "name": "scientific-python-cookie-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "cd docs && NODE_OPTIONS='--localstorage-file=_build/.node-localstorage --no-deprecation' myst build --html",
+    "serve": "cd docs && NODE_OPTIONS='--localstorage-file=_build/.node-localstorage --no-deprecation' myst start",
+    "clean": "rm -rf docs/_build"
+  },
+  "dependencies": {
+    "mystmd": "^1.0"
+  }
+}

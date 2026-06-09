@@ -1,32 +1,25 @@
 ---
-layout: page
 title: Style & static checks
-permalink: /guides/style/
-nav_order: 8
-parent: Topical Guides
-custom_title: Style and static checks
+short_title: Style and static checks
 ---
 
-{% include toc.html %}
+## Style and static checks
 
-# Style and static checks
+### Pre-commit
 
-## Pre-commit
-
-{% rr PY006 %} Scientific Python projects often use [pre-commit][] (or [prek][])
+{rr}`PY006` Scientific Python projects often use [pre-commit][] (or [prek][])
 to check code style. The original, `pre-commit`, has support for more languages,
 but `prek` is a faster Rust rewrite that supports most real world usage.
 
-{% tabs runner %} {% tab prek Prek %}
-
+::::{tab-set}
+:::{tab-item} Prek
 Prek can be installed through `brew` (macOS) or `pipx/uv` (anywhere). There are
 two modes to use it locally; you can check manually with `prek run` (changes
 only) or `prek run -a` (all). You can omit the `run`, as well; such as
 `prek -a`. You can also run `prek install` to add checks as a git pre-commit
 hook.
-
-{% endtab %} {% tab pre-commit Pre-commit %}
-
+:::
+:::{tab-item} Pre-commit
 Pre-commit can be installed through `brew` (macOS) or `pipx/uv` (anywhere).
 There are two modes to use it locally; you can check manually with
 `pre-commit run` (changes only) or `pre-commit run -a` (all). You can also run
@@ -35,8 +28,8 @@ gets its name).
 
 Pre-commit's setup is much slower than prek, but you can install `pre-commit-uv`
 with pre-commit to speed up the setup time quite a bit.
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 Local runs (with `-a`) are the standard way to use it. That will run all the
 checks in optimized, isolated environments. After the first run, it's quite fast
@@ -47,7 +40,7 @@ a custom pre-commit hook before; it's quite elegant and does not add or commit
 the changes, it just makes the changes and allows you to check and add them. You
 can always override the hook with `-n`.
 
-{% rr PC100 %} Here is a minimal `.pre-commit-config.yaml` file with some handy
+{rr}`PC100` Here is a minimal `.pre-commit-config.yaml` file with some handy
 options:
 
 ```yaml
@@ -94,7 +87,7 @@ docker), you cannot enable a `--manual` flag, so extra checks will not run, and
 jobs should not download packages (use `additional-dependencies:` to add what
 you need).
 
-{% rr PC901 %} {% rr PC902 %} {% rr PC903 %} You can customize the pre-commit
+{rr}`PC901` {rr}`PC902` {rr}`PC903` You can customize the pre-commit
 message with:
 
 ```yaml
@@ -124,9 +117,9 @@ updates:
       default-days: 7
 ```
 
-## Format
+### Format
 
-{% rr PC110 %} [Black](https://black.readthedocs.io/en/latest/) is a popular
+{rr}`PC110` [Black](https://black.readthedocs.io/en/latest/) is a popular
 auto-formatter from the Python Software Foundation. One of the main features of
 Black is that it is "opinionated"; that is, it is almost completely
 unconfigurable. Instead of allowing you to come up with your own format, it
@@ -147,8 +140,8 @@ There are a _few_ options, mostly to enable/disable certain files, remove string
 normalization, and to change the line length, and those go in your
 `pyproject.toml` file.
 
-{% tabs formatters %} {% tab ruff Ruff-format %}
-
+:::::{tab-set}
+::::{tab-item} Ruff-format
 Ruff, the powerful Rust-based linter, has a formatter that is designed with the
 help of some of the Black authors to look 99.9% like Black, but run 30x faster.
 Here is the snippet to add the formatter to your `.pre-commit-config.yml`
@@ -165,23 +158,21 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 As you likely will be using Ruff if you follow this guide, the formatter is
 recommended as well.
 
-{% details You can add a Ruff badge to your repo as well %}
-
+:::{dropdown} You can add a Ruff badge to your repo as well
 [![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 
 ```md
 [![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 ```
 
-```
+```text
 .. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json
     :target: https://github.com/astral-sh/ruff
 ```
 
-{% enddetails %}
-
-{% endtab %} {% tab black Black %}
-
+:::
+::::
+::::{tab-item} Black
 Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
@@ -191,22 +182,21 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
     - id: black
 ```
 
-{% details You can add a Black badge to your repo as well %}
-
+:::{dropdown} You can add a Black badge to your repo as well
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ```md
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ```
 
-```
+```text
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 ```
 
-{% enddetails %}
-
-{% endtab %} {% endtabs %}
+:::
+::::
+:::::
 
 In _very_ specific situations, like when making a 2D array, you may want to
 retain special formatting. After carefully deciding that it is a special use
@@ -216,9 +206,8 @@ option! Most of the time, you can find a way to make the Blacked code look
 better by rewriting your code; factor out long unreadable portions into a
 variable, avoid writing matrices as 1D lists, etc.
 
-{% details Documentation / README snippets support %}
-
-{% rr PC111 %} If you want Black used in your documentation, you can use
+:::{dropdown} Documentation / README snippets support
+{rr}`PC111` If you want Black used in your documentation, you can use
 blacken-docs. This can even catch syntax errors in code snippets! It supports
 markdown and restructured text. Note that because black is in
 `additional_dependencies`, you'll have to keep it up to date manually.
@@ -231,11 +220,11 @@ markdown and restructured text. Note that because black is in
       additional_dependencies: [black==24.*]
 ```
 
-{% enddetails %}
+:::
 
-## Ruff
+### Ruff
 
-{% rr PC190 %} [Ruff][] [(docs)][ruff docs] is a Python code linter and
+{rr}`PC190` [Ruff][] [(docs)][ruff docs] is a Python code linter and
 autofixer that replaces many other tools in the ecosystem with a ultra-fast
 (written in Rust), single zero-dependency package. All plugins are compiled in,
 so you can't get new failures from plugins updating without updating your
@@ -252,16 +241,17 @@ pre-commit hook.
       args: ["--fix", "--show-fixes"]
 ```
 
-{% rr PC192 %} The hook is named `ruff-check`. {% rr PC191 %} The `--fix`
+{rr}`PC192` The hook is named `ruff-check`. {rr}`PC191` The `--fix`
 argument is optional, but recommended, since you can inspect and undo changes in
 git. `--show-fixes` is highly recommended if `--fix` is present, otherwise it
 won't tell you what or why it fixed things.
 
-{% rr RF001 %} Ruff is configured in your `pyproject.toml`. Here's an example:
+{rr}`RF001` Ruff is configured in your `pyproject.toml`. Here's an example:
 
-{% tabs ruff-config %} {% tab ruff-simple Simple config %}
+::::{tab-set}
+:::{tab-item} Simple config
 
-```toml
+```ini
 [tool.ruff.lint]
 extend-select = [
   "B",      # flake8-bugbear
@@ -271,9 +261,10 @@ extend-select = [
 ]
 ```
 
-{% endtab %} {% tab ruff-full Full config %}
+:::
+:::{tab-item} Full config
 
-```toml
+```ini
 [tool.ruff.lint]
 extend-select = [
   "ARG",    # flake8-unused-arguments
@@ -323,9 +314,10 @@ typing-modules = ["mypackage._compat.typing"]
 "tests/**" = ["T20"]
 ```
 
-{% endtab %} {% tab ruff-ignore Ignore-based config %}
+:::
+:::{tab-item} Ignore-based config
 
-```toml
+```ini
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
@@ -353,7 +345,8 @@ typing-modules = ["mypackage._compat.typing"]
 "tests/**" = ["T20"]
 ```
 
-{% endtab %} {% endtabs %}
+:::
+::::
 
 Ruff [provides dozens of rule sets](https://beta.ruff.rs/docs/rules/); you can
 select what you want from these. Like Flake8, plugins match by whole letter
@@ -373,31 +366,31 @@ entirely from pre-commit (default excludes include "build", so if you have a
 this).
 
 The `src` list which tells it where to look for top level packages is no longer
-needed if just set to `["src"]` in Ruff 0.6+. {% rr RF003 %}
+needed if just set to `["src"]` in Ruff 0.6+. {rr}`RF003`
 
-{: .warning }
+:::{warning}
+If you don't use a `[project]` table (older setuptools or Poetry), then you
+should also set:
 
-> If you don't use a `[project]` table (older setuptools or Poetry), then you
-> should also set:
->
-> ```toml
-> target-version = "py39"
-> ```
->
-> This selects the minimum version you want to target (primarily for `"UP"` and
-> `"I"`) {% rr RF002 %}
+```ini
+target-version = "py39"
+```
+
+This selects the minimum version you want to target (primarily for `"UP"` and
+`"I"`) {rr}`RF002`
+:::
 
 Here are some good error codes to enable on most (but not all!) projects:
 
 - `E`, `F`, `W`: These are the standard flake8 checks, classic checks that have
   stood the test of time. Not required if you use `extend-select` (`W` not
   needed if you use a formatter)
-- `B`: This finds patterns that are very bug-prone. {% rr RF101 %}
+- `B`: This finds patterns that are very bug-prone. {rr}`RF101`
 - `I`: This sorts your includes. There are multiple benefits, such as smaller
   diffs, fewer conflicts, a way to auto-inject `__future__` imports, and easier
   for readers to tell what's built-in, third-party, and local. It has a lot of
   configuration options, but defaults to a Black-compatible style.
-  {% rr RF102 %}
+  {rr}`RF102`
 - `ARG`: This looks for unused arguments. You might need to `# noqa: ARG001`
   occasionally, but it's overall pretty useful.
 - `C4`: This looks for places that could use comprehensions, and can autofix
@@ -419,7 +412,7 @@ Here are some good error codes to enable on most (but not all!) projects:
 - `RUF`: Codes specific to Ruff, including removing noqa's that aren't used.
 - `T20`: Disallow `print` in your code (built on the assumption that it's a
   common debugging tool).
-- `UP`: Upgrade old Python syntax to your `target-version`. {% rr RF103 %}
+- `UP`: Upgrade old Python syntax to your `target-version`. {rr}`RF103`
 - `FURB`: From the refurb tool, a collection of helpful cleanups.
 - `PYI`: Typing related checks
 
@@ -428,8 +421,7 @@ Ruff. You can use `ALL` to get them all, then ignore the ones you want to
 ignore. New checks go into `--preview` before being activated in a minor
 release.
 
-{% details You can add a Ruff badge to your repo as well %}
-
+:::{dropdown} You can add a Ruff badge to your repo as well
 [![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json))](https://github.com/astral-sh/ruff)
 
 ```md
@@ -441,11 +433,11 @@ release.
     :target: https://github.com/astral-sh/ruff
 ```
 
-{% enddetails %}
+:::
 
-{% details Separate tools that Ruff replaces %}
+::::{dropdown} Separate tools that Ruff replaces
 
-### PyCln
+#### PyCln
 
 [PyCln][] will clean up your imports if you have any that are not needed. There
 is a Flake8 check for this, but it's usually nicer to automatically do the
@@ -461,7 +453,7 @@ use the manual stage, it's opt-in instead of automatic.
       stages: [manual]
 ```
 
-### Flake8
+#### Flake8
 
 [Flake8][] can check a collection of good practices for you, ranging from simple
 style to things that might confuse or detract users, such as unused imports,
@@ -520,8 +512,7 @@ enable more checks. A few interesting plugins:
 - [`flake8-print`](https://pypi.org/project/pep8-naming/): Makes sure you don't
   have print statements that sneak in. Code: `T`
 
-{% details Flake8-print details %}
-
+:::{dropdown} Flake8-print details
 Having something verify you don't add a print statement by mistake is _very_
 useful. A common need for the print checker would be to add it to a single
 directory (`src` if you are following the convention recommended). You can do
@@ -535,9 +526,9 @@ per-file-ignores =
     examples/*: T
 ```
 
-{% enddetails %}
+:::
 
-### YesQA
+#### YesQA
 
 Over time, you can end up with extra "noqa" comments that are no longer needed.
 This is a flake8 helper that removes those comments when they are no longer
@@ -554,7 +545,7 @@ You need to have the same extra dependencies as flake8. In YAML, you can save
 the list given to yesqa and repeat it in flake8 using `&flake8-dependencies` and
 `*flake8-dependencies` after the colon.
 
-### isort
+#### isort
 
 You can have your imports sorted automatically by [isort][]. This will sort your
 imports, and is black compatible. One reason to have sorted imports is to reduce
@@ -580,9 +571,7 @@ In order to use it, you need to add some configuration. You can add it to
 profile = "black"
 ```
 
-[isort]: https://pycqa.github.io/isort/
-
-### PyUpgrade
+#### PyUpgrade
 
 Another useful tool is [PyUpgrade][], which monitors your codebase for "old"
 style syntax. Most useful to keep Python 2 outdated constructs out, it can even
@@ -600,23 +589,22 @@ when clearly better (please always use them, they are faster) if you set
 
 [pyupgrade]: https://github.com/asottile/pyupgrade
 
-{: .note }
+:::{note}
+If you set this to at least `--py37-plus`, you can add the annotations import
+by adding the following line to your isort pre-commit hook configuration:
 
-> If you set this to at least `--py37-plus`, you can add the annotations import
-> by adding the following line to your isort pre-commit hook configuration:
->
-> ```yaml
-> args: ["-a", "from __future__ import annotations"]
-> ```
->
-> Also make sure isort comes before pyupgrade. Now when you run pre-commit, it
-> will clean up your annotations to 3.7+ style, too!
+```yaml
+args: ["-a", "from __future__ import annotations"]
+```
 
-{% enddetails %}
+Also make sure isort comes before pyupgrade. Now when you run pre-commit, it
+will clean up your annotations to 3.7+ style, too!
+:::
+::::
 
-## Type checking
+### Type checking
 
-{% rr PC140 %} One of the most exciting advancements in Python in the last 10
+{rr}`PC140` One of the most exciting advancements in Python in the last 10
 years has been static type hints. Scientific Python projects vary in the degree
 to which they are type-hint ready. One of the challenges for providing static
 type hints is that it was developed in the Python 3 era and it really shines in
@@ -652,7 +640,7 @@ add items to the virtual environment setup for MyPy by pre-commit, for example:
 additional_dependencies: [attrs==23.1.0]
 ```
 
-{% rr MY100 %} MyPy has a config section in `pyproject.toml` that looks like
+{rr}`MY100` MyPy has a config section in `pyproject.toml` that looks like
 this:
 
 ```ini
@@ -679,23 +667,23 @@ enable `check_untyped_defs` first, followed by `disallow_untyped_defs` then
 `disallow_incomplete_defs`. You can add these _per file_ by adding a
 `# mypy: <option>` at the top of a file. You can also pass `--strict` on the
 command line. `strict = true` is now allowed in config files, too
-{% rr MY101 %}.
+{rr}`MY101`.
 
-The extra strict options shown above, like `warn_unreachable` {% rr MY103 %},
-and `ignore-without-code` {% rr MY104 %}, `redundant-expr` {% rr MY105 %}, and
-`truthy-bool` {% rr MY106 %} can trigger too often (like on `sys.platform`
+The extra strict options shown above, like `warn_unreachable` {rr}`MY103`,
+and `ignore-without-code` {rr}`MY104`, `redundant-expr` {rr}`MY105`, and
+`truthy-bool` {rr}`MY106` can trigger too often (like on `sys.platform`
 checks) and have to be ignored occasionally, but can find some significant logic
 errors in your typing.
 
-[mypy page]: {% link pages/guides/mypy.md %}
+[mypy page]: pages/guides/mypy
 
-## Setuptools specific checks
+### Setuptools specific checks
 
 If you use setuptools, these checks are useful:
 
-{% details Setuptools-only checks %}
+::::{dropdown} Setuptools-only checks
 
-### Check-Manifest (setuptools only)
+#### Check-Manifest (setuptools only)
 
 [Check-manifest](https://pypi.org/project/check-manifest/) is a fantastic,
 highly recommended tool that verifies you have working SDists. You can install
@@ -703,7 +691,7 @@ it from PyPI. Run it on your repository and see what it says. If you want to
 ignore files (like test folders, example folders, docs, etc) you can add these
 into your `pyproject.toml` file:
 
-```toml
+```ini
 [tool.check-manifest]
 ignore = [
     ".travis.yml",
@@ -725,8 +713,7 @@ If you use `setuptools_scm`, you might want to add:
 additional_dependencies: ["setuptools_scm[toml]"]
 ```
 
-{% details If this is too slow: %}
-
+:::{dropdown} If this is too slow:
 **Warning**: For a complex package, this may be slow. You can optionally set
 `stages: [manual]` just below the id, and then only run this explicitly
 (probably in CI only). In GHA, you should enable the manual stage, which will
@@ -738,9 +725,9 @@ run all checks:
     extra_args: --show-diff-on-failure --all-files --hook-stage manual
 ```
 
-{% enddetails %}
+:::
 
-### Setup.cfg format (setuptools only)
+#### Setup.cfg format (setuptools only)
 
 There is a tool that keeps your `setup.cfg` organized, and makes sure that
 important parts (like Python classifiers) are in sync. This tool,
@@ -755,18 +742,17 @@ important parts (like Python classifiers) are in sync. This tool,
 ```
 
 Make sure you list the highest version of Python you are testing with here.
+::::
 
-{% enddetails %}
+### Spelling
 
-## Spelling
-
-{% rr PC160 %} You can and should check for spelling errors in your code too. If
+{rr}`PC160` You can and should check for spelling errors in your code too. If
 you want to add this, you can use a code-ready spell checker for common spelling
 mistakes. Unlike most spell checkers, these have a list of mistakes they look
 for, rather than a list of "valid" words. To use:
 
-{% tabs spell %} {% tab codespell codespell %}
-
+::::{tab-set}
+:::{tab-item} codespell
 If you want a Python based tool, [codespell] is the classic tool used.
 
 ```yaml
@@ -791,9 +777,8 @@ ignore-words-list = ["sur", "nd"]
 You can also add the `-w` flag to have it automatically correct errors - this is
 very helpful to quickly make corrections if you have a lot of them when first
 adding the check. `uvx codespell -w` will quickly correct all non-hidden files.
-
-{% endtab %} {% tab typos typos %}
-
+:::
+:::{tab-item} typos
 A rust rewrite of [codespell][], [typos][] has a defining feature: It can find
 typos in CamelCase or snake_case variable names. It also is probably faster,
 though codespell is very fast too. This one is not available on PyPI, use
@@ -810,7 +795,7 @@ integration.
 
 To configure it, you can use this section in `pyproject.toml`:
 
-```toml
+```ini
 [tool.typos.default.extend-words]
 nd = "nd"
 sur = "sur"
@@ -820,8 +805,8 @@ It has quite a few supported configuration options, like adding your own
 corrections, feel free to check the [full reference][typos-ref]. If you want it
 to write changes, you can remove the `args: []` in the pre-commit hook, or add
 `-w` when running it locally.
-
-{% endtab %} {% endtabs %}
+:::
+::::
 
 You can also use a local pygrep check to eliminate common capitalization errors,
 such as the one below:
@@ -836,9 +821,9 @@ such as the one below:
       exclude: .pre-commit-config.yaml
 ```
 
-## PyGrep hooks
+### PyGrep hooks
 
-{% rr PC170 %} This is a repository with a
+{rr}`PC170` This is a repository with a
 [collection of pre-commit extra hooks](https://github.com/pre-commit/pygrep-hooks)
 that protect against some common, easy to detect, mistakes. You can pick and
 choose the hooks you want from the repo; here are some common ones for
@@ -862,20 +847,21 @@ called `mypy_error_report.txt`, then run `pipx run mypy_clean_slate -a`.
 
 [codespell]: https://github.com/codespell-project/codespell
 
-{: .note }
+:::{note}
+Note that if you are not using Ruff's "PGH" code, there are `python-*` hooks
+also:
 
-> Note that if you are not using Ruff's "PGH" code, there are `python-*` hooks
-> also:
->
-> ```yaml
-> - id: python-check-blanket-noqa
-> - id: python-check-blanket-type-ignore
-> - id: python-no-log-warn
-> - id: python-no-eval
-> - id: python-use-type-annotations
-> ```
+```yaml
+- id: python-check-blanket-noqa
+- id: python-check-blanket-type-ignore
+- id: python-no-log-warn
+- id: python-no-eval
+- id: python-use-type-annotations
+```
 
-## Clang-format (C++ only)
+:::
+
+### Clang-format (C++ only)
 
 If you have C++ code, you should have a `.clang-format` file and use the
 following pre-commit config:
@@ -892,7 +878,7 @@ This will use 1-2 MB binary wheels from PyPI on all common platforms. You can
 generated such a file using
 `pipx run clang-format -style=llvm -dump-config > .clang-format`.
 
-## Shellcheck (shell scripts only)
+### Shellcheck (shell scripts only)
 
 If you have shell scripts, you can protect against common mistakes using
 [shellcheck](https://github.com/koalaman/shellcheck).
@@ -904,9 +890,9 @@ If you have shell scripts, you can protect against common mistakes using
     - id: shellcheck
 ```
 
-## Prettier
+### Prettier
 
-{% rr PC180 %} The [prettier](https://prettier.io) tool can format a large
+{rr}`PC180` The [prettier](https://prettier.io) tool can format a large
 number of different file types. An example of usage:
 
 ```yaml
@@ -933,7 +919,7 @@ be set to `"never"` or `"always"` to have prettier reflow text. You can turn off
 prettier for blocks with
 [comments depending on language](https://prettier.io/docs/en/ignore.html).
 
-## Schema validation
+### Schema validation
 
 There are two tools, both based on JSON Schema, that you can use to validate
 various configuration files. The first, [validate-pyproject][], validates your
@@ -941,7 +927,7 @@ various configuration files. The first, [validate-pyproject][], validates your
 (`build-system` and `project`), along with `tool.setuptools`. There are also
 plugins for some other tools, like `scikit-build-core` and `cibuildwheel`. You
 can even get all [SchemaStore][]'s plugins with the
-[validate-pyproject-schema-store][] plugin. Using it looks like this:
+validate-pyproject-schema-store plugin. Using it looks like this:
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
@@ -966,7 +952,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
     - id: check-readthedocs
 ```
 
-## Pylint (noisy)
+### Pylint (noisy)
 
 Pylint is very opinionated, with a high signal-to-noise ratio. However, by
 limiting the default checks or by starting off a new project using them, you can
@@ -976,7 +962,7 @@ pre-commit, since it needs to have your package installed - it is less static of
 check than Ruff or Flake8. Here is a suggested `pyproject.toml` entry to get you
 started:
 
-```toml
+```ini
 [tool.pylint]
 py-version = "3.10"
 jobs = "0"
@@ -1005,26 +991,26 @@ And you can add this to your GitHub Actions using
 `run: pipx run nox -s pylint -- --output-format=github`. You can replace
 `<your package>` with the module name.
 
-## Jupyter notebook support
+### Jupyter notebook support
 
-### Ruff
+#### Ruff
 
 Ruff natively supports notebooks. You no longer need to enable it, it's on by
 default with Ruff 0.6+. If you want to control rules based on being notebooks,
 you can just match with `**.ipynb` like any other file.
 
-### Black
+#### Black
 
 For Black, just make sure you use the `id: black-jupyter` hook instead of
 `id: black`; that will also include notebooks.
 
-### NBQA
+#### NBQA
 
 You can adapt other tools to notebooks using
 [nbQA](https://github.com/nbQA-dev/nbQA). However, check to see if the tool
 natively supports notebooks first, several of them do now.
 
-### Stripping output
+#### Stripping output
 
 You also might like the following hook, which cleans Jupyter outputs:
 
@@ -1034,8 +1020,6 @@ You also might like the following hook, which cleans Jupyter outputs:
   hooks:
     - id: nbstripout
 ```
-
-<!-- prettier-ignore-start -->
 
 [flake8]: https://github.com/pycqa/flake8
 [pycln]: https://hadialqattan.github.io/pycln
@@ -1047,7 +1031,3 @@ You also might like the following hook, which cleans Jupyter outputs:
 [typos-ref]: https://github.com/crate-ci/typos/blob/master/docs/reference.md
 [pre-commit]: https://pre-commit.com
 [prek]: https://prek.j178.dev
-
-<!-- prettier-ignore-end -->
-
-<script src="{% link assets/js/tabs.js %}"></script>

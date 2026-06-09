@@ -1,21 +1,20 @@
-# .readthedocs.yaml
-# Read the Docs configuration file
+# Read the Docs configuration file for myst
 # See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
 
 # Required
 version: 2
 
-# Set the version of Python and other tools you might need
 build:
   os: ubuntu-24.04
-
   tools:
-    ruby: "3.4"
-
+    nodejs: "24"
   commands:
-    - ./helpers/fetch_repo_review_app.sh
-    - bundle install
-    - >
-      JEKYLL_ENV=production bundle exec jekyll build --destination
-      _readthedocs/html --baseurl $(echo -n "$READTHEDOCS_CANONICAL_URL" | cut
-      -d '/' -f 4-)
+    # Install myst
+    - npm install -g mystmd
+    # Build the site
+    - cd docs && myst build --html
+    # Copy the output to Read the Docs expected location
+    - mkdir -p $READTHEDOCS_OUTPUT/html/
+    - cp -r docs/_build/html/. "$READTHEDOCS_OUTPUT/html"
+    # Clean up build artifacts
+    - rm -rf docs/_build

@@ -1,21 +1,15 @@
 ---
-layout: page
 title: Inline documentation
-permalink: /tutorials/module/
-nav_order: 2
-parent: Tutorials
 ---
 
-{% include toc.html %}
-
-# Inline documentation
+## Inline documentation
 
 In this section you will:
 
 - Place some code in a module.
 - Provide inline documentation (a "docstring").
 
-## Module
+### Module
 
 As a concrete example, let's suppose we have a simple function that encodes
 [Snell's Law][]. Perhaps this function currently lives in a Jupyter notebook or
@@ -74,7 +68,7 @@ automatically generate nice-looking HTML documentation later. Notable features:
 
 - There is a section listing input parameters, with the structure
 
-  ```
+  ```text
   parameter_name : parameter_type
       optional description
   ```
@@ -89,7 +83,7 @@ automatically generate nice-looking HTML documentation later. Notable features:
 - (Optional) There is a section of one or more examples.
 
 We will revisit docstrings in the section on writing
-[documentation]({% link pages/tutorials/docs.md %}).
+[documentation](pages/tutorials/docs).
 
 [snell's law]: https://en.wikipedia.org/wiki/Snell%27s_law
 [numpydoc standard]: https://numpydoc.readthedocs.io/en/latest/format.html

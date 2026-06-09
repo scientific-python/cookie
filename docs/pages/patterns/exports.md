@@ -1,14 +1,8 @@
 ---
-layout: page
 title: Exports
-permalink: /patterns/exports/
-nav_order: 1
-parent: Patterns
 ---
 
-{% include toc.html %}
-
-# Exports
+## Exports
 
 What objects in a module can you use? One common convention is that starting a
 name with a single underscore makes it "private" (though really "hidden" might
@@ -31,7 +25,7 @@ can cause surprising problems in some cases, though, due to Python's late
 binding. It's also easy to forget to delete something like an import, due to the
 fact the `del` statements are at the end of the module, far away from the usage.
 
-## Setting all
+### Setting all
 
 The solution to this is the `__all__` attribute. This is a public declaration of
 your exported API. It looks like this:
@@ -61,8 +55,7 @@ def __dir__() -> list[str]:
 This causes tab completion to only show your public API! You can still access
 everything in the module, it just won't be shown to the user.
 
-{: .warning }
-
+:::{warning}
 This `__dir__()` trick doesn't work very well on `__init__.py` modules, since
 ideally you want submodules to be shown if they have been imported. It's best to
 keep `__init__.py` modules minimal. It's tempting to import contents from your
@@ -70,7 +63,7 @@ submodules in `__init__.py`, but keep in mind importing any submodule always
 runs all parent `__init__.py`s, so you'll likely take an import performance hit
 and might have to deal with circular import issues in order to save a user a few
 keystrokes.
-
+:::
 There are some dynamic solutions to building your `__all__` variable without
 having to list all the items in a list near the top of your file. However, you
 lose several features doing so, such as the human readable list of module

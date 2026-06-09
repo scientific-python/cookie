@@ -1,15 +1,9 @@
 ---
-layout: page
 title: "GHA: Pure Python wheels"
-permalink: /guides/gha-pure/
-nav_order: 11
-parent: Topical Guides
-custom_title: GitHub Actions for pure Python wheels
+short_title: GitHub Actions for pure Python wheels
 ---
 
-{% include toc.html %}
-
-# GitHub Actions: Pure Python wheels
+## GitHub Actions: Pure Python wheels
 
 We will cover binary wheels [on the next page][], but if you do not have a
 compiled extension, this is called a universal (pure Python) package, and the
@@ -17,25 +11,25 @@ procedure to make a "built" wheel is simple. At the end of this page, there is a
 recipe that can often be used exactly for pure Python wheels (if the previous
 recommendations were followed).
 
-{: .note }
+:::{note}
+Why make a wheel when there is nothing to compile? There are a multitude of
+reasons that a wheel is better than only providing an sdist:
 
-> Why make a wheel when there is nothing to compile? There are a multitude of
-> reasons that a wheel is better than only providing an sdist:
->
-> - Wheels do not run `setup.py`, but simply install files into locations
->   - Lower install requirements - users don't need your setup tools
->   - Faster installs
->   - Safer installs - no arbitrary code execution
->   - Highly consistent installs
-> - Wheels pre-compile bytecode when they install
->   - Initial import is not slower than subsequent import
->   - Less chance of a permission issue
-> - You can look in the `.whl` (it's a `.zip`, really) and see where everything
->   is going to go
+- Wheels do not run `setup.py`, but simply install files into locations
+  - Lower install requirements - users don't need your setup tools
+  - Faster installs
+  - Safer installs - no arbitrary code execution
+  - Highly consistent installs
+- Wheels pre-compile bytecode when they install
+  - Initial import is not slower than subsequent import
+  - Less chance of a permission issue
+- You can look in the `.whl` (it's a `.zip`, really) and see where everything
+  is going to go
+:::
 
-[on the next page]: {% link pages/guides/gha_wheels.md %}
+[on the next page]: pages/guides/gha_wheels
 
-## Job setup
+### Job setup
 
 ```yaml
 name: CD
@@ -62,9 +56,7 @@ releases(-only). You will also need to change the event filter below.
 You can merge the CI job and the CD job if you want. To do that, preferably with
 the name "CI/CD", you can just combine the two `on` dicts.
 
-## Distribution: Pure Python wheels
-
-{% raw %}
+### Distribution: Pure Python wheels
 
 ```yaml
 dist:
@@ -86,8 +78,6 @@ dist:
       run: pipx run twine check dist/*
 ```
 
-{% endraw %}
-
 We use [PyPA-Build](https://pypa-build.readthedocs.io/en/latest/), a new build
 tool designed to make building wheels and SDists easy. It run a [PEP 517][]
 backend and can get [PEP 518][] requirements even for making SDists.
@@ -105,38 +95,36 @@ GitHub Actions (in fact, they use it to setup other applications).
 We upload the artifact just to make it available via the GitHub PR/Checks API.
 You can download a file to test locally if you want without making a release.
 
-{: .warning }
-
-> As of `upload-artifact@v4`, the artifact name must be unique. Extending an
-> existing artifact is no longer supported.
+:::{warning}
+As of `upload-artifact@v4`, the artifact name must be unique. Extending an
+existing artifact is no longer supported.
+:::
 
 We also add an optional check using twine for the metadata (it will be tested
 later in the upload action for the release job, as well).
 
-{: .highlight-title }
+:::{tip} All-in-one action
+There is an
+[all-in-one action](https://github.com/hynek/build-and-inspect-python-package)
+that does all the work for you for a pure Python package, including extra
+pre-upload checks & nice GitHub summaries.
 
-> All-in-one action
->
-> There is an
-> [all-in-one action](https://github.com/hynek/build-and-inspect-python-package)
-> that does all the work for you for a pure Python package, including extra
-> pre-upload checks & nice GitHub summaries.
->
-> ```yaml
-> steps:
->   - uses: actions/checkout@v6
->   - uses: hynek/build-and-inspect-python-package@v2
-> ```
->
-> The artifact it produces is named `Packages`, so that's what you need to use
-> later to publish. This will be used instead of the manual steps below.
+```yaml
+steps:
+  - uses: actions/checkout@v6
+  - uses: hynek/build-and-inspect-python-package@v2
+```
+
+The artifact it produces is named `Packages`, so that's what you need to use
+later to publish. This will be used instead of the manual steps below.
+:::
 
 And then, you need a release job. Trusted Publishing is more secure and
-recommended {% rr GH105 %}:
+recommended {rr}`GH105`:
 
-{% tabs %} {% tab oidc Trusted Publishing (recommended) %}
-
-{% raw %}
+::::{tab-set}
+:::{tab-item} Trusted Publishing (recommended)
+:sync: trusted-publishing
 
 ```yaml
 publish:
@@ -162,8 +150,6 @@ publish:
     - uses: pypa/gh-action-pypi-publish@release/v1
 ```
 
-{% endraw %}
-
 When you make a GitHub release in the web UI, we publish to PyPI. You'll just
 need to tell PyPI which org, repo, workflow, and set the `pypi` environment to
 allow pushes from GitHub. If it's the first time you've published a package, go
@@ -172,10 +158,9 @@ accept your initial package publish.
 
 We are also generating artifact attestations, which can allow users to verify
 that the artifacts were built on your actions.
-
-{% endtab %} {% tab token Token %}
-
-{% raw %}
+:::
+:::{tab-item} Token
+:sync: token
 
 ```yaml
 publish:
@@ -193,25 +178,22 @@ publish:
         password: ${{ secrets.pypi_password }}
 ```
 
-{% endraw %}
-
 If you cannot use Trusted Publishing, this publishes to PyPI with a token.
 You'll need to go to PyPI, generate a token for your user, and put it into
 `pypi_password` on your repo's secrets page. Once you have a project, you should
 delete your user-scoped token and generate a new project-scoped token.
+:::
+::::
 
-{% endtab %} {% endtabs %}
-
-{% details Complete recipe %}
-
+:::::{dropdown} Complete recipe
 This can be used on almost any package with a standard
 `.github/workflows/cd.yml` recipe. This works because `pyproject.toml` describes
 exactly how to build your package, hence all packages build exactly via the same
 interface:
 
-{% tabbodies %} {% tab oidc Trusted Publishing (recommended) %}
-
-{% raw %}
+::::{tab-set}
+:::{tab-item} Trusted Publishing (recommended)
+:sync: trusted-publishing
 
 ```yaml
 name: CD
@@ -260,11 +242,9 @@ jobs:
       - uses: pypa/gh-action-pypi-publish@release/v1
 ```
 
-{% endraw %}
-
-{% endtab %} {% tab token Token %}
-
-{% raw %}
+:::
+:::{tab-item} Token
+:sync: token
 
 ```yaml
 name: CD
@@ -305,25 +285,15 @@ jobs:
           password: ${{ secrets.pypi_password }}
 ```
 
-{% endraw %}
-
 If you cannot use Trusted Publishing, this publishes to PyPI with a token.
 You'll need to go to PyPI, generate a token for your user, and put it into
 `pypi_password` on your repo's secrets page. Once you have a project, you should
 delete your user-scoped token and generate a new project-scoped token.
-
-{% endtab %} {% endtabbodies %}
-
-{% enddetails %}
-
-<!-- prettier-ignore-start -->
+:::
+::::
+:::::
 
 [pep 517]: https://www.python.org/dev/peps/pep-0517/
 [pep 518]: https://www.python.org/dev/peps/pep-0518/
 [pypi trusted publisher docs]: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
 [`workflow_dispatch`]: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
-
-
-<!-- prettier-ignore-end -->
-
-<script src="{% link assets/js/tabs.js %}"></script>

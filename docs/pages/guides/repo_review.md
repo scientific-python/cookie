@@ -1,12 +1,8 @@
 ---
-layout: page
 title: Repo-Review
-permalink: /guides/repo-review/
-nav_order: 110
-interactive_repo_review: true
 ---
 
-# Repo-Review
+## Repo-Review
 
 You can check the style of a GitHub repository below. Enter any repository, such
 as `scikit-hep/hist`, and the branch you want to check, such as `main` (it must
@@ -25,6 +21,15 @@ pipx run 'sp-repo-review[cli]' <path to repo>
 
 ---
 
-{% include interactive_repo_review.html %}
-
-[Open in new page](https://scientific-python.github.io/repo-review/).
+<!-- rumdl-disable-next-line MD034 -->
+:::{anywidget} https://cdn.jsdelivr.net/npm/repo-review-webapp@1.1.3/dist/repo-review-anywidget.mjs
+{
+  "url_sync": true,
+  "deps": [
+    "repo-review~=1.1.0",
+    "sp-repo-review==2026.04.04",
+    "validate-pyproject[all]~=0.25.0",
+    "validate-pyproject-schema-store==2026.04.03",
+  ]
+}
+:::
