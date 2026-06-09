@@ -114,3 +114,11 @@ repos:
       - id: check-gitlab-ci
 {%- endif %}
       - id: check-readthedocs
+
+{%- if cookiecutter.__ci == "github" %}
+
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: "v1.25.2"
+    hooks:
+      - id: zizmor
+{%- endif %}

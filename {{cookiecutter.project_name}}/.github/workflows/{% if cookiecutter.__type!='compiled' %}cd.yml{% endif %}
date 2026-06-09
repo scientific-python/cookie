@@ -10,6 +10,8 @@ on:
     types:
       - published
 
+permissions: {}
+
 concurrency:
   group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
   cancel-in-progress: true
@@ -23,10 +25,13 @@ jobs:
   dist:
     name: Distribution build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - uses: hynek/build-and-inspect-python-package@v2

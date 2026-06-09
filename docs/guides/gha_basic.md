@@ -90,6 +90,27 @@ run a manual check, like check-manifest, then you can keep it but just use
 this one check. You can also use `needs: lint` in your other jobs to keep them
 from running if the lint check does not pass.
 
+## Linting your workflows
+
+{rr}`GH106` GitHub Actions workflows are a common source of security issues,
+such as script injection from untrusted input, overly broad token permissions,
+and credentials accidentally persisted by `actions/checkout`.
+[zizmor](https://docs.zizmor.sh) is a static analysis tool that audits your
+workflows for these problems. The easiest way to run it is as a pre-commit hook:
+
+```yaml
+- repo: https://github.com/zizmorcore/zizmor-pre-commit
+  rev: "v1.25.2"
+  hooks:
+    - id: zizmor
+```
+
+You can silence individual findings with `# zizmor: ignore[rule]` comments, or
+collect them in a [`zizmor.yml`](https://docs.zizmor.sh/configuration/) config
+file. If you'd rather keep it out of pre-commit, zizmor also ships the
+[`zizmorcore/zizmor-action`](https://github.com/zizmorcore/zizmor-action)
+GitHub Action, which can upload results to GitHub's code scanning dashboard.
+
 ## Unit tests
 
 Implementing unit tests is also easy. Since you should be following best

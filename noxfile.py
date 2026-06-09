@@ -426,6 +426,7 @@ def pc_bump(session: nox.Session) -> None:
     versions = {}
     pages = [
         Path("docs/guides/style.md"),
+        Path("docs/guides/gha_basic.md"),
         Path("{{cookiecutter.project_name}}/.pre-commit-config.yaml"),
         Path(".pre-commit-config.yaml"),
     ]

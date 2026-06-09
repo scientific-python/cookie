@@ -204,6 +204,7 @@ ignore = [
 
 [tool.repo-review.ignore]
 RTD103 = "Using Ruby instead of Python for docs"
+GH106 = "zizmor adoption for this repo's own workflows is tracked separately"
 
 [tool.typos.default.extend-words]
 nd = "nd"
