@@ -7,14 +7,6 @@
  * The .rr-btn CSS is in assets/css/site.css.
  */
 
-const escapeHtml = (value) =>
-  String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-
 const rrRole = {
   name: "rr",
   body: {
@@ -24,10 +16,17 @@ const rrRole = {
   run(data) {
     const code = String(data.body).trim();
 
+    // Emit a span carrying an exact-case `html_id` (e.g. id="PP007") so
+    // repo-review results can deep-link into the guides. We set `html_id`
+    // directly rather than `identifier`/`label`: MyST lowercases (and
+    // de-duplicates) identifiers, but the same check legitimately appears on
+    // multiple pages, and the deep-link fragments are case-sensitive.
     return [
       {
-        type: "html",
-        value: `<span class="rr-btn">${escapeHtml(code)}</span>`,
+        type: "span",
+        html_id: code,
+        class: "rr-btn",
+        children: [{ type: "text", value: code }],
       },
     ];
   },
