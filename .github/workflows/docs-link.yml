@@ -1,6 +1,9 @@
 name: Read the Docs PR preview
 
 on:
+  # zizmor: ignore[dangerous-triggers]
+  # pull_request_target is required so the RTD preview can comment on PRs from
+  # forks; no untrusted code is checked out, and it is gated on `fork == false`.
   pull_request_target:
     types:
       - opened

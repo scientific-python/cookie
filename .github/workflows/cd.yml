@@ -6,14 +6,19 @@ on:
     types:
       - published
 
+permissions: {}
+
 jobs:
   dist:
     name: Distribution build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - uses: hynek/build-and-inspect-python-package@v2

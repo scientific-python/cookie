@@ -23,6 +23,8 @@ jobs:
       run-docs: ${{ steps.docs-changes.outputs.run-docs || false }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Changed cookie-related files
         if: github.event_name == 'pull_request'

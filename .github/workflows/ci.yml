@@ -11,23 +11,34 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   change-detection:
+    permissions:
+      contents: read
+      pull-requests: read
     uses: ./.github/workflows/reusable-change-detection.yml
 
   cookie:
     needs: change-detection
     if: fromJSON(needs.change-detection.outputs.run-cookie)
+    permissions:
+      contents: read
     uses: ./.github/workflows/reusable-cookie.yml
 
   rr-tests:
     needs: change-detection
     if: fromJSON(needs.change-detection.outputs.run-rr)
+    permissions:
+      contents: read
     uses: ./.github/workflows/reusable-rr-tests.yml
 
   docs:
     needs: change-detection
     if: fromJSON(needs.change-detection.outputs.run-docs)
+    permissions:
+      contents: read
     uses: ./.github/workflows/reusable-docs.yml
 
   pass:
