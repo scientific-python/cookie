@@ -75,14 +75,14 @@ with many updates. Improved support for compiled components supported in part
 by NSF grant [OAC-2209877][].
 :::
 
-[simple]:                   pages/guides/packaging_simple
-[compiled]:                 pages/guides/packaging_compiled
+[simple]:                   pages/guides/packaging-simple
+[compiled]:                 pages/guides/packaging-compiled
 [style checking]:           pages/guides/style
 [testing]:                  pages/guides/pytest
 [documentation]:            pages/guides/docs
 [static typing]:            pages/guides/mypy
-[ci]:                       pages/guides/gha_pure
-[right in the guide]:       pages/guides/repo_review
+[ci]:                       pages/guides/gha-pure
+[right in the guide]:       pages/guides/repo-review
 
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 [repo-review]:              https://repo-review.readthedocs.io

@@ -42,15 +42,15 @@ WebAssembly! All checks point to a linked badge in the guide.
 [style]:              pages/guides/style
 [mypy]:               pages/guides/mypy
 [docs]:               pages/guides/docs
-[simple packaging]:   pages/guides/packaging_simple
-[compiled packaging]: pages/guides/packaging_compiled
-[classic packaging]:  pages/guides/packaging_classic
+[simple packaging]:   pages/guides/packaging-simple
+[compiled packaging]: pages/guides/packaging-compiled
+[classic packaging]:  pages/guides/packaging-classic
 [coverage]:           pages/guides/coverage
-[gha_basic]:          pages/guides/gha_basic
-[gha_pure]:           pages/guides/gha_pure
-[gha_wheels]:         pages/guides/gha_wheels
+[gha_basic]:          pages/guides/gha-basic
+[gha_pure]:           pages/guides/gha-pure
+[gha_wheels]:         pages/guides/gha-wheels
 [pytest]:             pages/guides/pytest
-[right in the guide]: pages/guides/repo_review
+[right in the guide]: pages/guides/repo-review
 
 [cookiecutter]:             https://cookiecutter.readthedocs.io
 [copier]:                   https://copier.readthedocs.io
