@@ -77,6 +77,11 @@ repos:
       - id: typos
         exclude: ^Gemfile\.lock$
 
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: "v1.25.2"
+    hooks:
+      - id: zizmor
+
   - repo: local
     hooks:
       - id: disallow-caps

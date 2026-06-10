@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Lint all
         run: pipx run nox -s 'lint'
@@ -33,6 +35,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-python@v6
         with:
@@ -105,6 +109,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-python@v6
         with:
@@ -172,6 +178,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Build sdist and wheel
         run: pipx run nox -s dist

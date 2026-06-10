@@ -28,14 +28,21 @@ runs:
 
     - name: Run repo-review
       shell: bash
+      # Pass expansions through the environment to avoid template injection
+      env:
+        PYTHON_PATH: ${{ steps.python.outputs.python-path }}
+        ACTION_PATH: ${{ github.action_path }}
+        SELECT: ${{ inputs.select }}
+        IGNORE: ${{ inputs.ignore }}
+        PACKAGE_DIR: ${{ inputs.package-dir }}
       run: >
         pipx run
-        --python '${{ steps.python.outputs.python-path }}'
-        --spec '${{ github.action_path }}[cli]'
+        --python "$PYTHON_PATH"
+        --spec "$ACTION_PATH[cli]"
         repo-review .
         --format html
         --stderr rich
-        --select "${{ inputs.select }}"
-        --ignore "${{ inputs.ignore }}"
-        --package-dir "${{ inputs.package-dir }}"
-        >> $GITHUB_STEP_SUMMARY
+        --select "$SELECT"
+        --ignore "$IGNORE"
+        --package-dir "$PACKAGE_DIR"
+        >> "$GITHUB_STEP_SUMMARY"

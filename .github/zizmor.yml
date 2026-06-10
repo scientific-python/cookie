@@ -1,0 +1,8 @@
+# Configuration for zizmor (https://docs.zizmor.sh)
+rules:
+  unpinned-uses:
+    config:
+      # Actions are kept up to date with Dependabot, so a ref (tag) pin is
+      # sufficient; hash pinning is not required.
+      policies:
+        "*": ref-pin
