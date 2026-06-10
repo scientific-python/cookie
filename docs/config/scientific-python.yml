@@ -2,6 +2,8 @@ version: 1
 
 site:
   template: book-theme
+  parts:
+    footer: footer.md
   options:
     hide_toc: false
     hide_footer_links: true
