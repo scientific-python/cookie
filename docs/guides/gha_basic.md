@@ -100,7 +100,7 @@ workflows for these problems. The easiest way to run it is as a pre-commit hook:
 
 ```yaml
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: "v1.25.2"
+  rev: "v1.26.1"
   hooks:
     - id: zizmor
 ```

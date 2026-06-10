@@ -208,7 +208,7 @@ class GH106(GitHub):
 
         ```yaml
         - repo: https://github.com/zizmorcore/zizmor-pre-commit
-          rev: v1.25.2
+          rev: v1.26.1
           hooks:
             - id: zizmor
         ```

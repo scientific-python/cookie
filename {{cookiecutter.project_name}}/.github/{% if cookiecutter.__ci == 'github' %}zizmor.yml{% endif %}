@@ -2,7 +2,6 @@
 rules:
   unpinned-uses:
     config:
-      # Actions are kept up to date with Dependabot, so a ref (tag) pin is
-      # sufficient; hash pinning is not required.
+      # Feel free to switch to hash pinning, then this can be removed.
       policies:
         "*": ref-pin
