@@ -94,7 +94,7 @@ build-backend = "setuptools.build_meta"
 ```
 
 For `requires-python`, you should specify the minimum you require, and you
-should not put an upper cap on it {rr}`PY004`, as this field is used to
+should not put an upper cap on it {rr}`PP004`, as this field is used to
 back-solve for old package versions that pass this check, allowing you to safely
 drop Python versions.
 

@@ -48,7 +48,7 @@ but tox and hatch both are also acceptable.
 Nox doesn't handle binary builds very well, so for compiled projects, it might
 be best left to just specialized tasks.
 
-[hatch]: https://hatch.pypi.io
+[hatch]: https://hatch.pypa.io
 [nox]: https://nox.thea.codes
 [tox]: https://tox.readthedocs.io
 [invoke]: https://www.pyinvoke.org

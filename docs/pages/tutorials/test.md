@@ -40,9 +40,9 @@ example
 ├── src
 │   └── example
 │       ├── __init__.py
-│       └── rescale.py
+│       └── refraction.py
 └── tests
-    └── test_rescale.py
+    └── test_snell.py
 ```
 
 > You may also see some `__pycache__` directories, which contain compiled Python
@@ -84,9 +84,8 @@ Things to notice:
 
 - It is tempting to put multiple assert statements in one test, but try to
   resist. You should make a separate test for each behavior that you are
-  checking, as pytest will only report the first test, which gives you an
-  incomplete picture of the failure. This is often referred to as the
-  Arrange-Act-Assert pattern.
+  checking, since a test stops at the first failing assertion, which gives you
+  an incomplete picture if a later behavior is also broken.
 - When comparing floating-point numbers (as opposed to integers) you should not
   test for exact equality. `pytest.approx` supports fuzzy comparisons and
   supports NumPy arrays.
@@ -123,11 +122,11 @@ platform darwin -- Python 3.6.4, pytest-3.6.2, py-1.5.4, pluggy-0.6.0
 benchmark: 3.1.1 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
 rootdir: /private/tmp/test11/example, inifile:
 plugins: pep8-1.0.6, lazy-fixture-0.3.0, forked-0.2, benchmark-3.1.1
-collected 1 item
+collected 3 items
 
-example/tests/test_snell.py ..                                                                 [100%]
+tests/test_snell.py ...                                                                        [100%]
 
-===================================== 2 passed in 0.02 seconds ======================================
+===================================== 3 passed in 0.02 seconds ======================================
 ```
 
 The output of `pytest` is customizable. Commonly useful command-line arguments

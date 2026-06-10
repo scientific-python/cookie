@@ -105,7 +105,7 @@ summary "r"eport of "a"ll results, which gives you a quick way to review what
 tests failed and were skipped, and why. `--showlocals` will print locals in
 tracebacks - depending on your tests, you might or might not like this one.
 {rr}`PP307` `--strict-markers` will make sure you don't try to use an
-unspecified fixture. {rr}`PP306` And `--strict-config` will error if you make
+unspecified marker. {rr}`PP306` And `--strict-config` will error if you make
 a mistake in your config. {rr}`PP305` `xfail_strict` will change the default
 for `xfail` to fail the tests if it doesn't fail - you can still override
 locally in a specific xfail for a flaky failure. {rr}`PP309`
@@ -198,7 +198,7 @@ from pytest import approx
 
 
 def test_approx():
-    0.3333333333333 == approx(1 / 3)
+    assert 0.3333333333333 == approx(1 / 3)
 ```
 
 This natively works with NumPy arrays, too! Always prefer
@@ -296,7 +296,7 @@ pytest to run a group of marked tests. This is an expression; you can use
 Probably the most useful built-in mark is `skipif`:
 
 ```python
-@pytest.mark.skipif("sys.version_info >= (3, 8)")
+@pytest.mark.skipif("sys.version_info < (3, 8)")
 def test_only_on_38plus():
     x = 3
     assert f"{x = }" == "x = 3"

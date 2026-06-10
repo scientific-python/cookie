@@ -422,10 +422,10 @@ ignore. New checks go into `--preview` before being activated in a minor
 release.
 
 :::{dropdown} You can add a Ruff badge to your repo as well
-[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json))](https://github.com/astral-sh/ruff)
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 ```md
-[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json))](https://github.com/astral-sh/ruff)
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 ```
 
 ```rst
@@ -509,7 +509,7 @@ enable more checks. A few interesting plugins:
   Enforces PEP8 grouped imports (you may prefer isort). Code: `I`
 - [`pep8-naming`](https://pypi.org/project/pep8-naming/): Enforces PEP8 naming
   rules. Code: `N`
-- [`flake8-print`](https://pypi.org/project/pep8-naming/): Makes sure you don't
+- [`flake8-print`](https://pypi.org/project/flake8-print/): Makes sure you don't
   have print statements that sneak in. Code: `T`
 
 :::{dropdown} Flake8-print details

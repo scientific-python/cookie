@@ -111,7 +111,7 @@ function.
 >>> from example.refraction import snell
 >>> import numpy as np
 >>> snell(np.pi / 4, 1.00, 1.33)
-1.2239576240104186
+0.5605584137424605
 ```
 
 The docstring can be viewed with `help()`.

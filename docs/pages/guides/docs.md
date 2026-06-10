@@ -17,7 +17,7 @@ commonly used, and have somewhat fewer examples and plugins. They are:
   framework for scientific libraries with a history of close usage with
   scientific tools like LaTeX. Examples include
   [astropy](https://docs.astropy.org/en/stable/index_user_docs.html) and
-  [corner](https://docs.astropy.org/en/stable/index_user_docs.html).
+  [corner](https://corner.readthedocs.io).
 - [MkDocs](https://www.mkdocs.org): A from-scratch new documentation system
   based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
   since it doesn't use docutils. Has over
