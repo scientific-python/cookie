@@ -15,7 +15,7 @@ perspective of your users, focusing on the behavior of the public interface and
 the Features that your project provides. Then we will cover
 [Project Level Integration tests](#project-level-integration-tests), which test
 that the various parts of your package work together, and work with the other
-packages it depends on. Finally we will cover the venrable
+packages it depends on. Finally we will cover the venerable
 {ref}`Unit Test <unit-tests>`, which test the correctness of your code from a
 perspective internal to your codebase, tests individual units in isolation, and
 are optimized to run quickly and often.
@@ -367,7 +367,7 @@ def test_func(mocker):
 Consider the benefits of refactoring your imports like so:
 
 ```python
-from numpy import sum as np_sum, Array as NpArray
+from numpy import sum as np_sum, ndarray as NpArray
 ```
 
 now you simply need to patch the imported function in the context of the
@@ -675,7 +675,7 @@ from unittest.mock import patch, Mock
 SRC = "mymodule.path.to.source"
 
 
-@patch(f"{SRC}.patchme", autospec=true)
+@patch(f"{SRC}.patchme", autospec=True)
 def test_myfunction(t, patchme: Mock):
     ret = myfunction()
     patchme.assert_called_with("input from myfunction")

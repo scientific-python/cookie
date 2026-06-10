@@ -57,7 +57,7 @@ advantages:
   manually look at the output of `git grep "sys.version_info"` to clean these
   up.
 - You can select the specific version of Python to switch on, even if the import
-  was available sooner. In this case, `import.metadata` was added in 3.8 but
+  was available sooner. In this case, `importlib.metadata` was added in 3.8 but
   important fixes landed in 3.10.
 - It matches your conditional requirements.
 
@@ -114,7 +114,7 @@ backport re-export file.
 - `importlib_resources`: Added as `importlib.resources` in 3.7, important
   updates in 3.9 (`files` added, which is the recommended public API!).
 - `tomli`: Added as `tomllib` in 3.11. Likely to become important again when
-  TOML 1.1 is released. (Note that `toml_w` is not in the stdlib.)
+  TOML 1.1 is released. (Note that `tomli_w` is not in the stdlib.)
 - `exceptiongroup`: A new builtin (`ExceptionGroup`) in 3.11.
-- `tz-data`: A first-party PyPI version of `zoneinfo` from 3.9, though with more
-  up-to-date timezone info.
+- `tzdata`: A first-party PyPI version of the data used by `zoneinfo` (added in
+  3.9), though with more up-to-date timezone info.

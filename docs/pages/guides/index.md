@@ -19,10 +19,10 @@ which should help in ensuring a consistent developer and user experience when
 working with distribution.
 
 A section on CI follows, with a [general setup guide][gha_basic], and then two
-choices for using CI to distribute your package, on for [pure Python][gha_pure],
-and one for [compiled extensions][gha_wheels]. You can read about setting up
-good tests on the [pytest page][pytest], with [coverage][]. There's also a page
-on setting up [docs][], as well.
+choices for using CI to distribute your package, one for
+[pure Python][gha_pure], and one for [compiled extensions][gha_wheels]. You can
+read about setting up good tests on the [pytest page][pytest], with
+[coverage][]. There's also a page on setting up [docs][], as well.
 
 :::{tip} New project template
 Once you have completed the guidelines, there is a

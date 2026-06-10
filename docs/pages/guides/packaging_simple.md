@@ -109,7 +109,7 @@ the installed version - this obviously tends to break if you build parts of the
 library or if you access package metadata.
 
 This sadly is not part of the standard metadata in `[project]`, so it depends on
-what backend you you use. Hatchling, Flit, PDM, and setuptools use automatic
+what backend you use. Hatchling, Flit, PDM, and setuptools use automatic
 detection.
 
 If you don't match your package name and import name (which you should except

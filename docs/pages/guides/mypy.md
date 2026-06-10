@@ -127,7 +127,7 @@ from typing import Protocol
 
 
 class Duck(Protocol):
-    def quack() -> str: ...
+    def quack(self) -> str: ...
 ```
 
 Now any object that can "quack" (and return a string) is a Duck. We can even add
@@ -145,7 +145,7 @@ we can write a duck implementation and test it like this:
 
 ```python
 class MyDuck:
-    def quack() -> str:
+    def quack(self) -> str:
         return "quack"
 ```
 

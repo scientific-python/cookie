@@ -46,7 +46,7 @@ jobs:
 This will run when you manually trigger a build ([`workflow_dispatch`][]), or
 when you publish a release. Later, we will make sure that the actual publish
 step requires the event to be a publish event, so that manual triggers (and
-branches/PRs, if those are enabled).
+branches/PRs, if those are enabled) do not publish to PyPI.
 
 If you want tags instead of releases, you can add the `on: push: tags: "v*"` key
 instead of the releases - however, _please_ remember to make a GitHub release of

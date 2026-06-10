@@ -71,8 +71,8 @@ analysis tools can't tell you if you forget a step, the API doesn't statically
 implicit changing state, and not all operations are valid in all possible
 states.
 
-One alternative replace `Data` with multiple immutable classes representing the
-state at each step.
+One alternative is to replace `Data` with multiple immutable classes
+representing the state at each step.
 
 ```python
 empty_data = EmptyData()

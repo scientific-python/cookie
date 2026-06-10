@@ -136,7 +136,7 @@ We can link them from the front page by using the MyST Markdown `{toctree}`
 directive.
 
 ````markdown
-```text {toctree}
+```{toctree}
 tutorials/installation.md
 tutorials/first-steps.md
 tutorials/real-application.md
@@ -154,7 +154,7 @@ or drifting out of sync over time.
 
 MyST recommends using [sphinx-autodoc2][]. However, we currently recommend using
 the built-in sphinx `autodoc` and `autosummary` extensions because they
-interoperates well with docstrings written to the numpydoc standard. To invoke
+interoperate well with docstrings written to the numpydoc standard. To invoke
 them, we need to employ yet another syntax (reST). Fortunately, you can simply
 copy/paste these examples.
 
