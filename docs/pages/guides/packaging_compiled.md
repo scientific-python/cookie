@@ -44,7 +44,7 @@ The most exciting developments have been new native build backends:
 
 :::{note}
 You should be familiar with [packing a pure Python
-project](pages/guides/packaging-compiled) - the metadata
+project](pages/guides/packaging-simple) - the metadata
 configuration is the same.
 :::
 There are also classic setuptools plugins:

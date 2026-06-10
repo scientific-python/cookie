@@ -137,7 +137,7 @@ your jobs and combine them into one `.coverage` file before running
 
 ##### Manually combining coverage
 
-If you are running in parallel, either with `pytest-xdist`, you can set
+If you are running in parallel, such as with `pytest-xdist`, you can set
 `run.parallel` to `true`, which will add a unique suffix to the coverage file(s)
 produced. If you are using the multiprocessing patch, that also will generate a
 unique suffix for each process launch.

@@ -85,7 +85,7 @@ Let's put them in a new directory in our package, such as
 ```
 
 To make these available to the Python loading mechanism, the easiest way is to
-add an `__init__.py` in `src/package/peak_spacing`. This can be an empty file;
+add an `__init__.py` in `src/package/peak_spacings`. This can be an empty file;
 it's purpose is to tell Python that this can be loaded.
 
 You'll want to make sure your Python building backend is placing these files in
@@ -155,7 +155,7 @@ LaB6 = files / "LaB6.txt"
 # Provide whatever is useful for your project here
 ```
 
-Now, a user can simply import and use `package.peakspacing.LaB6` and such
+Now, a user can simply import and use `package.peak_spacings.LaB6` and such
 directly.
 
 ### Downloading larger files on demand

@@ -183,3 +183,7 @@ Thumbs.db
 # Common editor files
 *~
 *.swp
+
+# Symlink to AGENTS.md
+CLAUDE.md
+.claude/

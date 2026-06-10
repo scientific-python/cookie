@@ -10,14 +10,14 @@ the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx
 and Mkdocs, and uses the modern MyST plugin to get Markdown support.
 
 :::{note} Popular frameworks
-There are other frameworks as well; these often are simpler, but are not as
-commonly used, and have somewhat fewer examples and plugins. They are:
+The two frameworks covered in this guide are the most commonly used in the
+scientific Python community. The main options are:
 
 - [Sphinx](https://www.sphinx-doc.org/en/master/): A popular documentation
   framework for scientific libraries with a history of close usage with
   scientific tools like LaTeX. Examples include
   [astropy](https://docs.astropy.org/en/stable/index_user_docs.html) and
-  [corner](https://docs.astropy.org/en/stable/index_user_docs.html).
+  [corner](https://corner.readthedocs.io).
 - [MkDocs](https://www.mkdocs.org): A from-scratch new documentation system
   based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
   since it doesn't use docutils. Has over
@@ -197,7 +197,7 @@ several good extensions:
 - [`sphinx.ext.napoleon`][] adds support for several common documentation styles
   like numpydoc.
 - `sphinx_autodoc_typehints` handles type hints
-- `sphinx_copybutton` adds a handle little copy button to code snipits.
+- `sphinx_copybutton` adds a handy little copy button to code snippets.
 
 We are including both possible file extensions. We are also avoiding some common
 file patterns, just in case.
@@ -602,9 +602,9 @@ some conditional installs based on arguments (sphinx-autobuild is only needed if
 serving). It does an editable install of your package so that you can skip the
 install steps with `-R` and still get updated documentation.
 
-Then there's a dedicated handler for the 'linkcheck' builder, which just checks
-links, and doesn't really produce output. Finally, we collect some useful args,
-and run either the autobuild (for `--serve`) or regular build. We could have
+The `-b` argument selects the builder, so you can pass `-b linkcheck` to just
+check links, for example. Finally, we collect some useful args, and run either
+the autobuild (when interactive) or a regular build. We could have
 just added `python -m http.server` pointing at the built documentation, but
 autobuild will rebuild if you change a file while serving.
 :::

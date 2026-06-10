@@ -11,8 +11,8 @@ fellow scientists and research software engineers.
 
 **Start at the basics.** Do you have a pile of scientific Python scripts or
 Jupyter notebooks that are becoming unwieldy? Are changes to some parts of your
-code accidentally breaking other parts of your code? Do you want to more
-maintainable, reusable, and shareable form? Start at the
+code accidentally breaking other parts of your code? Do you want to present them
+in a more maintainable, reusable, and shareable form? Start at the
 [tutorial](pages/tutorials/index).
 
 **Learn recommended tools and best practices.**
