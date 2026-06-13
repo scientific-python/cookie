@@ -4,7 +4,7 @@ title: Inline documentation
 
 ## Inline documentation
 
-In this section you will:
+In this section, you will:
 
 - Place some code in a module.
 - Provide inline documentation (a "docstring").
@@ -56,15 +56,15 @@ def snell(theta_inc: float, n1: float, n2: float) -> float:
 Notice that this example includes inline documentation --- a "docstring". This
 is extremely useful for collaborators, and the most common collaborator is
 Future You! It also includes type hints; this tells a programmer, type checker,
-or IDE what types are expected in an out of the function.
+or IDE what types are expected in and out of the function.
 
 Further, by following the [numpydoc standard][], we will be able to
 automatically generate nice-looking HTML documentation later. Notable features:
 
 - At the top, there is a succinct, one-line summary of the function's purpose.
-  It must one line.
+  It must be one line.
 
-- (Optional) There is an paragraph elaborating on that summary.
+- (Optional) There is a paragraph elaborating on that summary.
 
 - There is a section listing input parameters, with the structure
 
