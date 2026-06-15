@@ -1,4 +1,6 @@
-# pyproject.toml: project table
+<!-- rumdl-disable MD041 -->
+
+## pyproject.toml: project table
 
 <!-- [[[cog
 from cog_helpers import code_fence, render_cookie, TOMLMatcher
@@ -64,7 +66,7 @@ special, and replaces the old url setting.
 If you use the above configuration, you need `README.md` and `LICENSE` files,
 since they are explicitly specified.
 
-## License
+### License
 
 The license can be done one of two ways.
 
@@ -91,7 +93,7 @@ classifiers = [
 You should not include the `License ::` classifiers if you use the `license`
 field {rr}`PP007`.
 
-### Extras
+#### Extras
 
 Sometimes you want to ship a package with optional dependencies. For example,
 you might have extra requirements that are only needed for running a CLI, or for
@@ -113,7 +115,7 @@ mpl = [
 Self dependencies can be used by using the name of the package, such as
 `all = ["package[cli,mpl]"]`, (requires Pip 21.2+).
 
-### Command line
+#### Command line
 
 If you want to ship an "app" that a user can run from the command line, you need
 to add a `script` entry point. The form is:
@@ -128,7 +130,7 @@ function, followed by a colon, then the function to call. If you use
 `__main__.py` as the file, then `python -m` followed by the module will also
 work to call the app (`__name__` will be `"__main__"` in that case).
 
-### Development dependencies
+#### Development dependencies
 
 The proper way to specify dependencies exclusively used for development tasks
 (such as `pytest`, `ruff`, packages for generating documentation, etc.) is to
