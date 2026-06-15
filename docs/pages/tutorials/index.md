@@ -1,8 +1,4 @@
----
-title: Tutorials
----
-
-## Tutorials
+# Tutorials
 
 Do you have a pile of scientific Python scripts or Jupyter notebooks that are
 becoming unwieldy? Are changes to some parts of your code accidentally breaking

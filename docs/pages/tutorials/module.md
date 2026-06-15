@@ -1,15 +1,11 @@
----
-title: Inline documentation
----
-
-## Inline documentation
+# Inline documentation
 
 In this section, you will:
 
 - Place some code in a module.
 - Provide inline documentation (a "docstring").
 
-### Module
+## Module
 
 As a concrete example, let's suppose we have a simple function that encodes
 [Snell's Law][]. Perhaps this function currently lives in a Jupyter notebook or

@@ -1,8 +1,4 @@
----
-title: Patterns
----
-
-## Patterns
+# Patterns
 
 Patterns is a collection of common patterns in scientific software that are
 worth learning. These try to highlight best practices for specific situations,

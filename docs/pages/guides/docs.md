@@ -1,8 +1,4 @@
----
-title: Writing documentation
----
-
-## Writing documentation
+# Writing documentation
 
 Documentation used to require learning reStructuredText (sometimes referred to
 as reST / rST), but today we have great choices for documentation in markdown,
@@ -45,7 +41,7 @@ is uncertain, and mkdocs-material will be minimally maintained until
 late 2026.
 :::
 
-### What to include
+## What to include
 
 Ideally, software documentation should include:
 
@@ -76,7 +72,7 @@ with render_cookie(backend="hatch", docs="mkdocs") as package:
 ]]] -->
 <!-- [[[end]]] -->
 
-### Hand-written docs
+## Hand-written docs
 
 Create `docs/` directory within your project (next to `src/`). From here, Sphinx
 and MkDocs diverge.
@@ -85,7 +81,7 @@ and MkDocs diverge.
 :::{tab-item} Sphinx
 :sync: sphinx
 
-#### pyproject.toml additions
+### pyproject.toml additions
 
 Setting a `docs` dependency group looks like this:
 
@@ -107,7 +103,7 @@ There is a sphinx-quickstart tool, but it creates unnecessary files (make/bat,
 we recommend a cross-platform noxfile instead), and uses rST instead of
 Markdown. Instead, this is our recommended starting point for `conf.py`:
 
-#### conf.py
+### conf.py
 
 <!-- [[[cog
 with code_fence("python"):
@@ -227,7 +223,7 @@ docstrings, even if the parameter isn't documented yet. Feel free to check
 [sphinx-autodoc-typehints](https://github.com/tox-dev/sphinx-autodoc-typehints)
 for more options.
 
-#### index.md
+### index.md
 
 Your `index.md` file can start out like this:
 
@@ -471,7 +467,7 @@ nav:
 :::
 ::::
 
-#### .readthedocs.yaml
+### .readthedocs.yaml
 
 In order to use <https://readthedocs.org> to build, host, and preview your
 documentation, you must have a `.readthedocs.yaml` file {rr}`RTD100` like
@@ -548,7 +544,7 @@ Python {rr}`RTD103`, several languages are supported here).
 Finally, we have a `commands` table which describes how to install our
 dependencies and build the documentation into the ReadTheDocs output directory.
 
-#### noxfile.py additions
+### noxfile.py additions
 
 Add a session to your `noxfile.py` to generate docs:
 
@@ -642,7 +638,7 @@ documentation on how to configure what directories are watched for changes,
 :::
 ::::
 
-### API docs
+## API docs
 
 ::::{tab-set}
 :::{tab-item} Sphinx
@@ -651,7 +647,7 @@ To build API docs, you need to add the following Nox job. It will rerun
 `sphinx-apidoc` to generate the sphinx autodoc pages for each of your public
 modules.
 
-#### noxfile.py additions
+### noxfile.py additions
 
 <!-- [[[cog
 with code_fence("python"):
@@ -721,7 +717,7 @@ module by being more specific, like `::: my_package.my_module.MyClass`.
 :::
 ::::
 
-### Notebooks in docs
+## Notebooks in docs
 
 ::::{tab-set}
 :::{tab-item} Sphinx

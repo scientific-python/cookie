@@ -1,8 +1,4 @@
----
-title: Test
----
-
-## Test
+# Test
 
 In this section you will:
 
@@ -16,7 +12,7 @@ unintended changes or breakage with not go unnoticed. Writing tests also tends
 to encouraging you to write modular, reusable code, because it is easier to
 test.
 
-### Write some tests
+## Write some tests
 
 Make a directory for tests. We recommend putting it next to the `src` directory.
 
@@ -94,7 +90,7 @@ Things to notice:
   be using below.) This allows you to also write helper functions that are not
   tests.
 
-### Run the tests
+## Run the tests
 
 Scientific Python packages generally use a program called `pytest` to run their
 tests and report successes and failures. Install `pytest`.

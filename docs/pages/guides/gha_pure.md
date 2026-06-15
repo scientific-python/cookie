@@ -1,9 +1,8 @@
 ---
-title: "GHA: Pure Python wheels"
 short_title: GitHub Actions for pure Python wheels
 ---
 
-## GitHub Actions: Pure Python wheels
+# GitHub Actions: Pure Python wheels
 
 We will cover binary wheels [on the next page][], but if you do not have a
 compiled extension, this is called a universal (pure Python) package, and the
@@ -29,7 +28,7 @@ reasons that a wheel is better than only providing an sdist:
 
 [on the next page]: pages/guides/gha-wheels
 
-### Job setup
+## Job setup
 
 ```yaml
 name: CD
@@ -56,7 +55,7 @@ releases(-only). You will also need to change the event filter below.
 You can merge the CI job and the CD job if you want. To do that, preferably with
 the name "CI/CD", you can just combine the two `on` dicts.
 
-### Distribution: Pure Python wheels
+## Distribution: Pure Python wheels
 
 ```yaml
 dist:

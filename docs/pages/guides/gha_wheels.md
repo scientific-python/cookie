@@ -1,15 +1,14 @@
 ---
-title: "GHA: Binary wheels"
 short_title: GitHub Actions for Binary Wheels
 ---
 
-## GitHub Actions: Binary wheels
+# GitHub Actions: Binary wheels
 
 Building binary wheels is a bit more involved, but can still be done effectively
 with GHA. This document will introduce [cibuildwheel][] for use in your project.
 We will focus on GHA below.
 
-### Header
+## Header
 
 Wheel building should only happen rarely, so you will want to limit it to
 releases, and maybe a rarely moving branch or other special tag (such as
@@ -39,7 +38,7 @@ Finally, if you change the workflow itself in a PR, then rebuild the wheels too.
 
 [workflow_dispatch]: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
 
-#### Useful suggestion
+### Useful suggestion
 
 Since these variables will be used by all jobs, you could make them available in
 your `pyproject.toml` file, so they can be used everywhere (even locally for
@@ -60,7 +59,7 @@ will cause the pip install to use the dependency-group(s) specified. The
 `test-command` will use pytest to run your tests. You can also set the build
 verbosity (`-v` in pip) if you want to.
 
-### Making an SDist
+## Making an SDist
 
 You probably should not forget about making an SDist! A simple job, like before,
 will work:
@@ -89,7 +88,7 @@ Instead of using `uv`, you can also run `pipx run build --sdist`, or install
 build via pip and use `python -m build --sdist`. You can also pin the version
 with `pipx run build==<version>`.
 
-### The core job (3 main OS's)
+## The core job (3 main OS's)
 
 The core of the work is down here:
 
@@ -153,7 +152,7 @@ set that in the `pyproject.toml` file instead.
 You can skip specifying the `build[uv]` build-frontend option and pre-installing
 `uv` on the runners, but it will be a slower.
 
-### Publishing
+## Publishing
 
 Trusted Publishing is more secure and recommended {rr}`GH105`:
 

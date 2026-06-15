@@ -1,14 +1,10 @@
----
-title: Simple packaging
----
+# Simple packaging
 
 :::{tip} Quick start
 Once you've done this at least once, feel free to use
 [our cookiecutter/copier template](https://github.com/scientific-python/cookie),
 or `uv init` to get started quickly on new packages!
 :::
-
-## Simple packaging
 
 Python packages can now use a modern build system instead of the classic but
 verbose setuptools and `setup.py`. The one you select doesn't really matter that
@@ -37,7 +33,7 @@ from VCS. If you don't have an existing preference, hatchling is an excellent
 choice, balancing speed, configurability, and extendability.
 :::
 
-### pyproject.toml: build-system
+## pyproject.toml: build-system
 
 {rr}`PY001` Packages must have a `pyproject.toml` file {rr}`PP001` that
 selects the backend:
@@ -98,7 +94,7 @@ should not put an upper cap on it {rr}`PP004`, as this field is used to
 back-solve for old package versions that pass this check, allowing you to safely
 drop Python versions.
 
-### Package structure
+## Package structure
 
 All packages _should_ have a `src` folder, with the package code residing inside
 it, such as `src/<package>/`. This may seem like extra hassle; after all, you
@@ -119,7 +115,7 @@ You should have a `README` {rr}`PY002` and a `LICENSE` {rr}`PY003` file.
 You should have a `docs/` folder {rr}`PY004`. You should have a `/tests`
 folder {rr}`PY005` (recommended) and/or a `src/<package>/tests` folder.
 
-### Versioning
+## Versioning
 
 You can specify the version manually (as shown in the example), but the backends
 usually provide some automatic features to help you avoid this. Flit will pull
@@ -174,7 +170,7 @@ This will allow git archives (including the ones generated from GitHub) to also
 support versioning.
 :::
 
-### Including/excluding files in the SDist
+## Including/excluding files in the SDist
 
 This is tool specific.
 
