@@ -118,6 +118,7 @@ class PC140(PreCommit):
     repos = {
         "https://github.com/pre-commit/mirrors-mypy",
         "https://github.com/facebook/pyrefly-pre-commit",
+        "https://github.com/astral-sh/ty-pre-commit",
     }
 
 

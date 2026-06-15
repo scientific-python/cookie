@@ -142,6 +142,14 @@ def test_pc140_pyrefly():
     assert compute_check("PC140", precommit=precommit).result
 
 
+def test_pc140_ty():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/astral-sh/ty-pre-commit
+    """)
+    assert compute_check("PC140", precommit=precommit).result
+
+
 def test_pc160_codespell():
     precommit = yaml.safe_load("""
         repos:
