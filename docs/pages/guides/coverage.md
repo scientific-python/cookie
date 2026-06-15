@@ -1,8 +1,4 @@
----
-title: "Code coverage"
----
-
-## Code Coverage
+# Code Coverage
 
 The "Code coverage" value of a codebase indicates how much of the
 production/development code is covered by the running unit tests. Maintainers
@@ -32,7 +28,7 @@ adding weak tests just for coverage's sake is not a good idea. The tests
 should test your codebase thoroughly and should not be unreliable.
 :::
 
-### Running your tests with coverage
+## Running your tests with coverage
 
 There are two common ways to calculate coverage: using `coverage` or using
 `pytest-cov`. While `pytest-cov` is simpler on the command line, and it promises
@@ -92,7 +88,7 @@ shown below.
 :::
 ::::
 
-#### Configuring coverage
+### Configuring coverage
 
 There is a configuration section in `pyproject.toml` for coverage. Here are some
 common options
@@ -126,7 +122,7 @@ There are also useful reporting options. `report.exclude_lines = [...]` allows
 you to exclude lines from coverage. `report.fail_under` can trigger a failure if
 coverage is below a percent (like 100).
 
-#### Calculating code coverage in your workflows
+### Calculating code coverage in your workflows
 
 Your workflows should produce a `.coverage` file as outlined above. This file
 can be uploaded to `Codecov` using the [codecov/codecov-action][] action.
@@ -135,7 +131,7 @@ If you would rather do it yourself, you should collect coverage files from all
 your jobs and combine them into one `.coverage` file before running
 `coverage report`, so that you get a combined score.
 
-##### Manually combining coverage
+#### Manually combining coverage
 
 If you are running in parallel, such as with `pytest-xdist`, you can set
 `run.parallel` to `true`, which will add a unique suffix to the coverage file(s)
@@ -199,7 +195,7 @@ def tests(session: nox.Session) -> None:
 :::
 ::::
 
-##### Merging and reporting
+#### Merging and reporting
 
 If you are running in multiple jobs, you should use upload/download artifacts so
 they are all available in a single combine job at the end. Each one should have
@@ -219,7 +215,7 @@ def coverage(session: nox.Session) -> None:
     session.run("coverage", "erase")
 ```
 
-##### Configuring Codecov and uploading coverage reports
+#### Configuring Codecov and uploading coverage reports
 
 Interestingly, `Codecov` does not require any initial configurations for your
 project, given that you have already signed up for the same using your GitHub
@@ -243,7 +239,7 @@ The lines above should be added after the step that runs your tests with the
 for all the optional options. You'll need to specify a `CODECOV_TOKEN` secret,
 as well.
 
-##### Using codecov.yml
+#### Using codecov.yml
 
 One can also configure `Codecov` and coverage reports passed to `Codecov` using
 `codecov.yml`. `codecov.yml` should be placed inside the `.github` folder, along

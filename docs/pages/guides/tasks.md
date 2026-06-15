@@ -1,8 +1,4 @@
----
-title: Task runners
----
-
-## Task runners
+# Task runners
 
 <!-- [[[cog
 from cog_helpers import  code_fence, render_cookie, PyMatcher
@@ -55,9 +51,9 @@ be best left to just specialized tasks.
 [rake]: https://ruby.github.io/rake/
 [make]: https://www.gnu.org/software/make/
 
-### Nox
+## Nox
 
-#### Installing
+### Installing
 
 Installing nox should be handled like any other Python _application_. You should
 either use a good package manager, like brew on macOS, or you should use pipx;
@@ -83,7 +79,7 @@ customize the versions of Python prepared for you, then use input like this:
     python-versions: "3.10, 3.11, 3.12, 3.13, 3.13t, 3.14, 3.14t, pypy-3.11"
 ```
 
-#### Introduction
+### Introduction
 
 Nox is a tool for running tasks, called "sessions", inside temporary virtual
 environments. It is configured through Python and is designed to resemble
@@ -125,7 +121,7 @@ You can see all defined sessions (along with the docstrings) using:
 nox -l
 ```
 
-#### Parametrizing
+### Parametrizing
 
 You can parametrize sessions. either on Python or on any other item.
 
@@ -155,14 +151,14 @@ docker run --rm -itv $PWD:/src -w /src quay.io/pypa/manylinux_2_28_x86_64:latest
 Another container you can use is `thekevjames/nox:latest`; this has nox
 pre-installed (no pipx) and Python 2.7 and 3.5 as well.
 
-#### Useful sessions
+### Useful sessions
 
 Things like bumping the versions can be made sessions - since nox handles the
 environment for you, you can use any Python dependencies you like, and not have
 to worry about installing anything. Here are some commonly useful sessions that
 will likely look similar across different projects:
 
-##### Lint
+#### Lint
 
 Ideally, all developers should be using pre-commit or prek directly, but this
 helps new users.
@@ -186,7 +182,7 @@ def lint(session: nox.Session) -> None:
 <!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
-##### Tests
+#### Tests
 
 <!-- [[[cog
 with code_fence("python"):
@@ -206,7 +202,7 @@ def tests(session: nox.Session) -> None:
 <!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
 
-##### Docs
+#### Docs
 
 <!-- [[[cog
 with code_fence("python"):
@@ -257,7 +253,7 @@ nox -s docs -- --serve
 Notice that we set `default=False` so that docs are not built every time nox is
 run without arguments. {rr}`NOX103`
 
-##### Build (pure Python)
+#### Build (pure Python)
 
 For pure Python packages, this could be useful:
 
@@ -297,7 +293,7 @@ def build(session: nox.Session) -> None:
 
 (Removing the build directory is helpful for setuptools)
 
-#### Faster with uv
+### Faster with uv
 
 The [uv](https://github.com/astral-sh/uv) project is a Rust reimplementation of
 pip, pip-tools, and venv that is very, very fast. You can tell nox to use `uv`
@@ -322,7 +318,7 @@ interact with uv, nox might be getting uv from it's environment instead of the
 system environment, so you can install `uv` if `shutil.which("uv")` returns
 `None`. You should also set a minimum version of nox. {rr}`NOX101`
 
-#### Running without nox or requiring dependencies
+### Running without nox or requiring dependencies
 
 Nox also allows you to use the script block, both for running with runners (like
 `uv run` and `pipx run`), and for specifying dependencies to install or a
@@ -354,7 +350,7 @@ run directly if it is made executable. You can put any runner here; uv is shown.
 You also need a main block {rr}`NOX203` to allow nox to be run when this file
 is executed directly.
 
-#### Examples
+### Examples
 
 A standard
 [powered by nox](https://github.com/scikit-hep/hist/blob/main/noxfile.py)

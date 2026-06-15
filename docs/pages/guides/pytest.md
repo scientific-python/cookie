@@ -1,8 +1,4 @@
----
-title: "Testing with pytest"
----
-
-## Testing with pytest
+# Testing with pytest
 
 Tests are crucial to writing reliable software. A good test suite allows you to:
 
@@ -33,7 +29,7 @@ testing too. So just use `pytest`. All major packages use it too, including
 just extend it.
 :::
 
-### Basic test structure
+## Basic test structure
 
 You should make a folder called "tests" in your repository (probably alongside
 your `src` or module folder, but rarely they are placed inside the module
@@ -55,7 +51,7 @@ This looks simple, but it is doing several things:
   happens. If it fails, you will get a clear, detailed report on what each value
   was.
 
-#### Configuring pytest
+### Configuring pytest
 
 pytest supports configuration in `pytest.ini`, `setup.cfg`, or, since version 6,
 `pyproject.toml` {rr}`PP301`, or, since version 9, `pytest.toml` or
@@ -139,7 +135,7 @@ becoming errors using the syntax
 tends to be `default` (show the first time) or `ignore` (never show). The regex
 matches at the beginning of the error unless you prefix it with `.*`.
 
-#### Running pytest
+### Running pytest
 
 You can run pytest directly with `pytest` or `python -m pytest`. You can
 optionally give a directory or file to run on. You can also select just some
@@ -156,13 +152,13 @@ start out in your debugger at the beginning of the last failed test with
 `--trace --lf`. [See the docs](https://docs.pytest.org/en/stable/usage.html) for
 more running tips.
 
-### Guidelines for writing good tests
+## Guidelines for writing good tests
 
 Time spent learning all the powerful tools pytest has to offer will be well
 spent! You can make your tests more granular, mock things that aren't available
 (or are slow to run), parametrize, and much more.
 
-#### Tests should be easy
+### Tests should be easy
 
 Always use pytest. The built-in unittest is _very_ verbose; the simpler the
 writing of tests, the more tests you will write!
@@ -205,7 +201,7 @@ This natively works with NumPy arrays, too! Always prefer
 `array1 == approx(array2)` over the functions in the `numpy.testing` module if
 you can, it is simpler and the reporting is better.
 
-#### Tests should test for failures too
+### Tests should test for failures too
 
 You should make sure that expected errors are thrown:
 
@@ -221,7 +217,7 @@ def test_raises():
 You can check for warnings as well, with `pytest.warns` or
 `pytest.deprecated_call`.
 
-#### Tests should stay easy when scaling out
+### Tests should stay easy when scaling out
 
 pytest [uses fixtures](https://docs.pytest.org/en/stable/fixture.html) to
 represent complex ideas, like setup/teardown, temporary resources, or
@@ -284,7 +280,7 @@ conftest) will run three times, and each time will identify as a different
 `platform.system()`! Leave `autouse` off, and it becomes opt-in; adding
 `platform_system` to the list of arguments will opt in.
 
-#### Tests should be organized
+### Tests should be organized
 
 You can use `pytest.mark.*` to
 [mark](https://docs.pytest.org/en/stable/mark.html) tests, so you can easily
@@ -316,7 +312,7 @@ Many pytest plugins support new marks too, like `pytest-parametrize`. You can
 also use custom marks to enable/disable groups of tests, or to pass data into
 fixtures.
 
-#### Tests should test the installed version, not the local version
+### Tests should test the installed version, not the local version
 
 Your tests should run against an _installed_ version of your code. Testing
 against the _local_ version might work while the installed version does not (due
@@ -327,7 +323,7 @@ directories and `pytest` does not. Also, there may come a time when someone
 a build system, and if you are unable to test against an installed version, you
 won't be able to run your tests! (It happens more than you might think).
 
-#### Mock expensive or tricky calls
+### Mock expensive or tricky calls
 
 If you have to call something that is expensive or hard to call, it is often
 better to mock it. To isolate parts of your own code for "unit" testing, mocking

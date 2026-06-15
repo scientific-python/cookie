@@ -1,8 +1,4 @@
----
-title: Topical Guides
----
-
-## Topical Guides
+# Topical Guides
 
 The pages here are intended for developers who are making or maintaining a
 package and want to follow modern best practices in Python.

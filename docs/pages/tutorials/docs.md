@@ -1,10 +1,6 @@
----
-title: Writing documentation
----
+# Writing documentation
 
-## Writing documentation
-
-### Build the documentation
+## Build the documentation
 
 Scientific Python software documentation can be written in the Markdown syntax,
 which looks like this:
@@ -95,7 +91,7 @@ You should see some log message ending in `build succeeded.` This created the
 directory `docs/build`. Open `docs/build/index.html` in your web browser to view
 the documentation.
 
-### Essential Features of MyST Markdown
+## Essential Features of MyST Markdown
 
 We refer you to the [MyST][] documentation for topics including:
 
@@ -106,7 +102,7 @@ We refer you to the [MyST][] documentation for topics including:
 - Math and equations
 - Including content from other files
 
-### Structure
+## Structure
 
 We began with this structure, having a single documentation page.
 
@@ -145,7 +141,7 @@ tutorials/real-application.md
 
 For more details see the MyST documentation page on [organizing content][].
 
-### Automatically generate reference documentation
+## Automatically generate reference documentation
 
 Reference documentation provides comprehensive documentation of the API: all the
 inputs and outputs of every public object in the codebase. This should not be

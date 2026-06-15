@@ -1,10 +1,10 @@
 ---
-title: Home
+short_title: Home
 site:
   hide_outline: true
 ---
 
-## Scientific Python Library Development Guide
+# Scientific Python Library Development Guide
 
 This guide is maintained by the scientific Python community for the benefit of
 fellow scientists and research software engineers.
@@ -44,7 +44,7 @@ to use successfully and easier to maintain over time.
 tasks and can be tricky to get exactly right, such as including data files with
 Python packages.
 
-### Related Resources
+## Related Resources
 
 This guide does _not_ cover the basics of Python itself or the scientific Python
 libraries; it focuses on making or maintaining a package. We recommend the

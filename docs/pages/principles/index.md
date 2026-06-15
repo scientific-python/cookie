@@ -1,8 +1,4 @@
----
-title: Principles
----
-
-## Principles
+# Principles
 
 These pages are focused on designing good software, with a focus on end-user
 research code. [Process recommendations][] discusses the process of writing

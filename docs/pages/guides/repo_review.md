@@ -1,8 +1,4 @@
----
-title: Repo-Review
----
-
-## Repo-Review
+# Repo-Review
 
 You can check the style of a GitHub repository below. Enter any repository, such
 as `scikit-hep/hist`, and the branch you want to check, such as `main` (it must

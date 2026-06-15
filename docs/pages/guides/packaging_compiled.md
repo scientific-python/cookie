@@ -1,6 +1,4 @@
----
-title: Compiled packaging
----
+# Packaging Compiled Projects
 
 <!-- [[[cog
 from cog_helpers import code_fence, render_cookie, TOMLMatcher
@@ -25,8 +23,6 @@ Once you've done this at least once, feel free to use
 [our cookiecutter/copier template](https://github.com/scientific-python/cookie),
 or `uv init` to get started quickly on new packages!
 :::
-
-## Packaging Compiled Projects
 
 There are a variety of ways to package compiled projects. In the past, the only
 way to do it was to use setuptools/distutils, which required using lots of
@@ -63,7 +59,7 @@ elegant as Meson, there are a lot of historical examples of poorly written
 CMake.
 :::
 
-### pyproject.toml: build-system
+## pyproject.toml: build-system
 
 {rr}`PY001` Packages must have a `pyproject.toml` file {rr}`PP001` that
 selects the backend:
@@ -119,7 +115,7 @@ build-backend = "maturin"
 ```{include} ../../_partials/pyproject.md
 ```
 
-### Tool section in pyproject.toml
+## Tool section in pyproject.toml
 
 These tools all read the project table. They also have extra configuration
 options in `tool.*` settings.
@@ -167,7 +163,7 @@ configuration here to follow the convention of the other tools here.
 :::
 ::::
 
-### Backend specific files
+## Backend specific files
 
 ::::{tab-set}
 :::{tab-item} Scikit-build-core
@@ -272,7 +268,7 @@ features = ["extension-module", "abi3-py310"]
 :::
 ::::
 
-### Example compiled file
+## Example compiled file
 
 This example will make a `_core` extension inside your package; this pattern
 allows you to easily provide both Python files and compiled extensions, and
@@ -404,32 +400,32 @@ mod _core {
 :::
 ::::
 
-### Package structure
+## Package structure
 
 The recommendation (followed above) is to have source code in `/src`, and the
 Python package files in `/src/<package>`. The compiled files also can go in
 `/src`.
 
-### Versioning
+## Versioning
 
 Check the documentation for the tools above to see what forms of dynamic
 versioning the tool supports.
 
-### Including/excluding files in the SDist
+## Including/excluding files in the SDist
 
 Each tool uses a different mechanism to include or remove files from the SDist,
 though the defaults are reasonable.
 
-### Distributing
+## Distributing
 
 Unlike pure Python, you'll need to build redistributable wheels for each
 platform and supported Python version if you want to avoid compilation on the
 user's system using cibuildwheel. See [the CI page on wheels][gha_wheels] for a
 suggested workflow.
 
-### Special considerations
+## Special considerations
 
-#### NumPy
+### NumPy
 
 Modern versions of NumPy (1.25+) allow you to target older versions when
 building, which is _highly_ recommended, and this became required in NumPy 2.0.

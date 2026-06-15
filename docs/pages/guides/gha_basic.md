@@ -1,9 +1,8 @@
 ---
-title: "GHA: GitHub Actions intro"
 short_title: GitHub Actions introduction
 ---
 
-## GitHub Actions: Intro
+# GitHub Actions: Intro
 
 {rr}`GH100` The recommended CI for scientific Python projects is GitHub
 Actions (GHA), although its predecessor Azure is also in heavy usage, and other
@@ -25,7 +24,7 @@ with render_cookie() as package:
 ]]] -->
 <!-- [[[end]]] -->
 
-### Header
+## Header
 
 Your main CI workflow file should begin something like this:
 
@@ -47,7 +46,7 @@ you use a develop branch, you probably will want to include that. You can also
 specify specific branches for pull requests instead of running on all PRs (will
 run on PRs targeting those branches only).
 
-### Prek / Pre-commit
+## Prek / Pre-commit
 
 If you use [prek][] or [pre-commit][] in CI, you can run it directly in GitHub
 Actions. Prek is a faster Rust rewrite of pre-commit that supports most real
@@ -91,7 +90,7 @@ run a manual check, like check-manifest, then you can keep it but just use
 this one check. You can also use `needs: lint` in your other jobs to keep them
 from running if the lint check does not pass.
 
-### Unit tests
+## Unit tests
 
 Implementing unit tests is also easy. Since you should be following best
 practices listed in the previous sections, this becomes an almost directly
@@ -158,7 +157,7 @@ Note that while versioned images are available, like `ubuntu-24.04`, these are
 all rolling images; selecting a specific image will not make your CI completely
 static. And old versioned images are decommissioned.
 
-### Updating
+## Updating
 
 {rr}`GH200` {rr}`GH210` If you use non-default actions in your repository
 (you will see some in the following pages), then it's a good idea to keep them
@@ -190,9 +189,9 @@ which is both cleaner and sometimes required for dependent actions, like
 
 You can use this for other ecosystems too, including Python.
 
-### Common needs
+## Common needs
 
-#### Single OS steps
+### Single OS steps
 
 If you need to have a step run only on a specific OS, use an if on that step
 with `runner.os`:
@@ -204,7 +203,7 @@ if: runner.os != 'Windows' # also 'macOS' and 'Linux'
 Using `runner.os` is better than `matrix.<something>`. You also have an
 environment variable `$RUNNER_OS` as well. Single quotes are required here.
 
-#### Changing the environment in a step
+### Changing the environment in a step
 
 If you need to change environment variables for later steps, such combining with
 an if condition for only for one OS, then you add it to a special file:
@@ -215,7 +214,7 @@ an if condition for only for one OS, then you add it to a special file:
 
 Later steps will see this environment variable.
 
-#### Communicating between steps
+### Communicating between steps
 
 You can also directly communicate between steps, by setting `id:`'s. Some
 actions have outputs, and bash actions can manually write to output:
@@ -230,7 +229,7 @@ You can now refer to this step in a later step with
 using `${{ needs.<jobname>.outputs.something }}`. The `toJson()` function is
 useful for inputting JSON - you can even generate matrices dynamically this way!
 
-#### Pretty output
+### Pretty output
 
 You can write GitHub flavored markdown to `$GITHUB_STEP_SUMMARY`, and it will be
 shown on the summary page.
@@ -247,7 +246,7 @@ You can also do this
 which tell GitHub to look for certain patterns. Do keep in mind you can only see
 up to 10 matches per type per step, and a total of 50 matchers.
 
-#### Common useful actions
+### Common useful actions
 
 There are a variety of useful actions. There are GitHub supplied ones:
 
@@ -325,11 +324,11 @@ You can also run GitHub Actions locally:
 - [act](https://github.com/nektos/act): Run GitHub Actions in a docker image
   locally.
 
-### Advanced usage
+## Advanced usage
 
 These are some things you might need.
 
-#### Cancel existing runs
+### Cancel existing runs
 
 {rr}`GH102` If you add the following, you can ensure only one run per
 PR/branch happens at a time, cancelling the old run when a new one starts:
@@ -345,7 +344,7 @@ the "from" name for the PR. If you want, you can replace `github.ref` with
 `github.event.pull_request.number || github.sha`; this will still cancel on PR
 pushes but will build each commit on `main`.
 
-#### Pass job
+### Pass job
 
 If you want support GitHub's "merge when pass" feature, you should set up a pass
 job instead of listing every job you wand to require. Besides making it much
@@ -382,7 +381,7 @@ allowed to be skipped (`allowed-skips:`) too.
 Just set this `pass` job in your required checks for your main branch. Then
 you'll be able to use GitHub's auto merge functionality.
 
-#### Custom actions
+### Custom actions
 
 You can
 [write your own actions](https://docs.github.com/en/actions/creating-actions)
@@ -453,7 +452,7 @@ Examples of custom composite actions include:
   (This repo)
 :::
 
-#### Reusable workflows
+### Reusable workflows
 
 You can also make reusable workflows. One reason to do this is it allows you to
 use `needs` or communicate values between workflows. It's an easy way to make
@@ -470,7 +469,7 @@ If you add a `outputs:` table to the workflow call table, you can specify
 outputs for other workflows to read. See other options
 [in the docs](https://docs.github.com/en/actions/using-workflows/reusing-workflows).
 
-#### Conditional workflows
+### Conditional workflows
 
 Sometimes you have jobs that depend on certain files in our repository. Maybe
 you only want to run tests if code or tests files are changed, docs if
@@ -620,7 +619,7 @@ Some examples of repos using this method are:
   (this repo)
 :::
 
-#### GitHub pages
+### GitHub pages
 
 GitHub has finished moving their pages build infrastructure to Actions, and they
 [now provide](https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/)
@@ -702,7 +701,7 @@ for examples. Some other examples include:
 - [iris-hep.org](https://github.com/iris-hep/iris-hep.github.io/blob/master/.github/workflows/deploy.yml)
 :::
 
-#### Changelog generation
+### Changelog generation
 
 Not directly part of Actions, but also in `.github` is `.github/release.yml`,
 which lets you [configure the changelog generation][gh-changelog] button when
