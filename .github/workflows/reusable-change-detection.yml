@@ -22,7 +22,7 @@ jobs:
       run-rr: ${{ steps.rr-changes.outputs.run-rr || false }}
       run-docs: ${{ steps.docs-changes.outputs.run-docs || false }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.3
         with:
           persist-credentials: false
 
