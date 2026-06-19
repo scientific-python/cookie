@@ -13,7 +13,7 @@ jobs:
     name: Bump versions
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/create-github-app-token@v3
+      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: generate-token
         with:
           app-id: ${{ secrets.APP_ID }}
@@ -21,16 +21,16 @@ jobs:
           # Scope the token to only what the PR creation needs
           permission-contents: write
           permission-pull-requests: write
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
-      - uses: astral-sh/setup-uv@v8.2.0
+      - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
       - run: uvx nox -s pc_bump
         env:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: uvx nox -s gha_bump
       - run: git diff
-      - uses: peter-evans/create-pull-request@v8
+      - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           title: "chore(deps): bump versions"
           body: |
