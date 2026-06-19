@@ -22,14 +22,14 @@ jobs:
       run-rr: ${{ steps.rr-changes.outputs.run-rr || false }}
       run-docs: ${{ steps.docs-changes.outputs.run-docs || false }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
 
       - name: Changed cookie-related files
         if: github.event_name == 'pull_request'
         id: changed-cookie-files
-        uses: Ana06/get-changed-files@v2.3.0
+        uses: Ana06/get-changed-files@25f79e676e7ea1868813e21465014798211fad8c # v2.3.0
         with:
           format: "json"
           filter: |
@@ -51,7 +51,7 @@ jobs:
       - name: Changed sp-repo-review-related files
         if: github.event_name == 'pull_request'
         id: changed-rr-files
-        uses: Ana06/get-changed-files@v2.3.0
+        uses: Ana06/get-changed-files@25f79e676e7ea1868813e21465014798211fad8c # v2.3.0
         with:
           format: "json"
           filter: |
@@ -73,7 +73,7 @@ jobs:
       - name: Changed docs-related files
         if: github.event_name == 'pull_request'
         id: changed-docs-files
-        uses: Ana06/get-changed-files@v2.3.0
+        uses: Ana06/get-changed-files@25f79e676e7ea1868813e21465014798211fad8c # v2.3.0
         with:
           format: "json"
           filter: |
