@@ -139,4 +139,4 @@ Consult the [pytest documentation][] for more. For more advanced pytest
 suggestions, see our [pytest guide][].
 
 [pytest documentation]: https://docs.pytest.org/en/latest/
-[pytest guide]: pages/guides/pytest
+[pytest guide]: guides/pytest

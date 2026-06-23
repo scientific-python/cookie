@@ -12,9 +12,9 @@ start off on the right foot.
 Keeping in mind that too much software infrastructure can be overwhelming to
 those who haven't yet encountered the need for it, we introduce only the core
 essentials in this opinionated tutorial. From there, we recommend looking
-through the section on [principles](pages/principles/index). As
+through the section on [principles](principles/index). As
 your project grows you may find some good use for the more specific and advanced
-topics covered in the [guides](pages/guides/index).
+topics covered in the [guides](guides/index).
 
 ```{tableofcontents}
 ```

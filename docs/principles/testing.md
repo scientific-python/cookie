@@ -69,8 +69,8 @@ the test-case to make sure it fails when the code is broken.
 
 A good place to start writing tests is from the perspective of a user of your
 module or library, as described in the [Test
-Tutorial](pages/tutorials/test), and [Testing with pytest
-guide](pages/guides/pytest). These tests follow the "Detroit
+Tutorial](tutorials/test), and [Testing with pytest
+guide](guides/pytest). These tests follow the "Detroit
 School", focusing on behavior, avoiding testing of private attributes,
 minimizing the use of mocks/patches/test-doubles.
 
@@ -393,7 +393,7 @@ run unit tests in your source folder, from your package root, use
 your source repository), use `pytest --pyargs {package name}`.
 
 You can set the default test path in `pyproject.toml`, see: [Configuring
-pytest](pages/guides/pytest#configuring-pytest)
+pytest](guides/pytest#configuring-pytest)
 
 We recommend configuring pytest to run ONLY your fastest, least demanding test
 suite by default.

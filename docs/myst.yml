@@ -9,39 +9,39 @@ project:
     - rr-role.mjs
 
   toc:
-    - file: pages/index.md
-    - file: pages/tutorials/index.md
+    - file: index.md
+    - file: tutorials/index.md
       children:
-        - file: pages/tutorials/dev-environment.md
-        - file: pages/tutorials/module.md
-        - file: pages/tutorials/packaging.md
-        - file: pages/tutorials/test.md
-        - file: pages/tutorials/docs.md
-    - file: pages/guides/index.md
+        - file: tutorials/dev-environment.md
+        - file: tutorials/module.md
+        - file: tutorials/packaging.md
+        - file: tutorials/test.md
+        - file: tutorials/docs.md
+    - file: guides/index.md
       children:
-        - file: pages/guides/pytest.md
-        - file: pages/guides/coverage.md
-        - file: pages/guides/docs.md
-        - file: pages/guides/packaging_simple.md
-        - file: pages/guides/packaging_compiled.md
-        - file: pages/guides/packaging_classic.md
-        - file: pages/guides/style.md
-        - file: pages/guides/mypy.md
-        - file: pages/guides/gha_basic.md
-        - file: pages/guides/gha_pure.md
-        - file: pages/guides/gha_wheels.md
-        - file: pages/guides/tasks.md
-    - file: pages/principles/index.md
+        - file: guides/pytest.md
+        - file: guides/coverage.md
+        - file: guides/docs.md
+        - file: guides/packaging_simple.md
+        - file: guides/packaging_compiled.md
+        - file: guides/packaging_classic.md
+        - file: guides/style.md
+        - file: guides/mypy.md
+        - file: guides/gha_basic.md
+        - file: guides/gha_pure.md
+        - file: guides/gha_wheels.md
+        - file: guides/tasks.md
+    - file: principles/index.md
       children:
-        - file: pages/principles/process.md
-        - file: pages/principles/design.md
-        - file: pages/principles/testing.md
-    - file: pages/patterns/index.md
+        - file: principles/process.md
+        - file: principles/design.md
+        - file: principles/testing.md
+    - file: patterns/index.md
       children:
-        - file: pages/patterns/exports.md
-        - file: pages/patterns/backports.md
-        - file: pages/patterns/data_files.md
-    - file: pages/guides/repo_review.md
+        - file: patterns/exports.md
+        - file: patterns/backports.md
+        - file: patterns/data_files.md
+    - file: guides/repo_review.md
 
 site:
   template: book-theme

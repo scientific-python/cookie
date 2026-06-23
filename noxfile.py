@@ -425,7 +425,7 @@ def pc_bump(session: nox.Session) -> None:
     session.install("lastversion>=3.4")
     versions = {}
     pages = [
-        Path("docs/pages/guides/style.md"),
+        Path("docs/guides/style.md"),
         Path("{{cookiecutter.project_name}}/.pre-commit-config.yaml"),
         Path(".pre-commit-config.yaml"),
     ]
@@ -494,11 +494,11 @@ def gha_bump(session: nox.Session) -> None:
     """
     Bump the GitHub Actions.
     """
-    pages = list(Path("docs/pages/guides").glob("gha_*.md"))
+    pages = list(Path("docs/guides").glob("gha_*.md"))
     pages.extend(Path("{{cookiecutter.project_name}}/.github/workflows").iterdir())
-    pages.append(Path("docs/pages/guides/style.md"))
-    pages.append(Path("docs/pages/guides/tasks.md"))
-    pages.append(Path("docs/pages/guides/coverage.md"))
+    pages.append(Path("docs/guides/style.md"))
+    pages.append(Path("docs/guides/tasks.md"))
+    pages.append(Path("docs/guides/coverage.md"))
     full_txt = "\n".join(page.read_text() for page in pages)
 
     # This assumes there is a single version per action

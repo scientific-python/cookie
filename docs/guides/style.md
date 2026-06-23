@@ -674,7 +674,7 @@ and `ignore-without-code` {rr}`MY104`, `redundant-expr` {rr}`MY105`, and
 checks) and have to be ignored occasionally, but can find some significant logic
 errors in your typing.
 
-[mypy page]: pages/guides/mypy
+[mypy page]: guides/mypy
 
 ## Setuptools specific checks
 

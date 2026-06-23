@@ -87,7 +87,7 @@ repos:
         name: Disallow improper capitalization
         language: pygrep
         entry: PyBind|Numpy|Cmake|CCache|Github|PyTest|RST|PyLint
-        exclude: (.pre-commit-config.yaml|docs/pages/guides/style\.md)$
+        exclude: (.pre-commit-config.yaml|docs/guides/style\.md)$
       - id: disallow-words
         name: Disallow certain words
         language: pygrep
@@ -101,5 +101,5 @@ repos:
         name: Cog the pages
         language: python
         entry: cog -P -r -I ./helpers
-        files: "^docs/pages/guides/(packaging_compiled|docs|tasks|gha_basic).md|^copier.yml|^docs/_partials/pyproject.md"
+        files: "^docs/guides/(packaging_compiled|docs|tasks|gha_basic).md|^copier.yml|^docs/_partials/pyproject.md"
         additional_dependencies: [cogapp, cookiecutter, tomlkit]

@@ -86,7 +86,7 @@ build-backend = "setuptools.build_meta"
 :::
 ::::
 
-```{include} ../../_partials/pyproject.md
+```{include} ../_partials/pyproject.md
 ```
 
 For `requires-python`, you should specify the minimum you require, and you
