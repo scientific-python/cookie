@@ -6,16 +6,6 @@ from typing import Any
 
 from . import mk_url
 
-# Type checkers configured via a `tool.<name>` table in `pyproject.toml`. Only
-# MyPy and Pyrefly expose options that map onto the MY1xx checks below; ty
-# tightens individual rules instead, so the MyPy-specific checks skip for it.
-TYPE_CHECKERS = ("mypy", "pyrefly", "ty")
-
-
-def _tools(pyproject: dict[str, Any]) -> set[str]:
-    tool = pyproject.get("tool", {})
-    return {name for name in TYPE_CHECKERS if name in tool}
-
 
 class MyPy:
     family = "mypy"
@@ -35,7 +25,13 @@ class MY100(MyPy):
         this check.
         """
 
-        return bool(_tools(pyproject))
+        match pyproject:
+            case {
+                "tool": {"mypy": object()} | {"pyrefly": object()} | {"ty": object()}
+            }:
+                return True
+            case _:
+                return False
 
 
 class MY101(MyPy):
