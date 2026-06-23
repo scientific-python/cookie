@@ -5,8 +5,8 @@ short_title: Security
 # Security
 
 Supply-chain and CI security are increasingly important for scientific Python
-projects; new attacks are targetting smaller packages than ever before thanks
-to the ease with which exploits can be found and utalized with AI. This page
+projects; new attacks are targeting smaller packages than ever before thanks
+to the ease with which exploits can be found and utilized with AI. This page
 collects recommendations for keeping your repository and its automation secure.
 This is a work in progress; expect it to grow over time.
 
