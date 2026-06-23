@@ -426,10 +426,6 @@ Will not show up if no `setup.cfg` file is present.
 
 - [`SCFG001`](https://learn.scientific-python.org/development/guides/packaging-classic#SCFG001): Avoid deprecated setup.cfg names
 
-### Validate-PyProject
-
-- `VPP001`: Validate pyproject.toml
-
 <!-- [[[end]]] -->
 
 [repo-review]: https://repo-review.readthedocs.io
