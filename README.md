@@ -362,8 +362,8 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 
 ### MyPy
 
-- [`MY100`](https://learn.scientific-python.org/development/guides/style#MY100): Uses MyPy (pyproject config)
-- [`MY101`](https://learn.scientific-python.org/development/guides/style#MY101): MyPy strict mode
+- [`MY100`](https://learn.scientific-python.org/development/guides/style#MY100): Uses a type checker (pyproject config)
+- [`MY101`](https://learn.scientific-python.org/development/guides/style#MY101): Type checker in strict mode
 - `MY102`: MyPy show_error_codes deprecated
 - [`MY103`](https://learn.scientific-python.org/development/guides/style#MY103): MyPy warn unreachable
 - [`MY104`](https://learn.scientific-python.org/development/guides/style#MY104): MyPy enables ignore-without-code

@@ -9,6 +9,22 @@ def test_my100_present():
     assert compute_check("MY100", pyproject=toml).result
 
 
+def test_my100_pyrefly():
+    toml = toml_loads("""
+        [tool.pyrefly]
+        project-includes = ["src"]
+        """)
+    assert compute_check("MY100", pyproject=toml).result
+
+
+def test_my100_ty():
+    toml = toml_loads("""
+        [tool.ty.src]
+        include = ["src"]
+        """)
+    assert compute_check("MY100", pyproject=toml).result
+
+
 def test_my100_missing():
     assert not compute_check("MY100", pyproject={}).result
 
@@ -27,6 +43,39 @@ def test_my101_missing():
         warn_unreachable = true
         """)
     assert not compute_check("MY101", pyproject=toml).result
+
+
+def test_my101_pyrefly_preset():
+    toml = toml_loads("""
+        [tool.pyrefly]
+        preset = "strict"
+        """)
+    assert compute_check("MY101", pyproject=toml).result
+
+
+def test_my101_pyrefly_no_preset():
+    toml = toml_loads("""
+        [tool.pyrefly]
+        project-includes = ["src"]
+        """)
+    assert compute_check("MY101", pyproject=toml).result is False
+
+
+def test_my101_ty_skipped():
+    toml = toml_loads("""
+        [tool.ty.src]
+        include = ["src"]
+        """)
+    assert compute_check("MY101", pyproject=toml).result is None
+
+
+def test_my10x_skipped_without_mypy():
+    toml = toml_loads("""
+        [tool.ty.src]
+        include = ["src"]
+        """)
+    for name in ("MY102", "MY103", "MY104", "MY105", "MY106"):
+        assert compute_check(name, pyproject=toml).result is None
 
 
 def test_my102_pass_without_show_error_codes():

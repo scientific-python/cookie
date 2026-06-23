@@ -721,7 +721,7 @@ errors in your typing.
 :::
 :::{tab-item} Pyrefly
 :sync: pyrefly
-Pyrefly's config section in `pyproject.toml` looks like this:
+{rr}`MY100` Pyrefly's config section in `pyproject.toml` looks like this:
 
 ```toml
 [tool.pyrefly]
@@ -736,8 +736,8 @@ ignore-missing-imports = ["numpy"]
 Pyrefly checks all your code by default, rather than only annotated functions,
 so you can start from a looser `preset` and tighten as you go. Set
 `preset = "strict"` (the equivalent of MyPy's `strict = true`) once you are
-ready, and toggle individual error codes in a `[tool.pyrefly.errors]` table, for
-example:
+ready {rr}`MY101`, and toggle individual error codes in a
+`[tool.pyrefly.errors]` table, for example:
 
 ```toml
 [tool.pyrefly]
@@ -753,7 +753,7 @@ You can disable Pyrefly on a line with `# pyrefly: ignore` (or
 :::
 :::{tab-item} ty
 :sync: ty
-ty's config sections in `pyproject.toml` look like this:
+{rr}`MY100` ty's config sections in `pyproject.toml` look like this:
 
 ```toml
 [tool.ty.environment]
