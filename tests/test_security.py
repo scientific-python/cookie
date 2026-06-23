@@ -38,6 +38,4 @@ def test_sec001_missing() -> None:
               - id: ruff-check
         """
     )
-    assert not compute_check(
-        "SEC001", precommit=precommit, workflows={"ci": {}}
-    ).result
+    assert not compute_check("SEC001", precommit=precommit, workflows={"ci": {}}).result
