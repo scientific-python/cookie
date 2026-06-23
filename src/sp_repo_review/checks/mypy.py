@@ -6,13 +6,23 @@ from typing import Any
 
 from . import mk_url
 
+# Type checkers configured via a `tool.<name>` table in `pyproject.toml`. Only
+# MyPy and Pyrefly expose options that map onto the MY1xx checks below; ty
+# tightens individual rules instead, so the MyPy-specific checks skip for it.
+TYPE_CHECKERS = ("mypy", "pyrefly", "ty")
+
+
+def _tools(pyproject: dict[str, Any]) -> set[str]:
+    tool = pyproject.get("tool", {})
+    return {name for name in TYPE_CHECKERS if name in tool}
+
 
 class MyPy:
     family = "mypy"
 
 
 class MY100(MyPy):
-    "Uses MyPy (pyproject config)"
+    "Uses a type checker (pyproject config)"
 
     requires = {"PY001"}
     url = mk_url("style")
@@ -20,30 +30,27 @@ class MY100(MyPy):
     @staticmethod
     def check(pyproject: dict[str, Any]) -> bool:
         """
-        Must have `tool.mypy` section in `pyproject.toml`. Other forms of
-        configuration are not supported by this check.
+        Must have a `tool.mypy`, `tool.pyrefly`, or `tool.ty` section in
+        `pyproject.toml`. Other forms of configuration are not supported by
+        this check.
         """
 
-        match pyproject:
-            case {"tool": {"mypy": object()}}:
-                return True
-            case _:
-                return False
+        return bool(_tools(pyproject))
 
 
 class MY101(MyPy):
-    "MyPy strict mode"
+    "Type checker in strict mode"
 
     requires = {"MY100"}
     url = mk_url("style")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pyproject: dict[str, Any]) -> bool | None:
         """
-        Must have `strict` in the mypy config. MyPy is best with strict or
-        nearly strict configuration. If you are happy with the strictness of
-        your settings already, ignore this check or set `strict = false`
-        explicitly.
+        Should opt into strict checking. For MyPy, set `strict` (true/false).
+        For Pyrefly, set a `preset` (such as `"strict"`). ty has no strict
+        switch -- you tighten individual rules in `[tool.ty.rules]` -- so this
+        check is skipped when only ty is configured.
 
         ```toml
         [tool.mypy]
@@ -54,8 +61,12 @@ class MY101(MyPy):
         match pyproject:
             case {"tool": {"mypy": {"strict": bool()}}}:
                 return True
-            case _:
+            case {"tool": {"pyrefly": {"preset": str()}}}:
+                return True
+            case {"tool": {"mypy": object()} | {"pyrefly": object()}}:
                 return False
+            case _:
+                return None
 
 
 class MY102(MyPy):
@@ -64,17 +75,20 @@ class MY102(MyPy):
     requires = {"MY100"}
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pyproject: dict[str, Any]) -> bool | None:
         """
         Must not have `show_error_codes`. It is now the default, or you can
         use `hide_error_codes` with the reverse value instead (since MyPy v0.990).
+        Skipped if MyPy is not configured.
         """
 
         match pyproject:
             case {"tool": {"mypy": {"show_error_codes": bool()}}}:
                 return False
-            case _:
+            case {"tool": {"mypy": object()}}:
                 return True
+            case _:
+                return None
 
 
 class MY103(MyPy):
@@ -84,12 +98,12 @@ class MY103(MyPy):
     url = mk_url("style")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pyproject: dict[str, Any]) -> bool | None:
         """
         Must have `warn_unreachable` (true/false) to pass this check. There are
         occasionally false positives (often due to platform or Python version
         static checks), so it's okay to set it to false if you need to. But try
-        it first - it can catch real bugs too.
+        it first - it can catch real bugs too. Skipped if MyPy is not configured.
 
         ```toml
         [tool.mypy]
@@ -100,8 +114,10 @@ class MY103(MyPy):
         match pyproject:
             case {"tool": {"mypy": {"warn_unreachable": bool()}}}:
                 return True
-            case _:
+            case {"tool": {"mypy": object()}}:
                 return False
+            case _:
+                return None
 
 
 class MY104(MyPy):
@@ -111,11 +127,12 @@ class MY104(MyPy):
     url = mk_url("style")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pyproject: dict[str, Any]) -> bool | None:
         """
         Must have `"ignore-without-code"` in `enable_error_code = [...]`. This
         will force all skips in your project to include the error code, which
         makes them more readable, and avoids skipping something unintended.
+        Skipped if MyPy is not configured.
 
         ```toml
         [tool.mypy]
@@ -126,8 +143,10 @@ class MY104(MyPy):
         match pyproject:
             case {"tool": {"mypy": {"enable_error_code": codes}}}:
                 return "ignore-without-code" in codes
-            case _:
+            case {"tool": {"mypy": object()}}:
                 return False
+            case _:
+                return None
 
 
 class MY105(MyPy):
@@ -137,10 +156,11 @@ class MY105(MyPy):
     url = mk_url("style")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pyproject: dict[str, Any]) -> bool | None:
         """
         Must have `"redundant-expr"` in `enable_error_code = [...]`. This helps
         catch useless lines of code, like checking the same condition twice.
+        Skipped if MyPy is not configured.
 
         ```toml
         [tool.mypy]
@@ -151,8 +171,10 @@ class MY105(MyPy):
         match pyproject:
             case {"tool": {"mypy": {"enable_error_code": codes}}}:
                 return "redundant-expr" in codes
-            case _:
+            case {"tool": {"mypy": object()}}:
                 return False
+            case _:
+                return None
 
 
 class MY106(MyPy):
@@ -162,10 +184,11 @@ class MY106(MyPy):
     url = mk_url("style")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pyproject: dict[str, Any]) -> bool | None:
         """
         Must have `"truthy-bool"` in `enable_error_code = []`. This catches
-        mistakes in using a value as truthy if it cannot be falsy.
+        mistakes in using a value as truthy if it cannot be falsy. Skipped if
+        MyPy is not configured.
 
         ```toml
         [tool.mypy]
@@ -176,8 +199,10 @@ class MY106(MyPy):
         match pyproject:
             case {"tool": {"mypy": {"enable_error_code": codes}}}:
                 return "truthy-bool" in codes
-            case _:
+            case {"tool": {"mypy": object()}}:
                 return False
+            case _:
+                return None
 
 
 def repo_review_checks() -> dict[str, MyPy]:
