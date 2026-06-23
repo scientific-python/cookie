@@ -615,8 +615,8 @@ public API in the best way that you can (based on your supported Python
 versions). Stub files can be used instead for out-of-line typing.
 [MyPy](https://mypy.readthedocs.io/en/stable/) is suggested for type checking,
 though there are several other good options to try, as well;
-[Pyrefly](https://pyrefly.org) is a fast Rust-based checker, and is shown
-alongside MyPy in the tabs below. If you have
+[Pyrefly](https://pyrefly.org) and [ty](https://docs.astral.sh/ty/) are fast
+Rust-based checkers, and are shown alongside MyPy in the tabs below. If you have
 built-in support for type checking, you need to add empty `py.typed` files to
 all packages/subpackages to indicate that you support it.
 
@@ -657,9 +657,29 @@ This hook runs `pyrefly check`, reading its configuration from `pyproject.toml`
 (shown below). Like MyPy, you can add packages to the type-checking environment
 with `additional_dependencies`, and pass extra flags via `args`.
 :::
+:::{tab-item} ty
+:sync: ty
+```yaml
+- repo: https://github.com/astral-sh/ty-pre-commit
+  rev: "v0.0.52"
+  hooks:
+    - id: ty
+```
+
+This hook works differently from the others. Rather than building an isolated
+environment, it installs your project with uv, so the dependencies (and default
+dependency groups, including `dev`) declared in `pyproject.toml` are resolvable
+by ty without listing them again. Because of this, packages added to
+`additional_dependencies` are _not_ visible to ty; control the environment with
+uv's flags through `args` instead, such as `--no-default-groups` or
+`--group=typechecking`. The hook also deliberately does not pass it the changed
+filenames -- ty always checks the whole project (configured by `src.include` /
+`src.exclude` below), since an edit to one file can surface diagnostics in
+another.
+:::
 ::::
 
-Both checkers read their configuration from `pyproject.toml`:
+These checkers read their configuration from `pyproject.toml`:
 
 ::::{tab-set}
 :::{tab-item} MyPy
@@ -730,6 +750,39 @@ errors.implicit-import = false
 You can disable Pyrefly on a line with `# pyrefly: ignore` (or
 `# pyrefly: ignore[error-name]` for a specific code); the standard
 `# type: ignore` is honored as well.
+:::
+:::{tab-item} ty
+:sync: ty
+ty's config sections in `pyproject.toml` look like this:
+
+```toml
+[tool.ty.environment]
+python-version = "3.10"
+
+[tool.ty.src]
+include = ["src"]
+exclude = ["**/tests"]
+
+[tool.ty.rules]
+# Each rule can be set to "ignore", "warn", or "error"
+unresolved-import = "ignore"
+```
+
+Like Pyrefly, ty checks all your code rather than only annotated functions, and
+it has no single `strict` switch -- you tighten or relax individual rules in
+`[tool.ty.rules]`. To silence missing imports for specific modules (the
+equivalent of MyPy's per-module `ignore_missing_imports`) rather than turning
+the rule off everywhere, treat their imports as `Any` in the
+`[tool.ty.analysis]` table:
+
+```toml
+[tool.ty.analysis]
+# Glob patterns; `numpy.**` covers numpy and all its submodules
+replace-imports-with-any = ["numpy.**"]
+```
+
+You can disable ty on a line with `# ty: ignore` (or `# ty: ignore[rule-name]`
+for a specific rule); the standard `# type: ignore` is honored as well.
 :::
 ::::
 
