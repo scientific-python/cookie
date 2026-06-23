@@ -723,9 +723,8 @@ example:
 [tool.pyrefly]
 preset = "strict"
 
-[tool.pyrefly.errors]
 # Turn a specific check off
-implicit-import = false
+errors.implicit-import = false
 ```
 
 You can disable Pyrefly on a line with `# pyrefly: ignore` (or
