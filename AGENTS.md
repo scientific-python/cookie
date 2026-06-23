@@ -12,7 +12,10 @@ new Python projects (`{{cookiecutter.project_name}}/`), a **repo-review plugin**
 - Run linting (pre-commit via prek): `uvx nox -s rr_lint`
 - Run pylint: `uvx nox -s rr_pylint`
 - Run the CLI: `uvx nox -s rr_run -- <path>`
-- Regenerate README check list via cog: `uvx nox -s readme`
+- Regenerate README check list via cog: `uvx nox -s readme` (always use this
+  session, not `cog -r README.md` directly — the dev venv has extra repo-review
+  plugins like validate-pyproject installed, so a direct run adds stray check
+  sections that CI's minimal install will reject)
 - Build wheel/sdist: `uvx nox -s rr_build`
 
 Important: tests run with `PYTHONWARNDEFAULTENCODING=1`.
