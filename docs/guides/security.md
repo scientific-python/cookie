@@ -25,8 +25,34 @@ workflows for these problems. The easiest way to run it is as a pre-commit hook:
     - id: zizmor
 ```
 
+If you'd rather keep it out of pre-commit, zizmor also ships the
+[`zizmorcore/zizmor-action`](https://github.com/zizmorcore/zizmor-action)
+GitHub Action, which can upload its findings to GitHub's code scanning
+dashboard:
+
+```yaml
+name: zizmor
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+jobs:
+  zizmor:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: zizmorcore/zizmor-action@v0.5.7
+```
+
 You can silence individual findings with `# zizmor: ignore[rule]` comments, or
 collect them in a [`zizmor.yml`](https://docs.zizmor.sh/configuration/) config
-file. If you'd rather keep it out of pre-commit, zizmor also ships the
-[`zizmorcore/zizmor-action`](https://github.com/zizmorcore/zizmor-action)
-GitHub Action, which can upload results to GitHub's code scanning dashboard.
+file.
