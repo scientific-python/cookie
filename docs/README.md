@@ -19,7 +19,8 @@ bundle install
 bundle exec jekyll serve --livereload
 ```
 
-The pages are in markdown in `pages/`. Images and data files are in `assets/`.
+The pages are in markdown, in the `guides/`, `tutorials/`, `principles/`, and
+`patterns/` folders. Images and data files are in `assets/`.
 
 To bump versions, use nox. You can run `nox -s pc_bump` to bump the pre-commit
 versions, and `nox -s gha_bump` to bump the GitHub Actions versions.

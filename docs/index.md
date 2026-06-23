@@ -13,10 +13,10 @@ fellow scientists and research software engineers.
 Jupyter notebooks that are becoming unwieldy? Are changes to some parts of your
 code accidentally breaking other parts of your code? Do you want to present them
 in a more maintainable, reusable, and shareable form? Start at the
-[tutorial](pages/tutorials/index).
+[tutorial](tutorials/index).
 
 **Learn recommended tools and best practices.**
-[Topical guides](pages/guides/index) provide task-based instruction on topics
+[Topical guides](guides/index) provide task-based instruction on topics
 that scientists and research software engineers may encounter as their projects
 evolve and grow. This covers modern packaging ([simple][] or [compiled][]),
 [style checking][], [testing][], [documentation][], [static typing][], [CI][],
@@ -35,12 +35,12 @@ WebAssembly! All checks point to a linked badge in the guide.
 :::
 
 **Learn to write better research code.** A high-level document on
-[principles](pages/principles/index) provides advice based on the
+[principles](principles/index) provides advice based on the
 community's collective experience building code that is easier for researchers
 to use successfully and easier to maintain over time.
 
 **Use our solutions for common tasks.** A growing collection of
-[patterns](pages/patterns/index) provides tested approaches for
+[patterns](patterns/index) provides tested approaches for
 tasks and can be tricky to get exactly right, such as including data files with
 Python packages.
 
@@ -75,14 +75,14 @@ with many updates. Improved support for compiled components supported in part
 by NSF grant [OAC-2209877][].
 :::
 
-[simple]:                   pages/guides/packaging-simple
-[compiled]:                 pages/guides/packaging-compiled
-[style checking]:           pages/guides/style
-[testing]:                  pages/guides/pytest
-[documentation]:            pages/guides/docs
-[static typing]:            pages/guides/mypy
-[ci]:                       pages/guides/gha-pure
-[right in the guide]:       pages/guides/repo-review
+[simple]:                   guides/packaging-simple
+[compiled]:                 guides/packaging-compiled
+[style checking]:           guides/style
+[testing]:                  guides/pytest
+[documentation]:            guides/docs
+[static typing]:            guides/mypy
+[ci]:                       guides/gha-pure
+[right in the guide]:       guides/repo-review
 
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 [repo-review]:              https://repo-review.readthedocs.io

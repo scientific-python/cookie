@@ -195,7 +195,7 @@ Or you can generate a table that links out to documentation for each object.
 ````
 <!-- rumdl-enable -->
 
-See the [guide](pages/guides/docs) for more information on how to
+See the [guide](guides/docs) for more information on how to
 integrate this into a package, and setup for nox.
 
 [sphinx]: https://www.sphinx-doc.org/
@@ -204,4 +204,4 @@ integrate this into a package, and setup for nox.
 [sphinx-autodoc2]: https://sphinx-autodoc2.readthedocs.io/
 [mkdocs]: https://www.mkdocs.org/
 [mkdocs-material]: https://squidfunk.github.io/mkdocs-material/
-[documentation guide]: pages/guides/docs
+[documentation guide]: guides/docs

@@ -5,8 +5,8 @@ research code. [Process recommendations][] discusses the process of writing
 software, and [Design recommendations][] covers some tips about writing easy to
 read and maintain code.
 
-[Process recommendations]: pages/principles/process
-[Design recommendations]: pages/principles/design
+[Process recommendations]: principles/process
+[Design recommendations]: principles/design
 
 
 ```{tableofcontents}

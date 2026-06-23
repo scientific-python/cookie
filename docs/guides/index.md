@@ -34,19 +34,19 @@ your repository with the guidelines, runnable [right in the guide][] via
 WebAssembly! All checks point to a linked badge in the guide.
 :::
 
-[tutorials]:          pages/tutorials/index
-[style]:              pages/guides/style
-[mypy]:               pages/guides/mypy
-[docs]:               pages/guides/docs
-[simple packaging]:   pages/guides/packaging-simple
-[compiled packaging]: pages/guides/packaging-compiled
-[classic packaging]:  pages/guides/packaging-classic
-[coverage]:           pages/guides/coverage
-[gha_basic]:          pages/guides/gha-basic
-[gha_pure]:           pages/guides/gha-pure
-[gha_wheels]:         pages/guides/gha-wheels
-[pytest]:             pages/guides/pytest
-[right in the guide]: pages/guides/repo-review
+[tutorials]:          tutorials/index
+[style]:              guides/style
+[mypy]:               guides/mypy
+[docs]:               guides/docs
+[simple packaging]:   guides/packaging-simple
+[compiled packaging]: guides/packaging-compiled
+[classic packaging]:  guides/packaging-classic
+[coverage]:           guides/coverage
+[gha_basic]:          guides/gha-basic
+[gha_pure]:           guides/gha-pure
+[gha_wheels]:         guides/gha-wheels
+[pytest]:             guides/pytest
+[right in the guide]: guides/repo-review
 
 [cookiecutter]:             https://cookiecutter.readthedocs.io
 [copier]:                   https://copier.readthedocs.io
