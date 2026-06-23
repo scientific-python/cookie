@@ -180,45 +180,6 @@ def test_gh105_token_based_upload() -> None:
     assert "Token-based publishing" in res.err_msg
 
 
-def test_gh106_precommit() -> None:
-    precommit = yaml.safe_load(
-        """
-        repos:
-          - repo: https://github.com/zizmorcore/zizmor-pre-commit
-            rev: v1.22.0
-            hooks:
-              - id: zizmor
-        """
-    )
-    assert compute_check("GH106", precommit=precommit, workflows={"ci": {}}).result
-
-
-def test_gh106_action() -> None:
-    workflows = yaml.safe_load(
-        """
-        zizmor:
-          jobs:
-            zizmor:
-              steps:
-                - uses: zizmorcore/zizmor-action@v0.5.6
-        """
-    )
-    assert compute_check("GH106", precommit={}, workflows=workflows).result
-
-
-def test_gh106_missing() -> None:
-    precommit = yaml.safe_load(
-        """
-        repos:
-          - repo: https://github.com/astral-sh/ruff-pre-commit
-            rev: v0.15.16
-            hooks:
-              - id: ruff-check
-        """
-    )
-    assert not compute_check("GH106", precommit=precommit, workflows={"ci": {}}).result
-
-
 def test_gh200() -> None:
     dependabot = yaml.safe_load(
         """

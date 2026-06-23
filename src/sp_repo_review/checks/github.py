@@ -192,45 +192,6 @@ class GH105(GitHub):
         return "\n".join(errors)
 
 
-class GH106(GitHub):
-    "Use zizmor to check the GitHub Actions"
-
-    requires = {"GH100"}
-    url = mk_url("gha-basic")
-
-    @staticmethod
-    def check(precommit: dict[str, Any], workflows: dict[str, Any]) -> bool:
-        """
-        Projects with GitHub Actions should statically analyze their workflows
-        with [zizmor](https://docs.zizmor.sh), which catches common security
-        issues such as template injection, excessive permissions, and
-        credential persistence. The simplest way is to add the pre-commit hook:
-
-        ```yaml
-        - repo: https://github.com/zizmorcore/zizmor-pre-commit
-          rev: v1.26.1
-          hooks:
-            - id: zizmor
-        ```
-
-        You can also run it as the `zizmorcore/zizmor-action` GitHub Action.
-        """
-        for repo_item in precommit.get("repos", []):
-            if (
-                repo_item.get("repo", "").lower()
-                == "https://github.com/zizmorcore/zizmor-pre-commit"
-            ):
-                return True
-        for workflow in workflows.values():
-            for job in workflow.get("jobs", {}).values():
-                if not isinstance(job, dict):
-                    continue
-                for step in job.get("steps", []):
-                    if step.get("uses", "").startswith("zizmorcore/zizmor-action"):
-                        return True
-        return False
-
-
 class GH200(GitHub):
     "Maintained by Dependabot"
 
