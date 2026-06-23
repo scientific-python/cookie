@@ -614,14 +614,19 @@ recommended that you make an attempt to support type checking through your
 public API in the best way that you can (based on your supported Python
 versions). Stub files can be used instead for out-of-line typing.
 [MyPy](https://mypy.readthedocs.io/en/stable/) is suggested for type checking,
-though there are several other good options to try, as well. If you have
+though there are several other good options to try, as well;
+[Pyrefly](https://pyrefly.org) is a fast Rust-based checker, and is shown
+alongside MyPy in the tabs below. If you have
 built-in support for type checking, you need to add empty `py.typed` files to
 all packages/subpackages to indicate that you support it.
 
 Read more about type checking on the [dedicated page][mypy page].
 
-The MyPy addition for pre-commit:
+The pre-commit addition for type checking:
 
+::::{tab-set}
+:::{tab-item} MyPy
+:sync: mypy
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
   rev: "v2.1.0"
@@ -638,7 +643,27 @@ add items to the virtual environment setup for MyPy by pre-commit, for example:
 ```yaml
 additional_dependencies: [attrs==23.1.0]
 ```
+:::
+:::{tab-item} Pyrefly
+:sync: pyrefly
+```yaml
+- repo: https://github.com/facebook/pyrefly-pre-commit
+  rev: "1.1.1"
+  hooks:
+    - id: pyrefly-check
+```
 
+This hook runs `pyrefly check`, reading its configuration from `pyproject.toml`
+(shown below). Like MyPy, you can add packages to the type-checking environment
+with `additional_dependencies`, and pass extra flags via `args`.
+:::
+::::
+
+Both checkers read their configuration from `pyproject.toml`:
+
+::::{tab-set}
+:::{tab-item} MyPy
+:sync: mypy
 {rr}`MY100` MyPy has a config section in `pyproject.toml` that looks like
 this:
 
@@ -673,6 +698,41 @@ and `ignore-without-code` {rr}`MY104`, `redundant-expr` {rr}`MY105`, and
 `truthy-bool` {rr}`MY106` can trigger too often (like on `sys.platform`
 checks) and have to be ignored occasionally, but can find some significant logic
 errors in your typing.
+:::
+:::{tab-item} Pyrefly
+:sync: pyrefly
+Pyrefly's config section in `pyproject.toml` looks like this:
+
+```toml
+[tool.pyrefly]
+project-includes = ["src"]
+python-version = "3.10"
+project-excludes = ["**/tests"]
+
+# Use `Any` for imports that can't be resolved, one entry per module
+ignore-missing-imports = ["numpy"]
+```
+
+Pyrefly checks all your code by default, rather than only annotated functions,
+so you can start from a looser `preset` and tighten as you go. Set
+`preset = "strict"` (the equivalent of MyPy's `strict = true`) once you are
+ready, and toggle individual error codes in a `[tool.pyrefly.errors]` table, for
+example:
+
+```toml
+[tool.pyrefly]
+preset = "strict"
+
+[tool.pyrefly.errors]
+# Turn a specific check off
+implicit-import = false
+```
+
+You can disable Pyrefly on a line with `# pyrefly: ignore` (or
+`# pyrefly: ignore[error-name]` for a specific code); the standard
+`# type: ignore` is honored as well.
+:::
+::::
 
 [mypy page]: guides/mypy
 
