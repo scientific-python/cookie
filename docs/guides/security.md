@@ -51,7 +51,8 @@ Common security problems:
 ### Zizmor
 
 [zizmor](https://docs.zizmor.sh) is a static analysis tool that audits your
-workflows for common problems, including many of the ones above. You can run it as a pre-commit hook or as a GitHub Action:
+workflows for common problems, including many of the ones above. You can run
+it as a pre-commit hook or as a GitHub Action:
 
 ::::{tab-set}
 :::{tab-item} pre-commit
