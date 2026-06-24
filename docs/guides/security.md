@@ -31,7 +31,8 @@ Common security problems:
   if an attacker comprimizes the action repository you are using. If you use
   full 40 character SHA's, these cannot be modified. (Official actions are
   likely okay, but important for third party actions). There's even a GitHub
-  setting to require this.
+  setting to require this. It's conventional to include the tag as a trailing
+  comment.
 * Action SHA references can be added by a fork. If you make a fork of
   `actions/checkout`, you can reference _your_ SHA via
   `actions/checkout@<SHA>`. Only accept SHAs you have verified or a tool (like
@@ -47,6 +48,14 @@ Common security problems:
 * Don't build code in your release job. The release job should do _as little as
   possible_.
 * Use trusted publishing. There's no long-lived token to steal.
+
+:::{note}
+
+This guide and cookiecutter does _not_ use SHA pinning to make it easier to
+read and maintain. You can convert to SHA with tools like
+[`npx actions-up`](https://github.com/azat-io/actions-up).
+
+:::
 
 ### Zizmor
 
@@ -66,9 +75,6 @@ it as a pre-commit hook or as a GitHub Action:
 
 :::
 :::{tab-item} GitHub Actions
-
-The [`zizmorcore/zizmor-action`](https://github.com/zizmorcore/zizmor-action)
-GitHub Action can upload its findings to GitHub's code scanning dashboard:
 
 ```yaml
 name: zizmor
@@ -92,6 +98,9 @@ jobs:
 
       - uses: zizmorcore/zizmor-action@v0.5.7
 ```
+
+The [`zizmorcore/zizmor-action`](https://github.com/zizmorcore/zizmor-action)
+GitHub Action can upload its findings to GitHub's code scanning dashboard.
 
 :::
 ::::
