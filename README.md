@@ -322,101 +322,101 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 
 ### General
 
-- [`PY001`](https://learn.scientific-python.org/development/guides/packaging-simple#PY001): Has a pyproject.toml
-- [`PY002`](https://learn.scientific-python.org/development/guides/packaging-simple#PY002): Has a README.(md|rst) file
-- [`PY003`](https://learn.scientific-python.org/development/guides/packaging-simple#PY003): Has a LICENSE* file
-- [`PY004`](https://learn.scientific-python.org/development/guides/packaging-simple#PY004): Has docs folder
-- [`PY005`](https://learn.scientific-python.org/development/guides/packaging-simple#PY005): Has tests folder
-- [`PY006`](https://learn.scientific-python.org/development/guides/style#PY006): Has pre-commit config
-- [`PY007`](https://learn.scientific-python.org/development/guides/tasks#PY007): Supports an easy task runner (nox, tox, pixi, etc.)
+- [`PY001`](https://learn.scientific-python.org/development/pages/guides/packaging-simple#PY001): Has a pyproject.toml
+- [`PY002`](https://learn.scientific-python.org/development/pages/guides/packaging-simple#PY002): Has a README.(md|rst) file
+- [`PY003`](https://learn.scientific-python.org/development/pages/guides/packaging-simple#PY003): Has a LICENSE* file
+- [`PY004`](https://learn.scientific-python.org/development/pages/guides/packaging-simple#PY004): Has docs folder
+- [`PY005`](https://learn.scientific-python.org/development/pages/guides/packaging-simple#PY005): Has tests folder
+- [`PY006`](https://learn.scientific-python.org/development/pages/guides/style#PY006): Has pre-commit config
+- [`PY007`](https://learn.scientific-python.org/development/pages/guides/tasks#PY007): Supports an easy task runner (nox, tox, pixi, etc.)
 
 ### PyProject
 
-- [`PP002`](https://learn.scientific-python.org/development/guides/packaging-simple#PP002): Has a proper build-system table
-- [`PP003`](https://learn.scientific-python.org/development/guides/packaging-classic#PP003): Does not list wheel as a build-dep
-- [`PP004`](https://learn.scientific-python.org/development/guides/packaging-simple#PP004): Does not upper cap Python requires
-- [`PP005`](https://learn.scientific-python.org/development/guides/packaging-simple#PP005): Using SPDX project.license should not use deprecated trove classifiers
-- [`PP006`](https://learn.scientific-python.org/development/guides/packaging-simple#PP006): The dev dependency group should be defined
-- [`PP301`](https://learn.scientific-python.org/development/guides/pytest#PP301): Has pytest in pyproject
-- [`PP302`](https://learn.scientific-python.org/development/guides/pytest#PP302): Sets a minimum pytest to at least 6 or 9
-- [`PP303`](https://learn.scientific-python.org/development/guides/pytest#PP303): Sets the test paths
-- [`PP304`](https://learn.scientific-python.org/development/guides/pytest#PP304): Sets the log level in pytest
-- [`PP305`](https://learn.scientific-python.org/development/guides/pytest#PP305): Specifies strict xfail
-- [`PP306`](https://learn.scientific-python.org/development/guides/pytest#PP306): Specifies strict config
-- [`PP307`](https://learn.scientific-python.org/development/guides/pytest#PP307): Specifies strict markers
-- [`PP308`](https://learn.scientific-python.org/development/guides/pytest#PP308): Specifies useful pytest summary
-- [`PP309`](https://learn.scientific-python.org/development/guides/pytest#PP309): Filter warnings specified
+- [`PP002`](https://learn.scientific-python.org/development/pages/guides/packaging-simple#PP002): Has a proper build-system table
+- [`PP003`](https://learn.scientific-python.org/development/pages/guides/packaging-classic#PP003): Does not list wheel as a build-dep
+- [`PP004`](https://learn.scientific-python.org/development/pages/guides/packaging-simple#PP004): Does not upper cap Python requires
+- [`PP005`](https://learn.scientific-python.org/development/pages/guides/packaging-simple#PP005): Using SPDX project.license should not use deprecated trove classifiers
+- [`PP006`](https://learn.scientific-python.org/development/pages/guides/packaging-simple#PP006): The dev dependency group should be defined
+- [`PP301`](https://learn.scientific-python.org/development/pages/guides/pytest#PP301): Has pytest in pyproject
+- [`PP302`](https://learn.scientific-python.org/development/pages/guides/pytest#PP302): Sets a minimum pytest to at least 6 or 9
+- [`PP303`](https://learn.scientific-python.org/development/pages/guides/pytest#PP303): Sets the test paths
+- [`PP304`](https://learn.scientific-python.org/development/pages/guides/pytest#PP304): Sets the log level in pytest
+- [`PP305`](https://learn.scientific-python.org/development/pages/guides/pytest#PP305): Specifies strict xfail
+- [`PP306`](https://learn.scientific-python.org/development/pages/guides/pytest#PP306): Specifies strict config
+- [`PP307`](https://learn.scientific-python.org/development/pages/guides/pytest#PP307): Specifies strict markers
+- [`PP308`](https://learn.scientific-python.org/development/pages/guides/pytest#PP308): Specifies useful pytest summary
+- [`PP309`](https://learn.scientific-python.org/development/pages/guides/pytest#PP309): Filter warnings specified
 
 ### GitHub Actions
 
-- [`GH100`](https://learn.scientific-python.org/development/guides/gha-basic#GH100): Has GitHub Actions config
-- [`GH101`](https://learn.scientific-python.org/development/guides/gha-basic#GH101): Has nice names
-- [`GH102`](https://learn.scientific-python.org/development/guides/gha-basic#GH102): Auto-cancel on repeated PRs
-- [`GH103`](https://learn.scientific-python.org/development/guides/gha-basic#GH103): At least one workflow with manual dispatch trigger
-- [`GH104`](https://learn.scientific-python.org/development/guides/gha-wheels#GH104): Use unique names for upload-artifact
-- [`GH105`](https://learn.scientific-python.org/development/guides/gha-basic#GH105): Use Trusted Publishing instead of token-based publishing on PyPI
-- [`GH200`](https://learn.scientific-python.org/development/guides/gha-basic#GH200): Maintained by Dependabot
-- [`GH210`](https://learn.scientific-python.org/development/guides/gha-basic#GH210): Maintains the GitHub action versions with Dependabot
-- [`GH211`](https://learn.scientific-python.org/development/guides/gha-basic#GH211): Do not pin core actions as major versions
-- [`GH212`](https://learn.scientific-python.org/development/guides/gha-basic#GH212): Require GHA update grouping
+- [`GH100`](https://learn.scientific-python.org/development/pages/guides/gha-basic#GH100): Has GitHub Actions config
+- [`GH101`](https://learn.scientific-python.org/development/pages/guides/gha-basic#GH101): Has nice names
+- [`GH102`](https://learn.scientific-python.org/development/pages/guides/gha-basic#GH102): Auto-cancel on repeated PRs
+- [`GH103`](https://learn.scientific-python.org/development/pages/guides/gha-basic#GH103): At least one workflow with manual dispatch trigger
+- [`GH104`](https://learn.scientific-python.org/development/pages/guides/gha-wheels#GH104): Use unique names for upload-artifact
+- [`GH105`](https://learn.scientific-python.org/development/pages/guides/gha-basic#GH105): Use Trusted Publishing instead of token-based publishing on PyPI
+- [`GH200`](https://learn.scientific-python.org/development/pages/guides/gha-basic#GH200): Maintained by Dependabot
+- [`GH210`](https://learn.scientific-python.org/development/pages/guides/gha-basic#GH210): Maintains the GitHub action versions with Dependabot
+- [`GH211`](https://learn.scientific-python.org/development/pages/guides/gha-basic#GH211): Do not pin core actions as major versions
+- [`GH212`](https://learn.scientific-python.org/development/pages/guides/gha-basic#GH212): Require GHA update grouping
 
 ### MyPy
 
-- [`MY100`](https://learn.scientific-python.org/development/guides/style#MY100): Uses a type checker (pyproject config)
-- [`MY101`](https://learn.scientific-python.org/development/guides/style#MY101): Type checker in strict mode
+- [`MY100`](https://learn.scientific-python.org/development/pages/guides/style#MY100): Uses a type checker (pyproject config)
+- [`MY101`](https://learn.scientific-python.org/development/pages/guides/style#MY101): Type checker in strict mode
 - `MY102`: MyPy show_error_codes deprecated
-- [`MY103`](https://learn.scientific-python.org/development/guides/style#MY103): MyPy warn unreachable
-- [`MY104`](https://learn.scientific-python.org/development/guides/style#MY104): MyPy enables ignore-without-code
-- [`MY105`](https://learn.scientific-python.org/development/guides/style#MY105): MyPy enables redundant-expr
-- [`MY106`](https://learn.scientific-python.org/development/guides/style#MY106): MyPy enables truthy-bool
+- [`MY103`](https://learn.scientific-python.org/development/pages/guides/style#MY103): MyPy warn unreachable
+- [`MY104`](https://learn.scientific-python.org/development/pages/guides/style#MY104): MyPy enables ignore-without-code
+- [`MY105`](https://learn.scientific-python.org/development/pages/guides/style#MY105): MyPy enables redundant-expr
+- [`MY106`](https://learn.scientific-python.org/development/pages/guides/style#MY106): MyPy enables truthy-bool
 
 ### Nox
 
 Will not show up if no `noxfile.py` file is present.
 
-- [`NOX101`](https://learn.scientific-python.org/development/guides/tasks#NOX101): Sets minimum nox version
-- [`NOX102`](https://learn.scientific-python.org/development/guides/tasks#NOX102): Sets venv backend
-- [`NOX103`](https://learn.scientific-python.org/development/guides/tasks#NOX103): Set default per session instead of session list
-- [`NOX201`](https://learn.scientific-python.org/development/guides/tasks#NOX201): Set a script block with dependencies in your noxfile
-- [`NOX202`](https://learn.scientific-python.org/development/guides/tasks#NOX202): Has a shebang line
-- [`NOX203`](https://learn.scientific-python.org/development/guides/tasks#NOX203): Provide a main block to run nox
+- [`NOX101`](https://learn.scientific-python.org/development/pages/guides/tasks#NOX101): Sets minimum nox version
+- [`NOX102`](https://learn.scientific-python.org/development/pages/guides/tasks#NOX102): Sets venv backend
+- [`NOX103`](https://learn.scientific-python.org/development/pages/guides/tasks#NOX103): Set default per session instead of session list
+- [`NOX201`](https://learn.scientific-python.org/development/pages/guides/tasks#NOX201): Set a script block with dependencies in your noxfile
+- [`NOX202`](https://learn.scientific-python.org/development/pages/guides/tasks#NOX202): Has a shebang line
+- [`NOX203`](https://learn.scientific-python.org/development/pages/guides/tasks#NOX203): Provide a main block to run nox
 
 ### Pre-commit
 
 Will not show up if using lefthook instead of pre-commit/prek.
 
-- [`PC100`](https://learn.scientific-python.org/development/guides/style#PC100): Has pre-commit-hooks
-- [`PC110`](https://learn.scientific-python.org/development/guides/style#PC110): Uses black or ruff-format
-- [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Uses blacken-docs
-- [`PC140`](https://learn.scientific-python.org/development/guides/style#PC140): Uses a type checker
-- [`PC160`](https://learn.scientific-python.org/development/guides/style#PC160): Uses a spell checker
-- [`PC170`](https://learn.scientific-python.org/development/guides/style#PC170): Uses PyGrep hooks (only needed if rST present)
-- [`PC180`](https://learn.scientific-python.org/development/guides/style#PC180): Uses a markdown formatter
-- [`PC190`](https://learn.scientific-python.org/development/guides/style#PC190): Uses a linter (Ruff/Flake8)
-- [`PC191`](https://learn.scientific-python.org/development/guides/style#PC191): Ruff show fixes if fixes enabled
-- [`PC192`](https://learn.scientific-python.org/development/guides/style#PC192): Ruff uses `ruff-check` instead of `ruff` (legacy)
-- [`PC901`](https://learn.scientific-python.org/development/guides/style#PC901): Custom pre-commit CI update message
-- [`PC902`](https://learn.scientific-python.org/development/guides/style#PC902): Custom pre-commit CI autofix message
-- [`PC903`](https://learn.scientific-python.org/development/guides/style#PC903): Specified pre-commit CI schedule
+- [`PC100`](https://learn.scientific-python.org/development/pages/guides/style#PC100): Has pre-commit-hooks
+- [`PC110`](https://learn.scientific-python.org/development/pages/guides/style#PC110): Uses black or ruff-format
+- [`PC111`](https://learn.scientific-python.org/development/pages/guides/style#PC111): Uses blacken-docs
+- [`PC140`](https://learn.scientific-python.org/development/pages/guides/style#PC140): Uses a type checker
+- [`PC160`](https://learn.scientific-python.org/development/pages/guides/style#PC160): Uses a spell checker
+- [`PC170`](https://learn.scientific-python.org/development/pages/guides/style#PC170): Uses PyGrep hooks (only needed if rST present)
+- [`PC180`](https://learn.scientific-python.org/development/pages/guides/style#PC180): Uses a markdown formatter
+- [`PC190`](https://learn.scientific-python.org/development/pages/guides/style#PC190): Uses a linter (Ruff/Flake8)
+- [`PC191`](https://learn.scientific-python.org/development/pages/guides/style#PC191): Ruff show fixes if fixes enabled
+- [`PC192`](https://learn.scientific-python.org/development/pages/guides/style#PC192): Ruff uses `ruff-check` instead of `ruff` (legacy)
+- [`PC901`](https://learn.scientific-python.org/development/pages/guides/style#PC901): Custom pre-commit CI update message
+- [`PC902`](https://learn.scientific-python.org/development/pages/guides/style#PC902): Custom pre-commit CI autofix message
+- [`PC903`](https://learn.scientific-python.org/development/pages/guides/style#PC903): Specified pre-commit CI schedule
 
 ### ReadTheDocs
 
 Will not show up if no `.readthedocs.yml`/`.readthedocs.yaml` file is present.
 
-- [`RTD100`](https://learn.scientific-python.org/development/guides/docs#RTD100): Uses ReadTheDocs (pyproject config)
-- [`RTD101`](https://learn.scientific-python.org/development/guides/docs#RTD101): You have to set the RTD version number to 2
-- [`RTD102`](https://learn.scientific-python.org/development/guides/docs#RTD102): You have to set the RTD build image
-- [`RTD103`](https://learn.scientific-python.org/development/guides/docs#RTD103): You have to set the RTD python version
-- [`RTD104`](https://learn.scientific-python.org/development/guides/docs#RTD104): You have to specify a build configuration now for readthedocs.
+- [`RTD100`](https://learn.scientific-python.org/development/pages/guides/docs#RTD100): Uses ReadTheDocs (pyproject config)
+- [`RTD101`](https://learn.scientific-python.org/development/pages/guides/docs#RTD101): You have to set the RTD version number to 2
+- [`RTD102`](https://learn.scientific-python.org/development/pages/guides/docs#RTD102): You have to set the RTD build image
+- [`RTD103`](https://learn.scientific-python.org/development/pages/guides/docs#RTD103): You have to set the RTD python version
+- [`RTD104`](https://learn.scientific-python.org/development/pages/guides/docs#RTD104): You have to specify a build configuration now for readthedocs.
 
 ### Ruff
 
-- [`RF001`](https://learn.scientific-python.org/development/guides/style#RF001): Has Ruff config
-- [`RF002`](https://learn.scientific-python.org/development/guides/style#RF002): Target version must be set
-- [`RF003`](https://learn.scientific-python.org/development/guides/style#RF003): src directory doesn't need to be specified anymore (0.6+)
-- [`RF101`](https://learn.scientific-python.org/development/guides/style#RF101): Bugbear must be selected
-- [`RF102`](https://learn.scientific-python.org/development/guides/style#RF102): isort must be selected
-- [`RF103`](https://learn.scientific-python.org/development/guides/style#RF103): pyupgrade must be selected
+- [`RF001`](https://learn.scientific-python.org/development/pages/guides/style#RF001): Has Ruff config
+- [`RF002`](https://learn.scientific-python.org/development/pages/guides/style#RF002): Target version must be set
+- [`RF003`](https://learn.scientific-python.org/development/pages/guides/style#RF003): src directory doesn't need to be specified anymore (0.6+)
+- [`RF101`](https://learn.scientific-python.org/development/pages/guides/style#RF101): Bugbear must be selected
+- [`RF102`](https://learn.scientific-python.org/development/pages/guides/style#RF102): isort must be selected
+- [`RF103`](https://learn.scientific-python.org/development/pages/guides/style#RF103): pyupgrade must be selected
 - `RF201`: Avoid using deprecated config settings
 - `RF202`: Use (new) lint config section
 
@@ -424,7 +424,7 @@ Will not show up if no `.readthedocs.yml`/`.readthedocs.yaml` file is present.
 
 Will not show up if no `setup.cfg` file is present.
 
-- [`SCFG001`](https://learn.scientific-python.org/development/guides/packaging-classic#SCFG001): Avoid deprecated setup.cfg names
+- [`SCFG001`](https://learn.scientific-python.org/development/pages/guides/packaging-classic#SCFG001): Avoid deprecated setup.cfg names
 
 <!-- [[[end]]] -->
 
