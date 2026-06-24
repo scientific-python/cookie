@@ -51,8 +51,10 @@ Common security problems:
 ### Zizmor
 
 [zizmor](https://docs.zizmor.sh) is a static analysis tool that audits your
-workflows for common problems, including many of the ones above. You can run it
-is as a pre-commit hook:
+workflows for common problems, including many of the ones above. You can run it as a pre-commit hook or as a GitHub Action:
+
+::::{tab-set}
+:::{tab-item} pre-commit
 
 ```yaml
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
@@ -61,10 +63,11 @@ is as a pre-commit hook:
     - id: zizmor
 ```
 
-If you'd rather keep it out of pre-commit, zizmor also ships the
-[`zizmorcore/zizmor-action`](https://github.com/zizmorcore/zizmor-action)
-GitHub Action, which can upload its findings to GitHub's code scanning
-dashboard:
+:::
+:::{tab-item} GitHub Actions
+
+The [`zizmorcore/zizmor-action`](https://github.com/zizmorcore/zizmor-action)
+GitHub Action can upload its findings to GitHub's code scanning dashboard:
 
 ```yaml
 name: zizmor
@@ -88,6 +91,9 @@ jobs:
 
       - uses: zizmorcore/zizmor-action@v0.5.7
 ```
+
+:::
+::::
 
 You can silence individual findings with `# zizmor: ignore[rule]` comments, or
 collect them in a [`zizmor.yml`](https://docs.zizmor.sh/configuration/) config
