@@ -73,11 +73,11 @@ responding on your behalf, say so (e.g. with an AI disclaimer at top).
 You are accountable for every change you submit.
 
 **Don't submit slop.** Don't open a PR that a maintainer could finish faster
-than they can review it, and don't mass-file unsolicited PRs. Reviewing a
-careless PR can take far longer than writing it did; effectively a
+than they can review it, and don't mass-file unsolicited PRs. Reviewing an
+AI-generated PR can take far longer than writing it did -- effectively a
 denial-of-service on volunteer maintainers. If the change is trivial with AI,
 the maintainers probably could just trigger the AI themselves. Make sure the
-pull request is welcome - check issues, ask first, etc.
+pull request is welcome -- check issues, ask first, etc.
 
 ## `AI_POLICY.md`
 
@@ -246,7 +246,7 @@ location. You have to symlink `.agents/skills` to `.claude/skills`, of course.
 The details vary by tool, but most modern harnesses share a common vocabulary:
 
 - **Slash commands** for built-in actions (e.g. initialize context, plan, or
-  review). `/init`, `/review`, `/diff`, `/skills`, etc.
+  review). `/init`, `/review`, `/diff`, `/skills`, `/compact`, etc.
 - **`@`-mentions** to pull specific files into context.
 - **Planning mode**, where the AI proposes an approach and asks clarifying
   questions before editing. Valuable for anything non-trivial.
@@ -254,7 +254,8 @@ The details vary by tool, but most modern harnesses share a common vocabulary:
   summary, useful for research and parallel work, and keeping your context
   managed.
 - **Model tiers**, letting you match a cheap, fast model to simple tasks and a
-  frontier model to hard ones.
+  frontier model to hard ones. Use good models at first, then you'll learn what
+  is easy and hard for an AI, and can match better.
 
 As you'll learn, effective use of AI is often about managing context; loading
 the context with things the model needs to work on your problem (like design
@@ -264,10 +265,12 @@ think about.
 
 ## Common concerns
 
-- **Don't one-shot.** Watch what the AI is doing, iterate, and steer it.
-  Planning mode and a quick read of the diff catch most problems early.
+- **Don't try one-shot.** Watch what the AI is doing and steer it.
+  Planning mode and a quick read of the diff catch most problems early. It's
+  fine to iterate, you aren't trying to make an AI commercial!
 - **Verify, don't trust.** Models hallucinate; confirm invented explanations
-  and APIs. Reviewing with a *different* model family can catch issues a model
+  and APIs. Make sure the model validated with testing, ask it to if it doesn't
+  first try. Reviewing with a *different* model family can catch issues a model
   won't flag in its own work.
 - **You own the result.** AI proposes; you decide. It does not know your
   project's best practices unless you tell it, and it can't judge what is
@@ -278,12 +281,12 @@ think about.
   themselves a supply-chain target; see the [security guide][security] for
   dependency pinning, cooldowns, and CI hardening.
 - **Beware untrusted content.** Anything an agent reads can carry instructions:
-  issue text, PR comments, a fetched web page, CI logs. A model can't reliably
-  tell your instructions from a payload buried in the content it was asked to
+  issue text, PR comments, a fetched web page, CI logs. A model might confuse
+  instructions from a payload buried in the content it was asked to
   process - even in hidden comments. When you point an agent at outside
   material (e.g. "triage these issues" or a CI run URL), review what it does
   rather than letting it act unattended, and don't combine untrusted input with
-  destructive or credentialed access. This is unforunatly a big issue with
+  destructive or credentialed access. This is unfortunately a big issue with
   setting up an automated issue processing system.
 
 ## What AI is good at
@@ -345,6 +348,7 @@ Smaller ideas:
 - "Review the documentation for this project. Look for typos and gaps in
   coverage."
 - "Rebase this PR"
+- "Review PR #123" (most harnesses provide a `/review` command too).
 - Give it the URL to a flaky CI run and ask it to investigate it.
 - Ask it to revive an old outdated PR based on the current codebase.
 - Write something then ask it to apply what you did to something else similar.
@@ -368,9 +372,18 @@ for you. Try `uvx agentsview usage daily`, for example. A similar tool is
 If you use Claude Code, `npx ccstatusline` is much better than having the AI
 try to write its own status line.
 
+A very powerful technique is "rubber duck", where you develop code with one
+model, then review it with a different model, feeding the review back into the
+original model, and iterate. This can provide a significantly better result
+than either model on its own, moving up
+[about 74% to the next model class in some tests][rubberduck]. (This is also
+why model disclosure is important). You don't need a specialized mode (copilot
+has one), you can do this yourself if you have access to two model families.
+
 [ai-pr-policy]: https://willmcgugan.github.io/ai-pr-policy/
 [agents-md]: https://agents.md
 [agentskills]: https://agentskills.io
 [agentsview]: https://www.agentsview.io
+[rubberduck]: https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/
 [skills.sh]: https://www.skills.sh
 [security]: guides/security
