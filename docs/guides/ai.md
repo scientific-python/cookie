@@ -344,7 +344,8 @@ without them asking for it!
 
 Smaller ideas:
 
-- "Explain the structure and design of this project".
+- "Explain the structure and design of this project."
+- "What's new since last release? Changelog style."
 - "Review the documentation for this project. Look for typos and gaps in
   coverage."
 - "Rebase this PR"
