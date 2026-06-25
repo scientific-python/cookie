@@ -338,6 +338,9 @@ without them asking for it!
   and issues that are bugs that you can reproduce."
   - Followup: "Launch subagents to fix all the reproduced bugs in worktrees,
     and open a PR for each"
+
+Smaller ideas:
+    
 - "Explain the structure and design of this project".
 - "Review the documentation for this project. Look for typos and gaps in
   coverage."
@@ -355,8 +358,19 @@ without them asking for it!
 - Ask it to draft release notes or a changelog from the git log between two
   tags. It will try to mimic the existing style if there is one.
 
+## Tips
+
+If you want to see your usage across harnesses, Wes McKinney (of Pandas fame)
+has [AgentsView][], which reads local files from most harnesses and summarizes
+for you. Try `uvx agentsview usage daily`, for example. A similar tool is
+`npx ccusage`, which despite the name supports multiple harnesses too.
+
+If you use Claude Code, `npx ccstatusline` is much better than having the AI
+try to write its own status line.
+
 [ai-pr-policy]: https://willmcgugan.github.io/ai-pr-policy/
 [agents-md]: https://agents.md
 [agentskills]: https://agentskills.io
+[agentsview]: https://www.agentsview.io
 [skills.sh]: https://www.skills.sh
 [security]: guides/security
