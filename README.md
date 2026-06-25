@@ -420,6 +420,10 @@ Will not show up if no `.readthedocs.yml`/`.readthedocs.yaml` file is present.
 - `RF201`: Avoid using deprecated config settings
 - `RF202`: Use (new) lint config section
 
+### Security
+
+- [`SEC001`](https://learn.scientific-python.org/development/guides/security#SEC001): Use zizmor to check the GitHub Actions
+
 ### Setuptools Config
 
 Will not show up if no `setup.cfg` file is present.

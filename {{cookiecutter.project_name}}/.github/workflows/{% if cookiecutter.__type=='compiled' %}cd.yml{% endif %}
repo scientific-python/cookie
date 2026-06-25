@@ -9,6 +9,8 @@ on:
     paths:
       - .github/workflows/cd.yml
 
+permissions: {}
+
 concurrency:
   group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
   cancel-in-progress: true
@@ -22,9 +24,12 @@ jobs:
   make_sdist:
     name: Make SDist
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Build SDist
@@ -38,6 +43,8 @@ jobs:
   build_wheels:
     name: {% raw %}Wheel on ${{ matrix.os }}{% endraw %}
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -52,9 +59,13 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - uses: astral-sh/setup-uv@v8.2.0
+        with:
+          # Disable caching to avoid poisoning published wheels
+          enable-cache: false
 
       - uses: pypa/cibuildwheel@v4.1
 

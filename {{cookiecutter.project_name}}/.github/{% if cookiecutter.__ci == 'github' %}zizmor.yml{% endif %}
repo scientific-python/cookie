@@ -1,0 +1,7 @@
+# Configuration for zizmor (https://docs.zizmor.sh)
+rules:
+  unpinned-uses:
+    config:
+      # Feel free to switch to hash pinning, then this can be removed.
+      policies:
+        "*": ref-pin

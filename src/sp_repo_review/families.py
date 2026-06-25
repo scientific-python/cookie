@@ -114,6 +114,9 @@ def get_families(
         "github": Family(
             name="GitHub Actions",
         ),
+        "security": Family(
+            name="Security",
+        ),
         "pre-commit": Family(
             name="Pre-commit",
             readme_note="Will not show up if using lefthook instead of pre-commit/prek.",
