@@ -31,6 +31,7 @@ project:
         - file: guides/gha_pure.md
         - file: guides/gha_wheels.md
         - file: guides/security.md
+        - file: guides/ai.md
         - file: guides/tasks.md
     - file: principles/index.md
       children:
