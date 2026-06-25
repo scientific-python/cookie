@@ -340,7 +340,7 @@ without them asking for it!
     and open a PR for each"
 
 Smaller ideas:
-    
+
 - "Explain the structure and design of this project".
 - "Review the documentation for this project. Look for typos and gaps in
   coverage."
