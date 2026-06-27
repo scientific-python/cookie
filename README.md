@@ -347,6 +347,10 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PP308`](https://learn.scientific-python.org/development/guides/pytest#PP308): Specifies useful pytest summary
 - [`PP309`](https://learn.scientific-python.org/development/guides/pytest#PP309): Filter warnings specified
 
+### dependencies
+
+- [`DEP200`](https://learn.scientific-python.org/development/guides/gha-basic#DEP200): Maintained by Dependabot or Renovate.
+
 ### GitHub Actions
 
 - [`GH100`](https://learn.scientific-python.org/development/guides/gha-basic#GH100): Has GitHub Actions config
@@ -398,6 +402,11 @@ Will not show up if using lefthook instead of pre-commit/prek.
 - [`PC901`](https://learn.scientific-python.org/development/guides/style#PC901): Custom pre-commit CI update message
 - [`PC902`](https://learn.scientific-python.org/development/guides/style#PC902): Custom pre-commit CI autofix message
 - [`PC903`](https://learn.scientific-python.org/development/guides/style#PC903): Specified pre-commit CI schedule
+
+### Renovate
+
+- [`REN200`](https://learn.scientific-python.org/development/guides/gha-basic#REN200): Maintained by Renovate
+- [`REN210`](https://learn.scientific-python.org/development/guides/gha-basic#REN210): Maintains the GitHub action versions with Renovate
 
 ### ReadTheDocs
 
