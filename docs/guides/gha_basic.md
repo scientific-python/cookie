@@ -159,7 +159,8 @@ static. And old versioned images are decommissioned.
 
 ## Updating
 
-{rr}`GH200` {rr}`GH210` If you use non-default actions in your repository
+{rr}`DEP200` {rr}`GH200` {rr}`GH210` {rr}`REN200` {rr}`REN210`
+If you use non-default actions in your repository
 (you will see some in the following pages), then it's a good idea to keep them
 up to date. GitHub provided a way to do this with dependabot. Just add the
 following file as `.github/dependabot.yml`:
@@ -188,6 +189,18 @@ which is both cleaner and sometimes required for dependent actions, like
 `upload-artifact`/`download-artifact`.
 
 You can use this for other ecosystems too, including Python.
+
+[Renovate](https://docs.renovatebot.com/) can also be used for keeping GitHub
+Actions (and other ecosystems) up to date as well. A good starting point for
+`renovate.json` with the
+[hosted version](https://docs.renovatebot.com/getting-started/installing-onboarding/)
+which will cover GitHub Actions and most other ecosystems is:
+
+```json
+{
+  "extends": ["config:recommended"]
+}
+```
 
 ## Common needs
 
