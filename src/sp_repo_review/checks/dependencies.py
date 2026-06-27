@@ -6,6 +6,7 @@ from typing import Any
 
 from . import mk_url
 
+
 class Dependencies:
     family = "dependencies"
 
