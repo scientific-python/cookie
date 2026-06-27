@@ -4,9 +4,8 @@ from __future__ import annotations
 
 __lazy_modules__ = ["json"]
 
-from typing import TYPE_CHECKING, Any
-
 import json
+from typing import TYPE_CHECKING, Any
 
 from . import mk_url
 
@@ -46,6 +45,7 @@ def renovate(root: Traversable) -> dict[str, Any]:
                     return result
     return {}
 
+
 class Renovate:
     family = "renovate"
 
@@ -59,7 +59,7 @@ class REN200(Renovate):
     @staticmethod
     def check(renovate: dict[str, Any]) -> bool | None:
         """
-        All projects should have a renovate configuration file (`renovate.json` or other supported locations) 
+        All projects should have a renovate configuration file (`renovate.json` or other supported locations)
         to support dependency updates. Something like this:
 
         ```json
@@ -94,7 +94,7 @@ class REN210(Renovate):
         """
         if (manager := renovate.get("github-actions", {})) and manager.get("enabled"):
             return True
-        if (extends := renovate.get("extends", [])):
+        if extends := renovate.get("extends", []):
             if any(e in GHA_EXTENDS for e in extends):
                 return True
             return f"Renovate config extends {extends}, but none are a known config: {', '.join(GHA_EXTENDS)}."
