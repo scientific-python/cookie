@@ -171,3 +171,23 @@ def test_py007_missing(tmp_path: Path):
     simple = tmp_path / "simple"
     simple.mkdir()
     assert not compute_check("PY007", root=simple, pyproject={}).result
+
+
+def test_py008(tmp_path: Path):
+    simple = tmp_path / "simple"
+    simple.mkdir()
+    simple.joinpath(".gitignore").touch()
+    assert compute_check("PY008", root=simple).result
+
+
+def test_py008_not_file(tmp_path: Path):
+    simple = tmp_path / "simple"
+    simple.mkdir()
+    simple.joinpath(".gitignore").mkdir()
+    assert not compute_check("PY008", root=simple).result
+
+
+def test_py008_missing(tmp_path: Path):
+    simple = tmp_path / "simple"
+    simple.mkdir()
+    assert not compute_check("PY008", root=simple).result

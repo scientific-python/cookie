@@ -329,6 +329,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PY005`](https://learn.scientific-python.org/development/guides/packaging-simple#PY005): Has tests folder
 - [`PY006`](https://learn.scientific-python.org/development/guides/style#PY006): Has pre-commit config
 - [`PY007`](https://learn.scientific-python.org/development/guides/tasks#PY007): Supports an easy task runner (nox, tox, pixi, etc.)
+- [`PY008`](https://learn.scientific-python.org/development/guides/packaging-simple#PY008): Has a .gitignore file
 
 ### PyProject
 

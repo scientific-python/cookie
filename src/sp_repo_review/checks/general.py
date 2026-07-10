@@ -159,5 +159,16 @@ class PY007(General):
                 return False
 
 
+class PY008(General):
+    "Has a .gitignore file"
+
+    url = mk_url("packaging-simple")
+
+    @staticmethod
+    def check(root: Traversable) -> bool:
+        "Projects must have a `.gitignore` file"
+        return root.joinpath(".gitignore").is_file()
+
+
 def repo_review_checks() -> dict[str, General]:
     return {p.__name__: p() for p in General.__subclasses__()}
