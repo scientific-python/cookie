@@ -29,7 +29,7 @@ repos:
         additional_dependencies: [black==24.*]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.15.20"
+    rev: "v0.15.21"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -43,7 +43,7 @@ repos:
       - id: rst-inline-touching-normal
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v2.1.0"
+    rev: "v2.2.0"
     hooks:
       - id: mypy
         files: "(src|tests|noxfile.py)"
@@ -59,13 +59,13 @@ repos:
           - types-PyYAML
 
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: "v3.9.4"
+    rev: "v3.9.5"
     hooks:
       - id: prettier
         types_or: [yaml, html, css, scss, javascript, json]
 
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: "v0.2.28"
+    rev: "v0.2.31"
     hooks:
       - id: rumdl
         args: [--no-exclude] # Disable all exclude patterns

@@ -122,7 +122,7 @@ tests:
         allow-prereleases: true
 
     - name: Download uv
-      uses: astral-sh/setup-uv@v8.3.0
+      uses: astral-sh/setup-uv@v8.3.2
 
     - name: Test package
       run: uv run pytest
