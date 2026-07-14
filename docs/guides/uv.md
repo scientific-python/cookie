@@ -39,7 +39,7 @@ uv run python -m example
 uv run example-cli --help
 ```
 
-There is no need for a separate setup step. 
+There is no need for a separate setup step.
 `uv run` automatically creates a virtual environment in `.venv` if necessary, installs
 the package and its dependencies, and then runs the command.  You normally do not
 need to activate the environment by hand.
