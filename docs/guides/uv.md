@@ -4,19 +4,19 @@ short_title: Using uv
 
 # Using uv for development
 
-[uv][] can manage Python installations, project environments, dependencies,
-and lockfiles, as well as run commands and build packages. This page focuses on
-using uv to work on an existing Python package. With regards to setting it up, see the [packaging guide][] for
-project metadata and build-system configuration, the [pytest guide][] for
-testing, the [style guide][] for linting and formatting, the [documentation
-guide][] for building docs, and the [task runner guide][] for repeatable or
-specialized tasks.
-
+[uv][] can manage Python installations, project environments, dependencies, and
+lockfiles, as well as run commands and build packages. This page focuses on
+using uv to work on an existing Python package. With regards to setting it up,
+see the [packaging guide][] for project metadata and build-system configuration,
+the [pytest guide][] for testing, the [style guide][] for linting and
+formatting, the [documentation guide][] for building docs, and the
+[task runner guide][] for repeatable or specialized tasks.
 
 ## Install uv
 
 Follow the [official installation instructions][uv installation] to install uv
-with the standalone installer or a system package manager. Afterwards, check the installation with:
+with the standalone installer or a system package manager. Afterwards, check the
+installation with:
 
 ```console
 uv --version
@@ -39,10 +39,10 @@ uv run python -m example
 uv run example-cli --help
 ```
 
-There is no need for a separate setup step.
-`uv run` automatically creates a virtual environment in `.venv` if necessary, installs
-the package and its dependencies, and then runs the command.  You normally do not
-need to activate the environment by hand.
+There is no need for a separate setup step. `uv run` automatically creates a
+virtual environment in `.venv` if necessary, installs the package and its
+dependencies, and then runs the command. You normally do not need to activate
+the environment by hand.
 
 If a command belongs to a dependency group that is not enabled by default,
 include the group for that invocation:
@@ -57,8 +57,9 @@ example, the [pytest guide][] covers test selection and debugging, while the
 
 ## Prepare the project environment
 
-One side effect of `uv run` is that it keeps the project environment up to date. However, sometimes you want to prepare the environment explicitly.
-Common reasons include:
+One side effect of `uv run` is that it keeps the project environment up to date.
+However, sometimes you want to prepare the environment explicitly. Common
+reasons include:
 
 - Preparing `.venv` for an editor, notebook, or interactive shell.
 - Installing several dependency groups up front.
@@ -73,16 +74,17 @@ To prepare the project environment with the default dependency groups, run:
 uv sync
 ```
 
-This creates or updates `.venv` and `uv.lock`. The `dev` dependency group is included by
-default. To prepare an environment containing every dependency group, including
-groups such as `docs`, use:
+This creates or updates `.venv` and `uv.lock`. The `dev` dependency group is
+included by default. To prepare an environment containing every dependency
+group, including groups such as `docs`, use:
 
 ```console
 uv sync --all-groups
 ```
 
-Configure your editor to use the Python interpreter in `.venv`. Note that `.venv` is a regular virtual environment, so you can also activate it manually using the standard commands.
-
+Configure your editor to use the Python interpreter in `.venv`. Note that
+`.venv` is a regular virtual environment, so you can also activate it manually
+using the standard commands.
 
 ## Manage Python versions
 
@@ -126,7 +128,6 @@ uv remove --group docs sphinx
 
 These commands update `pyproject.toml`, `uv.lock`, and `.venv` together. You can
 also edit `pyproject.toml` by hand and then run `uv lock` or `uv sync`.
-
 
 ## Build the package
 
