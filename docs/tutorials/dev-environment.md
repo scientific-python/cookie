@@ -83,11 +83,15 @@ you'd normally use; as long as you use venvs, it should be nearly the same.
 You can use `--system` to mimic pip, otherwise it uses the active virtualenv
 or a `.venv` folder. `uv venv` will default to a `.venv` folder.
 
+For projects with a `pyproject.toml`, prefer uv's project interface over its
+pip-compatible interface. See the [uv guide][] for the day-to-day workflow.
+
 This also supports `--exclude-newer DATE`, which allows you to resolve as if
 you were at some past point in time.
 :::
 
 [uv]: https://github.com/astral-sh/uv
+[uv guide]: guides/uv
 
 ### Option 2: Using conda
 
