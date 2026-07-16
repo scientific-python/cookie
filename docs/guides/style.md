@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.20"
+  rev: "v0.15.21"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -234,7 +234,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.20"
+  rev: "v0.15.21"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -629,7 +629,7 @@ The pre-commit addition for type checking:
 :sync: mypy
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v2.1.0"
+  rev: "v2.2.0"
   hooks:
     - id: mypy
       files: src
@@ -661,7 +661,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.56"
+  rev: "v0.0.59"
   hooks:
     - id: ty
 ```
@@ -979,7 +979,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v22.1.5"
+  rev: "v22.1.8"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -1008,7 +1008,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.9.4"
+  rev: "v3.9.5"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
