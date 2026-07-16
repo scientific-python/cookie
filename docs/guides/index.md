@@ -12,7 +12,9 @@ good practices and to ensure continuity across the packages. There is a
 [dedicated page for static type checking with MyPy][mypy]. There is then a guide
 on [simple packaging][], [compiled packaging][], or even [classic packaging][],
 which should help in ensuring a consistent developer and user experience when
-working with distribution.
+working with distribution. The [uv guide][] covers setting up a Python
+environment and performing common development tasks in an existing project using
+`uv`.
 
 A section on CI follows, with a [general setup guide][gha_basic], and then two
 choices for using CI to distribute your package, one for
@@ -42,6 +44,7 @@ WebAssembly! All checks point to a linked badge in the guide.
 [simple packaging]:   guides/packaging-simple
 [compiled packaging]: guides/packaging-compiled
 [classic packaging]:  guides/packaging-classic
+[uv guide]:           guides/uv
 [coverage]:           guides/coverage
 [gha_basic]:          guides/gha-basic
 [gha_pure]:           guides/gha-pure

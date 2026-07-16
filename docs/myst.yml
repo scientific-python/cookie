@@ -25,6 +25,7 @@ project:
         - file: guides/packaging_simple.md
         - file: guides/packaging_compiled.md
         - file: guides/packaging_classic.md
+        - file: guides/uv.md
         - file: guides/style.md
         - file: guides/mypy.md
         - file: guides/gha_basic.md
