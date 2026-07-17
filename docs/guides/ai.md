@@ -173,7 +173,7 @@ How you track the file is a separate decision:
 
 Commit `AGENTS.md` so every contributor (and their harness) shares the same
 project context. This is a good default for projects with at least one
-maintainer also using AI harnesses. (Ignoring `CLAUDE.md` and `.claude/` is
+maintainer also using AI harnesses. (Ignoring `CLAUDE.md` and `.claude/` in your `.gitignore` is
 also a good idea, due to that not supporting standards and being fairly
 common.)
 
