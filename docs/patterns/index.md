@@ -10,9 +10,9 @@ If you would like to use backport packages, see [Backports][].
 
 If you are wondering about public API, see [Exports][].
 
-[including data files]: patterns/data-files
-[backports]: patterns/backports
-[exports]: patterns/exports
+[including data files]: /patterns/data_files.md
+[backports]: /patterns/backports.md
+[exports]: /patterns/exports.md
 
 ```{tableofcontents}
 ```

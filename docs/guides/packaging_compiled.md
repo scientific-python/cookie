@@ -40,7 +40,7 @@ The most exciting developments have been new native build backends:
 
 :::{note}
 You should be familiar with [packing a pure Python
-project](guides/packaging-simple) - the metadata
+project](/guides/packaging_simple.md) - the metadata
 configuration is the same.
 :::
 There are also classic setuptools plugins:
@@ -453,4 +453,4 @@ it is free-threaded. 3.13.5 was rushed out to fix it.
 [meson-python]: https://meson-python.readthedocs.io
 [setuptools-rust]: https://setuptools-rust.readthedocs.io/en/latest/
 [maturin]: https://www.maturin.rs
-[gha_wheels]: guides/gha-wheels
+[gha_wheels]: /guides/gha_wheels.md

@@ -786,7 +786,7 @@ for a specific rule); the standard `# type: ignore` is honored as well.
 :::
 ::::
 
-[mypy page]: guides/mypy
+[mypy page]: /guides/mypy.md
 
 ## Setuptools specific checks
 
