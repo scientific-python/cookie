@@ -5,11 +5,11 @@
     "": {
       "name": "scientific-python-development-guide",
       "dependencies": {
-        "mystmd": "^1.0",
+        "mystmd": "^1.10",
       },
     },
   },
   "packages": {
-    "mystmd": ["mystmd@1.9.1", "", { "bin": { "myst": "dist/myst.cjs" } }, "sha512-ya8u48V7Hn2EtE6DJTEtrWCZEnpIboiN5Ed6lDlvMikiSk8NHUxpocR2okf3BF8vNlC7Auj5s3T/Ulj3taN6bQ=="],
+    "mystmd": ["mystmd@1.10.1", "", { "bin": { "myst": "dist/myst.cjs" } }, "sha512-nczabm7R8PmoqJVqKpaijTr1kxdwnY+hRoFC7b+NEUdxW5yZZ8n/CuJlMJKlHtG/pA4o3Ia2RP/0Ra3UPj6sFg=="],
   }
 }
