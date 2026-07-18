@@ -8,6 +8,6 @@
     "clean": "rm -rf docs/_build"
   },
   "dependencies": {
-    "mystmd": "^1.0"
+    "mystmd": "^1.10.1"
   }
 }
