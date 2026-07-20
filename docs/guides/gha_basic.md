@@ -75,7 +75,7 @@ lint:
   runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v7
-    - uses: actions/setup-python@v6
+    - uses: actions/setup-python@v7
       with:
         python-version: "3.x"
     - uses: pre-commit/action@v3.0.1
@@ -116,7 +116,7 @@ tests:
         fetch-depth: 0 # Only needed if using setuptools-scm
 
     - name: Setup Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
@@ -425,7 +425,7 @@ Python version might come as a surprise. You can do that, though, using
 `update-environment: false` with `setup-python` and `pipx`:
 
 ```yaml
-- uses: actions/setup-python@v6
+- uses: actions/setup-python@v7
   id: python
   with:
     python-version: "3.11"

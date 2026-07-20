@@ -43,7 +43,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.15.21"
+    rev: "v0.15.22"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -60,7 +60,7 @@ repos:
 {%- endif %}
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v2.2.0"
+    rev: "v2.3.0"
     hooks:
       - id: mypy
         files: src|tests|noxfile.py
@@ -70,7 +70,7 @@ repos:
           - pytest
 
   - repo: https://github.com/codespell-project/codespell
-    rev: "v2.4.2"
+    rev: "v2.4.3"
     hooks:
       - id: codespell
         additional_dependencies:
@@ -118,7 +118,7 @@ repos:
 {%- if cookiecutter.__ci == "github" %}
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: "v1.26.1"
+    rev: "v1.27.0"
     hooks:
       - id: zizmor
 {%- endif %}

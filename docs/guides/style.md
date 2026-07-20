@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.21"
+  rev: "v0.15.22"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -234,7 +234,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.21"
+  rev: "v0.15.22"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -629,7 +629,7 @@ The pre-commit addition for type checking:
 :sync: mypy
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v2.2.0"
+  rev: "v2.3.0"
   hooks:
     - id: mypy
       files: src
@@ -661,7 +661,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.59"
+  rev: "v0.0.61"
   hooks:
     - id: ty
 ```
@@ -868,7 +868,7 @@ If you want a Python based tool, [codespell] is the classic tool used.
 
 ```yaml
 - repo: https://github.com/codespell-project/codespell
-  rev: "v2.4.2"
+  rev: "v2.4.3"
   hooks:
     - id: codespell
       additional_dependencies:
