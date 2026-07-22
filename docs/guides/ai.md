@@ -33,7 +33,7 @@ learns to code in this new era is still something unsolved.
 If you maintain a project: Try to engage with the human. If they are willing to
 interact (and not just type "address the review" into their harness), treat
 them like a human, even if you also see the AI working on their behalf. They
-also may use AI to address a language barrier.
+also may use AI to address a language barrier, or accommodate a disability.
 :::
 
 ## Disclosure and transparency
@@ -302,7 +302,7 @@ making is not as strong of an AI skill as pass/fail checks!
 AI knows a massive library of tricks and details. It will hallucinate ones
 sometimes, of course (that's why the pass/fail is important above!). Make it
 validate anything (newer models often have this in the system prompts, so it is
-model and harness dependent - for example, Claude Opus 4.8+ is paranoid
+model and harness dependent - for example, Claude Opus 4.8+ acts paranoid
 and validates without request).
 
 AI doesn't mind long or annoying tasks - iterating with a CI that takes minutes
