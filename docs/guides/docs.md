@@ -286,7 +286,7 @@ MkDocs documentation and plugins apply to it as well. While the cookie cutter
 creates a basic structure for your ProperDocs site (a top level
 `properdocs.yml` file and the `docs` directory), you can also follow the
 official
-[Getting started](https://squidfunk.github.io/mkdocs-material/getting-started/)
+[Getting started](https://properdocs.org/getting-started)
 guide instead.
 
 If you selected the `properdocs` option when using the template cookie-cutter
