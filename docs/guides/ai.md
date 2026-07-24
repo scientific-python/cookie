@@ -1,7 +1,3 @@
----
-short_title: AI
----
-
 # Agentic AI
 
 Around November of 2025, agentic AI exploded in usefulness, and has changed how
