@@ -33,8 +33,8 @@ template. There are lots of options, though:
   creators of `mkdocs-material` and `mkdocstrings`, designed as a faster,
   simpler successor to MkDocs. Configured with TOML and largely compatible
   with `mkdocs-material` sites, but still in early development.
-- [MyST](mystmd.org): A powerful system for rendering markdown and notebooks.
-  Can also be used for docs, though, see
+- [MyST](https://mystmd.org): A powerful system for rendering markdown and
+  notebooks. Can also be used for docs, though, see
   [echopype](https://echopype.readthedocs.io). AKA JupyterBook.
 - [Great Docs](https://posit-dev.github.io/great-docs/): A system with minimal
   configuration and modern features for making docs, based on Quarto.
