@@ -107,6 +107,7 @@ dev = [
 test = [
   "pytest >=9",
   "repo-review >=0.10.6",
+  "sp-repo-review[json5]"
 ]
 cog = [
   "cogapp",
