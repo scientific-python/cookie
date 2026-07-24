@@ -20,6 +20,8 @@ as "Agentic AI":
 - Low-cost models running unattended in automated systems that mass-produce
   pull requests. This is what most people mean by "AI slop", and it is the
   source of most of the frustration maintainers feel about AI contributions.
+  They might be useful for something personal, but they should never be
+  contributing unsolicited.
 
 The recommendations below are aimed at the first case, and at keeping your
 project from being overwhelmed by the second.
@@ -52,11 +54,18 @@ still yours (and your responsibility); the AI is a tool, not an author or
 copyright holder, which is what co-authored-by is for. A growing number of
 projects will close a PR with an AI co-author out of licensing concerns.
 
-The Linux kernel trailer looks like this:
+The Linux kernel trailer, part of the kernel's official
+[coding assistants documentation][kernel-ai], looks like this:
 
 ```text
 Assisted-by: <harness>:<model>
 ```
+
+The kernel doc adds one more rule worth copying: an AI must never add a
+`Signed-off-by:` line, because certifying the DCO is a legal act only a human
+can perform. Note that the trailer is not universal. Kubernetes, for example,
+forbids AI trailers and wants disclosure in the PR description instead.
+Always follow the policy of the project you are contributing to.
 
 You can usually customize your harness to include this, either in an agents
 file (below), or via specific settings.
@@ -77,7 +86,12 @@ than they can review it, and don't mass-file unsolicited PRs. Reviewing an
 AI-generated PR can take far longer than writing it did -- effectively a
 denial-of-service on volunteer maintainers. If the change is trivial with AI,
 the maintainers probably could just trigger the AI themselves. Make sure the
-pull request is welcome -- check issues, ask first, etc.
+pull request is welcome: check issues, ask first, etc.
+
+**Don't use AI on "good first issues".** Many projects are dropping this label
+because people just use AI on it -- the point of this is to help new
+contributors get used to the project, not to just push a button on an AI, a
+maintainer can do that. (And yes, a human wrote the proceeding em-dash!)
 
 ## `AI_POLICY.md`
 
@@ -100,9 +114,16 @@ AI-assisted contributions are welcome. We ask that you:
 - Disclose that AI was used and name the tool/model.
 - Review and understand every line you submit; you are responsible for it.
 - Meet the same quality, testing, and style standards as any contribution.
+- Fully autonomous agents may not open issues or PRs.
+- Respond to reviewers yourself.
+- AI text in descriptions and issues should be clearly marked.
 
-Only humans can be named as co-authors. The Linux kernel trailer can be used to
-credit AI assistance, like this:
+This applies to issues and comments as well as pull requests. Using AI for
+translation or grammar help is fine. Contributions that ignore this policy may
+be closed.
+
+Only humans can be named as co-authors, and AI can _never_ sign off on comment.
+The Linux kernel trailer can be used to credit AI assistance, like this:
 
 ```text
 Assisted-by: <harness>:<model>
@@ -121,17 +142,25 @@ involvement and prior buy-in before opening a PR. This mirrors the
 
 AI-assisted contributions are accepted only if:
 
-- The PR fills out the pull request template.
+- The PR follows the same rules as a non-AI PR.
 - It clearly states that it is AI-assisted and names the tool used.
 - It links to an issue or discussion where a maintainer agreed to the
   proposed change beforehand.
 - AI-generated descriptions/comments are clearly marked and only used when
   required.
+- A human drove the tool, reviewed every line, and can explain the change.
+- Fully autonomous agents may not open issues or PRs.
+- You respond to review comments yourself.
+
+This applies to issues and comments as well as pull requests. Using AI for
+translation or grammar help is fine. AI output may infringe copyright; it is
+your responsibility to make sure it does not.
 
 Unsolicited, undisclosed, or low-effort AI PRs will be closed.
 
-Only humans can be named as co-authors. The Linux kernel trailer should be used
-to credit AI assistance, like this:
+Only humans can be named as co-authors, and AI can _never_ sign off on a
+comment. The Linux kernel trailer should be used to credit AI assistance, like
+this:
 
 ```text
 Assisted-by: <harness>:<model>
@@ -152,6 +181,11 @@ to discuss before contributing. Fully-reviewed, disclosed AI-assisted fixes may
 be considered case by case. PRs suspected to be entirely AI-generated may be
 closed without explanation.
 
+This applies to issues, comments, and security reports as well as pull
+requests. Autonomous agents may not contribute. Using AI for translation or
+grammar help is fine. AI output may infringe copyright; it is your
+responsibility to make sure it does not. Repeat violations may lead to a ban.
+
 Only humans can be named as co-authors. The Linux kernel trailer must be used to
 credit AI assistance, like this:
 
@@ -162,6 +196,22 @@ Assisted-by: <harness>:<model>
 
 :::
 ::::
+
+For real examples, see the policies from [PyTorch][pytorch-ai],
+[NumPy][numpy-ai], [Ghostty][ghostty-ai], and [LLVM][llvm-ai], whose "golden
+rule" (shared with curl) sums the whole topic up: "a contribution should be
+worth more to the project than the time it takes to review it." A
+[community-maintained list][ai-policy-list] tracks policies across well over a
+hundred projects.
+
+Some angles to consider if they matter to your project: AI in security reports
+([curl][curl-ai] requires disclosure and human verification after a flood of
+fabricated reports), AI on the reviewer side ([Fedora][fedora-ai] lets
+reviewers use AI to assist, but not to make the accept/reject decision), and
+"good first issues" (LLVM and Mozilla forbid using AI on them, since they exist
+to teach newcomers). Some projects also cap open AI-assisted PRs per
+contributor (Homebrew allows one at a time), a simple guard against
+mass-produced PRs.
 
 ## `AGENTS.md`
 
@@ -442,11 +492,19 @@ If there's something repetitive, use AI to write a script to do it; it will use
 fewer tokens and be more reliable than having AI do the repetitive thing
 directly.
 
+[ai-policy-list]: https://github.com/melissawm/open-source-ai-contribution-policies
 [ai-pr-policy]: https://willmcgugan.github.io/ai-pr-policy/
 [agents-md]: https://agents.md
+[curl-ai]: https://curl.se/dev/contribute.html#on-ai-use-in-curl
+[fedora-ai]: https://docs.fedoraproject.org/en-US/council/policy/ai-policy/
+[ghostty-ai]: https://github.com/ghostty-org/ghostty/blob/main/AI_POLICY.md
+[kernel-ai]: https://docs.kernel.org/process/coding-assistants.html
+[llvm-ai]: https://llvm.org/docs/AIToolPolicy.html
+[numpy-ai]: https://numpy.org/devdocs/dev/ai_policy.html
+[pytorch-ai]: https://github.com/pytorch/pytorch/blob/main/AI_POLICY.md
 [agentskills]: https://agentskills.io
 [agentsview]: https://www.agentsview.io
 [marimo pair]: https://docs.marimo.io/guides/generate_with_ai/marimo_pair/
 [rubberduck]: https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/
 [skills.sh]: https://www.skills.sh
-[security]: guides/security
+[security]: /guides/security.md
