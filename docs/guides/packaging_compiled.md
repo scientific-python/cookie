@@ -1,4 +1,4 @@
-# Packaging Compiled Projects
+# Compiled packaging
 
 <!-- [[[cog
 from cog_helpers import code_fence, render_cookie, TOMLMatcher

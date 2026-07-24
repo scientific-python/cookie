@@ -1,8 +1,8 @@
 ---
-short_title: GitHub Actions introduction
+short_title: Introduction
 ---
 
-# GitHub Actions: Intro
+# GitHub Actions: Introduction
 
 {rr}`GH100` The recommended CI for scientific Python projects is GitHub
 Actions (GHA), although its predecessor Azure is also in heavy usage, and other

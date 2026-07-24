@@ -1,8 +1,8 @@
 ---
-short_title: GitHub Actions for pure Python wheels
+short_title: Pure Python projects
 ---
 
-# GitHub Actions: Pure Python wheels
+# GitHub Actions: Pure Python projects
 
 We will cover binary wheels [on the next page][], but if you do not have a
 compiled extension, this is called a universal (pure Python) package, and the
