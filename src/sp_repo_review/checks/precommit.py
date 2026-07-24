@@ -24,6 +24,19 @@ def precommit(root: Traversable) -> dict[str, Any]:
     return {}
 
 
+def _formats_markdown(hook: dict[str, Any]) -> bool:
+    "A `ruff-format` hook that Markdown files can reach."
+    match hook:
+        case {"id": "ruff-format", "types_or": types}:
+            return "markdown" in types
+        # No `types_or` means Ruff's own default, which will include
+        # Markdown in a future release.
+        case {"id": "ruff-format"}:
+            return True
+        case _:
+            return False
+
+
 class PreCommit:
     family = "pre-commit"
     requires = {"PY006"}
@@ -45,7 +58,7 @@ class PreCommit:
         return "one of " + ", ".join(msgs)
 
     @classmethod
-    def check(cls, precommit: dict[str, Any]) -> bool | None | str:
+    def check(cls, precommit: dict[str, Any]) -> bool | str | None:
         "Must have {self.describe} in `.pre-commit-config.yaml`"
         assert cls.repos, f"{cls.__name__} must have a repo, invalid class definition"
         for repo_item in precommit.get("repos", {}):
@@ -89,13 +102,39 @@ class PC110(PreCommit):
 
 
 class PC111(PreCommit):
-    "Uses blacken-docs"
+    "Formats code in docs (ruff-format or blacken-docs)"
 
     requires = {"PY006", "PC110"}
-    repos = {"https://github.com/adamchainz/blacken-docs"}
+    repos = {
+        "https://github.com/astral-sh/ruff-pre-commit",
+        "https://github.com/adamchainz/blacken-docs",
+    }
     renamed = {
         "https://github.com/asottile/blacken-docs": "https://github.com/adamchainz/blacken-docs"
     }
+
+    @classmethod
+    def check(cls, precommit: dict[str, Any]) -> bool | str | None:
+        """
+        Add `blacken-docs`, or (Ruff 0.16+) let Markdown files reach the
+        `ruff-format` hook in `.pre-commit-config.yaml`. Until the hook formats
+        Markdown by default, that means `types_or: [python, pyi, jupyter,
+        markdown, pyproject]`.
+        """
+        for repo_item in precommit.get("repos", {}):
+            match repo_item.get("repo", "").lower(), repo_item.get("hooks", []):
+                case "https://github.com/adamchainz/blacken-docs", _:
+                    return True
+                case "https://github.com/astral-sh/ruff-pre-commit", hooks if any(
+                    _formats_markdown(hook) for hook in hooks
+                ):
+                    return True
+                case repo, _ if repo in cls.renamed:
+                    return (
+                        f"Use `{cls.renamed[repo]}` instead of `{repo}` in "
+                        "`.pre-commit-config.yaml`"
+                    )
+        return False
 
 
 class PC190(PreCommit):

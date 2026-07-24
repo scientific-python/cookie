@@ -388,7 +388,7 @@ Will not show up if using lefthook instead of pre-commit/prek.
 
 - [`PC100`](https://learn.scientific-python.org/development/guides/style#PC100): Has pre-commit-hooks
 - [`PC110`](https://learn.scientific-python.org/development/guides/style#PC110): Uses black or ruff-format
-- [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Uses blacken-docs
+- [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Formats code in docs (ruff-format or blacken-docs)
 - [`PC140`](https://learn.scientific-python.org/development/guides/style#PC140): Uses a type checker
 - [`PC160`](https://learn.scientific-python.org/development/guides/style#PC160): Uses a spell checker
 - [`PC170`](https://learn.scientific-python.org/development/guides/style#PC170): Uses PyGrep hooks (only needed if rST present)

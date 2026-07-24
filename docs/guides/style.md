@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.22"
+  rev: "v0.16.0"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -205,11 +205,31 @@ option! Most of the time, you can find a way to make the Blacked code look
 better by rewriting your code; factor out long unreadable portions into a
 variable, avoid writing matrices as 1D lists, etc.
 
-:::{dropdown} Documentation / README snippets support
-{rr}`PC111` If you want Black used in your documentation, you can use
-blacken-docs. This can even catch syntax errors in code snippets! It supports
-markdown and restructured text. Note that because black is in
-`additional_dependencies`, you'll have to keep it up to date manually.
+::::::{dropdown} Documentation / README snippets support
+{rr}`PC111` A formatter can keep the Python snippets in your docs tidy, and
+even catch syntax errors in them.
+
+:::::{tab-set}
+::::{tab-item} Ruff-format
+Ruff (0.16+) formats Python code blocks in Markdown, so a single tool covers
+your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
+
+```yaml
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: "v0.16.0"
+  hooks:
+    - id: ruff-format
+      types_or: [python, pyi, jupyter, markdown, pyproject]
+```
+
+The hook only sees the file types you list, so `markdown` is needed until it is
+part of the hook's default.
+
+::::
+::::{tab-item} blacken-docs
+Use blacken-docs if you use Black, or want reStructuredText snippets formatted
+too. Note that because black is in `additional_dependencies`, you'll have to
+keep it up to date manually.
 
 ```yaml
 - repo: https://github.com/adamchainz/blacken-docs
@@ -219,7 +239,9 @@ markdown and restructured text. Note that because black is in
       additional_dependencies: [black==24.*]
 ```
 
-:::
+::::
+:::::
+::::::
 
 ## Ruff
 
@@ -234,7 +256,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.22"
+  rev: "v0.16.0"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
