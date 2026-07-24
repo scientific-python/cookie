@@ -80,7 +80,7 @@ by NSF grant [OAC-2209877][].
 [style checking]:           /guides/style.md
 [testing]:                  /guides/pytest.md
 [documentation]:            /guides/docs.md
-[static typing]:            /guides/mypy.md
+[static typing]:            /guides/typing.md
 [ci]:                       /guides/gha_pure.md
 [right in the guide]:       /guides/repo_review.md
 
