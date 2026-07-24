@@ -24,9 +24,9 @@ project:
         - file: guides/docs.md
         - title: Packaging
           children:
-          - file: guides/packaging_simple.md
-          - file: guides/packaging_compiled.md
-          - file: guides/packaging_classic.md
+            - file: guides/packaging_simple.md
+            - file: guides/packaging_compiled.md
+            - file: guides/packaging_classic.md
         - file: guides/style.md
         - file: guides/typing.md
         - title: GitHub Actions
