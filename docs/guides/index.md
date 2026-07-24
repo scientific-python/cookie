@@ -18,9 +18,9 @@ A section on CI follows, with a [general setup guide][gha_basic], and then two
 choices for using CI to distribute your package, one for
 [pure Python][gha_pure], and one for [compiled extensions][gha_wheels]. You can
 read about setting up good tests on the [pytest page][pytest], with
-[coverage][]. There's also a page on setting up [docs][], as well as pages on
-[security][] best practices and information on using [agentic AI][ai]
-responsibly.
+[coverage][]. There's also a page on setting up [docs][], a page on
+[task runners][tasks], as well as pages on [security][] best practices and
+information on using [agentic AI][ai] responsibly.
 
 :::{tip} New project template
 Once you have completed the guidelines, there is a
@@ -48,6 +48,7 @@ WebAssembly! All checks point to a linked badge in the guide.
 [gha_pure]:           /guides/gha_pure.md
 [gha_wheels]:         /guides/gha_wheels.md
 [security]:           /guides/security.md
+[tasks]:              /guides/tasks.md
 [ai]:                 /guides/ai.md
 [pytest]:             /guides/pytest.md
 [right in the guide]: /guides/repo_review.md
