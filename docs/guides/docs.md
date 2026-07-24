@@ -1,4 +1,4 @@
-# Writing documentation
+# Documentation
 
 Documentation used to require learning reStructuredText (sometimes referred to
 as reST / rST), but today we have great choices for documentation in markdown,

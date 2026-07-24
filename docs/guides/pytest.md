@@ -1,4 +1,4 @@
-# Testing with pytest
+# Testing
 
 Tests are crucial to writing reliable software. A good test suite allows you to:
 
