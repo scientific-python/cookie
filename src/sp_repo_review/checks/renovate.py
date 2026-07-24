@@ -38,7 +38,7 @@ def renovate(root: Traversable) -> dict[str, Any]:
     for renovate_path in renovate_paths:
         if not renovate_path.is_file():
             continue
-        with renovate_path.open() as f:
+        with renovate_path.open(encoding="utf-8") as f:
             text = f.read()
         try:
             # Handles JSON and JSONC (comments / trailing commas) with no
@@ -106,7 +106,7 @@ class REN210(Renovate):
     url = mk_url("gha-basic")
 
     @staticmethod
-    def check(renovate: dict[str, Any]) -> bool | None | str:
+    def check(renovate: dict[str, Any]) -> bool | str | None:
         """
         Ensures that Renovate is configured to maintain GitHub action versions.
 
