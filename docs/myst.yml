@@ -26,7 +26,7 @@ project:
         - file: guides/packaging_compiled.md
         - file: guides/packaging_classic.md
         - file: guides/style.md
-        - file: guides/mypy.md
+        - file: guides/typing.md
         - file: guides/gha_basic.md
         - file: guides/gha_pure.md
         - file: guides/gha_wheels.md

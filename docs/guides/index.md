@@ -37,7 +37,7 @@ WebAssembly! All checks point to a linked badge in the guide.
 
 [tutorials]:          /tutorials/index.md
 [style]:              /guides/style.md
-[mypy]:               /guides/mypy.md
+[mypy]:               /guides/typing.md
 [docs]:               /guides/docs.md
 [simple packaging]:   /guides/packaging_simple.md
 [compiled packaging]: /guides/packaging_compiled.md

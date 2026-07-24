@@ -22,15 +22,16 @@ expected really gives you a much better idea of what is going on and what you
 can do and can't do.
 
 But the key goal is: static type checking! There are a collection of static type
-checkers, the most "official" and famous of which is MyPy. You can think of this
-as the "compiler" for compiled languages like C++; it checks to make sure you
-are not lying about the types. For example, passing in anything that is not an
-int to `f` will fail a mypy check, _before you run or deploy any code_.
+checkers to choose from. You can think of a type checker as the "compiler" for
+compiled languages like C++; it checks to make sure you are not lying about the
+types. For example, passing in anything that is not an int to `f` will fail the
+type checker, _before you run or deploy any code_.
 
-Your tests cannot test every possible branch, every line of code. MyPy can
-(though it doesn't by default, due to gradual typing). You may have code that
-runs rarely, that requires remote resources, that is slow, etc. All those can be
-checked by MyPy. It also keeps you (too?) truthful in your types.
+Your tests cannot test every possible branch, every line of code. A type
+checker can (though it doesn't by default, due to gradual typing). You may have
+code that runs rarely, that requires remote resources, that is slow, etc. All
+those can be checked by the type checker. It also keeps you (too?) truthful in
+your types.
 
 ### Adding types
 
@@ -45,20 +46,22 @@ There are three ways to add types.
    libraries you don't control this way.
 
 If you have a library you don't control, you can add "type stubs" for it, then
-give MyPy your stubs directory. MyPy will pull the types from your stubs. If you
-are writing code for a Raspberry Pi, for example, you could add the stubs for
+give the type checker your stubs directory. It will pull the types from your
+stubs. If you are writing code for a Raspberry Pi, for example, you could add
+the stubs for
 the Pi libraries, and then validate your code, without ever even installing the
 Pi-only libraries!
 
 You do not have to add types for every object - most of the time, you just need
-it for parameters and returns from functions. When running MyPy, you can use
-`reveal_type(...)` to show the inferred type of any object, which is like a
-print statement but at type-checking time, or `reveal_locals()` to see all local
-types.
+it for parameters and returns from functions. When running the type checker, you
+can use `reveal_type(...)` to show the inferred type of any object, which is
+like a print statement but at type-checking time, or `reveal_locals()` to see
+all local types.
 
 ### Configuration
 
-By default, MyPy does as little as possible, so that you can add it iteratively
+By default, the type checker does as little as possible, so that you can add it
+iteratively
 to a code base. By default:
 
 - All untyped variables and return values will be `Any`.
@@ -74,8 +77,8 @@ suggestions.
 
 For a library to support typing, it has to a) add types using any of the three
 methods, and b) add a `py.typed` empty file to indicate that it's okay to look
-for types inside it. MyPy also looks in `typeshed`, which is a library full of
-type hints for (mostly) the standard library.
+for types inside it. The type checker also looks in `typeshed`, which is a
+library full of type hints for (mostly) the standard library.
 
 Third party libraries that are typed sometimes forget this last step, by the
 way!
@@ -114,8 +117,8 @@ This will print `A` because you removed B via the type narrowing using the
 
 ### Protocols
 
-One of the best features of MyPy is support for structural subtyping via
-Protocols - formalized duck-typing, basically. This allows cross library
+One of the best features of type checkers is support for structural subtyping
+via Protocols - formalized duck-typing, basically. This allows cross library
 interoperability, unlike traditional inheritance. Here’s how it works:
 
 ```python
@@ -173,8 +176,8 @@ Static typing has some great features worth checking out:
 - Literals
 - TypedDict
 - Nicer NamedTuple definition (very popular in Python 3 code)
-- MyPy validates with the Python version you ask for, regardless of what version
-  you are actually running.
+- The type checker validates with the Python version you ask for, regardless of
+  what version you are actually running.
 
 ## Complete example
 
