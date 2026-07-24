@@ -22,14 +22,18 @@ project:
         - file: guides/pytest.md
         - file: guides/coverage.md
         - file: guides/docs.md
-        - file: guides/packaging_simple.md
-        - file: guides/packaging_compiled.md
-        - file: guides/packaging_classic.md
+        - title: Packaging
+          children:
+            - file: guides/packaging_simple.md
+            - file: guides/packaging_compiled.md
+            - file: guides/packaging_classic.md
         - file: guides/style.md
         - file: guides/typing.md
-        - file: guides/gha_basic.md
-        - file: guides/gha_pure.md
-        - file: guides/gha_wheels.md
+        - title: GitHub Actions
+          children:
+            - file: guides/gha_basic.md
+            - file: guides/gha_pure.md
+            - file: guides/gha_wheels.md
         - file: guides/security.md
         - file: guides/tasks.md
     - file: principles/index.md

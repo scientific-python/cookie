@@ -1,8 +1,8 @@
 ---
-short_title: GitHub Actions for Binary Wheels
+short_title: Compiled projects
 ---
 
-# GitHub Actions: Binary wheels
+# GitHub Actions: Compiled projects
 
 Building binary wheels is a bit more involved, but can still be done effectively
 with GHA. This document will introduce [cibuildwheel][] for use in your project.
