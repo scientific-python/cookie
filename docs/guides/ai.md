@@ -43,7 +43,7 @@ We recommend **full disclosure**. Knowing what model was used lets a reviewer
 run a model from a different model family to help them review the contribution.
 A maintainer has a better idea of what to expect based on the model used. And
 it's generally more respectful to not keep your process hidden when
-contributing to open source - maybe the maintainer would like to try that model
+contributing to open source; maybe the maintainer would like to try that model
 too. If you heavily edit the model output, then use your discretion; but being
 open about the whole process is generally better!
 
@@ -377,7 +377,7 @@ verbose output fill the context with junk.
 - **Beware untrusted content.** Anything an agent reads can carry instructions:
   issue text, PR comments, a fetched web page, CI logs. A model might confuse
   instructions from a payload buried in the content it was asked to
-  process - even in hidden comments. When you point an agent at outside
+  process, even in hidden comments. When you point an agent at outside
   material (e.g. "triage these issues" or a CI run URL), review what it does
   rather than letting it act unattended, and don't combine untrusted input with
   destructive or credentialed access. This is unfortunately a big issue with
@@ -393,13 +393,13 @@ better pass/fail to work with. Do keep an eye on it, though, sometimes it will
 skip something instead of fixing it; sometimes that's correct, but decision
 making is not as strong of an AI skill as pass/fail checks!
 
-AI knows a massive library of tricks and details. It will hallucinate ones
+AI knows a massive library of tricks and details. It will hallucinate new tricks
 sometimes, of course (that's why the pass/fail is important above!). Make it
 validate anything (newer models often have this in the system prompts, so it is
-model and harness dependent - for example, Claude Opus 4.8+ acts paranoid
+model and harness dependent; for example, Claude Opus 4.8+ acts paranoid
 and validates without request).
 
-AI doesn't mind long or annoying tasks - iterating with a CI that takes minutes
+AI doesn't mind long or annoying tasks: iterating with a CI that takes minutes
 or hours, running things through Docker, figuring out how to build projects,
 etc. You'll realize that things you know are good ideas, but you were too time
 constrained to try before are perfect candidates for AI. Want to find the 20
@@ -425,7 +425,7 @@ without them asking for it!
 :::
 
 - "Review this project for bugs, performance, simplifications, and
-  modernizations" - you might be shocked at how much it can find!
+  modernizations" -- you might be shocked at how much it can find!
   - Make sure you use a good model, and have it validate the findings (some
     do not need extra prompting to do this).
   - Followup: Put this into an issue, then open up draft PRs for these.
@@ -456,9 +456,9 @@ Smaller ideas:
 - Write something then ask it to apply what you did to something else similar.
 - Point it at a bug report and ask it to reproduce it as a failing test, then
   fix it.
-- "Bisect this regression" - finding the commit that broke something is a
+- "Bisect this regression" -- finding the commit that broke something is a
   tedious mechanical loop AI is happy to run.
-- "Add tests for the change I just made" - good tests and coverage give it a
+- "Add tests for the change I just made" -- good tests and coverage give it a
   clear pass/fail to work against.
 - "Add type annotations here until the type checker passes."
 - Ask it to draft release notes or a changelog from the git log between two
