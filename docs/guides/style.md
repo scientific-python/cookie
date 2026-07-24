@@ -205,10 +205,14 @@ option! Most of the time, you can find a way to make the Blacked code look
 better by rewriting your code; factor out long unreadable portions into a
 variable, avoid writing matrices as 1D lists, etc.
 
-:::{dropdown} Documentation / README snippets support
-{rr}`PC111` Ruff (0.16+) can format Python code blocks in Markdown, so a
-single tool covers your code and your docs. Add `markdown` to the
-`ruff-format` hook's `types_or`:
+::::::{dropdown} Documentation / README snippets support
+{rr}`PC111` A formatter can keep the Python snippets in your docs tidy, and
+even catch syntax errors in them.
+
+:::::{tab-set}
+::::{tab-item} Ruff-format
+Ruff (0.16+) formats Python code blocks in Markdown, so a single tool covers
+your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -218,10 +222,11 @@ single tool covers your code and your docs. Add `markdown` to the
       types_or: [python, pyi, jupyter, markdown]
 ```
 
-If you use Black, or want reStructuredText snippets formatted too, blacken-docs
-does the same job and can catch syntax errors in code snippets. Note that
-because black is in `additional_dependencies`, you'll have to keep it up to date
-manually.
+::::
+::::{tab-item} blacken-docs
+Use blacken-docs if you use Black, or want reStructuredText snippets formatted
+too. Note that because black is in `additional_dependencies`, you'll have to
+keep it up to date manually.
 
 ```yaml
 - repo: https://github.com/adamchainz/blacken-docs
@@ -231,7 +236,9 @@ manually.
       additional_dependencies: [black==24.*]
 ```
 
-:::
+::::
+:::::
+::::::
 
 ## Ruff
 
