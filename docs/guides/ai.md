@@ -48,7 +48,7 @@ too. If you heavily edit the model output, then use your discretion; but being
 open about the whole process is generally better!
 
 **Always follow the policy of the project you are contributing to.** The
-following are general guidelines, but follow project policies if they exist.
+following are general guidelines.
 
 **Credit AI in commits.** Follow the convention used by the Linux kernel and
 add a trailer. Never allow the model to add itself as a co-author. The code is
@@ -59,8 +59,8 @@ can perform.
 
 :::{note} The Linux kernel trailer
 
-The Linux kernel trailer, part of the kernel's official
-[coding assistants documentation][kernel-ai], looks like this:
+This is part of the kernel's official
+[coding assistants documentation][kernel-ai], and looks like this:
 
 ```text
 Assisted-by: <harness>:<model>
@@ -86,8 +86,8 @@ above that disclaimer.
 
 **Keep human review human-to-human.** Maintainers should never have to argue
 with a bot. Don't make a reviewer talk to an AI without knowing it; if an AI is
-responding on your behalf, say so (e.g. with an AI disclaimer at top). Don't
-belittle a reviewer's time by not responding personally.
+responding on your behalf, say so (e.g. with an AI disclaimer at top). Respect
+a reviewer's time by responding personally.
 
 **Don't submit slop.** Don't open a PR that a maintainer could finish faster
 than they can review it, and don't mass-file unsolicited PRs. Reviewing an
@@ -121,16 +121,17 @@ AI-assisted contributions are welcome. We ask that you:
 - Disclose that AI was used and name the tool/model.
 - Review and understand every line you submit; you are responsible for it.
 - Meet the same quality, testing, and style standards as any contribution.
-- Fully autonomous agents may not open issues or PRs.
+- Not use fully autonomous agents to open issues or PRs.
 - Respond to reviewers yourself.
-- AI text in descriptions and issues should be clearly marked.
+- Clearly mark AI text in descriptions and issues.
 
 This applies to issues and comments as well as pull requests. Using AI for
 translation or grammar help is fine. Contributions that ignore this policy may
 be closed.
 
-Only humans can be named as co-authors, and AI can _never_ sign off on comment.
-The Linux kernel trailer can be used to credit AI assistance, like this:
+Only humans can be named as co-authors, and AI can _never_ sign off on a
+commit. The Linux kernel trailer can be used to credit AI assistance, like
+this:
 
 ```text
 Assisted-by: <harness>:<model>
@@ -156,7 +157,7 @@ AI-assisted contributions are accepted only if:
 - AI-generated descriptions/comments are clearly marked and only used when
   required.
 - A human drove the tool, reviewed every line, and can explain the change.
-- Fully autonomous agents may not open issues or PRs.
+- It was not opened by a fully autonomous agent.
 - You respond to review comments yourself.
 
 This applies to issues and comments as well as pull requests. Using AI for
@@ -166,7 +167,7 @@ your responsibility to make sure it does not.
 Unsolicited, undisclosed, or low-effort AI PRs will be closed.
 
 Only humans can be named as co-authors, and AI can _never_ sign off on a
-comment. The Linux kernel trailer should be used to credit AI assistance, like
+commit. The Linux kernel trailer should be used to credit AI assistance, like
 this:
 
 ```text
@@ -193,8 +194,9 @@ requests. Autonomous agents may not contribute. Using AI for translation or
 grammar help is fine. AI output may infringe copyright; it is your
 responsibility to make sure it does not. Repeat violations may lead to a ban.
 
-Only humans can be named as co-authors. The Linux kernel trailer must be used to
-credit AI assistance, like this:
+Only humans can be named as co-authors, and AI can _never_ sign off on a
+commit. The Linux kernel trailer must be used to credit AI assistance, like
+this:
 
 ```text
 Assisted-by: <harness>:<model>
@@ -441,7 +443,7 @@ For an existing PR:
   you break it?"
   - With a good model, this is really powerful.
 
-Smaller ideas
+Smaller ideas:
 
 - "Explain the structure and design of this project."
 - "What's new since last release? Changelog style."
