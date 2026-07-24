@@ -27,8 +27,8 @@ python:
     - asdf install uv latest
     - asdf global uv latest
     - uv sync --group docs 
-    {%- if cookiecutter.docs == 'mkdocs' %}
-    - uv run mkdocs build --site-dir $READTHEDOCS_OUTPUT/html
+    {%- if cookiecutter.docs == 'properdocs' %}
+    - uv run properdocs build --site-dir $READTHEDOCS_OUTPUT/html
     {%- elif cookiecutter.docs == 'zensical' %}
     - uv run zensical build
     - mkdir -p $READTHEDOCS_OUTPUT/html/

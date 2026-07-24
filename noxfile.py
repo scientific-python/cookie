@@ -41,7 +41,7 @@ nox.options.default_venv_backend = "uv|virtualenv"
 
 class Docs(enum.Enum):
     Sphinx = "sphinx"
-    MkDocs = "mkdocs"
+    ProperDocs = "properdocs"
     Zensical = "zensical"
 
 

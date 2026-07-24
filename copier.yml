@@ -87,7 +87,7 @@ docs:
   help: Choose your documentation tool
   choices:
     "Sphinx": sphinx
-    "MkDocs": mkdocs
+    "ProperDocs (MkDocs fork)": properdocs
     "Zensical (alpha)": zensical
   # [[[end]]]
 

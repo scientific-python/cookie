@@ -58,8 +58,8 @@ jobs:
       - name: Test poetry
         run: nox -s 'tests(poetry, novcs)' -s 'tests(poetry, vcs, sphinx)'
 
-      - name: Test flit (mkdocs)
-        run: nox -s 'tests(flit, novcs)' -s 'tests(flit, vcs, mkdocs)'
+      - name: Test flit (properdocs)
+        run: nox -s 'tests(flit, novcs)' -s 'tests(flit, vcs, properdocs)'
 
       - name: Test uv (zensical)
         run: nox -s 'tests(uv, novcs, zensical)'
@@ -131,7 +131,7 @@ jobs:
       - name: Test scikit-build
         run: |
           nox -s 'nox(skbuild, vcs, sphinx)'
-          nox -s 'nox(skbuild, vcs, mkdocs)' -- docs
+          nox -s 'nox(skbuild, vcs, properdocs)' -- docs
 
       - name: Test poetry
         run: |
@@ -141,7 +141,7 @@ jobs:
       - name: Test flit
         run: |
           nox -s 'nox(flit, novcs, zensical)'
-          nox -s 'nox(flit, novcs, mkdocs)' -- docs
+          nox -s 'nox(flit, novcs, properdocs)' -- docs
 
       - name: Test pdm
         run: |
@@ -155,8 +155,8 @@ jobs:
 
       - name: Test hatch
         run: |
-          nox -s 'nox(hatch, vcs, mkdocs)'
-          nox -s 'nox(hatch, vcs, mkdocs)' -- docs
+          nox -s 'nox(hatch, vcs, properdocs)'
+          nox -s 'nox(hatch, vcs, properdocs)' -- docs
 
       - name: Test setuptools PEP 621
         run: |
