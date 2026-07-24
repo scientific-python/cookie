@@ -26,10 +26,11 @@ to be displayed to the user.
 
 There are a variety of tools that can do this. In this guide we will present two
 approaches that are mainstream in the scientific Python community: the
-[Sphinx][] documentation generator with the [MyST][] plugin, and the [MkDocs][]
-generator via [mkdocs-material][].
+[Sphinx][] documentation generator with the [MyST][] plugin, and the
+[ProperDocs][] generator (a maintained fork of [MkDocs][]) via
+[mkdocs-material][].
 
-For more details, examples to help you pick between Sphinx and MkDocs (and
+For more details, examples to help you pick between Sphinx and ProperDocs (and
 instructions for the latter), see the [documentation guide][]. For this simple
 introduction, we will use Sphinx as it is still more popular with scientific
 libraries.
@@ -203,5 +204,6 @@ integrate this into a package, and setup for nox.
 [organizing content]: https://myst-parser.readthedocs.io/en/latest/syntax/organising_content.html
 [sphinx-autodoc2]: https://sphinx-autodoc2.readthedocs.io/
 [mkdocs]: https://www.mkdocs.org/
+[properdocs]: https://properdocs.org/
 [mkdocs-material]: https://squidfunk.github.io/mkdocs-material/
 [documentation guide]: /guides/docs.md

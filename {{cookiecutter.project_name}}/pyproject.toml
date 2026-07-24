@@ -133,13 +133,13 @@ docs = [
   "sphinx_autodoc_typehints",
   "furo>=2023.08.17",
 ]
-{%- elif cookiecutter.docs == "mkdocs" %}
+{%- elif cookiecutter.docs == "properdocs" %}
 docs = [
     "markdown>=3.9",
     "mdx-include>=1.4.2",
     "mkdocs-material>=9.1.19",
-    "mkdocs>=1.1.2",
     "mkdocstrings-python>=1.18.2",
+    "properdocs>=1.6.7",
     "pyyaml>=6.0.1",
 ]
 {%- elif cookiecutter.docs == "zensical" %}
@@ -333,7 +333,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
 "noxfile.py" = ["T20"]
-{%- if cookiecutter.docs == "mkdocs" %}
+{%- if cookiecutter.docs == "properdocs" %}
 "docs/examples/**" = ["T20"]
 {%- endif %}
 

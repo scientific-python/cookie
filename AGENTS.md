@@ -23,7 +23,7 @@ Important: tests run with `PYTHONWARNDEFAULTENCODING=1`.
 ### Cookie template validation
 
 The noxfile generates temporary projects for **all 9 backends** × **vcs on/off**
-× **3 docs engines** (sphinx/mkdocs/zensical). These are slow.
+× **3 docs engines** (sphinx/properdocs/zensical). These are slow.
 
 - `nox -s "tests(hatch)"` — run generated project tests for a single backend
 - `nox -s "lint(hatch)"` — run pre-commit (`prek`) on generated project
@@ -86,7 +86,7 @@ The noxfile generates temporary projects for **all 9 backends** × **vcs on/off*
 - The repo-review interactive page is embedded using an `{anywidget}` directive
   (see `docs/pages/guides/repo_review.md`).
 - Tab-sets use `:sync: <tab-name>` for cross-page tab synchronization, where the
-  sync key is the tab label itself (e.g., `sphinx`, `mkdocs`,
+  sync key is the tab label itself (e.g., `sphinx`, `properdocs`,
   `trusted-publishing`, `scikit-build-core`).
 - TOML code blocks in the docs use "ini" to get syntax highlighting for now.
   This is applied only at the docs layer (the `code_fence` cog helper in
