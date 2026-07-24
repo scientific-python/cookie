@@ -45,7 +45,7 @@ class PreCommit:
         return "one of " + ", ".join(msgs)
 
     @classmethod
-    def check(cls, precommit: dict[str, Any]) -> bool | None | str:
+    def check(cls, precommit: dict[str, Any]) -> bool | str | None:
         "Must have {self.describe} in `.pre-commit-config.yaml`"
         assert cls.repos, f"{cls.__name__} must have a repo, invalid class definition"
         for repo_item in precommit.get("repos", {}):
@@ -89,13 +89,40 @@ class PC110(PreCommit):
 
 
 class PC111(PreCommit):
-    "Uses blacken-docs"
+    "Formats code in docs (ruff-format or blacken-docs)"
 
     requires = {"PY006", "PC110"}
-    repos = {"https://github.com/adamchainz/blacken-docs"}
+    repos = {
+        "https://github.com/astral-sh/ruff-pre-commit",
+        "https://github.com/adamchainz/blacken-docs",
+    }
     renamed = {
         "https://github.com/asottile/blacken-docs": "https://github.com/adamchainz/blacken-docs"
     }
+
+    @classmethod
+    def check(cls, precommit: dict[str, Any]) -> bool | str | None:
+        """
+        Add `blacken-docs`, or (Ruff 0.16+) give the `ruff-format` hook
+        `types_or: [python, pyi, jupyter, markdown]` in
+        `.pre-commit-config.yaml`.
+        """
+        for repo_item in precommit.get("repos", {}):
+            repo = repo_item.get("repo", "").lower()
+            if repo == "https://github.com/adamchainz/blacken-docs":
+                return True
+            if repo == "https://github.com/astral-sh/ruff-pre-commit" and any(
+                hook.get("id") == "ruff-format"
+                and "markdown" in hook.get("types_or", [])
+                for hook in repo_item.get("hooks", {})
+            ):
+                return True
+            if repo in cls.renamed:
+                return (
+                    f"Use `{cls.renamed[repo]}` instead of `{repo}` in "
+                    "`.pre-commit-config.yaml`"
+                )
+        return False
 
 
 class PC190(PreCommit):

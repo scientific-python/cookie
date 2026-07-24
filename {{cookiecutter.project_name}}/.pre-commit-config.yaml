@@ -6,12 +6,6 @@ ci:
 exclude: ^.cruft.json|.copier-answers.yml$
 
 repos:
-  - repo: https://github.com/adamchainz/blacken-docs
-    rev: "1.20.0"
-    hooks:
-      - id: blacken-docs
-        additional_dependencies: [black==26.*]
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: "v6.0.0"
     hooks:
@@ -43,11 +37,12 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.15.22"
+    rev: "v0.16.0"
     hooks:
       - id: ruff-check
         args: ["--fix"]
       - id: ruff-format
+        types_or: [python, pyi, jupyter, markdown]
 
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 

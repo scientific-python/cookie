@@ -180,6 +180,7 @@ ignore = [
   "A002",   # Okay for arguments to shadow builtins
   "A004",   # Okay for imports to shadow builtins (like print)
   "COM812", # Trailing commas teach the formatter
+  "CPY001", # No copyright notices
   "D",      # Docstrings
   "E501",   # Line too long
   "FBT",    # Boolean args fine

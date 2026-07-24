@@ -213,7 +213,7 @@ def get_image(
     *,
     normalize: bool = True,
     beginning: int = 0,
-    end: int | None = None
+    end: int | None = None,
 ) -> np.ndarray: ...
 ```
 

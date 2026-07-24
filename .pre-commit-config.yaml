@@ -22,18 +22,13 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
 
-  - repo: https://github.com/adamchainz/blacken-docs
-    rev: "1.20.0"
-    hooks:
-      - id: blacken-docs
-        additional_dependencies: [black==24.*]
-
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.15.22"
+    rev: "v0.16.0"
     hooks:
       - id: ruff-check
         args: ["--fix"]
       - id: ruff-format
+        types_or: [python, pyi, jupyter, markdown]
 
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: "v1.10.0"
