@@ -45,6 +45,7 @@ repos:
         args: []
         additional_dependencies:
           - click
+          - json5>=0.15.0
           - markdown-it-py
           - pytest
           - nox

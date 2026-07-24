@@ -48,7 +48,10 @@ async = [
   "repo-review[async]",
 ]
 all = [
-  "sp-repo-review[cli,pyproject,async]",
+  "sp-repo-review[cli,pyproject,async,json5]",
+]
+json5 = [
+    "json5>=0.15.0",
 ]
 
 [project.urls]
