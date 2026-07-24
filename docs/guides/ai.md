@@ -20,8 +20,6 @@ as "Agentic AI":
 - Low-cost models running unattended in automated systems that mass-produce
   pull requests. This is what most people mean by "AI slop", and it is the
   source of most of the frustration maintainers feel about AI contributions.
-  They might be useful for something personal, but they should never be
-  contributing unsolicited.
 
 The recommendations below are aimed at the first case, and at keeping your
 project from being overwhelmed by the second.
@@ -88,10 +86,10 @@ denial-of-service on volunteer maintainers. If the change is trivial with AI,
 the maintainers probably could just trigger the AI themselves. Make sure the
 pull request is welcome: check issues, ask first, etc.
 
-**Don't use AI on "good first issues".** Many projects are dropping this label
-because people just use AI on it -- the point of this is to help new
-contributors get used to the project, not to just push a button on an AI, a
-maintainer can do that. (And yes, a human wrote the proceeding em-dash!)
+**Don't use AI on "good first issues".** These exist to teach new contributors,
+not to be a button an AI presses -- a maintainer could do that. LLVM and
+Mozilla explicitly forbid it, and other projects are dropping the label
+entirely. (And yes, a human wrote the preceding em-dash!)
 
 ## `AI_POLICY.md`
 
@@ -208,10 +206,8 @@ Some angles to consider if they matter to your project: AI in security reports
 ([curl][curl-ai] requires disclosure and human verification after a flood of
 fabricated reports), AI on the reviewer side ([Fedora][fedora-ai] lets
 reviewers use AI to assist, but not to make the accept/reject decision), and
-"good first issues" (LLVM and Mozilla forbid using AI on them, since they exist
-to teach newcomers). Some projects also cap open AI-assisted PRs per
-contributor (Homebrew allows one at a time), a simple guard against
-mass-produced PRs.
+per-contributor caps on open AI-assisted PRs (Homebrew allows one at a time), a
+simple guard against mass-produced PRs.
 
 ## `AGENTS.md`
 
@@ -281,7 +277,7 @@ cross-project preferences, such as:
 - If you use local or small models, you can request relative paths be used
   (easier for them to write).
 
-Here's an example file:
+::::{dropdown} Example user-level file
 
 ```markdown
 You are on macOS, but have GNU sed. `python3` can be used if python without
@@ -296,6 +292,8 @@ harness, and `<model>` is the AI model.
 Prefix PR descriptions and comments on PRs with the line ":robot: _AI text
 below_ :robot:" to indicate you are an agent speaking on a user's behalf.
 ```
+
+::::
 
 Claude also allows a per-project `CLAUDE.local.md`; that should never be
 committed, so put it in your global gitignore if you use it.
@@ -334,11 +332,12 @@ The details vary by tool, but most modern harnesses share a common vocabulary:
   frontier model to hard ones. Use good models at first, then you'll learn what
   is easy and hard for an AI, and can match better.
 
-As you'll learn, effective use of AI is often about managing context; loading
-the context with things the model needs to work on your problem (like design
-spec documents, etc) is important, as is also keeping the context short
-(limiting tool output, compacting, etc) to avoid giving the model too much to
-think about.
+As you'll learn, effective use of AI is mostly context management. If the AI
+makes bad decisions, it's probably missing context: load design documents,
+issues, conversations, and files (forcibly with `@` if needed) before starting,
+and use planning mode to have it ask you questions. If it becomes forgetful
+mid-task, the context is too full: use `/compact` liberally, and don't let
+verbose output fill the context with junk.
 
 ## Common concerns
 
@@ -426,7 +425,7 @@ For an existing PR:
   you break it?"
   - With a good model, this is really powerful.
 
-Smaller ideas:
+::::{dropdown} Smaller ideas
 
 - "Explain the structure and design of this project."
 - "What's new since last release? Changelog style."
@@ -447,6 +446,8 @@ Smaller ideas:
 - Ask it to draft release notes or a changelog from the git log between two
   tags. It will try to mimic the existing style if there is one.
 
+::::
+
 ## Tips
 
 If you want to see your usage across harnesses, Wes McKinney (of Pandas fame)
@@ -457,20 +458,13 @@ for you. Try `uvx agentsview usage daily`, for example. A similar tool is
 If you use Claude Code, `npx ccstatusline` is much better than having the AI
 try to write its own status line.
 
-If the AI makes bad decisions, it's probably missing context. Load design
-documents, issues, conversations, and files (forcibly with `@` if needed) into
-the context before starting. Use "plan" mode, and have it ask you questions. If
-it's working on a feature and starting to become forgetful, you've probably got
-too much context; use `/compact` liberally. Things like verbose output fill the
-context with junk.
-
 A very powerful technique is "rubber duck", where you develop code with one
 model, then review it with a different model, feeding the review back into the
 original model, and iterate. This can provide a significantly better result
 than either model on its own, moving up
-[about 74% to the next model class in some tests][rubberduck]. (This is also
-why model disclosure is important). You don't need a specialized mode (copilot
-has one), you can do this yourself if you have access to two model families.
+[about 74% to the next model class in some tests][rubberduck]. You don't need a
+specialized mode (copilot has one), you can do this yourself if you have access
+to two model families.
 
 Don't just do what you'd do with AI; have it do what you wouldn't do. If you
 are developing a feature, ask AI to take several projects that use yours and
