@@ -24,6 +24,19 @@ def precommit(root: Traversable) -> dict[str, Any]:
     return {}
 
 
+def _formats_markdown(hook: dict[str, Any]) -> bool:
+    "A `ruff-format` hook that Markdown files can reach."
+    match hook:
+        case {"id": "ruff-format", "types_or": types}:
+            return "markdown" in types
+        # No `types_or` means Ruff's own default, which will include
+        # Markdown in a future release.
+        case {"id": "ruff-format"}:
+            return True
+        case _:
+            return False
+
+
 class PreCommit:
     family = "pre-commit"
     requires = {"PY006"}
@@ -100,14 +113,6 @@ class PC111(PreCommit):
         "https://github.com/asottile/blacken-docs": "https://github.com/adamchainz/blacken-docs"
     }
 
-    @staticmethod
-    def formats_markdown(hook: dict[str, Any]) -> bool:
-        "A `ruff-format` hook that Markdown files can reach."
-        if hook.get("id") != "ruff-format":
-            return False
-        types = [*hook.get("types", []), *hook.get("types_or", [])]
-        return "markdown" in types or not types
-
     @classmethod
     def check(cls, precommit: dict[str, Any]) -> bool | str | None:
         """
@@ -117,18 +122,18 @@ class PC111(PreCommit):
         markdown]`.
         """
         for repo_item in precommit.get("repos", {}):
-            repo = repo_item.get("repo", "").lower()
-            if repo == "https://github.com/adamchainz/blacken-docs":
-                return True
-            if repo == "https://github.com/astral-sh/ruff-pre-commit" and any(
-                cls.formats_markdown(hook) for hook in repo_item.get("hooks", {})
-            ):
-                return True
-            if repo in cls.renamed:
-                return (
-                    f"Use `{cls.renamed[repo]}` instead of `{repo}` in "
-                    "`.pre-commit-config.yaml`"
-                )
+            match repo_item.get("repo", "").lower(), repo_item.get("hooks", []):
+                case "https://github.com/adamchainz/blacken-docs", _:
+                    return True
+                case "https://github.com/astral-sh/ruff-pre-commit", hooks if any(
+                    _formats_markdown(hook) for hook in hooks
+                ):
+                    return True
+                case repo, _ if repo in cls.renamed:
+                    return (
+                        f"Use `{cls.renamed[repo]}` instead of `{repo}` in "
+                        "`.pre-commit-config.yaml`"
+                    )
         return False
 
 
