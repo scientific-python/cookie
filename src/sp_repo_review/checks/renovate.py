@@ -8,6 +8,7 @@ import json
 from typing import TYPE_CHECKING, Any
 
 from . import mk_url
+from ._jsonc import strip_jsonc
 
 if TYPE_CHECKING:
     from .._compat.importlib.resources.abc import Traversable
@@ -35,14 +36,31 @@ def renovate(root: Traversable) -> dict[str, Any]:
     renovate_paths = [root.joinpath(f) for f in SUPPORTED_RENOVATE_FILES]
 
     for renovate_path in renovate_paths:
-        if renovate_path.is_file():
-            with renovate_path.open() as f:
-                try:
-                    result: dict[str, Any] = json.load(f)
-                except json.JSONDecodeError:
-                    continue
-                else:
-                    return result
+        if not renovate_path.is_file():
+            continue
+        with renovate_path.open() as f:
+            text = f.read()
+        try:
+            # Handles JSON and JSONC (comments / trailing commas) with no
+            # dependency, plus JSON5 files that use only those features.
+            result: dict[str, Any] = json.loads(strip_jsonc(text))
+        except json.JSONDecodeError:
+            # Full JSON5 (single quotes, unquoted keys, ...) needs a real
+            # parser, provided by the optional json5 extra.
+            try:
+                import json5  # noqa: PLC0415
+            except ImportError:
+                msg = (
+                    f"{renovate_path} could not be parsed as JSON/JSONC and needs "
+                    "full JSON5 support. Install the extra: "
+                    "pip install sp-repo-review[json5]"
+                )
+                raise ImportError(msg) from None
+            try:
+                result = json5.loads(text)
+            except ValueError:
+                continue
+        return result
     return {}
 
 
@@ -69,7 +87,9 @@ class REN200(Renovate):
         ```
 
         Renovate configurations in `package.json` are not supported.
-        Configurations in `.jsonc` or `.json5` files are not fully supported.
+        `.jsonc` files (and `.json5` files that only use comments or trailing
+        commas) are supported out of the box. Full JSON5 configs require the
+        optional `json5` dependency (`pip install sp-repo-review[json5]`).
         """
         if not renovate:
             return None

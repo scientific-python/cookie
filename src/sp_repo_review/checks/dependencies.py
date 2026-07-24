@@ -41,7 +41,9 @@ class DEP200(Dependencies):
         }}
         ```
         Renovate configurations in `package.json` are not supported.
-        Configurations in `.jsonc` or `.json5` files are not fully supported.
+        `.jsonc` files (and `.json5` files that only use comments or trailing
+        commas) are supported out of the box. Full JSON5 configs require the
+        optional `json5` dependency (`pip install sp-repo-review[json5]`).
         """
         return bool(dependabot or renovate)
 
