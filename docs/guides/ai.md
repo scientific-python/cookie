@@ -24,7 +24,8 @@ as "Agentic AI":
 The recommendations below are aimed at the first case, and at keeping your
 project from being overwhelmed by the second.
 
-:::{note}
+:::{attention} The developer using the tool
+:class: dropdown
 The first point does hide something: the tool depends on the developer guiding
 it (just like any other tool). You will also see users with very little coding
 experience using these tools to produce low quality contributions. How someone
@@ -46,11 +47,17 @@ contributing to open source - maybe the maintainer would like to try that model
 too. If you heavily edit the model output, then use your discretion; but being
 open about the whole process is generally better!
 
+**Always follow the policy of the project you are contributing to.** The
+following are general guidelines, but follow project policies if they exist.
+
 **Credit AI in commits.** Follow the convention used by the Linux kernel and
 add a trailer. Never allow the model to add itself as a co-author. The code is
 still yours (and your responsibility); the AI is a tool, not an author or
-copyright holder, which is what co-authored-by is for. A growing number of
-projects will close a PR with an AI co-author out of licensing concerns.
+copyright holder, which is what co-authored-by is for. An AI must never add a
+`Signed-off-by:` line, because certifying the DCO is a legal act only a human
+can perform.
+
+:::{note} The Linux kernel trailer
 
 The Linux kernel trailer, part of the kernel's official
 [coding assistants documentation][kernel-ai], looks like this:
@@ -59,32 +66,34 @@ The Linux kernel trailer, part of the kernel's official
 Assisted-by: <harness>:<model>
 ```
 
-The kernel doc adds one more rule worth copying: an AI must never add a
-`Signed-off-by:` line, because certifying the DCO is a legal act only a human
-can perform. Note that the trailer is not universal. Kubernetes, for example,
-forbids AI trailers and wants disclosure in the PR description instead.
-Always follow the policy of the project you are contributing to.
-
 You can usually customize your harness to include this, either in an agents
 file (below), or via specific settings.
+
+:::
+
+:::{warning} Not a universal standard
+:class: dropdown
+Note that the trailer is not universal. Kubernetes, for example, forbids AI
+trailers and wants disclosure in the PR description instead. Some projects do
+not want to know when AI was used so they can't be singled out later.
+:::
 
 **Write your own PR descriptions.** Generated PR summaries tend to be verbose,
 impersonal, and a chore to read. Write the description yourself. If a PR or
 comment does contain AI-generated prose, mark it clearly, for example with a
-short disclaimer line at the top - and you can still write a human written
-message above that disclaimer.
+short disclaimer line at the top; you can still write a human written message
+above that disclaimer.
 
 **Keep human review human-to-human.** Maintainers should never have to argue
 with a bot. Don't make a reviewer talk to an AI without knowing it; if an AI is
-responding on your behalf, say so (e.g. with an AI disclaimer at top).
-You are accountable for every change you submit.
+responding on your behalf, say so (e.g. with an AI disclaimer at top). Don't
+belittle a reviewer's time by not responding personally.
 
 **Don't submit slop.** Don't open a PR that a maintainer could finish faster
 than they can review it, and don't mass-file unsolicited PRs. Reviewing an
-AI-generated PR can take far longer than writing it did -- effectively a
-denial-of-service on volunteer maintainers. If the change is trivial with AI,
-the maintainers probably could just trigger the AI themselves. Make sure the
-pull request is welcome: check issues, ask first, etc.
+AI-generated PR can take far longer than writing it did. If the change is
+trivial with AI, the maintainers probably could just trigger the AI themselves.
+Make sure the pull request is welcome: check issues, ask first, etc.
 
 **Don't use AI on "good first issues".** These exist to teach new contributors,
 not to be a button an AI presses -- a maintainer could do that. LLVM and
@@ -195,6 +204,9 @@ Assisted-by: <harness>:<model>
 :::
 ::::
 
+:::{seealso} Other examples
+:class: dropdown
+
 For real examples, see the policies from [PyTorch][pytorch-ai],
 [NumPy][numpy-ai], [Ghostty][ghostty-ai], and [LLVM][llvm-ai], whose "golden
 rule" (shared with curl) sums the whole topic up: "a contribution should be
@@ -209,6 +221,8 @@ reviewers use AI to assist, but not to make the accept/reject decision), and
 per-contributor caps on open AI-assisted PRs (Homebrew allows one at a time), a
 simple guard against mass-produced PRs.
 
+:::
+
 ## `AGENTS.md`
 
 Harnesses read a project context file to learn how your repository works --
@@ -222,6 +236,7 @@ which tools to prefer, where generated files live, and any traps. Treat it as
 documentation you maintain, not a dumping ground.
 
 :::{note} Claude Code and `AGENTS.md`
+:class: dropdown
 
 Claude Code is the only major harness to *not* read `AGENTS.md`. You can support
 both with a symlink, keeping a single source of truth:
@@ -311,7 +326,8 @@ that's a good candidate for a skill. AI can help you write skills. You can store
 skills (like changelog skills) in a repository at `.agents/skills`, or for your
 user at `~/.agents/skills`. The `gh skills` command can help you manage them.
 
-:::{note}
+:::{note} Claude Skills
+:class: dropdown
 Yes, you probably guessed by now, Claude Code does not respect the standard
 location. You have to symlink `.agents/skills` to `.claude/skills`, of course.
 :::
@@ -425,7 +441,7 @@ For an existing PR:
   you break it?"
   - With a good model, this is really powerful.
 
-::::{dropdown} Smaller ideas
+Smaller ideas
 
 - "Explain the structure and design of this project."
 - "What's new since last release? Changelog style."
@@ -445,8 +461,6 @@ For an existing PR:
 - "Add type annotations here until the type checker passes."
 - Ask it to draft release notes or a changelog from the git log between two
   tags. It will try to mimic the existing style if there is one.
-
-::::
 
 ## Tips
 
