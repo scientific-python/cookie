@@ -7,7 +7,7 @@ the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx
 
 :::{note} Popular frameworks
 The three frameworks covered in this guide are the ones supported by the cookie
-template. The main options are:
+template. There are lots of options, though:
 
 - [Sphinx](https://www.sphinx-doc.org/en/master/): A popular documentation
   framework for scientific libraries with a history of close usage with
@@ -15,11 +15,12 @@ template. The main options are:
   [astropy](https://docs.astropy.org/en/stable/index_user_docs.html) and
   [corner](https://corner.readthedocs.io). The MyST parser enables markdown
   support.
-- [MkDocs](https://www.mkdocs.org): A from-scratch new documentation system
-  based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
-  since it doesn't use docutils. Has over
-  [200 plugins](https://github.com/mkdocs/catalog) - they are much easier to
-  write than Sphinx. Example sites include [hatch](https://hatch.pypa.io),
+- [MkDocs](https://www.mkdocs.org) /
+  [ProperDocs](https://github.com/ProperDocs/properdocs): A from-scratch
+  documentation system based on markdown and HTML. Less support for man pages &
+  PDFs than Sphinx, since it doesn't use docutils. Has over [200
+  plugins](https://github.com/mkdocs/catalog) - they are much easier to write
+  than Sphinx. Example sites include [hatch](https://hatch.pypa.io),
   [PDM](https://pdm.fming.dev),
   [cibuildwheel](https://cibuildwheel.readthedocs.io),
   [Textual](https://textual.textualize.io),
@@ -30,12 +31,12 @@ template. The main options are:
 - [Zensical](https://zensical.org): A new documentation system from the
   creators of `mkdocs-material` and `mkdocstrings`, designed as a faster,
   simpler successor to MkDocs. Configured with TOML and largely compatible
-  with `mkdocs-material` sites, but still in alpha development.
+  with `mkdocs-material` sites, but still in early development.
 - [MyST](mystmd.org): A powerful system for rendering markdown and notebooks.
   Can also be used for docs, though, see
   [echopype](https://echopype.readthedocs.io). AKA JupyterBook.
 - [Great Docs](https://posit-dev.github.io/great-docs/): A system with minimal
-  configuration and modern features for making docs.
+  configuration and modern features for making docs, based on Quarto.
 :::
 
 :::{warning} The Future of MkDocs
