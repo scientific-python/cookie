@@ -111,7 +111,9 @@ and capacity. The tabs below sketch three levels you can adapt.
 :::{tab-item} All in
 
 AI-assisted contributions are welcome on the same footing as any other, as long
-as they meet the project's quality bar and are disclosed.
+as they meet the project's quality bar and are disclosed. This is very similar
+to the [Linux kernel][kernel-ai] policy. [CPython][cpython-ai] is close too,
+but only appreciates disclosure instead of requiring it.
 
 ````markdown
 # AI Policy
@@ -142,8 +144,8 @@ Assisted-by: <harness>:<model>
 :::{tab-item} Moderate
 
 AI assistance is fine, but the burden is on the contributor to show real human
-involvement and prior buy-in before opening a PR. This mirrors the
-[original proposal][ai-pr-policy].
+involvement and prior buy-in before opening a PR. This mirrors the [original
+proposal][ai-pr-policy]. This is similar to [NumPy][numpy-ai]'s policy.
 
 ````markdown
 # AI Policy
@@ -179,7 +181,8 @@ Assisted-by: <harness>:<model>
 :::{tab-item} Minimal
 
 AI-generated PRs are discouraged or restricted. Use this if you have limited
-review capacity.
+review capacity. [nvim-tree][nvimtree-ai]'s policy is fairly similar, and also
+gives human PRs review priority.
 
 ````markdown
 # AI Policy
@@ -209,8 +212,9 @@ Assisted-by: <harness>:<model>
 :::{seealso} Other examples
 :class: dropdown
 
-For real examples, see the policies from [PyTorch][pytorch-ai],
-[NumPy][numpy-ai], [Ghostty][ghostty-ai], and [LLVM][llvm-ai], whose "golden
+For real examples, see the policies from [CPython][cpython-ai],
+[PyTorch][pytorch-ai], [NumPy][numpy-ai], [Ghostty][ghostty-ai], and
+[LLVM][llvm-ai], whose "golden
 rule" (shared with curl) sums the whole topic up: "a contribution should be
 worth more to the project than the time it takes to review it." A
 [community-maintained list][ai-policy-list] tracks policies across well over a
@@ -312,8 +316,11 @@ below_ :robot:" to indicate you are an agent speaking on a user's behalf.
 
 ::::
 
+:::{note} `CLAUDE.local.md`
+:class: dropdown
 Claude also allows a per-project `CLAUDE.local.md`; that should never be
 committed, so put it in your global gitignore if you use it.
+:::
 
 ## Skills
 
@@ -505,12 +512,14 @@ directly.
 [ai-policy-list]: https://github.com/melissawm/open-source-ai-contribution-policies
 [ai-pr-policy]: https://willmcgugan.github.io/ai-pr-policy/
 [agents-md]: https://agents.md
+[cpython-ai]: https://devguide.python.org/getting-started/ai-tools/
 [curl-ai]: https://curl.se/dev/contribute.html#on-ai-use-in-curl
 [fedora-ai]: https://docs.fedoraproject.org/en-US/council/policy/ai-policy/
 [ghostty-ai]: https://github.com/ghostty-org/ghostty/blob/main/AI_POLICY.md
 [kernel-ai]: https://docs.kernel.org/process/coding-assistants.html
 [llvm-ai]: https://llvm.org/docs/AIToolPolicy.html
 [numpy-ai]: https://numpy.org/devdocs/dev/ai_policy.html
+[nvimtree-ai]: https://github.com/nvim-tree/nvim-tree.lua/blob/master/CONTRIBUTING.md#ai-usage-policy-highly-discouraged
 [pytorch-ai]: https://github.com/pytorch/pytorch/blob/main/AI_POLICY.md
 [redmonk-ai]: https://redmonk.com/kholterhoff/2026/02/26/generative-ai-policy-landscape-in-open-source/
 [agentskills]: https://agentskills.io
