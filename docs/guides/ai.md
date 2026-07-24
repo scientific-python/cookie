@@ -92,7 +92,7 @@ and capacity. The tabs below sketch three levels you can adapt.
 AI-assisted contributions are welcome on the same footing as any other, as long
 as they meet the project's quality bar and are disclosed.
 
-```markdown
+````markdown
 # AI Policy
 
 AI-assisted contributions are welcome. We ask that you:
@@ -100,7 +100,14 @@ AI-assisted contributions are welcome. We ask that you:
 - Disclose that AI was used and name the tool/model.
 - Review and understand every line you submit; you are responsible for it.
 - Meet the same quality, testing, and style standards as any contribution.
+
+Only humans can be named as co-authors. The Linux kernel trailer can be used to
+credit AI assistance, like this:
+
+```text
+Assisted-by: <harness>:<model>
 ```
+````
 
 :::
 :::{tab-item} Moderate
@@ -109,7 +116,7 @@ AI assistance is fine, but the burden is on the contributor to show real human
 involvement and prior buy-in before opening a PR. This mirrors the
 [original proposal][ai-pr-policy].
 
-```markdown
+````markdown
 # AI Policy
 
 AI-assisted contributions are accepted only if:
@@ -118,9 +125,18 @@ AI-assisted contributions are accepted only if:
 - It clearly states that it is AI-assisted and names the tool used.
 - It links to an issue or discussion where a maintainer agreed to the
   proposed change beforehand.
+- AI-generated descriptions/comments are clearly marked and only used when
+  required.
 
 Unsolicited, undisclosed, or low-effort AI PRs will be closed.
+
+Only humans can be named as co-authors. The Linux kernel trailer should be used
+to credit AI assistance, like this:
+
+```text
+Assisted-by: <harness>:<model>
 ```
+````
 
 :::
 :::{tab-item} Minimal
@@ -128,13 +144,21 @@ Unsolicited, undisclosed, or low-effort AI PRs will be closed.
 AI-generated PRs are discouraged or restricted. Use this if you have limited
 review capacity.
 
-```markdown
+````markdown
 # AI Policy
 
 We do not accept unsolicited AI-generated pull requests. Please open an issue
 to discuss before contributing. Fully-reviewed, disclosed AI-assisted fixes may
-be considered case by case.
+be considered case by case. PRs suspected to be entirely AI-generated may be
+closed without explanation.
+
+Only humans can be named as co-authors. The Linux kernel trailer must be used to
+credit AI assistance, like this:
+
+```text
+Assisted-by: <harness>:<model>
 ```
+````
 
 :::
 ::::
@@ -161,7 +185,7 @@ ln -s AGENTS.md CLAUDE.md
 ```
 
 You can also mention `@AGENTS.md` inside `CLAUDE.md` if you want to add
-specific instructions; this is true for all the other harnesses too
+specific instructions; this is true for most other harnesses too
 (`copilot-instructions.md`, etc).
 
 :::
@@ -172,10 +196,10 @@ How you track the file is a separate decision:
 :::{tab-item} Commit it
 
 Commit `AGENTS.md` so every contributor (and their harness) shares the same
-project context. This is a good default for projects with at least one
-maintainer also using AI harnesses. (Ignoring `CLAUDE.md` and `.claude/` in your `.gitignore` is
-also a good idea, due to that not supporting standards and being fairly
-common.)
+project context, and you can enforce project conventions this way. This is a
+good default for projects with at least one maintainer also using AI harnesses.
+(Ignoring `CLAUDE.md` and `.claude/` in your `.gitignore` is also a good idea,
+due to that not supporting standards and being fairly common.)
 
 :::
 :::{tab-item} Ignore it
@@ -222,6 +246,9 @@ harness, and `<model>` is the AI model.
 Prefix PR descriptions and comments on PRs with the line ":robot: _AI text
 below_ :robot:" to indicate you are an agent speaking on a user's behalf.
 ```
+
+Claude also allows a per-project `CLAUDE.local.md`; that should never be
+committed, so put it in your global gitignore if you use it.
 
 ## Skills
 
@@ -306,7 +333,7 @@ model and harness dependent - for example, Claude Opus 4.8+ acts paranoid
 and validates without request).
 
 AI doesn't mind long or annoying tasks - iterating with a CI that takes minutes
-or hours, running things though docker, figuring out how to build projects,
+or hours, running things through Docker, figuring out how to build projects,
 etc. You'll realize that things you know are good ideas, but you were too time
 constrained to try before are perfect candidates for AI. Want to find the 20
 most important downstream projects and test them all before and after some
@@ -342,6 +369,13 @@ without them asking for it!
   - Followup: "Launch subagents to fix all the reproduced bugs in worktrees,
     and open a PR for each"
 
+For an existing PR:
+
+- "You are an adversarial reviewer for the new feature in this branch. Do you
+  see any problems? Anything that could be done or written more cleanly? Can
+  you break it?"
+  - With a good model, this is really powerful.
+
 Smaller ideas:
 
 - "Explain the structure and design of this project."
@@ -373,6 +407,13 @@ for you. Try `uvx agentsview usage daily`, for example. A similar tool is
 If you use Claude Code, `npx ccstatusline` is much better than having the AI
 try to write its own status line.
 
+If the AI makes bad decisions, it's probably missing context. Load design
+documents, issues, conversations, and files (forcibly with `@` if needed) into
+the context before starting. Use "plan" mode, and have it ask you questions. If
+it's working on a feature and starting to become forgetful, you've probably got
+too much context; use `/compact` liberally. Things like verbose output fill the
+context with junk.
+
 A very powerful technique is "rubber duck", where you develop code with one
 model, then review it with a different model, feeding the review back into the
 original model, and iterate. This can provide a significantly better result
@@ -381,10 +422,31 @@ than either model on its own, moving up
 why model disclosure is important). You don't need a specialized mode (copilot
 has one), you can do this yourself if you have access to two model families.
 
+Don't just do what you'd do with AI; have it do what you wouldn't do. If you
+are developing a feature, ask AI to take several projects that use yours and
+adapt them to your new feature. Take a PR where someone started using your
+library and ask for all the pain points they faced transitioning to it. Have AI
+try to find a way to break your feature or library. Look for gaps in your docs.
+Have it follow your tutorial and tell you what was missing. It is happy to use
+Docker or start up a database or other tools that you might not have time to
+set up for a small problem.
+
+You can mix it in at your pace. If you are writing, try adding `TODO` comments
+for things like adding links, then ask AI to find them and fix them. With
+[marimo pair][], you can work on a notebook or slides but have AI connected and
+able to help you edit anything you ask for, like splitting a slide into
+columns, adding a summary slide, or analyzing a SQLite database and adding a
+plot.
+
+If there's something repetitive, use AI to write a script to do it; it will use
+fewer tokens and be more reliable than having AI do the repetitive thing
+directly.
+
 [ai-pr-policy]: https://willmcgugan.github.io/ai-pr-policy/
 [agents-md]: https://agents.md
 [agentskills]: https://agentskills.io
 [agentsview]: https://www.agentsview.io
+[marimo pair]: https://docs.marimo.io/guides/generate_with_ai/marimo_pair/
 [rubberduck]: https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/
 [skills.sh]: https://www.skills.sh
 [security]: guides/security
