@@ -3,22 +3,24 @@
 Documentation used to require learning reStructuredText (sometimes referred to
 as reST / rST), but today we have great choices for documentation in markdown,
 the same format used by GitHub, Wikipedia, and others. This guide covers Sphinx
-and Mkdocs, and uses the modern MyST plugin to get Markdown support.
+(using the modern MyST plugin to get Markdown support), MkDocs, and Zensical.
 
 :::{note} Popular frameworks
-The two frameworks covered in this guide are the most commonly used in the
-scientific Python community. The main options are:
+The three frameworks covered in this guide are the ones supported by the cookie
+template. There are lots of options, though:
 
 - [Sphinx](https://www.sphinx-doc.org/en/master/): A popular documentation
   framework for scientific libraries with a history of close usage with
   scientific tools like LaTeX. Examples include
   [astropy](https://docs.astropy.org/en/stable/index_user_docs.html) and
-  [corner](https://corner.readthedocs.io).
-- [MkDocs](https://www.mkdocs.org): A from-scratch new documentation system
-  based on markdown and HTML. Less support for man pages & PDFs than Sphinx,
-  since it doesn't use docutils. Has over
-  [200 plugins](https://github.com/mkdocs/catalog) - they are much easier to
-  write than Sphinx. Example sites include [hatch](https://hatch.pypa.io),
+  [corner](https://corner.readthedocs.io). The MyST parser enables markdown
+  support.
+- [MkDocs](https://www.mkdocs.org) /
+  [ProperDocs](https://github.com/ProperDocs/properdocs): A from-scratch
+  documentation system based on markdown and HTML. Less support for man pages &
+  PDFs than Sphinx, since it doesn't use docutils. Has over [200
+  plugins](https://github.com/mkdocs/catalog) - they are much easier to write
+  than Sphinx. Example sites include [hatch](https://hatch.pypa.io),
   [PDM](https://pdm.fming.dev),
   [cibuildwheel](https://cibuildwheel.readthedocs.io),
   [Textual](https://textual.textualize.io),
@@ -26,19 +28,26 @@ scientific Python community. The main options are:
   [Pydantic](https://docs.pydantic.dev/latest/),
   [Polars](https://docs.pola.rs/), and
   [FastAPI](https://fastapi.tiangolo.com/)
-- [JupyterBook](https://jupyterbook.org): A powerful system for rendering a
-  collection of notebooks using Sphinx internally. Can also be used for docs,
-  though, see [echopype](https://echopype.readthedocs.io).
+- [Zensical](https://zensical.org): A new documentation system from the
+  creators of `mkdocs-material` and `mkdocstrings`, designed as a faster,
+  simpler successor to MkDocs. Configured with TOML and largely compatible
+  with `mkdocs-material` sites, but still in early development.
+- [MyST](mystmd.org): A powerful system for rendering markdown and notebooks.
+  Can also be used for docs, though, see
+  [echopype](https://echopype.readthedocs.io). AKA JupyterBook.
+- [Great Docs](https://posit-dev.github.io/great-docs/): A system with minimal
+  configuration and modern features for making docs, based on Quarto.
 :::
 
 :::{warning} The Future of MkDocs
-The creators of `mkdocs-material` and `mkdocstrings` have come together to
-create a new documentation package called
-[Zensical](https://zensical.org/about/). The framework is still in alpha
-development, but aims to simplify the documentation process, be blazing fast,
-and move away from the limitations of MkDocs. This also means MkDocs's future
-is uncertain, and mkdocs-material will be minimally maintained until
-late 2026.
+:class: dropdown
+With the creators of `mkdocs-material` and `mkdocstrings` now working on
+[Zensical](https://zensical.org/about/), MkDocs's future is uncertain, and
+mkdocs-material will be minimally maintained until late 2026.
+[ProperDocs](https://github.com/ProperDocs/properdocs) is a fork of MkDocs
+keeping compatibility with old plugins. MkDocs is threatening a complete
+reworking without plugins support for its next release, and then all public
+activity has ceased. [Read more](https://fpgmaas.com/blog/collapse-of-mkdocs/).
 :::
 
 ## What to include
@@ -69,13 +78,17 @@ with render_cookie(backend="hatch", docs="mkdocs") as package:
     mkdocs_conf_yaml = package.joinpath("mkdocs.yml").read_text(encoding="utf-8").strip()
     noxfile_mkdocs = PyMatcher.from_file(package / "noxfile.py")
     readthedocs_yaml_mkdocs = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
+with render_cookie(backend="hatch", docs="zensical") as package:
+    zensical_conf_toml = package.joinpath("zensical.toml").read_text(encoding="utf-8").strip()
+    noxfile_zensical = PyMatcher.from_file(package / "noxfile.py")
+    readthedocs_yaml_zensical = package.joinpath(".readthedocs.yaml").read_text(encoding="utf-8").strip()
 ]]] -->
 <!-- [[[end]]] -->
 
 ## Hand-written docs
 
-Create `docs/` directory within your project (next to `src/`). From here, Sphinx
-and MkDocs diverge.
+Create `docs/` directory within your project (next to `src/`). From here, the
+frameworks diverge.
 
 ::::{tab-set}
 :::{tab-item} Sphinx
@@ -465,6 +478,101 @@ nav:
 ```
 
 :::
+:::{tab-item} Zensical
+:sync: zensical
+Zensical is a single package, so the `docs` dependency group is short:
+
+```ini
+[dependency-groups]
+docs = [
+    "zensical>=0.0.20",
+]
+```
+
+You should include the docs group via `--group=docs` when using uv or pip to
+install, or install all groups, such as by running `uv sync --all-groups`.
+
+Like MkDocs, Zensical reads your written documentation from the `docs`
+directory, with a top-level config file, `zensical.toml`. Unlike MkDocs, it
+doesn't require a `nav`; if you don't give one, it builds the navigation from
+your file layout. The theme is a built-in evolution of `mkdocs-material`, so
+the [feature flags](https://zensical.org/docs/setup/) and palette options will
+look familiar if you've used that theme. Here's the file the cookie generates:
+
+<!-- [[[cog
+with code_fence("toml"):
+    print(zensical_conf_toml)
+]]] -->
+<!-- rumdl-disable MD013 -->
+```ini
+# Read more: https://zensical.org/docs/setup/basics
+
+[project]
+site_name = "package"
+site_description = "A great package."
+site_author = "My Name"
+copyright = "&copy; 2026 My Name"
+repo_url = "https://github.com/org/package"
+docs_dir = "docs"
+
+[project.theme]
+language = "en"
+features = [
+    "announce.dismiss",
+    "content.action.edit",
+    "content.action.view",
+    "content.code.annotate",
+    "content.code.copy",
+    "content.code.select",
+    "content.footnote.tooltips",
+    "content.tabs.link",
+    "content.tooltips",
+    "navigation.footer",
+    "navigation.indexes",
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.path",
+    "navigation.sections",
+    "navigation.top",
+    "navigation.tracking",
+    "search.highlight",
+]
+icon.repo = "fontawesome/brands/github"
+
+# Palette toggle for automatic mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+# Palette toggle for light mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+# Palette toggle for dark mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/org/package"
+```
+<!-- rumdl-enable MD013 -->
+<!-- [[[end]]] -->
+
+The `[project]` table holds the site metadata. The `[project.theme]` table
+enables a generous set of feature flags — code copy buttons, instant
+navigation, edit/view source actions, and search highlighting among them — and
+the three `[[project.theme.palette]]` entries give automatic, light, and dark
+modes with a toggle. See the
+[configuration docs](https://zensical.org/docs/setup/basics/) for the full
+list of options.
+:::
 ::::
 
 ### .readthedocs.yaml
@@ -529,6 +637,36 @@ build:
     - asdf global uv latest
     - uv sync --group docs
     - uv run mkdocs build --site-dir $READTHEDOCS_OUTPUT/html
+```
+<!-- rumdl-enable MD013 -->
+<!-- [[[end]]] -->
+:::
+:::{tab-item} Zensical
+:sync: zensical
+<!-- [[[cog
+with code_fence("yaml"):
+    print(readthedocs_yaml_zensical)
+]]] -->
+<!-- rumdl-disable MD013 -->
+```yaml
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+version: 2
+
+build:
+  os: ubuntu-24.04
+  tools:
+    python: "3.14"
+
+  commands:
+    - asdf plugin add uv
+    - asdf install uv latest
+    - asdf global uv latest
+    - uv sync --group docs
+    - uv run zensical build
+    - mkdir -p $READTHEDOCS_OUTPUT/html/
+    - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
 ```
 <!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
@@ -636,6 +774,35 @@ the source code is changed, the documentation will automatically update. For
 documentation on how to configure what directories are watched for changes,
 [consult the MkDocs configuration page](https://www.mkdocs.org/user-guide/configuration/#live-reloading).
 :::
+:::{tab-item} Zensical
+:sync: zensical
+<!-- [[[cog
+with code_fence("python"):
+    print(noxfile_zensical.get_source("docs"))
+]]] -->
+<!-- rumdl-disable MD013 -->
+```python
+@nox.session(reuse_venv=True, default=False)
+def docs(session: nox.Session) -> None:
+    """
+    Make or serve the docs. Pass --non-interactive to avoid serving.
+    """
+
+    doc_deps = nox.project.dependency_groups(PROJECT, "docs")
+    session.install("-e.", *doc_deps)
+
+    if session.interactive:
+        session.run("zensical", "serve", *session.posargs)
+    else:
+        session.run("zensical", "build", "--clean", *session.posargs)
+```
+<!-- rumdl-enable MD013 -->
+<!-- [[[end]]] -->
+
+This is nearly identical to the MkDocs job: `zensical serve` gives you a live
+preview that rebuilds when files change (and it's fast — rebuilds are
+incremental), while `zensical build` produces the static site in `site/`.
+:::
 ::::
 
 ## API docs
@@ -715,6 +882,22 @@ like built. In this case, we are asking to document the entire module
 `my_package`. You could instead ask for only a single component inside your
 module by being more specific, like `::: my_package.my_module.MyClass`.
 :::
+:::{tab-item} Zensical
+:sync: zensical
+Zensical has preliminary support for `mkdocstrings`, using the same triple
+colon syntax as MkDocs (see the MkDocs tab). Add `mkdocstrings-python` to your
+`docs` dependency group, then configure the handler in `zensical.toml`:
+
+```toml
+[project.plugins.mkdocstrings.handlers.python]
+paths = ["src"]
+inventories = ["https://docs.python.org/3/objects.inv"]
+```
+
+Some features, like backlinks, are not supported yet; see the
+[Zensical mkdocstrings docs](https://zensical.org/docs/setup/extensions/mkdocstrings/)
+for the current status.
+:::
 ::::
 
 ## Notebooks in docs
@@ -775,6 +958,13 @@ and notebooks. If you have a directory of example python files to run, consider
 For an external example, the
 [ChainConsumer docs](https://samreay.github.io/ChainConsumer/generated/gallery/)
 show `mkdocs-gallery` in action.
+:::
+:::{tab-item} Zensical
+:sync: zensical
+Zensical does not support MkDocs plugins like `mkdocs-jupyter`, and it has no
+notebook support of its own yet. If notebooks are central to your docs, use
+Sphinx or MkDocs for now, or pre-convert notebooks to Markdown with jupytext
+as part of your build.
 :::
 ::::
 
