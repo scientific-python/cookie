@@ -47,8 +47,8 @@ With the creators of `mkdocs-material` and `mkdocstrings` now working on
 mkdocs-material will be minimally maintained until late 2026.
 [ProperDocs](https://properdocs.org), started by a former MkDocs maintainer,
 is a drop-in fork of MkDocs keeping compatibility with existing plugins; the
-cookie uses it. MkDocs is threatening a complete reworking without plugin
-support for its next release, and then all public activity has ceased.
+cookie uses it. MkDocs was threatening a complete reworking without plugin
+support for its next release, and then all public activity ceased.
 [Read more](https://fpgmaas.com/blog/collapse-of-mkdocs/).
 :::
 
