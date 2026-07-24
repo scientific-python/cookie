@@ -42,7 +42,7 @@ repos:
       - id: ruff-check
         args: ["--fix"]
       - id: ruff-format
-        types_or: [python, pyi, jupyter, markdown]
+        types_or: [python, pyi, jupyter, markdown, pyproject]
 
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 

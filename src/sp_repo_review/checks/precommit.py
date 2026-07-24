@@ -119,7 +119,7 @@ class PC111(PreCommit):
         Add `blacken-docs`, or (Ruff 0.16+) let Markdown files reach the
         `ruff-format` hook in `.pre-commit-config.yaml`. Until the hook formats
         Markdown by default, that means `types_or: [python, pyi, jupyter,
-        markdown]`.
+        markdown, pyproject]`.
         """
         for repo_item in precommit.get("repos", {}):
             match repo_item.get("repo", "").lower(), repo_item.get("hooks", []):

@@ -28,7 +28,7 @@ repos:
       - id: ruff-check
         args: ["--fix"]
       - id: ruff-format
-        types_or: [python, pyi, jupyter, markdown]
+        types_or: [python, pyi, jupyter, markdown, pyproject]
 
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: "v1.10.0"

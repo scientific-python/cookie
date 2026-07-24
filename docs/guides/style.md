@@ -219,7 +219,7 @@ your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
   rev: "v0.16.0"
   hooks:
     - id: ruff-format
-      types_or: [python, pyi, jupyter, markdown]
+      types_or: [python, pyi, jupyter, markdown, pyproject]
 ```
 
 The hook only sees the file types you list, so `markdown` is needed until it is

@@ -72,7 +72,7 @@ def test_pc111_ruff_markdown():
           - repo: https://github.com/astral-sh/ruff-pre-commit
             hooks:
               - id: ruff-format
-                types_or: [python, pyi, jupyter, markdown]
+                types_or: [python, pyi, jupyter, markdown, pyproject]
     """)
     assert compute_check("PC111", precommit=precommit).result
 
