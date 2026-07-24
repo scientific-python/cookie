@@ -100,21 +100,28 @@ class PC111(PreCommit):
         "https://github.com/asottile/blacken-docs": "https://github.com/adamchainz/blacken-docs"
     }
 
+    @staticmethod
+    def formats_markdown(hook: dict[str, Any]) -> bool:
+        "A `ruff-format` hook that Markdown files can reach."
+        if hook.get("id") != "ruff-format":
+            return False
+        types = [*hook.get("types", []), *hook.get("types_or", [])]
+        return "markdown" in types or not types
+
     @classmethod
     def check(cls, precommit: dict[str, Any]) -> bool | str | None:
         """
-        Add `blacken-docs`, or (Ruff 0.16+) give the `ruff-format` hook
-        `types_or: [python, pyi, jupyter, markdown]` in
-        `.pre-commit-config.yaml`.
+        Add `blacken-docs`, or (Ruff 0.16+) let Markdown files reach the
+        `ruff-format` hook in `.pre-commit-config.yaml`. Until the hook formats
+        Markdown by default, that means `types_or: [python, pyi, jupyter,
+        markdown]`.
         """
         for repo_item in precommit.get("repos", {}):
             repo = repo_item.get("repo", "").lower()
             if repo == "https://github.com/adamchainz/blacken-docs":
                 return True
             if repo == "https://github.com/astral-sh/ruff-pre-commit" and any(
-                hook.get("id") == "ruff-format"
-                and "markdown" in hook.get("types_or", [])
-                for hook in repo_item.get("hooks", {})
+                cls.formats_markdown(hook) for hook in repo_item.get("hooks", {})
             ):
                 return True
             if repo in cls.renamed:

@@ -222,6 +222,9 @@ your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
       types_or: [python, pyi, jupyter, markdown]
 ```
 
+The hook only sees the file types you list, so `markdown` is needed until it is
+part of the hook's default.
+
 ::::
 ::::{tab-item} blacken-docs
 Use blacken-docs if you use Black, or want reStructuredText snippets formatted
