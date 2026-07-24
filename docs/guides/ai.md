@@ -214,7 +214,7 @@ For real examples, see the policies from [PyTorch][pytorch-ai],
 rule" (shared with curl) sums the whole topic up: "a contribution should be
 worth more to the project than the time it takes to review it." A
 [community-maintained list][ai-policy-list] tracks policies across well over a
-hundred projects.
+hundred projects, and [RedMonk][redmonk-ai] gives an overview of the landscape.
 
 Some angles to consider if they matter to your project: AI in security reports
 ([curl][curl-ai] requires disclosure and human verification after a flood of
@@ -512,6 +512,7 @@ directly.
 [llvm-ai]: https://llvm.org/docs/AIToolPolicy.html
 [numpy-ai]: https://numpy.org/devdocs/dev/ai_policy.html
 [pytorch-ai]: https://github.com/pytorch/pytorch/blob/main/AI_POLICY.md
+[redmonk-ai]: https://redmonk.com/kholterhoff/2026/02/26/generative-ai-policy-landscape-in-open-source/
 [agentskills]: https://agentskills.io
 [agentsview]: https://www.agentsview.io
 [marimo pair]: https://docs.marimo.io/guides/generate_with_ai/marimo_pair/
