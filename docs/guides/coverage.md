@@ -1,4 +1,4 @@
-# Code Coverage
+# Coverage
 
 The "Code coverage" value of a codebase indicates how much of the
 production/development code is covered by the running unit tests. Maintainers
