@@ -54,13 +54,13 @@ repos:
           - types-PyYAML
 
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: "v3.9.5"
+    rev: "v3.9.6"
     hooks:
       - id: prettier
         types_or: [yaml, html, css, scss, javascript, json]
 
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: "v0.2.37"
+    rev: "v0.2.43"
     hooks:
       - id: rumdl
         args: [--no-exclude] # Disable all exclude patterns
@@ -72,7 +72,7 @@ repos:
         exclude: ^Gemfile\.lock$
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: "v1.27.0"
+    rev: "v1.28.0"
     hooks:
       - id: zizmor
 

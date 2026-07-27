@@ -30,7 +30,7 @@ repos:
       - id: rst-inline-touching-normal
 
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: "v3.9.5"
+    rev: "v3.9.6"
     hooks:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json]
@@ -113,7 +113,7 @@ repos:
 {%- if cookiecutter.__ci == "github" %}
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: "v1.27.0"
+    rev: "v1.28.0"
     hooks:
       - id: zizmor
 {%- endif %}
