@@ -683,7 +683,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.61"
+  rev: "v0.0.63"
   hooks:
     - id: ty
 ```
@@ -1030,7 +1030,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.9.5"
+  rev: "v3.9.6"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
