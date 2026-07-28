@@ -157,13 +157,6 @@ class RF101(RF1xx):
     name = "flake8-bugbear"
 
 
-class RF102(RF1xx):
-    "isort must be selected"
-
-    code = "I"
-    name = "isort"
-
-
 class RF103(RF1xx):
     "pyupgrade must be selected"
 

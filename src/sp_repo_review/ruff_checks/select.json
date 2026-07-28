@@ -1,5 +1,15 @@
 {
-  "libs": ["AIR", "ASYNC", "DJ", "FAST", "INT", "NPY", "PD"],
+  "libs": ["AIR", "ASYNC", "DJ", "FAST", "NPY", "PD"],
+  "defaults": [
+    { "name": "BLE", "reason": "on by default" },
+    { "name": "DTZ", "reason": "on by default" },
+    { "name": "FA", "reason": "on by default" },
+    { "name": "FLY", "reason": "on by default" },
+    { "name": "I", "reason": "on by default, except I002, which needs config" },
+    { "name": "INT", "reason": "on by default" },
+    { "name": "PIE", "reason": "on by default" },
+    { "name": "YTT", "reason": "on by default" }
+  ],
   "specialty": [
     { "name": "CPY", "reason": "preview only" },
     { "name": "A", "reason": "Naming related" },

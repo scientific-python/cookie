@@ -36,6 +36,8 @@ with RESOURCE_DIR.joinpath("select.json").open(encoding="utf-8") as f:
     select_info = json.load(f)
 LIBS = frozenset(select_info["libs"])
 SPECIALTY = frozenset(r["name"] for r in select_info["specialty"])
+# Selected by Ruff without configuration (0.16+)
+DEFAULTS = {r["name"]: r["reason"] for r in select_info["defaults"]}
 
 with RESOURCE_DIR.joinpath("ignore.json").open(encoding="utf-8") as f:
     IGNORE_INFO = json.load(f)
@@ -105,6 +107,7 @@ def _print_output_rich(
     libs_items: dict[str, str],
     spec_items: dict[str, str],
     unselected_items: dict[str, str],
+    default_items: dict[str, str],
 ) -> None:
     """Print rich formatted output."""
     import rich.columns
@@ -128,6 +131,10 @@ def _print_output_rich(
     uns = "\n".join(_print_each_rich(unselected_items))
 
     rich.print(rich.columns.Columns([panel_sel, panel_lib, panel_spec]))
+    if default_items:
+        rich.print("[yellow]Selected, but on by default [dim](safe to remove)")
+        for item in _print_each_rich(default_items):
+            rich.print(item)
     if uns:
         rich.print("[red]Unselected [dim](copy and paste ready)")
         rich.print(uns)
@@ -138,11 +145,17 @@ def _print_output_plain(
     libs_items: dict[str, str],
     spec_items: dict[str, str],
     unselected_items: dict[str, str],
+    default_items: dict[str, str],
 ) -> None:
     """Print plain formatted output."""
     print("Selected:")
     for item in _print_each_plain(selected_items):
         print(item)
+
+    if default_items:
+        print("\nSelected, but on by default (safe to remove):")
+        for item in _print_each_plain(default_items):
+            print(item)
 
     if libs_items:
         print("\nLibrary specific:")
@@ -236,8 +249,15 @@ def process_dir(path: Path, format: str = "auto") -> None:
         _handle_all_selected(fmt, ruff_config)
         return
 
-    selected_items = {k: v for k, v in LINT_INFO.items() if k in selected}
-    all_uns_items = {k: v for k, v in LINT_INFO.items() if k not in selected}
+    default_items = {
+        k: DEFAULTS[k] for k in LINT_INFO if k in selected & DEFAULTS.keys()
+    }
+    selected_items = {
+        k: v for k, v in LINT_INFO.items() if k in selected and k not in DEFAULTS
+    }
+    all_uns_items = {
+        k: v for k, v in LINT_INFO.items() if k not in selected and k not in DEFAULTS
+    }
     unselected_items = {
         k: v for k, v in all_uns_items.items() if k not in LIBS | SPECIALTY
     }
@@ -245,9 +265,13 @@ def process_dir(path: Path, format: str = "auto") -> None:
     spec_items = {k: v for k, v in all_uns_items.items() if k in SPECIALTY}
 
     if fmt == "rich":
-        _print_output_rich(selected_items, libs_items, spec_items, unselected_items)
+        _print_output_rich(
+            selected_items, libs_items, spec_items, unselected_items, default_items
+        )
     else:
-        _print_output_plain(selected_items, libs_items, spec_items, unselected_items)
+        _print_output_plain(
+            selected_items, libs_items, spec_items, unselected_items, default_items
+        )
 
 
 def main() -> None:

@@ -68,15 +68,7 @@ def test_rf101_selected():
 
 
 def test_rf101_missing():
-    assert not compute_check("RF101", ruff={"lint": {"select": ["I"]}}).result
-
-
-def test_rf102_selected():
-    assert compute_check("RF102", ruff={"lint": {"select": ["I"]}}).result
-
-
-def test_rf102_missing():
-    assert not compute_check("RF102", ruff={"lint": {"select": ["UP"]}}).result
+    assert not compute_check("RF101", ruff={"lint": {"select": ["UP"]}}).result
 
 
 def test_rf103_selected():
