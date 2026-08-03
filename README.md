@@ -416,7 +416,6 @@ Will not show up if no `.readthedocs.yml`/`.readthedocs.yaml` file is present.
 - [`RF002`](https://learn.scientific-python.org/development/guides/style#RF002): Target version must be set
 - [`RF003`](https://learn.scientific-python.org/development/guides/style#RF003): src directory doesn't need to be specified anymore (0.6+)
 - [`RF101`](https://learn.scientific-python.org/development/guides/style#RF101): Bugbear must be selected
-- [`RF102`](https://learn.scientific-python.org/development/guides/style#RF102): isort must be selected
 - [`RF103`](https://learn.scientific-python.org/development/guides/style#RF103): pyupgrade must be selected
 - `RF201`: Avoid using deprecated config settings
 - `RF202`: Use (new) lint config section

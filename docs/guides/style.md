@@ -276,7 +276,6 @@ won't tell you what or why it fixed things.
 [tool.ruff.lint]
 extend-select = [
   "B",      # flake8-bugbear
-  "I",      # isort
   "RUF",    # Ruff-specific
   "UP",     # pyupgrade
 ]
@@ -290,16 +289,11 @@ extend-select = [
 extend-select = [
   "ARG",    # flake8-unused-arguments
   "B",      # flake8-bugbear
-  "BLE",    # flake8-blind-except
   "C4",     # flake8-comprehensions
-  "DTZ",    # flake8-datetimez
   "EM",     # flake8-errmsg
   "EXE",    # flake8-executable
-  "FA",     # flake8-future-annotations
-  "FLY",    # flynt
   "FURB",   # refurb
   "G",      # flake8-logging-format
-  "I",      # isort
   "ICN",    # flake8-import-conventions
   "ISC",    # flake8-implicit-str-concat
   "LOG",    # flake8-logging
@@ -307,7 +301,6 @@ extend-select = [
   "PD",     # pandas-vet
   "PERF",   # perflint
   "PGH",    # pygrep-hooks
-  "PIE",    # flake8-pie
   "PL",     # pylint
   "PT",     # flake8-pytest-style
   "PTH",    # flake8-use-pathlib
@@ -323,7 +316,6 @@ extend-select = [
   "TC",     # flake8-type-checking
   "TRY",    # tryceratops
   "UP",     # pyupgrade
-  "YTT",    # flake8-2020
 ]
 ignore = [
   "PLR09",    # Too many <...>
@@ -407,11 +399,10 @@ Here are some good error codes to enable on most (but not all!) projects:
   stood the test of time. Not required if you use `extend-select` (`W` not
   needed if you use a formatter)
 - `B`: This finds patterns that are very bug-prone. {rr}`RF101`
-- `I`: This sorts your includes. There are multiple benefits, such as smaller
-  diffs, fewer conflicts, a way to auto-inject `__future__` imports, and easier
-  for readers to tell what's built-in, third-party, and local. It has a lot of
-  configuration options, but defaults to a Black-compatible style.
-  {rr}`RF102`
+- `I`: This sorts your includes (on by default since Ruff 0.16). Select this
+  group only if you also want `I002`, which can auto-inject imports, such as
+  `from __future__ import annotations`; it needs the
+  `lint.isort.required-imports` setting.
 - `ARG`: This looks for unused arguments. You might need to `# noqa: ARG001`
   occasionally, but it's overall pretty useful.
 - `C4`: This looks for places that could use comprehensions, and can autofix
