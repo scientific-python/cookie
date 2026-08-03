@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.0"
+  rev: "v0.16.1"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -216,7 +216,7 @@ your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.0"
+  rev: "v0.16.1"
   hooks:
     - id: ruff-format
       types_or: [python, pyi, jupyter, markdown, pyproject]
@@ -256,7 +256,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.0"
+  rev: "v0.16.1"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -670,7 +670,7 @@ additional_dependencies: [attrs==23.1.0]
 :sync: pyrefly
 ```yaml
 - repo: https://github.com/facebook/pyrefly-pre-commit
-  rev: "1.1.1"
+  rev: "1.2.0"
   hooks:
     - id: pyrefly-check
 ```
@@ -683,7 +683,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.63"
+  rev: "v0.0.65"
   hooks:
     - id: ty
 ```

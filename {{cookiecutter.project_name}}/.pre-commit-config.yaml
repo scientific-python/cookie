@@ -37,7 +37,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.16.0"
+    rev: "v0.16.1"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -113,7 +113,7 @@ repos:
 {%- if cookiecutter.__ci == "github" %}
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: "v1.28.0"
+    rev: "v1.29.0"
     hooks:
       - id: zizmor
 {%- endif %}
