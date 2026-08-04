@@ -102,6 +102,9 @@ def get_families(
     setupcfg: ConfigParser | None = None,
 ) -> dict[str, Family]:
     return {
+        "dependency-updating": Family(
+            name="Dependency Updating",
+        ),
         "general": Family(
             name="General",
             order=-3,
@@ -123,6 +126,9 @@ def get_families(
         ),
         "mypy": Family(
             name="MyPy",
+        ),
+        "renovate": Family(
+            name="Renovate",
         ),
         "ruff": Family(
             name="Ruff",
