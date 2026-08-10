@@ -67,7 +67,7 @@ jobs:
           # Disable caching to avoid poisoning published wheels
           enable-cache: false
 
-      - uses: pypa/cibuildwheel@v4.1
+      - uses: pypa/cibuildwheel@v4.2
 
       - name: Upload wheels
         uses: actions/upload-artifact@v7
