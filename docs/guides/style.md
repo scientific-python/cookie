@@ -424,7 +424,9 @@ Here are some good error codes to enable on most (but not all!) projects:
 - `RUF`: Codes specific to Ruff, including removing noqa's that aren't used.
 - `T20`: Disallow `print` in your code (built on the assumption that it's a
   common debugging tool).
-- `UP`: Upgrade old Python syntax to your `target-version`. {rr}`RF103`
+- `UP`: Upgrade old Python syntax to your `target-version`. Ruff 0.16 turns most
+  of these on by default; select the group to also get the few remaining rules,
+  such as `UP015` (redundant open modes).
 - `FURB`: From the refurb tool, a collection of helpful cleanups.
 - `PYI`: Typing related checks
 

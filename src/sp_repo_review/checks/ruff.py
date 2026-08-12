@@ -157,13 +157,6 @@ class RF101(RF1xx):
     name = "flake8-bugbear"
 
 
-class RF103(RF1xx):
-    "pyupgrade must be selected"
-
-    code = "UP"
-    name = "pyupgrade"
-
-
 class RF2xxMixin(Protocol):
     @staticmethod
     def iter_check(ruff: dict[str, Any]) -> Generator[str, None, None]: ...
