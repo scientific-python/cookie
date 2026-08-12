@@ -273,20 +273,17 @@ won't tell you what or why it fixed things.
 :::{tab-item} Simple config
 
 ```ini
-[tool.ruff.lint]
-extend-select = [
-  "B",      # flake8-bugbear
-  "RUF",    # Ruff-specific
-  "UP",     # pyupgrade
-]
+[tool.ruff]
+show-fixes = true
 ```
 
 :::
 :::{tab-item} Full config
 
 ```ini
-[tool.ruff.lint]
-extend-select = [
+[tool.ruff]
+show-fixes = true
+lint.extend-select = [
   "ARG",    # flake8-unused-arguments
   "B",      # flake8-bugbear
   "C4",     # flake8-comprehensions
@@ -317,11 +314,11 @@ extend-select = [
   "TRY",    # tryceratops
   "UP",     # pyupgrade
 ]
-ignore = [
+lint.ignore = [
   "PLR09",    # Too many <...>
   "PLR2004",  # Magic value used in comparison
 ]
-typing-modules = ["mypackage._compat.typing"]
+lint.typing-modules = ["mypackage._compat.typing"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
@@ -364,8 +361,7 @@ typing-modules = ["mypackage._compat.typing"]
 Ruff [provides dozens of rule sets](https://beta.ruff.rs/docs/rules/); you can
 select what you want from these. Like Flake8, plugins match by whole letter
 sequences (with the special exception of pylint's "PL" shortcut), then you can
-also include leading or whole error codes. Codes starting with 9 must be
-selected explicitly, with at least the letters followed by a 9. You can also
+also include leading or whole error codes. You can also
 ignore certain error codes via `ignore`. You can also set codes per paths to
 ignore in `per-file-ignores`. If you don't like certain auto-fixes, you can
 disable auto-fixing for specific error codes via `unfixable`.
@@ -386,7 +382,7 @@ If you don't use a `[project]` table (older setuptools or Poetry), then you
 should also set:
 
 ```ini
-target-version = "py39"
+target-version = "py310"
 ```
 
 This selects the minimum version you want to target (primarily for `"UP"` and
