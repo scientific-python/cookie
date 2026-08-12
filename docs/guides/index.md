@@ -60,6 +60,5 @@ WebAssembly! All checks point to a linked badge in the guide.
 [sp-repo-review]:           https://pypi.org/project/sp-repo-review
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
 
-
 ```{tableofcontents}
 ```

@@ -10,6 +10,5 @@ suite for your project.
 [Design recommendations]: /principles/design.md
 [Testing recommendations]: /principles/testing.md
 
-
 ```{tableofcontents}
 ```
