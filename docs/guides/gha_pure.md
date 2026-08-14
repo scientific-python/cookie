@@ -111,7 +111,7 @@ pre-upload checks & nice GitHub summaries.
 ```yaml
 steps:
   - uses: actions/checkout@v7
-  - uses: hynek/build-and-inspect-python-package@v2
+  - uses: hynek/build-and-inspect-python-package@v3.0.1
 ```
 
 The artifact it produces is named `Packages`, so that's what you need to use
@@ -215,7 +215,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: hynek/build-and-inspect-python-package@v2
+      - uses: hynek/build-and-inspect-python-package@v3.0.1
 
   publish:
     needs: [dist]
@@ -266,7 +266,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: hynek/build-and-inspect-python-package@v2
+      - uses: hynek/build-and-inspect-python-package@v3.0.1
 
   publish:
     needs: [dist]
