@@ -179,7 +179,7 @@ upload_all:
         merge-multiple: true
 
     - name: Generate artifact attestations
-      uses: actions/attest-build-provenance@v4
+      uses: actions/attest@v4
       with:
         subject-path: "dist/*"
 
