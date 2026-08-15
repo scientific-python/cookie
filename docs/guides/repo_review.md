@@ -23,9 +23,9 @@ pipx run 'sp-repo-review[cli]' <path to repo>
   "url_sync": true,
   "deps": [
     "repo-review~=1.2.1",
-    "sp-repo-review==2026.06.18",
+    "sp-repo-review==2026.08.14",
     "validate-pyproject[all]~=0.25.0",
-    "validate-pyproject-schema-store==2026.06.14",
+    "validate-pyproject-schema-store==2026.08.14",
   ]
 }
 :::
