@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.2"
+  rev: "v0.16.4"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -216,7 +216,7 @@ your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.2"
+  rev: "v0.16.4"
   hooks:
     - id: ruff-format
       types_or: [python, pyi, jupyter, markdown, pyproject]
@@ -256,7 +256,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.2"
+  rev: "v0.16.4"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -640,7 +640,7 @@ The pre-commit addition for type checking:
 :sync: mypy
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v2.3.0"
+  rev: "v2.3.1"
   hooks:
     - id: mypy
       files: src
@@ -672,7 +672,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.69"
+  rev: "v0.0.74"
   hooks:
     - id: ty
 ```
@@ -1007,7 +1007,7 @@ If you have shell scripts, you can protect against common mistakes using
 
 ```yaml
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: "v0.11.0.1"
+  rev: "v0.11.0.1-1"
   hooks:
     - id: shellcheck
 ```
@@ -1053,7 +1053,7 @@ validate-pyproject-schema-store plugin. Using it looks like this:
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
-  rev: "v0.25"
+  rev: "0.26"
   hooks:
     - id: validate-pyproject
       additional_dependencies: ["validate-pyproject-schema-store[all]"]

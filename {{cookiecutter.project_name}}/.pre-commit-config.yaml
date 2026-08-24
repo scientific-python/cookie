@@ -37,7 +37,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.16.2"
+    rev: "v0.16.4"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -55,7 +55,7 @@ repos:
 {%- endif %}
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v2.3.0"
+    rev: "v2.3.1"
     hooks:
       - id: mypy
         files: src|tests|noxfile.py
@@ -72,7 +72,7 @@ repos:
           - tomli; python_version<'3.11'
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: "v0.11.0.1"
+    rev: "v0.11.0.1-1"
     hooks:
       - id: shellcheck
 
@@ -94,7 +94,7 @@ repos:
 {%- endif %}
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: "v0.25"
+    rev: "0.26"
     hooks:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
