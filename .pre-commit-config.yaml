@@ -23,7 +23,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.16.4"
+    rev: "v0.16.5"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -60,19 +60,19 @@ repos:
         types_or: [yaml, html, css, scss, javascript, json]
 
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: "v0.2.60"
+    rev: "v0.2.62"
     hooks:
       - id: rumdl
         args: [--no-exclude] # Disable all exclude patterns
 
   - repo: https://github.com/crate-ci/typos
-    rev: "v1.49.0"
+    rev: "v1.50.0"
     hooks:
       - id: typos
         exclude: ^Gemfile\.lock$
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: "v1.29.0"
+    rev: "v1.30.0"
     hooks:
       - id: zizmor
 

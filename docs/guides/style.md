@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.4"
+  rev: "v0.16.5"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -216,7 +216,7 @@ your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.4"
+  rev: "v0.16.5"
   hooks:
     - id: ruff-format
       types_or: [python, pyi, jupyter, markdown, pyproject]
@@ -256,7 +256,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.4"
+  rev: "v0.16.5"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -568,7 +568,7 @@ pre-commit config will work:
 
 ```yaml
 - repo: https://github.com/PyCQA/isort
-  rev: "8.0.1"
+  rev: "9.0.1"
   hooks:
     - id: isort
 ```
@@ -672,7 +672,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.74"
+  rev: "v0.0.75"
   hooks:
     - id: ty
 ```
@@ -909,7 +909,7 @@ integration.
 
 ```yaml
 - repo: https://github.com/crate-ci/typos
-  rev: "v1.49.0"
+  rev: "v1.50.0"
   hooks:
     - id: typos
       args: []
@@ -990,7 +990,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v22.1.8"
+  rev: "v23.1.0"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]

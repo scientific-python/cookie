@@ -37,7 +37,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.16.4"
+    rev: "v0.16.5"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -47,7 +47,7 @@ repos:
 {%- if cookiecutter.backend in ["pybind11", "skbuild", "mesonpy"] %}
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: "v22.1.8"
+    rev: "v23.1.0"
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]
@@ -113,7 +113,7 @@ repos:
 {%- if cookiecutter.__ci == "github" %}
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: "v1.29.0"
+    rev: "v1.30.0"
     hooks:
       - id: zizmor
 {%- endif %}
