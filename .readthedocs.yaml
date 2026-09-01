@@ -16,6 +16,9 @@ build:
     # Redirect the old /guides/mypy/ URL to /guides/typing/
     - mkdir -p docs/_build/html/guides/mypy
     - cp redirect-stubs/guides/mypy/index.html docs/_build/html/guides/mypy/index.html
+    # Redirect the retired classic-packaging guide to the current guide
+    - mkdir -p docs/_build/html/guides/packaging-classic
+    - cp redirect-stubs/guides/packaging-classic/index.html docs/_build/html/guides/packaging-classic/index.html
     # Copy the output to Read the Docs expected location
     - mkdir -p $READTHEDOCS_OUTPUT/html/
     - cp -r docs/_build/html/. "$READTHEDOCS_OUTPUT/html"
