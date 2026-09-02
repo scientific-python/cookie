@@ -46,7 +46,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run sp-repo-review action
-        uses: ./
+        uses: $/
 
   cog:
     name: Run cog on README

@@ -14,36 +14,51 @@ concurrency:
 permissions: {}
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: j178/prek-action@4e14d07f9231acabce116ccfca13b13dd9755ece # v3.0.0
+
   change-detection:
     permissions:
       contents: read
       pull-requests: read
-    uses: ./.github/workflows/reusable-change-detection.yml
+    uses: $/.github/workflows/reusable-change-detection.yml
 
   cookie:
     needs: change-detection
     if: fromJSON(needs.change-detection.outputs.run-cookie)
     permissions:
       contents: read
-    uses: ./.github/workflows/reusable-cookie.yml
+    uses: $/.github/workflows/reusable-cookie.yml
 
   rr-tests:
     needs: change-detection
     if: fromJSON(needs.change-detection.outputs.run-rr)
     permissions:
       contents: read
-    uses: ./.github/workflows/reusable-rr-tests.yml
+    uses: $/.github/workflows/reusable-rr-tests.yml
 
   docs:
     needs: change-detection
     if: fromJSON(needs.change-detection.outputs.run-docs)
     permissions:
       contents: read
-    uses: ./.github/workflows/reusable-docs.yml
+    uses: $/.github/workflows/reusable-docs.yml
 
   pass:
     if: always()
     needs:
+      - lint
       - change-detection
       - cookie
       - rr-tests
