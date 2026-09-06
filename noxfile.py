@@ -203,7 +203,7 @@ def diff_files(p1: Path, p2: Path) -> bool:
 @nox.parametrize("vcs", [False, True], ids=["novcs", "vcs"])
 @nox.parametrize("backend", BACKENDS, ids=BACKENDS)
 def lint(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> None:
-    session.install("cookiecutter", "prek")
+    session.install(f"{DIR}[cli]", "cookiecutter", "prek")
 
     tmp_dir = session.create_tmp()
     session.cd(tmp_dir)
@@ -217,6 +217,7 @@ def lint(session: nox.Session, backend: str, vcs: bool, docs: Docs) -> None:
         "--hook-stage=manual",
         "--show-diff-on-failure",
     )
+    session.run("sp-repo-review", ".")
 
 
 @nox.session(default=False)
