@@ -9,10 +9,10 @@ for your `CONTRIBUTING.md`, and at least glance through other sections.
 
 Following that, there are recommendations for [style][], intended to promote
 good practices and to ensure continuity across the packages. There is a
-[dedicated page for static type checking with MyPy][mypy]. There is then a guide
-on [simple packaging][], [compiled packaging][], or even [classic packaging][],
-which should help in ensuring a consistent developer and user experience when
-working with distribution.
+[dedicated page for static type checking with MyPy][mypy]. There are then
+guides on [simple packaging][] and [compiled packaging][], which should help in
+ensuring a consistent developer and user experience when working with
+distribution.
 
 A section on CI follows, with a [general setup guide][gha_basic], and then two
 choices for using CI to distribute your package, one for
@@ -42,7 +42,6 @@ WebAssembly! All checks point to a linked badge in the guide.
 [docs]:               /guides/docs.md
 [simple packaging]:   /guides/packaging_simple.md
 [compiled packaging]: /guides/packaging_compiled.md
-[classic packaging]:  /guides/packaging_classic.md
 [coverage]:           /guides/coverage.md
 [gha_basic]:          /guides/gha_basic.md
 [gha_pure]:           /guides/gha_pure.md
