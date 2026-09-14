@@ -68,7 +68,7 @@ it as a pre-commit hook or as a GitHub Action:
 
 ```yaml
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: "v1.30.0"
+  rev: "v1.30.1"
   hooks:
     - id: zizmor
 ```
