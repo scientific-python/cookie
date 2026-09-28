@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.7"
+  rev: "v0.16.9"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -216,7 +216,7 @@ your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.7"
+  rev: "v0.16.9"
   hooks:
     - id: ruff-format
       types_or: [python, pyi, jupyter, markdown, pyproject]
@@ -256,7 +256,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.7"
+  rev: "v0.16.9"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -496,7 +496,7 @@ the flake8 addition for pre-commit, with the `bugbear` plugin:
 
 ```yaml
 - repo: https://github.com/pycqa/flake8
-  rev: "7.3.0"
+  rev: "7.4.1"
   hooks:
     - id: flake8
       additional_dependencies: [flake8-bugbear]
@@ -659,7 +659,7 @@ additional_dependencies: [attrs==23.1.0]
 :sync: pyrefly
 ```yaml
 - repo: https://github.com/facebook/pyrefly-pre-commit
-  rev: "1.3.0"
+  rev: "1.3.1"
   hooks:
     - id: pyrefly-check
 ```
@@ -672,7 +672,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.80"
+  rev: "v0.0.84"
   hooks:
     - id: ty
 ```
@@ -909,7 +909,7 @@ integration.
 
 ```yaml
 - repo: https://github.com/crate-ci/typos
-  rev: "v1.50.1"
+  rev: "v1.50.3"
   hooks:
     - id: typos
       args: []
@@ -1019,7 +1019,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.9.6"
+  rev: "v3.9.9"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
@@ -1067,7 +1067,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.38.0"
+  rev: "0.38.2"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
