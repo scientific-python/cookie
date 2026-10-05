@@ -19,7 +19,7 @@ class SEC001(Security):
     url = mk_url("security")
 
     @staticmethod
-    def check(precommit: dict[str, Any], workflows: dict[str, Any]) -> bool:
+    def check(precommit: dict[str, Any], workflows: dict[str, Any]) -> bool | str:
         """
         Projects with GitHub Actions should statically analyze their workflows
         with [zizmor](https://docs.zizmor.sh), which catches common security
@@ -36,11 +36,14 @@ class SEC001(Security):
         You can also run it as the `zizmorcore/zizmor-action` GitHub Action.
         """
         for repo_item in precommit.get("repos", []):
-            if (
-                repo_item.get("repo", "").lower()
-                == "https://github.com/zizmorcore/zizmor-pre-commit"
-            ):
-                return True
+            match repo_item.get("repo", "").lower():
+                case "https://github.com/zizmorcore/zizmor-pre-commit":
+                    return True
+                case "https://github.com/woodruffw/zizmor-pre-commit" as repo:
+                    return (
+                        "Use `https://github.com/zizmorcore/zizmor-pre-commit` "
+                        f"instead of `{repo}` in `.pre-commit-config.yaml`"
+                    )
         for workflow in workflows.values():
             for job in workflow.get("jobs", {}).values():
                 if not isinstance(job, dict):

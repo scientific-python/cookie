@@ -39,3 +39,18 @@ def test_sec001_missing() -> None:
         """
     )
     assert not compute_check("SEC001", precommit=precommit, workflows={"ci": {}}).result
+
+
+def test_sec001_rename() -> None:
+    precommit = yaml.safe_load(
+        """
+        repos:
+          - repo: https://github.com/woodruffw/zizmor-pre-commit
+            rev: v1.5.0
+            hooks:
+              - id: zizmor
+        """
+    )
+    res = compute_check("SEC001", precommit=precommit, workflows={"ci": {}})
+    assert not res.result
+    assert "instead of `https://github.com/woodruffw/zizmor-pre-commit`" in res.err_msg
