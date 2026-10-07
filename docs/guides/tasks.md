@@ -76,7 +76,7 @@ customize the versions of Python prepared for you, then use input like this:
 ```yaml
 - uses: wntrblm/nox@2026.08.17
   with:
-    python-versions: "3.10, 3.11, 3.12, 3.13, 3.13t, 3.14, 3.14t, pypy-3.11"
+    python-versions: "3.11, 3.12, 3.13, 3.13t, 3.14, 3.14t, pypy-3.11"
 ```
 
 ### Introduction
@@ -127,7 +127,7 @@ You can parametrize sessions. either on Python or on any other item.
 
 ```python
 # Shortcut to parametrize Python
-@nox.session(python=["3.10", "3.11", "3.12", "3.13", "3.14"])
+@nox.session(python=["3.11", "3.12", "3.13", "3.14"])
 def my_session(session: nox.Session) -> None: ...
 
 

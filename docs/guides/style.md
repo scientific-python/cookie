@@ -382,7 +382,7 @@ If you don't use a `[project]` table (older setuptools or Poetry), then you
 should also set:
 
 ```ini
-target-version = "py310"
+target-version = "py311"
 ```
 
 This selects the minimum version you want to target (primarily for `"UP"` and
@@ -701,7 +701,7 @@ this:
 ```ini
 [tool.mypy]
 files = "src"
-python_version = "3.10"
+python_version = "3.11"
 strict = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 warn_unreachable = true
@@ -737,7 +737,7 @@ errors in your typing.
 ```toml
 [tool.pyrefly]
 project-includes = ["src"]
-python-version = "3.10"
+python-version = "3.11"
 project-excludes = ["**/tests"]
 
 # Use `Any` for imports that can't be resolved, one entry per module
@@ -768,7 +768,7 @@ You can disable Pyrefly on a line with `# pyrefly: ignore` (or
 
 ```toml
 [tool.ty.environment]
-python-version = "3.10"
+python-version = "3.11"
 
 [tool.ty.src]
 include = ["src"]
@@ -1086,7 +1086,7 @@ started:
 
 ```ini
 [tool.pylint]
-py-version = "3.10"
+py-version = "3.11"
 jobs = "0"
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
