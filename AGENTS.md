@@ -67,7 +67,7 @@ The noxfile generates temporary projects for **all 9 backends** × **vcs on/off*
 
 - CI uses change detection to decide whether to run cookie tests or rr-tests.
   Both are required to pass for the `pass` job.
-- rr-tests matrix runs on Python 3.10, 3.12, 3.14 across ubuntu/macos/windows.
+- rr-tests matrix runs on Python 3.10, 3.12, 3.14, 3.15 across ubuntu/macos/windows.
 - Cookie tests reuse the same `reusable-cookie.yml` workflow.
 
 ## Docs site (MyST)
