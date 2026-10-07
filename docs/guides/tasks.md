@@ -309,7 +309,7 @@ You can install `uv` with `pipx`, `brew`, etc. If you want to use uv in GitHub
 Actions, one way is to use this:
 
 ```yaml
-- uses: astral-sh/setup-uv@v10.1.0
+- uses: astral-sh/setup-uv@v10.2.0
 ```
 
 Check your jobs with `uv`; most things do not need to change. The main
