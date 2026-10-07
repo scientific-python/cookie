@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any
 from . import mk_url
 
 if TYPE_CHECKING:
-    from .._compat.importlib.resources.abc import Traversable
+    from importlib.resources.abc import Traversable
 
 # PY: Python Project
 ## 0xx: File existence

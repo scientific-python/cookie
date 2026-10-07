@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING
 from . import mk_url
 
 if TYPE_CHECKING:
-    from .._compat.importlib.resources.abc import Traversable
+    from importlib.resources.abc import Traversable
 
 
 def setupcfg(root: Traversable) -> configparser.ConfigParser | None:

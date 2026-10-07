@@ -9,7 +9,7 @@ authors = [
   { name = "Henry Schreiner", email = "henryfs@princeton.edu" },
 ]
 description = "Review repos for compliance to the Scientific-Python development guidelines"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "BSD-3-Clause"
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -19,7 +19,6 @@ classifiers = [
   "Intended Audience :: Science/Research",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
@@ -35,7 +34,6 @@ dynamic = ["version", "readme"]
 dependencies = [
   "pyyaml",
   "repo-review",
-  "tomli; python_version<'3.11'",
 ]
 
 [project.optional-dependencies]
@@ -135,7 +133,7 @@ testpaths = ["tests"]
 [tool.mypy]
 mypy_path = ["src"]
 files = ["src", "tests"]
-python_version = "3.10"
+python_version = "3.11"
 warn_unused_configs = true
 strict = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
@@ -150,7 +148,7 @@ disallow_incomplete_defs = true
 
 
 [tool.pylint]
-master.py-version = "3.10"
+master.py-version = "3.11"
 master.ignore-paths= ["src/sp_repo_review/_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
@@ -193,12 +191,7 @@ ignore = [
   "TID252", # Relative imports are fine
 ]
 
-[tool.ruff.lint.flake8-tidy-imports.banned-api]
-"importlib.abc".msg = "Use sp_repo_review._compat.importlib.resources.abc instead."
-"importlib.resources.abc".msg = "Use sp_repo_review._compat.importlib.resources.abc instead."
-
 [tool.ruff.lint.per-file-ignores]
-"src/sp_repo_review/_compat/**.py" = ["TID251"]
 "src/sp_repo_review/checks/*.py" = ["ERA001"]
 "src/sp_repo_review/ruff_checks/__main__.py" = ["PLC0415", "T20"]
 "tests/**" = ["ANN", "INP001", "S607"]
