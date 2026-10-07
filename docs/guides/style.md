@@ -882,8 +882,6 @@ If you want a Python based tool, [codespell] is the classic tool used.
   rev: "v2.4.3"
   hooks:
     - id: codespell
-      additional_dependencies:
-        - tomli; python_version<'3.11'
 ```
 
 You can list allowed spellings in a comma separated string passed to `-L` (or

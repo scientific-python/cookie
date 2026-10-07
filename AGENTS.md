@@ -22,13 +22,16 @@ Important: tests run with `PYTHONWARNDEFAULTENCODING=1`.
 
 ### Cookie template validation
 
-The noxfile generates temporary projects for **all 9 backends** × **vcs on/off**
-× **3 docs engines** (sphinx/properdocs/zensical). These are slow.
+The noxfile generates temporary projects for **all 10 backends** × **vcs
+on/off** × **3 docs engines** (sphinx/properdocs/zensical). These are slow.
+Session names include all three, like `tests(hatch, vcs, sphinx)`.
 
-- `nox -s "tests(hatch)"` — run generated project tests for a single backend
-- `nox -s "lint(hatch)"` — run pre-commit (`prek`) on generated project
-- `nox -s "dist(hatch)"` — verify build output includes LICENSE
-- `nox -s "native(hatch)"` — test hatch/pdm/poetry native test runners
+- `nox -s "tests(hatch, vcs, sphinx)"` — run generated project tests
+- `nox -s "lint(hatch, vcs, sphinx)"` — run pre-commit (`prek`) on generated
+  project
+- `nox -s "dist(hatch, vcs, sphinx)"` — verify build output includes LICENSE
+- `nox -s "native(hatch, vcs, sphinx)"` — test hatch/pdm/poetry native test
+  runners
 - `nox -s compare_copier` — verify cookiecutter and copier produce identical
   files
 - `nox -s compare_cruft` — verify cookiecutter and cruft produce identical files
