@@ -4,7 +4,7 @@ __lazy_modules__ = [
     "collections.abc",
     "os",
     "pathlib",
-    "sp_repo_review._compat",
+    "tomllib",
     "sp_repo_review.checks",
     "sp_repo_review.checks.ruff",
     "sys",
@@ -17,11 +17,11 @@ import importlib.resources
 import json
 import os
 import sys
+import tomllib
 from collections.abc import Iterator, Mapping
 from importlib.util import find_spec
 from pathlib import Path
 
-from sp_repo_review._compat import tomllib
 from sp_repo_review.checks.ruff import get_rule_selection, ruff
 
 # Create using ruff linter --output-format=json > src/sp_repo_review/ruff/linter.json

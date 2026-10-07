@@ -106,7 +106,7 @@ tests:
     fail-fast: false
     matrix:
       python-version:
-        - "3.10"
+        - "3.11"
         - "3.12"
         - "3.14"
   name: Check Python ${{ matrix.python-version }}

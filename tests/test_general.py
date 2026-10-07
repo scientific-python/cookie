@@ -1,9 +1,9 @@
+import tomllib
 from pathlib import Path
 
 import pytest
 from repo_review.testing import compute_check
 
-from sp_repo_review._compat import tomllib
 from sp_repo_review.checks.general import PY007_VALID_RUNNER_CONFS
 
 

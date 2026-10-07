@@ -260,8 +260,8 @@ rand = "0.9.2"
 [dependencies.pyo3]
 version = "0.27.2"
 # "extension-module" tells pyo3 we want to build an extension module (skips linking against libpython.so)
-# "abi3-py310" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.10
-features = ["extension-module", "abi3-py310"]
+# "abi3-py311" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.11
+features = ["extension-module", "abi3-py311"]
 ```
 <!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
