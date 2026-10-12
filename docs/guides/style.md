@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.10"
+  rev: "v0.17.0"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -176,7 +176,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "26.10.0"
+  rev: "26.10.1"
   hooks:
     - id: black
 ```
@@ -216,7 +216,7 @@ your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.10"
+  rev: "v0.17.0"
   hooks:
     - id: ruff-format
       types_or: [python, pyi, jupyter, markdown, pyproject]
@@ -256,7 +256,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.16.10"
+  rev: "v0.17.0"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -591,7 +591,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.21.2"
+  rev: "v3.22.0"
   hooks:
     - id: pyupgrade
       args: ["--py39-plus"]
@@ -672,7 +672,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.84"
+  rev: "v0.0.86"
   hooks:
     - id: ty
 ```
@@ -857,7 +857,7 @@ important parts (like Python classifiers) are in sync. This tool,
 
 ```yaml
 - repo: https://github.com/asottile/setup-cfg-fmt
-  rev: "v3.2.0"
+  rev: "v3.3.0"
   hooks:
     - id: setup-cfg-fmt
       args: [--include-version-classifiers, --max-py-version=3.12]
@@ -907,7 +907,7 @@ integration.
 
 ```yaml
 - repo: https://github.com/crate-ci/typos
-  rev: "v1.50.3"
+  rev: "v1.51.1"
   hooks:
     - id: typos
       args: []
@@ -988,7 +988,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v23.1.2"
+  rev: "v23.1.3"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -1017,7 +1017,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.9.9"
+  rev: "v3.9.10"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
