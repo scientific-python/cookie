@@ -199,7 +199,7 @@ class GH200(GitHub):
     url = mk_url("gha-basic")
 
     @staticmethod
-    def check(dependabot: dict[str, Any]) -> bool:
+    def check(dependabot: dict[str, Any]) -> bool | None:
         """
         All projects should have a `.github/dependabot.yml` file to support at least
         GitHub Actions regular updates. Something like this:
@@ -214,6 +214,8 @@ class GH200(GitHub):
               interval: "weekly"
         ```
         """
+        if not dependabot:
+            return None
         return bool(dependabot)
 
 
