@@ -23,7 +23,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.16.10"
+    rev: "v0.17.0"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -53,19 +53,19 @@ repos:
           - types-PyYAML
 
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: "v3.9.9"
+    rev: "v3.9.10"
     hooks:
       - id: prettier
         types_or: [yaml, html, css, scss, javascript, json]
 
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: "v0.2.78"
+    rev: "v0.2.79"
     hooks:
       - id: rumdl
         args: [--no-exclude] # Disable all exclude patterns
 
   - repo: https://github.com/crate-ci/typos
-    rev: "v1.50.3"
+    rev: "v1.51.1"
     hooks:
       - id: typos
         exclude: ^Gemfile\.lock$
