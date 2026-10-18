@@ -1,8 +1,8 @@
 ---
-short_title: GitHub Actions for pure Python wheels
+short_title: Pure Python projects
 ---
 
-# GitHub Actions: Pure Python wheels
+# GitHub Actions: Pure Python projects
 
 We will cover binary wheels [on the next page][], but if you do not have a
 compiled extension, this is called a universal (pure Python) package, and the
@@ -26,7 +26,7 @@ reasons that a wheel is better than only providing an sdist:
   is going to go
 :::
 
-[on the next page]: guides/gha-wheels
+[on the next page]: /guides/gha_wheels.md
 
 ## Job setup
 
@@ -111,7 +111,7 @@ pre-upload checks & nice GitHub summaries.
 ```yaml
 steps:
   - uses: actions/checkout@v7
-  - uses: hynek/build-and-inspect-python-package@v2
+  - uses: hynek/build-and-inspect-python-package@v3.0.1
 ```
 
 The artifact it produces is named `Packages`, so that's what you need to use
@@ -142,7 +142,7 @@ publish:
         path: dist
 
     - name: Generate artifact attestation for sdist and wheel
-      uses: actions/attest-build-provenance@v4
+      uses: actions/attest@v4
       with:
         subject-path: "dist/*"
 
@@ -215,7 +215,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: hynek/build-and-inspect-python-package@v2
+      - uses: hynek/build-and-inspect-python-package@v3.0.1
 
   publish:
     needs: [dist]
@@ -234,7 +234,7 @@ jobs:
           path: dist
 
       - name: Generate artifact attestation for sdist and wheel
-        uses: actions/attest-build-provenance@v4
+        uses: actions/attest@v4
         with:
           subject-path: "dist/*"
 
@@ -266,7 +266,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: hynek/build-and-inspect-python-package@v2
+      - uses: hynek/build-and-inspect-python-package@v3.0.1
 
   publish:
     needs: [dist]

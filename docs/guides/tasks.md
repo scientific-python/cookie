@@ -65,7 +65,7 @@ On GitHub Actions or Azure, pipx is available by default, so you should use
 action:
 
 ```yaml
-- uses: wntrblm/nox@2026.04.10
+- uses: wntrblm/nox@2026.08.17
 ```
 
 You can now access all current versions of Python from nox. At least in GitHub
@@ -74,9 +74,9 @@ your logs, or set `env: FORCE_COLOR: 3`[^force_color]. If you'd like to
 customize the versions of Python prepared for you, then use input like this:
 
 ```yaml
-- uses: wntrblm/nox@2026.04.10
+- uses: wntrblm/nox@2026.08.17
   with:
-    python-versions: "3.10, 3.11, 3.12, 3.13, 3.13t, 3.14, 3.14t, pypy-3.11"
+    python-versions: "3.11, 3.12, 3.13, 3.13t, 3.14, 3.14t, pypy-3.11"
 ```
 
 ### Introduction
@@ -127,7 +127,7 @@ You can parametrize sessions. either on Python or on any other item.
 
 ```python
 # Shortcut to parametrize Python
-@nox.session(python=["3.10", "3.11", "3.12", "3.13", "3.14"])
+@nox.session(python=["3.11", "3.12", "3.13", "3.14"])
 def my_session(session: nox.Session) -> None: ...
 
 
@@ -309,7 +309,7 @@ You can install `uv` with `pipx`, `brew`, etc. If you want to use uv in GitHub
 Actions, one way is to use this:
 
 ```yaml
-- uses: astral-sh/setup-uv@v8.3.0
+- uses: astral-sh/setup-uv@v10.3.0
 ```
 
 Check your jobs with `uv`; most things do not need to change. The main

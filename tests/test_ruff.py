@@ -68,27 +68,7 @@ def test_rf101_selected():
 
 
 def test_rf101_missing():
-    assert not compute_check("RF101", ruff={"lint": {"select": ["I"]}}).result
-
-
-def test_rf102_selected():
-    assert compute_check("RF102", ruff={"lint": {"select": ["I"]}}).result
-
-
-def test_rf102_missing():
-    assert not compute_check("RF102", ruff={"lint": {"select": ["UP"]}}).result
-
-
-def test_rf103_selected():
-    assert compute_check("RF103", ruff={"lint": {"select": ["UP"]}}).result
-
-
-def test_rf103_selected_by_all():
-    assert compute_check("RF103", ruff={"lint": {"select": ["ALL"]}}).result
-
-
-def test_rf103_missing():
-    assert not compute_check("RF103", ruff={"lint": {"select": ["B"]}}).result
+    assert not compute_check("RF101", ruff={"lint": {"select": ["UP"]}}).result
 
 
 def test_rf201_no_deprecated_keys():

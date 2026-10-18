@@ -9,19 +9,19 @@ for your `CONTRIBUTING.md`, and at least glance through other sections.
 
 Following that, there are recommendations for [style][], intended to promote
 good practices and to ensure continuity across the packages. There is a
-[dedicated page for static type checking with MyPy][mypy]. There is then a guide
-on [simple packaging][], [compiled packaging][], or even [classic packaging][],
-which should help in ensuring a consistent developer and user experience when
-working with distribution. The [uv guide][] covers setting up a Python
-environment and performing common development tasks in an existing project using
-`uv`.
+[dedicated page for static type checking with MyPy][mypy]. There are then
+guides on [simple packaging][] and [compiled packaging][], which should help in
+ensuring a consistent developer and user experience when working with
+distribution. The [uv guide][] covers setting up a Python environment and
+performing common development tasks in an existing project using `uv`.
 
 A section on CI follows, with a [general setup guide][gha_basic], and then two
 choices for using CI to distribute your package, one for
 [pure Python][gha_pure], and one for [compiled extensions][gha_wheels]. You can
 read about setting up good tests on the [pytest page][pytest], with
-[coverage][]. There's also a page on setting up [docs][], as well as a page on
-[security][] best practices.
+[coverage][]. There's also a page on setting up [docs][], a page on
+[task runners][tasks], as well as pages on [security][] best practices and
+information on using [agentic AI][ai] responsibly.
 
 :::{tip} New project template
 Once you have completed the guidelines, there is a
@@ -37,21 +37,22 @@ your repository with the guidelines, runnable [right in the guide][] via
 WebAssembly! All checks point to a linked badge in the guide.
 :::
 
-[tutorials]:          tutorials/index
-[style]:              guides/style
-[mypy]:               guides/mypy
-[docs]:               guides/docs
-[simple packaging]:   guides/packaging-simple
-[compiled packaging]: guides/packaging-compiled
-[classic packaging]:  guides/packaging-classic
-[uv guide]:           guides/uv
-[coverage]:           guides/coverage
-[gha_basic]:          guides/gha-basic
-[gha_pure]:           guides/gha-pure
-[gha_wheels]:         guides/gha-wheels
-[security]:           guides/security
-[pytest]:             guides/pytest
-[right in the guide]: guides/repo-review
+[tutorials]:          /tutorials/index.md
+[style]:              /guides/style.md
+[mypy]:               /guides/typing.md
+[docs]:               /guides/docs.md
+[simple packaging]:   /guides/packaging_simple.md
+[compiled packaging]: /guides/packaging_compiled.md
+[uv guide]:           /guides/uv.md
+[coverage]:           /guides/coverage.md
+[gha_basic]:          /guides/gha_basic.md
+[gha_pure]:           /guides/gha_pure.md
+[gha_wheels]:         /guides/gha_wheels.md
+[security]:           /guides/security.md
+[tasks]:              /guides/tasks.md
+[ai]:                 /guides/ai.md
+[pytest]:             /guides/pytest.md
+[right in the guide]: /guides/repo_review.md
 
 [cookiecutter]:             https://cookiecutter.readthedocs.io
 [copier]:                   https://copier.readthedocs.io
@@ -59,7 +60,6 @@ WebAssembly! All checks point to a linked badge in the guide.
 [repo-review]:              https://repo-review.readthedocs.io
 [sp-repo-review]:           https://pypi.org/project/sp-repo-review
 [scientific-python/cookie]: https://github.com/scientific-python/cookie
-
 
 ```{tableofcontents}
 ```

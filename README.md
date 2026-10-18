@@ -18,7 +18,7 @@ templates for Python packages?
   clearly documented and every tool described, and everything is kept in sync.
 - Ten different backends to choose from for building packages.
 - Optional VCS versioning for most backends.
-- Selection for your preferred documentation engine (Sphinx, MkDocs, or
+- Selection for your preferred documentation engine (Sphinx, ProperDocs, or
   Zensical).
 - Template generation tested in GitHub Actions using nox.
 - Supports generation with [copier][], [cookiecutter][], and [cruft][].
@@ -128,7 +128,7 @@ Check the key setup files, `pyproject.toml`, and possibly `setup.cfg` and
 `setup.py` (pybind11 example). Update `README.md`. Also update and add docs to
 `docs/`.
 
-There are a few example dependencies and a minimum Python version of 3.10, feel
+There are a few example dependencies and a minimum Python version of 3.11, feel
 free to change it to whatever you actually need/want. There is also a basic
 backports structure with a small typing example.
 
@@ -329,6 +329,7 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`PY005`](https://learn.scientific-python.org/development/guides/packaging-simple#PY005): Has tests folder
 - [`PY006`](https://learn.scientific-python.org/development/guides/style#PY006): Has pre-commit config
 - [`PY007`](https://learn.scientific-python.org/development/guides/tasks#PY007): Supports an easy task runner (nox, tox, pixi, etc.)
+- [`PY008`](https://learn.scientific-python.org/development/guides/packaging-simple#PY008): Has a .gitignore file
 
 ### PyProject
 
@@ -387,7 +388,7 @@ Will not show up if using lefthook instead of pre-commit/prek.
 
 - [`PC100`](https://learn.scientific-python.org/development/guides/style#PC100): Has pre-commit-hooks
 - [`PC110`](https://learn.scientific-python.org/development/guides/style#PC110): Uses black or ruff-format
-- [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Uses blacken-docs
+- [`PC111`](https://learn.scientific-python.org/development/guides/style#PC111): Formats code in docs (ruff-format or blacken-docs)
 - [`PC140`](https://learn.scientific-python.org/development/guides/style#PC140): Uses a type checker
 - [`PC160`](https://learn.scientific-python.org/development/guides/style#PC160): Uses a spell checker
 - [`PC170`](https://learn.scientific-python.org/development/guides/style#PC170): Uses PyGrep hooks (only needed if rST present)
@@ -415,8 +416,6 @@ Will not show up if no `.readthedocs.yml`/`.readthedocs.yaml` file is present.
 - [`RF002`](https://learn.scientific-python.org/development/guides/style#RF002): Target version must be set
 - [`RF003`](https://learn.scientific-python.org/development/guides/style#RF003): src directory doesn't need to be specified anymore (0.6+)
 - [`RF101`](https://learn.scientific-python.org/development/guides/style#RF101): Bugbear must be selected
-- [`RF102`](https://learn.scientific-python.org/development/guides/style#RF102): isort must be selected
-- [`RF103`](https://learn.scientific-python.org/development/guides/style#RF103): pyupgrade must be selected
 - `RF201`: Avoid using deprecated config settings
 - `RF202`: Use (new) lint config section
 

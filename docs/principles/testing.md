@@ -12,9 +12,9 @@ the Features that your project provides. Then we will cover
 [Project Level Integration tests](#project-level-integration-tests), which test
 that the various parts of your package work together, and work with the other
 packages it depends on. Finally we will cover the venerable
-{ref}`Unit Test <unit-tests>`, which test the correctness of your code from a
-perspective internal to your codebase, tests individual units in isolation, and
-are optimized to run quickly and often.
+{ref}`Unit Test <unit-tests-principles>`, which test the correctness of your
+code from a perspective internal to your codebase, tests individual units in
+isolation, and are optimized to run quickly and often.
 
 These 3 test suites will cover the bulk of your testing needs and help get your
 project to a reliable and maintainable state. We will also discuss some more
@@ -69,8 +69,8 @@ the test-case to make sure it fails when the code is broken.
 
 A good place to start writing tests is from the perspective of a user of your
 module or library, as described in the [Test
-Tutorial](tutorials/test), and [Testing with pytest
-guide](guides/pytest). These tests follow the "Detroit
+Tutorial](/tutorials/test.md), and [Testing with pytest
+guide](/guides/pytest.md). These tests follow the "Detroit
 School", focusing on behavior, avoiding testing of private attributes,
 minimizing the use of mocks/patches/test-doubles.
 
@@ -97,11 +97,12 @@ Tests should be divided up into different Suites, which can be run independently
 of one another.
 
 Tests which "Fail Fast" save both developer and compute time. Some tests are by
-necessity very slow. {ref}`Unit Tests <unit-tests>` should run extremely quickly
-in just a few seconds at most, while [end-to-end](#end-to-end-tests) require
-time to set up and may depend on slow and unreliable external services. By
-organizing tests into suites based on execution time, you can run fast suites
-first and stop if an error is encountered before running slower suites.
+necessity very slow. {ref}`Unit Tests <unit-tests-principles>` should run
+extremely quickly in just a few seconds at most, while
+[end-to-end](#end-to-end-tests) require time to set up and may depend on slow
+and unreliable external services. By organizing tests into suites based on
+execution time, you can run fast suites first and stop if an error is
+encountered before running slower suites.
 
 ### Advantages of Test Suites
 
@@ -196,7 +197,7 @@ more extensive validation.
 
 The intended audience for these tests is developers working on the project.
 
-(unit-tests)=
+(unit-tests-principles)=
 
 ## Unit Tests
 
@@ -393,7 +394,7 @@ run unit tests in your source folder, from your package root, use
 your source repository), use `pytest --pyargs {package name}`.
 
 You can set the default test path in `pyproject.toml`, see: [Configuring
-pytest](guides/pytest#configuring-pytest)
+pytest](/guides/pytest.md#configuring-pytest)
 
 We recommend configuring pytest to run ONLY your fastest, least demanding test
 suite by default.

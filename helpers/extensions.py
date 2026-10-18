@@ -1,4 +1,4 @@
-import datetime
+import datetime as dt
 from collections.abc import Mapping
 
 from copier_templates_extensions import ContextHook
@@ -39,7 +39,7 @@ class CookiecutterContext(SmartDict):
 
 @CookiecutterContext.register
 def __year(_):
-    return str(datetime.datetime.now(tz=datetime.timezone.utc).year)
+    return str(dt.datetime.now(tz=dt.UTC).year)
 
 
 @CookiecutterContext.register

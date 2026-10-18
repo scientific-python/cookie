@@ -66,6 +66,48 @@ def test_pc111():
     assert compute_check("PC111", precommit=precommit).result
 
 
+def test_pc111_ruff_markdown():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/astral-sh/ruff-pre-commit
+            hooks:
+              - id: ruff-format
+                types_or: [python, pyi, jupyter, markdown, pyproject]
+    """)
+    assert compute_check("PC111", precommit=precommit).result
+
+
+def test_pc111_ruff_default_types():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/astral-sh/ruff-pre-commit
+            hooks:
+              - id: ruff-format
+    """)
+    assert compute_check("PC111", precommit=precommit).result
+
+
+def test_pc111_ruff_markdown_excluded():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/astral-sh/ruff-pre-commit
+            hooks:
+              - id: ruff-format
+                types_or: [python, pyi, jupyter]
+    """)
+    assert not compute_check("PC111", precommit=precommit).result
+
+
+def test_pc111_ruff_check_only():
+    precommit = yaml.safe_load("""
+        repos:
+          - repo: https://github.com/astral-sh/ruff-pre-commit
+            hooks:
+              - id: ruff-check
+    """)
+    assert not compute_check("PC111", precommit=precommit).result
+
+
 def test_pc111_rename():
     precommit = yaml.safe_load("""
         repos:

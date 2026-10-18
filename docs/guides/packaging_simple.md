@@ -175,8 +175,8 @@ support versioning.
 This is tool specific.
 
 - [Hatchling info here](https://hatch.pypa.io/latest/config/build/#file-selection).
-  Hatchling uses your VCS ignore file by default, so make sure it is accurate
-  (which is a good idea anyway).
+  {rr}`PY008` Hatchling uses your VCS ignore file by default, so make sure your
+  project has an accurate `.gitignore` file (which is a good idea anyway).
 - [Flit info here](https://flit.readthedocs.io/en/latest/pyproject_toml.html#sdist-section).
   Flit requires manual inclusion/exclusion in many cases, like using a dirty
   working directory.

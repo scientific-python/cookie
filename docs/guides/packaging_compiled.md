@@ -1,4 +1,4 @@
-# Packaging Compiled Projects
+# Compiled packaging
 
 <!-- [[[cog
 from cog_helpers import code_fence, render_cookie, TOMLMatcher
@@ -40,7 +40,7 @@ The most exciting developments have been new native build backends:
 
 :::{note}
 You should be familiar with [packing a pure Python
-project](guides/packaging-simple) - the metadata
+project](/guides/packaging_simple.md) - the metadata
 configuration is the same.
 :::
 There are also classic setuptools plugins:
@@ -260,8 +260,8 @@ rand = "0.9.2"
 [dependencies.pyo3]
 version = "0.27.2"
 # "extension-module" tells pyo3 we want to build an extension module (skips linking against libpython.so)
-# "abi3-py310" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.10
-features = ["extension-module", "abi3-py310"]
+# "abi3-py311" tells pyo3 (and maturin) to build using the stable ABI with minimum Python version 3.11
+features = ["extension-module", "abi3-py311"]
 ```
 <!-- rumdl-enable MD013 -->
 <!-- [[[end]]] -->
@@ -453,4 +453,4 @@ it is free-threaded. 3.13.5 was rushed out to fix it.
 [meson-python]: https://meson-python.readthedocs.io
 [setuptools-rust]: https://setuptools-rust.readthedocs.io/en/latest/
 [maturin]: https://www.maturin.rs
-[gha_wheels]: guides/gha-wheels
+[gha_wheels]: /guides/gha_wheels.md

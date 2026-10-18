@@ -108,7 +108,7 @@ def build_api_docs(session: nox.Session) -> None:
     )
 
 
-{%- elif cookiecutter.docs == 'mkdocs' %}
+{%- elif cookiecutter.docs == 'properdocs' %}
 
 
 @nox.session(reuse_venv=True, default=False)
@@ -121,9 +121,9 @@ def docs(session: nox.Session) -> None:
     session.install("{% if cookiecutter.backend != "mesonpy" %}-e{% endif %}.", *doc_deps)
 
     if session.interactive:
-        session.run("mkdocs", "serve", "--clean", *session.posargs)
+        session.run("properdocs", "serve", "--clean", *session.posargs)
     else:
-        session.run("mkdocs", "build", "--clean", *session.posargs)
+        session.run("properdocs", "build", "--clean", *session.posargs)
 
 
 {%- elif cookiecutter.docs == 'zensical' %}

@@ -1,8 +1,8 @@
 ---
-short_title: GitHub Actions for Binary Wheels
+short_title: Compiled projects
 ---
 
-# GitHub Actions: Binary wheels
+# GitHub Actions: Compiled projects
 
 Building binary wheels is a bit more involved, but can still be done effectively
 with GHA. This document will introduce [cibuildwheel][] for use in your project.
@@ -73,7 +73,7 @@ make_sdist:
       with:
         fetch-depth: 0 # Optional, use if you use setuptools_scm
         submodules: true # Optional, use if you have submodules
-    - uses: astral-sh/setup-uv@v8.3.0
+    - uses: astral-sh/setup-uv@v10.3.0
 
     - name: Build SDist
       run: uv build --sdist
@@ -113,9 +113,9 @@ build_wheels:
         fetch-depth: 0
         submodules: true
 
-    - uses: astral-sh/setup-uv@v8.3.0
+    - uses: astral-sh/setup-uv@v10.3.0
 
-    - uses: pypa/cibuildwheel@v4.1
+    - uses: pypa/cibuildwheel@v4.3
 
     - name: Upload wheels
       uses: actions/upload-artifact@v7
@@ -179,7 +179,7 @@ upload_all:
         merge-multiple: true
 
     - name: Generate artifact attestations
-      uses: actions/attest-build-provenance@v4
+      uses: actions/attest@v4
       with:
         subject-path: "dist/*"
 

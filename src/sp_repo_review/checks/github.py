@@ -13,7 +13,7 @@ import yaml
 from . import mk_url
 
 if TYPE_CHECKING:
-    from .._compat.importlib.resources.abc import Traversable
+    from importlib.resources.abc import Traversable
 
 
 def workflows(root: Traversable) -> dict[str, Any]:

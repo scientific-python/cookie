@@ -91,7 +91,7 @@ you were at some past point in time.
 :::
 
 [uv]: https://github.com/astral-sh/uv
-[uv guide]: guides/uv
+[uv guide]: /guides/uv.md
 
 ### Option 2: Using conda
 

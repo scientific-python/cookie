@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any
 from . import mk_url
 
 if TYPE_CHECKING:
-    from .._compat.importlib.resources.abc import Traversable
+    from importlib.resources.abc import Traversable
 
 # PY: Python Project
 ## 0xx: File existence
@@ -157,6 +157,17 @@ class PY007(General):
                 return True
             case _:
                 return False
+
+
+class PY008(General):
+    "Has a .gitignore file"
+
+    url = mk_url("packaging-simple")
+
+    @staticmethod
+    def check(root: Traversable) -> bool:
+        "Projects must have a `.gitignore` file"
+        return root.joinpath(".gitignore").is_file()
 
 
 def repo_review_checks() -> dict[str, General]:

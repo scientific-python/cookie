@@ -1,17 +1,16 @@
 from __future__ import annotations
 
-__lazy_modules__ = [f"{__spec__.parent.rsplit('.', 1)[0]}._compat"]  # type: ignore[union-attr]
+__lazy_modules__ = ["tomllib"]
 
 import enum
+import tomllib
 from typing import TYPE_CHECKING, Any
 
-from .._compat import tomllib
 from . import mk_url
 
 if TYPE_CHECKING:
     from configparser import ConfigParser
-
-    from .._compat.importlib.resources.abc import Traversable
+    from importlib.resources.abc import Traversable
 
 
 class PytestFile(enum.Enum):

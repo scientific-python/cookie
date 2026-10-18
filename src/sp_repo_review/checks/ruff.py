@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-__lazy_modules__ = [f"{__spec__.parent.rsplit('.', 1)[0]}._compat"]  # type: ignore[union-attr]
+__lazy_modules__ = ["tomllib"]
 
+import tomllib
 from typing import TYPE_CHECKING, Any, ClassVar, Literal, Protocol
 
-from .._compat import tomllib
 from . import mk_url
 
 if TYPE_CHECKING:
     from collections.abc import Generator
-
-    from .._compat.importlib.resources.abc import Traversable
+    from importlib.resources.abc import Traversable
 
 ## R0xx: Ruff general
 ## R1xx: Ruff checks
@@ -155,20 +154,6 @@ class RF101(RF1xx):
 
     code = "B"
     name = "flake8-bugbear"
-
-
-class RF102(RF1xx):
-    "isort must be selected"
-
-    code = "I"
-    name = "isort"
-
-
-class RF103(RF1xx):
-    "pyupgrade must be selected"
-
-    code = "UP"
-    name = "pyupgrade"
 
 
 class RF2xxMixin(Protocol):

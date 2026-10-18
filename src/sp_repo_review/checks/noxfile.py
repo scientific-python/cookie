@@ -4,18 +4,18 @@
 
 from __future__ import annotations
 
-__lazy_modules__ = ["ast", f"{__spec__.parent.rsplit('.', 1)[0]}._compat"]  # type: ignore[union-attr]
+__lazy_modules__ = ["ast", "tomllib"]
 
 import ast
 import dataclasses
 import re
+import tomllib
 from typing import TYPE_CHECKING, Any
 
-from .._compat import tomllib
 from . import mk_url
 
 if TYPE_CHECKING:
-    from .._compat.importlib.resources.abc import Traversable
+    from importlib.resources.abc import Traversable
 
 REGEX = re.compile(
     r"(?m)^# /// (?P<type>[a-zA-Z0-9-]+)$\s(?P<content>(^#(| .*)$\s)+)^# ///$"

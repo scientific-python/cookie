@@ -40,3 +40,22 @@ def test_plain_format_has_quotes_and_comma(monkeypatch, tmp_path, capsys):
     ruff_checks.process_dir(tmp_path, format="plain")
     captured = capsys.readouterr()
     assert '"A",' in captured.out
+
+
+def test_plain_format_default_rules(monkeypatch, tmp_path, capsys):
+    """Rules Ruff selects itself are reported as removable, not as missing."""
+    monkeypatch.setattr(ruff_checks, "ruff", lambda *_a, **_k: {"tool": "ruff"})
+    monkeypatch.setattr(ruff_checks, "get_rule_selection", lambda *_a, **_k: {"A", "B"})
+    monkeypatch.setattr(ruff_checks, "LINT_INFO", {"A": "Rule A", "B": "Rule B"})
+    monkeypatch.setattr(ruff_checks, "LIBS", frozenset())
+    monkeypatch.setattr(ruff_checks, "SPECIALTY", frozenset())
+    monkeypatch.setattr(
+        ruff_checks, "DEFAULTS", {"A": "on by default", "C": "likewise"}
+    )
+
+    ruff_checks.process_dir(tmp_path, format="plain")
+    captured = capsys.readouterr()
+    selected, defaults = captured.out.split("Selected, but on by default")
+    assert '"B",' in selected
+    assert '"A",' in defaults
+    assert '"C",' not in captured.out

@@ -142,10 +142,10 @@ The artifacts are written to `dist/`. uv invokes the backend selected in
 from that backend. See the [packaging guide][] for selecting and configuring a
 backend, and the CI guides for publishing releases.
 
-[documentation guide]: guides/docs
-[packaging guide]: guides/packaging-simple
-[pytest guide]: guides/pytest
-[style guide]: guides/style
-[task runner guide]: guides/tasks
+[documentation guide]: /guides/docs.md
+[packaging guide]: /guides/packaging_simple.md
+[pytest guide]: /guides/pytest.md
+[style guide]: /guides/style.md
+[task runner guide]: /guides/tasks.md
 [uv]: https://docs.astral.sh/uv/
 [uv installation]: https://docs.astral.sh/uv/getting-started/installation/

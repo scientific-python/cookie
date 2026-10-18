@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.20"
+  rev: "v0.17.0"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -176,7 +176,7 @@ Here is the snippet to add Black to your `.pre-commit-config.yml`:
 
 ```yaml
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: "26.5.1"
+  rev: "26.10.1"
   hooks:
     - id: black
 ```
@@ -205,11 +205,31 @@ option! Most of the time, you can find a way to make the Blacked code look
 better by rewriting your code; factor out long unreadable portions into a
 variable, avoid writing matrices as 1D lists, etc.
 
-:::{dropdown} Documentation / README snippets support
-{rr}`PC111` If you want Black used in your documentation, you can use
-blacken-docs. This can even catch syntax errors in code snippets! It supports
-markdown and restructured text. Note that because black is in
-`additional_dependencies`, you'll have to keep it up to date manually.
+::::::{dropdown} Documentation / README snippets support
+{rr}`PC111` A formatter can keep the Python snippets in your docs tidy, and
+even catch syntax errors in them.
+
+:::::{tab-set}
+::::{tab-item} Ruff-format
+Ruff (0.16+) formats Python code blocks in Markdown, so a single tool covers
+your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
+
+```yaml
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: "v0.17.0"
+  hooks:
+    - id: ruff-format
+      types_or: [python, pyi, jupyter, markdown, pyproject]
+```
+
+The hook only sees the file types you list, so `markdown` is needed until it is
+part of the hook's default.
+
+::::
+::::{tab-item} blacken-docs
+Use blacken-docs if you use Black, or want reStructuredText snippets formatted
+too. Note that because black is in `additional_dependencies`, you'll have to
+keep it up to date manually.
 
 ```yaml
 - repo: https://github.com/adamchainz/blacken-docs
@@ -219,7 +239,9 @@ markdown and restructured text. Note that because black is in
       additional_dependencies: [black==24.*]
 ```
 
-:::
+::::
+:::::
+::::::
 
 ## Ruff
 
@@ -234,7 +256,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.15.20"
+  rev: "v0.17.0"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -251,33 +273,24 @@ won't tell you what or why it fixed things.
 :::{tab-item} Simple config
 
 ```ini
-[tool.ruff.lint]
-extend-select = [
-  "B",      # flake8-bugbear
-  "I",      # isort
-  "RUF",    # Ruff-specific
-  "UP",     # pyupgrade
-]
+[tool.ruff]
+show-fixes = true
 ```
 
 :::
 :::{tab-item} Full config
 
 ```ini
-[tool.ruff.lint]
-extend-select = [
+[tool.ruff]
+show-fixes = true
+lint.extend-select = [
   "ARG",    # flake8-unused-arguments
   "B",      # flake8-bugbear
-  "BLE",    # flake8-blind-except
   "C4",     # flake8-comprehensions
-  "DTZ",    # flake8-datetimez
   "EM",     # flake8-errmsg
   "EXE",    # flake8-executable
-  "FA",     # flake8-future-annotations
-  "FLY",    # flynt
   "FURB",   # refurb
   "G",      # flake8-logging-format
-  "I",      # isort
   "ICN",    # flake8-import-conventions
   "ISC",    # flake8-implicit-str-concat
   "LOG",    # flake8-logging
@@ -285,7 +298,6 @@ extend-select = [
   "PD",     # pandas-vet
   "PERF",   # perflint
   "PGH",    # pygrep-hooks
-  "PIE",    # flake8-pie
   "PL",     # pylint
   "PT",     # flake8-pytest-style
   "PTH",    # flake8-use-pathlib
@@ -301,13 +313,12 @@ extend-select = [
   "TC",     # flake8-type-checking
   "TRY",    # tryceratops
   "UP",     # pyupgrade
-  "YTT",    # flake8-2020
 ]
-ignore = [
+lint.ignore = [
   "PLR09",    # Too many <...>
   "PLR2004",  # Magic value used in comparison
 ]
-typing-modules = ["mypackage._compat.typing"]
+lint.typing-modules = ["mypackage._compat.typing"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
@@ -350,8 +361,7 @@ typing-modules = ["mypackage._compat.typing"]
 Ruff [provides dozens of rule sets](https://beta.ruff.rs/docs/rules/); you can
 select what you want from these. Like Flake8, plugins match by whole letter
 sequences (with the special exception of pylint's "PL" shortcut), then you can
-also include leading or whole error codes. Codes starting with 9 must be
-selected explicitly, with at least the letters followed by a 9. You can also
+also include leading or whole error codes. You can also
 ignore certain error codes via `ignore`. You can also set codes per paths to
 ignore in `per-file-ignores`. If you don't like certain auto-fixes, you can
 disable auto-fixing for specific error codes via `unfixable`.
@@ -372,7 +382,7 @@ If you don't use a `[project]` table (older setuptools or Poetry), then you
 should also set:
 
 ```ini
-target-version = "py39"
+target-version = "py311"
 ```
 
 This selects the minimum version you want to target (primarily for `"UP"` and
@@ -385,11 +395,10 @@ Here are some good error codes to enable on most (but not all!) projects:
   stood the test of time. Not required if you use `extend-select` (`W` not
   needed if you use a formatter)
 - `B`: This finds patterns that are very bug-prone. {rr}`RF101`
-- `I`: This sorts your includes. There are multiple benefits, such as smaller
-  diffs, fewer conflicts, a way to auto-inject `__future__` imports, and easier
-  for readers to tell what's built-in, third-party, and local. It has a lot of
-  configuration options, but defaults to a Black-compatible style.
-  {rr}`RF102`
+- `I`: This sorts your includes (on by default since Ruff 0.16). Select this
+  group only if you also want `I002`, which can auto-inject imports, such as
+  `from __future__ import annotations`; it needs the
+  `lint.isort.required-imports` setting.
 - `ARG`: This looks for unused arguments. You might need to `# noqa: ARG001`
   occasionally, but it's overall pretty useful.
 - `C4`: This looks for places that could use comprehensions, and can autofix
@@ -411,7 +420,9 @@ Here are some good error codes to enable on most (but not all!) projects:
 - `RUF`: Codes specific to Ruff, including removing noqa's that aren't used.
 - `T20`: Disallow `print` in your code (built on the assumption that it's a
   common debugging tool).
-- `UP`: Upgrade old Python syntax to your `target-version`. {rr}`RF103`
+- `UP`: Upgrade old Python syntax to your `target-version`. Ruff 0.16 turns most
+  of these on by default; select the group to also get the few remaining rules,
+  such as `UP015` (redundant open modes).
 - `FURB`: From the refurb tool, a collection of helpful cleanups.
 - `PYI`: Typing related checks
 
@@ -485,7 +496,7 @@ the flake8 addition for pre-commit, with the `bugbear` plugin:
 
 ```yaml
 - repo: https://github.com/pycqa/flake8
-  rev: "7.3.0"
+  rev: "7.4.1"
   hooks:
     - id: flake8
       additional_dependencies: [flake8-bugbear]
@@ -557,7 +568,7 @@ pre-commit config will work:
 
 ```yaml
 - repo: https://github.com/PyCQA/isort
-  rev: "8.0.1"
+  rev: "9.0.2"
   hooks:
     - id: isort
 ```
@@ -580,7 +591,7 @@ when clearly better (please always use them, they are faster) if you set
 
 ```yaml
 - repo: https://github.com/asottile/pyupgrade
-  rev: "v3.21.2"
+  rev: "v3.22.0"
   hooks:
     - id: pyupgrade
       args: ["--py39-plus"]
@@ -629,7 +640,7 @@ The pre-commit addition for type checking:
 :sync: mypy
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v2.1.0"
+  rev: "v2.4.0"
   hooks:
     - id: mypy
       files: src
@@ -648,7 +659,7 @@ additional_dependencies: [attrs==23.1.0]
 :sync: pyrefly
 ```yaml
 - repo: https://github.com/facebook/pyrefly-pre-commit
-  rev: "1.1.1"
+  rev: "1.3.2"
   hooks:
     - id: pyrefly-check
 ```
@@ -661,7 +672,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.56"
+  rev: "v0.0.86"
   hooks:
     - id: ty
 ```
@@ -690,7 +701,7 @@ this:
 ```ini
 [tool.mypy]
 files = "src"
-python_version = "3.10"
+python_version = "3.11"
 strict = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 warn_unreachable = true
@@ -726,7 +737,7 @@ errors in your typing.
 ```toml
 [tool.pyrefly]
 project-includes = ["src"]
-python-version = "3.10"
+python-version = "3.11"
 project-excludes = ["**/tests"]
 
 # Use `Any` for imports that can't be resolved, one entry per module
@@ -757,7 +768,7 @@ You can disable Pyrefly on a line with `# pyrefly: ignore` (or
 
 ```toml
 [tool.ty.environment]
-python-version = "3.10"
+python-version = "3.11"
 
 [tool.ty.src]
 include = ["src"]
@@ -786,7 +797,7 @@ for a specific rule); the standard `# type: ignore` is honored as well.
 :::
 ::::
 
-[mypy page]: guides/mypy
+[mypy page]: /guides/typing.md
 
 ## Setuptools specific checks
 
@@ -846,7 +857,7 @@ important parts (like Python classifiers) are in sync. This tool,
 
 ```yaml
 - repo: https://github.com/asottile/setup-cfg-fmt
-  rev: "v3.2.0"
+  rev: "v3.3.0"
   hooks:
     - id: setup-cfg-fmt
       args: [--include-version-classifiers, --max-py-version=3.12]
@@ -868,11 +879,9 @@ If you want a Python based tool, [codespell] is the classic tool used.
 
 ```yaml
 - repo: https://github.com/codespell-project/codespell
-  rev: "v2.4.2"
+  rev: "v2.4.3"
   hooks:
     - id: codespell
-      additional_dependencies:
-        - tomli; python_version<'3.11'
 ```
 
 You can list allowed spellings in a comma separated string passed to `-L` (or
@@ -898,7 +907,7 @@ integration.
 
 ```yaml
 - repo: https://github.com/crate-ci/typos
-  rev: "v1.48.0"
+  rev: "v1.51.1"
   hooks:
     - id: typos
       args: []
@@ -979,7 +988,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v22.1.5"
+  rev: "v23.1.3"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -996,7 +1005,7 @@ If you have shell scripts, you can protect against common mistakes using
 
 ```yaml
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: "v0.11.0.1"
+  rev: "v0.11.0.1-1"
   hooks:
     - id: shellcheck
 ```
@@ -1008,7 +1017,7 @@ number of different file types. An example of usage:
 
 ```yaml
 - repo: https://github.com/rbubley/mirrors-prettier
-  rev: "v3.9.4"
+  rev: "v3.9.10"
   hooks:
     - id: prettier
       types_or: [yaml, markdown, html, css, scss, javascript, json]
@@ -1042,7 +1051,7 @@ validate-pyproject-schema-store plugin. Using it looks like this:
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
-  rev: "v0.25"
+  rev: "0.26"
   hooks:
     - id: validate-pyproject
       additional_dependencies: ["validate-pyproject-schema-store[all]"]
@@ -1056,7 +1065,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.37.4"
+  rev: "0.38.2"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
@@ -1075,7 +1084,7 @@ started:
 
 ```ini
 [tool.pylint]
-py-version = "3.10"
+py-version = "3.11"
 jobs = "0"
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
