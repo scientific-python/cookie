@@ -26,6 +26,7 @@ project:
           children:
             - file: guides/packaging_simple.md
             - file: guides/packaging_compiled.md
+        - file: guides/uv.md
         - file: guides/style.md
         - file: guides/typing.md
         - title: GitHub Actions
