@@ -243,15 +243,15 @@ uvx sp-repo-review[cli] <path to repository>
 This will produce a list of results - green checkmarks mean this rule is
 followed, red x’s mean the rule is not. A yellow warning sign means that the
 check was skipped because a previous required check failed. Some checks will
-fail, that’s okay - the goal is bring all possible issues to your attention, not
-to force compliance with arbitrary checks. Eventually there might be a way to
-mark checks as ignored.
+fail, that’s okay - the goal is bring all possible issues to your attention,
+not to force compliance with arbitrary checks. Add any that don't fit to the
+ignore list.
 
 For example, `GH101` expects all your action files to have a nice `name:` field.
 If you are happy with the file-based names you see in CI, you should feel free
-to simply ignore this check (you can specify ignored checks in pyproject.toml or
-by passing args to repo-review, see the [repo-review
-docs][repo-review configuring]).
+to simply ignore this check (you can specify ignored checks in pyproject.toml
+or by passing args to repo-review, see the
+[repo-review docs][repo-review configuring]).
 
 All checks are mentioned at least in some way in the [Scientific-Python
 Development Guide][]. You should read that first - if you are not attempting to
