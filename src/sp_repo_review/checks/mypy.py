@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+__lazy_modules__ = ["tomllib"]
+
+import tomllib
 from typing import TYPE_CHECKING, Any
 
 from . import mk_url
@@ -7,7 +10,32 @@ from . import mk_url
 if TYPE_CHECKING:
     from importlib.resources.abc import Traversable
 
-MY100_CONFIG_FILES = ("ty.toml", "pyrefly.toml")
+
+def _load_config(
+    pyproject: dict[str, Any], package: Traversable, name: str
+) -> dict[str, Any] | None:
+    path = package.joinpath(f"{name}.toml")
+    if path.is_file():
+        with path.open("rb") as f:
+            return tomllib.load(f)
+    config: dict[str, Any] | None = pyproject.get("tool", {}).get(name)
+    return config
+
+
+def ty(pyproject: dict[str, Any], package: Traversable) -> dict[str, Any] | None:
+    """
+    Returns the ty configuration, or None if ty is not configured. A
+    ``ty.toml`` file takes precedence over ``pyproject.toml``.
+    """
+    return _load_config(pyproject, package, "ty")
+
+
+def pyrefly(pyproject: dict[str, Any], package: Traversable) -> dict[str, Any] | None:
+    """
+    Returns the Pyrefly configuration, or None if Pyrefly is not configured.
+    A ``pyrefly.toml`` file takes precedence over ``pyproject.toml``.
+    """
+    return _load_config(pyproject, package, "pyrefly")
 
 
 class MyPy:
@@ -21,23 +49,21 @@ class MY100(MyPy):
     url = mk_url("style")
 
     @staticmethod
-    def check(pyproject: dict[str, Any], package: Traversable) -> bool:
+    def check(
+        pyproject: dict[str, Any],
+        ty: dict[str, Any] | None,
+        pyrefly: dict[str, Any] | None,
+    ) -> bool:
         """
         Must have a `tool.mypy`, `tool.pyrefly`, or `tool.ty` section in
-        `pyproject.toml`, or a `ty.toml` or `pyrefly.toml` file. The other checks in this family only read
-        `pyproject.toml`.
+        `pyproject.toml`, or a `ty.toml` or `pyrefly.toml` file.
         """
 
-        if any(package.joinpath(fn).is_file() for fn in MY100_CONFIG_FILES):
-            return True
-
         match pyproject:
-            case {
-                "tool": {"mypy": object()} | {"pyrefly": object()} | {"ty": object()}
-            }:
+            case {"tool": {"mypy": object()}}:
                 return True
             case _:
-                return False
+                return ty is not None or pyrefly is not None
 
 
 class MY101(MyPy):
@@ -47,12 +73,16 @@ class MY101(MyPy):
     url = mk_url("style")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool | None:
+    def check(
+        pyproject: dict[str, Any],
+        ty: dict[str, Any] | None,
+        pyrefly: dict[str, Any] | None,
+    ) -> bool | None:
         """
         Should opt into strict checking. For MyPy, set `strict` (true/false).
-        For Pyrefly, set a `preset` (such as `"strict"`). ty has no strict
-        switch -- you tighten individual rules in `[tool.ty.rules]` -- so this
-        check is skipped when only ty is configured.
+        For Pyrefly, set `preset` to `"strict"` or `"all"`. ty has no strict
+        switch, so set the levels of rules in `[tool.ty.rules]`. Passes if any
+        configured type checker is strict.
 
         ```toml
         [tool.mypy]
@@ -60,15 +90,20 @@ class MY101(MyPy):
         ```
         """
 
-        match pyproject:
-            case {"tool": {"mypy": {"strict": bool()}}}:
+        mypy = pyproject.get("tool", {}).get("mypy")
+        if mypy is None and ty is None and pyrefly is None:
+            return None
+
+        match mypy:
+            case {"strict": bool()}:
                 return True
-            case {"tool": {"pyrefly": {"preset": str()}}}:
+        match pyrefly:
+            case {"preset": "strict" | "all"}:
                 return True
-            case {"tool": {"mypy": object()} | {"pyrefly": object()}}:
-                return False
-            case _:
-                return None
+        match ty:
+            case {"rules": dict()}:
+                return True
+        return False
 
 
 class MY102(MyPy):
@@ -205,6 +240,65 @@ class MY106(MyPy):
                 return False
             case _:
                 return None
+
+
+class MY107(MyPy):
+    "ty fails on warnings"
+
+    requires = {"MY100"}
+    url = mk_url("style")
+
+    @staticmethod
+    def check(ty: dict[str, Any] | None) -> bool | None:
+        """
+        Must set `error-on-warning` (true/false) in `[tool.ty.terminal]`. ty
+        exits successfully on warnings by default, so CI does not fail on
+        rules such as `unused-ignore-comment`. Skipped if ty is not configured.
+
+        ```toml
+        [tool.ty.terminal]
+        error-on-warning = true
+        ```
+        """
+
+        match ty:
+            case None:
+                return None
+            case {"terminal": {"error-on-warning": bool()}}:
+                return True
+            case _:
+                return False
+
+
+class MY108(MyPy):
+    "ty enables blanket-ignore-comment"
+
+    requires = {"MY100"}
+    url = mk_url("style")
+
+    @staticmethod
+    def check(ty: dict[str, Any] | None) -> bool | None:
+        """
+        Must enable the `blanket-ignore-comment` rule (or set `all` to a
+        level other than `"ignore"`). This forces every `# ty: ignore` to list
+        the rules it ignores, like MyPy's `ignore-without-code`. Skipped if ty
+        is not configured.
+
+        ```toml
+        [tool.ty.rules]
+        blanket-ignore-comment = "error"
+        ```
+        """
+
+        match ty:
+            case None:
+                return None
+            case {"rules": {"blanket-ignore-comment": str(level)}}:
+                return level != "ignore"
+            case {"rules": {"all": str(level)}}:
+                return level != "ignore"
+            case _:
+                return False
 
 
 def repo_review_checks() -> dict[str, MyPy]:
