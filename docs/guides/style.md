@@ -748,8 +748,9 @@ ignore-missing-imports = ["numpy"]
 
 Pyrefly checks all your code by default, rather than only annotated functions,
 so you can start from a looser `preset` and tighten as you go. Set
-`preset = "strict"` (the equivalent of MyPy's `strict = true`) once you are
-ready {rr}`MY101`, and toggle individual error codes in a
+`preset = "strict"` (the equivalent of MyPy's `strict = true`) or
+`preset = "all"` once you are ready {rr}`MY101`. The strict preset also reports
+unused `# pyrefly: ignore` comments. You can toggle individual error codes in a
 `[tool.pyrefly.errors]` table, for example:
 
 ```toml
@@ -778,12 +779,23 @@ exclude = ["**/tests"]
 
 [tool.ty.rules]
 # Each rule can be set to "ignore", "warn", or "error"
+blanket-ignore-comment = "error"
 unresolved-import = "ignore"
+
+[tool.ty.terminal]
+error-on-warning = true
 ```
 
 Like Pyrefly, ty checks all your code rather than only annotated functions, and
 it has no single `strict` switch -- you tighten or relax individual rules in
-`[tool.ty.rules]`. To silence missing imports for specific modules (the
+`[tool.ty.rules]` {rr}`MY101`. Set `all = "error"` there to turn on every rule.
+
+ty exits successfully on warnings by default, so CI does not fail on rules such
+as `unused-ignore-comment`. Set `error-on-warning` {rr}`MY107` to change this.
+The `blanket-ignore-comment` rule {rr}`MY108` forces every `# ty: ignore` to
+list the rules it ignores, like MyPy's `ignore-without-code`.
+
+To silence missing imports for specific modules (the
 equivalent of MyPy's per-module `ignore_missing_imports`) rather than turning
 the rule off everywhere, treat their imports as `Any` in the
 `[tool.ty.analysis]` table:

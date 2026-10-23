@@ -76,10 +76,12 @@ noxfile = "sp_repo_review.checks.noxfile:repo_review_checks"
 dependabot = "sp_repo_review.checks.github:dependabot"
 noxfile = "sp_repo_review.checks.noxfile:noxfile"
 precommit = "sp_repo_review.checks.precommit:precommit"
+pyrefly = "sp_repo_review.checks.mypy:pyrefly"
 pytest = "sp_repo_review.checks.pyproject:pytest"
 readthedocs = "sp_repo_review.checks.readthedocs:readthedocs"
 ruff = "sp_repo_review.checks.ruff:ruff"
 setupcfg = "sp_repo_review.checks.setupcfg:setupcfg"
+ty = "sp_repo_review.checks.mypy:ty"
 workflows = "sp_repo_review.checks.github:workflows"
 
 [project.entry-points."repo_review.families"]
