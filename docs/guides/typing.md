@@ -53,17 +53,53 @@ code also runs.
 
 ### Configuration
 
-By default, the type checker does as little as possible, so that you can add it
-iteratively to a code base. By default:
+The three main type checkers are [MyPy](https://mypy.readthedocs.io),
+[Pyrefly](https://pyrefly.org), and [ty](https://docs.astral.sh/ty/). They
+follow the same typing specification, but their defaults are different.
+
+Each checker reads configuration from `pyproject.toml`. Turn on as much
+checking as you can, and increase it over time. See the [style page][] for
+configuration suggestions for each checker.
+
+::::{tab-set}
+:::{tab-item} MyPy
+:sync: mypy
+MyPy does as little as possible by default, so that you can add it gradually
+to a code base:
 
 - All untyped variables and return values will be `Any`.
 - Code inside untyped functions is not checked _at all_.
 
-You can add configuration to `pyproject.toml` (and a little bit to the files
-themselves), or you can go all the way and pass `--strict`, which will turn on
-everything. Try to turn on as much as possible, and increase it until you can
-run with full `strict` checking. See the [style page][] for configuration
-suggestions.
+Set `strict = true` (or pass `--strict`) to turn on all checks. Disable MyPy on
+a line with `# type: ignore[error-code]`.
+:::
+:::{tab-item} Pyrefly
+:sync: pyrefly
+Pyrefly checks the bodies of all functions by default, including untyped ones.
+It also infers return types of unannotated functions, so it can find errors in
+code that has no annotations.
+
+Set `preset = "strict"` to turn on stricter checks. Configuration can also go
+in a `pyrefly.toml` file. Disable Pyrefly only on a line with `# pyrefly:
+ignore`. Note that pyrefly will try to read mypy's config if no pyrefly config
+is present.
+
+:::
+:::{tab-item} ty
+:sync: ty
+ty checks the bodies of all functions by default, including untyped ones. It
+also infers return types of unannotated functions, so it can find errors in
+code that has no annotations.
+
+There is no single strict switch. Set the severity of individual rules in
+`[tool.ty.rules]`. Configuration can also go in a `ty.toml` file. Disable ty
+only on a line with `# ty: ignore`.
+:::
+::::
+
+The checkers do not always agree, because each one implements the typing
+specification differently. If your library supports more than one checker, run
+each one in CI. All three support `# type: ignore`.
 
 [style page]: /guides/style.md
 

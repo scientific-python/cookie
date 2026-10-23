@@ -690,7 +690,9 @@ another.
 :::
 ::::
 
-These checkers read their configuration from `pyproject.toml`:
+These checkers read their configuration from `pyproject.toml`, shown below.
+Pyrefly and ty can also use a standalone `pyrefly.toml` or `ty.toml` file. In
+these files, drop the `tool.<name>` prefix from the table names.
 
 ::::{tab-set}
 :::{tab-item} MyPy

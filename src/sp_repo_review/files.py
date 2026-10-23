@@ -26,6 +26,8 @@ def prefetch_package() -> set[str]:
         ".pre-commit-config.yaml",
         ".readthedocs.yml",
         "noxfile.py",
+        "ty.toml",
+        "pyrefly.toml",
         "ruff.toml",
         ".ruff.toml",
     }
