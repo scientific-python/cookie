@@ -9,7 +9,7 @@ for your `CONTRIBUTING.md`, and at least glance through other sections.
 
 Following that, there are recommendations for [style][], intended to promote
 good practices and to ensure continuity across the packages. There is a
-[dedicated page for static type checking with MyPy][mypy]. There are then
+[dedicated page for static type checking][typing]. There are then
 guides on [simple packaging][] and [compiled packaging][], which should help in
 ensuring a consistent developer and user experience when working with
 distribution.
@@ -38,7 +38,7 @@ WebAssembly! All checks point to a linked badge in the guide.
 
 [tutorials]:          /tutorials/index.md
 [style]:              /guides/style.md
-[mypy]:               /guides/typing.md
+[typing]:             /guides/typing.md
 [docs]:               /guides/docs.md
 [simple packaging]:   /guides/packaging_simple.md
 [compiled packaging]: /guides/packaging_compiled.md

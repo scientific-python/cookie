@@ -361,9 +361,9 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`GH211`](https://learn.scientific-python.org/development/guides/gha-basic#GH211): Do not pin core actions as major versions
 - [`GH212`](https://learn.scientific-python.org/development/guides/gha-basic#GH212): Require GHA update grouping
 
-### MyPy
+### Type checking
 
-- [`MY100`](https://learn.scientific-python.org/development/guides/style#MY100): Uses a type checker (pyproject config)
+- [`MY100`](https://learn.scientific-python.org/development/guides/style#MY100): Uses a type checker
 - [`MY101`](https://learn.scientific-python.org/development/guides/style#MY101): Type checker in strict mode
 - `MY102`: MyPy show_error_codes deprecated
 - [`MY103`](https://learn.scientific-python.org/development/guides/style#MY103): MyPy warn unreachable

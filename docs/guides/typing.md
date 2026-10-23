@@ -53,17 +53,37 @@ code also runs.
 
 ### Configuration
 
-By default, the type checker does as little as possible, so that you can add it
-iteratively to a code base. By default:
+The three main type checkers are [MyPy](https://mypy.readthedocs.io),
+[Pyrefly](https://pyrefly.org), and [ty](https://docs.astral.sh/ty/). They
+follow the same typing specification, but their defaults are different.
+
+MyPy does as little as possible by default, so that you can add it gradually
+to a code base:
 
 - All untyped variables and return values will be `Any`.
 - Code inside untyped functions is not checked _at all_.
 
-You can add configuration to `pyproject.toml` (and a little bit to the files
-themselves), or you can go all the way and pass `--strict`, which will turn on
-everything. Try to turn on as much as possible, and increase it until you can
-run with full `strict` checking. See the [style page][] for configuration
-suggestions.
+Pyrefly and ty check the bodies of all functions by default, including untyped
+ones. They also infer return types of unannotated functions, so they can find
+errors in code that has no annotations.
+
+Each checker reads configuration from `pyproject.toml`. Pyrefly and ty can
+also use their own file (`pyrefly.toml` or `ty.toml`). Turn on as much
+checking as you can, and increase it over time:
+
+- MyPy: set `strict = true` (or pass `--strict`).
+- Pyrefly: set `preset = "strict"`.
+- ty: there is no single strict switch. Set the severity of individual rules
+  in `[tool.ty.rules]`.
+
+All three understand `# type: ignore`. Pyrefly and ty also have their own
+ignore comments (`# pyrefly: ignore` and `# ty: ignore`) that affect only that
+checker. See the [style page][] for
+configuration suggestions for each checker.
+
+The checkers do not always agree, because each one implements the typing
+specification differently. If your library supports more than one checker, run
+each one in CI.
 
 [style page]: /guides/style.md
 
