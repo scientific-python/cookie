@@ -18,11 +18,11 @@ pipx run 'sp-repo-review[cli]' <path to repo>
 ---
 
 <!-- rumdl-disable-next-line MD034 -->
-:::{anywidget} https://cdn.jsdelivr.net/npm/repo-review-webapp@1.2.1/dist/repo-review-anywidget.mjs
+:::{anywidget} https://cdn.jsdelivr.net/npm/repo-review-webapp@1.3.0/dist/repo-review-anywidget.mjs
 {
   "url_sync": true,
   "deps": [
-    "repo-review~=1.2.1",
+    "repo-review~=1.3.0",
     "sp-repo-review==2026.08.14",
     "validate-pyproject[all]~=0.25.0",
     "validate-pyproject-schema-store==2026.08.14",
