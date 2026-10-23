@@ -80,8 +80,10 @@ It also infers return types of unannotated functions, so it can find errors in
 code that has no annotations.
 
 Set `preset = "strict"` to turn on stricter checks. Configuration can also go
-in a `pyrefly.toml` file. Disable Pyrefly on a line with `# pyrefly: ignore`;
-`# type: ignore` is honored as well.
+in a `pyrefly.toml` file. Disable Pyrefly only on a line with `# pyrefly:
+ignore`. Note that pyrefly will try to read mypy's config if no pyrefly config
+is present.
+
 :::
 :::{tab-item} ty
 :sync: ty
@@ -90,14 +92,14 @@ also infers return types of unannotated functions, so it can find errors in
 code that has no annotations.
 
 There is no single strict switch. Set the severity of individual rules in
-`[tool.ty.rules]`. Configuration can also go in a `ty.toml` file. Disable ty on
-a line with `# ty: ignore`; `# type: ignore` is honored as well.
+`[tool.ty.rules]`. Configuration can also go in a `ty.toml` file. Disable ty
+only on a line with `# ty: ignore`.
 :::
 ::::
 
 The checkers do not always agree, because each one implements the typing
 specification differently. If your library supports more than one checker, run
-each one in CI.
+each one in CI. All three support `# type: ignore`.
 
 [style page]: /guides/style.md
 
