@@ -57,29 +57,43 @@ The three main type checkers are [MyPy](https://mypy.readthedocs.io),
 [Pyrefly](https://pyrefly.org), and [ty](https://docs.astral.sh/ty/). They
 follow the same typing specification, but their defaults are different.
 
+Each checker reads configuration from `pyproject.toml`. Turn on as much
+checking as you can, and increase it over time. See the [style page][] for
+configuration suggestions for each checker.
+
+::::{tab-set}
+:::{tab-item} MyPy
+:sync: mypy
 MyPy does as little as possible by default, so that you can add it gradually
 to a code base:
 
 - All untyped variables and return values will be `Any`.
 - Code inside untyped functions is not checked _at all_.
 
-Pyrefly and ty check the bodies of all functions by default, including untyped
-ones. They also infer return types of unannotated functions, so they can find
-errors in code that has no annotations.
+Set `strict = true` (or pass `--strict`) to turn on all checks. Disable MyPy on
+a line with `# type: ignore[error-code]`.
+:::
+:::{tab-item} Pyrefly
+:sync: pyrefly
+Pyrefly checks the bodies of all functions by default, including untyped ones.
+It also infers return types of unannotated functions, so it can find errors in
+code that has no annotations.
 
-Each checker reads configuration from `pyproject.toml`. Pyrefly and ty can
-also use their own file (`pyrefly.toml` or `ty.toml`). Turn on as much
-checking as you can, and increase it over time:
+Set `preset = "strict"` to turn on stricter checks. Configuration can also go
+in a `pyrefly.toml` file. Disable Pyrefly on a line with `# pyrefly: ignore`;
+`# type: ignore` is honored as well.
+:::
+:::{tab-item} ty
+:sync: ty
+ty checks the bodies of all functions by default, including untyped ones. It
+also infers return types of unannotated functions, so it can find errors in
+code that has no annotations.
 
-- MyPy: set `strict = true` (or pass `--strict`).
-- Pyrefly: set `preset = "strict"`.
-- ty: there is no single strict switch. Set the severity of individual rules
-  in `[tool.ty.rules]`.
-
-All three understand `# type: ignore`. Pyrefly and ty also have their own
-ignore comments (`# pyrefly: ignore` and `# ty: ignore`) that affect only that
-checker. See the [style page][] for
-configuration suggestions for each checker.
+There is no single strict switch. Set the severity of individual rules in
+`[tool.ty.rules]`. Configuration can also go in a `ty.toml` file. Disable ty on
+a line with `# ty: ignore`; `# type: ignore` is honored as well.
+:::
+::::
 
 The checkers do not always agree, because each one implements the typing
 specification differently. If your library supports more than one checker, run
