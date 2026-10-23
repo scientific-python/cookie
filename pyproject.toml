@@ -99,7 +99,7 @@ dev = [
 ]
 test = [
   "pytest >=9",
-  "repo-review >=1.3",
+  "repo-review >=0.10.6",
 ]
 cog = [
   "cogapp",
