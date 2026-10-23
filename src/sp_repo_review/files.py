@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from .checks.renovate import SUPPORTED_RENOVATE_FILES
+
 
 def prefetch_root() -> set[str]:
     """
@@ -28,4 +30,5 @@ def prefetch_package() -> set[str]:
         "noxfile.py",
         "ruff.toml",
         ".ruff.toml",
+        *SUPPORTED_RENOVATE_FILES,
     }
