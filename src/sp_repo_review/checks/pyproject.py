@@ -429,5 +429,29 @@ class PP309(PyProject):
         return "filterwarnings" in options
 
 
+class PP310(PyProject):
+    "Project uses pyproject-fmt"
+
+    url = mk_url("packaging-simple")
+
+    @staticmethod
+    def check(pyproject: dict[str, Any]) -> bool:
+        """
+        For consistency across multiple Python projects' supporting setup,
+        a project should organize entries in file `pyproject.toml` with
+        `pyproject-fmt`.  A minimal working example is
+
+        ```toml
+        [tool.pyproject-fmt]
+        max_supported_python = "3.14"
+        ```
+        """
+        match pyproject:
+            case {"tool": {"pyproject-fmt": {}}}:
+                return True
+            case _:
+                return False
+
+
 def repo_review_checks() -> dict[str, PyProject]:
     return {p.__name__: p() for p in PyProject.__subclasses__()}
