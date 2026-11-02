@@ -37,7 +37,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.17.1"
+    rev: "v0.17.3"
     hooks:
       - id: ruff-check
         args: ["--fix"]
@@ -55,7 +55,7 @@ repos:
 {%- endif %}
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v2.4.0"
+    rev: "v2.4.1"
     hooks:
       - id: mypy
         files: src|tests|noxfile.py
@@ -92,13 +92,13 @@ repos:
 {%- endif %}
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: "0.26"
+    rev: "v0.27"
     hooks:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: "0.38.2"
+    rev: "0.39.0"
     hooks:
 {%- if cookiecutter.__ci == "github" %}
       - id: check-dependabot
