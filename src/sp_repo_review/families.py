@@ -122,7 +122,7 @@ def get_families(
             readme_note="Will not show up if using lefthook instead of pre-commit/prek.",
         ),
         "mypy": Family(
-            name="MyPy",
+            name="Type checking",
         ),
         "ruff": Family(
             name="Ruff",

@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-__lazy_modules__ = ["typing"]
-
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from . import mk_url
+
+if TYPE_CHECKING:
+    from importlib.resources.abc import Traversable
+
+MY100_CONFIG_FILES = ("ty.toml", "pyrefly.toml")
 
 
 class MyPy:
@@ -12,18 +15,21 @@ class MyPy:
 
 
 class MY100(MyPy):
-    "Uses a type checker (pyproject config)"
+    "Uses a type checker"
 
     requires = {"PY001"}
     url = mk_url("style")
 
     @staticmethod
-    def check(pyproject: dict[str, Any]) -> bool:
+    def check(pyproject: dict[str, Any], package: Traversable) -> bool:
         """
         Must have a `tool.mypy`, `tool.pyrefly`, or `tool.ty` section in
-        `pyproject.toml`. Other forms of configuration are not supported by
-        this check.
+        `pyproject.toml`, or a `ty.toml` or `pyrefly.toml` file. The other checks in this family only read
+        `pyproject.toml`.
         """
+
+        if any(package.joinpath(fn).is_file() for fn in MY100_CONFIG_FILES):
+            return True
 
         match pyproject:
             case {

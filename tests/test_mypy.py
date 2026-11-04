@@ -1,32 +1,35 @@
+from pathlib import Path
+
+import pytest
 from repo_review.testing import compute_check, toml_loads
 
 
-def test_my100_present():
+def test_my100_present(tmp_path: Path):
     toml = toml_loads("""
         [tool.mypy]
         strict = true
         """)
-    assert compute_check("MY100", pyproject=toml).result
+    assert compute_check("MY100", pyproject=toml, package=tmp_path).result
 
 
-def test_my100_pyrefly():
+def test_my100_pyrefly(tmp_path: Path):
     toml = toml_loads("""
         [tool.pyrefly]
         project-includes = ["src"]
         """)
-    assert compute_check("MY100", pyproject=toml).result
+    assert compute_check("MY100", pyproject=toml, package=tmp_path).result
 
 
-def test_my100_ty():
+def test_my100_ty(tmp_path: Path):
     toml = toml_loads("""
         [tool.ty.src]
         include = ["src"]
         """)
-    assert compute_check("MY100", pyproject=toml).result
+    assert compute_check("MY100", pyproject=toml, package=tmp_path).result
 
 
-def test_my100_missing():
-    assert not compute_check("MY100", pyproject={}).result
+def test_my100_missing(tmp_path: Path):
+    assert not compute_check("MY100", pyproject={}, package=tmp_path).result
 
 
 def test_my101_present_bool():
@@ -156,3 +159,9 @@ def test_my106_missing():
         enable_error_code = ["ignore-without-code", "redundant-expr"]
         """)
     assert not compute_check("MY106", pyproject=toml).result
+
+
+@pytest.mark.parametrize("name", ["ty.toml", "pyrefly.toml"])
+def test_my100_config_file(tmp_path: Path, name: str):
+    tmp_path.joinpath(name).touch()
+    assert compute_check("MY100", pyproject={}, package=tmp_path).result
