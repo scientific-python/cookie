@@ -370,6 +370,8 @@ for family, grp in itertools.groupby(collected.checks.items(), key=lambda x: x[1
 - [`MY104`](https://learn.scientific-python.org/development/guides/style#MY104): MyPy enables ignore-without-code
 - [`MY105`](https://learn.scientific-python.org/development/guides/style#MY105): MyPy enables redundant-expr
 - [`MY106`](https://learn.scientific-python.org/development/guides/style#MY106): MyPy enables truthy-bool
+- [`MY107`](https://learn.scientific-python.org/development/guides/style#MY107): ty fails on warnings
+- [`MY108`](https://learn.scientific-python.org/development/guides/style#MY108): ty enables blanket-ignore-comment
 
 ### Nox
 
