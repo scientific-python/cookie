@@ -148,7 +148,7 @@ Here is the snippet to add the formatter to your `.pre-commit-config.yml`
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.17.1"
+  rev: "v0.17.4"
   hooks:
     #  id: ruff-check would go here if using both
     - id: ruff-format
@@ -216,7 +216,7 @@ your code and your docs. Add `markdown` to the `ruff-format` hook's `types_or`:
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.17.1"
+  rev: "v0.17.4"
   hooks:
     - id: ruff-format
       types_or: [python, pyi, jupyter, markdown, pyproject]
@@ -256,7 +256,7 @@ pre-commit hook.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.17.1"
+  rev: "v0.17.4"
   hooks:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
@@ -456,7 +456,7 @@ use the manual stage, it's opt-in instead of automatic.
 
 ```yaml
 - repo: https://github.com/hadialqattan/pycln
-  rev: "v2.6.0"
+  rev: "v2.6.1"
   hooks:
     - id: pycln
       args: [--all]
@@ -496,7 +496,7 @@ the flake8 addition for pre-commit, with the `bugbear` plugin:
 
 ```yaml
 - repo: https://github.com/pycqa/flake8
-  rev: "7.4.1"
+  rev: "7.5.0"
   hooks:
     - id: flake8
       additional_dependencies: [flake8-bugbear]
@@ -640,7 +640,7 @@ The pre-commit addition for type checking:
 :sync: mypy
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v2.4.0"
+  rev: "v2.4.1"
   hooks:
     - id: mypy
       files: src
@@ -659,7 +659,7 @@ additional_dependencies: [attrs==23.1.0]
 :sync: pyrefly
 ```yaml
 - repo: https://github.com/facebook/pyrefly-pre-commit
-  rev: "1.4.0"
+  rev: "1.4.1"
   hooks:
     - id: pyrefly-check
 ```
@@ -672,7 +672,7 @@ with `additional_dependencies`, and pass extra flags via `args`.
 :sync: ty
 ```yaml
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "v0.0.89"
+  rev: "v0.0.99"
   hooks:
     - id: ty
 ```
@@ -909,7 +909,7 @@ integration.
 
 ```yaml
 - repo: https://github.com/crate-ci/typos
-  rev: "v1.51.1"
+  rev: "v1.52.0"
   hooks:
     - id: typos
       args: []
@@ -990,7 +990,7 @@ following pre-commit config:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: "v23.1.3"
+  rev: "v23.1.5"
   hooks:
     - id: clang-format
       types_or: [c++, c, cuda]
@@ -1053,7 +1053,7 @@ validate-pyproject-schema-store plugin. Using it looks like this:
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
-  rev: "0.26"
+  rev: "v0.27"
   hooks:
     - id: validate-pyproject
       additional_dependencies: ["validate-pyproject-schema-store[all]"]
@@ -1067,7 +1067,7 @@ schemas, and you can load them via URL. It work on JSON, YAML, and TOML.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: "0.38.2"
+  rev: "0.39.0"
   hooks:
     - id: check-dependabot
     - id: check-github-workflows
